@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+<SyntaxDefinition name="UnrealScript" extensions=".uc;.uci" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+	<!--This is enhanced version of C# adapted to UnrealScript keywords-->
+	<Color name="Comment" foreground="DarkGreen"/>
+	<Color name="String" foreground="DarkRed"/>
+	<Color name="Char" foreground="DarkRed"/>
+	<Color name="Preprocessor" foreground="Red"/>
+	<Color name="Punctuation" foreground="DarkGreen"/>
+	<Color name="ValueTypes" foreground="DarkCyan"/>
+	<Color name="ReferenceTypes" foreground="DarkCyan"/>
+	<Color name="MethodCall" foreground="Gray"/>
+	<Color name="NumberLiteral" foreground="DarkRed"/>
+	<Color name="Keywords" foreground="Blue"/>
+	<Color name="ParameterModifiers" foreground="DarkBlue"/>
+	<Color name="ClassModifiers" foreground="DarkBlue"/>
+	<Color name="VariableModifiers" foreground="DarkBlue"/>
+	<Color name="StructModifiers" foreground="DarkBlue"/>
+	<Color name="StateModifiers" foreground="DarkBlue"/>
+	<Color name="FunctionModifiers" foreground="DarkBlue"/>
+	<Color name="Visibility" foreground="DarkBlue"/>
+	<Color name="Literals" foreground="DarkBlue"/>
+	<Color name="Blocks" foreground="Blue"/>
+	<Color name="Declarations" foreground="Blue"/>
+	<Color name="Statements" foreground="DarkBlue"/>
+	<Color name="TypeKeywords" foreground="DarkCyan"/>
+	<Color name="ClassKeywords" foreground="DarkBlue"/>
+	<Color name="StructKeywords" foreground="DarkBlue"/>
+	<Color name="StateKeywords" foreground="DarkBlue"/>
+	<Color name="DefaultPropertiesMethods" foreground="Blue"/>
+	<Color name="ArrayFunctions" foreground="Blue"/>
+	<Color name="StructInitializers" foreground="Blue"/>
+	<Color name="ConstantFunctions" foreground="Blue"/>
+	<Color name="ClassAccessors" foreground="DarkBlue"/>
+
+	<RuleSet name="CommentMarkerSet" ignoreCase="true">
+		<Keywords fontWeight="bold" foreground="Red">
+			<Word>TODO</Word>
+			<Word>FIXME</Word>
+		</Keywords>
+		<Keywords fontWeight="bold" foreground="#E0E000">
+			<Word>HACK</Word>
+			<Word>UNDONE</Word>
+		</Keywords>
+	</RuleSet>
+
+	<!-- This is the main ruleset. -->
+	<RuleSet ignoreCase="true">
+		<Span color="Preprocessor">
+			<Begin>\`</Begin>
+			<RuleSet name="PreprocessorSet">
+				<Keywords fontWeight="bold">
+					<Word>if</Word>
+					<Word>define</Word>
+					<Word>else</Word>
+					<Word>elif</Word>
+					<Word>endif</Word>
+					<Word>isdefined</Word>
+					<Word>notdefined</Word>
+					<Word>include</Word>
+					<Word>undefine</Word>
+				</Keywords>
+			</RuleSet>
+		</Span>
+
+		<Span color="Comment" ruleSet="CommentMarkerSet">
+			<Begin>//</Begin>
+		</Span>
+
+		<Span color="Comment" ruleSet="CommentMarkerSet" multiline="true">
+			<Begin>/\*</Begin>
+			<End>\*/</End>
+		</Span>
+
+		<Span color="String">
+			<Begin>"</Begin>
+			<End>"</End>
+			<RuleSet>
+				<!-- span for escape sequences -->
+				<Span begin="\\" end="."/>
+			</RuleSet>
+		</Span>
+
+		<Span color="Char">
+			<Begin>'</Begin>
+			<End>'</End>
+			<RuleSet>
+				<!-- span for escape sequences -->
+				<Span begin="\\" end="."/>
+			</RuleSet>
+		</Span>
+
+		<Keywords color="ValueTypes">
+			<Word>bool</Word>
+			<Word>byte</Word>
+			<Word>float</Word>
+			<Word>int</Word>
+		</Keywords>
+
+		<Keywords color="ReferenceTypes">
+			<Word>class</Word>
+			<Word>interface</Word>
+			<Word>delegate</Word>
+			<Word>object</Word>
+			<Word>string</Word>
+			<Word>array</Word>
+			<Word>map</Word>
+			<Word>pointer</Word>
+			<Word>name</Word>
+			<Word>button</Word>
+			<Word>orderedarray</Word>
+		</Keywords>
+
+		<Keywords color="Visibility">
+			<Word>public</Word>
+			<Word>protected</Word>
+			<Word>protectedwrite</Word>
+			<Word>private</Word>		
+			<Word>privatewrite</Word>
+		</Keywords>
+
+		<Keywords color="Blocks">
+			<Word>cpptext</Word>
+			<Word>cppstruct</Word>
+			<Word>structcpptext</Word>
+			<Word>replication</Word>
+			<Word>defaultproperties</Word>
+			<Word>structdefaults</Word>
+			<Word>structdefaultproperties</Word>
+		</Keywords>
+
+		<Keywords color="Declarations">
+			<Word>function</Word>
+			<Word>delegate</Word>
+			<Word>event</Word>
+			<Word>enum</Word>
+			<Word>struct</Word>
+			<Word>state</Word>
+			<Word>var</Word>
+			<Word>local</Word>
+			<Word>operator</Word>
+			<Word>preoperator</Word>
+			<Word>postoperator</Word>
+			<Word>const</Word>
+		</Keywords>
+
+		<Keywords color="Statements">
+			<Word>break</Word>
+			<Word>case</Word>
+			<Word>continue</Word>
+			<Word>default</Word>
+			<Word>do</Word>
+			<Word>while</Word>
+			<Word>until</Word>
+			<Word>else</Word>
+			<Word>for</Word>
+			<Word>foreach</Word>
+			<Word>switch</Word>
+			<Word>if</Word>
+			<Word>goto</Word>
+			<Word>stop</Word>
+			<Word>return</Word>
+			<Word>new</Word>
+		</Keywords>
+
+		<Keywords color="Literals">
+			<Word>global</Word>
+			<Word>super</Word>
+			<Word>self</Word>
+			<Word>none</Word>
+			<Word>true</Word>
+			<Word>false</Word>
+		</Keywords>
+
+		<Keywords color="ArrayFunctions">
+			<Word>length</Word>
+			<Word>insert</Word>
+			<Word>insertitem</Word>
+			<Word>add</Word>
+			<Word>additem</Word>
+			<Word>remove</Word>
+			<Word>removeitem</Word>
+			<Word>find</Word>
+			<Word>sort</Word>
+		</Keywords>
+
+		<Keywords color="ClassAccessors">
+			<Word>static</Word>
+			<Word>default</Word>
+			<Word>const</Word>
+		</Keywords>
+
+		<Keywords color="ConstantFunctions">
+			<Word>nameof</Word>
+			<Word>arraycount</Word>
+			<Word>enumcount</Word>
+			<Word>assert</Word>
+		</Keywords>
+
+		<Keywords color="StructInitializers">
+			<Word>rot</Word>
+			<Word>vect</Word>
+			<Word>rng</Word>
+		</Keywords>
+
+		<Keywords color="ClassKeywords">
+			<Word>extends</Word>
+			<Word>expands</Word>
+			<Word>within</Word>
+		</Keywords>
+
+		<Keywords color="StructKeywords">
+			<Word>extends</Word>
+			<Word>expands</Word>
+		</Keywords>
+
+		<Keywords color="StateKeywords">
+			<Word>extends</Word>
+			<Word>expands</Word>
+			<Word>ignores</Word>
+		</Keywords>
+
+		<Keywords color="ClassModifiers">
+			<Word>inherits</Word>
+			<Word>exportstructs</Word>
+			<Word>editinlinenew</Word> 
+			<Word>noteditinlinenew</Word>
+			<Word>cacheexempt</Word>
+			<Word>instanced</Word> 
+			<Word>notinstanced</Word>
+			<Word>perobjectconfig</Word>
+			<Word>perobjectlocalized</Word>
+			<Word>safereplace</Word>
+			<Word>dontsortcategories</Word>
+			<Word>autoexpandcategories</Word>
+			<Word>autocollapsecategories</Word> 
+			<Word>dontautocollapsecategories</Word>
+			<Word>collapsecategories</Word> 
+			<Word>dontcollapsecategories</Word>
+			<Word>config</Word>
+			<Word>nativereplication</Word>
+			<Word>abstract</Word>
+			<Word>hidedropdown</Word>
+			<Word>hidecategories</Word> 
+			<Word>showcategories</Word>
+			<Word>forcescriptorder</Word>
+			<Word>nousercreate</Word>
+			<Word>placeable</Word>
+			<Word>notplaceable</Word>
+			<Word>dllbind</Word>
+			<Word>implements</Word>
+			<Word>dependson</Word>
+			<Word>parseconfig</Word>
+			<Word>transient</Word>
+			<Word>nontransient</Word>
+			<Word>guid</Word>
+			<Word>classgroup</Word>
+			
+			<Word>native</Word>
+			<Word>Intrinsic</Word>
+			<Word>export</Word>
+		</Keywords>
+		
+		<Keywords color="FunctionModifiers">
+			<Word>native</Word>
+			<Word>Intrinsic</Word>
+			<Word>simulated</Word>
+			<Word>noexport</Word>
+			<Word>dllimport</Word>
+			<Word>virtual</Word>
+			<Word>iterator</Word>
+			<Word>latent</Word>
+			<Word>server</Word>
+			<Word>client</Word>
+			<Word>noexportheader</Word>
+			<Word>static</Word>
+			<Word>final</Word>
+			<Word>exec</Word>
+			<Word>demorecording</Word>
+			<Word>singular</Word>
+			<Word>reliable</Word>
+			<Word>unreliable</Word>
+			<Word>invariant</Word>
+			<Word>k2call</Word>
+			<Word>k2pure</Word>
+			<Word>k2override</Word>
+		</Keywords>
+
+		<Keywords color="StateModifiers">
+			<Word>simulated</Word>
+			<Word>auto</Word>
+		</Keywords>
+
+		<Keywords color="StructModifiers">
+			<Word>long</Word>
+			<Word>immutable</Word>
+			<Word>immutablewhencooked</Word>
+			<Word>atomic</Word>
+			<Word>atomicwhencooked</Word>
+			<Word>atomicwhencooked</Word>
+			<Word>native</Word>
+			<Word>init</Word>
+			<Word>export</Word>
+		</Keywords>
+
+		<Keywords color="VariableModifiers">
+			<Word>intrinsic</Word>
+			<Word>native</Word>
+			<Word>archetype</Word>
+			<Word>notforconsole</Word>
+			<Word>repnotify</Word>
+			<Word>repretry</Word>
+			<Word>crosslevelpassive</Word>
+			<Word>serializetext</Word>
+			<Word>edfindable</Word>
+			<Word>editconst</Word>
+			<Word>editconstarray</Word>
+			<Word>editfixedsize</Word>
+			<Word>edithide</Word>
+			<Word>editinline</Word>
+			<Word>editinlineuse</Word>
+			<Word>editinlinenotify</Word>
+			<Word>editoronly</Word>
+			<Word>edittextbox</Word>
+			<Word>interp</Word>
+			<Word>noclear</Word>
+			<Word>noimport</Word>
+			<Word>nontransactional</Word>
+			<Word>cache</Word>
+			<Word>input</Word>
+			<Word>databinding</Word>
+			<Word>duplicatetransient</Word>
+			<Word>automated</Word>
+			<Word>localized</Word>
+			<Word>instanced</Word>
+			<Word>travel</Word>
+			<Word>deprecated</Word>
+			<Word>depreciated</Word>
+			<Word>transient</Word>
+			<Word>config</Word>
+			<Word>globalconfig</Word>
+		</Keywords>
+
+		<Keywords color="ParameterModifiers">
+			<Word>out</Word>
+			<Word>const</Word>
+			<Word>native</Word>
+			<Word>intrinsic</Word>
+			<Word>init</Word>
+			<Word>skip</Word>
+			<Word>optional</Word>
+			<Word>coerce</Word>
+		</Keywords>
+
+		<Keywords color="DefaultPropertiesMethods">
+			<Word>Empty</Word>
+			<Word>Add</Word>
+			<Word>AddIndex</Word>
+			<Word>Remove</Word>
+			<Word>RemoveIndex</Word>
+			<Word>Replace</Word>
+
+			<Word>Begin</Word>
+			<Word>End</Word>
+		</Keywords>
+
+		<!-- Mark previous rule-->
+		<Rule color="MethodCall">
+			\b
+			[\d\w_]+  # an identifier
+			(?=\s*\() # followed by (
+		</Rule>
+
+		<!-- Digits -->
+		<Rule color="NumberLiteral">
+			\b0[xX][0-9a-fA-F]+  # hex number
+			|
+			(	\b\d+(\.[0-9]+)?   #number with optional floating point
+			|	\.[0-9]+           #or just starting with floating point
+			)
+			([eE][+-]?[0-9]+)? # optional exponent
+		</Rule>
+
+		<Rule color="Punctuation">
+			[?,.;()\[\]{}+\-/%*=&lt;&gt;^+~!|&amp;]+
+		</Rule>
+	</RuleSet>
+</SyntaxDefinition>
