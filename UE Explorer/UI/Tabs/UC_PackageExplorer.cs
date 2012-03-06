@@ -95,9 +95,13 @@ namespace UEExplorer.UI.Tabs
 
 				TabControl_General.TabPages.Remove( TabPage_Chunks );
 			}
+			catch( System.IO.FileLoadException e )
+			{
+				throw new UnrealException( "Invalid package signature!", e );
+			}
 			catch( Exception e )
 			{
-				throw new UnrealException( "Couldn't load " + FileName + "! \r\nEvent:Loading Package", e );
+				throw new UnrealException( e.Message, e );
 			}
 
 			string NTLPath = Path.Combine( Application.StartupPath, "Native Tables", Program.Options.NTLPath );
