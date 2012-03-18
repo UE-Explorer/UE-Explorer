@@ -1,4 +1,5 @@
 /Misc/
 /Obfuscator/
+/*.suo
 /*.csproj.user
 /*.sln.DotSettings.user
