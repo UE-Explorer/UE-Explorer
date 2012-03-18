@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("UE Explorer")]
-[assembly: AssemblyCopyright("Copyright 2010 - 2012 Eliot Van Uytfanghe. All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright 2012 Eliot van Uytfanghe.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
