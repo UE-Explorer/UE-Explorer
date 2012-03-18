@@ -116,8 +116,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Storm.TabControl">
-      <HintPath>Output References\Storm.TabControl.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>libs\Storm.TabControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -371,9 +370,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="default.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="UE_ProgramLogo.png" />
   </ItemGroup>
   <ItemGroup>
