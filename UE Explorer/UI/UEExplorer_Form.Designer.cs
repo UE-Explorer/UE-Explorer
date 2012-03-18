@@ -58,6 +58,7 @@
 			this.menuItem20 = new System.Windows.Forms.MenuItem();
 			this.menuItem3 = new System.Windows.Forms.MenuItem();
 			this.menuItem5 = new System.Windows.Forms.MenuItem();
+			this.menuItem23 = new System.Windows.Forms.MenuItem();
 			this.menuItem6 = new System.Windows.Forms.MenuItem();
 			this.menuItem7 = new System.Windows.Forms.MenuItem();
 			this.menuItem4 = new System.Windows.Forms.MenuItem();
@@ -289,6 +290,7 @@
 			this.menuItem3.Index = 3;
 			this.menuItem3.MenuItems.AddRange( new System.Windows.Forms.MenuItem[] {
             this.menuItem5,
+            this.menuItem23,
             this.menuItem6,
             this.menuItem7} );
 			this.menuItem3.Text = "&Help";
@@ -299,14 +301,20 @@
 			this.menuItem5.Text = "&About...";
 			this.menuItem5.Click += new System.EventHandler( this.aboutToolStripMenuItem_Click );
 			// 
+			// menuItem23
+			// 
+			this.menuItem23.Index = 1;
+			this.menuItem23.Text = "Check for Updates...";
+			this.menuItem23.Click += new System.EventHandler( this.checkForUpdates );
+			// 
 			// menuItem6
 			// 
-			this.menuItem6.Index = 1;
+			this.menuItem6.Index = 2;
 			this.menuItem6.Text = "-";
 			// 
 			// menuItem7
 			// 
-			this.menuItem7.Index = 2;
+			this.menuItem7.Index = 3;
 			this.menuItem7.Text = "&Options";
 			this.menuItem7.Click += new System.EventHandler( this.optionsToolStripMenuItem_Click_1 );
 			// 
@@ -377,6 +385,7 @@
 		private System.Windows.Forms.MenuItem menuItem2;
 		private System.Windows.Forms.MenuItem menuItem21;
 		private System.Windows.Forms.MenuItem menuItem22;
+		private System.Windows.Forms.MenuItem menuItem23;
 
 
 		// OnClick events!
