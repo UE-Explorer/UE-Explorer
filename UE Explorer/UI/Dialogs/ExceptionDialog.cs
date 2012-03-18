@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Net;
 using System.Web;
-using System.Text;
-using System.IO;
+using System.Windows.Forms;
 
 namespace UEExplorer.UI.Dialogs
 {
@@ -27,7 +24,7 @@ namespace UEExplorer.UI.Dialogs
 			}
 		}
 
-		public void SendReport()
+		protected void SendReport()
 		{
 			SendDialog sendDialog = new SendDialog();
 			if( sendDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK )
@@ -43,7 +40,7 @@ namespace UEExplorer.UI.Dialogs
 				
 				try
 				{
-					Post( "http://eliot.pwc-networks.com/report/report/", postData );  
+					Program.Post( Program.WEBSITE_URL + "report/send/", postData );  
 					MessageBox.Show( "Thanks for reporting this exception occurrance!", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information );
 				}
 				catch
@@ -51,26 +48,6 @@ namespace UEExplorer.UI.Dialogs
 					MessageBox.Show( "Failed to send this report. Please try again later!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
 				}
 			}
-		}
-
-		public void Post( string url, string data )
-		{
-			var buffer = Encoding.UTF8.GetBytes( data );
-			var webReq = (HttpWebRequest)WebRequest.Create( url );
-			webReq.Method = "POST";
-			webReq.ContentType = "application/x-www-form-urlencoded";
-			webReq.ContentLength = buffer.Length;
-
-			using( var postStream = webReq.GetRequestStream())
-			{
-				postStream.Write( buffer, 0, buffer.Length );
-			}
-
-			var response = webReq.GetResponse();
-			//using( var responseReader = new StreamReader( response.GetResponseStream() ) )
-			//{
-			//    MessageBox.Show( responseReader.ReadToEnd() );
-			//}
 		}
 	}
 }
