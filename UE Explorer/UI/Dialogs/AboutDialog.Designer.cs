@@ -35,6 +35,7 @@
 			this.CopyrightLabel = new System.Windows.Forms.Label();
 			this.VersionLabel = new System.Windows.Forms.Label();
 			this.button1 = new System.Windows.Forms.Button();
+			this.LinkLabel = new System.Windows.Forms.LinkLabel();
 			label2 = new System.Windows.Forms.Label();
 			pictureBox1 = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(pictureBox1)).BeginInit();
@@ -42,12 +43,12 @@
 			// 
 			// label2
 			// 
-			label2.Location = new System.Drawing.Point( 16, 111 );
+			label2.Location = new System.Drawing.Point( 12, 95 );
 			label2.Name = "label2";
-			label2.Size = new System.Drawing.Size( 362, 59 );
+			label2.Size = new System.Drawing.Size( 359, 59 );
 			label2.TabIndex = 8;
 			label2.Text = "Libraries:\r\n    Storm.TabControl - Theodor Storm Kristensen\r\n    ICSharpCode.Aval" +
-				"onEdit - Daniel Grunwald\r\n    UELib - Eliot Van Uytfanghe";
+				"onEdit - Daniel Grunwald\r\n    UELib - Eliot van Uytfanghe";
 			// 
 			// pictureBox1
 			// 
@@ -74,7 +75,7 @@
 			// CopyrightLabel
 			// 
 			this.CopyrightLabel.AutoSize = true;
-			this.CopyrightLabel.Location = new System.Drawing.Point( 13, 73 );
+			this.CopyrightLabel.Location = new System.Drawing.Point( 12, 70 );
 			this.CopyrightLabel.Name = "CopyrightLabel";
 			this.CopyrightLabel.Size = new System.Drawing.Size( 43, 13 );
 			this.CopyrightLabel.TabIndex = 7;
@@ -99,13 +100,26 @@
 			this.button1.Text = "OK";
 			this.button1.UseVisualStyleBackColor = true;
 			// 
+			// LinkLabel
+			// 
+			this.LinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.LinkLabel.AutoSize = true;
+			this.LinkLabel.Location = new System.Drawing.Point( 9, 162 );
+			this.LinkLabel.Name = "LinkLabel";
+			this.LinkLabel.Size = new System.Drawing.Size( 49, 13 );
+			this.LinkLabel.TabIndex = 11;
+			this.LinkLabel.TabStop = true;
+			this.LinkLabel.Text = "L LABEL";
+			this.LinkLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
 			// AboutForm
 			// 
 			this.AcceptButton = this.button1;
 			this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size( 390, 172 );
+			this.ClientSize = new System.Drawing.Size( 390, 184 );
 			this.ControlBox = false;
+			this.Controls.Add( this.LinkLabel );
 			this.Controls.Add( pictureBox1 );
 			this.Controls.Add( this.button1 );
 			this.Controls.Add( label2 );
@@ -135,5 +149,6 @@
 		private System.Windows.Forms.Label VersionLabel;
 		private System.Windows.Forms.Label CopyrightLabel;
 		private System.Windows.Forms.Label label4;
+		internal System.Windows.Forms.LinkLabel LinkLabel;
 	}
 }
