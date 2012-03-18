@@ -1605,6 +1605,7 @@ namespace UEExplorer.UI.Tabs
 				FindButton.Enabled = true;
 				SearchBox.Enabled = true;
 				ExportButton.Enabled = true;
+				WPFHost.Enabled = true;
 			}
 
 			//ScriptPage.Document.ClearAll();
