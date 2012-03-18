@@ -35,14 +35,12 @@
 			// 
 			// DefaultPage
 			// 
-			this.DefaultPage.AllowWebBrowserDrop = false;
 			this.DefaultPage.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.DefaultPage.Location = new System.Drawing.Point( 0, 0 );
 			this.DefaultPage.Margin = new System.Windows.Forms.Padding( 0 );
 			this.DefaultPage.Name = "DefaultPage";
 			this.DefaultPage.ScriptErrorsSuppressed = true;
-			this.DefaultPage.ScrollBarsEnabled = false;
-			this.DefaultPage.Size = new System.Drawing.Size( 1308, 584 );
+			this.DefaultPage.Size = new System.Drawing.Size( 0, 0 );
 			this.DefaultPage.TabIndex = 2;
 			this.DefaultPage.Url = new System.Uri( "", System.UriKind.Relative );
 			// 
@@ -53,7 +51,7 @@
 			this.panel1.Location = new System.Drawing.Point( 0, 0 );
 			this.panel1.Margin = new System.Windows.Forms.Padding( 0 );
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size( 1308, 584 );
+			this.panel1.Size = new System.Drawing.Size( 0, 0 );
 			this.panel1.TabIndex = 3;
 			// 
 			// UC_Default
@@ -63,7 +61,7 @@
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.Controls.Add( this.panel1 );
 			this.Name = "UC_Default";
-			this.Size = new System.Drawing.Size( 1308, 584 );
+			this.Size = new System.Drawing.Size( 0, 0 );
 			this.panel1.ResumeLayout( false );
 			this.ResumeLayout( false );
 

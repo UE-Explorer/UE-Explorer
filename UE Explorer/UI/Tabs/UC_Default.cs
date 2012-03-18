@@ -14,7 +14,7 @@ namespace UEExplorer.UI.Tabs
 		{
 			// ...
 
-			DefaultPage.Navigate( Path.Combine( Application.StartupPath, "default.htm" ) );
+			DefaultPage.Navigate( Program.WEBSITE_URL + "/apps/ue_explorer/" );
 			base.TabCreated();
 
 			Dock = System.Windows.Forms.DockStyle.Fill;
