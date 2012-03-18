@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.VisualBasic.ApplicationServices;
+using System.Net;
+using System.Web;
 
 namespace UEExplorer
 {
@@ -89,6 +91,35 @@ namespace UEExplorer
 				xser.Serialize( w, Options );
 			}
 		}
+
+#if DEBUG
+		public const string WEBSITE_URL = "http://localhost/eliot/";
+#else
+		public const string WEBSITE_URL = "http://eliot.pwc-networks.com/";
+#endif
+
+		public static string Post( string url, string data )
+		{
+			var buffer = Encoding.UTF8.GetBytes( data );
+			var webReq = (HttpWebRequest)WebRequest.Create( url );
+			webReq.Method = "POST";
+			webReq.ContentType = "application/x-www-form-urlencoded";
+			webReq.ContentLength = buffer.Length;
+
+			using( var postStream = webReq.GetRequestStream())
+			{
+				postStream.Write( buffer, 0, buffer.Length );
+			}
+
+			var response = webReq.GetResponse();
+			string result = String.Empty;
+			using( var responseReader = new StreamReader( response.GetResponseStream() ) )
+			{
+				
+			    result = responseReader.ReadToEnd();
+			}
+			return result;
+		}
     }
 
 	public class XMLSettings
@@ -109,6 +140,10 @@ namespace UEExplorer
 
 		#region DECOMPILER
 		public bool bSuppressComments;
+		#endregion
+
+		#region THIRDPARY
+		public string UEModelAppPath = String.Empty;
 		#endregion
 	}
 }

@@ -1174,9 +1174,17 @@ namespace UEExplorer.UI.Tabs
 			var popupssuck = new ContextMenuStrip();
 			if( e.Node is ObjectNode && ((ObjectNode)e.Node).Object is UContent )
 			{
+				if( File.Exists( Program.Options.UEModelAppPath	) )
+				{
+					popupssuck.Items.Add( "Open in UE Model Viewer" );
+#if DEBUG
+					popupssuck.Items.Add( "Export with UE Model Viewer" );
+#endif
+				}
 #if DEBUG
 				popupssuck.Items.Add( "View Content" );
 #endif
+				popupssuck.Items.Add( "View Object" );
 			}
 			else
 			{
@@ -1323,6 +1331,69 @@ namespace UEExplorer.UI.Tabs
 						break;
 					}
 #endif
+					case "Open in UE Model Viewer":
+					{
+						System.Diagnostics.Process.Start( 
+							Program.Options.UEModelAppPath, 
+							"-path=" + _UnrealPackage.PackageDirectory
+							+ " " + _UnrealPackage.PackageName
+							+ " " + node.Text
+						);
+						break;
+					}
+
+					case "Export with UE Model Viewer":
+					{
+						string packagePath = Application.StartupPath 
+							+ "\\Exported\\" 
+							+ _UnrealPackage.PackageName; 
+
+						string contentDir = packagePath + "\\Content"; 
+						Directory.CreateDirectory( contentDir );
+						var appArguments = "-path=" + _UnrealPackage.PackageDirectory
+							+ " " + "-out="  + contentDir
+							+ " -export"
+							+ " " + _UnrealPackage.PackageName
+							+ " " + node.Text;
+						var appInfo = new System.Diagnostics.ProcessStartInfo(
+							Program.Options.UEModelAppPath, 
+							appArguments
+						);
+						appInfo.UseShellExecute = false;
+						appInfo.RedirectStandardOutput = true;
+						appInfo.CreateNoWindow = false;
+						var app = System.Diagnostics.Process.Start( appInfo );
+						var log = String.Empty;
+						app.OutputDataReceived += delegate
+						(object sender, System.Diagnostics.DataReceivedEventArgs e)
+						{
+							log += e.Data;
+							return;
+						};
+						//app.WaitForExit();
+
+						if( Directory.GetFiles( contentDir ).Length > 0 )
+						{
+							if( MessageBox.Show( 
+								"Do you want to go the folder with the exported content?", 
+								Application.ProductName,
+								MessageBoxButtons.YesNo 
+								) == DialogResult.Yes )
+							{
+								System.Diagnostics.Process.Start( contentDir );
+							}
+						}
+						else
+						{
+							MessageBox.Show( 
+								"The object was not exported."
+								+ "\r\n\r\nArguments:" + appArguments
+								+ "\r\n\r\nLog:" + log,
+								Application.ProductName 
+							);
+						}
+						break;
+					}						
 
 					case "View Object":
 						if( node is IDecompileableNode )

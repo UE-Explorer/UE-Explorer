@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using UELib;
+using System.Drawing;
 
 namespace UEExplorer.UI.Tabs
 {
@@ -29,6 +30,8 @@ namespace UEExplorer.UI.Tabs
 			CheckBox_LicenseeMode.Checked = Program.Options.bForceLicenseeMode;
 			NumericUpDown_LicenseeMode.Value = Program.Options.LicenseeMode;
 			SuppressComments.Checked = Program.Options.bSuppressComments;
+
+			PathText.Text = Program.Options.UEModelAppPath;
 
 			base.TabCreated();
 		}
@@ -64,8 +67,27 @@ namespace UEExplorer.UI.Tabs
 
 			Program.Options.bSuppressComments = SuppressComments.Checked;   
 			UELib.UnrealConfig.SuppressComments = SuppressComments.Checked; 
+			Program.Options.UEModelAppPath = PathText.Text;
 
 			Program.SaveConfig();
+		}
+
+		private void PathButton_Click( object sender, EventArgs e )
+		{
+			OpenFileDialog dialog = new OpenFileDialog();
+			dialog.Filter = "UE Model View (umodel.exe)|umodel.exe";
+			if( dialog.ShowDialog() == DialogResult.OK )
+			{
+				PathText.Text = dialog.FileName;
+			}
+		}
+
+		private void PathText_TextChanged( object sender, EventArgs e )
+		{
+			PathText.BackColor = File.Exists( PathText.Text ) 
+				&& Path.GetFileName( PathText.Text ) == "umodel.exe"
+				? Color.Green
+				: Color.Red;
 		}
 	}
 }
