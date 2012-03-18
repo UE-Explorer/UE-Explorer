@@ -1560,11 +1560,20 @@ namespace UEExplorer.UI.Tabs
 
 		private void ToolStripButton_Find_Click( object sender, EventArgs e )
 		{
+			if( this.myTextEditor1 == null )
+			{
+				return;
+			}
 			EditorUtil.FindText( this.myTextEditor1, SearchBox.Text );
 		}
 
 		private void SearchBox_KeyPress_1( object sender, KeyPressEventArgs e )
 		{
+			if( this.myTextEditor1 == null )
+			{
+				return;
+			}
+
 			if( e.KeyChar == '\r' )
 			{
 				EditorUtil.FindText( this.myTextEditor1, SearchBox.Text );	  
