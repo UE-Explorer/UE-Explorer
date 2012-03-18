@@ -92,12 +92,12 @@
 			this.WPFHost = new System.Windows.Forms.Integration.ElementHost();
 			this.myTextEditor1 = new UEExplorer.UI.Tabs.MyTextEditor();
 			this.ToolStrip_Content = new System.Windows.Forms.ToolStrip();
-			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-			this.ToolStripButton_Previous = new System.Windows.Forms.ToolStripButton();
-			this.ToolStripButton_Next = new System.Windows.Forms.ToolStripButton();
+			this.ExportButton = new System.Windows.Forms.ToolStripButton();
+			this.PrevButton = new System.Windows.Forms.ToolStripButton();
+			this.NextButton = new System.Windows.Forms.ToolStripButton();
 			this.Label_ObjectName = new System.Windows.Forms.ToolStripLabel();
 			this.SearchBox = new System.Windows.Forms.ToolStripTextBox();
-			this.ToolStripButton_Find = new System.Windows.Forms.ToolStripButton();
+			this.FindButton = new System.Windows.Forms.ToolStripButton();
 			label1 = new System.Windows.Forms.Label();
 			panel1 = new System.Windows.Forms.Panel();
 			label2 = new System.Windows.Forms.Label();
@@ -653,36 +653,36 @@
 			this.ToolStrip_Content.CanOverflow = false;
 			this.ToolStrip_Content.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.ToolStrip_Content.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.ToolStripButton_Previous,
-            this.ToolStripButton_Next,
+            this.ExportButton,
+            this.PrevButton,
+            this.NextButton,
             this.Label_ObjectName,
             this.SearchBox,
-            this.ToolStripButton_Find} );
+            this.FindButton} );
 			this.ToolStrip_Content.Name = "ToolStrip_Content";
 			this.ToolStrip_Content.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			// 
-			// toolStripButton1
+			// ExportButton
 			// 
-			resources.ApplyResources( this.toolStripButton1, "toolStripButton1" );
-			this.toolStripButton1.Name = "toolStripButton1";
-			this.toolStripButton1.Click += new System.EventHandler( this.toolStripButton1_Click );
+			resources.ApplyResources( this.ExportButton, "ExportButton" );
+			this.ExportButton.Name = "ExportButton";
+			this.ExportButton.Click += new System.EventHandler( this.toolStripButton1_Click );
 			// 
-			// ToolStripButton_Previous
+			// PrevButton
 			// 
-			this.ToolStripButton_Previous.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.ToolStripButton_Previous.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			resources.ApplyResources( this.ToolStripButton_Previous, "ToolStripButton_Previous" );
-			this.ToolStripButton_Previous.Name = "ToolStripButton_Previous";
-			this.ToolStripButton_Previous.Click += new System.EventHandler( this.ToolStripButton_Backward_Click );
+			this.PrevButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.PrevButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			resources.ApplyResources( this.PrevButton, "PrevButton" );
+			this.PrevButton.Name = "PrevButton";
+			this.PrevButton.Click += new System.EventHandler( this.ToolStripButton_Backward_Click );
 			// 
-			// ToolStripButton_Next
+			// NextButton
 			// 
-			this.ToolStripButton_Next.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.ToolStripButton_Next.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			resources.ApplyResources( this.ToolStripButton_Next, "ToolStripButton_Next" );
-			this.ToolStripButton_Next.Name = "ToolStripButton_Next";
-			this.ToolStripButton_Next.Click += new System.EventHandler( this.ToolStripButton_Forward_Click );
+			this.NextButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.NextButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			resources.ApplyResources( this.NextButton, "NextButton" );
+			this.NextButton.Name = "NextButton";
+			this.NextButton.Click += new System.EventHandler( this.ToolStripButton_Forward_Click );
 			// 
 			// Label_ObjectName
 			// 
@@ -693,15 +693,15 @@
 			// 
 			// SearchBox
 			// 
-			this.SearchBox.Name = "SearchBox";
 			resources.ApplyResources( this.SearchBox, "SearchBox" );
+			this.SearchBox.Name = "SearchBox";
 			this.SearchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler( this.SearchBox_KeyPress_1 );
 			// 
-			// ToolStripButton_Find
+			// FindButton
 			// 
-			this.ToolStripButton_Find.Name = "ToolStripButton_Find";
-			resources.ApplyResources( this.ToolStripButton_Find, "ToolStripButton_Find" );
-			this.ToolStripButton_Find.Click += new System.EventHandler( this.ToolStripButton_Find_Click );
+			resources.ApplyResources( this.FindButton, "FindButton" );
+			this.FindButton.Name = "FindButton";
+			this.FindButton.Click += new System.EventHandler( this.ToolStripButton_Find_Click );
 			// 
 			// UC_PackageExplorer
 			// 
@@ -768,7 +768,7 @@
 		internal System.Windows.Forms.NumericUpDown Num_NameIndex;
 		internal System.Windows.Forms.Button Button_FindName;
 		internal System.Windows.Forms.ToolStrip ToolStrip_Content;
-		private System.Windows.Forms.ToolStripButton toolStripButton1;
+		private System.Windows.Forms.ToolStripButton ExportButton;
 		internal System.Windows.Forms.ToolStripLabel Label_ObjectName;
 		internal System.Windows.Forms.Panel Panel_Content;
 		internal System.Windows.Forms.DataGridView DataGridView_Flags;
@@ -791,9 +791,9 @@
 		private System.Windows.Forms.DataGridView DataGridView_NameTable;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-		private System.Windows.Forms.ToolStripButton ToolStripButton_Find;
-		private System.Windows.Forms.ToolStripButton ToolStripButton_Next;
-		private System.Windows.Forms.ToolStripButton ToolStripButton_Previous;
+		private System.Windows.Forms.ToolStripButton FindButton;
+		private System.Windows.Forms.ToolStripButton NextButton;
+		private System.Windows.Forms.ToolStripButton PrevButton;
 		private System.Windows.Forms.Integration.ElementHost WPFHost;
 		private MyTextEditor myTextEditor1;
 		internal System.Windows.Forms.TabPage TabPage_Generations;

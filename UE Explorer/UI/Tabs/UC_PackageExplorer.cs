@@ -1600,6 +1600,13 @@ namespace UEExplorer.UI.Tabs
 			content = content.TrimEnd( '\r', '\n' );
 			content = content.TrimStart( '\r', '\n' );
 
+			if( content.Length > 0 )
+			{
+				FindButton.Enabled = true;
+				SearchBox.Enabled = true;
+				ExportButton.Enabled = true;
+			}
+
 			//ScriptPage.Document.ClearAll();
 			myTextEditor1.textEditor.Clear();
 			myTextEditor1.textEditor.Text = content;
@@ -1623,6 +1630,7 @@ namespace UEExplorer.UI.Tabs
 				{
 					_ContentBuffer.RemoveRange( _BufferIndex, _ContentBuffer.Count - _BufferIndex );
 					_BufferIndex = _ContentBuffer.Count - 1;
+					NextButton.Enabled = false;
 				}
 			}
 
@@ -1635,6 +1643,11 @@ namespace UEExplorer.UI.Tabs
 				_ContentBuffer.RemoveRange( 0, 1 );
 			}
 			else ++ _BufferIndex;
+
+			if( _BufferIndex > 0 )
+			{
+				PrevButton.Enabled = true;
+			}
 		}
 
 		private void ToolStripButton_Backward_Click( object sender, EventArgs e )
@@ -1645,6 +1658,13 @@ namespace UEExplorer.UI.Tabs
 				Label_ObjectName.Text = _ContentBuffer[_BufferIndex].Label;
 				SetContentText( _ContentBuffer[_BufferIndex].Node, _ContentBuffer[_BufferIndex].Text, true );
 				SelectNode( _ContentBuffer[_BufferIndex].Node );
+
+				if( _BufferIndex == 0 )
+				{
+					PrevButton.Enabled = false;
+				}
+
+				NextButton.Enabled = true;
 			}
 		}
 
@@ -1656,6 +1676,12 @@ namespace UEExplorer.UI.Tabs
 				Label_ObjectName.Text = _ContentBuffer[_BufferIndex].Label;
 				SetContentText( _ContentBuffer[_BufferIndex].Node, _ContentBuffer[_BufferIndex].Text, true );
 				SelectNode( _ContentBuffer[_BufferIndex].Node );
+
+				if( _BufferIndex == _ContentBuffer.Count-1 )
+				{
+					NextButton.Enabled = false;
+				}
+				PrevButton.Enabled = true;
 			}
 		}
 

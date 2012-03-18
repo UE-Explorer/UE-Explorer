@@ -995,7 +995,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAB8
-        EQAAAk1TRnQBSQFMAgEBCgEAAXQBAwF0AQMBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        EQAAAk1TRnQBSQFMAgEBCgEAAZQBAwGUAQMBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1426,19 +1426,25 @@
   <data name="ToolStrip_Content.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="toolStripButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="ExportButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ExportButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ExportButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 25</value>
   </data>
-  <data name="toolStripButton1.Text" xml:space="preserve">
+  <data name="ExportButton.Text" xml:space="preserve">
     <value>Export</value>
   </data>
-  <data name="toolStripButton1.ToolTipText" xml:space="preserve">
+  <data name="ExportButton.ToolTipText" xml:space="preserve">
     <value>Export Script</value>
   </data>
-  <data name="ToolStripButton_Previous.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PrevButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="PrevButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI0SURBVDhPnZNfSFNRHMdvQ7sus/yz2tAJ6U2zcpZZFiq0
@@ -1454,16 +1460,19 @@
         AAAASUVORK5CYII=
 </value>
   </data>
-  <data name="ToolStripButton_Previous.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="PrevButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Black</value>
   </data>
-  <data name="ToolStripButton_Previous.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="PrevButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 25</value>
   </data>
-  <data name="ToolStripButton_Previous.Text" xml:space="preserve">
+  <data name="PrevButton.Text" xml:space="preserve">
     <value>Backward</value>
   </data>
-  <data name="ToolStripButton_Next.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="NextButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="NextButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVDhPY2BAAo67Hf47HMKPkdWjsEGaQdjztPv/ibda
@@ -1478,13 +1487,13 @@
         PYXpP0scxEYYxpkbyZUAAJFr7+R+oDqAAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="ToolStripButton_Next.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="NextButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Black</value>
   </data>
-  <data name="ToolStripButton_Next.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="NextButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 25</value>
   </data>
-  <data name="ToolStripButton_Next.Text" xml:space="preserve">
+  <data name="NextButton.Text" xml:space="preserve">
     <value>Forward</value>
   </data>
   <data name="Label_ObjectName.Size" type="System.Drawing.Size, System.Drawing">
@@ -1493,16 +1502,22 @@
   <data name="Label_ObjectName.Text" xml:space="preserve">
     <value>Object</value>
   </data>
+  <data name="SearchBox.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="SearchBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
   <data name="SearchBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 28</value>
   </data>
-  <data name="ToolStripButton_Find.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="FindButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="FindButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 25</value>
   </data>
-  <data name="ToolStripButton_Find.Text" xml:space="preserve">
+  <data name="FindButton.Text" xml:space="preserve">
     <value>Find</value>
   </data>
   <data name="ToolStrip_Content.Location" type="System.Drawing.Point, System.Drawing">
@@ -1715,22 +1730,22 @@
   <data name="&gt;&gt;myTextEditor1.Type" xml:space="preserve">
     <value>WindowsFormsIntegration.Design.HostedComponent, WindowsFormsIntegration.Design, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="&gt;&gt;toolStripButton1.Name" xml:space="preserve">
-    <value>toolStripButton1</value>
+  <data name="&gt;&gt;ExportButton.Name" xml:space="preserve">
+    <value>ExportButton</value>
   </data>
-  <data name="&gt;&gt;toolStripButton1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ExportButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripButton_Previous.Name" xml:space="preserve">
-    <value>ToolStripButton_Previous</value>
+  <data name="&gt;&gt;PrevButton.Name" xml:space="preserve">
+    <value>PrevButton</value>
   </data>
-  <data name="&gt;&gt;ToolStripButton_Previous.Type" xml:space="preserve">
+  <data name="&gt;&gt;PrevButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripButton_Next.Name" xml:space="preserve">
-    <value>ToolStripButton_Next</value>
+  <data name="&gt;&gt;NextButton.Name" xml:space="preserve">
+    <value>NextButton</value>
   </data>
-  <data name="&gt;&gt;ToolStripButton_Next.Type" xml:space="preserve">
+  <data name="&gt;&gt;NextButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label_ObjectName.Name" xml:space="preserve">
@@ -1745,16 +1760,16 @@
   <data name="&gt;&gt;SearchBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripButton_Find.Name" xml:space="preserve">
-    <value>ToolStripButton_Find</value>
+  <data name="&gt;&gt;FindButton.Name" xml:space="preserve">
+    <value>FindButton</value>
   </data>
-  <data name="&gt;&gt;ToolStripButton_Find.Type" xml:space="preserve">
+  <data name="&gt;&gt;FindButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>UC_PackageExplorer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>UEExplorer.UI.UserControl_Tab, UE Explorer, Version=1.0.4460.8967, Culture=neutral, PublicKeyToken=null</value>
+    <value>UEExplorer.UI.UserControl_Tab, UE Explorer, Version=1.0.4460.9204, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
