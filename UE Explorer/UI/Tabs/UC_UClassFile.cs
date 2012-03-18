@@ -111,7 +111,7 @@ namespace UEExplorer.UI.Tabs
 		{
 			int fails = 0;
 			searchAgain:
-			int textIndex = editor.textEditor.Text.IndexOf( text, _CurrentIndex );
+			int textIndex = editor.textEditor.Text.IndexOf( text, _CurrentIndex, StringComparison.OrdinalIgnoreCase );
 
 			if( textIndex == -1 )
 			{
