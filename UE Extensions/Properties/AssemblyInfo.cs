@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "" )]
 [assembly: AssemblyProduct( "UE Extensions" )]
-[assembly: AssemblyCopyright("Copyright 2010 - 2011 Eliot Van Uytfanghe. All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright 2011 Eliot van Uytfanghe.")]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
