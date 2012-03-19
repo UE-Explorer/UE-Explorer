@@ -59,10 +59,10 @@ namespace UEExplorer
 			}
 		}
 
-		public static string SettingsPath = Path.Combine( Application.StartupPath, "Config", "UEExplorerConfig.xml" );
-		public static XMLSettings Options;
+		internal static string SettingsPath = Path.Combine( Application.StartupPath, "Config", "UEExplorerConfig.xml" );
+		internal static XMLSettings Options;
 
-		public static void LoadConfig()
+		internal static void LoadConfig()
 		{
 			if( File.Exists( SettingsPath ) )
 			{
@@ -78,9 +78,16 @@ namespace UEExplorer
 			}
 
 			UELib.UnrealConfig.SuppressComments = Options.bSuppressComments;
+			UELib.UnrealConfig.PreBeginBracket = ParseFormatOption( Program.Options.PreBeginBracket );
+			UELib.UnrealConfig.PreEndBracket = ParseFormatOption( Program.Options.PreEndBracket );
 		}
 
-		public static void SaveConfig()
+		internal static string ParseFormatOption( string input )
+		{
+			return input.Replace( "%NEWLINE%", "\r\n" ).Replace( "%TABS%", "{0}" );
+		}
+
+		internal static void SaveConfig()
 		{
 			if( Options == null )
 				Options = new XMLSettings();
@@ -93,12 +100,12 @@ namespace UEExplorer
 		}
 
 #if DEBUG
-		public const string WEBSITE_URL = "http://localhost/eliot/";
+		internal const string WEBSITE_URL = "http://localhost/eliot/";
 #else
-		public const string WEBSITE_URL = "http://eliot.pwc-networks.com/";
+		internal const string WEBSITE_URL = "http://eliot.pwc-networks.com/";
 #endif
 
-		public static string Post( string url, string data )
+		internal static string Post( string url, string data )
 		{
 			var buffer = Encoding.UTF8.GetBytes( data );
 			var webReq = (HttpWebRequest)WebRequest.Create( url );
@@ -140,6 +147,8 @@ namespace UEExplorer
 
 		#region DECOMPILER
 		public bool bSuppressComments;
+		public string PreBeginBracket = "%NEWLINE%%TABS%";
+		public string PreEndBracket = "%NEWLINE%%TABS%";
 		#endregion
 
 		#region THIRDPARY

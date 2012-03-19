@@ -29,7 +29,11 @@
 		protected override void InitializeComponent()
 		{
 			System.Windows.Forms.GroupBox groupBox3;
+			System.Windows.Forms.Label label4;
+			System.Windows.Forms.Label label3;
 			System.Windows.Forms.Label label2;
+			this.PreBeginBracket = new System.Windows.Forms.TextBox();
+			this.PreEndBracket = new System.Windows.Forms.TextBox();
 			this.SuppressComments = new System.Windows.Forms.CheckBox();
 			this.TabControl_Options = new System.Windows.Forms.TabControl();
 			this.TabPage_Serializer = new System.Windows.Forms.TabPage();
@@ -50,6 +54,8 @@
 			this.PathText = new System.Windows.Forms.TextBox();
 			this.Button_Save = new System.Windows.Forms.Button();
 			groupBox3 = new System.Windows.Forms.GroupBox();
+			label4 = new System.Windows.Forms.Label();
+			label3 = new System.Windows.Forms.Label();
 			label2 = new System.Windows.Forms.Label();
 			groupBox3.SuspendLayout();
 			this.TabControl_Options.SuspendLayout();
@@ -64,13 +70,49 @@
 			// 
 			// groupBox3
 			// 
+			groupBox3.Controls.Add( label4 );
+			groupBox3.Controls.Add( label3 );
+			groupBox3.Controls.Add( this.PreBeginBracket );
+			groupBox3.Controls.Add( this.PreEndBracket );
 			groupBox3.Controls.Add( this.SuppressComments );
 			groupBox3.Location = new System.Drawing.Point( 392, 5 );
 			groupBox3.Name = "groupBox3";
-			groupBox3.Size = new System.Drawing.Size( 275, 100 );
+			groupBox3.Size = new System.Drawing.Size( 275, 196 );
 			groupBox3.TabIndex = 10;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Decompiler Output";
+			// 
+			// label4
+			// 
+			label4.AutoSize = true;
+			label4.Location = new System.Drawing.Point( 4, 152 );
+			label4.Name = "label4";
+			label4.Size = new System.Drawing.Size( 120, 13 );
+			label4.TabIndex = 4;
+			label4.Text = "Pre End Bracket Format";
+			// 
+			// label3
+			// 
+			label3.AutoSize = true;
+			label3.Location = new System.Drawing.Point( 4, 113 );
+			label3.Name = "label3";
+			label3.Size = new System.Drawing.Size( 128, 13 );
+			label3.TabIndex = 3;
+			label3.Text = "Pre Begin Bracket Format";
+			// 
+			// PreBeginBracket
+			// 
+			this.PreBeginBracket.Location = new System.Drawing.Point( 7, 129 );
+			this.PreBeginBracket.Name = "PreBeginBracket";
+			this.PreBeginBracket.Size = new System.Drawing.Size( 262, 20 );
+			this.PreBeginBracket.TabIndex = 2;
+			// 
+			// PreEndBracket
+			// 
+			this.PreEndBracket.Location = new System.Drawing.Point( 7, 169 );
+			this.PreEndBracket.Name = "PreEndBracket";
+			this.PreEndBracket.Size = new System.Drawing.Size( 262, 20 );
+			this.PreEndBracket.TabIndex = 1;
 			// 
 			// SuppressComments
 			// 
@@ -99,7 +141,7 @@
 			this.TabControl_Options.Location = new System.Drawing.Point( 0, 0 );
 			this.TabControl_Options.Name = "TabControl_Options";
 			this.TabControl_Options.SelectedIndex = 0;
-			this.TabControl_Options.Size = new System.Drawing.Size( 913, 585 );
+			this.TabControl_Options.Size = new System.Drawing.Size( 917, 585 );
 			this.TabControl_Options.TabIndex = 0;
 			// 
 			// TabPage_Serializer
@@ -109,7 +151,7 @@
 			this.TabPage_Serializer.Controls.Add( this.groupBox1 );
 			this.TabPage_Serializer.Location = new System.Drawing.Point( 4, 22 );
 			this.TabPage_Serializer.Name = "TabPage_Serializer";
-			this.TabPage_Serializer.Size = new System.Drawing.Size( 905, 559 );
+			this.TabPage_Serializer.Size = new System.Drawing.Size( 909, 559 );
 			this.TabPage_Serializer.TabIndex = 1;
 			this.TabPage_Serializer.Text = "UE Library";
 			this.TabPage_Serializer.UseVisualStyleBackColor = true;
@@ -239,7 +281,7 @@
 			this.tabPage1.Location = new System.Drawing.Point( 4, 22 );
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding( 3 );
-			this.tabPage1.Size = new System.Drawing.Size( 905, 559 );
+			this.tabPage1.Size = new System.Drawing.Size( 909, 559 );
 			this.tabPage1.TabIndex = 2;
 			this.tabPage1.Text = "UE Explorer";
 			this.tabPage1.UseVisualStyleBackColor = true;
@@ -280,7 +322,7 @@
 			// Button_Save
 			// 
 			this.Button_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.Button_Save.Location = new System.Drawing.Point( 821, 550 );
+			this.Button_Save.Location = new System.Drawing.Point( 825, 550 );
 			this.Button_Save.Name = "Button_Save";
 			this.Button_Save.Size = new System.Drawing.Size( 75, 23 );
 			this.Button_Save.TabIndex = 1;
@@ -295,7 +337,7 @@
 			this.Controls.Add( this.Button_Save );
 			this.Controls.Add( this.TabControl_Options );
 			this.Name = "UC_Options";
-			this.Size = new System.Drawing.Size( 913, 585 );
+			this.Size = new System.Drawing.Size( 917, 585 );
 			groupBox3.ResumeLayout( false );
 			groupBox3.PerformLayout();
 			this.TabControl_Options.ResumeLayout( false );
@@ -334,5 +376,7 @@
 		private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.Button PathButton;
 		private System.Windows.Forms.TextBox PathText;
+		private System.Windows.Forms.TextBox PreBeginBracket;
+		private System.Windows.Forms.TextBox PreEndBracket;
 	}
 }

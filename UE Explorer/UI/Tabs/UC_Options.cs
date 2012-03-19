@@ -30,6 +30,8 @@ namespace UEExplorer.UI.Tabs
 			CheckBox_LicenseeMode.Checked = Program.Options.bForceLicenseeMode;
 			NumericUpDown_LicenseeMode.Value = Program.Options.LicenseeMode;
 			SuppressComments.Checked = Program.Options.bSuppressComments;
+			PreBeginBracket.Text = Program.Options.PreBeginBracket;
+			PreEndBracket.Text = Program.Options.PreEndBracket;
 
 			PathText.Text = Program.Options.UEModelAppPath;
 
@@ -68,6 +70,11 @@ namespace UEExplorer.UI.Tabs
 			Program.Options.bSuppressComments = SuppressComments.Checked;   
 			UELib.UnrealConfig.SuppressComments = SuppressComments.Checked; 
 			Program.Options.UEModelAppPath = PathText.Text;
+
+			Program.Options.PreBeginBracket = PreBeginBracket.Text;
+			Program.Options.PreEndBracket = PreEndBracket.Text;
+			UELib.UnrealConfig.PreBeginBracket = Program.ParseFormatOption( Program.Options.PreBeginBracket );
+			UELib.UnrealConfig.PreEndBracket = Program.ParseFormatOption( Program.Options.PreEndBracket );
 
 			Program.SaveConfig();
 		}
