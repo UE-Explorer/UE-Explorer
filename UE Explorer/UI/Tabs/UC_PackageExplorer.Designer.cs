@@ -35,6 +35,7 @@
 			System.Windows.Forms.Label label2;
 			System.Windows.Forms.TableLayoutPanel UScriptLayout;
 			System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
+			System.Windows.Forms.Label label3;
 			this.Num_NameIndex = new System.Windows.Forms.NumericUpDown();
 			this.Button_FindName = new System.Windows.Forms.Button();
 			this.Num_ObjectIndex = new System.Windows.Forms.NumericUpDown();
@@ -76,6 +77,7 @@
 			this.TabPage_Objects = new System.Windows.Forms.TabPage();
 			this.TabControl_Objects = new System.Windows.Forms.TabControl();
 			this.TabPage_Classes = new System.Windows.Forms.TabPage();
+			this.FilterText = new System.Windows.Forms.TextBox();
 			this.TreeView_Classes = new System.Windows.Forms.TreeView();
 			this.VSIcons = new System.Windows.Forms.ImageList( this.components );
 			this.TabPage_Content = new System.Windows.Forms.TabPage();
@@ -103,6 +105,7 @@
 			label2 = new System.Windows.Forms.Label();
 			UScriptLayout = new System.Windows.Forms.TableLayoutPanel();
 			exportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			label3 = new System.Windows.Forms.Label();
 			panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Num_NameIndex)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Num_ObjectIndex)).BeginInit();
@@ -520,15 +523,28 @@
 			// 
 			// TabPage_Classes
 			// 
+			this.TabPage_Classes.Controls.Add( label3 );
+			this.TabPage_Classes.Controls.Add( this.FilterText );
 			this.TabPage_Classes.Controls.Add( this.TreeView_Classes );
 			resources.ApplyResources( this.TabPage_Classes, "TabPage_Classes" );
 			this.TabPage_Classes.Name = "TabPage_Classes";
 			this.TabPage_Classes.UseVisualStyleBackColor = true;
 			// 
+			// label3
+			// 
+			resources.ApplyResources( label3, "label3" );
+			label3.Name = "label3";
+			// 
+			// FilterText
+			// 
+			resources.ApplyResources( this.FilterText, "FilterText" );
+			this.FilterText.Name = "FilterText";
+			this.FilterText.TextChanged += new System.EventHandler( this.FilterText_TextChanged );
+			// 
 			// TreeView_Classes
 			// 
-			this.TreeView_Classes.CausesValidation = false;
 			resources.ApplyResources( this.TreeView_Classes, "TreeView_Classes" );
+			this.TreeView_Classes.CausesValidation = false;
 			this.TreeView_Classes.ImageList = this.VSIcons;
 			this.TreeView_Classes.Name = "TreeView_Classes";
 			this.TreeView_Classes.ShowNodeToolTips = true;
@@ -735,6 +751,7 @@
 			this.TabPage_Objects.ResumeLayout( false );
 			this.TabControl_Objects.ResumeLayout( false );
 			this.TabPage_Classes.ResumeLayout( false );
+			this.TabPage_Classes.PerformLayout();
 			this.TabPage_Content.ResumeLayout( false );
 			this.TabPage_Deps.ResumeLayout( false );
 			this.TabPage_Chunks.ResumeLayout( false );
@@ -811,6 +828,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn CompressedSize;
 		internal System.Windows.Forms.Label LABEL_Copyright;
 		internal System.Windows.Forms.Label LABEL_Author;
+		private System.Windows.Forms.TextBox FilterText;
 
 
 	}

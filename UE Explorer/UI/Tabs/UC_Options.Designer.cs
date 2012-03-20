@@ -141,7 +141,7 @@
 			this.TabControl_Options.Location = new System.Drawing.Point( 0, 0 );
 			this.TabControl_Options.Name = "TabControl_Options";
 			this.TabControl_Options.SelectedIndex = 0;
-			this.TabControl_Options.Size = new System.Drawing.Size( 917, 585 );
+			this.TabControl_Options.Size = new System.Drawing.Size( 0, 0 );
 			this.TabControl_Options.TabIndex = 0;
 			// 
 			// TabPage_Serializer
@@ -151,7 +151,7 @@
 			this.TabPage_Serializer.Controls.Add( this.groupBox1 );
 			this.TabPage_Serializer.Location = new System.Drawing.Point( 4, 22 );
 			this.TabPage_Serializer.Name = "TabPage_Serializer";
-			this.TabPage_Serializer.Size = new System.Drawing.Size( 909, 559 );
+			this.TabPage_Serializer.Size = new System.Drawing.Size( 0, 0 );
 			this.TabPage_Serializer.TabIndex = 1;
 			this.TabPage_Serializer.Text = "UE Library";
 			this.TabPage_Serializer.UseVisualStyleBackColor = true;
@@ -322,7 +322,7 @@
 			// Button_Save
 			// 
 			this.Button_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.Button_Save.Location = new System.Drawing.Point( 825, 550 );
+			this.Button_Save.Location = new System.Drawing.Point( -92, -35 );
 			this.Button_Save.Name = "Button_Save";
 			this.Button_Save.Size = new System.Drawing.Size( 75, 23 );
 			this.Button_Save.TabIndex = 1;
@@ -337,7 +337,7 @@
 			this.Controls.Add( this.Button_Save );
 			this.Controls.Add( this.TabControl_Options );
 			this.Name = "UC_Options";
-			this.Size = new System.Drawing.Size( 917, 585 );
+			this.Size = new System.Drawing.Size( 0, 0 );
 			groupBox3.ResumeLayout( false );
 			groupBox3.PerformLayout();
 			this.TabControl_Options.ResumeLayout( false );

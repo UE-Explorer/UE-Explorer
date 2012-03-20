@@ -1655,6 +1655,7 @@ namespace UEExplorer.UI.Tabs
 		{
 			if( _BufferIndex - 1 > -1 )
 			{
+				FilterText.Text = String.Empty;
 				-- _BufferIndex;
 				Label_ObjectName.Text = _ContentBuffer[_BufferIndex].Label;
 				SetContentText( _ContentBuffer[_BufferIndex].Node, _ContentBuffer[_BufferIndex].Text, true );
@@ -1673,6 +1674,7 @@ namespace UEExplorer.UI.Tabs
 		{
 			if( _BufferIndex + 1 < _ContentBuffer.Count )
 			{
+				FilterText.Text = String.Empty;
 				++ _BufferIndex;
 				Label_ObjectName.Text = _ContentBuffer[_BufferIndex].Label;
 				SetContentText( _ContentBuffer[_BufferIndex].Node, _ContentBuffer[_BufferIndex].Text, true );
@@ -1744,6 +1746,33 @@ namespace UEExplorer.UI.Tabs
 			var HVD = new HexViewDialog( obj );
 			HVD.Show( _Form );
 			HVD.ShowInTaskbar = true;
+		}
+
+		private List<TreeNode> _FilteredNodes = new List<TreeNode>();
+
+		private void FilterText_TextChanged( object sender, EventArgs e )
+		{
+			for( int i = 0; i < TreeView_Classes.Nodes.Count; ++ i )
+			{
+				if( !TreeView_Classes.Nodes[i].Text.Contains( FilterText.Text ) )
+				{
+					_FilteredNodes.Add( TreeView_Classes.Nodes[i] );
+					TreeView_Classes.Nodes[i].Remove();
+					-- i;
+				}
+			}
+
+			for( int i = 0; i < _FilteredNodes.Count; ++ i )
+			{
+				if( FilterText.Text == String.Empty || _FilteredNodes[i].Text.Contains( FilterText.Text ) )
+				{
+					TreeView_Classes.Nodes.Add( _FilteredNodes[i] );
+					_FilteredNodes.Remove( _FilteredNodes[i] ); 
+					-- i;
+				}	
+			}
+
+			TreeView_Classes.Sort();
 		}
 	}
 
