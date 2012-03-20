@@ -61,6 +61,8 @@
 			this.menuItem23 = new System.Windows.Forms.MenuItem();
 			this.menuItem6 = new System.Windows.Forms.MenuItem();
 			this.menuItem7 = new System.Windows.Forms.MenuItem();
+			this.menuItem25 = new System.Windows.Forms.MenuItem();
+			this.menuItem24 = new System.Windows.Forms.MenuItem();
 			this.menuItem4 = new System.Windows.Forms.MenuItem();
 			this.UEStatusStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).BeginInit();
@@ -292,7 +294,9 @@
             this.menuItem5,
             this.menuItem23,
             this.menuItem6,
-            this.menuItem7} );
+            this.menuItem7,
+            this.menuItem25,
+            this.menuItem24} );
 			this.menuItem3.Text = "&Help";
 			// 
 			// menuItem5
@@ -304,7 +308,7 @@
 			// menuItem23
 			// 
 			this.menuItem23.Index = 1;
-			this.menuItem23.Text = "Check for Updates...";
+			this.menuItem23.Text = "&Check for Updates...";
 			this.menuItem23.Click += new System.EventHandler( this.checkForUpdates );
 			// 
 			// menuItem6
@@ -315,13 +319,24 @@
 			// menuItem7
 			// 
 			this.menuItem7.Index = 3;
-			this.menuItem7.Text = "&Options";
-			this.menuItem7.Click += new System.EventHandler( this.optionsToolStripMenuItem_Click_1 );
+			this.menuItem7.Text = "&Options...";
+			this.menuItem7.Click += new System.EventHandler( this.menuItem7_Click );
+			// 
+			// menuItem25
+			// 
+			this.menuItem25.Index = 4;
+			this.menuItem25.Text = "-";
+			// 
+			// menuItem24
+			// 
+			this.menuItem24.Index = 5;
+			this.menuItem24.Text = "> &Forums";
+			this.menuItem24.Click += new System.EventHandler( this.menuItem24_Click );
 			// 
 			// menuItem4
 			// 
 			this.menuItem4.Index = 4;
-			this.menuItem4.Text = "Donate!";
+			this.menuItem4.Text = "> Donate!";
 			this.menuItem4.Click += new System.EventHandler( this.donateToolStripMenuItem1_Click );
 			// 
 			// UEExplorer_Form
@@ -368,7 +383,6 @@
 		private System.Windows.Forms.MenuItem menuItem4;
 		private System.Windows.Forms.MenuItem menuItem5;
 		private System.Windows.Forms.MenuItem menuItem6;
-		private System.Windows.Forms.MenuItem menuItem7;
 		private System.Windows.Forms.MenuItem menuItem8;
 		private System.Windows.Forms.MenuItem menuItem9;
 		private System.Windows.Forms.MenuItem menuItem10;
@@ -386,6 +400,9 @@
 		private System.Windows.Forms.MenuItem menuItem21;
 		private System.Windows.Forms.MenuItem menuItem22;
 		private System.Windows.Forms.MenuItem menuItem23;
+		private System.Windows.Forms.MenuItem menuItem7;
+		private System.Windows.Forms.MenuItem menuItem24;
+		private System.Windows.Forms.MenuItem menuItem25;
 
 
 		// OnClick events!

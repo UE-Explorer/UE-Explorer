@@ -312,11 +312,6 @@ namespace UEExplorer.UI
 			AddTabComponent( typeof(UnrealNativesGeneratorTab), "Unreal Natives Table Generator" );
 		}
 
-		private void optionsToolStripMenuItem_Click_1( object sender, EventArgs e )
-		{
-			AddTabComponent( typeof(UC_Options), Application.ProductName + " Options" );
-		}
-
 		private void Unreal_Explorer_Form_Shown( object sender, EventArgs e )
 		{
 			Refresh();
@@ -516,7 +511,7 @@ namespace UEExplorer.UI
 
 		private void donateToolStripMenuItem1_Click( object sender, EventArgs e )
 		{
-			System.Diagnostics.Process.Start( "http://www.eliot.pwc-networks.com/donate.html" );
+			System.Diagnostics.Process.Start( Program.WEBSITE_URL + "donate.html" );
 		}
 
 		private void checkForUpdates( object sender, EventArgs e )
@@ -548,6 +543,16 @@ namespace UEExplorer.UI
 			{
 				MessageBox.Show( "Failed to request the latest version. Please try again later!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
 			}
+		}
+
+		private void menuItem7_Click( object sender, EventArgs e )
+		{
+			AddTabComponent( typeof(UC_Options), Application.ProductName + " Options" );
+		}
+
+		private void menuItem24_Click( object sender, EventArgs e )
+		{
+			System.Diagnostics.Process.Start( Program.WEBSITE_URL + "forum" );
 		}
     }
 
