@@ -1774,6 +1774,11 @@ namespace UEExplorer.UI.Tabs
 
 			TreeView_Classes.Sort();
 		}
+
+		private void ReloadButton_Click( object sender, EventArgs e )
+		{
+			ReloadPackage();
+		}
 	}
 
 	internal class UPackageObject : UObject

@@ -150,7 +150,7 @@ namespace UEExplorer.UI
 		public void RemoveTab( ITabComponent delComponent )
 		{
 			TabsControl.RemoveTab( delComponent.Tab );
-			//Tabs.Remove( delComponent );	// Handled elsewhere
+			Tabs.Remove( delComponent );	// Handled elsewhere
 		}
 
 		public TabStripItem CreateTabPage( string title )

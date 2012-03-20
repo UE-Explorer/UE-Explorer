@@ -46,6 +46,7 @@
 			this.exportDecompiledClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportScriptClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ReloadButton = new System.Windows.Forms.ToolStripButton();
 			this.TabControl_General = new System.Windows.Forms.TabControl();
 			this.TabPage_Package = new System.Windows.Forms.TabPage();
 			this.LABEL_Copyright = new System.Windows.Forms.Label();
@@ -213,7 +214,8 @@
 			this.ToolStrip_Main.BackColor = System.Drawing.Color.White;
 			this.ToolStrip_Main.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.ToolStrip_Main.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1} );
+            this.toolStripDropDownButton1,
+            this.ReloadButton} );
 			resources.ApplyResources( this.ToolStrip_Main, "ToolStrip_Main" );
 			this.ToolStrip_Main.Name = "ToolStrip_Main";
 			this.ToolStrip_Main.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -251,6 +253,13 @@
 			this.viewBufferToolStripMenuItem.Name = "viewBufferToolStripMenuItem";
 			resources.ApplyResources( this.viewBufferToolStripMenuItem, "viewBufferToolStripMenuItem" );
 			this.viewBufferToolStripMenuItem.Click += new System.EventHandler( this.viewBufferToolStripMenuItem_Click );
+			// 
+			// ReloadButton
+			// 
+			this.ReloadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			resources.ApplyResources( this.ReloadButton, "ReloadButton" );
+			this.ReloadButton.Name = "ReloadButton";
+			this.ReloadButton.Click += new System.EventHandler( this.ReloadButton_Click );
 			// 
 			// TabControl_General
 			// 
@@ -829,6 +838,7 @@
 		internal System.Windows.Forms.Label LABEL_Copyright;
 		internal System.Windows.Forms.Label LABEL_Author;
 		private System.Windows.Forms.TextBox FilterText;
+		private System.Windows.Forms.ToolStripButton ReloadButton;
 
 
 	}
