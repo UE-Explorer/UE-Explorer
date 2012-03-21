@@ -3,3 +3,5 @@
 /*.suo
 /*.csproj.user
 /*.sln.DotSettings.user
+/Eliot.Extensions.Obfuscator/
+/Eliot.Extensions.EdProtector/
