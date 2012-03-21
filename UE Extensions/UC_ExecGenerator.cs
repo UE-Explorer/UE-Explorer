@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace UE_Extensions
+namespace Eliot.Extensions.ExecGenerator
 {
 	using UEExplorer.UI;
 	using UELib;

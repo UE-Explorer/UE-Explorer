@@ -1,4 +1,4 @@
-﻿namespace UE_Extensions
+﻿namespace Eliot.Extensions.ExecGenerator
 {
 	using UEExplorer.UI;
 
