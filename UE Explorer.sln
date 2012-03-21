@@ -7,21 +7,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UE Explorer", "UE Explorer\
 		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1} = {6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UELib", "UELib\UELib.csproj", "{7E45273F-434F-42FA-8269-0E760AEB41E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UELib", "UELib\Eliot.UELib.csproj", "{7E45273F-434F-42FA-8269-0E760AEB41E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obfuscator", "Obfuscator\Obfuscator.csproj", "{760F1D8A-0963-45DA-9E92-220E05EBAD2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Extensions.Obfuscator", "Obfuscator\Eliot.Extensions.Obfuscator.csproj", "{760F1D8A-0963-45DA-9E92-220E05EBAD2A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7E45273F-434F-42FA-8269-0E760AEB41E1} = {7E45273F-434F-42FA-8269-0E760AEB41E1}
 		{C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94} = {C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UE Extensions", "UE Extensions\UE Extensions.csproj", "{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Extensions.ExecGenerator", "UE Extensions\Eliot.Extensions.ExecGenerator.csproj", "{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7E45273F-434F-42FA-8269-0E760AEB41E1} = {7E45273F-434F-42FA-8269-0E760AEB41E1}
 		{C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94} = {C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.AvalonEdit", "..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj", "{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UnrealScript.Parser", "..\Unreal Programming Environment\UPE.UnrealScript\Eliot.UnrealScript.Parser.csproj", "{FF884D57-179B-4A56-B76D-FCE950FB9F01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Extensions.EdProtector", "Eliot.Extensions.EdProtector\Eliot.Extensions.EdProtector.csproj", "{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,12 +87,31 @@ Global
 		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|x86.ActiveCfg = Release|Any CPU
+		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Release|x86.ActiveCfg = Release|Any CPU
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateAssemblyVersion = True
 		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UpdateAssemblyVersion = True
 	EndGlobalSection
 EndGlobal
