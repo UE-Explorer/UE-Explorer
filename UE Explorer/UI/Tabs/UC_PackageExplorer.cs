@@ -351,7 +351,7 @@ namespace UEExplorer.UI.Tabs
 				}	
 			
 				#if DEBUG
-					if( exp.Guid != String.Empty )
+					if( exp.Guid != Guid.Empty.ToString() )
 					{
 						Nodes.Add( "Guid:" + exp.Guid );
 					}
@@ -368,8 +368,24 @@ namespace UEExplorer.UI.Tabs
 						}
 					}
 					catch{}
-				#endif
 
+					try
+					{
+						if( exp.NetObjects != null && exp.NetObjects.Count > 0 )
+						{
+							var n = Nodes.Add( "NetObjects" );
+							foreach( var obj in exp.NetObjects )
+							{
+								n.Nodes.Add( "Name:" + exp.Owner.GetIndexObjectName( obj ) + "(" + obj + ")" );
+							}
+						}
+					}
+					catch{}	
+				#endif
+				if( exp.Object != null && exp.Object.NetIndex != 0 )
+				{
+					Nodes.Add( "NetIndex:" + exp.Owner.GetIndexObjectName( exp.Object.NetIndex ) + "(" + exp.Object.NetIndex + ")" ); 
+				}
 				TreeView.EndUpdate();
 			}
 		}
@@ -1754,7 +1770,7 @@ namespace UEExplorer.UI.Tabs
 		{
 			for( int i = 0; i < TreeView_Classes.Nodes.Count; ++ i )
 			{
-				if( !TreeView_Classes.Nodes[i].Text.Contains( FilterText.Text ) )
+				if( TreeView_Classes.Nodes[i].Text.IndexOf( FilterText.Text, StringComparison.OrdinalIgnoreCase ) == -1 )
 				{
 					_FilteredNodes.Add( TreeView_Classes.Nodes[i] );
 					TreeView_Classes.Nodes[i].Remove();
@@ -1764,7 +1780,7 @@ namespace UEExplorer.UI.Tabs
 
 			for( int i = 0; i < _FilteredNodes.Count; ++ i )
 			{
-				if( FilterText.Text == String.Empty || _FilteredNodes[i].Text.Contains( FilterText.Text ) )
+				if( FilterText.Text == String.Empty || _FilteredNodes[i].Text.IndexOf( FilterText.Text, StringComparison.OrdinalIgnoreCase  ) >= 0 )
 				{
 					TreeView_Classes.Nodes.Add( _FilteredNodes[i] );
 					_FilteredNodes.Remove( _FilteredNodes[i] ); 
