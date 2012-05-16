@@ -66,19 +66,19 @@
 			label4.AutoSize = true;
 			label4.Location = new System.Drawing.Point( 10, 9 );
 			label4.Name = "label4";
-			label4.Size = new System.Drawing.Size( 360, 13 );
+			label4.Size = new System.Drawing.Size( 303, 13 );
 			label4.TabIndex = 8;
-			label4.Text = "This will send a report to eliot.pwc-networks.com with the exception details!";
+			label4.Text = "This will send a report to eliotvu.com with the exception details!";
 			// 
 			// linkLabel1
 			// 
 			linkLabel1.AutoSize = true;
 			linkLabel1.Location = new System.Drawing.Point( 12, 22 );
 			linkLabel1.Name = "linkLabel1";
-			linkLabel1.Size = new System.Drawing.Size( 293, 13 );
+			linkLabel1.Size = new System.Drawing.Size( 128, 13 );
 			linkLabel1.TabIndex = 10;
 			linkLabel1.TabStop = true;
-			linkLabel1.Text = "http://eliot.pwc-networks.com/forum/forumdisplay.php?fid=4";
+			linkLabel1.Text = "http://eliotvu.com/forum/";
 			// 
 			// InfoText
 			// 

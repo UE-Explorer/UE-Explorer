@@ -16,7 +16,7 @@ namespace UEExplorer.UI.Dialogs
 		{
 			label4.Text = Application.ProductName;
 		 	VersionLabel.Text = "Version " + UEExplorer_Form.Version;
-			CopyrightLabel.Text = AssemblyCopyright;
+			CopyrightLabel.Text = Application.ProductName + " " + AssemblyCopyright;
 			LinkLabel.Text = Program.WEBSITE_URL;
 		}
 

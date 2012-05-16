@@ -122,10 +122,6 @@ namespace UEExplorer.UI
 			InitializeUI();
 
 			TManager = new TabsManager( this );
-			if( Environment.GetCommandLineArgs().Length <= 1 )
-			{
-				AddTabComponent( typeof(UC_Default), "Homepage" );
-			}
 		}
 
 		private void UEExplorer_Form_FormClosing( object sender, FormClosingEventArgs e )
@@ -223,7 +219,13 @@ namespace UEExplorer.UI
 		}
 
 		#region Events
-		private void StartOpenFileDialog()
+		private void aboutToolStripMenuItem_Click( object sender, EventArgs e )
+		{
+			var about = new AboutForm();
+			about.ShowDialog();
+		}
+
+		private void openFileToolStripMenuItem_Click( object sender, EventArgs e )
 		{
 			var ofd = new OpenFileDialog
 			{
@@ -240,17 +242,6 @@ namespace UEExplorer.UI
 					LoadFile( fileName );
 				}
 			}	
-		}
-
-		private void aboutToolStripMenuItem_Click( object sender, EventArgs e )
-		{
-			var about = new AboutForm();
-			about.ShowDialog();
-		}
-
-		private void openFileToolStripMenuItem_Click( object sender, EventArgs e )
-		{
-			StartOpenFileDialog();
 		}
 
 		private void unrealColorGeneratorToolStripMenuItem_Click( object sender, EventArgs e )
@@ -322,6 +313,11 @@ namespace UEExplorer.UI
 				{
 					LoadFile( args[i] );
 				}
+			}
+
+			if( TManager.Tabs.Count == 0 )
+			{
+				AddTabComponent( typeof(UC_Default), "Homepage" );
 			}
 		}
 
@@ -518,30 +514,39 @@ namespace UEExplorer.UI
 		{
 			try
 			{
+				ProgressStatus.SaveStatus();
+				ProgressStatus.SetStatus( "Checking for updates..." );
 				// ID of UE Explorer
-				var postData = "data[items][id]=21";		
+				var postData = "data[items][id]=21";
 				var result = Program.Post( Program.WEBSITE_URL + "apps/version/", postData ).Trim();
 				if( result != Version )
 				{
 					if( MessageBox.Show(
-						"Clicking yes will bring you to the page with the latest version!" 
-						+ "\r\n\r\nYour version: " + Version 
+						"Clicking yes will bring you to the page with the latest version!"
+						+ "\r\n\r\nYour version: " + Version
 						+ "\r\nLatest version: " + result
 						, "A new version is available!"
 						, MessageBoxButtons.YesNo
 					) == System.Windows.Forms.DialogResult.Yes )
 					{
-						System.Diagnostics.Process.Start( Program.WEBSITE_URL + "portfolio/view/21/UE+Explorer" );
+						System.Diagnostics.Process.Start( Program.WEBSITE_URL + "portfolio/view/21/UE-Explorer" );
 					}
 				}
 				else
 				{
-					MessageBox.Show( "You have the latest version of " + Application.ProductName ); 
+					MessageBox.Show( "You have the latest version of " + Application.ProductName );
 				}
 			}
-			catch
+			catch( Exception exc )
 			{
-				MessageBox.Show( "Failed to request the latest version. Please try again later!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+				MessageBox.Show( "Failed to request the latest version. Please try again later!"
+					+ "\r\nException:" + exc.Message,
+					"Error", MessageBoxButtons.OK, MessageBoxIcon.Error
+				);
+			}
+			finally
+			{
+				ProgressStatus.ResetStatus();
 			}
 		}
 
@@ -552,7 +557,12 @@ namespace UEExplorer.UI
 
 		private void menuItem24_Click( object sender, EventArgs e )
 		{
-			System.Diagnostics.Process.Start( Program.WEBSITE_URL + "forum" );
+			System.Diagnostics.Process.Start( Program.WEBSITE_URL + "forum/" );
+		}
+
+		private void menuItem26_Click( object sender, EventArgs e )
+		{
+			System.Diagnostics.Process.Start( Program.WEBSITE_URL );
 		}
     }
 

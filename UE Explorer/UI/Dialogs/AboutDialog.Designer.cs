@@ -29,8 +29,8 @@
 		private void InitializeComponent()
 		{
 			System.Windows.Forms.Label label2;
-			System.Windows.Forms.PictureBox pictureBox1;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( AboutForm ) );
+			System.Windows.Forms.PictureBox pictureBox1;
 			this.label4 = new System.Windows.Forms.Label();
 			this.CopyrightLabel = new System.Windows.Forms.Label();
 			this.VersionLabel = new System.Windows.Forms.Label();
@@ -45,10 +45,9 @@
 			// 
 			label2.Location = new System.Drawing.Point( 12, 95 );
 			label2.Name = "label2";
-			label2.Size = new System.Drawing.Size( 359, 59 );
+			label2.Size = new System.Drawing.Size( 359, 96 );
 			label2.TabIndex = 8;
-			label2.Text = "Libraries:\r\n    Storm.TabControl - Theodor Storm Kristensen\r\n    ICSharpCode.Aval" +
-				"onEdit - Daniel Grunwald\r\n    UELib - Eliot van Uytfanghe";
+			label2.Text = resources.GetString( "label2.Text" );
 			// 
 			// pictureBox1
 			// 
@@ -104,7 +103,7 @@
 			// 
 			this.LinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.LinkLabel.AutoSize = true;
-			this.LinkLabel.Location = new System.Drawing.Point( 9, 162 );
+			this.LinkLabel.Location = new System.Drawing.Point( 9, 201 );
 			this.LinkLabel.Name = "LinkLabel";
 			this.LinkLabel.Size = new System.Drawing.Size( 49, 13 );
 			this.LinkLabel.TabIndex = 11;
@@ -117,7 +116,7 @@
 			this.AcceptButton = this.button1;
 			this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size( 390, 184 );
+			this.ClientSize = new System.Drawing.Size( 390, 223 );
 			this.ControlBox = false;
 			this.Controls.Add( this.LinkLabel );
 			this.Controls.Add( pictureBox1 );

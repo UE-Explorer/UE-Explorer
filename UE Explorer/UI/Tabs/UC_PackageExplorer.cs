@@ -85,7 +85,17 @@ namespace UEExplorer.UI.Tabs
 
 				if( _UnrealPackage.CompressedChunks != null && _UnrealPackage.CompressedChunks.Capacity > 0 )
 				{
-					MessageBox.Show( "This package is cooked! Cooked packages are not supported.", "Notice", MessageBoxButtons.OK );
+					if( MessageBox.Show( "This package is cooked! Cooked packages are not supported."
+						+ "\r\n\r\nPlease consider decompressing the package using \"Unreal Package Decompressor\" from Gildor"
+						+ "\r\n\r\nYou can download the tool from http://www.gildor.org/downloads or press OK to go there now.",
+						"Notice", MessageBoxButtons.OKCancel, MessageBoxIcon.Question
+					) == DialogResult.OK )
+					{
+						System.Diagnostics.Process.Start( "http://www.gildor.org/downloads" );
+						MessageBox.Show( "To use Gildor's tool, try \"decompress.exe PACKAGENAME.EXT\" you may have to specify -lzo.", 
+							"Notice", MessageBoxButtons.OK, MessageBoxIcon.Information 
+						);
+					}
 					TabControl_General.Selected -= TabControl_General_Selected;
 					TabControl_General.TabPages.Remove( TabPage_Objects );
 					TabControl_General.TabPages.Remove( TabPage_Tables );
@@ -97,6 +107,15 @@ namespace UEExplorer.UI.Tabs
 			}
 			catch( System.IO.FileLoadException e )
 			{
+				//if( MessageBox.Show(
+				//        "This package has an unknown signature.\r\n\r\nAre you sure you want to try to deserialize this package? Clicking Yes might lead to unexpected results!",
+				//        "Warning", MessageBoxButtons.YesNo
+				//    ) == DialogResult.No
+				//)
+				//{
+				//    Owner.RemoveTab( this );
+				//    return;
+				//}
 				throw new UnrealException( "Invalid package signature!", e );
 			}
 			catch( Exception e )
@@ -550,8 +569,8 @@ namespace UEExplorer.UI.Tabs
 			{
 				TabPage_Objects.Text += " (" + _UnrealPackage.ObjectsList.Count + ")";
 
- 				TabPage_Tables.Text += " (" + (_UnrealPackage.ImportTableList.Count + 
-					_UnrealPackage.ExportTableList.Count + 
+				TabPage_Tables.Text += " (" + (_UnrealPackage.ImportTableList.Count +
+					_UnrealPackage.ExportTableList.Count +
 					_UnrealPackage.NameTableList.Count) + ")";
 				TabPage_Names.Text += " (" + _UnrealPackage.NameTableList.Count + ")";
 				TabPage_Exports.Text += " (" + _UnrealPackage.ExportTableList.Count + ")";
@@ -559,10 +578,10 @@ namespace UEExplorer.UI.Tabs
 
 				CreateClassesList();
 				// HACK:Add a MetaData object to the classes tree(hack because MetaData is not an actual class)
-				var metobj = _UnrealPackage.FindObject( "MetaData", typeof(UMetaData), false );
+				var metobj = _UnrealPackage.FindObject( "MetaData", typeof( UMetaData ), false );
 				if( metobj != null )
 				{
-					var node = new ObjectNode( metobj ) {ImageKey = "UClass"};
+					var node = new ObjectNode( metobj ) { ImageKey = "UClass" };
 					node.SelectedImageKey = node.ImageKey;
 					node.Text = metobj.Name;
 					if( metobj.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
@@ -574,6 +593,10 @@ namespace UEExplorer.UI.Tabs
 
 				CreateDependenciesList();
 				CreateContentList();
+			}
+			else
+			{
+				EmptyIsPackage();
 			}
 
 			if( _UnrealPackage.GenerationsList != null )
@@ -592,6 +615,14 @@ namespace UEExplorer.UI.Tabs
 
 			ResumeLayout();
 			CausesValidation = true;
+		}
+
+		private void EmptyIsPackage()
+		{
+			Button_FindName.Enabled = false;
+			Button_FindObject.Enabled = false;
+			exportScriptClassesToolStripMenuItem.Enabled = false;
+			exportDecompiledClassesToolStripMenuItem.Enabled = false;
 		}
 
 		private delegate void CreateTableDelegate( object nameTable );
@@ -1045,7 +1076,10 @@ namespace UEExplorer.UI.Tabs
 				{
 					continue;
 				}
-				File.WriteAllText( packagePath + "\\Classes\\" + Object.Name + UnrealExtensions.UnrealCodeExt, Object.ScriptBuffer.Decompile() );
+
+				string output = Object.ScriptBuffer.Decompile();
+
+				File.WriteAllText( packagePath + "\\Classes\\" + Object.Name + UnrealExtensions.UnrealCodeExt, output );
 			}				
 			CreateFlagsFile( packagePath );
 			DialogResult DR = MessageBox.Show( "Exported all package classes of " + _UnrealPackage.FullPackageName + " to " + packagePath +
@@ -1108,7 +1142,8 @@ namespace UEExplorer.UI.Tabs
 		{
 			return "Deserialization failed by the following exception:\n" 
 				+ errorObject.ThrownException.Message 
-				+ "\n\nOccurred on position:" + errorObject.ExceptionPosition
+				+ "\n\nOccurred on position:" 
+					+ errorObject.ExceptionPosition + "/" + errorObject.ExportTable.SerialSize
 				+ "\n\nStackTrace:" + errorObject.ThrownException.StackTrace;
 		}
 

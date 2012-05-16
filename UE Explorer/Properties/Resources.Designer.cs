@@ -119,7 +119,7 @@ namespace UEExplorer.Properties {
         /// </summary>
         internal static string Open_File {
             get {
-                return ResourceManager.GetString("Open File", resourceCulture);
+                return ResourceManager.GetString("Open_File", resourceCulture);
             }
         }
         

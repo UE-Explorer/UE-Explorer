@@ -121,7 +121,7 @@
   <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\UE_ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Open File" xml:space="preserve">
+  <data name="Open_File" xml:space="preserve">
     <value>Open File</value>
   </data>
   <data name="RegistryWarning" xml:space="preserve">
@@ -131,22 +131,22 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
-	<data name="NOT_AVAILABLE">
-		<value xml:space="preserve">N/A</value>
-	</data>
-	<data name="NO_OBJECT_WAS_FOUND">
-		<value xml:space="preserve">No Object was found.</value>
-	</data>
-	<data name="OBJECT_IS">
-		<value xml:space="preserve">Object is </value>
-	</data>
-	<data name="INVALID_OBJECT_INDEX">
-		<value xml:space="preserve">Invalid Object index </value>
-	</data>
-	<data name="INVALID_NAME_INDEX">
-		<value xml:space="preserve">Invalid Name index </value>
-	</data>
-	<data name="NAME_IS">
-		<value xml:space="preserve">Name is </value>
-	</data>
+  <data name="NOT_AVAILABLE" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="NO_OBJECT_WAS_FOUND" xml:space="preserve">
+    <value>No Object was found.</value>
+  </data>
+  <data name="OBJECT_IS" xml:space="preserve">
+    <value>Object is </value>
+  </data>
+  <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
+    <value>Invalid Object index </value>
+  </data>
+  <data name="INVALID_NAME_INDEX" xml:space="preserve">
+    <value>Invalid Name index </value>
+  </data>
+  <data name="NAME_IS" xml:space="preserve">
+    <value>Name is </value>
+  </data>
 </root>

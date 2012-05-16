@@ -102,7 +102,7 @@ namespace UEExplorer
 #if DEBUG
 		internal const string WEBSITE_URL = "http://localhost/eliot/";
 #else
-		internal const string WEBSITE_URL = "http://eliot.pwc-networks.com/";
+		internal const string WEBSITE_URL = "http://eliotvu.com/";
 #endif
 
 		internal static string Post( string url, string data )

@@ -120,6 +120,15 @@
   <metadata name="label2.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="label2.Text" xml:space="preserve">
+    <value>All rights belong to their respectful owners.
+
+Storm.TabControl - Theodor Storm Kristensen
+ICSharpCode.AvalonEdit - Daniel Grunwald
+Eliot.UELib - Eliot van Uytfanghe
+
+You can view the licenses in "license.html"</value>
+  </data>
   <metadata name="pictureBox1.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
