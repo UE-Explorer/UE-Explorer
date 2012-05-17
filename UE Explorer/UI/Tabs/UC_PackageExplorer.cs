@@ -76,16 +76,19 @@ namespace UEExplorer.UI.Tabs
 				UnrealPackage.OverrideVersion = Program.Options.Version;
 			}
 
+			UnrealConfig.SuppressSignature = false;
+			reload:
 			ProgressStatus.SetStatus( "Loading Package..." );
 			// Open the file.
 			try
 			{
 				_UnrealPackage = UnrealLoader.LoadPackage( FileName );
+				UnrealConfig.SuppressSignature = false;
 				_SummarySize = _UnrealPackage.Stream.Position;
 
 				if( _UnrealPackage.CompressedChunks != null && _UnrealPackage.CompressedChunks.Capacity > 0 )
 				{
-					if( MessageBox.Show( "This package is cooked! Cooked packages are not supported."
+					if( MessageBox.Show( "This package is compressed! Compressed packages are not supported."
 						+ "\r\n\r\nPlease consider decompressing the package using \"Unreal Package Decompressor\" from Gildor"
 						+ "\r\n\r\nYou can download the tool from http://www.gildor.org/downloads or press OK to go there now.",
 						"Notice", MessageBoxButtons.OKCancel, MessageBoxIcon.Question
@@ -107,16 +110,20 @@ namespace UEExplorer.UI.Tabs
 			}
 			catch( System.IO.FileLoadException e )
 			{
-				//if( MessageBox.Show(
-				//        "This package has an unknown signature.\r\n\r\nAre you sure you want to try to deserialize this package? Clicking Yes might lead to unexpected results!",
-				//        "Warning", MessageBoxButtons.YesNo
-				//    ) == DialogResult.No
-				//)
-				//{
-				//    Owner.RemoveTab( this );
-				//    return;
-				//}
-				throw new UnrealException( "Invalid package signature!", e );
+				_UnrealPackage = null;
+				if( MessageBox.Show(
+				        "This package has an unknown signature.\r\n\r\nAre you sure you want to try to deserialize this package? Clicking Yes might lead to unexpected results!",
+				        "Warning", MessageBoxButtons.YesNo
+				    ) == DialogResult.No
+				)
+				{
+					Owner.RemoveTab( this );
+					return;
+				}
+				UnrealConfig.SuppressSignature = true;
+				goto reload;
+				//throw new UnrealException( "Invalid package signature!", e );
+
 			}
 			catch( Exception e )
 			{
@@ -591,8 +598,25 @@ namespace UEExplorer.UI.Tabs
 					TreeView_Classes.Nodes.Add( node );
 				}
 
-				CreateDependenciesList();
-				CreateContentList();
+				try
+				{
+					CreateDependenciesList();
+				}
+				catch( Exception e )
+				{
+					// May happen, like on games such as Medal of Honor: Airborne.
+					ExceptionDialog.Show( "An exception occurred when creating the dependencies table!", e );
+				}
+
+				try
+				{
+					CreateContentList();
+				}
+				catch( Exception e )
+				{
+					// May happen, like on games such as Medal of Honor: Airborne.
+					ExceptionDialog.Show( "An exception occurred when creating the content table!", e );
+				}
 			}
 			else
 			{
