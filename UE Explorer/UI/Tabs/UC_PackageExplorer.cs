@@ -546,6 +546,8 @@ namespace UEExplorer.UI.Tabs
 				}
 			}
 
+			Label_DetectedBuild.Text += " " + _UnrealPackage.Build.GameID;
+
 			// Automatic iterate through all package flags and return them as a string list
 			var flags = new List<string>
 			{

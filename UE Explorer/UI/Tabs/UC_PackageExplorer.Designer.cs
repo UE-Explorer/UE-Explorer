@@ -49,6 +49,7 @@
 			this.ReloadButton = new System.Windows.Forms.ToolStripButton();
 			this.TabControl_General = new System.Windows.Forms.TabControl();
 			this.TabPage_Package = new System.Windows.Forms.TabPage();
+			this.Label_DetectedBuild = new System.Windows.Forms.Label();
 			this.LABEL_Copyright = new System.Windows.Forms.Label();
 			this.LABEL_Author = new System.Windows.Forms.Label();
 			this.DataGridView_Flags = new System.Windows.Forms.DataGridView();
@@ -276,6 +277,7 @@
 			// 
 			this.TabPage_Package.BackColor = System.Drawing.Color.White;
 			this.TabPage_Package.CausesValidation = false;
+			this.TabPage_Package.Controls.Add( this.Label_DetectedBuild );
 			this.TabPage_Package.Controls.Add( this.LABEL_Copyright );
 			this.TabPage_Package.Controls.Add( this.LABEL_Author );
 			this.TabPage_Package.Controls.Add( this.DataGridView_Flags );
@@ -288,6 +290,12 @@
 			this.TabPage_Package.Controls.Add( this.Label_Version );
 			resources.ApplyResources( this.TabPage_Package, "TabPage_Package" );
 			this.TabPage_Package.Name = "TabPage_Package";
+			// 
+			// Label_DetectedBuild
+			// 
+			resources.ApplyResources( this.Label_DetectedBuild, "Label_DetectedBuild" );
+			this.Label_DetectedBuild.CausesValidation = false;
+			this.Label_DetectedBuild.Name = "Label_DetectedBuild";
 			// 
 			// LABEL_Copyright
 			// 
@@ -839,6 +847,7 @@
 		internal System.Windows.Forms.Label LABEL_Author;
 		private System.Windows.Forms.TextBox FilterText;
 		private System.Windows.Forms.ToolStripButton ReloadButton;
+		internal System.Windows.Forms.Label Label_DetectedBuild;
 
 
 	}
