@@ -564,6 +564,11 @@ namespace UEExplorer.UI.Tabs
 				flags.Add( "Debug " + _UnrealPackage.IsDebug().ToString() );
 				flags.Add( "Stripped " + _UnrealPackage.IsStripped().ToString() );
 			}
+			else if( _UnrealPackage.Version > 61 && _UnrealPackage.Version <= 69 )		// <= UT99
+			{
+				//flags.Add( "Unsecure " + _UnrealPackage.HasPackageFlag( PackageFlags.Unsecure ) );
+				flags.Add( "Encrypted " + _UnrealPackage.HasPackageFlag( PackageFlags.Encrypted ) );
+			}
 
 			foreach( string flag in flags )
 			{
