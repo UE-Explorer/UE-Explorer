@@ -529,7 +529,7 @@ namespace UEExplorer.UI
 						, MessageBoxButtons.YesNo
 					) == System.Windows.Forms.DialogResult.Yes )
 					{
-						System.Diagnostics.Process.Start( Program.WEBSITE_URL + "portfolio/view/21/UE-Explorer" );
+						System.Diagnostics.Process.Start( Program.WEBSITE_URL + "portfolio/view/21/ue-explorer" );
 					}
 				}
 				else
@@ -552,7 +552,7 @@ namespace UEExplorer.UI
 
 		private void menuItem7_Click( object sender, EventArgs e )
 		{
-			AddTabComponent( typeof(UC_Options), Application.ProductName + " Options" );
+			AddTabComponent( typeof(UC_Options), "Options" );
 		}
 
 		private void menuItem24_Click( object sender, EventArgs e )
