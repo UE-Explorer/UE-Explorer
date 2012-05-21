@@ -117,38 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="label1.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 9</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 13</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Object Index</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <metadata name="panel1.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
@@ -156,12 +124,17 @@
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="Num_NameIndex.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Num_NameIndex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 68</value>
+    <value>118, 29</value>
   </data>
   <data name="Num_NameIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>182, 20</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Num_NameIndex.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
@@ -177,65 +150,14 @@
   <data name="&gt;&gt;Num_NameIndex.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="label2.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 50</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 13</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Name Index</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button_FindName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 68</value>
-  </data>
-  <data name="Button_FindName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="Button_FindName.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="Button_FindName.Text" xml:space="preserve">
-    <value>Find Name</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.Name" xml:space="preserve">
-    <value>Button_FindName</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="Num_ObjectIndex.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="Num_ObjectIndex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 27</value>
+    <value>118, 3</value>
   </data>
   <data name="Num_ObjectIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>182, 20</value>
   </data>
   <data name="Num_ObjectIndex.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -250,13 +172,13 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;Num_ObjectIndex.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="Button_FindObject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 27</value>
+    <value>3, 3</value>
   </data>
   <data name="Button_FindObject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>109, 23</value>
   </data>
   <data name="Button_FindObject.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -274,13 +196,37 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;Button_FindObject.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
+  </data>
+  <data name="Button_FindName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 29</value>
+  </data>
+  <data name="Button_FindName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 23</value>
+  </data>
+  <data name="Button_FindName.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="Button_FindName.Text" xml:space="preserve">
+    <value>Find Name</value>
+  </data>
+  <data name="&gt;&gt;Button_FindName.Name" xml:space="preserve">
+    <value>Button_FindName</value>
+  </data>
+  <data name="&gt;&gt;Button_FindName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button_FindName.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;Button_FindName.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 305</value>
+    <value>3, 352</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 102</value>
+    <value>307, 58</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -295,7 +241,7 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>14</value>
   </data>
   <metadata name="UScriptLayout.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
@@ -402,6 +348,324 @@
   <data name="TabControl_General.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="FolderValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="FolderValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="FolderValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 48</value>
+  </data>
+  <data name="FolderValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="FolderValue.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="FolderValue.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="FolderValue.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;FolderValue.Name" xml:space="preserve">
+    <value>FolderValue</value>
+  </data>
+  <data name="&gt;&gt;FolderValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FolderValue.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;FolderValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Label_Folder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Label_Folder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label_Folder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label_Folder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 48</value>
+  </data>
+  <data name="Label_Folder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
+  </data>
+  <data name="Label_Folder.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="Label_Folder.Text" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="Label_Folder.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;Label_Folder.Name" xml:space="preserve">
+    <value>Label_Folder</value>
+  </data>
+  <data name="&gt;&gt;Label_Folder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label_Folder.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;Label_Folder.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BuildValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="BuildValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BuildValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 28</value>
+  </data>
+  <data name="BuildValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="BuildValue.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="BuildValue.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="&gt;&gt;BuildValue.Name" xml:space="preserve">
+    <value>BuildValue</value>
+  </data>
+  <data name="&gt;&gt;BuildValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BuildValue.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;BuildValue.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="CookerValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CookerValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CookerValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 68</value>
+  </data>
+  <data name="CookerValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="CookerValue.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="CookerValue.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="CookerValue.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;CookerValue.Name" xml:space="preserve">
+    <value>CookerValue</value>
+  </data>
+  <data name="&gt;&gt;CookerValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CookerValue.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;CookerValue.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="EngineValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="EngineValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="EngineValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 48</value>
+  </data>
+  <data name="EngineValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="EngineValue.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="EngineValue.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="EngineValue.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;EngineValue.Name" xml:space="preserve">
+    <value>EngineValue</value>
+  </data>
+  <data name="&gt;&gt;EngineValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EngineValue.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;EngineValue.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="VersionValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="VersionValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="VersionValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 8</value>
+  </data>
+  <data name="VersionValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="VersionValue.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="VersionValue.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="&gt;&gt;VersionValue.Name" xml:space="preserve">
+    <value>VersionValue</value>
+  </data>
+  <data name="&gt;&gt;VersionValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VersionValue.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;VersionValue.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="FlagsValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="FlagsValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="FlagsValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 8</value>
+  </data>
+  <data name="FlagsValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="FlagsValue.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="FlagsValue.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="&gt;&gt;FlagsValue.Name" xml:space="preserve">
+    <value>FlagsValue</value>
+  </data>
+  <data name="&gt;&gt;FlagsValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FlagsValue.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;FlagsValue.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="LicenseeValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LicenseeValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LicenseeValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 28</value>
+  </data>
+  <data name="LicenseeValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="LicenseeValue.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="LicenseeValue.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="&gt;&gt;LicenseeValue.Name" xml:space="preserve">
+    <value>LicenseeValue</value>
+  </data>
+  <data name="&gt;&gt;LicenseeValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LicenseeValue.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;LicenseeValue.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <metadata name="label4.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 87</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>GUID</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="Label_GUID.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Label_GUID.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 84</value>
+  </data>
+  <data name="Label_GUID.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 20</value>
+  </data>
+  <data name="Label_GUID.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;Label_GUID.Name" xml:space="preserve">
+    <value>Label_GUID</value>
+  </data>
+  <data name="&gt;&gt;Label_GUID.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label_GUID.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;Label_GUID.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <metadata name="Label_DetectedBuild.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <data name="Label_DetectedBuild.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -412,7 +676,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label_DetectedBuild.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 48</value>
+    <value>144, 28</value>
   </data>
   <data name="Label_DetectedBuild.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -433,7 +697,10 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_DetectedBuild.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>10</value>
+  </data>
+  <data name="LABEL_Copyright.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="LABEL_Copyright.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -442,7 +709,7 @@
     <value>NoControl</value>
   </data>
   <data name="LABEL_Copyright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 106</value>
+    <value>0, 479</value>
   </data>
   <data name="LABEL_Copyright.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -466,7 +733,10 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;LABEL_Copyright.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>11</value>
+  </data>
+  <data name="LABEL_Author.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="LABEL_Author.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -475,7 +745,7 @@
     <value>NoControl</value>
   </data>
   <data name="LABEL_Author.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 87</value>
+    <value>0, 457</value>
   </data>
   <data name="LABEL_Author.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -499,7 +769,7 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;LABEL_Author.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>12</value>
   </data>
   <data name="DataGridView_Flags.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -529,13 +799,13 @@
     <value>Flag Condition</value>
   </data>
   <data name="DataGridView_Flags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 130</value>
+    <value>3, 110</value>
   </data>
   <data name="DataGridView_Flags.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
   <data name="DataGridView_Flags.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 169</value>
+    <value>307, 236</value>
   </data>
   <data name="DataGridView_Flags.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -550,7 +820,7 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;DataGridView_Flags.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>13</value>
   </data>
   <data name="Label_CookerVersion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -559,7 +829,7 @@
     <value>True</value>
   </data>
   <data name="Label_CookerVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 28</value>
+    <value>0, 68</value>
   </data>
   <data name="Label_CookerVersion.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 13</value>
@@ -583,7 +853,7 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_CookerVersion.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>15</value>
   </data>
   <data name="Label_EngineVersion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -592,7 +862,7 @@
     <value>True</value>
   </data>
   <data name="Label_EngineVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 8</value>
+    <value>0, 48</value>
   </data>
   <data name="Label_EngineVersion.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
@@ -616,49 +886,25 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_EngineVersion.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>16</value>
   </data>
-  <data name="Label_GUID.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label_GUID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 68</value>
-  </data>
-  <data name="Label_GUID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
-  </data>
-  <data name="Label_GUID.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="Label_GUID.Text" xml:space="preserve">
-    <value>Package GUID</value>
-  </data>
-  <data name="&gt;&gt;Label_GUID.Name" xml:space="preserve">
-    <value>Label_GUID</value>
-  </data>
-  <data name="&gt;&gt;Label_GUID.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label_GUID.Parent" xml:space="preserve">
-    <value>TabPage_Package</value>
-  </data>
-  <data name="&gt;&gt;Label_GUID.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
+  <metadata name="Label_LicenseeMode.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <data name="Label_LicenseeMode.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Label_LicenseeMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 48</value>
+    <value>0, 28</value>
   </data>
   <data name="Label_LicenseeMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 13</value>
+    <value>88, 13</value>
   </data>
   <data name="Label_LicenseeMode.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="Label_LicenseeMode.Text" xml:space="preserve">
-    <value>Package Licensee Version</value>
+    <value>Licensee Version</value>
   </data>
   <data name="&gt;&gt;Label_LicenseeMode.Name" xml:space="preserve">
     <value>Label_LicenseeMode</value>
@@ -670,22 +916,25 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_LicenseeMode.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>17</value>
   </data>
+  <metadata name="Label_Flags.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <data name="Label_Flags.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Label_Flags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 28</value>
+    <value>144, 8</value>
   </data>
   <data name="Label_Flags.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 13</value>
+    <value>32, 13</value>
   </data>
   <data name="Label_Flags.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="Label_Flags.Text" xml:space="preserve">
-    <value>Package Flags</value>
+    <value>Flags</value>
   </data>
   <data name="&gt;&gt;Label_Flags.Name" xml:space="preserve">
     <value>Label_Flags</value>
@@ -697,8 +946,11 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_Flags.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>18</value>
   </data>
+  <metadata name="Label_Version.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <data name="Label_Version.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -706,13 +958,13 @@
     <value>0, 8</value>
   </data>
   <data name="Label_Version.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>42, 13</value>
   </data>
   <data name="Label_Version.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="Label_Version.Text" xml:space="preserve">
-    <value>Package Version</value>
+    <value>Version</value>
   </data>
   <data name="&gt;&gt;Label_Version.Name" xml:space="preserve">
     <value>Label_Version</value>
@@ -724,7 +976,7 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_Version.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>19</value>
   </data>
   <data name="TabPage_Package.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1112,7 +1364,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAB8
-        EQAAAk1TRnQBSQFMAgEBCgEAARQBBAEUAQQBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        EQAAAk1TRnQBSQFMAgEBCgEAAQQBBQEEAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1520,7 +1772,7 @@
     <value>3, 28</value>
   </data>
   <data name="WPFHost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>589, 515</value>
+    <value>557, 515</value>
   </data>
   <data name="WPFHost.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1647,7 +1899,7 @@
     <value>Yes</value>
   </data>
   <data name="ToolStrip_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>595, 28</value>
+    <value>563, 28</value>
   </data>
   <data name="ToolStrip_Content.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1677,7 +1929,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="Panel_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>595, 546</value>
+    <value>563, 546</value>
   </data>
   <data name="Panel_Content.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1707,7 +1959,7 @@
     <value>1</value>
   </data>
   <data name="UScriptLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>922, 546</value>
+    <value>890, 546</value>
   </data>
   <data name="UScriptLayout.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1740,7 +1992,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>922, 546</value>
+    <value>890, 546</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButton1.Name" xml:space="preserve">
     <value>toolStripDropDownButton1</value>

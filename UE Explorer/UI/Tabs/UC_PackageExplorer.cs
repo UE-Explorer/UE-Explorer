@@ -108,7 +108,7 @@ namespace UEExplorer.UI.Tabs
 
 				TabControl_General.TabPages.Remove( TabPage_Chunks );
 			}
-			catch( System.IO.FileLoadException e )
+			catch( System.IO.FileLoadException )
 			{
 				_UnrealPackage = null;
 				if( MessageBox.Show(
@@ -522,18 +522,27 @@ namespace UEExplorer.UI.Tabs
 			// Package Info
 
 			// Section 1
-			Label_Version.Text 			+= " " + _UnrealPackage.Version;
-			Label_Flags.Text 			+= " " + UnrealMethods.FlagToString( (_UnrealPackage.PackageFlags & ~(uint)PackageFlags.Protected) );
-			Label_GUID.Text				+= " " + _UnrealPackage.GUID;
-			Label_LicenseeMode.Text 	+= " " + _UnrealPackage.LicenseeVersion;
+			VersionValue.Text 			= (_UnrealPackage.Version.ToString());
+			FlagsValue.Text 			= UnrealMethods.FlagToString( (_UnrealPackage.PackageFlags & ~(uint)PackageFlags.Protected) );
+			LicenseeValue.Text 			= _UnrealPackage.LicenseeVersion.ToString();
+
+			Label_GUID.Text				= _UnrealPackage.GUID;
 
 			// Section 2	
 			if( _UnrealPackage.Version >= 245 )
 			{
 				if( _UnrealPackage.EngineVersion > 0 )
 				{
-					Label_EngineVersion.Visible = true;
-					Label_EngineVersion.Text 	+= " " + _UnrealPackage.EngineVersion;
+					Label_EngineVersion.Visible		= true;
+					EngineValue.Visible				= true;
+					EngineValue.Text 				=  _UnrealPackage.EngineVersion.ToString();
+				}
+
+				if( _UnrealPackage.Group != "None" )
+				{
+					Label_Folder.Visible			= true;
+					FolderValue.Visible				= true;
+					FolderValue.Text				= _UnrealPackage.Group;
 				}
 			}
 
@@ -541,12 +550,13 @@ namespace UEExplorer.UI.Tabs
 			{
 				if( _UnrealPackage.CookerVersion > 0 )
 				{
-					Label_CookerVersion.Visible = true;
-					Label_CookerVersion.Text 	+= " " + _UnrealPackage.CookerVersion;
+					Label_CookerVersion.Visible		= true;
+					CookerValue.Visible				= true;
+					CookerValue.Text				= _UnrealPackage.CookerVersion.ToString();
 				}
 			}
 
-			Label_DetectedBuild.Text += " " + _UnrealPackage.Build.GameID;
+			BuildValue.Text = _UnrealPackage.Build.GameID.ToString();
 
 			// Automatic iterate through all package flags and return them as a string list
 			var flags = new List<string>
@@ -558,11 +568,13 @@ namespace UEExplorer.UI.Tabs
 
 			if( _UnrealPackage.Version >= UnrealPackage.VCookedPackages )
 			{
+				flags.Add( "Compressed " + _UnrealPackage.HasPackageFlag( PackageFlags.Compressed ) );
 				flags.Add( "Cooked " + _UnrealPackage.IsCooked().ToString() );
-				flags.Add( "Map " + _UnrealPackage.IsMap().ToString() );
-				flags.Add( "Script " + _UnrealPackage.IsScript().ToString() );
+				flags.Add( "ConsoleCooked " + _UnrealPackage.HasPackageFlag( PackageFlags.ConsoleCooked ) );	
 				flags.Add( "Debug " + _UnrealPackage.IsDebug().ToString() );
-				flags.Add( "Stripped " + _UnrealPackage.IsStripped().ToString() );
+				flags.Add( "Script " + _UnrealPackage.IsScript().ToString() );
+				flags.Add( "Stripped " + _UnrealPackage.IsStripped().ToString() );			
+				flags.Add( "Map " + _UnrealPackage.IsMap().ToString() );
 			}
 			else if( _UnrealPackage.Version > 61 && _UnrealPackage.Version <= 69 )		// <= UT99
 			{

@@ -29,17 +29,20 @@
 		protected override void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.Label label1;
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( UC_PackageExplorer ) );
 			System.Windows.Forms.Panel panel1;
-			System.Windows.Forms.Label label2;
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( UC_PackageExplorer ) );
 			System.Windows.Forms.TableLayoutPanel UScriptLayout;
 			System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
+			System.Windows.Forms.Label label4;
+			System.Windows.Forms.Label Label_DetectedBuild;
+			System.Windows.Forms.Label Label_LicenseeMode;
+			System.Windows.Forms.Label Label_Flags;
+			System.Windows.Forms.Label Label_Version;
 			System.Windows.Forms.Label label3;
 			this.Num_NameIndex = new System.Windows.Forms.NumericUpDown();
-			this.Button_FindName = new System.Windows.Forms.Button();
 			this.Num_ObjectIndex = new System.Windows.Forms.NumericUpDown();
 			this.Button_FindObject = new System.Windows.Forms.Button();
+			this.Button_FindName = new System.Windows.Forms.Button();
 			this.Panel_Main = new System.Windows.Forms.Panel();
 			this.ToolStrip_Main = new System.Windows.Forms.ToolStrip();
 			this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -49,7 +52,15 @@
 			this.ReloadButton = new System.Windows.Forms.ToolStripButton();
 			this.TabControl_General = new System.Windows.Forms.TabControl();
 			this.TabPage_Package = new System.Windows.Forms.TabPage();
-			this.Label_DetectedBuild = new System.Windows.Forms.Label();
+			this.FolderValue = new System.Windows.Forms.Label();
+			this.Label_Folder = new System.Windows.Forms.Label();
+			this.BuildValue = new System.Windows.Forms.Label();
+			this.CookerValue = new System.Windows.Forms.Label();
+			this.EngineValue = new System.Windows.Forms.Label();
+			this.VersionValue = new System.Windows.Forms.Label();
+			this.FlagsValue = new System.Windows.Forms.Label();
+			this.LicenseeValue = new System.Windows.Forms.Label();
+			this.Label_GUID = new System.Windows.Forms.TextBox();
 			this.LABEL_Copyright = new System.Windows.Forms.Label();
 			this.LABEL_Author = new System.Windows.Forms.Label();
 			this.DataGridView_Flags = new System.Windows.Forms.DataGridView();
@@ -57,10 +68,6 @@
 			this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Label_CookerVersion = new System.Windows.Forms.Label();
 			this.Label_EngineVersion = new System.Windows.Forms.Label();
-			this.Label_GUID = new System.Windows.Forms.Label();
-			this.Label_LicenseeMode = new System.Windows.Forms.Label();
-			this.Label_Flags = new System.Windows.Forms.Label();
-			this.Label_Version = new System.Windows.Forms.Label();
 			this.TabPage_Tables = new System.Windows.Forms.TabPage();
 			this.TabControl_Tables = new System.Windows.Forms.TabControl();
 			this.TabPage_Names = new System.Windows.Forms.TabPage();
@@ -102,11 +109,14 @@
 			this.Label_ObjectName = new System.Windows.Forms.ToolStripLabel();
 			this.SearchBox = new System.Windows.Forms.ToolStripTextBox();
 			this.FindButton = new System.Windows.Forms.ToolStripButton();
-			label1 = new System.Windows.Forms.Label();
 			panel1 = new System.Windows.Forms.Panel();
-			label2 = new System.Windows.Forms.Label();
 			UScriptLayout = new System.Windows.Forms.TableLayoutPanel();
 			exportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			label4 = new System.Windows.Forms.Label();
+			Label_DetectedBuild = new System.Windows.Forms.Label();
+			Label_LicenseeMode = new System.Windows.Forms.Label();
+			Label_Flags = new System.Windows.Forms.Label();
+			Label_Version = new System.Windows.Forms.Label();
 			label3 = new System.Windows.Forms.Label();
 			panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Num_NameIndex)).BeginInit();
@@ -136,20 +146,14 @@
 			this.ToolStrip_Content.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// label1
-			// 
-			resources.ApplyResources( label1, "label1" );
-			label1.Name = "label1";
-			// 
 			// panel1
 			// 
 			resources.ApplyResources( panel1, "panel1" );
+			panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			panel1.Controls.Add( this.Num_NameIndex );
-			panel1.Controls.Add( label2 );
-			panel1.Controls.Add( this.Button_FindName );
 			panel1.Controls.Add( this.Num_ObjectIndex );
-			panel1.Controls.Add( label1 );
 			panel1.Controls.Add( this.Button_FindObject );
+			panel1.Controls.Add( this.Button_FindName );
 			panel1.Name = "panel1";
 			// 
 			// Num_NameIndex
@@ -161,17 +165,6 @@
             0,
             0} );
 			this.Num_NameIndex.Name = "Num_NameIndex";
-			// 
-			// label2
-			// 
-			resources.ApplyResources( label2, "label2" );
-			label2.Name = "label2";
-			// 
-			// Button_FindName
-			// 
-			resources.ApplyResources( this.Button_FindName, "Button_FindName" );
-			this.Button_FindName.Name = "Button_FindName";
-			this.Button_FindName.UseVisualStyleBackColor = true;
 			// 
 			// Num_ObjectIndex
 			// 
@@ -193,6 +186,12 @@
 			resources.ApplyResources( this.Button_FindObject, "Button_FindObject" );
 			this.Button_FindObject.Name = "Button_FindObject";
 			this.Button_FindObject.UseVisualStyleBackColor = true;
+			// 
+			// Button_FindName
+			// 
+			resources.ApplyResources( this.Button_FindName, "Button_FindName" );
+			this.Button_FindName.Name = "Button_FindName";
+			this.Button_FindName.UseVisualStyleBackColor = true;
 			// 
 			// UScriptLayout
 			// 
@@ -277,25 +276,94 @@
 			// 
 			this.TabPage_Package.BackColor = System.Drawing.Color.White;
 			this.TabPage_Package.CausesValidation = false;
-			this.TabPage_Package.Controls.Add( this.Label_DetectedBuild );
+			this.TabPage_Package.Controls.Add( this.FolderValue );
+			this.TabPage_Package.Controls.Add( this.Label_Folder );
+			this.TabPage_Package.Controls.Add( this.BuildValue );
+			this.TabPage_Package.Controls.Add( this.CookerValue );
+			this.TabPage_Package.Controls.Add( this.EngineValue );
+			this.TabPage_Package.Controls.Add( this.VersionValue );
+			this.TabPage_Package.Controls.Add( this.FlagsValue );
+			this.TabPage_Package.Controls.Add( this.LicenseeValue );
+			this.TabPage_Package.Controls.Add( label4 );
+			this.TabPage_Package.Controls.Add( this.Label_GUID );
+			this.TabPage_Package.Controls.Add( Label_DetectedBuild );
 			this.TabPage_Package.Controls.Add( this.LABEL_Copyright );
 			this.TabPage_Package.Controls.Add( this.LABEL_Author );
 			this.TabPage_Package.Controls.Add( this.DataGridView_Flags );
 			this.TabPage_Package.Controls.Add( panel1 );
 			this.TabPage_Package.Controls.Add( this.Label_CookerVersion );
 			this.TabPage_Package.Controls.Add( this.Label_EngineVersion );
-			this.TabPage_Package.Controls.Add( this.Label_GUID );
-			this.TabPage_Package.Controls.Add( this.Label_LicenseeMode );
-			this.TabPage_Package.Controls.Add( this.Label_Flags );
-			this.TabPage_Package.Controls.Add( this.Label_Version );
+			this.TabPage_Package.Controls.Add( Label_LicenseeMode );
+			this.TabPage_Package.Controls.Add( Label_Flags );
+			this.TabPage_Package.Controls.Add( Label_Version );
 			resources.ApplyResources( this.TabPage_Package, "TabPage_Package" );
 			this.TabPage_Package.Name = "TabPage_Package";
 			// 
+			// FolderValue
+			// 
+			resources.ApplyResources( this.FolderValue, "FolderValue" );
+			this.FolderValue.CausesValidation = false;
+			this.FolderValue.Name = "FolderValue";
+			// 
+			// Label_Folder
+			// 
+			resources.ApplyResources( this.Label_Folder, "Label_Folder" );
+			this.Label_Folder.CausesValidation = false;
+			this.Label_Folder.Name = "Label_Folder";
+			// 
+			// BuildValue
+			// 
+			resources.ApplyResources( this.BuildValue, "BuildValue" );
+			this.BuildValue.CausesValidation = false;
+			this.BuildValue.Name = "BuildValue";
+			// 
+			// CookerValue
+			// 
+			resources.ApplyResources( this.CookerValue, "CookerValue" );
+			this.CookerValue.CausesValidation = false;
+			this.CookerValue.Name = "CookerValue";
+			// 
+			// EngineValue
+			// 
+			resources.ApplyResources( this.EngineValue, "EngineValue" );
+			this.EngineValue.CausesValidation = false;
+			this.EngineValue.Name = "EngineValue";
+			// 
+			// VersionValue
+			// 
+			resources.ApplyResources( this.VersionValue, "VersionValue" );
+			this.VersionValue.CausesValidation = false;
+			this.VersionValue.Name = "VersionValue";
+			// 
+			// FlagsValue
+			// 
+			resources.ApplyResources( this.FlagsValue, "FlagsValue" );
+			this.FlagsValue.CausesValidation = false;
+			this.FlagsValue.Name = "FlagsValue";
+			// 
+			// LicenseeValue
+			// 
+			resources.ApplyResources( this.LicenseeValue, "LicenseeValue" );
+			this.LicenseeValue.CausesValidation = false;
+			this.LicenseeValue.Name = "LicenseeValue";
+			// 
+			// label4
+			// 
+			resources.ApplyResources( label4, "label4" );
+			label4.CausesValidation = false;
+			label4.Name = "label4";
+			// 
+			// Label_GUID
+			// 
+			resources.ApplyResources( this.Label_GUID, "Label_GUID" );
+			this.Label_GUID.Name = "Label_GUID";
+			this.Label_GUID.ReadOnly = true;
+			// 
 			// Label_DetectedBuild
 			// 
-			resources.ApplyResources( this.Label_DetectedBuild, "Label_DetectedBuild" );
-			this.Label_DetectedBuild.CausesValidation = false;
-			this.Label_DetectedBuild.Name = "Label_DetectedBuild";
+			resources.ApplyResources( Label_DetectedBuild, "Label_DetectedBuild" );
+			Label_DetectedBuild.CausesValidation = false;
+			Label_DetectedBuild.Name = "Label_DetectedBuild";
 			// 
 			// LABEL_Copyright
 			// 
@@ -361,29 +429,23 @@
 			this.Label_EngineVersion.CausesValidation = false;
 			this.Label_EngineVersion.Name = "Label_EngineVersion";
 			// 
-			// Label_GUID
-			// 
-			resources.ApplyResources( this.Label_GUID, "Label_GUID" );
-			this.Label_GUID.CausesValidation = false;
-			this.Label_GUID.Name = "Label_GUID";
-			// 
 			// Label_LicenseeMode
 			// 
-			resources.ApplyResources( this.Label_LicenseeMode, "Label_LicenseeMode" );
-			this.Label_LicenseeMode.CausesValidation = false;
-			this.Label_LicenseeMode.Name = "Label_LicenseeMode";
+			resources.ApplyResources( Label_LicenseeMode, "Label_LicenseeMode" );
+			Label_LicenseeMode.CausesValidation = false;
+			Label_LicenseeMode.Name = "Label_LicenseeMode";
 			// 
 			// Label_Flags
 			// 
-			resources.ApplyResources( this.Label_Flags, "Label_Flags" );
-			this.Label_Flags.CausesValidation = false;
-			this.Label_Flags.Name = "Label_Flags";
+			resources.ApplyResources( Label_Flags, "Label_Flags" );
+			Label_Flags.CausesValidation = false;
+			Label_Flags.Name = "Label_Flags";
 			// 
 			// Label_Version
 			// 
-			resources.ApplyResources( this.Label_Version, "Label_Version" );
-			this.Label_Version.CausesValidation = false;
-			this.Label_Version.Name = "Label_Version";
+			resources.ApplyResources( Label_Version, "Label_Version" );
+			Label_Version.CausesValidation = false;
+			Label_Version.Name = "Label_Version";
 			// 
 			// TabPage_Tables
 			// 
@@ -745,7 +807,6 @@
 			this.DoubleBuffered = true;
 			this.Name = "UC_PackageExplorer";
 			panel1.ResumeLayout( false );
-			panel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Num_NameIndex)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Num_ObjectIndex)).EndInit();
 			UScriptLayout.ResumeLayout( false );
@@ -784,10 +845,6 @@
 
 		internal System.Windows.Forms.TabControl TabControl_General;
 		internal System.Windows.Forms.TabPage TabPage_Package;
-		internal System.Windows.Forms.Label Label_GUID;
-		internal System.Windows.Forms.Label Label_LicenseeMode;
-		internal System.Windows.Forms.Label Label_Flags;
-		internal System.Windows.Forms.Label Label_Version;
 		internal System.Windows.Forms.TabPage TabPage_Tables;
 		internal System.Windows.Forms.TabControl TabControl_Tables;
 		internal System.Windows.Forms.TabPage TabPage_Names;
@@ -795,8 +852,6 @@
 		internal System.Windows.Forms.TabPage TabPage_Imports;
 		internal System.Windows.Forms.TreeView TreeView_Exports;
 		internal System.Windows.Forms.TreeView TreeView_Imports;
-		internal System.Windows.Forms.Label Label_EngineVersion;
-		internal System.Windows.Forms.Label Label_CookerVersion;
 		internal System.Windows.Forms.Button Button_FindObject;
 		internal System.Windows.Forms.NumericUpDown Num_ObjectIndex;
 		internal System.Windows.Forms.NumericUpDown Num_NameIndex;
@@ -847,7 +902,17 @@
 		internal System.Windows.Forms.Label LABEL_Author;
 		private System.Windows.Forms.TextBox FilterText;
 		private System.Windows.Forms.ToolStripButton ReloadButton;
-		internal System.Windows.Forms.Label Label_DetectedBuild;
+		private System.Windows.Forms.TextBox Label_GUID;
+		internal System.Windows.Forms.Label VersionValue;
+		internal System.Windows.Forms.Label FlagsValue;
+		internal System.Windows.Forms.Label LicenseeValue;
+		internal System.Windows.Forms.Label BuildValue;
+		internal System.Windows.Forms.Label CookerValue;
+		internal System.Windows.Forms.Label EngineValue;
+		internal System.Windows.Forms.Label FolderValue;
+		internal System.Windows.Forms.Label Label_Folder;
+		internal System.Windows.Forms.Label Label_CookerVersion;
+		internal System.Windows.Forms.Label Label_EngineVersion;
 
 
 	}
