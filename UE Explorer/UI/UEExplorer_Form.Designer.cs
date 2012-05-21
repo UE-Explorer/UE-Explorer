@@ -57,14 +57,14 @@
 			this.menuItem18 = new System.Windows.Forms.MenuItem();
 			this.menuItem19 = new System.Windows.Forms.MenuItem();
 			this.menuItem20 = new System.Windows.Forms.MenuItem();
-			this.menuItem3 = new System.Windows.Forms.MenuItem();
-			this.menuItem5 = new System.Windows.Forms.MenuItem();
-			this.menuItem23 = new System.Windows.Forms.MenuItem();
 			this.menuItem7 = new System.Windows.Forms.MenuItem();
+			this.menuItem3 = new System.Windows.Forms.MenuItem();
+			this.menuItem23 = new System.Windows.Forms.MenuItem();
 			this.menuItem25 = new System.Windows.Forms.MenuItem();
 			this.menuItem24 = new System.Windows.Forms.MenuItem();
-			this.menuItem4 = new System.Windows.Forms.MenuItem();
 			this.menuItem27 = new System.Windows.Forms.MenuItem();
+			this.menuItem5 = new System.Windows.Forms.MenuItem();
+			this.menuItem4 = new System.Windows.Forms.MenuItem();
 			menuItem26 = new System.Windows.Forms.MenuItem();
 			this.UEStatusStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).BeginInit();
@@ -83,7 +83,7 @@
             this.LoadingProgress,
             this.ProgressLabel,
             this.SelectedNativeTable} );
-			this.UEStatusStrip.Location = new System.Drawing.Point( 0, 490 );
+			this.UEStatusStrip.Location = new System.Drawing.Point( 0, 519 );
 			this.UEStatusStrip.Name = "UEStatusStrip";
 			this.UEStatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
 			this.UEStatusStrip.Size = new System.Drawing.Size( 929, 22 );
@@ -137,7 +137,7 @@
 			this.TabComponentsStrip.SelectedColorEnd = System.Drawing.Color.White;
 			this.TabComponentsStrip.SelectedColorStart = System.Drawing.Color.DarkGray;
 			this.TabComponentsStrip.SelectedForeColor = System.Drawing.Color.Black;
-			this.TabComponentsStrip.Size = new System.Drawing.Size( 929, 490 );
+			this.TabComponentsStrip.Size = new System.Drawing.Size( 929, 519 );
 			this.TabComponentsStrip.TabIndex = 1;
 			this.TabComponentsStrip.Text = "TabComponents";
 			this.TabComponentsStrip.Visible = false;
@@ -296,6 +296,12 @@
 			this.menuItem20.Text = "Registry Features Enabled";
 			this.menuItem20.Click += new System.EventHandler( this.toggleUEExplorerFileIconsToolStripMenuItem_Click );
 			// 
+			// menuItem7
+			// 
+			this.menuItem7.Index = 3;
+			this.menuItem7.Text = "&Options";
+			this.menuItem7.Click += new System.EventHandler( this.menuItem7_Click );
+			// 
 			// menuItem3
 			// 
 			this.menuItem3.Index = 4;
@@ -308,23 +314,11 @@
             this.menuItem5} );
 			this.menuItem3.Text = "&Help";
 			// 
-			// menuItem5
-			// 
-			this.menuItem5.Index = 5;
-			this.menuItem5.Text = "&About...";
-			this.menuItem5.Click += new System.EventHandler( this.aboutToolStripMenuItem_Click );
-			// 
 			// menuItem23
 			// 
 			this.menuItem23.Index = 0;
 			this.menuItem23.Text = "&Check for Updates...";
 			this.menuItem23.Click += new System.EventHandler( this.checkForUpdates );
-			// 
-			// menuItem7
-			// 
-			this.menuItem7.Index = 3;
-			this.menuItem7.Text = "&Options";
-			this.menuItem7.Click += new System.EventHandler( this.menuItem7_Click );
 			// 
 			// menuItem25
 			// 
@@ -337,16 +331,22 @@
 			this.menuItem24.Text = "> &Forums";
 			this.menuItem24.Click += new System.EventHandler( this.menuItem24_Click );
 			// 
+			// menuItem27
+			// 
+			this.menuItem27.Index = 4;
+			this.menuItem27.Text = "-";
+			// 
+			// menuItem5
+			// 
+			this.menuItem5.Index = 5;
+			this.menuItem5.Text = "&About...";
+			this.menuItem5.Click += new System.EventHandler( this.aboutToolStripMenuItem_Click );
+			// 
 			// menuItem4
 			// 
 			this.menuItem4.Index = 5;
 			this.menuItem4.Text = "> Donate!";
 			this.menuItem4.Click += new System.EventHandler( this.donateToolStripMenuItem1_Click );
-			// 
-			// menuItem27
-			// 
-			this.menuItem27.Index = 4;
-			this.menuItem27.Text = "-";
 			// 
 			// UEExplorer_Form
 			// 
@@ -355,13 +355,13 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImage = global::UEExplorer.Properties.Resources.UE_ProgramLogo;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.ClientSize = new System.Drawing.Size( 929, 512 );
+			this.ClientSize = new System.Drawing.Size( 929, 541 );
 			this.Controls.Add( this.TabComponentsStrip );
 			this.Controls.Add( this.UEStatusStrip );
 			this.DoubleBuffered = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject( "$this.Icon" )));
 			this.Menu = this.mainMenu1;
-			this.MinimumSize = new System.Drawing.Size( 700, 550 );
+			this.MinimumSize = new System.Drawing.Size( 700, 600 );
 			this.Name = "UEExplorer_Form";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler( this.UEExplorer_Form_FormClosing );
 			this.Shown += new System.EventHandler( this.Unreal_Explorer_Form_Shown );
