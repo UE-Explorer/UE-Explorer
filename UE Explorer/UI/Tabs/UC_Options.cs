@@ -77,6 +77,8 @@ namespace UEExplorer.UI.Tabs
 			UELib.UnrealConfig.PreEndBracket = Program.ParseFormatOption( Program.Options.PreEndBracket );
 
 			Program.SaveConfig();
+
+			MessageBox.Show( "Successfully saved!", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information );
 		}
 
 		private void PathButton_Click( object sender, EventArgs e )
