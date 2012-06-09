@@ -82,6 +82,7 @@ namespace UEExplorer.UI.Tabs
 			// Open the file.
 			try
 			{
+				UnrealConfig.Platform = (UnrealConfig.CookedPlatform)Enum.Parse( typeof(UnrealConfig.CookedPlatform), _Form.Platform.Text, true );
 				_UnrealPackage = UnrealLoader.LoadPackage( FileName );
 				UnrealConfig.SuppressSignature = false;
 				_SummarySize = _UnrealPackage.Stream.Position;
@@ -568,13 +569,14 @@ namespace UEExplorer.UI.Tabs
 
 			if( _UnrealPackage.Version >= UnrealPackage.VCookedPackages )
 			{
-				flags.Add( "Compressed " + _UnrealPackage.HasPackageFlag( PackageFlags.Compressed ) );
 				flags.Add( "Cooked " + _UnrealPackage.IsCooked().ToString() );
-				flags.Add( "ConsoleCooked " + _UnrealPackage.HasPackageFlag( PackageFlags.ConsoleCooked ) );	
+				flags.Add( "Compressed " + _UnrealPackage.HasPackageFlag( PackageFlags.Compressed ) );
+				flags.Add( "FullyCompressed " + _UnrealPackage.HasPackageFlag( PackageFlags.FullyCompressed ) );	
 				flags.Add( "Debug " + _UnrealPackage.IsDebug().ToString() );
 				flags.Add( "Script " + _UnrealPackage.IsScript().ToString() );
 				flags.Add( "Stripped " + _UnrealPackage.IsStripped().ToString() );			
 				flags.Add( "Map " + _UnrealPackage.IsMap().ToString() );
+				flags.Add( "Console " + _UnrealPackage.IsBigEndian.ToString() );
 			}
 			else if( _UnrealPackage.Version > 61 && _UnrealPackage.Version <= 69 )		// <= UT99
 			{

@@ -139,6 +139,7 @@ namespace UEExplorer
 		public bool bForceLicenseeMode;
 		public ushort Version;
 		public ushort LicenseeMode;
+		public string Platform = "PC";
 		#endregion
 
 		#region Unreal Cache Extractor Related Membbers

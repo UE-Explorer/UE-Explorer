@@ -65,6 +65,9 @@
 			this.menuItem27 = new System.Windows.Forms.MenuItem();
 			this.menuItem5 = new System.Windows.Forms.MenuItem();
 			this.menuItem4 = new System.Windows.Forms.MenuItem();
+			this.Platform = new System.Windows.Forms.ToolStripDropDownButton();
+			this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.pCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			menuItem26 = new System.Windows.Forms.MenuItem();
 			this.UEStatusStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).BeginInit();
@@ -82,8 +85,9 @@
 			this.UEStatusStrip.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.LoadingProgress,
             this.ProgressLabel,
-            this.SelectedNativeTable} );
-			this.UEStatusStrip.Location = new System.Drawing.Point( 0, 519 );
+            this.SelectedNativeTable,
+            this.Platform} );
+			this.UEStatusStrip.Location = new System.Drawing.Point( 0, 540 );
 			this.UEStatusStrip.Name = "UEStatusStrip";
 			this.UEStatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
 			this.UEStatusStrip.Size = new System.Drawing.Size( 929, 22 );
@@ -104,7 +108,7 @@
 			// 
 			this.ProgressLabel.BackColor = System.Drawing.Color.Transparent;
 			this.ProgressLabel.Name = "ProgressLabel";
-			this.ProgressLabel.Size = new System.Drawing.Size( 872, 17 );
+			this.ProgressLabel.Size = new System.Drawing.Size( 673, 17 );
 			this.ProgressLabel.Spring = true;
 			this.ProgressLabel.Text = "Ready";
 			this.ProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -137,7 +141,7 @@
 			this.TabComponentsStrip.SelectedColorEnd = System.Drawing.Color.White;
 			this.TabComponentsStrip.SelectedColorStart = System.Drawing.Color.DarkGray;
 			this.TabComponentsStrip.SelectedForeColor = System.Drawing.Color.Black;
-			this.TabComponentsStrip.Size = new System.Drawing.Size( 929, 519 );
+			this.TabComponentsStrip.Size = new System.Drawing.Size( 929, 540 );
 			this.TabComponentsStrip.TabIndex = 1;
 			this.TabComponentsStrip.Text = "TabComponents";
 			this.TabComponentsStrip.Visible = false;
@@ -348,6 +352,31 @@
 			this.menuItem4.Text = "> Donate!";
 			this.menuItem4.Click += new System.EventHandler( this.donateToolStripMenuItem1_Click );
 			// 
+			// Platform
+			// 
+			this.Platform.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.Platform.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
+            this.pCToolStripMenuItem,
+            this.consoleToolStripMenuItem} );
+			this.Platform.Image = ((System.Drawing.Image)(resources.GetObject( "Platform.Image" )));
+			this.Platform.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.Platform.Name = "Platform";
+			this.Platform.Size = new System.Drawing.Size( 66, 20 );
+			this.Platform.Text = "Platform";
+			this.Platform.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler( this.Platform_DropDownItemClicked );
+			// 
+			// consoleToolStripMenuItem
+			// 
+			this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
+			this.consoleToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
+			this.consoleToolStripMenuItem.Text = "Console";
+			// 
+			// pCToolStripMenuItem
+			// 
+			this.pCToolStripMenuItem.Name = "pCToolStripMenuItem";
+			this.pCToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
+			this.pCToolStripMenuItem.Text = "PC";
+			// 
 			// UEExplorer_Form
 			// 
 			this.AllowDrop = true;
@@ -355,7 +384,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImage = global::UEExplorer.Properties.Resources.UE_ProgramLogo;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.ClientSize = new System.Drawing.Size( 929, 541 );
+			this.ClientSize = new System.Drawing.Size( 929, 562 );
 			this.Controls.Add( this.TabComponentsStrip );
 			this.Controls.Add( this.UEStatusStrip );
 			this.DoubleBuffered = true;
@@ -412,6 +441,9 @@
 		private System.Windows.Forms.MenuItem menuItem24;
 		private System.Windows.Forms.MenuItem menuItem25;
 		private System.Windows.Forms.MenuItem menuItem27;
+		private System.Windows.Forms.ToolStripMenuItem pCToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
+		internal System.Windows.Forms.ToolStripDropDownButton Platform;
 
 
 		// OnClick events!

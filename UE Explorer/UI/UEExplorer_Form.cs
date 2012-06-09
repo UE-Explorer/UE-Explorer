@@ -29,6 +29,8 @@ namespace UEExplorer.UI
 			}
 
 			SelectedNativeTable.Text = Program.Options.NTLPath;
+
+			Platform.Text = Program.Options.Platform;
 		}
 
 		private void SelectedNativeTable_DropDownOpening( object sender, EventArgs e )
@@ -563,6 +565,13 @@ namespace UEExplorer.UI
 		private void menuItem26_Click( object sender, EventArgs e )
 		{
 			System.Diagnostics.Process.Start( Program.WEBSITE_URL );
+		}
+
+		private void Platform_DropDownItemClicked( object sender, ToolStripItemClickedEventArgs e )
+		{
+			Platform.Text = e.ClickedItem.Text;
+			Program.Options.Platform = Platform.Text;
+			Program.SaveConfig();
 		}
     }
 
