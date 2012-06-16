@@ -160,6 +160,7 @@
 			<Word>stop</Word>
 			<Word>return</Word>
 			<Word>new</Word>
+			<Word>filtereditoronly</Word>
 		</Keywords>
 
 		<Keywords color="Literals">
@@ -254,6 +255,7 @@
 			<Word>nontransient</Word>
 			<Word>guid</Word>
 			<Word>classgroup</Word>
+			<Word>nativeonly</Word>
 			
 			<Word>native</Word>
 			<Word>Intrinsic</Word>
@@ -310,6 +312,7 @@
 			<Word>repnotify</Word>
 			<Word>repretry</Word>
 			<Word>crosslevelpassive</Word>
+			<Word>crosslevelactive</Word>
 			<Word>serializetext</Word>
 			<Word>edfindable</Word>
 			<Word>editconst</Word>
