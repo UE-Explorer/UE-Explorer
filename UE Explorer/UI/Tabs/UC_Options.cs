@@ -59,7 +59,7 @@ namespace UEExplorer.UI.Tabs
 			if( !CheckBox_SerObj.Checked )
 				Program.Options.InitFlags &= ~UnrealPackage.InitFlags.Deserialize;
 
-			Program.Options.InitFlags |= UnrealPackage.InitFlags.RegisterClasses | UnrealPackage.InitFlags.Construct;
+			Program.Options.InitFlags |= UnrealPackage.InitFlags.RegisterClasses;
 
 			Program.Options.bForceVersion = CheckBox_Version.Checked;
 			Program.Options.Version = (ushort)NumericUpDown_Version.Value;

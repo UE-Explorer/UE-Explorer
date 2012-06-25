@@ -59,10 +59,10 @@ namespace UEExplorer
 			}
 		}
 
-		internal static string SettingsPath = Path.Combine( Application.StartupPath, "Config", "UEExplorerConfig.xml" );
-		internal static XMLSettings Options;
+		public static string SettingsPath = Path.Combine( Application.StartupPath, "Config", "UEExplorerConfig.xml" );
+		public static XMLSettings Options;
 
-		internal static void LoadConfig()
+		public static void LoadConfig()
 		{
 			if( File.Exists( SettingsPath ) )
 			{
@@ -87,7 +87,7 @@ namespace UEExplorer
 			return input.Replace( "%NEWLINE%", "\r\n" ).Replace( "%TABS%", "{0}" );
 		}
 
-		internal static void SaveConfig()
+		public static void SaveConfig()
 		{
 			if( Options == null )
 				Options = new XMLSettings();
@@ -129,6 +129,7 @@ namespace UEExplorer
 		}
     }
 
+	[System.Reflection.ObfuscationAttribute(Exclude = true)]
 	public class XMLSettings
 	{
 		#region Unreal Packages Decompiler Related Members
