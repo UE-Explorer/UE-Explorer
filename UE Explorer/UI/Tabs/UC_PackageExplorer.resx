@@ -132,7 +132,7 @@
     <value>118, 29</value>
   </data>
   <data name="Num_NameIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 20</value>
+    <value>146, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Num_NameIndex.TabIndex" type="System.Int32, mscorlib">
@@ -157,7 +157,7 @@
     <value>118, 3</value>
   </data>
   <data name="Num_ObjectIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 20</value>
+    <value>146, 20</value>
   </data>
   <data name="Num_ObjectIndex.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1364,7 +1364,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAB8
-        EQAAAk1TRnQBSQFMAgEBCgEAAQQBBQEEAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        EQAAAk1TRnQBSQFMAgEBCgEAAUwBBQFMAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1492,8 +1492,38 @@
   <data name="&gt;&gt;TabPage_Classes.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="TreeView_Content.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="Button_Export.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="Button_Export.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Button_Export.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 440</value>
+  </data>
+  <data name="Button_Export.Size" type="System.Drawing.Size, System.Drawing">
+    <value>305, 23</value>
+  </data>
+  <data name="Button_Export.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="Button_Export.Text" xml:space="preserve">
+    <value>Export As...</value>
+  </data>
+  <data name="&gt;&gt;Button_Export.Name" xml:space="preserve">
+    <value>Button_Export</value>
+  </data>
+  <data name="&gt;&gt;Button_Export.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button_Export.Parent" xml:space="preserve">
+    <value>TabPage_Content</value>
+  </data>
+  <data name="&gt;&gt;Button_Export.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TreeView_Content.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="TreeView_Content.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -1502,7 +1532,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TreeView_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
+    <value>305, 437</value>
   </data>
   <data name="TreeView_Content.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1517,7 +1547,7 @@
     <value>TabPage_Content</value>
   </data>
   <data name="&gt;&gt;TreeView_Content.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="TabPage_Content.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1772,7 +1802,7 @@
     <value>3, 28</value>
   </data>
   <data name="WPFHost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 515</value>
+    <value>979, 515</value>
   </data>
   <data name="WPFHost.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1899,7 +1929,7 @@
     <value>Yes</value>
   </data>
   <data name="ToolStrip_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>563, 28</value>
+    <value>985, 28</value>
   </data>
   <data name="ToolStrip_Content.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1929,7 +1959,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="Panel_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>563, 546</value>
+    <value>985, 546</value>
   </data>
   <data name="Panel_Content.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1959,7 +1989,7 @@
     <value>1</value>
   </data>
   <data name="UScriptLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 546</value>
+    <value>1312, 546</value>
   </data>
   <data name="UScriptLayout.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1992,7 +2022,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 546</value>
+    <value>1312, 546</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButton1.Name" xml:space="preserve">
     <value>toolStripDropDownButton1</value>

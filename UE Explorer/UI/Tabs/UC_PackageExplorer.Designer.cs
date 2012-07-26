@@ -30,7 +30,7 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.Panel panel1;
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( UC_PackageExplorer ) );
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
 			System.Windows.Forms.TableLayoutPanel UScriptLayout;
 			System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
 			System.Windows.Forms.Label label4;
@@ -88,8 +88,9 @@
 			this.TabPage_Classes = new System.Windows.Forms.TabPage();
 			this.FilterText = new System.Windows.Forms.TextBox();
 			this.TreeView_Classes = new System.Windows.Forms.TreeView();
-			this.VSIcons = new System.Windows.Forms.ImageList( this.components );
+			this.VSIcons = new System.Windows.Forms.ImageList(this.components);
 			this.TabPage_Content = new System.Windows.Forms.TabPage();
+			this.Button_Export = new System.Windows.Forms.Button();
 			this.TreeView_Content = new System.Windows.Forms.TreeView();
 			this.TabPage_Deps = new System.Windows.Forms.TabPage();
 			this.TreeView_Deps = new System.Windows.Forms.TreeView();
@@ -148,232 +149,232 @@
 			// 
 			// panel1
 			// 
-			resources.ApplyResources( panel1, "panel1" );
+			resources.ApplyResources(panel1, "panel1");
 			panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			panel1.Controls.Add( this.Num_NameIndex );
-			panel1.Controls.Add( this.Num_ObjectIndex );
-			panel1.Controls.Add( this.Button_FindObject );
-			panel1.Controls.Add( this.Button_FindName );
+			panel1.Controls.Add(this.Num_NameIndex);
+			panel1.Controls.Add(this.Num_ObjectIndex);
+			panel1.Controls.Add(this.Button_FindObject);
+			panel1.Controls.Add(this.Button_FindName);
 			panel1.Name = "panel1";
 			// 
 			// Num_NameIndex
 			// 
-			resources.ApplyResources( this.Num_NameIndex, "Num_NameIndex" );
-			this.Num_NameIndex.Maximum = new decimal( new int[] {
+			resources.ApplyResources(this.Num_NameIndex, "Num_NameIndex");
+			this.Num_NameIndex.Maximum = new decimal(new int[] {
             99999,
             0,
             0,
-            0} );
+            0});
 			this.Num_NameIndex.Name = "Num_NameIndex";
 			// 
 			// Num_ObjectIndex
 			// 
-			resources.ApplyResources( this.Num_ObjectIndex, "Num_ObjectIndex" );
-			this.Num_ObjectIndex.Maximum = new decimal( new int[] {
+			resources.ApplyResources(this.Num_ObjectIndex, "Num_ObjectIndex");
+			this.Num_ObjectIndex.Maximum = new decimal(new int[] {
             99999,
             0,
             0,
-            0} );
-			this.Num_ObjectIndex.Minimum = new decimal( new int[] {
+            0});
+			this.Num_ObjectIndex.Minimum = new decimal(new int[] {
             99999,
             0,
             0,
-            -2147483648} );
+            -2147483648});
 			this.Num_ObjectIndex.Name = "Num_ObjectIndex";
 			// 
 			// Button_FindObject
 			// 
-			resources.ApplyResources( this.Button_FindObject, "Button_FindObject" );
+			resources.ApplyResources(this.Button_FindObject, "Button_FindObject");
 			this.Button_FindObject.Name = "Button_FindObject";
 			this.Button_FindObject.UseVisualStyleBackColor = true;
 			// 
 			// Button_FindName
 			// 
-			resources.ApplyResources( this.Button_FindName, "Button_FindName" );
+			resources.ApplyResources(this.Button_FindName, "Button_FindName");
 			this.Button_FindName.Name = "Button_FindName";
 			this.Button_FindName.UseVisualStyleBackColor = true;
 			// 
 			// UScriptLayout
 			// 
 			UScriptLayout.BackColor = System.Drawing.Color.White;
-			resources.ApplyResources( UScriptLayout, "UScriptLayout" );
-			UScriptLayout.Controls.Add( this.Panel_Main, 0, 0 );
-			UScriptLayout.Controls.Add( this.Panel_Content, 1, 0 );
+			resources.ApplyResources(UScriptLayout, "UScriptLayout");
+			UScriptLayout.Controls.Add(this.Panel_Main, 0, 0);
+			UScriptLayout.Controls.Add(this.Panel_Content, 1, 0);
 			UScriptLayout.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
 			UScriptLayout.Name = "UScriptLayout";
 			// 
 			// Panel_Main
 			// 
-			resources.ApplyResources( this.Panel_Main, "Panel_Main" );
-			this.Panel_Main.Controls.Add( this.ToolStrip_Main );
-			this.Panel_Main.Controls.Add( this.TabControl_General );
+			resources.ApplyResources(this.Panel_Main, "Panel_Main");
+			this.Panel_Main.Controls.Add(this.ToolStrip_Main);
+			this.Panel_Main.Controls.Add(this.TabControl_General);
 			this.Panel_Main.Name = "Panel_Main";
 			// 
 			// ToolStrip_Main
 			// 
 			this.ToolStrip_Main.BackColor = System.Drawing.Color.White;
 			this.ToolStrip_Main.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-			this.ToolStrip_Main.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
+			this.ToolStrip_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1,
-            this.ReloadButton} );
-			resources.ApplyResources( this.ToolStrip_Main, "ToolStrip_Main" );
+            this.ReloadButton});
+			resources.ApplyResources(this.ToolStrip_Main, "ToolStrip_Main");
 			this.ToolStrip_Main.Name = "ToolStrip_Main";
 			this.ToolStrip_Main.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			// 
 			// toolStripDropDownButton1
 			// 
 			this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.toolStripDropDownButton1.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
+			this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             exportingToolStripMenuItem,
-            this.viewBufferToolStripMenuItem} );
-			resources.ApplyResources( this.toolStripDropDownButton1, "toolStripDropDownButton1" );
+            this.viewBufferToolStripMenuItem});
+			resources.ApplyResources(this.toolStripDropDownButton1, "toolStripDropDownButton1");
 			this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
 			// 
 			// exportingToolStripMenuItem
 			// 
 			exportingToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			exportingToolStripMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
+			exportingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportDecompiledClassesToolStripMenuItem,
-            this.exportScriptClassesToolStripMenuItem} );
+            this.exportScriptClassesToolStripMenuItem});
 			exportingToolStripMenuItem.Name = "exportingToolStripMenuItem";
-			resources.ApplyResources( exportingToolStripMenuItem, "exportingToolStripMenuItem" );
+			resources.ApplyResources(exportingToolStripMenuItem, "exportingToolStripMenuItem");
 			// 
 			// exportDecompiledClassesToolStripMenuItem
 			// 
 			this.exportDecompiledClassesToolStripMenuItem.Name = "exportDecompiledClassesToolStripMenuItem";
-			resources.ApplyResources( this.exportDecompiledClassesToolStripMenuItem, "exportDecompiledClassesToolStripMenuItem" );
+			resources.ApplyResources(this.exportDecompiledClassesToolStripMenuItem, "exportDecompiledClassesToolStripMenuItem");
 			// 
 			// exportScriptClassesToolStripMenuItem
 			// 
 			this.exportScriptClassesToolStripMenuItem.Name = "exportScriptClassesToolStripMenuItem";
-			resources.ApplyResources( this.exportScriptClassesToolStripMenuItem, "exportScriptClassesToolStripMenuItem" );
+			resources.ApplyResources(this.exportScriptClassesToolStripMenuItem, "exportScriptClassesToolStripMenuItem");
 			// 
 			// viewBufferToolStripMenuItem
 			// 
 			this.viewBufferToolStripMenuItem.Name = "viewBufferToolStripMenuItem";
-			resources.ApplyResources( this.viewBufferToolStripMenuItem, "viewBufferToolStripMenuItem" );
-			this.viewBufferToolStripMenuItem.Click += new System.EventHandler( this.viewBufferToolStripMenuItem_Click );
+			resources.ApplyResources(this.viewBufferToolStripMenuItem, "viewBufferToolStripMenuItem");
+			this.viewBufferToolStripMenuItem.Click += new System.EventHandler(this.viewBufferToolStripMenuItem_Click);
 			// 
 			// ReloadButton
 			// 
 			this.ReloadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			resources.ApplyResources( this.ReloadButton, "ReloadButton" );
+			resources.ApplyResources(this.ReloadButton, "ReloadButton");
 			this.ReloadButton.Name = "ReloadButton";
-			this.ReloadButton.Click += new System.EventHandler( this.ReloadButton_Click );
+			this.ReloadButton.Click += new System.EventHandler(this.ReloadButton_Click);
 			// 
 			// TabControl_General
 			// 
-			resources.ApplyResources( this.TabControl_General, "TabControl_General" );
-			this.TabControl_General.Controls.Add( this.TabPage_Package );
-			this.TabControl_General.Controls.Add( this.TabPage_Tables );
-			this.TabControl_General.Controls.Add( this.TabPage_Objects );
-			this.TabControl_General.Controls.Add( this.TabPage_Chunks );
+			resources.ApplyResources(this.TabControl_General, "TabControl_General");
+			this.TabControl_General.Controls.Add(this.TabPage_Package);
+			this.TabControl_General.Controls.Add(this.TabPage_Tables);
+			this.TabControl_General.Controls.Add(this.TabPage_Objects);
+			this.TabControl_General.Controls.Add(this.TabPage_Chunks);
 			this.TabControl_General.Name = "TabControl_General";
 			this.TabControl_General.SelectedIndex = 0;
-			this.TabControl_General.Selected += new System.Windows.Forms.TabControlEventHandler( this.TabControl_General_Selected );
+			this.TabControl_General.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl_General_Selected);
 			// 
 			// TabPage_Package
 			// 
 			this.TabPage_Package.BackColor = System.Drawing.Color.White;
 			this.TabPage_Package.CausesValidation = false;
-			this.TabPage_Package.Controls.Add( this.FolderValue );
-			this.TabPage_Package.Controls.Add( this.Label_Folder );
-			this.TabPage_Package.Controls.Add( this.BuildValue );
-			this.TabPage_Package.Controls.Add( this.CookerValue );
-			this.TabPage_Package.Controls.Add( this.EngineValue );
-			this.TabPage_Package.Controls.Add( this.VersionValue );
-			this.TabPage_Package.Controls.Add( this.FlagsValue );
-			this.TabPage_Package.Controls.Add( this.LicenseeValue );
-			this.TabPage_Package.Controls.Add( label4 );
-			this.TabPage_Package.Controls.Add( this.Label_GUID );
-			this.TabPage_Package.Controls.Add( Label_DetectedBuild );
-			this.TabPage_Package.Controls.Add( this.LABEL_Copyright );
-			this.TabPage_Package.Controls.Add( this.LABEL_Author );
-			this.TabPage_Package.Controls.Add( this.DataGridView_Flags );
-			this.TabPage_Package.Controls.Add( panel1 );
-			this.TabPage_Package.Controls.Add( this.Label_CookerVersion );
-			this.TabPage_Package.Controls.Add( this.Label_EngineVersion );
-			this.TabPage_Package.Controls.Add( Label_LicenseeMode );
-			this.TabPage_Package.Controls.Add( Label_Flags );
-			this.TabPage_Package.Controls.Add( Label_Version );
-			resources.ApplyResources( this.TabPage_Package, "TabPage_Package" );
+			this.TabPage_Package.Controls.Add(this.FolderValue);
+			this.TabPage_Package.Controls.Add(this.Label_Folder);
+			this.TabPage_Package.Controls.Add(this.BuildValue);
+			this.TabPage_Package.Controls.Add(this.CookerValue);
+			this.TabPage_Package.Controls.Add(this.EngineValue);
+			this.TabPage_Package.Controls.Add(this.VersionValue);
+			this.TabPage_Package.Controls.Add(this.FlagsValue);
+			this.TabPage_Package.Controls.Add(this.LicenseeValue);
+			this.TabPage_Package.Controls.Add(label4);
+			this.TabPage_Package.Controls.Add(this.Label_GUID);
+			this.TabPage_Package.Controls.Add(Label_DetectedBuild);
+			this.TabPage_Package.Controls.Add(this.LABEL_Copyright);
+			this.TabPage_Package.Controls.Add(this.LABEL_Author);
+			this.TabPage_Package.Controls.Add(this.DataGridView_Flags);
+			this.TabPage_Package.Controls.Add(panel1);
+			this.TabPage_Package.Controls.Add(this.Label_CookerVersion);
+			this.TabPage_Package.Controls.Add(this.Label_EngineVersion);
+			this.TabPage_Package.Controls.Add(Label_LicenseeMode);
+			this.TabPage_Package.Controls.Add(Label_Flags);
+			this.TabPage_Package.Controls.Add(Label_Version);
+			resources.ApplyResources(this.TabPage_Package, "TabPage_Package");
 			this.TabPage_Package.Name = "TabPage_Package";
 			// 
 			// FolderValue
 			// 
-			resources.ApplyResources( this.FolderValue, "FolderValue" );
+			resources.ApplyResources(this.FolderValue, "FolderValue");
 			this.FolderValue.CausesValidation = false;
 			this.FolderValue.Name = "FolderValue";
 			// 
 			// Label_Folder
 			// 
-			resources.ApplyResources( this.Label_Folder, "Label_Folder" );
+			resources.ApplyResources(this.Label_Folder, "Label_Folder");
 			this.Label_Folder.CausesValidation = false;
 			this.Label_Folder.Name = "Label_Folder";
 			// 
 			// BuildValue
 			// 
-			resources.ApplyResources( this.BuildValue, "BuildValue" );
+			resources.ApplyResources(this.BuildValue, "BuildValue");
 			this.BuildValue.CausesValidation = false;
 			this.BuildValue.Name = "BuildValue";
 			// 
 			// CookerValue
 			// 
-			resources.ApplyResources( this.CookerValue, "CookerValue" );
+			resources.ApplyResources(this.CookerValue, "CookerValue");
 			this.CookerValue.CausesValidation = false;
 			this.CookerValue.Name = "CookerValue";
 			// 
 			// EngineValue
 			// 
-			resources.ApplyResources( this.EngineValue, "EngineValue" );
+			resources.ApplyResources(this.EngineValue, "EngineValue");
 			this.EngineValue.CausesValidation = false;
 			this.EngineValue.Name = "EngineValue";
 			// 
 			// VersionValue
 			// 
-			resources.ApplyResources( this.VersionValue, "VersionValue" );
+			resources.ApplyResources(this.VersionValue, "VersionValue");
 			this.VersionValue.CausesValidation = false;
 			this.VersionValue.Name = "VersionValue";
 			// 
 			// FlagsValue
 			// 
-			resources.ApplyResources( this.FlagsValue, "FlagsValue" );
+			resources.ApplyResources(this.FlagsValue, "FlagsValue");
 			this.FlagsValue.CausesValidation = false;
 			this.FlagsValue.Name = "FlagsValue";
 			// 
 			// LicenseeValue
 			// 
-			resources.ApplyResources( this.LicenseeValue, "LicenseeValue" );
+			resources.ApplyResources(this.LicenseeValue, "LicenseeValue");
 			this.LicenseeValue.CausesValidation = false;
 			this.LicenseeValue.Name = "LicenseeValue";
 			// 
 			// label4
 			// 
-			resources.ApplyResources( label4, "label4" );
+			resources.ApplyResources(label4, "label4");
 			label4.CausesValidation = false;
 			label4.Name = "label4";
 			// 
 			// Label_GUID
 			// 
-			resources.ApplyResources( this.Label_GUID, "Label_GUID" );
+			resources.ApplyResources(this.Label_GUID, "Label_GUID");
 			this.Label_GUID.Name = "Label_GUID";
 			this.Label_GUID.ReadOnly = true;
 			// 
 			// Label_DetectedBuild
 			// 
-			resources.ApplyResources( Label_DetectedBuild, "Label_DetectedBuild" );
+			resources.ApplyResources(Label_DetectedBuild, "Label_DetectedBuild");
 			Label_DetectedBuild.CausesValidation = false;
 			Label_DetectedBuild.Name = "Label_DetectedBuild";
 			// 
 			// LABEL_Copyright
 			// 
-			resources.ApplyResources( this.LABEL_Copyright, "LABEL_Copyright" );
+			resources.ApplyResources(this.LABEL_Copyright, "LABEL_Copyright");
 			this.LABEL_Copyright.CausesValidation = false;
 			this.LABEL_Copyright.Name = "LABEL_Copyright";
 			// 
 			// LABEL_Author
 			// 
-			resources.ApplyResources( this.LABEL_Author, "LABEL_Author" );
+			resources.ApplyResources(this.LABEL_Author, "LABEL_Author");
 			this.LABEL_Author.CausesValidation = false;
 			this.LABEL_Author.Name = "LABEL_Author";
 			// 
@@ -383,12 +384,12 @@
 			this.DataGridView_Flags.AllowUserToDeleteRows = false;
 			this.DataGridView_Flags.AllowUserToResizeColumns = false;
 			this.DataGridView_Flags.AllowUserToResizeRows = false;
-			resources.ApplyResources( this.DataGridView_Flags, "DataGridView_Flags" );
+			resources.ApplyResources(this.DataGridView_Flags, "DataGridView_Flags");
 			this.DataGridView_Flags.BackgroundColor = System.Drawing.Color.White;
 			this.DataGridView_Flags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.DataGridView_Flags.Columns.AddRange( new System.Windows.Forms.DataGridViewColumn[] {
+			this.DataGridView_Flags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Flag,
-            this.Value} );
+            this.Value});
 			this.DataGridView_Flags.MultiSelect = false;
 			this.DataGridView_Flags.Name = "DataGridView_Flags";
 			this.DataGridView_Flags.ReadOnly = true;
@@ -401,7 +402,7 @@
 			// 
 			this.Flag.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.Flag.FillWeight = 50F;
-			resources.ApplyResources( this.Flag, "Flag" );
+			resources.ApplyResources(this.Flag, "Flag");
 			this.Flag.Name = "Flag";
 			this.Flag.ReadOnly = true;
 			this.Flag.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -411,7 +412,7 @@
 			// 
 			this.Value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.Value.FillWeight = 40F;
-			resources.ApplyResources( this.Value, "Value" );
+			resources.ApplyResources(this.Value, "Value");
 			this.Value.Name = "Value";
 			this.Value.ReadOnly = true;
 			this.Value.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -419,56 +420,56 @@
 			// 
 			// Label_CookerVersion
 			// 
-			resources.ApplyResources( this.Label_CookerVersion, "Label_CookerVersion" );
+			resources.ApplyResources(this.Label_CookerVersion, "Label_CookerVersion");
 			this.Label_CookerVersion.CausesValidation = false;
 			this.Label_CookerVersion.Name = "Label_CookerVersion";
 			// 
 			// Label_EngineVersion
 			// 
-			resources.ApplyResources( this.Label_EngineVersion, "Label_EngineVersion" );
+			resources.ApplyResources(this.Label_EngineVersion, "Label_EngineVersion");
 			this.Label_EngineVersion.CausesValidation = false;
 			this.Label_EngineVersion.Name = "Label_EngineVersion";
 			// 
 			// Label_LicenseeMode
 			// 
-			resources.ApplyResources( Label_LicenseeMode, "Label_LicenseeMode" );
+			resources.ApplyResources(Label_LicenseeMode, "Label_LicenseeMode");
 			Label_LicenseeMode.CausesValidation = false;
 			Label_LicenseeMode.Name = "Label_LicenseeMode";
 			// 
 			// Label_Flags
 			// 
-			resources.ApplyResources( Label_Flags, "Label_Flags" );
+			resources.ApplyResources(Label_Flags, "Label_Flags");
 			Label_Flags.CausesValidation = false;
 			Label_Flags.Name = "Label_Flags";
 			// 
 			// Label_Version
 			// 
-			resources.ApplyResources( Label_Version, "Label_Version" );
+			resources.ApplyResources(Label_Version, "Label_Version");
 			Label_Version.CausesValidation = false;
 			Label_Version.Name = "Label_Version";
 			// 
 			// TabPage_Tables
 			// 
-			this.TabPage_Tables.Controls.Add( this.TabControl_Tables );
-			resources.ApplyResources( this.TabPage_Tables, "TabPage_Tables" );
+			this.TabPage_Tables.Controls.Add(this.TabControl_Tables);
+			resources.ApplyResources(this.TabPage_Tables, "TabPage_Tables");
 			this.TabPage_Tables.Name = "TabPage_Tables";
 			this.TabPage_Tables.UseVisualStyleBackColor = true;
 			// 
 			// TabControl_Tables
 			// 
-			this.TabControl_Tables.Controls.Add( this.TabPage_Names );
-			this.TabControl_Tables.Controls.Add( this.TabPage_Exports );
-			this.TabControl_Tables.Controls.Add( this.TabPage_Imports );
-			this.TabControl_Tables.Controls.Add( this.TabPage_Generations );
-			resources.ApplyResources( this.TabControl_Tables, "TabControl_Tables" );
+			this.TabControl_Tables.Controls.Add(this.TabPage_Names);
+			this.TabControl_Tables.Controls.Add(this.TabPage_Exports);
+			this.TabControl_Tables.Controls.Add(this.TabPage_Imports);
+			this.TabControl_Tables.Controls.Add(this.TabPage_Generations);
+			resources.ApplyResources(this.TabControl_Tables, "TabControl_Tables");
 			this.TabControl_Tables.Name = "TabControl_Tables";
 			this.TabControl_Tables.SelectedIndex = 0;
-			this.TabControl_Tables.Selected += new System.Windows.Forms.TabControlEventHandler( this.TabControl_Tables_Selected );
+			this.TabControl_Tables.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl_Tables_Selected);
 			// 
 			// TabPage_Names
 			// 
-			this.TabPage_Names.Controls.Add( this.DataGridView_NameTable );
-			resources.ApplyResources( this.TabPage_Names, "TabPage_Names" );
+			this.TabPage_Names.Controls.Add(this.DataGridView_NameTable);
+			resources.ApplyResources(this.TabPage_Names, "TabPage_Names");
 			this.TabPage_Names.Name = "TabPage_Names";
 			this.TabPage_Names.UseVisualStyleBackColor = true;
 			// 
@@ -480,10 +481,10 @@
 			this.DataGridView_NameTable.AllowUserToResizeRows = false;
 			this.DataGridView_NameTable.BackgroundColor = System.Drawing.Color.White;
 			this.DataGridView_NameTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.DataGridView_NameTable.Columns.AddRange( new System.Windows.Forms.DataGridViewColumn[] {
+			this.DataGridView_NameTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
-            this.Column2} );
-			resources.ApplyResources( this.DataGridView_NameTable, "DataGridView_NameTable" );
+            this.Column2});
+			resources.ApplyResources(this.DataGridView_NameTable, "DataGridView_NameTable");
 			this.DataGridView_NameTable.MultiSelect = false;
 			this.DataGridView_NameTable.Name = "DataGridView_NameTable";
 			this.DataGridView_NameTable.ReadOnly = true;
@@ -495,51 +496,51 @@
 			// Column1
 			// 
 			this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources( this.Column1, "Column1" );
+			resources.ApplyResources(this.Column1, "Column1");
 			this.Column1.Name = "Column1";
 			this.Column1.ReadOnly = true;
 			// 
 			// Column2
 			// 
 			this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources( this.Column2, "Column2" );
+			resources.ApplyResources(this.Column2, "Column2");
 			this.Column2.Name = "Column2";
 			this.Column2.ReadOnly = true;
 			// 
 			// TabPage_Exports
 			// 
-			this.TabPage_Exports.Controls.Add( this.TreeView_Exports );
-			resources.ApplyResources( this.TabPage_Exports, "TabPage_Exports" );
+			this.TabPage_Exports.Controls.Add(this.TreeView_Exports);
+			resources.ApplyResources(this.TabPage_Exports, "TabPage_Exports");
 			this.TabPage_Exports.Name = "TabPage_Exports";
 			this.TabPage_Exports.UseVisualStyleBackColor = true;
 			// 
 			// TreeView_Exports
 			// 
 			this.TreeView_Exports.CausesValidation = false;
-			resources.ApplyResources( this.TreeView_Exports, "TreeView_Exports" );
+			resources.ApplyResources(this.TreeView_Exports, "TreeView_Exports");
 			this.TreeView_Exports.Name = "TreeView_Exports";
 			this.TreeView_Exports.ShowNodeToolTips = true;
-			this.TreeView_Exports.AfterSelect += new System.Windows.Forms.TreeViewEventHandler( this._OnExportsNodeSelected );
-			this.TreeView_Exports.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler( this.TreeView_Exports_NodeMouseClick );
+			this.TreeView_Exports.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this._OnExportsNodeSelected);
+			this.TreeView_Exports.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Exports_NodeMouseClick);
 			// 
 			// TabPage_Imports
 			// 
-			this.TabPage_Imports.Controls.Add( this.TreeView_Imports );
-			resources.ApplyResources( this.TabPage_Imports, "TabPage_Imports" );
+			this.TabPage_Imports.Controls.Add(this.TreeView_Imports);
+			resources.ApplyResources(this.TabPage_Imports, "TabPage_Imports");
 			this.TabPage_Imports.Name = "TabPage_Imports";
 			this.TabPage_Imports.UseVisualStyleBackColor = true;
 			// 
 			// TreeView_Imports
 			// 
 			this.TreeView_Imports.CausesValidation = false;
-			resources.ApplyResources( this.TreeView_Imports, "TreeView_Imports" );
+			resources.ApplyResources(this.TreeView_Imports, "TreeView_Imports");
 			this.TreeView_Imports.Name = "TreeView_Imports";
 			this.TreeView_Imports.ShowNodeToolTips = true;
 			// 
 			// TabPage_Generations
 			// 
-			this.TabPage_Generations.Controls.Add( this.DataGridView_GenerationsTable );
-			resources.ApplyResources( this.TabPage_Generations, "TabPage_Generations" );
+			this.TabPage_Generations.Controls.Add(this.DataGridView_GenerationsTable);
+			resources.ApplyResources(this.TabPage_Generations, "TabPage_Generations");
 			this.TabPage_Generations.Name = "TabPage_Generations";
 			this.TabPage_Generations.UseVisualStyleBackColor = true;
 			// 
@@ -551,11 +552,11 @@
 			this.DataGridView_GenerationsTable.AllowUserToResizeRows = false;
 			this.DataGridView_GenerationsTable.BackgroundColor = System.Drawing.Color.White;
 			this.DataGridView_GenerationsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.DataGridView_GenerationsTable.Columns.AddRange( new System.Windows.Forms.DataGridViewColumn[] {
+			this.DataGridView_GenerationsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
-            this.Column4} );
-			resources.ApplyResources( this.DataGridView_GenerationsTable, "DataGridView_GenerationsTable" );
+            this.Column4});
+			resources.ApplyResources(this.DataGridView_GenerationsTable, "DataGridView_GenerationsTable");
 			this.DataGridView_GenerationsTable.MultiSelect = false;
 			this.DataGridView_GenerationsTable.Name = "DataGridView_GenerationsTable";
 			this.DataGridView_GenerationsTable.ReadOnly = true;
@@ -567,113 +568,121 @@
 			// dataGridViewTextBoxColumn1
 			// 
 			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources( this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1" );
+			resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
 			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
 			this.dataGridViewTextBoxColumn1.ReadOnly = true;
 			// 
 			// dataGridViewTextBoxColumn2
 			// 
 			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources( this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2" );
+			resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			this.dataGridViewTextBoxColumn2.ReadOnly = true;
 			// 
 			// Column4
 			// 
-			resources.ApplyResources( this.Column4, "Column4" );
+			resources.ApplyResources(this.Column4, "Column4");
 			this.Column4.Name = "Column4";
 			this.Column4.ReadOnly = true;
 			// 
 			// TabPage_Objects
 			// 
-			this.TabPage_Objects.Controls.Add( this.TabControl_Objects );
-			resources.ApplyResources( this.TabPage_Objects, "TabPage_Objects" );
+			this.TabPage_Objects.Controls.Add(this.TabControl_Objects);
+			resources.ApplyResources(this.TabPage_Objects, "TabPage_Objects");
 			this.TabPage_Objects.Name = "TabPage_Objects";
 			this.TabPage_Objects.UseVisualStyleBackColor = true;
 			// 
 			// TabControl_Objects
 			// 
-			this.TabControl_Objects.Controls.Add( this.TabPage_Classes );
-			this.TabControl_Objects.Controls.Add( this.TabPage_Content );
-			this.TabControl_Objects.Controls.Add( this.TabPage_Deps );
-			resources.ApplyResources( this.TabControl_Objects, "TabControl_Objects" );
+			this.TabControl_Objects.Controls.Add(this.TabPage_Classes);
+			this.TabControl_Objects.Controls.Add(this.TabPage_Content);
+			this.TabControl_Objects.Controls.Add(this.TabPage_Deps);
+			resources.ApplyResources(this.TabControl_Objects, "TabControl_Objects");
 			this.TabControl_Objects.Name = "TabControl_Objects";
 			this.TabControl_Objects.SelectedIndex = 0;
 			// 
 			// TabPage_Classes
 			// 
-			this.TabPage_Classes.Controls.Add( label3 );
-			this.TabPage_Classes.Controls.Add( this.FilterText );
-			this.TabPage_Classes.Controls.Add( this.TreeView_Classes );
-			resources.ApplyResources( this.TabPage_Classes, "TabPage_Classes" );
+			this.TabPage_Classes.Controls.Add(label3);
+			this.TabPage_Classes.Controls.Add(this.FilterText);
+			this.TabPage_Classes.Controls.Add(this.TreeView_Classes);
+			resources.ApplyResources(this.TabPage_Classes, "TabPage_Classes");
 			this.TabPage_Classes.Name = "TabPage_Classes";
 			this.TabPage_Classes.UseVisualStyleBackColor = true;
 			// 
 			// label3
 			// 
-			resources.ApplyResources( label3, "label3" );
+			resources.ApplyResources(label3, "label3");
 			label3.Name = "label3";
 			// 
 			// FilterText
 			// 
-			resources.ApplyResources( this.FilterText, "FilterText" );
+			resources.ApplyResources(this.FilterText, "FilterText");
 			this.FilterText.Name = "FilterText";
-			this.FilterText.TextChanged += new System.EventHandler( this.FilterText_TextChanged );
+			this.FilterText.TextChanged += new System.EventHandler(this.FilterText_TextChanged);
 			// 
 			// TreeView_Classes
 			// 
-			resources.ApplyResources( this.TreeView_Classes, "TreeView_Classes" );
+			resources.ApplyResources(this.TreeView_Classes, "TreeView_Classes");
 			this.TreeView_Classes.CausesValidation = false;
 			this.TreeView_Classes.ImageList = this.VSIcons;
 			this.TreeView_Classes.Name = "TreeView_Classes";
 			this.TreeView_Classes.ShowNodeToolTips = true;
-			this.TreeView_Classes.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler( this.TreeView_Classes_NodeMouseClick );
+			this.TreeView_Classes.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Classes_NodeMouseClick);
 			// 
 			// VSIcons
 			// 
-			this.VSIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject( "VSIcons.ImageStream" )));
+			this.VSIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("VSIcons.ImageStream")));
 			this.VSIcons.TransparentColor = System.Drawing.Color.Fuchsia;
-			this.VSIcons.Images.SetKeyName( 0, "Unknown" );
-			this.VSIcons.Images.SetKeyName( 1, "UClass" );
-			this.VSIcons.Images.SetKeyName( 2, "UObject" );
-			this.VSIcons.Images.SetKeyName( 3, "UConst" );
-			this.VSIcons.Images.SetKeyName( 4, "UEnum" );
-			this.VSIcons.Images.SetKeyName( 5, "UStruct" );
-			this.VSIcons.Images.SetKeyName( 6, "UProperty" );
-			this.VSIcons.Images.SetKeyName( 7, "UFunction" );
-			this.VSIcons.Images.SetKeyName( 8, "UState" );
-			this.VSIcons.Images.SetKeyName( 9, "List" );
+			this.VSIcons.Images.SetKeyName(0, "Unknown");
+			this.VSIcons.Images.SetKeyName(1, "UClass");
+			this.VSIcons.Images.SetKeyName(2, "UObject");
+			this.VSIcons.Images.SetKeyName(3, "UConst");
+			this.VSIcons.Images.SetKeyName(4, "UEnum");
+			this.VSIcons.Images.SetKeyName(5, "UStruct");
+			this.VSIcons.Images.SetKeyName(6, "UProperty");
+			this.VSIcons.Images.SetKeyName(7, "UFunction");
+			this.VSIcons.Images.SetKeyName(8, "UState");
+			this.VSIcons.Images.SetKeyName(9, "List");
 			// 
 			// TabPage_Content
 			// 
-			this.TabPage_Content.Controls.Add( this.TreeView_Content );
-			resources.ApplyResources( this.TabPage_Content, "TabPage_Content" );
+			this.TabPage_Content.Controls.Add(this.Button_Export);
+			this.TabPage_Content.Controls.Add(this.TreeView_Content);
+			resources.ApplyResources(this.TabPage_Content, "TabPage_Content");
 			this.TabPage_Content.Name = "TabPage_Content";
 			this.TabPage_Content.UseVisualStyleBackColor = true;
 			// 
+			// Button_Export
+			// 
+			resources.ApplyResources(this.Button_Export, "Button_Export");
+			this.Button_Export.Name = "Button_Export";
+			this.Button_Export.UseVisualStyleBackColor = true;
+			this.Button_Export.Click += new System.EventHandler(this.Button_Export_Click);
+			// 
 			// TreeView_Content
 			// 
-			resources.ApplyResources( this.TreeView_Content, "TreeView_Content" );
+			resources.ApplyResources(this.TreeView_Content, "TreeView_Content");
 			this.TreeView_Content.Name = "TreeView_Content";
-			this.TreeView_Content.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler( this.TreeView_Content_NodeMouseClick );
+			this.TreeView_Content.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Content_NodeMouseClick);
 			// 
 			// TabPage_Deps
 			// 
 			this.TabPage_Deps.BackColor = System.Drawing.Color.White;
-			this.TabPage_Deps.Controls.Add( this.TreeView_Deps );
-			resources.ApplyResources( this.TabPage_Deps, "TabPage_Deps" );
+			this.TabPage_Deps.Controls.Add(this.TreeView_Deps);
+			resources.ApplyResources(this.TabPage_Deps, "TabPage_Deps");
 			this.TabPage_Deps.Name = "TabPage_Deps";
 			// 
 			// TreeView_Deps
 			// 
-			resources.ApplyResources( this.TreeView_Deps, "TreeView_Deps" );
+			resources.ApplyResources(this.TreeView_Deps, "TreeView_Deps");
 			this.TreeView_Deps.Name = "TreeView_Deps";
 			this.TreeView_Deps.ShowNodeToolTips = true;
 			// 
 			// TabPage_Chunks
 			// 
-			this.TabPage_Chunks.Controls.Add( this.DataGridView_Chunks );
-			resources.ApplyResources( this.TabPage_Chunks, "TabPage_Chunks" );
+			this.TabPage_Chunks.Controls.Add(this.DataGridView_Chunks);
+			resources.ApplyResources(this.TabPage_Chunks, "TabPage_Chunks");
 			this.TabPage_Chunks.Name = "TabPage_Chunks";
 			this.TabPage_Chunks.UseVisualStyleBackColor = true;
 			// 
@@ -685,12 +694,12 @@
 			this.DataGridView_Chunks.AllowUserToResizeRows = false;
 			this.DataGridView_Chunks.BackgroundColor = System.Drawing.Color.White;
 			this.DataGridView_Chunks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-			this.DataGridView_Chunks.Columns.AddRange( new System.Windows.Forms.DataGridViewColumn[] {
+			this.DataGridView_Chunks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.CompressedOffset,
-            this.CompressedSize} );
-			resources.ApplyResources( this.DataGridView_Chunks, "DataGridView_Chunks" );
+            this.CompressedSize});
+			resources.ApplyResources(this.DataGridView_Chunks, "DataGridView_Chunks");
 			this.DataGridView_Chunks.MultiSelect = false;
 			this.DataGridView_Chunks.Name = "DataGridView_Chunks";
 			this.DataGridView_Chunks.ReadOnly = true;
@@ -702,142 +711,142 @@
 			// dataGridViewTextBoxColumn3
 			// 
 			this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources( this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3" );
+			resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
 			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
 			this.dataGridViewTextBoxColumn3.ReadOnly = true;
 			// 
 			// dataGridViewTextBoxColumn4
 			// 
 			this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources( this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4" );
+			resources.ApplyResources(this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4");
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			this.dataGridViewTextBoxColumn4.ReadOnly = true;
 			// 
 			// CompressedOffset
 			// 
 			this.CompressedOffset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources( this.CompressedOffset, "CompressedOffset" );
+			resources.ApplyResources(this.CompressedOffset, "CompressedOffset");
 			this.CompressedOffset.Name = "CompressedOffset";
 			this.CompressedOffset.ReadOnly = true;
 			// 
 			// CompressedSize
 			// 
 			this.CompressedSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources( this.CompressedSize, "CompressedSize" );
+			resources.ApplyResources(this.CompressedSize, "CompressedSize");
 			this.CompressedSize.Name = "CompressedSize";
 			this.CompressedSize.ReadOnly = true;
 			// 
 			// Panel_Content
 			// 
-			this.Panel_Content.Controls.Add( this.WPFHost );
-			this.Panel_Content.Controls.Add( this.ToolStrip_Content );
-			resources.ApplyResources( this.Panel_Content, "Panel_Content" );
+			this.Panel_Content.Controls.Add(this.WPFHost);
+			this.Panel_Content.Controls.Add(this.ToolStrip_Content);
+			resources.ApplyResources(this.Panel_Content, "Panel_Content");
 			this.Panel_Content.Name = "Panel_Content";
 			// 
 			// WPFHost
 			// 
-			resources.ApplyResources( this.WPFHost, "WPFHost" );
+			resources.ApplyResources(this.WPFHost, "WPFHost");
 			this.WPFHost.Name = "WPFHost";
 			this.WPFHost.Child = this.myTextEditor1;
 			// 
 			// ToolStrip_Content
 			// 
 			this.ToolStrip_Content.AllowMerge = false;
-			resources.ApplyResources( this.ToolStrip_Content, "ToolStrip_Content" );
+			resources.ApplyResources(this.ToolStrip_Content, "ToolStrip_Content");
 			this.ToolStrip_Content.BackColor = System.Drawing.Color.White;
 			this.ToolStrip_Content.CanOverflow = false;
 			this.ToolStrip_Content.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-			this.ToolStrip_Content.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
+			this.ToolStrip_Content.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExportButton,
             this.PrevButton,
             this.NextButton,
             this.Label_ObjectName,
             this.SearchBox,
-            this.FindButton} );
+            this.FindButton});
 			this.ToolStrip_Content.Name = "ToolStrip_Content";
 			this.ToolStrip_Content.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			// 
 			// ExportButton
 			// 
-			resources.ApplyResources( this.ExportButton, "ExportButton" );
+			resources.ApplyResources(this.ExportButton, "ExportButton");
 			this.ExportButton.Name = "ExportButton";
-			this.ExportButton.Click += new System.EventHandler( this.toolStripButton1_Click );
+			this.ExportButton.Click += new System.EventHandler(this.toolStripButton1_Click);
 			// 
 			// PrevButton
 			// 
 			this.PrevButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
 			this.PrevButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			resources.ApplyResources( this.PrevButton, "PrevButton" );
+			resources.ApplyResources(this.PrevButton, "PrevButton");
 			this.PrevButton.Name = "PrevButton";
-			this.PrevButton.Click += new System.EventHandler( this.ToolStripButton_Backward_Click );
+			this.PrevButton.Click += new System.EventHandler(this.ToolStripButton_Backward_Click);
 			// 
 			// NextButton
 			// 
 			this.NextButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
 			this.NextButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			resources.ApplyResources( this.NextButton, "NextButton" );
+			resources.ApplyResources(this.NextButton, "NextButton");
 			this.NextButton.Name = "NextButton";
-			this.NextButton.Click += new System.EventHandler( this.ToolStripButton_Forward_Click );
+			this.NextButton.Click += new System.EventHandler(this.ToolStripButton_Forward_Click);
 			// 
 			// Label_ObjectName
 			// 
 			this.Label_ObjectName.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
 			this.Label_ObjectName.BackColor = System.Drawing.Color.Transparent;
 			this.Label_ObjectName.Name = "Label_ObjectName";
-			resources.ApplyResources( this.Label_ObjectName, "Label_ObjectName" );
+			resources.ApplyResources(this.Label_ObjectName, "Label_ObjectName");
 			// 
 			// SearchBox
 			// 
-			resources.ApplyResources( this.SearchBox, "SearchBox" );
+			resources.ApplyResources(this.SearchBox, "SearchBox");
 			this.SearchBox.Name = "SearchBox";
-			this.SearchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler( this.SearchBox_KeyPress_1 );
+			this.SearchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchBox_KeyPress_1);
 			// 
 			// FindButton
 			// 
-			resources.ApplyResources( this.FindButton, "FindButton" );
+			resources.ApplyResources(this.FindButton, "FindButton");
 			this.FindButton.Name = "FindButton";
-			this.FindButton.Click += new System.EventHandler( this.ToolStripButton_Find_Click );
+			this.FindButton.Click += new System.EventHandler(this.ToolStripButton_Find_Click);
 			// 
 			// UC_PackageExplorer
 			// 
-			resources.ApplyResources( this, "$this" );
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
-			this.Controls.Add( UScriptLayout );
+			this.Controls.Add(UScriptLayout);
 			this.DoubleBuffered = true;
 			this.Name = "UC_PackageExplorer";
-			panel1.ResumeLayout( false );
+			panel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.Num_NameIndex)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Num_ObjectIndex)).EndInit();
-			UScriptLayout.ResumeLayout( false );
-			this.Panel_Main.ResumeLayout( false );
+			UScriptLayout.ResumeLayout(false);
+			this.Panel_Main.ResumeLayout(false);
 			this.Panel_Main.PerformLayout();
-			this.ToolStrip_Main.ResumeLayout( false );
+			this.ToolStrip_Main.ResumeLayout(false);
 			this.ToolStrip_Main.PerformLayout();
-			this.TabControl_General.ResumeLayout( false );
-			this.TabPage_Package.ResumeLayout( false );
+			this.TabControl_General.ResumeLayout(false);
+			this.TabPage_Package.ResumeLayout(false);
 			this.TabPage_Package.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.DataGridView_Flags)).EndInit();
-			this.TabPage_Tables.ResumeLayout( false );
-			this.TabControl_Tables.ResumeLayout( false );
-			this.TabPage_Names.ResumeLayout( false );
+			this.TabPage_Tables.ResumeLayout(false);
+			this.TabControl_Tables.ResumeLayout(false);
+			this.TabPage_Names.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.DataGridView_NameTable)).EndInit();
-			this.TabPage_Exports.ResumeLayout( false );
-			this.TabPage_Imports.ResumeLayout( false );
-			this.TabPage_Generations.ResumeLayout( false );
+			this.TabPage_Exports.ResumeLayout(false);
+			this.TabPage_Imports.ResumeLayout(false);
+			this.TabPage_Generations.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.DataGridView_GenerationsTable)).EndInit();
-			this.TabPage_Objects.ResumeLayout( false );
-			this.TabControl_Objects.ResumeLayout( false );
-			this.TabPage_Classes.ResumeLayout( false );
+			this.TabPage_Objects.ResumeLayout(false);
+			this.TabControl_Objects.ResumeLayout(false);
+			this.TabPage_Classes.ResumeLayout(false);
 			this.TabPage_Classes.PerformLayout();
-			this.TabPage_Content.ResumeLayout( false );
-			this.TabPage_Deps.ResumeLayout( false );
-			this.TabPage_Chunks.ResumeLayout( false );
+			this.TabPage_Content.ResumeLayout(false);
+			this.TabPage_Deps.ResumeLayout(false);
+			this.TabPage_Chunks.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.DataGridView_Chunks)).EndInit();
-			this.Panel_Content.ResumeLayout( false );
-			this.ToolStrip_Content.ResumeLayout( false );
+			this.Panel_Content.ResumeLayout(false);
+			this.ToolStrip_Content.ResumeLayout(false);
 			this.ToolStrip_Content.PerformLayout();
-			this.ResumeLayout( false );
+			this.ResumeLayout(false);
 
 		}
 
@@ -913,6 +922,7 @@
 		internal System.Windows.Forms.Label Label_Folder;
 		internal System.Windows.Forms.Label Label_CookerVersion;
 		internal System.Windows.Forms.Label Label_EngineVersion;
+		internal System.Windows.Forms.Button Button_Export;
 
 
 	}
