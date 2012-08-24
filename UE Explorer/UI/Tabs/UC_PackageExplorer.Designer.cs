@@ -664,6 +664,7 @@
 			// 
 			resources.ApplyResources(this.TreeView_Content, "TreeView_Content");
 			this.TreeView_Content.Name = "TreeView_Content";
+			this.TreeView_Content.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_Content_AfterSelect);
 			this.TreeView_Content.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Content_NodeMouseClick);
 			// 
 			// TabPage_Deps

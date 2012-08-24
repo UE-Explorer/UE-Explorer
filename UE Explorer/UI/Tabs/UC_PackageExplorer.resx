@@ -132,7 +132,7 @@
     <value>118, 29</value>
   </data>
   <data name="Num_NameIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
+    <value>134, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Num_NameIndex.TabIndex" type="System.Int32, mscorlib">
@@ -157,7 +157,7 @@
     <value>118, 3</value>
   </data>
   <data name="Num_ObjectIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
+    <value>134, 20</value>
   </data>
   <data name="Num_ObjectIndex.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1364,7 +1364,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAB8
-        EQAAAk1TRnQBSQFMAgEBCgEAAUwBBQFMAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        EQAAAk1TRnQBSQFMAgEBCgEAAWQBBQFkAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1799,7 +1799,7 @@
     <value>False</value>
   </data>
   <data name="WPFHost.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
+    <value>-5, 28</value>
   </data>
   <data name="WPFHost.Size" type="System.Drawing.Size, System.Drawing">
     <value>979, 515</value>

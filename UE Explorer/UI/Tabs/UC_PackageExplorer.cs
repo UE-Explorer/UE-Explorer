@@ -1098,14 +1098,18 @@ namespace UEExplorer.UI.Tabs
 			ShowNodeContextMenuStrip( TreeView_Exports, e, _OnExportsItemClicked );
 		}
 
+		private bool _SuppressNodeSelect = false;
+
 		private void TreeView_Content_NodeMouseClick( object sender, TreeNodeMouseClickEventArgs e )
 		{
 			switch( e.Button )
 			{
-				case System.Windows.Forms.MouseButtons.Left:		
+				case System.Windows.Forms.MouseButtons.Left:	
+					//PerformNodeAction( e.Node as IDecompileableObjectNode, "View Object" );
 					break;
 
 				case System.Windows.Forms.MouseButtons.Right:
+					_SuppressNodeSelect = true;
 					ShowNodeContextMenuStrip( TreeView_Content, e, _OnContentItemClicked );
 					break;
 			}
@@ -1768,6 +1772,17 @@ namespace UEExplorer.UI.Tabs
 
 			Button_Export.Enabled = exportable;
 			Button_Export.Refresh();
+		}
+
+		private void TreeView_Content_AfterSelect( object sender, TreeViewEventArgs e )
+		{
+			// Selection shouldn't view object, for example on contextmenu selection.
+			if( _SuppressNodeSelect )
+			{
+				_SuppressNodeSelect = false;
+				return;
+			}
+			PerformNodeAction( e.Node as IDecompileableObjectNode, "View Object" );
 		}
 	}
 
