@@ -711,6 +711,9 @@ namespace UEExplorer.UI.Tabs
 
 				var exp = exportTable as UnrealExportTable;
 				var node = new ExportNode {Table = exp, Text = exp.ObjectName};
+				SetImageKeyForObject( exp, node );
+
+				node.SelectedImageKey = node.ImageKey;
 				_TempNodes[_NIndex ++] = node;
 
 				if( exp.Object != null && exp.Object.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
@@ -759,12 +762,16 @@ namespace UEExplorer.UI.Tabs
 					_TempNodes = new TreeNode[_UnrealPackage.ImportTableList.Count];
 				}
 
+				var imp = (importTable as UnrealImportTable);
 				ImportNode node = new ImportNode
 				{
-				    Table = (importTable as UnrealImportTable),
-				    Text = (importTable as UnrealImportTable).ObjectName
+				    Table = imp,
+				    Text = imp.ObjectName
 				};
 				_TempNodes[_NIndex ++] = node;
+
+				SetImageKeyForObject( imp, node );
+
 
 				if( _NIndex == _UnrealPackage.ImportTableList.Count )
 				{
@@ -863,11 +870,34 @@ namespace UEExplorer.UI.Tabs
 			if( node == null )
 				return;
 
-			foreach( var table in _UnrealPackage.ImportTableList.Where( table => table != parent && table.Object.Outer == parent.Object ) )
+			foreach( var table in _UnrealPackage.ImportTableList.Where( table => table != parent && table.OuterTable == parent ) )
 			{
 				GetDependencyOn( table, node.Nodes.Add( table.ObjectName ) );
 			}
-			node.ToolTipText = "ClassName:" + parent.Object.GetClassName() + "\r\nDependenciesCount:" + node.Nodes.Count;
+
+			node.ToolTipText = "Class:" + parent.ClassName 
+				+ "\r\nDependencies:" + node.Nodes.Count;
+			SetImageKeyForObject( parent, node );
+		}
+
+		protected void SetImageKeyForObject( UnrealTable tableObject, TreeNode node )
+		{
+			if( tableObject.Object != null )
+			{
+				if( tableObject.Object.GetType().IsSubclassOf( typeof(UProperty) ) )
+				{
+					node.ImageKey = typeof(UProperty).Name;
+				}
+				else
+				{
+					if( tableObject.ClassName == "Package" )
+					{
+						node.ImageKey = "List";
+					}
+					else node.ImageKey = tableObject.Object.GetType().Name;	
+				}
+				node.SelectedImageKey = node.ImageKey;
+			}
 		}
 
 		protected void CreateGenerationsList()
@@ -1874,6 +1904,44 @@ namespace UEExplorer.UI.Tabs
 		private void ReloadButton_Click( object sender, EventArgs e )
 		{
 			ReloadPackage();
+		}
+
+		private Pen borderPen = new Pen( Color.FromArgb( 237, 237, 237 ) );
+		private Pen linePen = new Pen( Color.White );
+		private void panel4_Paint( object sender, PaintEventArgs e )
+		{
+			e.Graphics.DrawRectangle( borderPen, 0, 0, panel4.Width-1, panel4.Height-1 );
+		}
+
+		private void panel1_Paint( object sender, PaintEventArgs e )
+		{
+			e.Graphics.DrawRectangle( borderPen, 0, 0, panel1.Width-1, panel1.Height-1 );
+		}
+
+		private void toolStripSeparator1_Paint( object sender, PaintEventArgs e )
+		{
+			e.Graphics.FillRectangle( linePen.Brush, 2, 0, panel1.Width-4, panel1.Height );
+			e.Graphics.DrawLine( borderPen, e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Left, e.ClipRectangle.Bottom );
+			e.Graphics.DrawLine( borderPen, e.ClipRectangle.Right-1, e.ClipRectangle.Top, e.ClipRectangle.Right-1, e.ClipRectangle.Bottom );
+		}
+
+		private void ToolStrip_Content_Paint( object sender, PaintEventArgs e )
+		{
+			e.Graphics.DrawRectangle( borderPen, 0, 0, ((Control)sender).Width-1, panel1.Height-1 );
+		}
+
+		private void TreeView_Deps_DrawNode( object sender, DrawTreeNodeEventArgs e )
+		{
+			//int num = ((TreeNode)sender).Nodes.Count;
+			//if( num == 0 )
+			//{
+			//    return;
+			//}
+
+			//e.Graphics.DrawString( "x" + num, 
+			//    TreeView_Deps.Font, borderPen.Brush,
+			//    e.Bounds.Right - 32, ((float)(e.Bounds.Top - e.Bounds.Bottom))*0.5f	
+			//);
 		}
 	}
 

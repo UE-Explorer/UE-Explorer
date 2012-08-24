@@ -30,8 +30,17 @@
 		/// </summary>
 		protected virtual void InitializeComponent()
 		{
-			components = new System.ComponentModel.Container();
+			this.SuspendLayout();
+			// 
+			// UserControl_Tab
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.Margin = new System.Windows.Forms.Padding(0);
+			this.Name = "UserControl_Tab";
+			this.ResumeLayout(false);
+
 		}
 
 		#endregion

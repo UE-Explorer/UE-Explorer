@@ -117,26 +117,282 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="panel1.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="UScriptLayout.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="UScriptLayout.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="panel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="WPFHost.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="WPFHost.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="WPFHost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="WPFHost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>694, 510</value>
+  </data>
+  <data name="WPFHost.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;WPFHost.Name" xml:space="preserve">
+    <value>WPFHost</value>
+  </data>
+  <data name="&gt;&gt;WPFHost.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Integration.ElementHost, WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="&gt;&gt;WPFHost.Parent" xml:space="preserve">
+    <value>panel4</value>
+  </data>
+  <data name="&gt;&gt;WPFHost.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 37</value>
+  </data>
+  <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>700, 516</value>
+  </data>
+  <data name="panel4.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;panel4.Name" xml:space="preserve">
+    <value>panel4</value>
+  </data>
+  <data name="&gt;&gt;panel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel4.Parent" xml:space="preserve">
+    <value>Panel_Content</value>
+  </data>
+  <data name="&gt;&gt;panel4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <metadata name="ToolStrip_Content.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="ToolStrip_Content.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="ToolStrip_Content.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ToolStrip_Content.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ToolStrip_Content.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="PrevButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="PrevButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI0SURBVDhPnZNfSFNRHMdvQ7sus/yz2tAJ6U2zcpZZFiq0
+        2GT2EqQPhg8DSQ0NKqwmRbiwiMI1WDAbQVE5emlaW+4PG97RNAuNHpK0hqNFEb0W1YsP3zpH7727k3zo
+        wJd74Jzv5/s7v3MPw6SMQxE99LHVlbpfNhfMh2dMcMSv4tGCDY7ZHlhnjqA9qkOtVw2T30ADVkAE8+X5
+        PowkXXDNW3DtTRvOvqjDyViVKPN4BcrvaeQQwXxl7jzuxwdgf9uFC6+McMet+L34A57EDRmkI7oT24c4
+        CUIADXw1nO96MfC6GWcm92H4wyUIg//ilgF6YjrUD9VQ0aMQQOeUEZaXB+nGVPPnn+9xbqpeBHQ9r0Rb
+        tAytPIfKQU4CnJqoWWEmFZB0/6fbVN6kE56Pt3B0vASNYS0KrOwyIKSn5v7pJrHs1SbGcBHqQmqo+pXL
+        AO8SIL38X4vfaSLRcMKOh4mbuLswiL1BFXYF8pDblykBzJEKEfIgpYHRrx6YIloYwoU4ENqE3YF87PBv
+        RLFvHbZdLJUA+91qChCa5JyziKd4nLyD6kABqv6mljzLhtanRL6dBXd8iwRochvQEuRwjN8qNun67GkK
+        4b/5UT62gaZqvCxyRhVQdedKAHKVym4FOJsajQEthCaRcpsnGqALFqLIl4W8JxlQjjDIPMHIzcJ/TSC1
+        tj0oda2nTSoby6Hlbn66Ftmja8A6GKg605LTHwWBEBX3auiX7VAgw7yUKOifr/F/F/4AS2zwZi8wYRgA
+        AAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="PrevButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Black</value>
+  </data>
+  <data name="PrevButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="PrevButton.Text" xml:space="preserve">
+    <value>Backward</value>
+  </data>
+  <data name="NextButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="NextButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVDhPY2BAAo67Hf47HMKPkdWjsEGaQdjztPv/ibda
+        /i+70/N/4uWs//Wn/f4n7tf9b7ZR/L/7VmewBRiGwDQ3XC//v/bBjP8zrpf9bzsX9b/4qNX/7EN6cBy3
+        V+O/2jwJVENgmpuvlf5fcKvpf9+lNLiGrQ+noxgAMixlv/Z/zWnKCENABtjsM/w/9WrR/6YzQf8LjpiC
+        NV18s+8/CDz+cgPFkKxDuv/tlkv9t55mDPEKyIDUYy7/y47boyhsPxv6/9vvTyiGpB3U+R+1X/V/+D7l
+        /zrdyggD8g4bYzgV5Io1dzvBBoDAo8/XwWoC9yr+d90l81+4nh1qwA4HsMSEi0lwxbgY9z5f/e+yS/q/
+        1Q7x/yJ1nFADNhJvwLanK/6bbBf5r79N8L9AOSvCgLjdGnAvuO+W+Q/CkftU/0+/VgZ3zMYny8Catbby
+        /5fdxPVfvUoJYYD5EnGwAbBAAhkwBRitMADSrAe0VXEz93+ZTZz/hfrY/ysnKyAM8Fji/D94u/L/iH0q
+        8EC68+kKWD9Is9oWPrCtEhvZ//OuY/ovkimAMAAUlZyZTP+Ve8T/u26TgQdS0dnY/x1XK8G2Sm/i+C+4
+        nuU/51qG/6zpDKiaYekaZIhZj9F/pRk84EBS3cILdq7YBrb/3OsY/7NPZPgvkopmM3qmABkCwrJFEmCa
+        PYXpP0scxEYYxpkbyZUAAJFr7+R+oDqAAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="NextButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Black</value>
+  </data>
+  <data name="NextButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="NextButton.Text" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="ExportButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ExportButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 25</value>
+  </data>
+  <data name="ExportButton.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ExportButton.ToolTipText" xml:space="preserve">
+    <value>Save content as .uc</value>
+  </data>
+  <data name="toolStripSeparator1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 28</value>
+  </data>
+  <data name="SearchBox.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="SearchBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="SearchBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 28</value>
+  </data>
+  <data name="FindButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="FindButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 25</value>
+  </data>
+  <data name="FindButton.Text" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="toolStripSeparator4.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 28</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 28</value>
+  </data>
+  <data name="Label_ObjectName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 25</value>
+  </data>
+  <data name="Label_ObjectName.Text" xml:space="preserve">
+    <value>Object</value>
+  </data>
+  <data name="ToolStrip_Content.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="ToolStrip_Content.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="ToolStrip_Content.Size" type="System.Drawing.Size, System.Drawing">
+    <value>700, 28</value>
+  </data>
+  <data name="ToolStrip_Content.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip_Content.Name" xml:space="preserve">
+    <value>ToolStrip_Content</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip_Content.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip_Content.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip_Content.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 6</value>
+  </data>
+  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>700, 28</value>
+  </data>
+  <data name="panel3.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
+    <value>Panel_Content</value>
+  </data>
+  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Panel_Content.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="Panel_Content.Location" type="System.Drawing.Point, System.Drawing">
+    <value>327, 0</value>
+  </data>
+  <data name="Panel_Content.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="Panel_Content.Size" type="System.Drawing.Size, System.Drawing">
+    <value>706, 556</value>
+  </data>
+  <data name="Panel_Content.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;Panel_Content.Name" xml:space="preserve">
+    <value>Panel_Content</value>
+  </data>
+  <data name="&gt;&gt;Panel_Content.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Panel_Content.Parent" xml:space="preserve">
+    <value>UScriptLayout</value>
+  </data>
+  <data name="&gt;&gt;Panel_Content.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="TabControl_General.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="Num_NameIndex.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Num_NameIndex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 29</value>
+    <value>197, 185</value>
   </data>
   <data name="Num_NameIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 20</value>
+    <value>100, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Num_NameIndex.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
+  </data>
+  <data name="Num_NameIndex.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;Num_NameIndex.Name" xml:space="preserve">
     <value>Num_NameIndex</value>
@@ -145,7 +401,7 @@
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Num_NameIndex.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Num_NameIndex.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -154,13 +410,16 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="Num_ObjectIndex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 3</value>
+    <value>197, 151</value>
   </data>
   <data name="Num_ObjectIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 20</value>
+    <value>100, 20</value>
   </data>
   <data name="Num_ObjectIndex.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
+  </data>
+  <data name="Num_ObjectIndex.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;Num_ObjectIndex.Name" xml:space="preserve">
     <value>Num_ObjectIndex</value>
@@ -169,196 +428,22 @@
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Num_ObjectIndex.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Num_ObjectIndex.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Button_FindObject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="Button_FindObject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 23</value>
-  </data>
-  <data name="Button_FindObject.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="Button_FindObject.Text" xml:space="preserve">
-    <value>Find Object</value>
-  </data>
-  <data name="&gt;&gt;Button_FindObject.Name" xml:space="preserve">
-    <value>Button_FindObject</value>
-  </data>
-  <data name="&gt;&gt;Button_FindObject.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button_FindObject.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;Button_FindObject.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="Button_FindName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 29</value>
-  </data>
-  <data name="Button_FindName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 23</value>
-  </data>
-  <data name="Button_FindName.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="Button_FindName.Text" xml:space="preserve">
-    <value>Find Name</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.Name" xml:space="preserve">
-    <value>Button_FindName</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 352</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 58</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>TabPage_Package</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <metadata name="UScriptLayout.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="UScriptLayout.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="UScriptLayout.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="Panel_Main.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <metadata name="ToolStrip_Main.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>151, 17</value>
-  </metadata>
-  <metadata name="exportingToolStripMenuItem.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="exportDecompiledClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="exportDecompiledClassesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export &amp;Classes</value>
-  </data>
-  <data name="exportScriptClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="exportScriptClassesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export &amp;Scripts</value>
-  </data>
-  <data name="exportingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 22</value>
-  </data>
-  <data name="exportingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ex&amp;porting</value>
-  </data>
-  <data name="viewBufferToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 22</value>
-  </data>
-  <data name="viewBufferToolStripMenuItem.Text" xml:space="preserve">
-    <value>View Buffer</value>
-  </data>
-  <data name="toolStripDropDownButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 22</value>
-  </data>
-  <data name="toolStripDropDownButton1.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
-  <data name="ReloadButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIISURBVDhPpZP7S1NxGMbPPxKaXVUkMEq8IpKUCoY/hGgI
-        ymqkDYYXcCjDZOANURSjCNGFQUTsl4GXVMxKk62YU4fXQpaIlygHQxBRH8/zwvyaIAYe+HLgnPN8nue9
-        HA3nvDTq63oW/jm13XOwvPTB3DYFY5MH+bXfcN8ygfTSMSSXfESicQDxBqdYHwH29g9w2tnZ3UcguIvN
-        rR3417exuBJE5N1n/wfwLgXEOc38Bc6xNRHb+/y4nm49G0Bnit2zf9H6bkliE/jKuYxrd6oVgDWfjB+K
-        TWeKMyrGEVfowITvD9re/9ABVQrAhh0HHK+ZselMMaN/mvwtDb+aVqkA7HYIwIj3ysfluPTorJnP6Ezx
-        oHsD1s5ZXEktUwCOioB5f1CEPR9+wTG6iuiserTo8dkwng7HT/R+XUPF8xlcTjErAOdMcW6NW8STiwG8
-        7vej8oUPN/PsEv3t8Ao0TZP3T1u8uJRkUgAuSYHtO97oLxmXd5t9Ho8aPTK+GzntqNfrLm2fFoihwYOI
-        xGIF4KjoGBLzY1OrF9k6OOFxnwDC4wxIMX1G0pMhgVyMNyoA13PAtS7OrJk1PrC69LUdQWxuF6IybHrX
-        LRI7JrtZdoDAo1XmbjMyD+tjSXxGcXRmnYg5ttD9QuxDhN0uUgDOmbvNTpPOJaGAo2K36cyaGZvOFIfd
-        KlSA8/zRh9ABIDUG+1JpAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="ReloadButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="ReloadButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 22</value>
-  </data>
-  <data name="ReloadButton.Text" xml:space="preserve">
-    <value>Reload</value>
-  </data>
-  <data name="ReloadButton.ToolTipText" xml:space="preserve">
-    <value>Reload this package.</value>
-  </data>
-  <data name="ToolStrip_Main.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="ToolStrip_Main.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 25</value>
-  </data>
-  <data name="ToolStrip_Main.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="ToolStrip_Main.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Main.Name" xml:space="preserve">
-    <value>ToolStrip_Main</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Main.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Main.Parent" xml:space="preserve">
-    <value>Panel_Main</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Main.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TabControl_General.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="FolderValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="FolderValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="FolderValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="FolderValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>182, 48</value>
+    <value>198, 69</value>
   </data>
   <data name="FolderValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>99, 13</value>
   </data>
   <data name="FolderValue.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -379,19 +464,49 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;FolderValue.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
+  </data>
+  <data name="Button_FindObject.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="Button_FindObject.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 145</value>
+  </data>
+  <data name="Button_FindObject.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 28</value>
+  </data>
+  <data name="Button_FindObject.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="Button_FindObject.Text" xml:space="preserve">
+    <value>Find Object</value>
+  </data>
+  <data name="&gt;&gt;Button_FindObject.Name" xml:space="preserve">
+    <value>Button_FindObject</value>
+  </data>
+  <data name="&gt;&gt;Button_FindObject.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button_FindObject.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;Button_FindObject.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="Label_Folder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Top, Right</value>
   </data>
   <data name="Label_Folder.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label_Folder.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="Label_Folder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="Label_Folder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 48</value>
+    <value>160, 69</value>
   </data>
   <data name="Label_Folder.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -415,19 +530,46 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_Folder.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
-  <data name="BuildValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Button_FindName.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="Button_FindName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 179</value>
+  </data>
+  <data name="Button_FindName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 28</value>
+  </data>
+  <data name="Button_FindName.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="Button_FindName.Text" xml:space="preserve">
+    <value>Find Name</value>
+  </data>
+  <data name="&gt;&gt;Button_FindName.Name" xml:space="preserve">
+    <value>Button_FindName</value>
+  </data>
+  <data name="&gt;&gt;Button_FindName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button_FindName.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;Button_FindName.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="BuildValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="BuildValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="BuildValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>182, 28</value>
+    <value>198, 49</value>
   </data>
   <data name="BuildValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>99, 13</value>
   </data>
   <data name="BuildValue.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -445,19 +587,16 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;BuildValue.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="CookerValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>6</value>
   </data>
   <data name="CookerValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="CookerValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 68</value>
+    <value>104, 89</value>
   </data>
   <data name="CookerValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>50, 13</value>
   </data>
   <data name="CookerValue.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -478,19 +617,16 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;CookerValue.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="EngineValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>7</value>
   </data>
   <data name="EngineValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="EngineValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 48</value>
+    <value>104, 69</value>
   </data>
   <data name="EngineValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>50, 13</value>
   </data>
   <data name="EngineValue.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -511,19 +647,16 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;EngineValue.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="VersionValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>8</value>
   </data>
   <data name="VersionValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="VersionValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 8</value>
+    <value>104, 29</value>
   </data>
   <data name="VersionValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>50, 13</value>
   </data>
   <data name="VersionValue.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -541,19 +674,19 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;VersionValue.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
-  <data name="FlagsValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="FlagsValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="FlagsValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="FlagsValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>182, 8</value>
+    <value>198, 29</value>
   </data>
   <data name="FlagsValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>99, 13</value>
   </data>
   <data name="FlagsValue.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -571,19 +704,16 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;FlagsValue.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="LicenseeValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>10</value>
   </data>
   <data name="LicenseeValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="LicenseeValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 28</value>
+    <value>104, 49</value>
   </data>
   <data name="LicenseeValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>50, 13</value>
   </data>
   <data name="LicenseeValue.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -601,7 +731,7 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;LicenseeValue.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <metadata name="label4.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
@@ -609,17 +739,14 @@
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 87</value>
+    <value>4, 6</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>88, 13</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -637,16 +764,16 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="Label_GUID.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="Label_GUID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 84</value>
+    <value>104, 3</value>
   </data>
   <data name="Label_GUID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 20</value>
+    <value>193, 20</value>
   </data>
   <data name="Label_GUID.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -661,22 +788,25 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_GUID.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>13</value>
   </data>
   <metadata name="Label_DetectedBuild.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
   <data name="Label_DetectedBuild.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Top, Right</value>
   </data>
   <data name="Label_DetectedBuild.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label_DetectedBuild.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="Label_DetectedBuild.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="Label_DetectedBuild.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 28</value>
+    <value>160, 49</value>
   </data>
   <data name="Label_DetectedBuild.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -697,22 +827,22 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_DetectedBuild.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>14</value>
   </data>
   <data name="LABEL_Copyright.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+    <value>Top, Left, Right</value>
   </data>
-  <data name="LABEL_Copyright.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="LABEL_Copyright.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.75pt</value>
   </data>
   <data name="LABEL_Copyright.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="LABEL_Copyright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 479</value>
+    <value>3, 126</value>
   </data>
   <data name="LABEL_Copyright.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>297, 16</value>
   </data>
   <data name="LABEL_Copyright.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -733,22 +863,22 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;LABEL_Copyright.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>15</value>
   </data>
   <data name="LABEL_Author.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+    <value>Top, Left, Right</value>
   </data>
-  <data name="LABEL_Author.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="LABEL_Author.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.75pt</value>
   </data>
   <data name="LABEL_Author.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="LABEL_Author.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 457</value>
+    <value>3, 106</value>
   </data>
   <data name="LABEL_Author.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
+    <value>297, 17</value>
   </data>
   <data name="LABEL_Author.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -769,10 +899,10 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;LABEL_Author.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>16</value>
   </data>
   <data name="DataGridView_Flags.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <metadata name="Flag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -799,13 +929,13 @@
     <value>Flag Condition</value>
   </data>
   <data name="DataGridView_Flags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 110</value>
+    <value>3, 213</value>
   </data>
   <data name="DataGridView_Flags.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
   <data name="DataGridView_Flags.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 236</value>
+    <value>294, 265</value>
   </data>
   <data name="DataGridView_Flags.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -820,19 +950,16 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;DataGridView_Flags.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>17</value>
   </data>
   <data name="Label_CookerVersion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="Label_CookerVersion.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Label_CookerVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 68</value>
+    <value>4, 89</value>
   </data>
   <data name="Label_CookerVersion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 13</value>
+    <value>88, 13</value>
   </data>
   <data name="Label_CookerVersion.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -853,19 +980,16 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_CookerVersion.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>18</value>
   </data>
   <data name="Label_EngineVersion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="Label_EngineVersion.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Label_EngineVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 48</value>
+    <value>4, 69</value>
   </data>
   <data name="Label_EngineVersion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 13</value>
+    <value>88, 13</value>
   </data>
   <data name="Label_EngineVersion.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -886,19 +1010,16 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_EngineVersion.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>19</value>
   </data>
   <metadata name="Label_LicenseeMode.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="Label_LicenseeMode.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Label_LicenseeMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 28</value>
+    <value>4, 49</value>
   </data>
   <data name="Label_LicenseeMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>94, 13</value>
   </data>
   <data name="Label_LicenseeMode.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -916,16 +1037,22 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_LicenseeMode.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>20</value>
   </data>
   <metadata name="Label_Flags.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Label_Flags.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="Label_Flags.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label_Flags.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
   <data name="Label_Flags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 8</value>
+    <value>160, 29</value>
   </data>
   <data name="Label_Flags.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -946,19 +1073,16 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_Flags.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>21</value>
   </data>
   <metadata name="Label_Version.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="Label_Version.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Label_Version.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 8</value>
+    <value>4, 29</value>
   </data>
   <data name="Label_Version.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 13</value>
+    <value>94, 13</value>
   </data>
   <data name="Label_Version.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -976,16 +1100,13 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_Version.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>22</value>
   </data>
   <data name="TabPage_Package.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="TabPage_Package.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
   <data name="TabPage_Package.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 492</value>
+    <value>300, 481</value>
   </data>
   <data name="TabPage_Package.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1008,6 +1129,9 @@
   <data name="&gt;&gt;TabPage_Package.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="DataGridView_NameTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1020,14 +1144,11 @@
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Flags</value>
   </data>
-  <data name="DataGridView_NameTable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="DataGridView_NameTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>3, 3</value>
   </data>
   <data name="DataGridView_NameTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
+    <value>286, 455</value>
   </data>
   <data name="DataGridView_NameTable.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1048,7 +1169,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage_Names.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
+    <value>292, 455</value>
   </data>
   <data name="TabPage_Names.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1071,289 +1192,10 @@
   <data name="&gt;&gt;TabPage_Names.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="TreeView_Exports.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="TreeView_Exports.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="TreeView_Exports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
-  </data>
-  <data name="TreeView_Exports.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TreeView_Exports.Name" xml:space="preserve">
-    <value>TreeView_Exports</value>
-  </data>
-  <data name="&gt;&gt;TreeView_Exports.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TreeView_Exports.Parent" xml:space="preserve">
-    <value>TabPage_Exports</value>
-  </data>
-  <data name="&gt;&gt;TreeView_Exports.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TabPage_Exports.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage_Exports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
-  </data>
-  <data name="TabPage_Exports.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="TabPage_Exports.Text" xml:space="preserve">
-    <value>Exports</value>
-  </data>
-  <data name="TabPage_Exports.ToolTipText" xml:space="preserve">
-    <value>Exported Objects</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Exports.Name" xml:space="preserve">
-    <value>TabPage_Exports</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Exports.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Exports.Parent" xml:space="preserve">
-    <value>TabControl_Tables</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Exports.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="TreeView_Imports.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="TreeView_Imports.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="TreeView_Imports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
-  </data>
-  <data name="TreeView_Imports.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TreeView_Imports.Name" xml:space="preserve">
-    <value>TreeView_Imports</value>
-  </data>
-  <data name="&gt;&gt;TreeView_Imports.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TreeView_Imports.Parent" xml:space="preserve">
-    <value>TabPage_Imports</value>
-  </data>
-  <data name="&gt;&gt;TreeView_Imports.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TabPage_Imports.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage_Imports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
-  </data>
-  <data name="TabPage_Imports.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="TabPage_Imports.Text" xml:space="preserve">
-    <value>Imports</value>
-  </data>
-  <data name="TabPage_Imports.ToolTipText" xml:space="preserve">
-    <value>Imported Objects</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Imports.Name" xml:space="preserve">
-    <value>TabPage_Imports</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Imports.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Imports.Parent" xml:space="preserve">
-    <value>TabControl_Tables</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Imports.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
-    <value>Names</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>Exports</value>
-  </data>
-  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Net Objects</value>
-  </data>
-  <data name="DataGridView_GenerationsTable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="DataGridView_GenerationsTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="DataGridView_GenerationsTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
-  </data>
-  <data name="DataGridView_GenerationsTable.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;DataGridView_GenerationsTable.Name" xml:space="preserve">
-    <value>DataGridView_GenerationsTable</value>
-  </data>
-  <data name="&gt;&gt;DataGridView_GenerationsTable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DataGridView_GenerationsTable.Parent" xml:space="preserve">
-    <value>TabPage_Generations</value>
-  </data>
-  <data name="&gt;&gt;DataGridView_GenerationsTable.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TabPage_Generations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage_Generations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
-  </data>
-  <data name="TabPage_Generations.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="TabPage_Generations.Text" xml:space="preserve">
-    <value>Gens</value>
-  </data>
-  <data name="TabPage_Generations.ToolTipText" xml:space="preserve">
-    <value>Package Generations</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Generations.Name" xml:space="preserve">
-    <value>TabPage_Generations</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Generations.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Generations.Parent" xml:space="preserve">
-    <value>TabControl_Tables</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Generations.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="TabControl_Tables.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="TabControl_Tables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="TabControl_Tables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 492</value>
-  </data>
-  <data name="TabControl_Tables.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TabControl_Tables.Name" xml:space="preserve">
-    <value>TabControl_Tables</value>
-  </data>
-  <data name="&gt;&gt;TabControl_Tables.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabControl_Tables.Parent" xml:space="preserve">
-    <value>TabPage_Tables</value>
-  </data>
-  <data name="&gt;&gt;TabControl_Tables.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TabPage_Tables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage_Tables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 492</value>
-  </data>
-  <data name="TabPage_Tables.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="TabPage_Tables.Text" xml:space="preserve">
-    <value>Tables</value>
-  </data>
-  <data name="TabPage_Tables.ToolTipText" xml:space="preserve">
-    <value>Package Tables</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Tables.Name" xml:space="preserve">
-    <value>TabPage_Tables</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Tables.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Tables.Parent" xml:space="preserve">
-    <value>TabControl_General</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Tables.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <metadata name="label3.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 446</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>TabPage_Classes</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="FilterText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="FilterText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 443</value>
-  </data>
-  <data name="FilterText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 20</value>
-  </data>
-  <data name="FilterText.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;FilterText.Name" xml:space="preserve">
-    <value>FilterText</value>
-  </data>
-  <data name="&gt;&gt;FilterText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FilterText.Parent" xml:space="preserve">
-    <value>TabPage_Classes</value>
-  </data>
-  <data name="&gt;&gt;FilterText.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="TreeView_Classes.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="TreeView_Exports.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="TreeView_Classes.ImageIndex" type="System.Int32, mscorlib">
+  <data name="TreeView_Exports.ImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <metadata name="VSIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -1364,7 +1206,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAB8
-        EQAAAk1TRnQBSQFMAgEBCgEAAQQBBQEEAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        EQAAAk1TRnQBSQFMAgEBCgEAAawBCAGsAQgBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1441,17 +1283,248 @@
         AYABIwGAAQEC/wHwAQABwAF3AYABAQL/AfABAAHgBf8B8AEAAfEF/ws=
 </value>
   </data>
-  <data name="TreeView_Classes.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="TreeView_Exports.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="TreeView_Exports.SelectedImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TreeView_Exports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 449</value>
+  </data>
+  <data name="TreeView_Exports.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TreeView_Exports.Name" xml:space="preserve">
+    <value>TreeView_Exports</value>
+  </data>
+  <data name="&gt;&gt;TreeView_Exports.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TreeView_Exports.Parent" xml:space="preserve">
+    <value>TabPage_Exports</value>
+  </data>
+  <data name="&gt;&gt;TreeView_Exports.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TabPage_Exports.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage_Exports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 455</value>
+  </data>
+  <data name="TabPage_Exports.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="TabPage_Exports.Text" xml:space="preserve">
+    <value>Exports</value>
+  </data>
+  <data name="TabPage_Exports.ToolTipText" xml:space="preserve">
+    <value>Exported Objects</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Exports.Name" xml:space="preserve">
+    <value>TabPage_Exports</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Exports.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Exports.Parent" xml:space="preserve">
+    <value>TabControl_Tables</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Exports.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TreeView_Imports.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="TreeView_Imports.ImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TreeView_Imports.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="TreeView_Imports.SelectedImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TreeView_Imports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 449</value>
+  </data>
+  <data name="TreeView_Imports.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TreeView_Imports.Name" xml:space="preserve">
+    <value>TreeView_Imports</value>
+  </data>
+  <data name="&gt;&gt;TreeView_Imports.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TreeView_Imports.Parent" xml:space="preserve">
+    <value>TabPage_Imports</value>
+  </data>
+  <data name="&gt;&gt;TreeView_Imports.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TabPage_Imports.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage_Imports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 455</value>
+  </data>
+  <data name="TabPage_Imports.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="TabPage_Imports.Text" xml:space="preserve">
+    <value>Imports</value>
+  </data>
+  <data name="TabPage_Imports.ToolTipText" xml:space="preserve">
+    <value>Imported Objects</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Imports.Name" xml:space="preserve">
+    <value>TabPage_Imports</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Imports.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Imports.Parent" xml:space="preserve">
+    <value>TabControl_Tables</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Imports.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="DataGridView_GenerationsTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Names</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Exports</value>
+  </data>
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Net Objects</value>
+  </data>
+  <data name="DataGridView_GenerationsTable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="DataGridView_GenerationsTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 449</value>
+  </data>
+  <data name="DataGridView_GenerationsTable.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;DataGridView_GenerationsTable.Name" xml:space="preserve">
+    <value>DataGridView_GenerationsTable</value>
+  </data>
+  <data name="&gt;&gt;DataGridView_GenerationsTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DataGridView_GenerationsTable.Parent" xml:space="preserve">
+    <value>TabPage_Generations</value>
+  </data>
+  <data name="&gt;&gt;DataGridView_GenerationsTable.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TabPage_Generations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage_Generations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 455</value>
+  </data>
+  <data name="TabPage_Generations.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="TabPage_Generations.Text" xml:space="preserve">
+    <value>Gens</value>
+  </data>
+  <data name="TabPage_Generations.ToolTipText" xml:space="preserve">
+    <value>Package Generations</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Generations.Name" xml:space="preserve">
+    <value>TabPage_Generations</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Generations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Generations.Parent" xml:space="preserve">
+    <value>TabControl_Tables</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Generations.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="TabControl_Tables.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TabControl_Tables.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="TreeView_Classes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="TabControl_Tables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 481</value>
+  </data>
+  <data name="TabControl_Tables.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TabControl_Tables.Name" xml:space="preserve">
+    <value>TabControl_Tables</value>
+  </data>
+  <data name="&gt;&gt;TabControl_Tables.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabControl_Tables.Parent" xml:space="preserve">
+    <value>TabPage_Tables</value>
+  </data>
+  <data name="&gt;&gt;TabControl_Tables.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TabPage_Tables.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage_Tables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 481</value>
+  </data>
+  <data name="TabPage_Tables.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="TabPage_Tables.Text" xml:space="preserve">
+    <value>Tables</value>
+  </data>
+  <data name="TabPage_Tables.ToolTipText" xml:space="preserve">
+    <value>Package Tables</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Tables.Name" xml:space="preserve">
+    <value>TabPage_Tables</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Tables.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Tables.Parent" xml:space="preserve">
+    <value>TabControl_General</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Tables.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TreeView_Classes.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="TreeView_Classes.ImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TreeView_Classes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
   <data name="TreeView_Classes.SelectedImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="TreeView_Classes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 440</value>
+    <value>286, 423</value>
   </data>
   <data name="TreeView_Classes.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1466,13 +1539,73 @@
     <value>TabPage_Classes</value>
   </data>
   <data name="&gt;&gt;TreeView_Classes.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="label3.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 435</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>TabPage_Classes</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="FilterText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="FilterText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>45, 432</value>
+  </data>
+  <data name="FilterText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 20</value>
+  </data>
+  <data name="FilterText.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;FilterText.Name" xml:space="preserve">
+    <value>FilterText</value>
+  </data>
+  <data name="&gt;&gt;FilterText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FilterText.Parent" xml:space="preserve">
+    <value>TabPage_Classes</value>
+  </data>
+  <data name="&gt;&gt;FilterText.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="TabPage_Classes.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
   <data name="TabPage_Classes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
+    <value>292, 455</value>
   </data>
   <data name="TabPage_Classes.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1492,17 +1625,14 @@
   <data name="&gt;&gt;TabPage_Classes.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="TreeView_Content.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="TreeView_Content.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="TreeView_Content.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="TreeView_Content.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 3</value>
   </data>
   <data name="TreeView_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
+    <value>286, 449</value>
   </data>
   <data name="TreeView_Content.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1523,7 +1653,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
+    <value>292, 455</value>
   </data>
   <data name="TabPage_Content.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1543,14 +1673,20 @@
   <data name="&gt;&gt;TabPage_Content.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="TreeView_Deps.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="TreeView_Deps.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="TreeView_Deps.ImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="TreeView_Deps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>3, 3</value>
+  </data>
+  <data name="TreeView_Deps.SelectedImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="TreeView_Deps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
+    <value>286, 449</value>
   </data>
   <data name="TreeView_Deps.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1571,7 +1707,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage_Deps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 466</value>
+    <value>292, 455</value>
   </data>
   <data name="TabPage_Deps.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1601,7 +1737,7 @@
     <value>True</value>
   </data>
   <data name="TabControl_Objects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 492</value>
+    <value>300, 481</value>
   </data>
   <data name="TabControl_Objects.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1622,7 +1758,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage_Objects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 492</value>
+    <value>300, 481</value>
   </data>
   <data name="TabPage_Objects.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1673,7 +1809,7 @@
     <value>0, 0</value>
   </data>
   <data name="DataGridView_Chunks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 492</value>
+    <value>300, 481</value>
   </data>
   <data name="DataGridView_Chunks.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1694,7 +1830,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage_Chunks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 492</value>
+    <value>300, 481</value>
   </data>
   <data name="TabPage_Chunks.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1714,17 +1850,14 @@
   <data name="&gt;&gt;TabPage_Chunks.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="TabControl_General.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>55, 18</value>
+  </data>
   <data name="TabControl_General.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
-  </data>
-  <data name="TabControl_General.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="TabControl_General.Padding" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>3, 3</value>
   </data>
   <data name="TabControl_General.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 518</value>
+    <value>308, 507</value>
   </data>
   <data name="TabControl_General.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1736,16 +1869,148 @@
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TabControl_General.Parent" xml:space="preserve">
-    <value>Panel_Main</value>
+    <value>panel1</value>
   </data>
   <data name="&gt;&gt;TabControl_General.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 34</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>314, 513</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>Panel_Main</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <metadata name="ToolStrip_Main.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>151, 17</value>
+  </metadata>
+  <data name="ToolStrip_Main.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ToolStrip_Main.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <metadata name="exportingToolStripMenuItem.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="exportDecompiledClassesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="exportDecompiledClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="exportDecompiledClassesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export &amp;Classes</value>
+  </data>
+  <data name="exportScriptClassesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="exportScriptClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="exportScriptClassesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export &amp;Scripts</value>
+  </data>
+  <data name="exportingToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="exportingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 22</value>
+  </data>
+  <data name="exportingToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ex&amp;porting</value>
+  </data>
+  <data name="viewBufferToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="viewBufferToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 22</value>
+  </data>
+  <data name="viewBufferToolStripMenuItem.Text" xml:space="preserve">
+    <value>View Buffer</value>
+  </data>
+  <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 25</value>
+  </data>
+  <data name="toolStripDropDownButton1.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="ReloadButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 25</value>
+  </data>
+  <data name="ReloadButton.Text" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="ReloadButton.ToolTipText" xml:space="preserve">
+    <value>Reload this package.</value>
+  </data>
+  <data name="ToolStrip_Main.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="ToolStrip_Main.Size" type="System.Drawing.Size, System.Drawing">
+    <value>314, 28</value>
+  </data>
+  <data name="ToolStrip_Main.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip_Main.Name" xml:space="preserve">
+    <value>ToolStrip_Main</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip_Main.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip_Main.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip_Main.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>314, 28</value>
+  </data>
+  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
+    <value>Panel_Main</value>
+  </data>
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Panel_Main.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="Panel_Main.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="Panel_Main.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 540</value>
+    <value>321, 550</value>
   </data>
   <data name="Panel_Main.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1760,190 +2025,6 @@
     <value>UScriptLayout</value>
   </data>
   <data name="&gt;&gt;Panel_Main.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="WPFHost.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="WPFHost.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="WPFHost.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
-  </data>
-  <data name="WPFHost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 515</value>
-  </data>
-  <data name="WPFHost.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="WPFHost.Text" xml:space="preserve">
-    <value>elementHost1</value>
-  </data>
-  <data name="&gt;&gt;WPFHost.Name" xml:space="preserve">
-    <value>WPFHost</value>
-  </data>
-  <data name="&gt;&gt;WPFHost.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Integration.ElementHost, WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
-  </data>
-  <data name="&gt;&gt;WPFHost.Parent" xml:space="preserve">
-    <value>Panel_Content</value>
-  </data>
-  <data name="&gt;&gt;WPFHost.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="ToolStrip_Content.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="ToolStrip_Content.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ExportButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ExportButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="ExportButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 25</value>
-  </data>
-  <data name="ExportButton.Text" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="ExportButton.ToolTipText" xml:space="preserve">
-    <value>Export Script</value>
-  </data>
-  <data name="PrevButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="PrevButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI0SURBVDhPnZNfSFNRHMdvQ7sus/yz2tAJ6U2zcpZZFiq0
-        2GT2EqQPhg8DSQ0NKqwmRbiwiMI1WDAbQVE5emlaW+4PG97RNAuNHpK0hqNFEb0W1YsP3zpH7727k3zo
-        wJd74Jzv5/s7v3MPw6SMQxE99LHVlbpfNhfMh2dMcMSv4tGCDY7ZHlhnjqA9qkOtVw2T30ADVkAE8+X5
-        PowkXXDNW3DtTRvOvqjDyViVKPN4BcrvaeQQwXxl7jzuxwdgf9uFC6+McMet+L34A57EDRmkI7oT24c4
-        CUIADXw1nO96MfC6GWcm92H4wyUIg//ilgF6YjrUD9VQ0aMQQOeUEZaXB+nGVPPnn+9xbqpeBHQ9r0Rb
-        tAytPIfKQU4CnJqoWWEmFZB0/6fbVN6kE56Pt3B0vASNYS0KrOwyIKSn5v7pJrHs1SbGcBHqQmqo+pXL
-        AO8SIL38X4vfaSLRcMKOh4mbuLswiL1BFXYF8pDblykBzJEKEfIgpYHRrx6YIloYwoU4ENqE3YF87PBv
-        RLFvHbZdLJUA+91qChCa5JyziKd4nLyD6kABqv6mljzLhtanRL6dBXd8iwRochvQEuRwjN8qNun67GkK
-        4b/5UT62gaZqvCxyRhVQdedKAHKVym4FOJsajQEthCaRcpsnGqALFqLIl4W8JxlQjjDIPMHIzcJ/TSC1
-        tj0oda2nTSoby6Hlbn66Ftmja8A6GKg605LTHwWBEBX3auiX7VAgw7yUKOifr/F/F/4AS2zwZi8wYRgA
-        AAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="PrevButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Black</value>
-  </data>
-  <data name="PrevButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 25</value>
-  </data>
-  <data name="PrevButton.Text" xml:space="preserve">
-    <value>Backward</value>
-  </data>
-  <data name="NextButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="NextButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVDhPY2BAAo67Hf47HMKPkdWjsEGaQdjztPv/ibda
-        /i+70/N/4uWs//Wn/f4n7tf9b7ZR/L/7VmewBRiGwDQ3XC//v/bBjP8zrpf9bzsX9b/4qNX/7EN6cBy3
-        V+O/2jwJVENgmpuvlf5fcKvpf9+lNLiGrQ+noxgAMixlv/Z/zWnKCENABtjsM/w/9WrR/6YzQf8LjpiC
-        NV18s+8/CDz+cgPFkKxDuv/tlkv9t55mDPEKyIDUYy7/y47boyhsPxv6/9vvTyiGpB3U+R+1X/V/+D7l
-        /zrdyggD8g4bYzgV5Io1dzvBBoDAo8/XwWoC9yr+d90l81+4nh1qwA4HsMSEi0lwxbgY9z5f/e+yS/q/
-        1Q7x/yJ1nFADNhJvwLanK/6bbBf5r79N8L9AOSvCgLjdGnAvuO+W+Q/CkftU/0+/VgZ3zMYny8Catbby
-        /5fdxPVfvUoJYYD5EnGwAbBAAhkwBRitMADSrAe0VXEz93+ZTZz/hfrY/ysnKyAM8Fji/D94u/L/iH0q
-        8EC68+kKWD9Is9oWPrCtEhvZ//OuY/ovkimAMAAUlZyZTP+Ve8T/u26TgQdS0dnY/x1XK8G2Sm/i+C+4
-        nuU/51qG/6zpDKiaYekaZIhZj9F/pRk84EBS3cILdq7YBrb/3OsY/7NPZPgvkopmM3qmABkCwrJFEmCa
-        PYXpP0scxEYYxpkbyZUAAJFr7+R+oDqAAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="NextButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Black</value>
-  </data>
-  <data name="NextButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 25</value>
-  </data>
-  <data name="NextButton.Text" xml:space="preserve">
-    <value>Forward</value>
-  </data>
-  <data name="Label_ObjectName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 25</value>
-  </data>
-  <data name="Label_ObjectName.Text" xml:space="preserve">
-    <value>Object</value>
-  </data>
-  <data name="SearchBox.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="SearchBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
-  <data name="SearchBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 28</value>
-  </data>
-  <data name="FindButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="FindButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 25</value>
-  </data>
-  <data name="FindButton.Text" xml:space="preserve">
-    <value>Find</value>
-  </data>
-  <data name="ToolStrip_Content.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="ToolStrip_Content.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="ToolStrip_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>563, 28</value>
-  </data>
-  <data name="ToolStrip_Content.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="ToolStrip_Content.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Content.Name" xml:space="preserve">
-    <value>ToolStrip_Content</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Content.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Content.Parent" xml:space="preserve">
-    <value>Panel_Content</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Content.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Panel_Content.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="Panel_Content.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 0</value>
-  </data>
-  <data name="Panel_Content.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="Panel_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>563, 546</value>
-  </data>
-  <data name="Panel_Content.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;Panel_Content.Name" xml:space="preserve">
-    <value>Panel_Content</value>
-  </data>
-  <data name="&gt;&gt;Panel_Content.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Panel_Content.Parent" xml:space="preserve">
-    <value>UScriptLayout</value>
-  </data>
-  <data name="&gt;&gt;Panel_Content.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="UScriptLayout.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1959,7 +2040,7 @@
     <value>1</value>
   </data>
   <data name="UScriptLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 546</value>
+    <value>1033, 556</value>
   </data>
   <data name="UScriptLayout.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1977,22 +2058,151 @@
     <value>0</value>
   </data>
   <data name="UScriptLayout.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="Panel_Main" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Panel_Content" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="Panel_Content" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="Panel_Main" Row="-1" RowSpan="1" Column="-1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>35</value>
+    <value>25</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 546</value>
+    <value>1033, 556</value>
+  </data>
+  <data name="&gt;&gt;myTextEditor1.Name" xml:space="preserve">
+    <value>myTextEditor1</value>
+  </data>
+  <data name="&gt;&gt;myTextEditor1.Type" xml:space="preserve">
+    <value>WindowsFormsIntegration.Design.HostedComponent, WindowsFormsIntegration.Design, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;PrevButton.Name" xml:space="preserve">
+    <value>PrevButton</value>
+  </data>
+  <data name="&gt;&gt;PrevButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NextButton.Name" xml:space="preserve">
+    <value>NextButton</value>
+  </data>
+  <data name="&gt;&gt;NextButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ExportButton.Name" xml:space="preserve">
+    <value>ExportButton</value>
+  </data>
+  <data name="&gt;&gt;ExportButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SearchBox.Name" xml:space="preserve">
+    <value>SearchBox</value>
+  </data>
+  <data name="&gt;&gt;SearchBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FindButton.Name" xml:space="preserve">
+    <value>FindButton</value>
+  </data>
+  <data name="&gt;&gt;FindButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
+    <value>toolStripSeparator4</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label_ObjectName.Name" xml:space="preserve">
+    <value>Label_ObjectName</value>
+  </data>
+  <data name="&gt;&gt;Label_ObjectName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Flag.Name" xml:space="preserve">
+    <value>Flag</value>
+  </data>
+  <data name="&gt;&gt;Flag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Value.Name" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="&gt;&gt;Value.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+    <value>Column1</value>
+  </data>
+  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column2.Name" xml:space="preserve">
+    <value>Column2</value>
+  </data>
+  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VSIcons.Name" xml:space="preserve">
+    <value>VSIcons</value>
+  </data>
+  <data name="&gt;&gt;VSIcons.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column4.Name" xml:space="preserve">
+    <value>Column4</value>
+  </data>
+  <data name="&gt;&gt;Column4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn4</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CompressedOffset.Name" xml:space="preserve">
+    <value>CompressedOffset</value>
+  </data>
+  <data name="&gt;&gt;CompressedOffset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CompressedSize.Name" xml:space="preserve">
+    <value>CompressedSize</value>
+  </data>
+  <data name="&gt;&gt;CompressedSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButton1.Name" xml:space="preserve">
     <value>toolStripDropDownButton1</value>
@@ -2028,120 +2238,6 @@
     <value>ReloadButton</value>
   </data>
   <data name="&gt;&gt;ReloadButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Flag.Name" xml:space="preserve">
-    <value>Flag</value>
-  </data>
-  <data name="&gt;&gt;Flag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Value.Name" xml:space="preserve">
-    <value>Value</value>
-  </data>
-  <data name="&gt;&gt;Value.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
-    <value>Column1</value>
-  </data>
-  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column2.Name" xml:space="preserve">
-    <value>Column2</value>
-  </data>
-  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn1</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn2</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column4.Name" xml:space="preserve">
-    <value>Column4</value>
-  </data>
-  <data name="&gt;&gt;Column4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;VSIcons.Name" xml:space="preserve">
-    <value>VSIcons</value>
-  </data>
-  <data name="&gt;&gt;VSIcons.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn3</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn4</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CompressedOffset.Name" xml:space="preserve">
-    <value>CompressedOffset</value>
-  </data>
-  <data name="&gt;&gt;CompressedOffset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CompressedSize.Name" xml:space="preserve">
-    <value>CompressedSize</value>
-  </data>
-  <data name="&gt;&gt;CompressedSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;myTextEditor1.Name" xml:space="preserve">
-    <value>myTextEditor1</value>
-  </data>
-  <data name="&gt;&gt;myTextEditor1.Type" xml:space="preserve">
-    <value>WindowsFormsIntegration.Design.HostedComponent, WindowsFormsIntegration.Design, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="&gt;&gt;ExportButton.Name" xml:space="preserve">
-    <value>ExportButton</value>
-  </data>
-  <data name="&gt;&gt;ExportButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PrevButton.Name" xml:space="preserve">
-    <value>PrevButton</value>
-  </data>
-  <data name="&gt;&gt;PrevButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;NextButton.Name" xml:space="preserve">
-    <value>NextButton</value>
-  </data>
-  <data name="&gt;&gt;NextButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label_ObjectName.Name" xml:space="preserve">
-    <value>Label_ObjectName</value>
-  </data>
-  <data name="&gt;&gt;Label_ObjectName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SearchBox.Name" xml:space="preserve">
-    <value>SearchBox</value>
-  </data>
-  <data name="&gt;&gt;SearchBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FindButton.Name" xml:space="preserve">
-    <value>FindButton</value>
-  </data>
-  <data name="&gt;&gt;FindButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
