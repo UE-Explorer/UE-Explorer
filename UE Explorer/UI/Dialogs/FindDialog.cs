@@ -7,9 +7,9 @@ namespace UEExplorer.UI.Dialogs
 
 	public partial class FindDialog : Form
 	{
-		private MyTextEditor _Editor;
+		private TextEditorPanel _Editor;
 
-		public FindDialog( MyTextEditor editor )
+		public FindDialog( TextEditorPanel editor )
 		{
 			_Editor = editor;
 

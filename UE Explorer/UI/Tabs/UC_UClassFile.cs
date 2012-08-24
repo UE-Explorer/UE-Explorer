@@ -12,7 +12,7 @@ namespace UEExplorer.UI.Tabs
 		public string FileName{ get; set; }
 
 		private System.Windows.Forms.Integration.ElementHost WPFHost;
-		private MyTextEditor myTextEditor1;
+		private TextEditorPanel myTextEditor1;
 		private TableLayoutPanel EditorLayout;
 
 		/*public class UCSyntax : ICSharpCode.AvalonEdit.Highlighting.IHighlightingDefinition
@@ -51,7 +51,7 @@ namespace UEExplorer.UI.Tabs
 		protected override void InitializeComponent()
 		{
 			this.WPFHost = new System.Windows.Forms.Integration.ElementHost();
-			this.myTextEditor1 = new UEExplorer.UI.Tabs.MyTextEditor();
+			this.myTextEditor1 = new UEExplorer.UI.Tabs.TextEditorPanel();
 			this.EditorLayout = new System.Windows.Forms.TableLayoutPanel();
 			this.EditorLayout.SuspendLayout();
 			this.SuspendLayout();
@@ -107,7 +107,7 @@ namespace UEExplorer.UI.Tabs
 	{
 		private static int _CurrentIndex;
 
-		public static void FindText( MyTextEditor editor, string text )
+		public static void FindText( TextEditorPanel editor, string text )
 		{
 			int fails = 0;
 			searchAgain:

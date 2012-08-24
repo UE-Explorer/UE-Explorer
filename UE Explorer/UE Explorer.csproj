@@ -176,8 +176,8 @@
     <Compile Include="UI\Tabs\UC_UClassFile.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Tabs\MyTextEditor.xaml.cs">
-      <DependentUpon>MyTextEditor.xaml</DependentUpon>
+    <Compile Include="UI\Tabs\TextEditorPanel.xaml.cs">
+      <DependentUpon>TextEditorPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Tabs\UC_Default.cs">
       <SubType>UserControl</SubType>
@@ -394,7 +394,7 @@
     <None Include="UE_ProgramLogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="UI\Tabs\MyTextEditor.xaml">
+    <Page Include="UI\Tabs\TextEditorPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -419,7 +419,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
