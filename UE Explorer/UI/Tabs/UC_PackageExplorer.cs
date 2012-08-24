@@ -897,6 +897,7 @@ namespace UEExplorer.UI.Tabs
 				(o => (
 					(o.ResistsInGroup()) || o.HasObjectFlag( ObjectFlagsLO.Automated )) 
 					&& o.ExportIndex > 0 
+					&& o.Outer != null
 				))
 			{
 				var groupNode = groups.Find( n => n.Text == obj.Outer.Name );

@@ -132,7 +132,7 @@
     <value>118, 29</value>
   </data>
   <data name="Num_NameIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 20</value>
+    <value>130, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Num_NameIndex.TabIndex" type="System.Int32, mscorlib">
@@ -157,7 +157,7 @@
     <value>118, 3</value>
   </data>
   <data name="Num_ObjectIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 20</value>
+    <value>130, 20</value>
   </data>
   <data name="Num_ObjectIndex.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1364,7 +1364,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAB8
-        EQAAAk1TRnQBSQFMAgEBCgEAAWQBBQFkAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        EQAAAk1TRnQBSQFMAgEBCgEAAWwBBQFsAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1799,10 +1799,10 @@
     <value>False</value>
   </data>
   <data name="WPFHost.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-5, 28</value>
+    <value>3, 28</value>
   </data>
   <data name="WPFHost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 515</value>
+    <value>724, 515</value>
   </data>
   <data name="WPFHost.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1929,7 +1929,7 @@
     <value>Yes</value>
   </data>
   <data name="ToolStrip_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 28</value>
+    <value>738, 28</value>
   </data>
   <data name="ToolStrip_Content.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1959,7 +1959,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="Panel_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 546</value>
+    <value>738, 546</value>
   </data>
   <data name="Panel_Content.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1989,7 +1989,7 @@
     <value>1</value>
   </data>
   <data name="UScriptLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1312, 546</value>
+    <value>1065, 546</value>
   </data>
   <data name="UScriptLayout.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2022,7 +2022,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1312, 546</value>
+    <value>1065, 546</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButton1.Name" xml:space="preserve">
     <value>toolStripDropDownButton1</value>
