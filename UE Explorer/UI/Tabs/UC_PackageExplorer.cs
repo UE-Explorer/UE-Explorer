@@ -699,7 +699,7 @@ namespace UEExplorer.UI.Tabs
 				var del = new CreateTableDelegate( CreateExportTable );
 				foreach( var t in _UnrealPackage.ExportTableList )
 				{
-					Invoke( del, t );
+					TreeView_Exports.Invoke( del, t );
 				}
 			}
 			else
@@ -1183,28 +1183,57 @@ namespace UEExplorer.UI.Tabs
 			Owner.Owner.LoadFile( FileName );
 		}
 
-		private void _OnClassesNodeSelected( object sender, TreeViewEventArgs e )
+		private void OutputNodeObject( TreeNode treeNode )
 		{
 			try
 			{
-				if( e.Node is IDecompileableNode )
+				var newTitle = String.Empty;
+				if( treeNode is IDecompileableNode )
 				{
-					var node = (IDecompileableNode)e.Node;
-					Label_ObjectName.Text = node.Text;
-					SetContentText( (TreeNode)node, node.Decompile() );
+					SetContentText( treeNode, ((IDecompileableNode)treeNode).Decompile() );
 
-					if( node is ClassNode && ((ClassNode)node).Object != null && ((ClassNode)node).Object.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
+					// Assemble a title
+					if( treeNode is IDecompileableObjectNode )
 					{
-						AddSerToolTipError( e.Node, ((ClassNode)node).Object ); 
+						UObject obj;
+						if( (obj = ((IDecompileableObjectNode)treeNode).Object as UObject) != null )
+						{
+							newTitle = obj.GetOuterGroup();
+							if( obj.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
+							{
+								AddSerToolTipError( treeNode, obj );
+							}
+						}
+						else
+						{
+							newTitle = treeNode.Text;
+						}
 					}
+					else
+					{
+						if( treeNode.Parent != null )
+						{
+							newTitle = treeNode.Parent.Text + "." + treeNode.Text;
+						}
+						else
+						{
+							newTitle = treeNode.Text;
+						}
+					}
+					Label_ObjectName.Text = newTitle;
 				}
 			}
 			catch( Exception except )
 			{
-				ExceptionDialog.Show( "An exception occurred while attempting to display content of node: " + e.Node.Text, except );
-				e.Node.ForeColor = Color.Red;
-				e.Node.ToolTipText = except.Message;
+				ExceptionDialog.Show( "An exception occurred while attempting to display content of node: " + treeNode.Text, except );
+				treeNode.ForeColor = Color.Red;
+				treeNode.ToolTipText = except.Message;
 			}
+		}
+
+		private void _OnClassesNodeSelected( object sender, TreeViewEventArgs e )
+		{
+			OutputNodeObject( e.Node );
 		}
 
 		private void AddSerToolTipError( TreeNode node, UObject errorObject )
@@ -1224,26 +1253,7 @@ namespace UEExplorer.UI.Tabs
 
 		private void _OnExportsNodeSelected( object sender, TreeViewEventArgs e )
 		{
-			try
-			{
-				if( e.Node is IDecompileableNode )
-				{
-					var node = (IDecompileableNode)e.Node;
-					Label_ObjectName.Text = node.Text;
-					SetContentText( (TreeNode)node, node.Decompile() );
-
-					if( ((ExportNode)node).Object != null && ((UObject)((ExportNode)node).Object).SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
-					{
-						AddSerToolTipError( e.Node, ((UObject)((ExportNode)node).Object) );
-					}
-				}
-			}
-			catch( Exception except )
-			{
-				ExceptionDialog.Show( "An exception occurred while attempting to display content of node: " + e.Node.Text, except );
-				e.Node.ForeColor = Color.Red;
-				e.Node.ToolTipText = except.Message;
-			}
+			OutputNodeObject( e.Node );
 		}
 
 		private void _OnClassesNodeExpand( object sender, TreeViewCancelEventArgs e )
