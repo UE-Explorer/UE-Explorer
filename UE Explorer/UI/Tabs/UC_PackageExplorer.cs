@@ -46,6 +46,9 @@ namespace UEExplorer.UI.Tabs
 						new System.Xml.XmlTextReader( langPath ), 
 						ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance 
 					);
+					myTextEditor1.textEditor.TextArea.SelectionChanged += TextArea_SelectionChanged;
+					myTextEditor1.searchWiki.Click += searchWiki_Click;
+					myTextEditor1.textEditor.ContextMenuOpening += new System.Windows.Controls.ContextMenuEventHandler( contextMenu_ContextMenuOpening );
 				}
 				catch( Exception e )
 				{
@@ -55,6 +58,33 @@ namespace UEExplorer.UI.Tabs
 
 			_Form = Owner.Owner;
 			base.TabCreated();
+		}
+
+		string GetSelection()
+		{
+			return myTextEditor1.textEditor.TextArea.Selection.GetText( myTextEditor1.textEditor.Document );
+		}
+
+		void contextMenu_ContextMenuOpening( object sender, System.Windows.Controls.ContextMenuEventArgs e )
+		{
+			myTextEditor1.searchWiki.Header = "Search UnrealWiki for \"" 
+				+  GetSelection()
+				+ "\"";
+		}
+
+		void searchWiki_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			System.Diagnostics.Process.Start( 
+				String.Format( 
+					"http://wiki.beyondunreal.com/?ns0=1&ns100=1&ns102=1&ns104=1&ns106=1&search={0}&title=Special%3ASearch&fulltext=Advanced+search&fulltext=Advanced+search",
+					GetSelection()
+				) 
+			);
+		}
+
+		void TextArea_SelectionChanged( object sender, EventArgs e )
+		{
+			myTextEditor1.textEditor.TextArea.Selection.GetText( myTextEditor1.textEditor.Document );
 		}
 
 		public void PostInitialize()
