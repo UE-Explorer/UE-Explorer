@@ -117,36 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\UE_ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NAME_IS" xml:space="preserve">
+    <value>Name is </value>
+  </data>
+  <data name="OBJECT_IS" xml:space="preserve">
+    <value>Object is </value>
   </data>
   <data name="Open_File" xml:space="preserve">
     <value>Open File</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="INVALID_NAME_INDEX" xml:space="preserve">
+    <value>Invalid Name index </value>
+  </data>
+  <data name="NOT_AVAILABLE" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
+    <value>Invalid Object index </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\UE_ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RegistryWarning" xml:space="preserve">
     <value>Enabling this will edit your registry file. 
 If you happen to move the "UE Explorer" folder, uninstall or update it, then please disable this before doing so!</value>
   </data>
-  <data name="Warning" xml:space="preserve">
-    <value>Warning</value>
-  </data>
-  <data name="NOT_AVAILABLE" xml:space="preserve">
-    <value>N/A</value>
-  </data>
   <data name="NO_OBJECT_WAS_FOUND" xml:space="preserve">
     <value>No Object was found.</value>
   </data>
-  <data name="OBJECT_IS" xml:space="preserve">
-    <value>Object is </value>
-  </data>
-  <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
-    <value>Invalid Object index </value>
-  </data>
-  <data name="INVALID_NAME_INDEX" xml:space="preserve">
-    <value>Invalid Name index </value>
-  </data>
-  <data name="NAME_IS" xml:space="preserve">
-    <value>Name is </value>
+  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

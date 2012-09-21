@@ -37,7 +37,6 @@
 			System.Windows.Forms.Label Label_LicenseeMode;
 			System.Windows.Forms.Label Label_Flags;
 			System.Windows.Forms.Label Label_Version;
-			System.Windows.Forms.Label label3;
 			System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
 			this.Panel_Content = new System.Windows.Forms.Panel();
 			this.panel4 = new System.Windows.Forms.Panel();
@@ -97,6 +96,7 @@
 			this.TabPage_Objects = new System.Windows.Forms.TabPage();
 			this.TabControl_Objects = new System.Windows.Forms.TabControl();
 			this.TabPage_Classes = new System.Windows.Forms.TabPage();
+			this._SearchIcon = new System.Windows.Forms.PictureBox();
 			this.TreeView_Classes = new System.Windows.Forms.TreeView();
 			this.FilterText = new System.Windows.Forms.TextBox();
 			this.TabPage_Content = new System.Windows.Forms.TabPage();
@@ -111,18 +111,19 @@
 			this.CompressedSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.ToolStrip_Main = new System.Windows.Forms.ToolStrip();
-			this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+			this._Tools_StripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
 			this.exportDecompiledClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportScriptClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ReloadButton = new System.Windows.Forms.ToolStripButton();
+			this.label3 = new System.Windows.Forms.Label();
+			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
 			UScriptLayout = new System.Windows.Forms.TableLayoutPanel();
 			label4 = new System.Windows.Forms.Label();
 			Label_DetectedBuild = new System.Windows.Forms.Label();
 			Label_LicenseeMode = new System.Windows.Forms.Label();
 			Label_Flags = new System.Windows.Forms.Label();
 			Label_Version = new System.Windows.Forms.Label();
-			label3 = new System.Windows.Forms.Label();
 			exportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			UScriptLayout.SuspendLayout();
 			this.Panel_Content.SuspendLayout();
@@ -147,6 +148,7 @@
 			this.TabPage_Objects.SuspendLayout();
 			this.TabControl_Objects.SuspendLayout();
 			this.TabPage_Classes.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this._SearchIcon)).BeginInit();
 			this.TabPage_Content.SuspendLayout();
 			this.TabPage_Deps.SuspendLayout();
 			this.TabPage_Chunks.SuspendLayout();
@@ -300,6 +302,7 @@
 			this.TabControl_General.Controls.Add(this.TabPage_Objects);
 			this.TabControl_General.Controls.Add(this.TabPage_Chunks);
 			this.TabControl_General.HotTrack = true;
+			this.TabControl_General.ImageList = this.VSIcons;
 			this.TabControl_General.Name = "TabControl_General";
 			this.TabControl_General.SelectedIndex = 0;
 			this.TabControl_General.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl_General_Selected);
@@ -563,6 +566,7 @@
 			this.TabControl_Tables.Controls.Add(this.TabPage_Imports);
 			this.TabControl_Tables.Controls.Add(this.TabPage_Generations);
 			resources.ApplyResources(this.TabControl_Tables, "TabControl_Tables");
+			this.TabControl_Tables.ImageList = this.VSIcons;
 			this.TabControl_Tables.Name = "TabControl_Tables";
 			this.TabControl_Tables.SelectedIndex = 0;
 			this.TabControl_Tables.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl_Tables_Selected);
@@ -644,6 +648,13 @@
 			this.VSIcons.Images.SetKeyName(7, "UFunction");
 			this.VSIcons.Images.SetKeyName(8, "UState");
 			this.VSIcons.Images.SetKeyName(9, "List");
+			this.VSIcons.Images.SetKeyName(10, "text");
+			this.VSIcons.Images.SetKeyName(11, "tree");
+			this.VSIcons.Images.SetKeyName(12, "object");
+			this.VSIcons.Images.SetKeyName(13, "multiple");
+			this.VSIcons.Images.SetKeyName(14, "import");
+			this.VSIcons.Images.SetKeyName(15, "export");
+			this.VSIcons.Images.SetKeyName(16, "text-left");
 			// 
 			// TabPage_Imports
 			// 
@@ -726,17 +737,25 @@
 			this.TabControl_Objects.Controls.Add(this.TabPage_Content);
 			this.TabControl_Objects.Controls.Add(this.TabPage_Deps);
 			resources.ApplyResources(this.TabControl_Objects, "TabControl_Objects");
+			this.TabControl_Objects.ImageList = this.VSIcons;
 			this.TabControl_Objects.Name = "TabControl_Objects";
 			this.TabControl_Objects.SelectedIndex = 0;
 			// 
 			// TabPage_Classes
 			// 
 			this.TabPage_Classes.BackColor = System.Drawing.Color.White;
+			this.TabPage_Classes.Controls.Add(this._SearchIcon);
 			this.TabPage_Classes.Controls.Add(this.TreeView_Classes);
-			this.TabPage_Classes.Controls.Add(label3);
 			this.TabPage_Classes.Controls.Add(this.FilterText);
 			resources.ApplyResources(this.TabPage_Classes, "TabPage_Classes");
 			this.TabPage_Classes.Name = "TabPage_Classes";
+			// 
+			// _SearchIcon
+			// 
+			resources.ApplyResources(this._SearchIcon, "_SearchIcon");
+			this._SearchIcon.BackgroundImage = global::UEExplorer.Properties.Resources.search;
+			this._SearchIcon.Name = "_SearchIcon";
+			this._SearchIcon.TabStop = false;
 			// 
 			// TreeView_Classes
 			// 
@@ -748,12 +767,6 @@
 			this.TreeView_Classes.Name = "TreeView_Classes";
 			this.TreeView_Classes.ShowNodeToolTips = true;
 			this.TreeView_Classes.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Classes_NodeMouseClick);
-			// 
-			// label3
-			// 
-			resources.ApplyResources(label3, "label3");
-			label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-			label3.Name = "label3";
 			// 
 			// FilterText
 			// 
@@ -867,22 +880,22 @@
 			resources.ApplyResources(this.ToolStrip_Main, "ToolStrip_Main");
 			this.ToolStrip_Main.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.ToolStrip_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1,
+            this._Tools_StripDropDownButton,
             this.ReloadButton});
 			this.ToolStrip_Main.Name = "ToolStrip_Main";
 			this.ToolStrip_Main.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.ToolStrip_Main.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStrip_Content_Paint);
 			// 
-			// toolStripDropDownButton1
+			// _Tools_StripDropDownButton
 			// 
-			this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this._Tools_StripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this._Tools_StripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             exportingToolStripMenuItem,
             this.viewBufferToolStripMenuItem});
-			this.toolStripDropDownButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-			this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-			this.toolStripDropDownButton1.Padding = new System.Windows.Forms.Padding(3);
-			resources.ApplyResources(this.toolStripDropDownButton1, "toolStripDropDownButton1");
+			this._Tools_StripDropDownButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+			this._Tools_StripDropDownButton.Name = "_Tools_StripDropDownButton";
+			this._Tools_StripDropDownButton.Padding = new System.Windows.Forms.Padding(3);
+			resources.ApplyResources(this._Tools_StripDropDownButton, "_Tools_StripDropDownButton");
 			// 
 			// exportingToolStripMenuItem
 			// 
@@ -923,6 +936,17 @@
 			resources.ApplyResources(this.ReloadButton, "ReloadButton");
 			this.ReloadButton.Click += new System.EventHandler(this.ReloadButton_Click);
 			// 
+			// label3
+			// 
+			resources.ApplyResources(this.label3, "label3");
+			this.label3.Name = "label3";
+			// 
+			// toolStripButton1
+			// 
+			this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
+			this.toolStripButton1.Name = "toolStripButton1";
+			// 
 			// UC_PackageExplorer
 			// 
 			resources.ApplyResources(this, "$this");
@@ -957,6 +981,7 @@
 			this.TabControl_Objects.ResumeLayout(false);
 			this.TabPage_Classes.ResumeLayout(false);
 			this.TabPage_Classes.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this._SearchIcon)).EndInit();
 			this.TabPage_Content.ResumeLayout(false);
 			this.TabPage_Deps.ResumeLayout(false);
 			this.TabPage_Chunks.ResumeLayout(false);
@@ -991,7 +1016,7 @@
 		internal System.Windows.Forms.DataGridView DataGridView_Flags;
 		private System.Windows.Forms.Panel Panel_Main;
 		private System.Windows.Forms.ToolStrip ToolStrip_Main;
-		private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+		private System.Windows.Forms.ToolStripDropDownButton _Tools_StripDropDownButton;
 		public System.Windows.Forms.ToolStripMenuItem exportDecompiledClassesToolStripMenuItem;
 		public System.Windows.Forms.ToolStripMenuItem exportScriptClassesToolStripMenuItem;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Flag;
@@ -1048,6 +1073,9 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.PictureBox _SearchIcon;
+		private System.Windows.Forms.ToolStripButton toolStripButton1;
+		private System.Windows.Forms.Label label3;
 
 
 	}
