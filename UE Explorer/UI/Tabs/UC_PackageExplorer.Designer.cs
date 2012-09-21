@@ -41,7 +41,7 @@
 			this.Panel_Content = new System.Windows.Forms.Panel();
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.WPFHost = new System.Windows.Forms.Integration.ElementHost();
-			this.myTextEditor1 = new UEExplorer.UI.Tabs.MyTextEditor();
+			this.TextEditorPanel = new UEExplorer.UI.Tabs.TextEditorPanel();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.ToolStrip_Content = new System.Windows.Forms.ToolStrip();
 			this.PrevButton = new System.Windows.Forms.ToolStripButton();
@@ -183,7 +183,7 @@
 			// 
 			resources.ApplyResources(this.WPFHost, "WPFHost");
 			this.WPFHost.Name = "WPFHost";
-			this.WPFHost.Child = this.myTextEditor1;
+			this.WPFHost.Child = this.TextEditorPanel;
 			// 
 			// panel3
 			// 
@@ -1037,7 +1037,7 @@
 		private System.Windows.Forms.ToolStripButton NextButton;
 		private System.Windows.Forms.ToolStripButton PrevButton;
 		private System.Windows.Forms.Integration.ElementHost WPFHost;
-		private MyTextEditor myTextEditor1;
+		private TextEditorPanel TextEditorPanel;
 		internal System.Windows.Forms.TabPage TabPage_Generations;
 		private System.Windows.Forms.DataGridView DataGridView_GenerationsTable;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;

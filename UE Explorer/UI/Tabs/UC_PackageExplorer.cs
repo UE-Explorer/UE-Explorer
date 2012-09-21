@@ -42,10 +42,18 @@ namespace UEExplorer.UI.Tabs
 			{
 				try
 				{
-					myTextEditor1.textEditor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load( 
+					TextEditorPanel.textEditor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load( 
 						new System.Xml.XmlTextReader( langPath ), 
 						ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance 
 					);
+					TextEditorPanel.searchWiki.Click += searchWiki_Click;
+					TextEditorPanel.textEditor.ContextMenuOpening += new System.Windows.Controls.ContextMenuEventHandler( contextMenu_ContextMenuOpening );
+					TextEditorPanel.copy.Click += copy_Click;
+
+					// Fold all { } blocks
+					//var foldingManager = ICSharpCode.AvalonEdit.Folding.FoldingManager.Install(myTextEditor1.textEditor.TextArea);
+					//var foldingStrategy = new ICSharpCode.AvalonEdit.Folding.XmlFoldingStrategy();
+					//foldingStrategy.UpdateFoldings(foldingManager, myTextEditor1.textEditor.Document);
 				}
 				catch( Exception e )
 				{
@@ -55,6 +63,41 @@ namespace UEExplorer.UI.Tabs
 
 			_Form = Owner.Owner;
 			base.TabCreated();
+		}
+
+		void copy_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			TextEditorPanel.textEditor.Copy();
+			//System.Windows.Clipboard.SetText( GetSelection() );
+		}
+
+		string GetSelection()
+		{
+			return TextEditorPanel.textEditor.TextArea.Selection.GetText( TextEditorPanel.textEditor.Document );
+		}
+
+		void contextMenu_ContextMenuOpening( object sender, System.Windows.Controls.ContextMenuEventArgs e )
+		{
+			if( TextEditorPanel.textEditor.TextArea.Selection.Length == 0 )
+			{
+				TextEditorPanel.searchWiki.IsEnabled = false;
+				return;
+			}
+			var selection = GetSelection();
+			//myTextEditor1.searchWiki.IsEnabled = !selection.Contains( '\n' );
+			TextEditorPanel.searchWiki.Header = "Search UnrealWiki for \"" 
+				+  selection.Substring( 0, 64 )
+				+ "\"";
+		}
+
+		void searchWiki_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			System.Diagnostics.Process.Start( 
+				String.Format( 
+					"http://wiki.beyondunreal.com/?ns0=1&ns100=1&ns102=1&ns104=1&ns106=1&search={0}&title=Special%3ASearch&fulltext=Advanced+search&fulltext=Advanced+search",
+					GetSelection()
+				) 
+			);
 		}
 
 		public void PostInitialize()
@@ -260,7 +303,7 @@ namespace UEExplorer.UI.Tabs
 			};
 			if( sfd.ShowDialog() == DialogResult.OK )
 			{
-				File.WriteAllText( sfd.FileName, myTextEditor1.textEditor.Text );
+				File.WriteAllText( sfd.FileName, TextEditorPanel.textEditor.Text );
 			}
 		}	
 
@@ -1696,30 +1739,30 @@ namespace UEExplorer.UI.Tabs
 
 		private void ToolStripButton_Find_Click( object sender, EventArgs e )
 		{
-			if( this.myTextEditor1 == null )
+			if( this.TextEditorPanel == null )
 			{
 				return;
 			}
-			EditorUtil.FindText( this.myTextEditor1, SearchBox.Text );
+			EditorUtil.FindText( this.TextEditorPanel, SearchBox.Text );
 		}
 
 		private void SearchBox_KeyPress_1( object sender, KeyPressEventArgs e )
 		{
-			if( this.myTextEditor1 == null )
+			if( this.TextEditorPanel == null )
 			{
 				return;
 			}
 
 			if( e.KeyChar == '\r' )
 			{
-				EditorUtil.FindText( this.myTextEditor1, SearchBox.Text );	  
+				EditorUtil.FindText( this.TextEditorPanel, SearchBox.Text );	  
 				e.Handled = true;
 			}
 		}
 
 		public override void TabFind()
 		{
-			new FindDialog( this.myTextEditor1 ).Show();
+			new FindDialog( this.TextEditorPanel ).Show();
 		}
 
 		private struct BufferData
@@ -1745,9 +1788,9 @@ namespace UEExplorer.UI.Tabs
 			}
 
 			//ScriptPage.Document.ClearAll();
-			myTextEditor1.textEditor.Clear();
-			myTextEditor1.textEditor.Text = content;
-			myTextEditor1.textEditor.ScrollToHome();
+			TextEditorPanel.textEditor.Clear();
+			TextEditorPanel.textEditor.Text = content;
+			TextEditorPanel.textEditor.ScrollToHome();
 			//ScriptPage.Document.Text = content;
 			//ScriptPage.ScrollIntoView( 0 );	
 
