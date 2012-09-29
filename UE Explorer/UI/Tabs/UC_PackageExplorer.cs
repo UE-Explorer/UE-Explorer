@@ -1369,16 +1369,16 @@ namespace UEExplorer.UI.Tabs
 			{
 				if( e.Node is IDecompileableNode )
 				{
-					#if DEBUG
+					popupssuck.Items.Add( "View Object" );
 					var decompileableObjectNode = e.Node as IDecompileableObjectNode;
 					if( decompileableObjectNode != null && (decompileableObjectNode.Object is IUnrealDeserializableObject)  )
 					{
-						popupssuck.Items.Add( "Deserialize - Link" );
-					}
-					#endif
-
-
-					popupssuck.Items.Add( "View Object" );
+						popupssuck.Items.Add( "View Object Properties" );
+						#if DEBUG
+							popupssuck.Items.Add( "Deserialize - Link" );
+						#endif
+					}	
+					
 					if( e.Node is ObjectNode )
 					{
 						if( ((ObjectNode)e.Node).Object is UMetaData  )
@@ -1582,6 +1582,13 @@ namespace UEExplorer.UI.Tabs
 						}
 						break;
 
+					case "View Object Properties":
+						var propDialog = new PropertiesDialog();
+						propDialog.ObjectLabel.Text = node.Text;
+						propDialog.ObjectPropertiesGrid.SelectedObject = node.Object;
+						propDialog.ShowDialog( this );
+						break;
+
 #if DEBUG
 					case "Deserialize - Link":
 						if( node is IDecompileableNode )
@@ -1776,9 +1783,7 @@ namespace UEExplorer.UI.Tabs
 
 		private void SetContentText( TreeNode node, string content, bool skip = false )
 		{			
-			content = content.TrimEnd( '\r', '\n' );
-			content = content.TrimStart( '\r', '\n' );
-
+			content = content.TrimStart( '\r', '\n' ).TrimEnd( '\r', '\n' );
 			if( content.Length > 0 )
 			{
 				FindButton.Enabled = true;
