@@ -727,13 +727,11 @@ namespace UEExplorer.UI.Tabs
 			}
 			else
 			{
-				TreeView_Exports.BeginUpdate();
 				DataGridView_NameTable.Rows.Add( ((UnrealNameTable)nameTable).Name, String.Format( "{0:x4}", (nameTable as UnrealNameTable).Flags ) );
-				TreeView_Exports.EndUpdate();
 			}
 		}
 
-		private TreeNode[] _TempNodes = null;
+		private TreeNode[] _ExportNodes = null;
 		private int _NIndex = 0;
 		protected void CreateExportTable( object exportTable )
 		{
@@ -749,7 +747,7 @@ namespace UEExplorer.UI.Tabs
 			{
 				if( _NIndex == 0 )
 				{
-				    _TempNodes = new TreeNode[_UnrealPackage.ExportTableList.Count];
+				    _ExportNodes = new TreeNode[_UnrealPackage.ExportTableList.Count];
 				}
 
 				var exp = exportTable as UnrealExportTable;
@@ -757,7 +755,7 @@ namespace UEExplorer.UI.Tabs
 				SetImageKeyForObject( exp, node );
 
 				node.SelectedImageKey = node.ImageKey;
-				_TempNodes[_NIndex ++] = node;
+				_ExportNodes[_NIndex ++] = node;
 
 				if( exp.Object != null && exp.Object.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
 				{
@@ -772,9 +770,9 @@ namespace UEExplorer.UI.Tabs
 				if( _NIndex == _UnrealPackage.ExportTableList.Count )
 				{
 					TreeView_Exports.BeginUpdate();
-				    TreeView_Exports.Nodes.AddRange( _TempNodes );
+				    TreeView_Exports.Nodes.AddRange( _ExportNodes );
 					TreeView_Exports.EndUpdate();
-				    _TempNodes = null;
+					//_ExportNodes = null;
 				    _NIndex = 0;
 				}
 			}
@@ -802,7 +800,7 @@ namespace UEExplorer.UI.Tabs
 			{
 				if( _NIndex == 0 )
 				{
-					_TempNodes = new TreeNode[_UnrealPackage.ImportTableList.Count];
+					_ExportNodes = new TreeNode[_UnrealPackage.ImportTableList.Count];
 				}
 
 				var imp = (importTable as UnrealImportTable);
@@ -811,7 +809,7 @@ namespace UEExplorer.UI.Tabs
 				    Table = imp,
 				    Text = imp.ObjectName
 				};
-				_TempNodes[_NIndex ++] = node;
+				_ExportNodes[_NIndex ++] = node;
 
 				SetImageKeyForObject( imp, node );
 
@@ -819,9 +817,9 @@ namespace UEExplorer.UI.Tabs
 				if( _NIndex == _UnrealPackage.ImportTableList.Count )
 				{
 					TreeView_Exports.BeginUpdate();
-					TreeView_Imports.Nodes.AddRange( _TempNodes );
+					TreeView_Imports.Nodes.AddRange( _ExportNodes );
 					TreeView_Exports.EndUpdate();
-					_TempNodes = null;
+					_ExportNodes = null;
 					_NIndex = 0;
 				}
 			}
@@ -2000,6 +1998,35 @@ namespace UEExplorer.UI.Tabs
 			//    TreeView_Deps.Font, borderPen.Brush,
 			//    e.Bounds.Right - 32, ((float)(e.Bounds.Top - e.Bounds.Bottom))*0.5f	
 			//);
+		}
+
+		private void FilterByClassCheckBox( object sender, EventArgs e )
+		{
+			var checkBox = ((CheckBox)sender);
+			if( !checkBox.Checked )
+			{
+				TreeView_Exports.BeginUpdate();
+				List<TreeNode> removedNodes = new List<TreeNode>();
+				for( int i = 0; i < TreeView_Exports.Nodes.Count; ++ i )
+				{
+					if( TreeView_Exports.Nodes[i].ImageKey == checkBox.ImageKey )
+					{
+						removedNodes.Add( TreeView_Exports.Nodes[i] );
+						TreeView_Exports.Nodes.RemoveAt( i );
+					}
+				}
+				checkBox.Tag = removedNodes;
+				TreeView_Exports.EndUpdate();
+			}
+			else
+			{
+				if( checkBox.Tag == null )
+				{
+					checkBox.Checked = false;
+					return;
+				}
+				TreeView_Exports.Nodes.AddRange( (checkBox.Tag as List<TreeNode>).ToArray() );
+			}		
 		}
 	}
 
