@@ -590,7 +590,7 @@ namespace UEExplorer.UI.Tabs
 				}
 			}
 
-			if( _UnrealPackage.Version >= UnrealPackage.VCookedPackages )
+			if( _UnrealPackage.Version >= UnrealPackage.VCOOKEDPACKAGES )
 			{
 				if( _UnrealPackage.CookerVersion > 0 )
 				{
@@ -610,7 +610,7 @@ namespace UEExplorer.UI.Tabs
 			    "ServerSideOnly " + (_UnrealPackage.HasPackageFlag(PackageFlags.ServerSideOnly) ? "True" : "False")
 			};
 
-			if( _UnrealPackage.Version >= UnrealPackage.VCookedPackages )
+			if( _UnrealPackage.Version >= UnrealPackage.VCOOKEDPACKAGES )
 			{
 				flags.Add( "Cooked " + _UnrealPackage.IsCooked().ToString() );
 				flags.Add( "Compressed " + _UnrealPackage.HasPackageFlag( PackageFlags.Compressed ) );
@@ -1644,10 +1644,10 @@ namespace UEExplorer.UI.Tabs
 							codeDec.InitDecompile();
 
 							string content = String.Empty;
-							while( codeDec.CurrentIndex + 1 < codeDec.TokensCollection.Count )
+							while( codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count )
 							{
 								var t = codeDec.NextToken;
-								int orgIndex = codeDec.CurrentIndex;
+								int orgIndex = codeDec.CurrentTokenIndex;
 								string output;
 								bool breakOut = false;
 								try
@@ -1660,15 +1660,15 @@ namespace UEExplorer.UI.Tabs
 									breakOut = true;
 								}
 								string chain = t.GetType().Name + "(" + t.Size + ")";
-								int inlinedTokens = codeDec.CurrentIndex - orgIndex;
+								int inlinedTokens = codeDec.CurrentTokenIndex - orgIndex;
 								if( inlinedTokens > 0 )
 								{
 									++ orgIndex;
 									for( int i = 0; i < inlinedTokens; ++ i )
 									{
 										chain += " -> " 
-											+ codeDec.TokensCollection[orgIndex + i].GetType().Name 
-											+ "(" + codeDec.TokensCollection[orgIndex + i].Size + ")";
+											+ codeDec.DeserializedTokens[orgIndex + i].GetType().Name 
+											+ "(" + codeDec.DeserializedTokens[orgIndex + i].Size + ")";
 									}
 								}
 
@@ -1790,12 +1790,9 @@ namespace UEExplorer.UI.Tabs
 				WPFHost.Enabled = true;
 			}
 
-			//ScriptPage.Document.ClearAll();
-			TextEditorPanel.textEditor.Clear();
+			//TextEditorPanel.textEditor.Clear();
 			TextEditorPanel.textEditor.Text = content;
 			TextEditorPanel.textEditor.ScrollToHome();
-			//ScriptPage.Document.Text = content;
-			//ScriptPage.ScrollIntoView( 0 );	
 
 			if( skip )
 				return;
