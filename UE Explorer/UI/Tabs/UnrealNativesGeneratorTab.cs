@@ -77,10 +77,10 @@ namespace UEExplorer.UI.Tabs
 
 				foreach( UFunction Func in NPkg.ObjectsList.OfType<UFunction>() )
 				{
-					if( Func.HasFunctionFlag( FunctionFlags.Native ) && Func.iNative > 0 )
+					if( Func.HasFunctionFlag( FunctionFlags.Native ) && Func.NativeToken > 0 )
 					{			
 						NativeTable NT = new NativeTable();
-						NT.ByteToken = Func.iNative;
+						NT.ByteToken = Func.NativeToken;
 						if( Func.IsOperator() )
 						{				
 							if( Func.IsPre() )

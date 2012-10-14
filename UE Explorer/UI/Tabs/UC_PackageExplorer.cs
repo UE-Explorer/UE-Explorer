@@ -311,11 +311,11 @@ namespace UEExplorer.UI.Tabs
 		{
 			public new UClass Object
 			{
-				get{ return _Object as UClass; }
-				set{ _Object = value; }
+				get{ return Object as UClass; }
+				set{ Object = value; }
 			}
 
-			public ClassNode( IUnrealDecompileable objectRef ) : base( objectRef )
+			public ClassNode( IUnrealDecompilable objectRef ) : base( objectRef )
 			{
 				Nodes.Add( "DUMMYNODE" );
 			}
@@ -331,9 +331,9 @@ namespace UEExplorer.UI.Tabs
 			}
 		}
 
-		internal class ExportNode : UnrealTableNode, IDecompileableObjectNode
+		internal class ExportNode : UnrealTableNode, IDecompilableObjectNode
 		{
-			public IUnrealDecompileable Object
+			public IUnrealDecompilable Object
 			{
 				get{ return Table.Object; }
 				set{ Table.Object = value as UObject; }
@@ -1229,15 +1229,15 @@ namespace UEExplorer.UI.Tabs
 			try
 			{
 				var newTitle = String.Empty;
-				if( treeNode is IDecompileableNode )
+				if( treeNode is IDecompilableNode )
 				{
-					SetContentText( treeNode, ((IDecompileableNode)treeNode).Decompile() );
+					SetContentText( treeNode, ((IDecompilableNode)treeNode).Decompile() );
 
 					// Assemble a title
-					if( treeNode is IDecompileableObjectNode )
+					if( treeNode is IDecompilableObjectNode )
 					{
 						UObject obj;
-						if( (obj = ((IDecompileableObjectNode)treeNode).Object as UObject) != null )
+						if( (obj = ((IDecompilableObjectNode)treeNode).Object as UObject) != null )
 						{
 							newTitle = obj.GetOuterGroup();
 							if( obj.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
@@ -1365,10 +1365,10 @@ namespace UEExplorer.UI.Tabs
 			}
 			else
 			{
-				if( e.Node is IDecompileableNode )
+				if( e.Node is IDecompilableNode )
 				{
 					popupssuck.Items.Add( "View Object" );
-					var decompileableObjectNode = e.Node as IDecompileableObjectNode;
+					var decompileableObjectNode = e.Node as IDecompilableObjectNode;
 					if( decompileableObjectNode != null && (decompileableObjectNode.Object is IUnrealDeserializableObject)  )
 					{
 						popupssuck.Items.Add( "View Object Properties" );
@@ -1416,7 +1416,7 @@ namespace UEExplorer.UI.Tabs
 				}
 			}
 
-			if( e.Node is IDecompileableObjectNode )
+			if( e.Node is IDecompilableObjectNode )
 			{
 				popupssuck.Items.Add( "View Buffer" );
 			}
@@ -1452,7 +1452,7 @@ namespace UEExplorer.UI.Tabs
 			}	
 		}
 
-		private void PerformNodeAction( IDecompileableObjectNode node, string action )
+		private void PerformNodeAction( IDecompilableObjectNode node, string action )
 		{
 			if( node == null )
 				return;
@@ -1573,7 +1573,7 @@ namespace UEExplorer.UI.Tabs
 					}						
 
 					case "View Object":
-						if( node is IDecompileableNode )
+						if( node is IDecompilableNode )
 						{
 							Label_ObjectName.Text = node.Text;
 							SetContentText( node as TreeNode, node.Decompile() );
@@ -1589,7 +1589,7 @@ namespace UEExplorer.UI.Tabs
 
 #if DEBUG
 					case "Deserialize - Link":
-						if( node is IDecompileableNode )
+						if( node is IDecompilableNode )
 						{
 							Label_ObjectName.Text = node.Text;
 
