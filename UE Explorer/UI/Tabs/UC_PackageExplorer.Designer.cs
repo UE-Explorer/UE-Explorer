@@ -110,6 +110,7 @@
 			this.TreeView_Classes = new System.Windows.Forms.TreeView();
 			this.FilterText = new System.Windows.Forms.TextBox();
 			this.TabPage_Content = new System.Windows.Forms.TabPage();
+			this.Button_Export = new System.Windows.Forms.Button();
 			this.TreeView_Content = new System.Windows.Forms.TreeView();
 			this.TabPage_Deps = new System.Windows.Forms.TabPage();
 			this.TreeView_Deps = new System.Windows.Forms.TreeView();
@@ -895,9 +896,17 @@
 			// TabPage_Content
 			// 
 			this.TabPage_Content.BackColor = System.Drawing.Color.White;
+			this.TabPage_Content.Controls.Add(this.Button_Export);
 			this.TabPage_Content.Controls.Add(this.TreeView_Content);
 			resources.ApplyResources(this.TabPage_Content, "TabPage_Content");
 			this.TabPage_Content.Name = "TabPage_Content";
+			// 
+			// Button_Export
+			// 
+			resources.ApplyResources(this.Button_Export, "Button_Export");
+			this.Button_Export.Name = "Button_Export";
+			this.Button_Export.UseVisualStyleBackColor = true;
+			this.Button_Export.Click += new System.EventHandler(this.Button_Export_Click);
 			// 
 			// TreeView_Content
 			// 
@@ -905,6 +914,7 @@
 			this.TreeView_Content.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.TreeView_Content.HideSelection = false;
 			this.TreeView_Content.Name = "TreeView_Content";
+			this.TreeView_Content.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_Content_AfterSelect);
 			this.TreeView_Content.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Content_NodeMouseClick);
 			// 
 			// TabPage_Deps
@@ -1204,7 +1214,6 @@
 		private System.Windows.Forms.CheckBox checkBox5;
 		private System.Windows.Forms.CheckBox checkBox4;
 		private System.Windows.Forms.CheckBox checkBox3;
-
-
+		internal System.Windows.Forms.Button Button_Export;
 	}
 }

@@ -90,7 +90,7 @@
             this.ProgressLabel,
             this.SelectedNativeTable,
             this.Platform});
-			this.UEStatusStrip.Location = new System.Drawing.Point(0, 540);
+			this.UEStatusStrip.Location = new System.Drawing.Point(0, 519);
 			this.UEStatusStrip.Name = "UEStatusStrip";
 			this.UEStatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
 			this.UEStatusStrip.Size = new System.Drawing.Size(929, 22);
@@ -172,7 +172,7 @@
 			this.TabComponentsStrip.SelectedColorStart = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
 			this.TabComponentsStrip.SelectedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
 			this.TabComponentsStrip.SelectedItem = this.tabStripItem2;
-			this.TabComponentsStrip.Size = new System.Drawing.Size(929, 540);
+			this.TabComponentsStrip.Size = new System.Drawing.Size(929, 519);
 			this.TabComponentsStrip.TabIndex = 1;
 			this.TabComponentsStrip.Text = "TabComponents";
 			this.TabComponentsStrip.Visible = false;
@@ -419,7 +419,7 @@
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
 			this.BackgroundImage = global::UEExplorer.Properties.Resources.UE_ProgramLogo;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.ClientSize = new System.Drawing.Size(929, 562);
+			this.ClientSize = new System.Drawing.Size(929, 541);
 			this.Controls.Add(this.TabComponentsStrip);
 			this.Controls.Add(this.UEStatusStrip);
 			this.DoubleBuffered = true;
@@ -428,6 +428,7 @@
 			this.Menu = this.mainMenu1;
 			this.MinimumSize = new System.Drawing.Size(700, 600);
 			this.Name = "UEExplorer_Form";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UEExplorer_Form_FormClosing);
 			this.Shown += new System.EventHandler(this.Unreal_Explorer_Form_Shown);
 			this.DragDrop += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragDrop);

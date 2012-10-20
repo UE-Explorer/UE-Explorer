@@ -955,7 +955,6 @@ namespace UEExplorer.UI.Tabs
 			}
 		}
 
-		// Really ugly hardcoded way to sort nodes by outer.
 		protected void CreateContentList()
 		{
 			if( _UnrealPackage.ObjectsList == null || _UnrealPackage.ObjectsList.Count == 0 )
@@ -964,179 +963,24 @@ namespace UEExplorer.UI.Tabs
 				return;
 			}
 
-			// Find all content.
-			var content = _UnrealPackage.ObjectsList.Where( obj => obj is UContent ).ToList();
-
-			if( content.Count == 0 )
+			var groups = new List<ObjectNode>();
+			foreach( var obj in _UnrealPackage.ObjectsList.Where
+				(o => (
+					(o.ResistsInGroup()) || o.HasObjectFlag( ObjectFlagsLO.Automated )) 
+					&& o.ExportIndex > 0 
+					&& o.Outer != null
+				))
 			{
-				TabControl_Objects.Controls.Remove( TabPage_Content );
-				return;
-			}
-
-			// Create the package and group nodes.
-			var nodes = TreeView_Content.Nodes;
-			foreach( UObject Object in content )
-			{	
-				if( Object.ExportIndex > 0 && Object.Outer != null )
+				var groupNode = groups.Find( n => n.Text == obj.Outer.Name );
+				if( groupNode == null )
 				{
-					ObjectNode package = null;
-					if( Object.Outer.Outer != null )
-					{	
-						bool breakout = false;
-						foreach( ObjectNode node in nodes )
-						{
-							if( node.Text == Object.Outer.Outer.Name )
-							{
-								package = node;
-								breakout = true;
-								break;
-							}
-						}
-
-						if( !breakout )
-						{
-							package = new ObjectNode( Object );
-							package.Text = Object.Outer.Outer.Name;
-							nodes.Add( package );
-						}
-					}
-					else
-					{
-						bool breakout = false;
-						foreach( ObjectNode node in nodes )
-						{
-							if( node.Text == Object.Package.PackageName )
-							{
-								package = node;
-								breakout = true;
-								break;
-							}
-						}
-
-						if( !breakout )
-						{
-							package = new ObjectNode( Object );
-							package.Text = Object.Package.PackageName;
-							nodes.Add( package );
-						}
-					}
-
-					if( package != null )
-					{
-						bool breakout = false;
-						foreach( ObjectNode node in package.Nodes )
-						{
-							if( node.Text == Object.Outer.Name )
-							{
-								breakout = true;
-								break;
-							}
-						}
-						if( !breakout )
-						{
-							// add group.
-							ObjectNode objn = new ObjectNode( Object );
-							objn.Text = Object.Outer.Name;
-							package.Nodes.Add( objn );
-						}
-					}
-					else
-					{
-						bool breakout = false;
-						foreach( ObjectNode node in nodes )
-						{
-							if( node.Text == Object.Outer.Name )
-							{
-								breakout = true;
-								break;
-							}
-						}
-
-						if( !breakout )
-						{
-							// add package because no group was found.
-							ObjectNode objn = new ObjectNode( Object );
-							objn.Text = Object.Outer.Name;
-							nodes.Add( objn );
-						}
-					}
+					groupNode = new ObjectNode( obj.Outer ) { Text = obj.Outer.Name };
+					groups.Add( groupNode );
 				}
+				groupNode.Nodes.Add( new ObjectNode( obj ){Text = obj.Name} );
 			}
 
-			// Add objects to the group/package nodes.
-			foreach( UObject Object in content )
-			{	
-				if( Object.ExportIndex > 0 && Object.Outer != null )
-				{
-					if( Object.Outer.Outer != null )
-					{
-						bool breakout = false;
-						foreach( ObjectNode node in nodes )
-						{
-							if( node.Text == Object.Outer.Outer.Name )
-							{
-								foreach( ObjectNode groupnode in node.Nodes )
-								{
-									if( Object.Outer.Name == groupnode.Text )
-									{
-										ObjectNode objn = new ObjectNode( Object );
-										objn.Text = Object.Name;
-										groupnode.Nodes.Add( objn );
-										breakout = true;
-										break;
-									}
-								}
-
-								if( breakout )
-								{
-									break;
-								}
-							}
-						}
-						continue;
-					}
-					else
-					{
-						bool breakout = false;
-						foreach( ObjectNode node in nodes )
-						{
-							if( node.Text == Object.Package.PackageName )
-							{
-								foreach( ObjectNode groupnode in node.Nodes )
-								{
-									if( Object.Outer.Name == groupnode.Text )
-									{
-										ObjectNode objn = new ObjectNode( Object );
-										objn.Text = Object.Name;
-										groupnode.Nodes.Add( objn );
-										breakout = true;
-										break;
-									}
-								}
-
-								if( breakout )
-								{
-									break;
-								}
-							}
-						}
-						continue;
-					}
-					/*else
-					{
-						foreach( ObjectNode node in nodes )
-						{
-							if( node.Text == Object.Outer.Name )
-							{
-								node.Nodes.Add( Object.Name );
-								break;
-							}
-						}
-					}*/
-					//continue;
-				}			
-			}
-
+			TreeView_Content.Nodes.AddRange( groups.ToArray() );
 			if( TreeView_Content.Nodes.Count == 0 )
 			{
 				TabControl_Objects.Controls.Remove( TabPage_Content );
@@ -1336,12 +1180,22 @@ namespace UEExplorer.UI.Tabs
 			ShowNodeContextMenuStrip( TreeView_Exports, e, _OnExportsItemClicked );
 		}
 
+		private bool _SuppressNodeSelect = false;
 		private void TreeView_Content_NodeMouseClick( object sender, TreeNodeMouseClickEventArgs e )
 		{
-			if( e.Button != MouseButtons.Right ) 
-				return;
+			switch( e.Button )
+			{
+				case System.Windows.Forms.MouseButtons.Left:	
+					//PerformNodeAction( e.Node as IDecompileableObjectNode, "View Object" );
+					break;
 
-			ShowNodeContextMenuStrip( TreeView_Content, e, _OnContentItemClicked );
+				case System.Windows.Forms.MouseButtons.Right:
+					_SuppressNodeSelect = true;
+					ShowNodeContextMenuStrip( TreeView_Content, e, _OnContentItemClicked );
+					break;
+			}
+
+			CheckIfNodeIsExportable( e.Node );
 		}
 
 		private void ShowNodeContextMenuStrip( TreeView tree, TreeNodeMouseClickEventArgs e, ToolStripItemClickedEventHandler itemClicked )
@@ -2024,6 +1878,58 @@ namespace UEExplorer.UI.Tabs
 				}
 				TreeView_Exports.Nodes.AddRange( (checkBox.Tag as List<TreeNode>).ToArray() );
 			}		
+		}
+
+		private void Button_Export_Click( object sender, EventArgs e )
+		{
+			var exportableObject = ((ObjectNode)TreeView_Content.SelectedNode).Object as IUnrealExportable; 
+			((UObject)exportableObject).BeginDeserializing();
+
+			List<string> exts = exportableObject.ExportableExtensions.ToList();
+			string extensions = String.Empty;
+			foreach( string ext in exts )
+			{
+				extensions += string.Format( "{0}(*" + ".{0})|*.{0}", ext );
+				if( ext != exts.Last() )
+				{
+					extensions += "|";
+				}
+			}
+			var dialog = new SaveFileDialog(){Filter = extensions, FileName = ((UObject)exportableObject).Name};
+			if( dialog.ShowDialog() == DialogResult.OK )
+			{
+				var stream = new FileStream( dialog.FileName, FileMode.Create, FileAccess.Write );
+				exportableObject.SerializeExport( exts[dialog.FilterIndex], stream );
+				stream.Flush();
+				stream.Close();
+			}
+		}
+
+		private void CheckIfNodeIsExportable( TreeNode node )
+		{
+			bool exportable = false;
+
+			var soundObject = ((ObjectNode)node).Object as IUnrealExportable;
+			if( soundObject != null )
+			{
+				exportable = soundObject.CompatableExport();	
+		
+				Button_Export.Text = string.Format( "Export {0} As...", node.Text );	
+			}
+
+			Button_Export.Enabled = exportable;
+			Button_Export.Refresh();
+		}
+
+		private void TreeView_Content_AfterSelect( object sender, TreeViewEventArgs e )
+		{
+			// Selection shouldn't view object, for example on contextmenu selection.
+			if( _SuppressNodeSelect )
+			{
+				_SuppressNodeSelect = false;
+				return;
+			}
+			PerformNodeAction( e.Node as IDecompilableObjectNode, "View Object" );
 		}
 	}
 
