@@ -33,6 +33,7 @@
 			System.Windows.Forms.Label label5;
 			System.Windows.Forms.Label label4;
 			System.Windows.Forms.Label label3;
+			System.Windows.Forms.Label label6;
 			this.IndentionNumeric = new System.Windows.Forms.NumericUpDown();
 			this.PreBeginBracket = new System.Windows.Forms.TextBox();
 			this.PreEndBracket = new System.Windows.Forms.TextBox();
@@ -57,6 +58,7 @@
 			label5 = new System.Windows.Forms.Label();
 			label4 = new System.Windows.Forms.Label();
 			label3 = new System.Windows.Forms.Label();
+			label6 = new System.Windows.Forms.Label();
 			groupBox3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.IndentionNumeric)).BeginInit();
 			this.groupBox4.SuspendLayout();
@@ -84,9 +86,9 @@
 			groupBox3.Controls.Add(this.PreBeginBracket);
 			groupBox3.Controls.Add(this.PreEndBracket);
 			groupBox3.Controls.Add(this.SuppressComments);
-			groupBox3.Location = new System.Drawing.Point(399, 8);
+			groupBox3.Location = new System.Drawing.Point(337, 8);
 			groupBox3.Name = "groupBox3";
-			groupBox3.Size = new System.Drawing.Size(275, 281);
+			groupBox3.Size = new System.Drawing.Size(275, 224);
 			groupBox3.TabIndex = 15;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Decompiler Output";
@@ -94,21 +96,16 @@
 			// IndentionNumeric
 			// 
 			this.IndentionNumeric.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.IndentionNumeric.Location = new System.Drawing.Point(179, 169);
+			this.IndentionNumeric.Location = new System.Drawing.Point(179, 112);
 			this.IndentionNumeric.Name = "IndentionNumeric";
 			this.IndentionNumeric.Size = new System.Drawing.Size(86, 20);
 			this.IndentionNumeric.TabIndex = 7;
-			this.IndentionNumeric.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
 			// 
 			// label5
 			// 
 			label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			label5.AutoSize = true;
-			label5.Location = new System.Drawing.Point(176, 153);
+			label5.Location = new System.Drawing.Point(176, 96);
 			label5.Name = "label5";
 			label5.Size = new System.Drawing.Size(90, 13);
 			label5.TabIndex = 6;
@@ -118,7 +115,7 @@
 			// 
 			label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			label4.AutoSize = true;
-			label4.Location = new System.Drawing.Point(4, 237);
+			label4.Location = new System.Drawing.Point(4, 180);
 			label4.Name = "label4";
 			label4.Size = new System.Drawing.Size(120, 13);
 			label4.TabIndex = 4;
@@ -128,7 +125,7 @@
 			// 
 			label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			label3.AutoSize = true;
-			label3.Location = new System.Drawing.Point(4, 198);
+			label3.Location = new System.Drawing.Point(4, 141);
 			label3.Name = "label3";
 			label3.Size = new System.Drawing.Size(128, 13);
 			label3.TabIndex = 3;
@@ -138,7 +135,7 @@
 			// 
 			this.PreBeginBracket.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.PreBeginBracket.Location = new System.Drawing.Point(7, 214);
+			this.PreBeginBracket.Location = new System.Drawing.Point(7, 157);
 			this.PreBeginBracket.Name = "PreBeginBracket";
 			this.PreBeginBracket.Size = new System.Drawing.Size(262, 20);
 			this.PreBeginBracket.TabIndex = 2;
@@ -147,7 +144,7 @@
 			// 
 			this.PreEndBracket.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.PreEndBracket.Location = new System.Drawing.Point(7, 254);
+			this.PreEndBracket.Location = new System.Drawing.Point(7, 197);
 			this.PreEndBracket.Name = "PreEndBracket";
 			this.PreEndBracket.Size = new System.Drawing.Size(262, 20);
 			this.PreEndBracket.TabIndex = 1;
@@ -162,14 +159,25 @@
 			this.SuppressComments.Text = "Suppress Comments";
 			this.SuppressComments.UseVisualStyleBackColor = true;
 			// 
+			// label6
+			// 
+			label6.AutoSize = true;
+			label6.Location = new System.Drawing.Point(9, 62);
+			label6.Name = "label6";
+			label6.Size = new System.Drawing.Size(579, 13);
+			label6.TabIndex = 3;
+			label6.Text = "Input the path to UE Model Viewer to get integrated support for viewing Meshes an" +
+    "d/or Textures through the Content tab!";
+			// 
 			// groupBox4
 			// 
+			this.groupBox4.Controls.Add(label6);
 			this.groupBox4.Controls.Add(label2);
 			this.groupBox4.Controls.Add(this.PathButton);
 			this.groupBox4.Controls.Add(this.PathText);
-			this.groupBox4.Location = new System.Drawing.Point(10, 295);
+			this.groupBox4.Location = new System.Drawing.Point(10, 238);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(664, 63);
+			this.groupBox4.Size = new System.Drawing.Size(602, 82);
 			this.groupBox4.TabIndex = 16;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Third-Party";
@@ -191,7 +199,7 @@
 			this.PathText.ForeColor = System.Drawing.SystemColors.HighlightText;
 			this.PathText.Location = new System.Drawing.Point(42, 32);
 			this.PathText.Name = "PathText";
-			this.PathText.Size = new System.Drawing.Size(616, 20);
+			this.PathText.Size = new System.Drawing.Size(554, 20);
 			this.PathText.TabIndex = 0;
 			this.PathText.TextChanged += new System.EventHandler(this.PathText_TextChanged);
 			// 
@@ -200,9 +208,9 @@
 			this.groupBox1.Controls.Add(this.CheckBox_LinkObj);
 			this.groupBox1.Controls.Add(this.CheckBox_SerObj);
 			this.groupBox1.Controls.Add(this.CheckBox_ImpObj);
-			this.groupBox1.Location = new System.Drawing.Point(10, 199);
+			this.groupBox1.Location = new System.Drawing.Point(10, 142);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(383, 90);
+			this.groupBox1.Size = new System.Drawing.Size(321, 90);
 			this.groupBox1.TabIndex = 13;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Package Initialization";
@@ -230,6 +238,7 @@
 			// CheckBox_ImpObj
 			// 
 			this.CheckBox_ImpObj.AutoSize = true;
+			this.CheckBox_ImpObj.Enabled = false;
 			this.CheckBox_ImpObj.Location = new System.Drawing.Point(6, 65);
 			this.CheckBox_ImpObj.Name = "CheckBox_ImpObj";
 			this.CheckBox_ImpObj.Size = new System.Drawing.Size(94, 17);
@@ -247,15 +256,15 @@
 			this.groupBox2.Controls.Add(this.ComboBox_NativeTable);
 			this.groupBox2.Location = new System.Drawing.Point(10, 8);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(383, 185);
+			this.groupBox2.Size = new System.Drawing.Size(321, 128);
 			this.groupBox2.TabIndex = 14;
 			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "Deserialization";
+			this.groupBox2.Text = "Package Deserialization";
 			// 
 			// NumericUpDown_LicenseeMode
 			// 
-			this.NumericUpDown_LicenseeMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.NumericUpDown_LicenseeMode.Location = new System.Drawing.Point(250, 70);
+			this.NumericUpDown_LicenseeMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.NumericUpDown_LicenseeMode.Location = new System.Drawing.Point(188, 96);
 			this.NumericUpDown_LicenseeMode.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -267,8 +276,8 @@
 			// 
 			// NumericUpDown_Version
 			// 
-			this.NumericUpDown_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.NumericUpDown_Version.Location = new System.Drawing.Point(250, 44);
+			this.NumericUpDown_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.NumericUpDown_Version.Location = new System.Drawing.Point(188, 70);
 			this.NumericUpDown_Version.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -280,18 +289,20 @@
 			// 
 			// CheckBox_LicenseeMode
 			// 
+			this.CheckBox_LicenseeMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.CheckBox_LicenseeMode.AutoSize = true;
-			this.CheckBox_LicenseeMode.Location = new System.Drawing.Point(10, 70);
+			this.CheckBox_LicenseeMode.Location = new System.Drawing.Point(10, 96);
 			this.CheckBox_LicenseeMode.Name = "CheckBox_LicenseeMode";
-			this.CheckBox_LicenseeMode.Size = new System.Drawing.Size(129, 17);
+			this.CheckBox_LicenseeMode.Size = new System.Drawing.Size(137, 17);
 			this.CheckBox_LicenseeMode.TabIndex = 13;
-			this.CheckBox_LicenseeMode.Text = "Force Licensee Mode";
+			this.CheckBox_LicenseeMode.Text = "Force Licensee Version";
 			this.CheckBox_LicenseeMode.UseVisualStyleBackColor = true;
 			// 
 			// CheckBox_Version
 			// 
+			this.CheckBox_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.CheckBox_Version.AutoSize = true;
-			this.CheckBox_Version.Location = new System.Drawing.Point(10, 47);
+			this.CheckBox_Version.Location = new System.Drawing.Point(10, 73);
 			this.CheckBox_Version.Name = "CheckBox_Version";
 			this.CheckBox_Version.Size = new System.Drawing.Size(91, 17);
 			this.CheckBox_Version.TabIndex = 12;
@@ -309,17 +320,18 @@
 			// 
 			// ComboBox_NativeTable
 			// 
-			this.ComboBox_NativeTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.ComboBox_NativeTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.ComboBox_NativeTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.ComboBox_NativeTable.FormattingEnabled = true;
-			this.ComboBox_NativeTable.Location = new System.Drawing.Point(86, 19);
+			this.ComboBox_NativeTable.Location = new System.Drawing.Point(10, 39);
 			this.ComboBox_NativeTable.Name = "ComboBox_NativeTable";
-			this.ComboBox_NativeTable.Size = new System.Drawing.Size(287, 21);
+			this.ComboBox_NativeTable.Size = new System.Drawing.Size(301, 21);
 			this.ComboBox_NativeTable.TabIndex = 10;
 			// 
 			// Button_Save
 			// 
-			this.Button_Save.Location = new System.Drawing.Point(599, 364);
+			this.Button_Save.Location = new System.Drawing.Point(537, 326);
 			this.Button_Save.Name = "Button_Save";
 			this.Button_Save.Size = new System.Drawing.Size(75, 23);
 			this.Button_Save.TabIndex = 12;
