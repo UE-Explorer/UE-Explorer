@@ -30,9 +30,10 @@
 		{
 			System.Windows.Forms.Label label2;
 			System.Windows.Forms.GroupBox groupBox3;
+			System.Windows.Forms.Label label5;
 			System.Windows.Forms.Label label4;
 			System.Windows.Forms.Label label3;
-			System.Windows.Forms.Label label5;
+			this.IndentionNumeric = new System.Windows.Forms.NumericUpDown();
 			this.PreBeginBracket = new System.Windows.Forms.TextBox();
 			this.PreEndBracket = new System.Windows.Forms.TextBox();
 			this.SuppressComments = new System.Windows.Forms.CheckBox();
@@ -51,19 +52,18 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.ComboBox_NativeTable = new System.Windows.Forms.ComboBox();
 			this.Button_Save = new System.Windows.Forms.Button();
-			this.IndentionNumeric = new System.Windows.Forms.NumericUpDown();
 			label2 = new System.Windows.Forms.Label();
 			groupBox3 = new System.Windows.Forms.GroupBox();
+			label5 = new System.Windows.Forms.Label();
 			label4 = new System.Windows.Forms.Label();
 			label3 = new System.Windows.Forms.Label();
-			label5 = new System.Windows.Forms.Label();
 			groupBox3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.IndentionNumeric)).BeginInit();
 			this.groupBox4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_LicenseeMode)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Version)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.IndentionNumeric)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label2
@@ -90,6 +90,29 @@
 			groupBox3.TabIndex = 15;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Decompiler Output";
+			// 
+			// IndentionNumeric
+			// 
+			this.IndentionNumeric.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.IndentionNumeric.Location = new System.Drawing.Point(179, 169);
+			this.IndentionNumeric.Name = "IndentionNumeric";
+			this.IndentionNumeric.Size = new System.Drawing.Size(86, 20);
+			this.IndentionNumeric.TabIndex = 7;
+			this.IndentionNumeric.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			// 
+			// label5
+			// 
+			label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			label5.AutoSize = true;
+			label5.Location = new System.Drawing.Point(176, 153);
+			label5.Name = "label5";
+			label5.Size = new System.Drawing.Size(90, 13);
+			label5.TabIndex = 6;
+			label5.Text = "Indention Spaces";
 			// 
 			// label4
 			// 
@@ -304,29 +327,6 @@
 			this.Button_Save.UseVisualStyleBackColor = true;
 			this.Button_Save.Click += new System.EventHandler(this.Button_Save_Click);
 			// 
-			// label5
-			// 
-			label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			label5.AutoSize = true;
-			label5.Location = new System.Drawing.Point(176, 153);
-			label5.Name = "label5";
-			label5.Size = new System.Drawing.Size(51, 13);
-			label5.TabIndex = 6;
-			label5.Text = "Indention";
-			// 
-			// IndentionNumeric
-			// 
-			this.IndentionNumeric.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.IndentionNumeric.Location = new System.Drawing.Point(179, 169);
-			this.IndentionNumeric.Name = "IndentionNumeric";
-			this.IndentionNumeric.Size = new System.Drawing.Size(86, 20);
-			this.IndentionNumeric.TabIndex = 7;
-			this.IndentionNumeric.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-			// 
 			// UC_Options
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -341,6 +341,7 @@
 			this.Size = new System.Drawing.Size(1312, 584);
 			groupBox3.ResumeLayout(false);
 			groupBox3.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.IndentionNumeric)).EndInit();
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
@@ -349,7 +350,6 @@
 			this.groupBox2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_LicenseeMode)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Version)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.IndentionNumeric)).EndInit();
 			this.ResumeLayout(false);
 
 		}

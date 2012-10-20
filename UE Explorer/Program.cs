@@ -80,6 +80,23 @@ namespace UEExplorer
 			UELib.UnrealConfig.SuppressComments = Options.bSuppressComments;
 			UELib.UnrealConfig.PreBeginBracket = ParseFormatOption( Program.Options.PreBeginBracket );
 			UELib.UnrealConfig.PreEndBracket = ParseFormatOption( Program.Options.PreEndBracket );
+			UpdateIndention();
+		}
+
+		internal static void UpdateIndention()
+		{
+			if( Program.Options.Indention == 4 )
+			{
+				UELib.UnrealConfig.Indention = "\t";
+			}
+			else
+			{
+				UELib.UnrealConfig.Indention = String.Empty;
+				for( var i = 0; i < Program.Options.Indention; ++ i )
+				{
+					UELib.UnrealConfig.Indention += " ";
+				}		
+			}
 		}
 
 		internal static string ParseFormatOption( string input )

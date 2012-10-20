@@ -39,22 +39,6 @@ namespace UEExplorer.UI.Tabs
 			base.TabCreated();
 		}
 
-		private void SetIndention()
-		{
-			if( Program.Options.Indention == 4 )
-			{
-				UnrealConfig.Indention = "\t";
-			}
-			else
-			{
-				UnrealConfig.Indention = String.Empty;
-				for( var i = 0; i < Program.Options.Indention; ++ i )
-				{
-					UnrealConfig.Indention += " ";
-				}		
-			}
-		}
-
 		public static string[] GetNativeTables()
 		{
 			return Directory.GetFiles( Path.Combine( Application.StartupPath, "Native Tables" ), "*" + NativesTablePackage.Extension );
@@ -94,7 +78,7 @@ namespace UEExplorer.UI.Tabs
 			UELib.UnrealConfig.PreEndBracket = Program.ParseFormatOption( Program.Options.PreEndBracket );
 
 			Program.Options.Indention = (int)IndentionNumeric.Value;
-			SetIndention();
+			Program.UpdateIndention();
 
 			Program.SaveConfig();
 
