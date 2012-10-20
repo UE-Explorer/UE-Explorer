@@ -307,20 +307,6 @@ namespace UEExplorer.UI.Tabs
 			}
 		}	
 
-		internal class ClassNode : ObjectNode
-		{
-			public new UClass Object
-			{
-				get{ return Object as UClass; }
-				set{ Object = value; }
-			}
-
-			public ClassNode( IUnrealDecompilable objectRef ) : base( objectRef )
-			{
-				Nodes.Add( "DUMMYNODE" );
-			}
-		}
-
 		internal class UnrealTableNode : TreeNode 
 		{
 			internal UnrealTable Table;
@@ -652,9 +638,8 @@ namespace UEExplorer.UI.Tabs
 				var metobj = _UnrealPackage.FindObject( "MetaData", typeof( UMetaData ), false );
 				if( metobj != null )
 				{
-					var node = new ObjectNode( metobj ) { ImageKey = "UClass" };
-					node.SelectedImageKey = node.ImageKey;
-					node.Text = metobj.Name;
+					var node = new ObjectNode( metobj ) { ImageKey = "UClass", SelectedImageKey = "UClass", Text = metobj.Name };
+					node.Nodes.Add( "DUMMYNODE" );
 					if( metobj.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
 					{
 						node.ForeColor = Color.Red;
@@ -862,15 +847,19 @@ namespace UEExplorer.UI.Tabs
 					continue;
 				}
 
-				ClassNode Node = new ClassNode( Object );
-				Node.ImageKey = "UClass";
-				Node.SelectedImageKey = Node.ImageKey;
-				Node.Text = Object.Name;
+				var node = new ObjectNode( Object )
+				{
+					ImageKey = "UClass", 
+					SelectedImageKey = "UClass", 
+					Text = Object.Name
+				};
+				node.Nodes.Add( "DUMMYNODE" );
+
 				if( Object.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
 				{
-					Node.ForeColor = Color.Red;
+					node.ForeColor = Color.Red;
 				}
-				TreeView_Classes.Nodes.Add( Node );	
+				TreeView_Classes.Nodes.Add( node );	
 			}
 			TreeView_Classes.EndUpdate();
 
@@ -1202,84 +1191,85 @@ namespace UEExplorer.UI.Tabs
 		{
 			tree.SelectedNode = e.Node;
 
-			var popupssuck = new ContextMenuStrip();
-			if( e.Node is ObjectNode && ((ObjectNode)e.Node).Object is UContent )
-			{
-				if( File.Exists( Program.Options.UEModelAppPath	) )
-				{
-					popupssuck.Items.Add( "Open in UE Model Viewer" );
-#if DEBUG
-					popupssuck.Items.Add( "Export with UE Model Viewer" );
-#endif
-				}
-#if DEBUG
-				popupssuck.Items.Add( "View Content" );
-#endif
-				popupssuck.Items.Add( "View Object" );
-			}
-			else
-			{
-				if( e.Node is IDecompilableNode )
-				{
-					popupssuck.Items.Add( "View Object" );
-					var decompileableObjectNode = e.Node as IDecompilableObjectNode;
-					if( decompileableObjectNode != null && (decompileableObjectNode.Object is IUnrealDeserializableObject)  )
-					{
-						popupssuck.Items.Add( "View Object Properties" );
-						#if DEBUG
-							popupssuck.Items.Add( "Deserialize - Link" );
-						#endif
-					}	
-					
-					if( e.Node is ObjectNode )
-					{
-						if( ((ObjectNode)e.Node).Object is UMetaData  )
-						{
-							popupssuck.Items.Add( "View Used Tags" );
-						}
-
-						if( ((ObjectNode)e.Node).Object is UELib.Core.UStruct )
-						{
-							if( ((UELib.Core.UStruct)((ObjectNode)e.Node).Object).ScriptSize > 0 )
-							{
-								if( ((ObjectNode)e.Node).Object is UClass )
-								{
-									popupssuck.Items.Add( "View Replication" );
-								}
-
-								popupssuck.Items.Add( "View Tokens" );
-							}
-
-							if( ((ObjectNode)e.Node).Object is UClass && ((UELib.Core.UStruct)((ObjectNode)e.Node).Object).Properties != null )
-							{
-								popupssuck.Items.Add( "View DefaultProperties" );
-							}
-						}
-
-						var uObject = ((ObjectNode)e.Node).Object as UObject;
-						if( uObject != null && uObject.ThrownException != null )
-						{
-							popupssuck.Items.Add( "View Exception" );
-						}
-					}
-				}
-
-				if( e.Node is ClassNode )
-				{
-					popupssuck.Items.Add( "View Script" );	
-				}
-			}
-
-			if( e.Node is IDecompilableObjectNode )
-			{
-				popupssuck.Items.Add( "View Buffer" );
-			}
-
-			if( popupssuck.Items.Count == 0 )
+			var viewToolsContextMenu = new ContextMenuStrip();
+			BuildItemNodes( e.Node, viewToolsContextMenu.Items );
+			if( viewToolsContextMenu.Items.Count == 0 )
 				return;
 
-			popupssuck.ItemClicked += itemClicked;
-			popupssuck.Show( tree, e.Location );
+			viewToolsContextMenu.ItemClicked += itemClicked;
+			viewToolsContextMenu.Show( tree, e.Location );	
+		}
+
+		private void BuildItemNodes( TreeNode performingNode, ToolStripItemCollection itemCollection )
+		{
+			itemCollection.Clear();
+
+			var decompilableNode = performingNode as IDecompilableNode;
+			if( decompilableNode != null ) 
+			{ 
+				itemCollection.Add( "View Object" );
+				var decompilableObjectNode = decompilableNode as IDecompilableObjectNode;
+				if( decompilableObjectNode != null )
+				{
+					if( decompilableObjectNode.Object is UContent )
+					{ 
+						if( File.Exists( Program.Options.UEModelAppPath	) )
+						{
+							itemCollection.Add( "Open in UE Model Viewer" );
+		#if DEBUG
+							itemCollection.Add( "Export with UE Model Viewer" );
+		#endif
+						}
+		#if DEBUG
+						itemCollection.Add( "View Content" );
+		#endif	
+					}
+
+					if( decompilableObjectNode.Object is UMetaData )
+					{
+						itemCollection.Add( "View Used Tags" );	
+					}
+
+					if( decompilableObjectNode.Object is UStruct )
+					{
+						var unStruct = (decompilableObjectNode.Object as UStruct); 
+						if( unStruct.ScriptSize > 0 )
+						{
+							if( decompilableObjectNode.Object is UClass )
+							{
+								itemCollection.Add( "View Replication" );	
+							}
+							itemCollection.Add( "View Tokens" );
+						}
+
+						if( decompilableObjectNode.Object is UClass )
+						{
+							itemCollection.Add( "View Script" );	
+						}
+
+						if( unStruct.Properties != null )
+						{
+							itemCollection.Add( "View DefaultProperties" );	
+						}
+					}
+
+					itemCollection.Add( "View Buffer" );
+					if( (decompilableObjectNode.Object as UObject).ThrownException != null )
+					{
+						itemCollection.Add( new ToolStripSeparator() );
+						itemCollection.Add( "View Exception" );		
+					}
+
+					if( decompilableObjectNode.Object is IUnrealDeserializableObject )
+					{
+						itemCollection.Add( new ToolStripSeparator() );
+						itemCollection.Add( "Managed Properties" );
+						#if DEBUG
+							itemCollection.Add( "Force Deserialize" );
+						#endif	
+					}
+				}
+			}
 		}
 
 		private void _OnClassesItemClicked( object sender, ToolStripItemClickedEventArgs e )
@@ -1406,7 +1396,7 @@ namespace UEExplorer.UI.Tabs
 						if( Directory.GetFiles( contentDir ).Length > 0 )
 						{
 							if( MessageBox.Show( 
-								"Do you want to go the folder with the exported content?", 
+								Resources.UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER, 
 								Application.ProductName,
 								MessageBoxButtons.YesNo 
 								) == DialogResult.Yes )
@@ -1417,9 +1407,11 @@ namespace UEExplorer.UI.Tabs
 						else
 						{
 							MessageBox.Show( 
-								"The object was not exported."
-								+ "\r\n\r\nArguments:" + appArguments
-								+ "\r\n\r\nLog:" + log,
+								string.Format( 
+									"The object was not exported.\r\n\r\nArguments:{0}\r\n\r\nLog:{1}", 
+									appArguments, 
+									log 
+								),
 								Application.ProductName 
 							);
 						}
@@ -1427,14 +1419,11 @@ namespace UEExplorer.UI.Tabs
 					}						
 
 					case "View Object":
-						if( node is IDecompilableNode )
-						{
-							Label_ObjectName.Text = node.Text;
-							SetContentText( node as TreeNode, node.Decompile() );
-						}
+						Label_ObjectName.Text = node.Text;
+						SetContentText( node as TreeNode, node.Decompile() );
 						break;
 
-					case "View Object Properties":
+					case "Managed Properties":
 						var propDialog = new PropertiesDialog();
 						propDialog.ObjectLabel.Text = node.Text;
 						propDialog.ObjectPropertiesGrid.SelectedObject = node.Object;
@@ -1442,58 +1431,55 @@ namespace UEExplorer.UI.Tabs
 						break;
 
 #if DEBUG
-					case "Deserialize - Link":
-						if( node is IDecompilableNode )
-						{
-							Label_ObjectName.Text = node.Text;
+					case "Force Deserialize":
+						Label_ObjectName.Text = node.Text;
 
-							((IUnrealDeserializableObject)node.Object).BeginDeserializing();
-							((UObject)node.Object).PostInitialize();
-						}
+						((IUnrealDeserializableObject)node.Object).BeginDeserializing();
+						((UObject)node.Object).PostInitialize();
 						break;
 #endif
 
 					case "View Replication":
 					{
-						var ONode = node as ClassNode;
-						if( ONode != null && ONode.Object != null )
+						var unClass = node.Object as UClass;
+						if( unClass != null )
 						{
-							Label_ObjectName.Text = ONode.Object.Name;
-							SetContentText( ONode, ONode.Object.FormatReplication() );
+							Label_ObjectName.Text = unClass.Name;
+							SetContentText( node as TreeNode, unClass.FormatReplication() );
 						}
 						break;
 					}
 
 					case "View Script":
 					{
-						var ONode = node as ClassNode;
-						if( ONode != null && ONode.Object.ScriptBuffer != null )
+						var unClass = node.Object as UClass;
+						if( unClass != null && unClass.ScriptBuffer != null )
 						{
-							Label_ObjectName.Text = ONode.Object.ScriptBuffer.Name;
-							SetContentText( ONode, ONode.Object.ScriptBuffer.Decompile() );
+							Label_ObjectName.Text = unClass.ScriptBuffer.Name;
+							SetContentText( node as TreeNode, unClass.ScriptBuffer.Decompile() );
 						}
 						break;
 					}
 
 					case "View DefaultProperties":
 					{
-						var ONode = node as ClassNode;
-						if( ONode != null && ONode.Object != null )
+						var unStruct = node.Object as UStruct;
+						if( unStruct != null )
 						{
-							Label_ObjectName.Text = ONode.Object.Name;
-							SetContentText( ONode, (ONode.Object as UELib.Core.UStruct).FormatDefaultProperties() );
+							Label_ObjectName.Text = unStruct.Name;
+							SetContentText( node as TreeNode, unStruct.FormatDefaultProperties() );
 						}
 						break;
 					}
 
 					case "View Tokens":
 					{
-						var ONode = node as ObjectNode;
-						if( ONode != null && ((UELib.Core.UStruct)ONode.Object).ScriptSize > 0 )
+						var unStruct = node.Object as UStruct;
+						if( unStruct != null && unStruct.ScriptSize > 0 )
 						{
 							Label_ObjectName.Text = node.Text;
 
-							var codeDec = ((UELib.Core.UStruct)ONode.Object).ByteCodeManager;
+							var codeDec = unStruct.ByteCodeManager;
 							codeDec.Deserialize();
 							codeDec.InitDecompile();
 
@@ -1532,7 +1518,7 @@ namespace UEExplorer.UI.Tabs
 								if( breakOut )
 									break;
 							}
-							SetContentText( ONode, content );
+							SetContentText( node as TreeNode, content );
 						}
 						break;
 					}
@@ -1632,9 +1618,16 @@ namespace UEExplorer.UI.Tabs
 		}
 		private readonly List<BufferData> _ContentBuffer = new List<BufferData>();
 		private int _BufferIndex = -1;
+		private TreeNode _LastNodeContent;
 
 		private void SetContentText( TreeNode node, string content, bool skip = false )
-		{			
+		{
+			if( _LastNodeContent != node )
+			{
+				BuildItemNodes( node, ViewTools.DropDownItems );
+			}
+			_LastNodeContent = node;
+
 			content = content.TrimStart( '\r', '\n' ).TrimEnd( '\r', '\n' );
 			if( content.Length > 0 )
 			{
@@ -1642,6 +1635,7 @@ namespace UEExplorer.UI.Tabs
 				SearchBox.Enabled = true;
 				ExportButton.Enabled = true;
 				WPFHost.Enabled = true;
+				ViewTools.Enabled = true;
 			}
 
 			//TextEditorPanel.textEditor.Clear();
@@ -1930,6 +1924,20 @@ namespace UEExplorer.UI.Tabs
 				return;
 			}
 			PerformNodeAction( e.Node as IDecompilableObjectNode, "View Object" );
+		}
+
+		private void ViewTools_DropDownItemClicked( object sender, ToolStripItemClickedEventArgs e )
+		{
+			if( _LastNodeContent == null )
+				return;
+
+			var decompilableObject = _LastNodeContent as IDecompilableObjectNode;
+			if( decompilableObject == null )
+			{
+				return;
+			}
+
+			PerformNodeAction( decompilableObject, e.ClickedItem.Text );
 		}
 	}
 

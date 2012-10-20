@@ -144,6 +144,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to go the folder with the exported content?.
+        /// </summary>
+        internal static string UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER {
+            get {
+                return ResourceManager.GetString("UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap UE_ProgramLogo {

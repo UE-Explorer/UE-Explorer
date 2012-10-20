@@ -53,6 +53,7 @@
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.Label_ObjectName = new System.Windows.Forms.ToolStripLabel();
+			this.ViewTools = new System.Windows.Forms.ToolStripDropDownButton();
 			this.Panel_Main = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.TabControl_General = new System.Windows.Forms.TabControl();
@@ -217,7 +218,8 @@
             this.FindButton,
             this.toolStripSeparator4,
             this.toolStripSeparator3,
-            this.Label_ObjectName});
+            this.Label_ObjectName,
+            this.ViewTools});
 			this.ToolStrip_Content.Name = "ToolStrip_Content";
 			this.ToolStrip_Content.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.ToolStrip_Content.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStrip_Content_Paint);
@@ -291,6 +293,13 @@
 			this.Label_ObjectName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			this.Label_ObjectName.Name = "Label_ObjectName";
 			resources.ApplyResources(this.Label_ObjectName, "Label_ObjectName");
+			// 
+			// ViewTools
+			// 
+			this.ViewTools.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			resources.ApplyResources(this.ViewTools, "ViewTools");
+			this.ViewTools.Name = "ViewTools";
+			this.ViewTools.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ViewTools_DropDownItemClicked);
 			// 
 			// Panel_Main
 			// 
@@ -1215,5 +1224,6 @@
 		private System.Windows.Forms.CheckBox checkBox4;
 		private System.Windows.Forms.CheckBox checkBox3;
 		internal System.Windows.Forms.Button Button_Export;
+		public System.Windows.Forms.ToolStripDropDownButton ViewTools;
 	}
 }
