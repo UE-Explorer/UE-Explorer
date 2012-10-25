@@ -23,7 +23,7 @@ namespace UEExplorer.UI.Tabs
 			base.TabCreated();
 
 			_UTab.Dock = DockStyle.Fill;
-			_Tab.Controls.Add( _UTab );
+			Tab.Controls.Add( _UTab );
 
 			_APkg.NativesTableList = new List<NativeTable>();
 
@@ -46,7 +46,7 @@ namespace UEExplorer.UI.Tabs
 			ofd.Title = "File Dialog";
 			ofd.CheckFileExists = true;
 			ofd.Multiselect = true;
-			DialogResult dr = ofd.ShowDialog( _Owner.Owner.Owner );
+			DialogResult dr = ofd.ShowDialog( Owner.Owner.Owner );
 			if( dr != DialogResult.OK )
 			{
 				return;

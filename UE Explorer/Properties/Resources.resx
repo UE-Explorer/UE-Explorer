@@ -140,7 +140,7 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\UE_ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\UI\Main\ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RegistryWarning" xml:space="preserve">
     <value>Enabling this will edit your registry file. 
@@ -154,5 +154,56 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
   </data>
 	<data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER">
 		<value xml:space="preserve">Do you want to go the folder with the exported content?</value>
+	</data>
+	<data name="ProgramForm_checkForUpdates_New-Version">
+		<value xml:space="preserve">A new version is available!</value>
+		<comment>Dialog title.</comment>
+	</data>
+	<data name="ProgramForm_checkForUpdates_Progress-Status">
+		<value xml:space="preserve">Checking for updates...</value>
+		<comment>Status</comment>
+	</data>
+	<data name="ProgramForm_checkForUpdates_Latest-Version">
+		<value xml:space="preserve">You have the latest version of {0}</value>
+		<comment>Dialog description</comment>
+	</data>
+	<data name="Error">
+		<value xml:space="preserve">Error</value>
+		<comment>Dialog title</comment>
+	</data>
+	<data name="Options">
+		<value xml:space="preserve">Options</value>
+		<comment>Tab title</comment>
+	</data>
+	<data name="ProgramForm_checkForUpdates_Failed">
+		<value xml:space="preserve">Failed to request the latest version. Please try again later!
+Exception:{0}</value>
+	</data>
+	<data name="Homepage">
+		<value xml:space="preserve">Homepage</value>
+		<comment>Tab title</comment>
+	</data>
+	<data name="ProgramForm_Unreal_Natives_Table_Generator">
+		<value xml:space="preserve">Unreal Natives Table Generator</value>
+		<comment>Tab title</comment>
+	</data>
+	<data name="ProgramForm_Cache_Extractor">
+		<value xml:space="preserve">Cache Extractor</value>
+		<comment>Tab title</comment>
+	</data>
+	<data name="ProgramForm_LoadFile_Failed_loading_package">
+		<value xml:space="preserve">Failed loading package: {0}</value>
+		<comment>Exception description.</comment>
+	</data>
+	<data name="ProgramForm_LoadFile_Loading_file">
+		<value xml:space="preserve">Loading file {0}...</value>
+		<comment>Status description.</comment>
+	</data>
+	<data name="ProgramForm_checkForUpdates_New-Update">
+		<value xml:space="preserve">Clicking yes will bring you to the page with the latest version!
+
+Your version: {0}
+Latest version: {1}</value>
+		<comment>Dialog description.</comment>
 	</data>
 </root>

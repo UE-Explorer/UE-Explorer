@@ -26,7 +26,7 @@ namespace UEExplorer.UI.Tabs
 
 			_ExTab = new UC_CacheExtractor();
 			_ExTab.Dock = System.Windows.Forms.DockStyle.Fill;
-			_Tab.Controls.Add( _ExTab );
+			Tab.Controls.Add( _ExTab );
 		}
 
 		public override void TabSelected()

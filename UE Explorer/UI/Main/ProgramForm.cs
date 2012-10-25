@@ -14,7 +14,7 @@ namespace UEExplorer.UI
 
 	using UELib;
 
-    public partial class UEExplorer_Form : Form
+    public partial class ProgramForm : Form
     {		
 		public readonly TabsManager TManager;
 
@@ -93,7 +93,7 @@ namespace UEExplorer.UI
 
 		private void toolsToolStripMenuItem_DropDownOpening( object sender, EventArgs e )
 		{
-			menuItem20.Checked = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( UEAUFL ) != null;
+			menuItem20.Checked = Program.AreFileTypesRegistered();
 
 			if( menuItem13.Enabled )
 				return;
@@ -101,77 +101,42 @@ namespace UEExplorer.UI
 			InitializeExtensions();
 		}
 
-		private FileStream _logStream;
-
     	public static string Version
     	{
     		get{ return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
     	}
 
-		internal UEExplorer_Form()
+		internal ProgramForm()
         {
-
-			Text = Application.ProductName + " " + Version;
-			//this.ControlBox = false;	  
-
-			string path = Path.Combine( Application.StartupPath, "Log.txt" );
-			_logStream = new FileStream( path, FileMode.Create, FileAccess.Write  );
-			var sw = new StreamWriter( _logStream );
-			Console.SetOut( sw );
+			Text = string.Format( "{0} {1}", Application.ProductName, Version );
 
             InitializeComponent();	
 			InitializeConfig();
 			InitializeUI();
 
-			TManager = new TabsManager( this );
+			TManager = new TabsManager( this, TabComponentsStrip );
 		}
-
-		private void UEExplorer_Form_FormClosing( object sender, FormClosingEventArgs e )
-		{
-			if( _logStream == null ) 
-				return;
-
-			_logStream.Flush();
-			_logStream.Close();
-			_logStream.Dispose();
-		}
-
-		public ITabComponent AddTabComponent( Type type, string name )
-		{
-			// Avoid duping tabs.
-			foreach( ITabComponent TC in TManager.Tabs )
-			{
-				if( TC.Tab.Title == name )
-				{
-					return null;
-				}
-			}
-
-			ITabComponent newtab = (ITabComponent)Activator.CreateInstance( type );
-			TabStripItem item = TManager.CreateTabPage( name );
-			TManager.AddTab( newtab, item );
-
-			TabComponentsStrip.Visible = TabComponentsStrip.Items.Count > 0;
-			item.Refresh();
-			return newtab;
-		}
-
+		
 		public void LoadFile( string fileName )
 		{
 			ITabComponent tabComponent = null;
 
 			ProgressStatus.SaveStatus();
-			ProgressStatus.SetStatus( "Loading file " + Path.GetFileName( fileName ) + "..." );
-
-			//Refresh();
+			ProgressStatus.SetStatus( string.Format( 
+					Resources.ProgramForm_LoadFile_Loading_file, 
+					Path.GetFileName( fileName ) 
+				) 
+			);
 
 			try
 			{
 				switch( Path.GetExtension( fileName ) )
 				{
 					case ".uc": case ".uci":
-						tabComponent = AddTabComponent( typeof(UC_UClassFile), Path.GetFileName( fileName ) );
-						UC_UClassFile classFile = (UC_UClassFile)tabComponent;
+						tabComponent = TManager.AddTabComponent( typeof(UC_UClassFile), 
+							Path.GetFileName( fileName ) 
+						);
+						var classFile = (UC_UClassFile)tabComponent;
 						if( classFile == null )
 						{
 							return;
@@ -182,8 +147,10 @@ namespace UEExplorer.UI
 						break;
 
 					default:
-						tabComponent = AddTabComponent( typeof(UC_PackageExplorer), Path.GetFileName( fileName ) );
-						UC_PackageExplorer unrealFile = (UC_PackageExplorer)tabComponent;
+						tabComponent = TManager.AddTabComponent( typeof(UC_PackageExplorer), 
+							Path.GetFileName( fileName ) 
+						);
+						var unrealFile = (UC_PackageExplorer)tabComponent;
 						if( unrealFile == null )
 						{
 							return;
@@ -200,24 +167,14 @@ namespace UEExplorer.UI
 				{
 					TManager.RemoveTab( tabComponent );
 				}
-				ExceptionDialog.Show( "Failed loading package: " + fileName, e );
-				
+				ExceptionDialog.Show( string.Format( Resources.ProgramForm_LoadFile_Failed_loading_package, 
+					fileName ), e 
+				);		
 			}
 			finally
 			{
 				ProgressStatus.Reset();
 			}
-		}
-
-		public bool IsLoaded( string fileName )
-		{
-			return TManager.Tabs.Exists(
-				delegate( ITabComponent tc ){ 
-					return (IHasFileName)tc != null 
-						? ((IHasFileName)tc).FileName == fileName 
-						: true; 
-				} 
-			);
 		}
 
 		#region Events
@@ -255,7 +212,9 @@ namespace UEExplorer.UI
 
 		private void unrealCacheExtractorToolStripMenuItem_Click( object sender, EventArgs e )
 		{
-			AddTabComponent( typeof(CacheExtractorTabComponent), "Cache Extractor" );
+			TManager.AddTabComponent( typeof(CacheExtractorTabComponent), 
+				Resources.ProgramForm_Cache_Extractor 
+			);
 		}
 
 		private void TabComponentsStrip_TabStripItemSelectionChanged( TabStripItemChangedEventArgs e )
@@ -302,7 +261,9 @@ namespace UEExplorer.UI
 
 		private void unrealNativeTableGeneratorToolStripMenuItem_Click( object sender, EventArgs e )
 		{
-			AddTabComponent( typeof(UnrealNativesGeneratorTab), "Unreal Natives Table Generator" );
+			TManager.AddTabComponent( typeof(UnrealNativesGeneratorTab), 
+				Resources.ProgramForm_Unreal_Natives_Table_Generator 
+			);
 		}
 
 		private void Unreal_Explorer_Form_Shown( object sender, EventArgs e )
@@ -319,7 +280,7 @@ namespace UEExplorer.UI
 
 			if( TManager.Tabs.Count == 0 )
 			{
-				AddTabComponent( typeof(UC_Default), "Homepage" );
+				TManager.AddTabComponent( typeof(UC_Default), Resources.Homepage );
 			}
 		}
 
@@ -334,17 +295,23 @@ namespace UEExplorer.UI
 					MessageBoxIcon.Warning 
 				);	
 			}
-			ChangeUnrealRegistry( menuItem20.Checked );
+			Program.ToggleRegisterFileTypes( menuItem20.Checked );
 		}
 
 		private void UEExplorer_Form_DragEnter( object sender, DragEventArgs e )
 		{
-			e.Effect = e.Data.GetDataPresent( DataFormats.FileDrop ) ? DragDropEffects.Move : DragDropEffects.None;
+			e.Effect = e.Data.GetDataPresent( DataFormats.FileDrop ) 
+				? DragDropEffects.Move 
+				: DragDropEffects.None;
 		}
 
 		private void UEExplorer_Form_DragDrop( object sender, DragEventArgs e )
 		{
-			string allowedExtensions = UnrealExtensions.FormatUnrealExtensionsAsFilter().Replace( "*.u;", "*.u;*.uc;*.uci;" );
+			string allowedExtensions = UnrealExtensions.FormatUnrealExtensionsAsFilter().Replace( 
+				"*.u;", 
+				"*.u;*.uc;*.uci;" 
+			);
+
 			if( e.Data.GetDataPresent( DataFormats.FileDrop ) )
 			{
 				var files = (string[])e.Data.GetData( DataFormats.FileDrop );
@@ -376,140 +343,9 @@ namespace UEExplorer.UI
 		}
 		#endregion
 
-		private const string UEAUFL = "UEExplorer.AnyUnrealFile";
-
-		private static void ChangeUnrealRegistry( bool undo = false )
-		{		
-			var extkeys = new List<Microsoft.Win32.RegistryKey>();
-			var extensions = UnrealExtensions.FormatUnrealExtensionsAsList();
-			if( undo )
-			{
-				Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree( UEAUFL );
-				foreach( string ext in extensions )
-				{
-					Microsoft.Win32.RegistryKey extkey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( ext, true );
-					if( extkey != null )
-					{
-						if( (string)extkey.GetValue( "" ) == UEAUFL )
-						{
-							Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree( ext );
-						}
-						else
-						{
-							extkeys.Add( extkey );
-						}
-					}	
-				}
-
-				foreach( Microsoft.Win32.RegistryKey key in extkeys )
-				{
-					var reference = (string)key.GetValue( "" );
-					if( reference != null )
-					{
-						Microsoft.Win32.RegistryKey k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( reference, true );
-						if( k != null )
-						{
-							EditKey( k, true );
-						}
-					}
-				}
-			}
-			else
-			{
-				foreach( string ext in extensions )
-				{
-					Microsoft.Win32.RegistryKey extkey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( ext, true );
-					if( extkey == null )
-					{
-						extkey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey( ext );
-						extkey.SetValue( "", UEAUFL, Microsoft.Win32.RegistryValueKind.String );
-						extkey.SetValue( "Content Type", "application", Microsoft.Win32.RegistryValueKind.String );
-					}
-					else if( (string)(extkey.GetValue( "" )) != UEAUFL )
-					{		  
-						extkeys.Add( extkey );
-					}
-				}
-
-				Microsoft.Win32.RegistryKey unrealfilekey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey( UEAUFL );
-				if( unrealfilekey != null )
-				{
-					unrealfilekey.SetValue( "", "Unreal File" );
-					EditKey( unrealfilekey );
-				}
-
-				foreach( Microsoft.Win32.RegistryKey key in extkeys )
-				{
-					string reference = (string)key.GetValue( "" );
-					if( reference != null )
-					{
-						Microsoft.Win32.RegistryKey k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( reference, true );
-						if( k != null )
-						{
-							EditKey( k );
-						}
-					}
-				}
-			}
-		}
-
-		private static void EditKey( Microsoft.Win32.RegistryKey key, bool undo = false )
-		{
-			if( undo )
-			{
-				var xkey = key.OpenSubKey( "DefaultIcon", true );
-				// Should only add a icon reference if none was already set, so that .UT2 map files keep their original icon.
-				if( xkey != null )
-				{
-					string curkey = (string)xkey.GetValue( "" );
-					if( curkey != null )
-					{
-						string oldasc = (string)xkey.GetValue( "OldAssociation" );
-						xkey.SetValue( "OldAssociation", curkey, Microsoft.Win32.RegistryValueKind.String );
-						xkey.SetValue( "", oldasc ?? "", Microsoft.Win32.RegistryValueKind.String );
-					}
-				}
-
-				var shellkey = key.OpenSubKey( "shell", true );
-				if( shellkey != null )
-				{
-					shellkey.DeleteSubKeyTree( "open in " + Application.ProductName );
-				}
-			}
-			else
-			{
-				// Should only add a icon reference if none was already set, so that .UT2 map files keep their original icon.
-				if( key.OpenSubKey( "DefaultIcon" ) == null )
-				{
-					using( var defaulticonkey = key.CreateSubKey( "DefaultIcon" ) )
-					{
-						if( defaulticonkey != null )
-						{
-							string mykey = Path.Combine( Application.StartupPath, "unrealfile.ico" );
-							string oldassociation = (string)defaulticonkey.GetValue( "" );
-							if( oldassociation != mykey )
-							{
-								if( oldassociation != null )
-								{
-									defaulticonkey.SetValue( "OldAssociation", oldassociation, Microsoft.Win32.RegistryValueKind.String );
-								}	
-								defaulticonkey.SetValue( "", mykey, Microsoft.Win32.RegistryValueKind.String );
-							}
-						}
-					}
-				}
-
-				var shellkey = key.CreateSubKey( "shell" );
-				var editkey = shellkey.CreateSubKey( "open in " + Application.ProductName );
-				editkey.SetValue( "", "&Open in " + Application.ProductName );
-				var cmdkey = editkey.CreateSubKey( "command" );
-				cmdkey.SetValue( "", "\"" + Application.ExecutablePath + "\" \"%1\"", Microsoft.Win32.RegistryValueKind.ExpandString );
-			}
-		}
-
 		private void donateToolStripMenuItem1_Click( object sender, EventArgs e )
 		{
-			System.Diagnostics.Process.Start( Program.WEBSITE_URL + "donate.html" );
+			System.Diagnostics.Process.Start( Program.Donate_URL );
 		}
 
 		private void checkForUpdates( object sender, EventArgs e )
@@ -517,33 +353,45 @@ namespace UEExplorer.UI
 			try
 			{
 				ProgressStatus.SaveStatus();
-				ProgressStatus.SetStatus( "Checking for updates..." );
-				// ID of UE Explorer
-				var postData = "data[items][id]=21";
-				var result = Program.Post( Program.WEBSITE_URL + "apps/version/", postData ).Trim();
+				ProgressStatus.SetStatus( Resources.ProgramForm_checkForUpdates_Progress_Status );
+
+				var result = Program.Post( Program.Version_URL, Program.Program_Parm_ID ).Trim();
 				if( result != Version )
 				{
 					if( MessageBox.Show(
-						"Clicking yes will bring you to the page with the latest version!"
-						+ "\r\n\r\nYour version: " + Version
-						+ "\r\nLatest version: " + result
-						, "A new version is available!"
+						string.Format( 
+							Resources.ProgramForm_checkForUpdates_New_Update,
+							Version,
+							result 
+						)
+						, Resources.ProgramForm_checkForUpdates_New_Version
 						, MessageBoxButtons.YesNo
-					) == System.Windows.Forms.DialogResult.Yes )
+					) == DialogResult.Yes )
 					{
-						System.Diagnostics.Process.Start( Program.WEBSITE_URL + "portfolio/view/21/ue-explorer" );
+						System.Diagnostics.Process.Start( Program.Program_URL );
 					}
 				}
 				else
 				{
-					MessageBox.Show( "You have the latest version of " + Application.ProductName );
+					MessageBox.Show( string.Format( 
+							Resources.ProgramForm_checkForUpdates_Latest_Version, 
+							Application.ProductName 
+						) 
+					);
 				}
 			}
 			catch( Exception exc )
 			{
-				MessageBox.Show( "Failed to request the latest version. Please try again later!"
-					+ "\r\nException:" + exc.Message,
-					"Error", MessageBoxButtons.OK, MessageBoxIcon.Error
+				MessageBox.Show
+				( 
+					string.Format
+					( 
+						Resources.ProgramForm_checkForUpdates_Failed, 
+						exc.Message 
+					),
+					Resources.Error, 
+					MessageBoxButtons.OK, 
+					MessageBoxIcon.Error
 				);
 			}
 			finally
@@ -554,12 +402,12 @@ namespace UEExplorer.UI
 
 		private void menuItem7_Click( object sender, EventArgs e )
 		{
-			AddTabComponent( typeof(UC_Options), "Options" );
+			TManager.AddTabComponent( typeof(UC_Options), Resources.Options );
 		}
 
 		private void menuItem24_Click( object sender, EventArgs e )
 		{
-			System.Diagnostics.Process.Start( Program.WEBSITE_URL + "forum/" );
+			System.Diagnostics.Process.Start( Program.Forum_URL );
 		}
 
 		private void menuItem26_Click( object sender, EventArgs e )

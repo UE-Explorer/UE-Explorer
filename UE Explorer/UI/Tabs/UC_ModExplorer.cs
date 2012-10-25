@@ -41,9 +41,4 @@ namespace UEExplorer.UI.Tabs
 			}
 		}	
 	}
-
-	public interface IHasFileName
-	{
-		string FileName{ get; set; }
-	}
 }

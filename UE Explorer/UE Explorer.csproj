@@ -15,7 +15,7 @@
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ApplicationIcon>unrealfile.ico</ApplicationIcon>
+    <ApplicationIcon>UI\Main\ProgramIcon.ico</ApplicationIcon>
     <ManifestCertificateThumbprint>140D43639E5D9F34C438962DAEEDEFED61E536EF</ManifestCertificateThumbprint>
     <ManifestKeyFile>UE_Explorer_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
@@ -273,7 +273,7 @@
     <Compile Include="UI\Tabs\UC_Options.Designer.cs">
       <DependentUpon>UC_Options.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\TabsManager.cs" />
+    <Compile Include="UI\Tabs\TabsManager.cs" />
     <Compile Include="UI\Tabs\UC_ModExplorer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -281,10 +281,10 @@
       <DependentUpon>UC_ModExplorer.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Tabs\UnrealNativesGeneratorTab.cs" />
-    <Compile Include="UI\UserControl_Tab.cs">
+    <Compile Include="UI\Tabs\UserControl_Tab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\UserControl_Tab.Designer.cs">
+    <Compile Include="UI\Tabs\UserControl_Tab.Designer.cs">
       <DependentUpon>UserControl_Tab.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\HexViewDialog.cs">
@@ -330,11 +330,11 @@
     <Compile Include="UI\Tabs\UC_NativeGenerator.Designer.cs">
       <DependentUpon>UC_NativeGenerator.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UEExplorer_Form.cs">
+    <Compile Include="UI\Main\ProgramForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UEExplorer_Form.Designer.cs">
-      <DependentUpon>UEExplorer_Form.cs</DependentUpon>
+    <Compile Include="UI\Main\ProgramForm.Designer.cs">
+      <DependentUpon>ProgramForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -383,8 +383,8 @@
     <EmbeddedResource Include="UI\Tabs\UC_UClassFile.resx">
       <DependentUpon>UC_UClassFile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UEExplorer_Form.resx">
-      <DependentUpon>UEExplorer_Form.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Main\ProgramForm.resx">
+      <DependentUpon>ProgramForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -458,9 +458,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="unrealfile.ico">
+    <Content Include="UI\Main\ProgramIcon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UELib\Eliot.UELib.csproj">
@@ -469,7 +469,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UE_ProgramLogo.png" />
+    <None Include="UI\Main\ProgramLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="UI\Tabs\TextEditorPanel.xaml">
@@ -480,12 +480,12 @@
   <ItemGroup>
     <PublishFile Include="ICSharpCode.AvalonEdit">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
@@ -499,7 +499,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

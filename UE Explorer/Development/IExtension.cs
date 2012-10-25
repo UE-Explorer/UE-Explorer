@@ -14,7 +14,7 @@ namespace UEExplorer.Development
 		/// Called after UEExplorer_Form is initialized.
 		/// </summary>
 		/// <param name="form"></param>
-		void Initialize( UEExplorer.UI.UEExplorer_Form form );
+		void Initialize( UEExplorer.UI.ProgramForm form );
 
 		/// <summary>
 		/// Called when activated by end-user.

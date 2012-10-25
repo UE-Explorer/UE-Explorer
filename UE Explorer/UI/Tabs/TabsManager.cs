@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Storm.TabControl;
+using System.Reflection;
 
 namespace UEExplorer.UI
 {
@@ -20,33 +22,18 @@ namespace UEExplorer.UI
 	/// </summary>
 	public class TabComponent : ITabComponent
 	{
-		/// <summary>
-		/// The one who created me!
-		/// </summary>
-		public TabsManager _Owner = null;
-		public TabsManager Owner
-		{
-			get{ return _Owner; }
-			set{ _Owner = value; }
-		}
-
-		/// <summary>
-		/// The tab this tabcomponent works for.
-		/// </summary>
-		public TabStripItem _Tab = null;
-		public TabStripItem Tab
-		{
-			get { return _Tab; }
-			set { _Tab = value; }
-		}
+		public TabsManager Owner{ get; set; }
+		public TabStripItem Tab{ get; set; }
 
 		/// <summary>
 		///	Creates a new instance of the TabComponent class.
 		/// </summary>
 		public TabComponent()
 		{
+			Owner = null;
+			Tab = null;
 		}
-	
+
 		/// <summary>
 		/// Called after the tab was constructed.
 		/// </summary>
@@ -109,8 +96,8 @@ namespace UEExplorer.UI
 
 	public class TabsManager
 	{
-		public readonly UEExplorer_Form Owner = null;
-		public readonly TabStrip TabsControl = null;
+		public readonly ProgramForm Owner;
+		private readonly TabStrip _TabsControl;
 
 		public readonly List<ITabComponent> Tabs = new List<ITabComponent>();
 
@@ -118,26 +105,26 @@ namespace UEExplorer.UI
 		{
 			get
 			{
-				return Tabs != null && TabsControl != null 
-					? Tabs.Find( (t) => t.Tab == TabsControl.SelectedItem ) as ITabComponent 
+				return Tabs != null && _TabsControl != null 
+					? Tabs.Find( (t) => t.Tab == _TabsControl.SelectedItem ) as ITabComponent 
 					: null;
 			}
 		}
 
-		public TabsManager( UEExplorer_Form owner )
+		public TabsManager( ProgramForm owner, TabStrip tabsControl )
 		{
 			this.Owner = owner;
-			this.TabsControl = owner.TabComponentsStrip;
+			this._TabsControl = tabsControl;
 		}
 
 		public void AddTab( ITabComponent newComponent, TabStripItem newTab, bool bSkipAdd = false )
 		{
-			TabsControl.SelectedItem = newTab;
+			_TabsControl.SelectedItem = newTab;
 
 			// Add this page to the real tabs manager
 			if( !bSkipAdd )
 			{
-				TabsControl.AddTab( newTab );
+				_TabsControl.AddTab( newTab );
 			}	
 
 			newComponent.Tab = newTab;
@@ -149,20 +136,55 @@ namespace UEExplorer.UI
 
 		public void RemoveTab( ITabComponent delComponent )
 		{
-			TabsControl.RemoveTab( delComponent.Tab );
+			_TabsControl.RemoveTab( delComponent.Tab );
 			Tabs.Remove( delComponent );	// Handled elsewhere
 		}
 
 		public TabStripItem CreateTabPage( string title )
 		{
-			TabStripItem newTab = new TabStripItem();
+			var newTab = new TabStripItem();
 			newTab.IsDrawn = true;
 			newTab.Selected = true;
-			newTab.TabStripParent = TabsControl;
+			newTab.TabStripParent = _TabsControl;
 			newTab.TabIndex = 0;
 			newTab.Title = title;
 			newTab.BackColor = System.Drawing.Color.White;
 			return newTab;
 		}
+
+		public ITabComponent AddTabComponent( Type tabType, string tabName )
+		{
+			// Avoid duping tabs.
+			foreach( ITabComponent TC in Tabs )
+			{
+				if( TC.Tab.Title == tabName )
+				{
+					return null;
+				}
+			}
+
+			var newtab = Activator.CreateInstance( tabType ) as ITabComponent;
+			var item = CreateTabPage( tabName );
+			AddTab( newtab, item );
+
+			_TabsControl.Visible = _TabsControl.Items.Count > 0;
+			item.Refresh();
+			return newtab;
+		}
+
+		public bool IsLoaded( string fileName )
+		{
+			return Tabs.Exists(
+				delegate( ITabComponent tabComponent ){ 
+					return (IHasFileName)tabComponent == null 
+						|| ((IHasFileName)tabComponent).FileName == fileName; 
+				} 
+			);
+		}
+	}
+
+	public interface IHasFileName
+	{
+		string FileName{ get; }
 	}
 }

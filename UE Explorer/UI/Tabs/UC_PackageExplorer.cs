@@ -489,7 +489,7 @@ namespace UEExplorer.UI.Tabs
 			}
 		}
 
-		private UEExplorer_Form _Form = null;
+		private ProgramForm _Form = null;
 
 		private List<UClass> _ClassesList = null;
 

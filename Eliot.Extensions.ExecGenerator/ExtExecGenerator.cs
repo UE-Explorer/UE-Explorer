@@ -11,13 +11,13 @@ namespace Eliot.Extensions.ExecGenerator
 	[ExtensionTitle( "Exec Generator" )]
 	public class ExtExecGen : IExtension
 	{
-		private UEExplorer_Form _Owner;
+		private ProgramForm _Owner;
 
 		/// <summary>
 		/// Called after UEExplorer_Form is initialized.
 		/// </summary>
 		/// <param name="form"></param>
-		public void Initialize( UEExplorer_Form form )
+		public void Initialize( ProgramForm form )
 		{
 			_Owner = form;
 		}
@@ -27,7 +27,7 @@ namespace Eliot.Extensions.ExecGenerator
 		/// </summary>
 		public void OnActivate( object sender, EventArgs e )
 		{
-			_Owner.AddTabComponent( typeof(UC_ExecGenerator), "Unreal Exec Commands Generator" );
+			_Owner.TManager.AddTabComponent( typeof(UC_ExecGenerator), "Unreal Exec Commands Generator" );
 		}
 	}
 }

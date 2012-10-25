@@ -15,7 +15,7 @@ namespace UEExplorer.UI.Dialogs
 		private void AboutForm_Load( object sender, EventArgs e )
 		{
 			label4.Text = Application.ProductName;
-		 	VersionLabel.Text = "Version " + UEExplorer_Form.Version;
+		 	VersionLabel.Text = "Version " + ProgramForm.Version;
 			CopyrightLabel.Text = Application.ProductName + " " + AssemblyCopyright;
 			LinkLabel.Text = Program.WEBSITE_URL;
 		}
