@@ -964,9 +964,12 @@ namespace UEExplorer.UI.Tabs
 				if( groupNode == null )
 				{
 					groupNode = new ObjectNode( obj.Outer ) { Text = obj.Outer.Name };
+					SetImageKeyForObject( obj.Outer.Table, groupNode );
 					groups.Add( groupNode );
 				}
-				groupNode.Nodes.Add( new ObjectNode( obj ){Text = obj.Name} );
+				var objectNode = new ObjectNode( obj ){Text = obj.Name};
+				SetImageKeyForObject( obj.Table, objectNode );
+				groupNode.Nodes.Add( objectNode );
 			}
 
 			TreeView_Content.Nodes.AddRange( groups.ToArray() );
