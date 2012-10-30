@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows.Forms;
+using System.IO;
 
 namespace UEExplorer.UI.Dialogs
 {
@@ -17,7 +18,15 @@ namespace UEExplorer.UI.Dialogs
 			label4.Text = Application.ProductName;
 		 	VersionLabel.Text = "Version " + ProgramForm.Version;
 			CopyrightLabel.Text = Application.ProductName + " " + AssemblyCopyright;
-			LinkLabel.Text = Program.WEBSITE_URL;
+			LinkLabel.Text = Program.WEBSITE_URL;		
+			
+			DonatorsSet.ReadXml( Path.Combine( Application.StartupPath, "Config", "Donators.xml" ) );
+			DonatorsGrid.AutoGenerateColumns = true;
+			DonatorsGrid.DataSource = DonatorsSet;
+			DonatorsGrid.DataMember = "Donators";
+
+
+			DonateLink.Text = Program.Donate_URL;
 		}
 
 		private string AssemblyCopyright
@@ -27,6 +36,11 @@ namespace UEExplorer.UI.Dialogs
 				var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes( typeof( AssemblyCopyrightAttribute ), false );
 				return attributes.Length == 0 ? "" : ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
 			}
+		}
+
+		private void LicenseLink_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e )
+		{
+			System.Diagnostics.Process.Start( "file:///" + Path.Combine( Application.StartupPath, "license.html" ) );
 		}
 	}
 }

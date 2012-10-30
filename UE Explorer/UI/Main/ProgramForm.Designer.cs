@@ -31,7 +31,6 @@
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.MenuItem menuItem26;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProgramForm));
-			this.Cache_Browser = new System.Windows.Forms.FolderBrowserDialog();
 			this.UEStatusStrip = new System.Windows.Forms.StatusStrip();
 			this.LoadingProgress = new System.Windows.Forms.ToolStripProgressBar();
 			this.ProgressLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -55,7 +54,7 @@
 			this.toolsToolStripMenuItem = new System.Windows.Forms.MenuItem();
 			this.menuItem13 = new System.Windows.Forms.MenuItem();
 			this.menuItem14 = new System.Windows.Forms.MenuItem();
-			this.menuItem15 = new System.Windows.Forms.MenuItem();
+			this._CacheExtractorItem = new System.Windows.Forms.MenuItem();
 			this.menuItem16 = new System.Windows.Forms.MenuItem();
 			this.menuItem17 = new System.Windows.Forms.MenuItem();
 			this.menuItem18 = new System.Windows.Forms.MenuItem();
@@ -66,9 +65,9 @@
 			this.menuItem23 = new System.Windows.Forms.MenuItem();
 			this.menuItem25 = new System.Windows.Forms.MenuItem();
 			this.menuItem24 = new System.Windows.Forms.MenuItem();
+			this.menuItem6 = new System.Windows.Forms.MenuItem();
 			this.menuItem27 = new System.Windows.Forms.MenuItem();
 			this.menuItem5 = new System.Windows.Forms.MenuItem();
-			this.menuItem4 = new System.Windows.Forms.MenuItem();
 			this.tabStripItem1 = new Storm.TabControl.TabStripItem();
 			this.tabStripItem3 = new Storm.TabControl.TabStripItem();
 			menuItem26 = new System.Windows.Forms.MenuItem();
@@ -79,7 +78,7 @@
 			// 
 			// menuItem26
 			// 
-			menuItem26.Index = 3;
+			menuItem26.Index = 2;
 			menuItem26.Text = "> &Home";
 			menuItem26.Click += new System.EventHandler(this.menuItem26_Click);
 			// 
@@ -208,8 +207,7 @@
             this.menuItem2,
             this.toolsToolStripMenuItem,
             this.menuItem7,
-            this.menuItem3,
-            this.menuItem4});
+            this.menuItem3});
 			// 
 			// menuItem1
 			// 
@@ -286,7 +284,7 @@
 			this.toolsToolStripMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem13,
             this.menuItem14,
-            this.menuItem15,
+            this._CacheExtractorItem,
             this.menuItem16,
             this.menuItem17,
             this.menuItem18,
@@ -306,12 +304,12 @@
 			this.menuItem14.Index = 1;
 			this.menuItem14.Text = "-";
 			// 
-			// menuItem15
+			// _CacheExtractorItem
 			// 
-			this.menuItem15.Enabled = false;
-			this.menuItem15.Index = 2;
-			this.menuItem15.Text = "Cache Extractor";
-			this.menuItem15.Click += new System.EventHandler(this.unrealCacheExtractorToolStripMenuItem_Click);
+			this._CacheExtractorItem.Enabled = false;
+			this._CacheExtractorItem.Index = 2;
+			this._CacheExtractorItem.Text = "Cache Extractor";
+			this._CacheExtractorItem.Click += new System.EventHandler(this.unrealCacheExtractorToolStripMenuItem_Click);
 			// 
 			// menuItem16
 			// 
@@ -353,8 +351,9 @@
 			this.menuItem3.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem23,
             this.menuItem25,
-            this.menuItem24,
             menuItem26,
+            this.menuItem24,
+            this.menuItem6,
             this.menuItem27,
             this.menuItem5});
 			this.menuItem3.Text = "&Help";
@@ -372,26 +371,26 @@
 			// 
 			// menuItem24
 			// 
-			this.menuItem24.Index = 2;
+			this.menuItem24.Index = 3;
 			this.menuItem24.Text = "> &Forums";
 			this.menuItem24.Click += new System.EventHandler(this.menuItem24_Click);
 			// 
+			// menuItem6
+			// 
+			this.menuItem6.Index = 4;
+			this.menuItem6.Text = "> Donate";
+			this.menuItem6.Click += new System.EventHandler(this.donateToolStripMenuItem1_Click);
+			// 
 			// menuItem27
 			// 
-			this.menuItem27.Index = 4;
+			this.menuItem27.Index = 5;
 			this.menuItem27.Text = "-";
 			// 
 			// menuItem5
 			// 
-			this.menuItem5.Index = 5;
+			this.menuItem5.Index = 6;
 			this.menuItem5.Text = "&About...";
 			this.menuItem5.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-			// 
-			// menuItem4
-			// 
-			this.menuItem4.Index = 5;
-			this.menuItem4.Text = "> Donate!";
-			this.menuItem4.Click += new System.EventHandler(this.donateToolStripMenuItem1_Click);
 			// 
 			// tabStripItem1
 			// 
@@ -411,7 +410,7 @@
 			this.tabStripItem3.TabStripParent = this.TabComponentsStrip;
 			this.tabStripItem3.Title = "TabStrip Page 2";
 			// 
-			// UEExplorer_Form
+			// ProgramForm
 			// 
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,8 +425,8 @@
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Menu = this.mainMenu1;
-			this.MinimumSize = new System.Drawing.Size(700, 600);
-			this.Name = "UEExplorer_Form";
+			this.MinimumSize = new System.Drawing.Size(800, 600);
+			this.Name = "ProgramForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Shown += new System.EventHandler(this.Unreal_Explorer_Form_Shown);
 			this.DragDrop += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragDrop);
@@ -443,7 +442,6 @@
 
         #endregion
 
-		private System.Windows.Forms.FolderBrowserDialog Cache_Browser;
 		internal System.Windows.Forms.StatusStrip UEStatusStrip;
 		internal System.Windows.Forms.ToolStripStatusLabel ProgressLabel;
 		private System.Windows.Forms.PictureBox pictureBox1;
@@ -454,7 +452,6 @@
 		private System.Windows.Forms.MenuItem menuItem1;
 		private System.Windows.Forms.MenuItem toolsToolStripMenuItem;
 		private System.Windows.Forms.MenuItem menuItem3;
-		private System.Windows.Forms.MenuItem menuItem4;
 		private System.Windows.Forms.MenuItem menuItem5;
 		private System.Windows.Forms.MenuItem menuItem8;
 		private System.Windows.Forms.MenuItem menuItem9;
@@ -463,7 +460,7 @@
 		private System.Windows.Forms.MenuItem menuItem11;
 		private System.Windows.Forms.MenuItem menuItem13;
 		private System.Windows.Forms.MenuItem menuItem14;
-		private System.Windows.Forms.MenuItem menuItem15;
+		private System.Windows.Forms.MenuItem _CacheExtractorItem;
 		private System.Windows.Forms.MenuItem menuItem16;
 		private System.Windows.Forms.MenuItem menuItem17;
 		private System.Windows.Forms.MenuItem menuItem18;
@@ -483,6 +480,7 @@
 		private Storm.TabControl.TabStripItem tabStripItem1;
 		private Storm.TabControl.TabStripItem tabStripItem2;
 		private Storm.TabControl.TabStripItem tabStripItem3;
+		private System.Windows.Forms.MenuItem menuItem6;
 
 
 		// OnClick events!

@@ -15,7 +15,7 @@
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ApplicationIcon>UI\Main\ProgramIcon.ico</ApplicationIcon>
+    <ApplicationIcon>unrealfile.ico</ApplicationIcon>
     <ManifestCertificateThumbprint>140D43639E5D9F34C438962DAEEDEFED61E536EF</ManifestCertificateThumbprint>
     <ManifestKeyFile>UE_Explorer_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
@@ -458,7 +458,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UI\Main\ProgramIcon.ico">
+    <Content Include="Config\Donators.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="unrealfile.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -480,12 +483,12 @@
   <ItemGroup>
     <PublishFile Include="ICSharpCode.AvalonEdit">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

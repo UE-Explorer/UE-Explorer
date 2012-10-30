@@ -31,6 +31,10 @@ namespace UEExplorer.UI
 			SelectedNativeTable.Text = Program.Options.NTLPath;
 
 			Platform.Text = Program.Options.Platform;
+
+#if DEBUG
+			_CacheExtractorItem.Enabled = true;
+#endif
 		}
 
 		private void SelectedNativeTable_DropDownOpening( object sender, EventArgs e )
