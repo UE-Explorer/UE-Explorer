@@ -1,6 +1,5 @@
 ﻿/***********************************************************************
- *	Author - Eliot Van Uytfanghe
- *	Copyright - (C) Eliot Van Uytfanghe 2009 - 2011
+ * Copyright 2009-2012 Eliot Van Uytfanghe. All rights reserved. 
  **********************************************************************/
 using System;
 using System.Collections.Generic;
@@ -147,7 +146,7 @@ namespace UEExplorer
 
 		internal const string WEBSITE_URL = 
 #if DEBUG
-			"http://localhost/eliot/";
+			"http://localhost/Eliot/";
 #else
 			"http://eliotvu.com/";
 #endif
@@ -157,6 +156,7 @@ namespace UEExplorer
 		internal const string Program_Parm_ID = "data[items][id]=21";
 		internal const string Version_URL = WEBSITE_URL +  "apps/version/";
 		internal const string Forum_URL = WEBSITE_URL + "forum/";
+		internal const string APPS_URL = WEBSITE_URL + "apps/ue_explorer/";
 
 		internal static string Post( string url, string data )
 		{
@@ -171,14 +171,30 @@ namespace UEExplorer
 				postStream.Write( buffer, 0, buffer.Length );
 			}
 
-			var response = webReq.GetResponse();
 			string result;
-			using( var responseReader = new StreamReader( response.GetResponseStream() ) )
-			{
+			using( var response = webReq.GetResponse() )
+			{ 
+				using( var responseReader = new StreamReader( response.GetResponseStream() ) )
+				{
 				
-			    result = responseReader.ReadToEnd();
+					result = responseReader.ReadToEnd();
+				}
 			}
 			return result;
+		}
+
+		public static MemoryStream ReadRemoteFile( string url )
+		{
+			var webReq = (HttpWebRequest)WebRequest.Create( url );
+			var buffer = new MemoryStream();
+			using( var response = webReq.GetResponse() )
+			{
+				using( var responseStream = response.GetResponseStream() )
+				{
+					responseStream.CopyTo( buffer );
+				}
+			}
+			return buffer;
 		}
 
 #region Registry	
