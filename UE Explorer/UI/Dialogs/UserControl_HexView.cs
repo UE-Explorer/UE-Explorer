@@ -229,28 +229,53 @@ namespace UEExplorer.UI.Dialogs
 			if( Buffer == null ) 
 				return;
 
+			e.Graphics.PageUnit = GraphicsUnit.Pixel;
 			int offset = (ViewWidth * vScrollBar1.Value);
-			int lineCount = Math.Min( (int)(HexLinePanel.ClientSize.Height / _LineSpacing), (Buffer.Length - offset) / ViewWidth + 
+			int lineCount = Math.Min( (int)((float)HexLinePanel.ClientSize.Height / _LineSpacing), (Buffer.Length - offset) / ViewWidth + 
 				(((Buffer.Length - offset) % ViewWidth) > 0 ? 1 : 0) );
 		
 			float lineyOffset = _LineSpacing;
-			float byteColumoffset = _DrawByte ? 96 : 0;
-			float asciiColumoffset = byteColumoffset == 0 ? 96 : byteColumoffset + ColumnSize + ColumnOffset;
+			float byteColumoffset = _DrawByte ? 74 : 0;
+			float asciiColumoffset = byteColumoffset == 0 ? 74 : byteColumoffset + ColumnSize + ColumnOffset;
 
-			Brush b = new SolidBrush( ForeColor );
+			Brush brush = new SolidBrush( ForeColor );
 			if( _DrawByte )
 			{
+				float x = byteColumoffset;
+				float y = lineyOffset;
+
+				//e.Graphics.FillRectangle( new SolidBrush( Color.FromArgb(44, 44, 44) ), x, y, ColumnSize, _LineSpacing );
+				e.Graphics.DrawLine( new Pen( new SolidBrush( Color.DimGray ) ), x, y + _LineSpacing, x + ColumnSize, y + _LineSpacing );
+
 				for( int i = 0; i < ViewWidth; ++ i )
 				{
-					e.Graphics.DrawString( _Hexs[i].ToString( CultureInfo.InvariantCulture ), Font, b, byteColumoffset + (i * HexSpacing), lineyOffset );
+					var c = _Hexs[i].ToString( CultureInfo.InvariantCulture );
+					var cs = e.Graphics.MeasureString( c, HexLinePanel.Font, new PointF(0,0), StringFormat.GenericTypographic );
+					e.Graphics.DrawString( c, HexLinePanel.Font, brush, 
+						x + i*HexSpacing, 
+						y + cs.Height*0.5f, 
+						StringFormat.GenericTypographic 
+					);
 				}
 			}
 
 			if( _DrawASCII )
 			{
+				float x = asciiColumoffset;
+				float y = lineyOffset;
+
+				//e.Graphics.FillRectangle( new SolidBrush( Color.FromArgb(44, 44, 44) ), x, y, ColumnSize, _LineSpacing );
+				e.Graphics.DrawLine( new Pen( new SolidBrush( Color.DimGray ) ), x, y + _LineSpacing, x + ViewWidth * 16, y + _LineSpacing );
+
 				for( int i = 0; i < ViewWidth; ++ i )
 				{
-					e.Graphics.DrawString( _Hexs[i].ToString( CultureInfo.InvariantCulture ), Font, b, asciiColumoffset + (i * 16), lineyOffset );
+					var c = _Hexs[i].ToString( CultureInfo.InvariantCulture );
+					var cs = e.Graphics.MeasureString( c, HexLinePanel.Font, new PointF(0,0), StringFormat.GenericTypographic );
+					e.Graphics.DrawString( c, HexLinePanel.Font, brush, 
+						x + i*16, 
+						y + cs.Height*0.5f, 
+						StringFormat.GenericTypographic 
+					);
 				}
 			}
 			lineyOffset += Font.Height;
@@ -265,8 +290,8 @@ namespace UEExplorer.UI.Dialogs
 					break;
 				}
 
-				string lineText = String.Format( "0x{0:x8}", offset ).PadLeft( 8, '0' ).ToUpper();
-				e.Graphics.DrawString( lineText, Font, b, 0, lineyOffset );
+				string lineText = String.Format( "{0:x8}", offset ).PadLeft( 8, '0' ).ToUpper();
+				e.Graphics.DrawString( lineText, Font, brush, 0, lineyOffset );
 			
 				if( _DrawByte )
 				{
@@ -275,13 +300,13 @@ namespace UEExplorer.UI.Dialogs
 						int byteOffset = (offset + hexByte);
 						if( byteOffset < Buffer.Length )
 						{
-							Brush drawbrush = b;
+							Brush drawbrush = brush;
 							string drawntext = String.Format( "{0:x2}", Buffer[byteOffset] ).ToUpper();
 							if( byteOffset == SelectedOffset )
 							{
 								// Draw the selection.
 								drawbrush = new SolidBrush( Color.Blue );
-								var p = new Pen( b );
+								var p = new Pen( brush );
 								e.Graphics.DrawLine( p, 
 									new Point( (int)(byteColumoffset + (hexByte * HexSpacing)), 
 										(int)(lineyOffset + extraLineOffset) 
@@ -336,13 +361,13 @@ namespace UEExplorer.UI.Dialogs
 						int byteOffset = (offset + hexByte);
 						if( byteOffset < Buffer.Length )
 						{
-							Brush drawbrush = b;
-							string drawntext = "" + FilterByte( ref Buffer[byteOffset] );
+							Brush drawbrush = brush;
+							string drawntext = "" + FilterByte( Buffer[byteOffset] );
 							if( byteOffset == SelectedOffset )
 							{
 								// Draw the selection.
 								drawbrush = new SolidBrush( Color.Blue );
-								var p = new Pen( b );
+								var p = new Pen( brush );
 								e.Graphics.DrawLine( p, new Point( (int)(asciiColumoffset + (hexByte * 16)), 
 									(int)(lineyOffset + extraLineOffset) ), new Point( (int)(asciiColumoffset + ((hexByte + 1) * 16)), 
 										(int)(lineyOffset + extraLineOffset) ) );   
@@ -355,7 +380,7 @@ namespace UEExplorer.UI.Dialogs
 			}
 		}
 
-		private static char FilterByte( ref byte code )
+		internal static char FilterByte( byte code )
 		{
 			if( code >= 0x20 && code <= 0x7E )
 			{
@@ -547,6 +572,7 @@ namespace UEExplorer.UI.Dialogs
 			}
 			//_SelectedOffset = -1;
 			//HexLinePanel.Invalidate();
+			this.Focus();
 		}
 
 		private void UserControl_HexView_KeyDown( object sender, KeyEventArgs e )
