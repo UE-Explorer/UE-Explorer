@@ -25,7 +25,7 @@ namespace UEExplorer.UI.Dialogs
 			InitializeDonators();
 		}
 
-		private readonly const string DONATORS_URL = "http://eliotvu.com/files/donators.txt"; 
+		private const string DONATORS_URL = "http://eliotvu.com/files/donators.txt"; 
 		private void InitializeDonators()
 		{
 			var buffer = new StreamReader( Program.ReadRemoteFile( DONATORS_URL ) );
