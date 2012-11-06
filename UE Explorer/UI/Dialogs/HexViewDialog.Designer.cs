@@ -76,8 +76,8 @@
 			// 
 			this.toolStripStatusLabel1.BackColor = System.Drawing.Color.Transparent;
 			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-			this.toolStripStatusLabel1.Size = new System.Drawing.Size(62, 17);
-			this.toolStripStatusLabel1.Text = "Buffer Size";
+			this.toolStripStatusLabel1.Size = new System.Drawing.Size(27, 17);
+			this.toolStripStatusLabel1.Text = "Size";
 			// 
 			// ToolStripStatusLabel_Position
 			// 
@@ -114,7 +114,7 @@
 			this.viewASCIIToolStripMenuItem.CheckOnClick = true;
 			this.viewASCIIToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.viewASCIIToolStripMenuItem.Name = "viewASCIIToolStripMenuItem";
-			this.viewASCIIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.viewASCIIToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
 			this.viewASCIIToolStripMenuItem.Text = "View ASCII";
 			this.viewASCIIToolStripMenuItem.CheckedChanged += new System.EventHandler(this.viewASCIIToolStripMenuItem_CheckedChanged);
 			// 
@@ -124,7 +124,7 @@
 			this.viewByteToolStripMenuItem.CheckOnClick = true;
 			this.viewByteToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.viewByteToolStripMenuItem.Name = "viewByteToolStripMenuItem";
-			this.viewByteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.viewByteToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
 			this.viewByteToolStripMenuItem.Text = "View Byte";
 			this.viewByteToolStripMenuItem.CheckedChanged += new System.EventHandler(this.viewByteToolStripMenuItem_CheckedChanged);
 			// 
@@ -132,7 +132,7 @@
 			// 
 			this.viewDecimalToolStripMenuItem.CheckOnClick = true;
 			this.viewDecimalToolStripMenuItem.Name = "viewDecimalToolStripMenuItem";
-			this.viewDecimalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.viewDecimalToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
 			this.viewDecimalToolStripMenuItem.Text = "View Decimal";
 			this.viewDecimalToolStripMenuItem.Visible = false;
 			// 
@@ -140,7 +140,7 @@
 			// 
 			this.viewIntegerToolStripMenuItem.CheckOnClick = true;
 			this.viewIntegerToolStripMenuItem.Name = "viewIntegerToolStripMenuItem";
-			this.viewIntegerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.viewIntegerToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
 			this.viewIntegerToolStripMenuItem.Text = "View Integer";
 			this.viewIntegerToolStripMenuItem.Visible = false;
 			// 
@@ -171,17 +171,17 @@
 			// 
 			// exportBinaryFileToolStripMenuItem
 			// 
-			this.exportBinaryFileToolStripMenuItem.Enabled = false;
 			this.exportBinaryFileToolStripMenuItem.Name = "exportBinaryFileToolStripMenuItem";
 			this.exportBinaryFileToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
 			this.exportBinaryFileToolStripMenuItem.Text = "Export Binary File";
+			this.exportBinaryFileToolStripMenuItem.Click += new System.EventHandler(this.exportBinaryFileToolStripMenuItem_Click);
 			// 
 			// importBinaryFileToolStripMenuItem
 			// 
-			this.importBinaryFileToolStripMenuItem.Enabled = false;
 			this.importBinaryFileToolStripMenuItem.Name = "importBinaryFileToolStripMenuItem";
 			this.importBinaryFileToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
 			this.importBinaryFileToolStripMenuItem.Text = "Import Binary File";
+			this.importBinaryFileToolStripMenuItem.Click += new System.EventHandler(this.importBinaryFileToolStripMenuItem_Click);
 			// 
 			// userControl_HexView1
 			// 

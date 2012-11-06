@@ -1054,7 +1054,7 @@ namespace UEExplorer.UI.Tabs
 			File.WriteAllLines( packagePath + "\\Classes\\" + Path.GetFileNameWithoutExtension( _UnrealPackage.FullPackageName ) + UnrealExtensions.UnrealFlagsExt, upkgContent );
 		}
 
-		private void ReloadPackage()
+		internal void ReloadPackage()
 		{
 			Owner.RemoveTab( this );
 			Owner.Owner.LoadFile( FileName );
@@ -1256,8 +1256,13 @@ namespace UEExplorer.UI.Tabs
 						}
 					}
 
-					itemCollection.Add( "View Buffer" );
-					if( (decompilableObjectNode.Object as UObject).ThrownException != null )
+					if( (decompilableObjectNode.Object as ISupportsBuffer) != null )
+					{ 
+						itemCollection.Add( "View Buffer" );
+					}
+
+					var myObj = decompilableObjectNode.Object as UObject;
+					if( myObj != null && myObj.ThrownException != null )
 					{
 						itemCollection.Add( new ToolStripSeparator() );
 						itemCollection.Add( "View Exception" );		
@@ -1529,7 +1534,7 @@ namespace UEExplorer.UI.Tabs
 					case "View Buffer":
 					{
 						var obj = node.Object as UObject;
-						var HVD = new HexViewDialog( obj );
+						var HVD = new HexViewDialog( obj, this );
 						HVD.Show( _Form );
 						HVD.ShowInTaskbar = true;
 						break;
@@ -1773,7 +1778,7 @@ namespace UEExplorer.UI.Tabs
 		private void viewBufferToolStripMenuItem_Click( object sender, EventArgs e )
 		{
 			var obj = new UPackageObject( _UnrealPackage, _SummarySize );
-			var HVD = new HexViewDialog( obj );
+			var HVD = new HexViewDialog( obj, this );
 			HVD.Show( _Form );
 			HVD.ShowInTaskbar = true;
 		}

@@ -1,22 +1,28 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
+using UEExplorer.UI.Tabs;
+using UELib;
 using UELib.Core;
 
 namespace UEExplorer.UI.Dialogs
 {
 	public partial class HexViewDialog : Form
 	{
+		private readonly UC_PackageExplorer _Owner;
+
 		public HexViewDialog()
 		{
 			InitializeComponent();
 		}
 
-		public HexViewDialog( UObject uObject ) : this()
+		public HexViewDialog( UObject uObject, Tabs.UC_PackageExplorer owner ) : this()
 		{
+			_Owner = owner;
 			userControl_HexView1.SetHexData( uObject );
 			try
 			{
-				toolStripStatusLabel1.Text += ": " + String.Format( "0x{0:8x}", userControl_HexView1.Buffer.Length ).PadLeft( 8, '0' );
+				toolStripStatusLabel1.Text += ": " + String.Format( "{0}", userControl_HexView1.Buffer.Length ).PadLeft( 8, '0' );
 				Text = uObject.Package.PackageName + "." + uObject.GetOuterGroup() + " " + Text;
 			}
 			catch( Exception )
@@ -101,6 +107,68 @@ namespace UEExplorer.UI.Dialogs
 			}
 
 			Clipboard.SetText( input );
+		}
+
+		private void exportBinaryFileToolStripMenuItem_Click( object sender, EventArgs e )
+		{
+			var fsd = new SaveFileDialog()
+			{
+				FileName = userControl_HexView1.HexObject.GetOuterGroup() 
+					+ "." + userControl_HexView1.HexObject.GetClassName()
+			};
+
+			if( fsd.ShowDialog() == DialogResult.OK )
+			{
+				File.WriteAllBytes( fsd.FileName, userControl_HexView1.Buffer );
+			}
+		}
+
+		private void importBinaryFileToolStripMenuItem_Click( object sender, EventArgs e )
+		{
+			var hexObject = userControl_HexView1.HexObject;
+
+			var osd = new OpenFileDialog()
+			{
+				FileName = hexObject.GetOuterGroup() 
+					+ "." + hexObject.GetClassName()	
+			};
+
+			if( osd.ShowDialog() == DialogResult.OK )
+			{
+				var buffer = File.ReadAllBytes( osd.FileName );		
+				if( buffer.Length != userControl_HexView1.Buffer.Length )
+				{
+					MessageBox.Show( "You cannot import binary files with an unequal length!" );		
+					return;
+				}
+
+				userControl_HexView1.Buffer = buffer;
+				userControl_HexView1.Refresh();
+
+				var result = MessageBox.Show( "Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!", "Save?", MessageBoxButtons.YesNo );
+				if( result == DialogResult.Yes )
+				{
+					hexObject.Package.Stream.Close();
+					hexObject.Package.Stream.Dispose();
+
+					using( var package = UnrealPackage.DeserializePackage( hexObject.Package.FullPackageName, FileAccess.ReadWrite ) )
+					{ 
+						package.Stream.Seek( hexObject.ExportTable.SerialOffset, SeekOrigin.Begin );
+						try
+						{ 
+							package.Stream.Write( buffer, 0, buffer.Length );
+							package.Stream.Flush();
+
+							Close();
+							_Owner.ReloadPackage();
+						}
+						catch( FileFormatException exc )
+						{
+							MessageBox.Show( "Couldn't save the package because of the following exception: " + exc );
+						}	
+					}
+				}
+			}
 		}
 	}
 }

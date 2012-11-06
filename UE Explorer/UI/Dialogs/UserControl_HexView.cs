@@ -90,6 +90,10 @@ namespace UEExplorer.UI.Dialogs
 		}
 
 		private UObject _Object;
+		public UObject HexObject
+		{
+			get{ return _Object; }
+		}
 
 		public UserControl_HexView()
 		{
@@ -229,7 +233,7 @@ namespace UEExplorer.UI.Dialogs
 			if( Buffer == null ) 
 				return;
 
-			e.Graphics.PageUnit = GraphicsUnit.Pixel;
+			//e.Graphics.PageUnit = GraphicsUnit.Pixel;
 			int offset = (ViewWidth * vScrollBar1.Value);
 			int lineCount = Math.Min( (int)((float)HexLinePanel.ClientSize.Height / _LineSpacing), (Buffer.Length - offset) / ViewWidth + 
 				(((Buffer.Length - offset) % ViewWidth) > 0 ? 1 : 0) );
@@ -401,7 +405,12 @@ namespace UEExplorer.UI.Dialogs
 			DissambledObject.Text = "";
 			DissambledName.Text = "";
 
-			((HexViewDialog)ParentForm).ToolStripStatusLabel_Position.Text = "Position: " + SelectedOffset;
+			((HexViewDialog)ParentForm).ToolStripStatusLabel_Position.Text = 
+				String.Format( 
+					"Position: {0} + {1}", 
+					HexObject.ExportTable != null ? HexObject.ExportTable.SerialOffset : 0, 
+					SelectedOffset 
+			);
 			var cb = new byte[8];
 			int i = 0;
  			for( ; SelectedOffset + i < Buffer.Length && i < 8; ++ i )
@@ -505,8 +514,8 @@ namespace UEExplorer.UI.Dialogs
 				(((Buffer.Length - offset) % ViewWidth) > 0 ? 1 : 0) );
 		
 			float lineyoffset = _LineSpacing;
-			float byteoffset = _DrawByte ? 96 : 0;
-			float charoffset = byteoffset == 0 ? 96 : byteoffset + ColumnSize + ColumnOffset;
+			float byteoffset = _DrawByte ? 74 : 0;
+			float charoffset = byteoffset == 0 ? 74 : byteoffset + ColumnSize + ColumnOffset;
 
 			for( int line = 0; line < lineCount; ++ line )
 			{
