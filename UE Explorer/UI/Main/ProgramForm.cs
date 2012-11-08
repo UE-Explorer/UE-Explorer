@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using Eliot.Utilities;
 using Storm.TabControl;
 using UEExplorer.Properties;
 
@@ -17,6 +18,7 @@ namespace UEExplorer.UI
     public partial class ProgramForm : Form
     {		
 		public readonly TabsManager TManager;
+		private MRUManager _MRUManager;
 
 		private void InitializeUI()
 		{		 
@@ -35,6 +37,35 @@ namespace UEExplorer.UI
 #if DEBUG
 			_CacheExtractorItem.Enabled = true;
 #endif
+
+			MRUManager.SetStoragePath( Application.StartupPath );
+			_MRUManager = MRUManager.Load();
+			_MRUManager.RefreshEvent += RefreshMRUEvent;
+			RefreshMRUEvent();
+		}
+
+		private void RefreshMRUEvent()
+		{
+			_ROF.MenuItems.Clear();
+			for( int i = _MRUManager.Files.Count - 1; i >= 0; -- i )
+			{
+				var item = _ROF.MenuItems.Add
+				( 
+					(_MRUManager.Files.Count - i) + " " + Path.GetFileName( _MRUManager.Files[i] ) 
+				);		
+				item.Tag = _MRUManager.Files[i];
+				item.Click += _ROF_ItemClicked; 
+			}
+
+			_ROF.Enabled = _ROF.MenuItems.Count > 0;
+			_MRUManager.Save();
+		}
+
+		private void _ROF_ItemClicked( object sender, EventArgs e )
+		{
+			var item = sender as MenuItem;
+			LoadFile( item.Tag as string );
+			RefreshMRUEvent();
 		}
 
 		private void SelectedNativeTable_DropDownOpening( object sender, EventArgs e )
@@ -77,12 +108,12 @@ namespace UEExplorer.UI
 							string extensionname = "Extension";
 
 							object[] attribs = t.GetCustomAttributes( typeof(ExtensionTitleAttribute), false );
-							if( attribs != null && attribs.Length > 0 )
+							if( attribs.Length > 0 )
 							{
 								extensionname = ((ExtensionTitleAttribute)attribs[0]).Title;
 							}
 				 
-							IExtension ext = Activator.CreateInstance( t ) as IExtension;
+							var ext = Activator.CreateInstance( t ) as IExtension;
 
 							var item = menuItem13.MenuItems.Add( extensionname );
 							item.Click += ext.OnActivate;
@@ -178,6 +209,8 @@ namespace UEExplorer.UI
 			finally
 			{
 				ProgressStatus.Reset();
+
+			   _MRUManager.AddFile( fileName );
 			}
 		}
 
@@ -425,7 +458,7 @@ namespace UEExplorer.UI
 			Program.Options.Platform = Platform.Text;
 			Program.SaveConfig();
 		}
-    }
+	}
 
 	public static class ProgressStatus
 	{

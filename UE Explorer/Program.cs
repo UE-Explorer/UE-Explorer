@@ -52,7 +52,7 @@ namespace UEExplorer
 
 		public class SingleInstanceApplication : WindowsFormsApplicationBase
 		{
-			internal SingleInstanceApplication()
+			public SingleInstanceApplication()
 			{
 				IsSingleInstance = true;
 			}

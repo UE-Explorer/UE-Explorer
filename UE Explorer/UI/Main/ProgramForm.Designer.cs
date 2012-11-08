@@ -44,6 +44,7 @@
 			this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
 			this.menuItem1 = new System.Windows.Forms.MenuItem();
 			this.menuItem8 = new System.Windows.Forms.MenuItem();
+			this._ROF = new System.Windows.Forms.MenuItem();
 			this.menuItem9 = new System.Windows.Forms.MenuItem();
 			this.menuItem12 = new System.Windows.Forms.MenuItem();
 			this.menuItem11 = new System.Windows.Forms.MenuItem();
@@ -214,6 +215,7 @@
 			this.menuItem1.Index = 0;
 			this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem8,
+            this._ROF,
             this.menuItem9,
             this.menuItem12,
             this.menuItem11,
@@ -227,17 +229,23 @@
 			this.menuItem8.Text = "&Open File...";
 			this.menuItem8.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
 			// 
+			// _ROF
+			// 
+			this._ROF.Enabled = false;
+			this._ROF.Index = 1;
+			this._ROF.Text = "Recent Opened Files";
+			// 
 			// menuItem9
 			// 
 			this.menuItem9.Enabled = false;
-			this.menuItem9.Index = 1;
+			this.menuItem9.Index = 2;
 			this.menuItem9.Text = "-";
 			this.menuItem9.Visible = false;
 			// 
 			// menuItem12
 			// 
 			this.menuItem12.Enabled = false;
-			this.menuItem12.Index = 2;
+			this.menuItem12.Index = 3;
 			this.menuItem12.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
 			this.menuItem12.Text = "&Save File";
 			this.menuItem12.Visible = false;
@@ -245,12 +253,12 @@
 			// 
 			// menuItem11
 			// 
-			this.menuItem11.Index = 3;
+			this.menuItem11.Index = 4;
 			this.menuItem11.Text = "-";
 			// 
 			// menuItem10
 			// 
-			this.menuItem10.Index = 4;
+			this.menuItem10.Index = 5;
 			this.menuItem10.Shortcut = System.Windows.Forms.Shortcut.AltF4;
 			this.menuItem10.Text = "E&xit";
 			this.menuItem10.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
@@ -481,6 +489,7 @@
 		private Storm.TabControl.TabStripItem tabStripItem2;
 		private Storm.TabControl.TabStripItem tabStripItem3;
 		private System.Windows.Forms.MenuItem menuItem6;
+		private System.Windows.Forms.MenuItem _ROF;
 
 
 		// OnClick events!
