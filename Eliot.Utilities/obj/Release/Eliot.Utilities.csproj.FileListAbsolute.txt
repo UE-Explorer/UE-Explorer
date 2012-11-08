@@ -1,4 +1,0 @@
-C:\Program Files (x86)\UE Explorer\Eliot.Utilities.dll
-C:\Program Files (x86)\UE Explorer\Eliot.Utilities.pdb
-C:\Users\Eliot\Documents\Visual Studio 2010\Projects\UE Explorer\Eliot.Utilities\obj\Release\Eliot.Utilities.dll
-C:\Users\Eliot\Documents\Visual Studio 2010\Projects\UE Explorer\Eliot.Utilities\obj\Release\Eliot.Utilities.pdb
