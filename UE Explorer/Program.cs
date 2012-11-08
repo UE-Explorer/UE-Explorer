@@ -158,45 +158,6 @@ namespace UEExplorer
 		internal const string Forum_URL = WEBSITE_URL + "forum/";
 		internal const string APPS_URL = WEBSITE_URL + "apps/ue_explorer/";
 
-		internal static string Post( string url, string data )
-		{
-			var webReq = (HttpWebRequest)WebRequest.Create( url );
-			webReq.Method = "POST";
-			webReq.ContentType = "application/x-www-form-urlencoded";
-			var buffer = Encoding.UTF8.GetBytes( data );
-			webReq.ContentLength = buffer.Length;
-
-			using( var postStream = webReq.GetRequestStream())
-			{
-				postStream.Write( buffer, 0, buffer.Length );
-			}
-
-			string result;
-			using( var response = webReq.GetResponse() )
-			{ 
-				using( var responseReader = new StreamReader( response.GetResponseStream() ) )
-				{
-				
-					result = responseReader.ReadToEnd();
-				}
-			}
-			return result;
-		}
-
-		public static MemoryStream ReadRemoteFile( string url )
-		{
-			var webReq = (HttpWebRequest)WebRequest.Create( url );
-			var buffer = new MemoryStream();
-			using( var response = webReq.GetResponse() )
-			{
-				using( var responseStream = response.GetResponseStream() )
-				{
-					responseStream.CopyTo( buffer );
-				}
-			}
-			return buffer;
-		}
-
 #region Registry	
 		private const string RegistryFileFolderName = "UEExplorer.AnyUnrealFile";
 

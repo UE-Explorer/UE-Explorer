@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Eliot.Utilities;
+using Eliot.Utilities.Net;
 
 namespace UEExplorer.UI.Dialogs
 {
@@ -28,14 +30,14 @@ namespace UEExplorer.UI.Dialogs
 		private const string DONATORS_URL = "http://eliotvu.com/files/donators.txt"; 
 		private void InitializeDonators()
 		{
-			var buffer = new StreamReader( Program.ReadRemoteFile( DONATORS_URL ) );
-			buffer.BaseStream.Position = 0;
-
-			DonatorsSet.ReadXml( buffer );
+			using( var buffer = new StreamReader( WebRequest.Create( DONATORS_URL ).Get() ) )
+			{ 
+				buffer.BaseStream.Position = 0;
+				DonatorsSet.ReadXml( buffer );
+			}
 			DonatorsGrid.AutoGenerateColumns = true;
 			DonatorsGrid.DataSource = DonatorsSet;
 			DonatorsGrid.DataMember = "Donators";
-
 
 			DonateLink.Text = Program.Donate_URL;		
 		}

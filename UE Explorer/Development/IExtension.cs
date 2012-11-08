@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UEExplorer.UI;
-using UEExplorer.UI.Tabs;
-using System.ComponentModel;
 
 namespace UEExplorer.Development
 {
+	using UI;
+
 	public interface IExtension
 	{
 		/// <summary>
-		/// Called after UEExplorer_Form is initialized.
+		/// Called after main form is initialized.
 		/// </summary>
 		/// <param name="form"></param>
-		void Initialize( UEExplorer.UI.ProgramForm form );
+		void Initialize( ProgramForm form );
 
 		/// <summary>
 		/// Called when activated by end-user.
@@ -24,7 +20,7 @@ namespace UEExplorer.Development
 
 	public class ExtensionTitleAttribute : Attribute
 	{
-		public string Title;
+		public readonly string Title;
 
 		public ExtensionTitleAttribute( string title )
 		{

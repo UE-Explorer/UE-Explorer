@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Net;
 using System.Web;
 using System.Windows.Forms;
+using Eliot.Utilities.Net;
 
 namespace UEExplorer.UI.Dialogs
 {
@@ -27,7 +29,7 @@ namespace UEExplorer.UI.Dialogs
 		protected void SendReport()
 		{
 			SendDialog sendDialog = new SendDialog();
-			if( sendDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK )
+			if( sendDialog.ShowDialog() == DialogResult.OK )
 			{
 				var logData = " exception:\r\n<code>" 
 					+ ExceptionMessage.Text + "</code>\r\n\r\nStack:\r\n<code>" 
@@ -40,12 +42,16 @@ namespace UEExplorer.UI.Dialogs
 				
 				try
 				{
-					Program.Post( Program.WEBSITE_URL + "report/send/", postData );  
-					MessageBox.Show( "Thanks for reporting this exception occurrance!", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information );
+					WebRequest.Create( Program.WEBSITE_URL + "report/send/" ).Post( postData );  
+					MessageBox.Show( "Thanks for reporting this exception occurrance!", 
+						"Successful", MessageBoxButtons.OK, MessageBoxIcon.Information 
+					);
 				}
 				catch
 				{
-					MessageBox.Show( "Failed to send this report. Please try again later!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+					MessageBox.Show( "Failed to send this report. Please try again later!", 
+						"Error", MessageBoxButtons.OK, MessageBoxIcon.Error 
+					);
 				}
 			}
 		}

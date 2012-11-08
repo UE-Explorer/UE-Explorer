@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
 using Eliot.Utilities;
+using Eliot.Utilities.Net;
 using Storm.TabControl;
 using UEExplorer.Properties;
 
@@ -392,7 +394,7 @@ namespace UEExplorer.UI
 				ProgressStatus.SaveStatus();
 				ProgressStatus.SetStatus( Resources.ProgramForm_checkForUpdates_Progress_Status );
 
-				var result = Program.Post( Program.Version_URL, Program.Program_Parm_ID ).Trim();
+				var result = WebRequest.Create( Program.Version_URL ).Post( Program.Program_Parm_ID ).Trim();
 				if( result != Version )
 				{
 					if( MessageBox.Show(
