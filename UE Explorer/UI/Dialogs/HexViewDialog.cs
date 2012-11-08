@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using UEExplorer.Properties;
 using UEExplorer.UI.Tabs;
 using UELib;
 using UELib.Core;
@@ -16,7 +17,7 @@ namespace UEExplorer.UI.Dialogs
 			InitializeComponent();
 		}
 
-		public HexViewDialog( UObject uObject, Tabs.UC_PackageExplorer owner ) : this()
+		public HexViewDialog( UObject uObject, UC_PackageExplorer owner ) : this()
 		{
 			_Owner = owner;
 			userControl_HexView1.SetHexData( uObject );
@@ -138,20 +139,29 @@ namespace UEExplorer.UI.Dialogs
 				var buffer = File.ReadAllBytes( osd.FileName );		
 				if( buffer.Length != userControl_HexView1.Buffer.Length )
 				{
-					MessageBox.Show( "You cannot import binary files with an unequal length!" );		
+					MessageBox.Show( Resources.CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH );		
 					return;
 				}
 
 				userControl_HexView1.Buffer = buffer;
 				userControl_HexView1.Refresh();
 
-				var result = MessageBox.Show( "Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!", "Save?", MessageBoxButtons.YesNo );
+				var result = MessageBox.Show(
+					Resources.SAVE_QUESTION_WARNING, 
+					Resources.SAVE_QUESTION, 
+					MessageBoxButtons.YesNo 
+				);
 				if( result == DialogResult.Yes )
 				{
 					hexObject.Package.Stream.Close();
 					hexObject.Package.Stream.Dispose();
 
-					using( var package = UnrealPackage.DeserializePackage( hexObject.Package.FullPackageName, FileAccess.ReadWrite ) )
+					using(  var package = UnrealPackage.DeserializePackage
+							( 
+								hexObject.Package.FullPackageName, 
+								FileAccess.ReadWrite 
+							)
+						)
 					{ 
 						package.Stream.Seek( hexObject.ExportTable.SerialOffset, SeekOrigin.Begin );
 						try
@@ -162,9 +172,9 @@ namespace UEExplorer.UI.Dialogs
 							Close();
 							_Owner.ReloadPackage();
 						}
-						catch( FileFormatException exc )
+						catch( IOException exc )
 						{
-							MessageBox.Show( "Couldn't save the package because of the following exception: " + exc );
+							MessageBox.Show( string.Format( Resources.COULDNT_SAVE_EXCEPTION, exc ) );
 						}	
 					}
 				}

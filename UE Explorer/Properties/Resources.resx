@@ -206,4 +206,16 @@ Your version: {0}
 Latest version: {1}</value>
 		<comment>Dialog description.</comment>
 	</data>
+	<data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH">
+		<value xml:space="preserve">You cannot import binary files with an unequal length!</value>
+	</data>
+	<data name="SAVE_QUESTION_WARNING">
+		<value xml:space="preserve">Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!</value>
+	</data>
+	<data name="SAVE_QUESTION">
+		<value xml:space="preserve">Save?</value>
+	</data>
+	<data name="COULDNT_SAVE_EXCEPTION">
+		<value xml:space="preserve">Couldn't save the package because of the following exception: {0}</value>
+	</data>
 </root>

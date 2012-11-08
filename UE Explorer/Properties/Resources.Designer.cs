@@ -61,6 +61,24 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot import binary files with an unequal length!.
+        /// </summary>
+        internal static string CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH {
+            get {
+                return ResourceManager.GetString("CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t save the package because of the following exception: {0}.
+        /// </summary>
+        internal static string COULDNT_SAVE_EXCEPTION {
+            get {
+                return ResourceManager.GetString("COULDNT_SAVE_EXCEPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -242,6 +260,24 @@ namespace UEExplorer.Properties {
         internal static string RegistryWarning {
             get {
                 return ResourceManager.GetString("RegistryWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save?.
+        /// </summary>
+        internal static string SAVE_QUESTION {
+            get {
+                return ResourceManager.GetString("SAVE_QUESTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!.
+        /// </summary>
+        internal static string SAVE_QUESTION_WARNING {
+            get {
+                return ResourceManager.GetString("SAVE_QUESTION_WARNING", resourceCulture);
             }
         }
         
