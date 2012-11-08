@@ -88,6 +88,24 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to send this report. Please try again later!.
+        /// </summary>
+        internal static string ExceptionDialog_FAIL {
+            get {
+                return ResourceManager.GetString("ExceptionDialog_FAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thanks for reporting this exception occurrance!.
+        /// </summary>
+        internal static string ExceptionDialog_THANKS {
+            get {
+                return ResourceManager.GetString("ExceptionDialog_THANKS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Homepage.
         /// </summary>
         internal static string Homepage {
@@ -288,6 +306,15 @@ namespace UEExplorer.Properties {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successful.
+        /// </summary>
+        internal static string SUCCESS {
+            get {
+                return ResourceManager.GetString("SUCCESS", resourceCulture);
             }
         }
         

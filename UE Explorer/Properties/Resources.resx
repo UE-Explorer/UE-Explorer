@@ -218,4 +218,13 @@ Latest version: {1}</value>
 	<data name="COULDNT_SAVE_EXCEPTION">
 		<value xml:space="preserve">Couldn't save the package because of the following exception: {0}</value>
 	</data>
+	<data name="ExceptionDialog_THANKS">
+		<value xml:space="preserve">Thanks for reporting this exception occurrance!</value>
+	</data>
+	<data name="ExceptionDialog_FAIL">
+		<value xml:space="preserve">Failed to send this report. Please try again later!</value>
+	</data>
+	<data name="SUCCESS">
+		<value xml:space="preserve">Successful</value>
+	</data>
 </root>

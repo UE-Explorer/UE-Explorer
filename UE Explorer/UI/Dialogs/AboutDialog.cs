@@ -30,6 +30,7 @@ namespace UEExplorer.UI.Dialogs
 		private const string DONATORS_URL = "http://eliotvu.com/files/donators.txt"; 
 		private void InitializeDonators()
 		{
+			Refresh();
 			using( var buffer = new StreamReader( WebRequest.Create( DONATORS_URL ).Get() ) )
 			{ 
 				buffer.BaseStream.Position = 0;
