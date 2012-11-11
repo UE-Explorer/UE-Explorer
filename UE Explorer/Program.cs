@@ -104,24 +104,29 @@ namespace UEExplorer
 				SaveConfig();
 			}
 
-			UELib.UnrealConfig.SuppressComments = Options.bSuppressComments;
-			UELib.UnrealConfig.PreBeginBracket = ParseFormatOption( Program.Options.PreBeginBracket );
-			UELib.UnrealConfig.PreEndBracket = ParseFormatOption( Program.Options.PreEndBracket );
+			UnrealConfig.SuppressComments = Options.bSuppressComments;
+			UnrealConfig.PreBeginBracket = ParseFormatOption( Options.PreBeginBracket );
+			UnrealConfig.PreEndBracket = ParseFormatOption( Options.PreEndBracket );
+			if( Options.VariableTypes == null || Options.VariableTypes.Count == 0 )
+			{
+				Options.VariableTypes = Options.DefaultVariableTypes;
+			}
+			UnrealConfig.VariableTypes = Options.VariableTypes;
 			UpdateIndention();
 		}
 
 		internal static void UpdateIndention()
 		{
-			if( Program.Options.Indention == 4 )
+			if( Options.Indention == 4 )
 			{
-				UELib.UnrealConfig.Indention = "\t";
+				UnrealConfig.Indention = "\t";
 			}
 			else
 			{
-				UELib.UnrealConfig.Indention = String.Empty;
-				for( var i = 0; i < Program.Options.Indention; ++ i )
+				UnrealConfig.Indention = String.Empty;
+				for( var i = 0; i < Options.Indention; ++ i )
 				{
-					UELib.UnrealConfig.Indention += " ";
+					UnrealConfig.Indention += " ";
 				}		
 			}
 		}
@@ -303,7 +308,7 @@ namespace UEExplorer
 		#region Unreal Packages Decompiler Related Members
 		public string NTLPath = "NativesTableList_UT2004";
 
-		public UELib.UnrealPackage.InitFlags InitFlags = UELib.UnrealPackage.InitFlags.All;
+		public UnrealPackage.InitFlags InitFlags = UnrealPackage.InitFlags.All;
 		public bool bForceVersion;
 		public bool bForceLicenseeMode;
 		public ushort Version;
@@ -320,6 +325,16 @@ namespace UEExplorer
 		public string PreBeginBracket = "%NEWLINE%%TABS%";
 		public string PreEndBracket = "%NEWLINE%%TABS%";
 		public int Indention = 4;
+
+		public List<UnrealConfig.VariableType> VariableTypes;
+		[XmlIgnore]
+		public readonly List<UnrealConfig.VariableType> DefaultVariableTypes = new List<UnrealConfig.VariableType>()
+		{
+			new UnrealConfig.VariableType{VFullName = "XInterface.GUIComponent.Controls", VType = "ObjectProperty"},
+			new UnrealConfig.VariableType{VFullName = "Engine.Actor.Skins", VType = "ObjectProperty"},	
+			new UnrealConfig.VariableType{VFullName = "Engine.Actor.Components", VType = "ObjectProperty"},
+			new UnrealConfig.VariableType{VFullName = "Engine.SkeletalMeshComponent.AnimSets", VType = "ObjectProperty"}
+		};
 		#endregion
 
 		#region THIRDPARY

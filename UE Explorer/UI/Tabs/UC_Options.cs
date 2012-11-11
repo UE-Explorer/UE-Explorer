@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using UEExplorer.Properties;
 using UELib;
 using System.Drawing;
+using UELib.Types;
 
 namespace UEExplorer.UI.Tabs
 {
@@ -36,12 +39,30 @@ namespace UEExplorer.UI.Tabs
 			PathText.Text = Program.Options.UEModelAppPath;
 			IndentionNumeric.Value = Program.Options.Indention;
 
+			foreach( var enumElement in Enum.GetNames( typeof(PropertyType) ) )
+			{
+				if( enumElement == "StructOffset" )
+					continue;
+
+				VariableType.Items.Add( enumElement );	
+			}
+
+			foreach( var type in Program.Options.VariableTypes )
+			{
+				var node = new TreeNode( type.VFullName ) 
+				{
+					Tag = type
+				};
+				VariableTypesTree.Nodes.Add( node );	
+			}
+
 			base.TabCreated();
 		}
 
-		public static string[] GetNativeTables()
+		public static IEnumerable<string> GetNativeTables()
 		{
-			return Directory.GetFiles( Path.Combine( Application.StartupPath, "Native Tables" ), "*" + NativesTablePackage.Extension );
+			return Directory.GetFiles( Path.Combine( Application.StartupPath, "Native Tables" ), "*" 
+				+ NativesTablePackage.Extension );
 		}
 
 		private void Button_Save_Click( object sender, EventArgs e )
@@ -69,26 +90,37 @@ namespace UEExplorer.UI.Tabs
 			Program.Options.LicenseeMode = (ushort)NumericUpDown_LicenseeMode.Value;
 
 			Program.Options.bSuppressComments = SuppressComments.Checked;   
-			UELib.UnrealConfig.SuppressComments = SuppressComments.Checked; 
+			UnrealConfig.SuppressComments = SuppressComments.Checked; 
 			Program.Options.UEModelAppPath = PathText.Text;
 
 			Program.Options.PreBeginBracket = PreBeginBracket.Text;
 			Program.Options.PreEndBracket = PreEndBracket.Text;
-			UELib.UnrealConfig.PreBeginBracket = Program.ParseFormatOption( Program.Options.PreBeginBracket );
-			UELib.UnrealConfig.PreEndBracket = Program.ParseFormatOption( Program.Options.PreEndBracket );
+			UnrealConfig.PreBeginBracket = Program.ParseFormatOption( Program.Options.PreBeginBracket );
+			UnrealConfig.PreEndBracket = Program.ParseFormatOption( Program.Options.PreEndBracket );
 
 			Program.Options.Indention = (int)IndentionNumeric.Value;
 			Program.UpdateIndention();
 
-			Program.SaveConfig();
+			Program.Options.VariableTypes.Clear();
+			foreach( TreeNode node in VariableTypesTree.Nodes )
+			{
+				Program.Options.VariableTypes.Add( node.Tag as UnrealConfig.VariableType );
+			}
+			UnrealConfig.VariableTypes = Program.Options.VariableTypes;
 
-			MessageBox.Show( "Successfully saved!", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information );
+			Program.SaveConfig();
+			MessageBox.Show( Resources.SAVE_SUCCESS, Resources.SAVED, 
+				MessageBoxButtons.OK, MessageBoxIcon.Information 
+			);
 		}
 
 		private void PathButton_Click( object sender, EventArgs e )
 		{
-			OpenFileDialog dialog = new OpenFileDialog();
-			dialog.Filter = "UE Model View (umodel.exe)|umodel.exe";
+			var dialog = new OpenFileDialog
+			{
+				Filter = "UE Model View (umodel.exe)|umodel.exe"
+			};
+
 			if( dialog.ShowDialog() == DialogResult.OK )
 			{
 				PathText.Text = dialog.FileName;
@@ -101,6 +133,64 @@ namespace UEExplorer.UI.Tabs
 				&& Path.GetFileName( PathText.Text ) == "umodel.exe"
 				? Color.Green
 				: Color.Red;
+		}
+
+		private void VariableTypesTree_AfterSelect( object sender, TreeViewEventArgs e )
+		{
+			var vType = (UnrealConfig.VariableType)e.Node.Tag;
+
+			VariableTypeGroup.Text = vType.VFullName;
+			VariableType.SelectedIndex = VariableType.Items.IndexOf( vType.VType );
+		}
+
+		private void VariableType_SelectedIndexChanged( object sender, EventArgs e )
+		{
+			var vType = (UnrealConfig.VariableType)VariableTypesTree.SelectedNode.Tag;
+			vType.VType = (string)VariableType.SelectedItem;
+		}
+
+		private void VariableTypeGroup_TextChanged( object sender, EventArgs e )
+		{
+			var vType = (UnrealConfig.VariableType)VariableTypesTree.SelectedNode.Tag;
+			vType.VFullName = VariableTypeGroup.Text;
+
+			VariableTypesTree.SelectedNode.Text = vType.VFullName;
+		}
+
+		private void NewArrayType_Click( object sender, EventArgs e )
+		{
+			if( VariableTypesTree.Nodes.Count == 0 )
+			{
+				VariableTypeGroup.Enabled = true;
+				VariableType.Enabled = true;	
+			}
+
+			var node = new TreeNode( "Package.Class.Property" )
+			{
+				Tag = new UnrealConfig.VariableType
+				{
+					VFullName = "Package.Class.Property",
+					VType = "ObjectProperty"
+				}
+			};
+
+			VariableTypesTree.Nodes.Add( node );
+			VariableTypesTree.SelectedNode = node;
+		}
+
+		private void DeleteArrayType_Click( object sender, EventArgs e )
+		{
+			if( VariableTypesTree.SelectedNode == null )
+				return;
+
+			VariableTypesTree.Nodes.Remove( VariableTypesTree.SelectedNode );
+
+			if( VariableTypesTree.Nodes.Count == 0 )
+			{
+				//VariableTypeGroup.Text = String.Empty;
+				VariableTypeGroup.Enabled = false;
+				VariableType.Enabled = false;
+			}
 		}
 	}
 }

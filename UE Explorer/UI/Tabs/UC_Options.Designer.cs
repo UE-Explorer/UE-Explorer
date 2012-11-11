@@ -53,6 +53,15 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.ComboBox_NativeTable = new System.Windows.Forms.ComboBox();
 			this.Button_Save = new System.Windows.Forms.Button();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.DeleteArrayType = new System.Windows.Forms.Button();
+			this.NewArrayType = new System.Windows.Forms.Button();
+			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.VariableType = new System.Windows.Forms.ComboBox();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.VariableTypeGroup = new System.Windows.Forms.TextBox();
+			this.VariableTypesTree = new System.Windows.Forms.TreeView();
 			label2 = new System.Windows.Forms.Label();
 			groupBox3 = new System.Windows.Forms.GroupBox();
 			label5 = new System.Windows.Forms.Label();
@@ -66,12 +75,14 @@
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_LicenseeMode)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Version)).BeginInit();
+			this.groupBox5.SuspendLayout();
+			this.groupBox6.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label2
 			// 
 			label2.AutoSize = true;
-			label2.Location = new System.Drawing.Point(6, 16);
+			label2.Location = new System.Drawing.Point(3, 16);
 			label2.Name = "label2";
 			label2.Size = new System.Drawing.Size(114, 13);
 			label2.TabIndex = 2;
@@ -95,17 +106,17 @@
 			// 
 			// IndentionNumeric
 			// 
-			this.IndentionNumeric.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.IndentionNumeric.Location = new System.Drawing.Point(179, 112);
+			this.IndentionNumeric.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.IndentionNumeric.Location = new System.Drawing.Point(181, 40);
 			this.IndentionNumeric.Name = "IndentionNumeric";
 			this.IndentionNumeric.Size = new System.Drawing.Size(86, 20);
 			this.IndentionNumeric.TabIndex = 7;
 			// 
 			// label5
 			// 
-			label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			label5.AutoSize = true;
-			label5.Location = new System.Drawing.Point(176, 96);
+			label5.Location = new System.Drawing.Point(178, 21);
 			label5.Name = "label5";
 			label5.Size = new System.Drawing.Size(90, 13);
 			label5.TabIndex = 6;
@@ -162,7 +173,8 @@
 			// label6
 			// 
 			label6.AutoSize = true;
-			label6.Location = new System.Drawing.Point(9, 62);
+			label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+			label6.Location = new System.Drawing.Point(3, 38);
 			label6.Name = "label6";
 			label6.Size = new System.Drawing.Size(579, 13);
 			label6.TabIndex = 3;
@@ -175,18 +187,18 @@
 			this.groupBox4.Controls.Add(label2);
 			this.groupBox4.Controls.Add(this.PathButton);
 			this.groupBox4.Controls.Add(this.PathText);
-			this.groupBox4.Location = new System.Drawing.Point(10, 238);
+			this.groupBox4.Location = new System.Drawing.Point(10, 418);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(602, 82);
+			this.groupBox4.Size = new System.Drawing.Size(602, 60);
 			this.groupBox4.TabIndex = 16;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Third-Party";
 			// 
 			// PathButton
 			// 
-			this.PathButton.Location = new System.Drawing.Point(7, 32);
+			this.PathButton.Location = new System.Drawing.Point(568, 13);
 			this.PathButton.Name = "PathButton";
-			this.PathButton.Size = new System.Drawing.Size(29, 23);
+			this.PathButton.Size = new System.Drawing.Size(29, 20);
 			this.PathButton.TabIndex = 1;
 			this.PathButton.Text = "...";
 			this.PathButton.UseVisualStyleBackColor = true;
@@ -197,9 +209,9 @@
 			this.PathText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.PathText.ForeColor = System.Drawing.SystemColors.HighlightText;
-			this.PathText.Location = new System.Drawing.Point(42, 32);
+			this.PathText.Location = new System.Drawing.Point(123, 13);
 			this.PathText.Name = "PathText";
-			this.PathText.Size = new System.Drawing.Size(554, 20);
+			this.PathText.Size = new System.Drawing.Size(439, 20);
 			this.PathText.TabIndex = 0;
 			this.PathText.TextChanged += new System.EventHandler(this.PathText_TextChanged);
 			// 
@@ -331,7 +343,7 @@
 			// 
 			// Button_Save
 			// 
-			this.Button_Save.Location = new System.Drawing.Point(537, 326);
+			this.Button_Save.Location = new System.Drawing.Point(537, 484);
 			this.Button_Save.Name = "Button_Save";
 			this.Button_Save.Size = new System.Drawing.Size(75, 23);
 			this.Button_Save.TabIndex = 12;
@@ -339,18 +351,118 @@
 			this.Button_Save.UseVisualStyleBackColor = true;
 			this.Button_Save.Click += new System.EventHandler(this.Button_Save_Click);
 			// 
+			// groupBox5
+			// 
+			this.groupBox5.Controls.Add(this.DeleteArrayType);
+			this.groupBox5.Controls.Add(this.NewArrayType);
+			this.groupBox5.Controls.Add(this.groupBox6);
+			this.groupBox5.Controls.Add(this.VariableTypesTree);
+			this.groupBox5.Location = new System.Drawing.Point(10, 239);
+			this.groupBox5.Name = "groupBox5";
+			this.groupBox5.Size = new System.Drawing.Size(602, 173);
+			this.groupBox5.TabIndex = 17;
+			this.groupBox5.TabStop = false;
+			this.groupBox5.Text = "Array Type Definitions";
+			// 
+			// DeleteArrayType
+			// 
+			this.DeleteArrayType.Location = new System.Drawing.Point(5, 49);
+			this.DeleteArrayType.Name = "DeleteArrayType";
+			this.DeleteArrayType.Size = new System.Drawing.Size(75, 23);
+			this.DeleteArrayType.TabIndex = 3;
+			this.DeleteArrayType.Text = "Remove";
+			this.DeleteArrayType.UseVisualStyleBackColor = true;
+			this.DeleteArrayType.Click += new System.EventHandler(this.DeleteArrayType_Click);
+			// 
+			// NewArrayType
+			// 
+			this.NewArrayType.Location = new System.Drawing.Point(5, 20);
+			this.NewArrayType.Name = "NewArrayType";
+			this.NewArrayType.Size = new System.Drawing.Size(75, 23);
+			this.NewArrayType.TabIndex = 2;
+			this.NewArrayType.Text = "Add";
+			this.NewArrayType.UseVisualStyleBackColor = true;
+			this.NewArrayType.Click += new System.EventHandler(this.NewArrayType_Click);
+			// 
+			// groupBox6
+			// 
+			this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox6.Controls.Add(this.VariableType);
+			this.groupBox6.Controls.Add(this.label8);
+			this.groupBox6.Controls.Add(this.label7);
+			this.groupBox6.Controls.Add(this.VariableTypeGroup);
+			this.groupBox6.Location = new System.Drawing.Point(328, 20);
+			this.groupBox6.Name = "groupBox6";
+			this.groupBox6.Size = new System.Drawing.Size(267, 147);
+			this.groupBox6.TabIndex = 1;
+			this.groupBox6.TabStop = false;
+			this.groupBox6.Text = "Properties";
+			// 
+			// VariableType
+			// 
+			this.VariableType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.VariableType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.VariableType.FormattingEnabled = true;
+			this.VariableType.Location = new System.Drawing.Point(96, 48);
+			this.VariableType.Name = "VariableType";
+			this.VariableType.Size = new System.Drawing.Size(164, 21);
+			this.VariableType.TabIndex = 3;
+			this.VariableType.SelectedIndexChanged += new System.EventHandler(this.VariableType_SelectedIndexChanged);
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(6, 48);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(31, 13);
+			this.label8.TabIndex = 2;
+			this.label8.Text = "Type";
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(6, 20);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(36, 13);
+			this.label7.TabIndex = 1;
+			this.label7.Text = "Group";
+			// 
+			// VariableTypeGroup
+			// 
+			this.VariableTypeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.VariableTypeGroup.Location = new System.Drawing.Point(96, 20);
+			this.VariableTypeGroup.Name = "VariableTypeGroup";
+			this.VariableTypeGroup.Size = new System.Drawing.Size(164, 20);
+			this.VariableTypeGroup.TabIndex = 0;
+			this.VariableTypeGroup.TextChanged += new System.EventHandler(this.VariableTypeGroup_TextChanged);
+			// 
+			// VariableTypesTree
+			// 
+			this.VariableTypesTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.VariableTypesTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.VariableTypesTree.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.VariableTypesTree.HideSelection = false;
+			this.VariableTypesTree.Location = new System.Drawing.Point(87, 20);
+			this.VariableTypesTree.Name = "VariableTypesTree";
+			this.VariableTypesTree.Size = new System.Drawing.Size(234, 147);
+			this.VariableTypesTree.TabIndex = 0;
+			this.VariableTypesTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.VariableTypesTree_AfterSelect);
+			// 
 			// UC_Options
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(groupBox3);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.Button_Save);
 			this.Name = "UC_Options";
-			this.Size = new System.Drawing.Size(1312, 584);
+			this.Size = new System.Drawing.Size(1026, 584);
 			groupBox3.ResumeLayout(false);
 			groupBox3.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.IndentionNumeric)).EndInit();
@@ -362,6 +474,9 @@
 			this.groupBox2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_LicenseeMode)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Version)).EndInit();
+			this.groupBox5.ResumeLayout(false);
+			this.groupBox6.ResumeLayout(false);
+			this.groupBox6.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -387,6 +502,15 @@
 		private System.Windows.Forms.ComboBox ComboBox_NativeTable;
 		private System.Windows.Forms.Button Button_Save;
 		private System.Windows.Forms.NumericUpDown IndentionNumeric;
+		private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.GroupBox groupBox6;
+		private System.Windows.Forms.ComboBox VariableType;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.TextBox VariableTypeGroup;
+		private System.Windows.Forms.TreeView VariableTypesTree;
+		private System.Windows.Forms.Button DeleteArrayType;
+		private System.Windows.Forms.Button NewArrayType;
 
 	}
 }

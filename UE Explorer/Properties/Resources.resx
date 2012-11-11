@@ -227,4 +227,10 @@ Latest version: {1}</value>
 	<data name="SUCCESS">
 		<value xml:space="preserve">Successful</value>
 	</data>
+	<data name="SAVE_SUCCESS">
+		<value xml:space="preserve">Successfully saved!</value>
+	</data>
+	<data name="SAVED">
+		<value xml:space="preserve">Saved!</value>
+	</data>
 </root>

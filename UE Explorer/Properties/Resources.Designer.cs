@@ -300,6 +300,24 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successfully saved!.
+        /// </summary>
+        internal static string SAVE_SUCCESS {
+            get {
+                return ResourceManager.GetString("SAVE_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saved!.
+        /// </summary>
+        internal static string SAVED {
+            get {
+                return ResourceManager.GetString("SAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap search {
