@@ -30,7 +30,7 @@ namespace UEExplorer.UI.Dialogs
 			public List<BytesMetaInfo> MetaInfoList;
 		}
 
-		public HexMetaInfo Structure;
+		private HexMetaInfo _Structure;
 
 		public byte[] Buffer
 		{
@@ -38,16 +38,14 @@ namespace UEExplorer.UI.Dialogs
 			set;
 		}
 
-		public const int ViewWidth = 16;
-		public const float HexSpacing = 24;
-		public const float ColumnSize = (ViewWidth * HexSpacing);
-		public const float ColumnOffset = 12;
+		private const int ViewWidth = 16;
+		private const float HexSpacing = 20;
+		private const float ColumnSize = (ViewWidth * HexSpacing);
+		private const float ColumnOffset = 12;
 		private readonly float _LineSpacing;
 
 		private bool _DrawASCII = true;
 		private bool _DrawByte = true;
-		private bool _DrawDecimal;
-		private bool _DrawInteger;
 
 		public bool DrawASCII
 		{
@@ -69,26 +67,6 @@ namespace UEExplorer.UI.Dialogs
 			}
 		}
 
-		public bool DrawDecimal
-		{
-			get{ return _DrawDecimal; }
-			set
-			{
-				_DrawDecimal = value;
-				HexLinePanel.Invalidate();
-			}
-		}
-
-		public bool DrawInteger
-		{
-			get{ return _DrawInteger; }
-			set
-			{
-				_DrawInteger = value;
-				HexLinePanel.Invalidate();
-			}
-		}
-
 		private UObject _Object;
 		public UObject HexObject
 		{
@@ -98,8 +76,7 @@ namespace UEExplorer.UI.Dialogs
 		public UserControl_HexView()
 		{
 			InitializeComponent();
-			_LineSpacing = ((Font.Size * Font.FontFamily.GetLineSpacing( Font.Style )) 
-			                / Font.FontFamily.GetEmHeight( Font.Style )) + Font.Height;
+			_LineSpacing = HexLinePanel.Font.Height + 4;
 		}
 
 		private long _ScriptOffset = -1;
@@ -110,9 +87,9 @@ namespace UEExplorer.UI.Dialogs
 			using( var r = new XmlTextReader( path ) )
 			{
 				var xser = new XmlSerializer( typeof(HexMetaInfo) );
-				Structure = (HexMetaInfo)xser.Deserialize( r );
+				_Structure = (HexMetaInfo)xser.Deserialize( r );
 
-				foreach( var s in Structure.MetaInfoList )
+				foreach( var s in _Structure.MetaInfoList )
 				{
 					byte size;
 					Color color;
@@ -177,7 +154,7 @@ namespace UEExplorer.UI.Dialogs
 			using( var w = new XmlTextWriter( path, System.Text.Encoding.ASCII ) )
 			{
 				var xser = new XmlSerializer( typeof(HexMetaInfo) );
-				xser.Serialize( w, Structure );
+				xser.Serialize( w, _Structure );
 			}
 		}
 
@@ -188,8 +165,8 @@ namespace UEExplorer.UI.Dialogs
 			vScrollBar1.Value = 0;
 			if( Buffer != null )
 			{
-				int lines = (int)(Buffer.Length / ((float)ViewWidth));
-				vScrollBar1.Maximum = lines;
+				var lines = (int)Math.Ceiling( Buffer.Length / ((float)ViewWidth) );
+				vScrollBar1.Maximum = lines - 1;
 				vScrollBar1.Visible = lines > 0;
 			}
 			HexLinePanel.Invalidate();
@@ -209,7 +186,7 @@ namespace UEExplorer.UI.Dialogs
 				}
 				else
 				{
-					Structure = new HexMetaInfo{MetaInfoList = new List<HexMetaInfo.BytesMetaInfo>()};
+					_Structure = new HexMetaInfo{MetaInfoList = new List<HexMetaInfo.BytesMetaInfo>()};
 				}
 			}
 		}
@@ -235,7 +212,7 @@ namespace UEExplorer.UI.Dialogs
 
 			//e.Graphics.PageUnit = GraphicsUnit.Pixel;
 			int offset = (ViewWidth * vScrollBar1.Value);
-			int lineCount = Math.Min( (int)((float)HexLinePanel.ClientSize.Height / _LineSpacing), (Buffer.Length - offset) / ViewWidth + 
+			int lineCount = Math.Min( (int)(HexLinePanel.ClientSize.Height / _LineSpacing), (Buffer.Length - offset) / ViewWidth + 
 				(((Buffer.Length - offset) % ViewWidth) > 0 ? 1 : 0) );
 		
 			float lineyOffset = _LineSpacing;
@@ -243,59 +220,79 @@ namespace UEExplorer.UI.Dialogs
 			float asciiColumoffset = byteColumoffset == 0 ? 74 : byteColumoffset + ColumnSize + ColumnOffset;
 
 			Brush brush = new SolidBrush( ForeColor );
+
+			const string text = "Offset";
+			var textLength = e.Graphics.MeasureString( text, HexLinePanel.Font, 
+				new PointF(0,0), StringFormat.GenericTypographic 
+			);
+			e.Graphics.DrawString( text, HexLinePanel.Font, brush, 
+				2, 
+				textLength.Height*0.5f,
+				StringFormat.GenericTypographic
+			);
+			e.Graphics.DrawLine( new Pen( new SolidBrush( Color.FromArgb( 0x55EDEDED ) ) ), 
+				2, _LineSpacing + HexLinePanel.Font.Height*.5f, 
+				2 + byteColumoffset - HexSpacing*.5f, _LineSpacing + HexLinePanel.Font.Height*.5f 
+			);
+
 			if( _DrawByte )
 			{
 				float x = byteColumoffset;
-				float y = lineyOffset;
+				float y = 0;
 
 				//e.Graphics.FillRectangle( new SolidBrush( Color.FromArgb(44, 44, 44) ), x, y, ColumnSize, _LineSpacing );
-				e.Graphics.DrawLine( new Pen( new SolidBrush( Color.DimGray ) ), x, y + _LineSpacing, x + ColumnSize, y + _LineSpacing );
+				e.Graphics.DrawLine( new Pen( new SolidBrush( Color.FromArgb( 0x55EDEDED ) ) ), 
+					x, y + _LineSpacing + HexLinePanel.Font.Height*.5f, 
+					x + ColumnSize, y + _LineSpacing + HexLinePanel.Font.Height*.5f 
+				);
 
 				for( int i = 0; i < ViewWidth; ++ i )
 				{
-					var c = _Hexs[i].ToString( CultureInfo.InvariantCulture );
+					var c = "0" + _Hexs[i].ToString( CultureInfo.InvariantCulture );
 					var cs = e.Graphics.MeasureString( c, HexLinePanel.Font, new PointF(0,0), StringFormat.GenericTypographic );
 					e.Graphics.DrawString( c, HexLinePanel.Font, brush, 
-						x + i*HexSpacing, 
+						x + i*HexSpacing + 2, 
 						y + cs.Height*0.5f, 
 						StringFormat.GenericTypographic 
 					);
 				}
 			}
 
+			const float asciiWidth = HexSpacing;
 			if( _DrawASCII )
 			{
 				float x = asciiColumoffset;
-				float y = lineyOffset;
+				float y = 0;
 
 				//e.Graphics.FillRectangle( new SolidBrush( Color.FromArgb(44, 44, 44) ), x, y, ColumnSize, _LineSpacing );
-				e.Graphics.DrawLine( new Pen( new SolidBrush( Color.DimGray ) ), x, y + _LineSpacing, x + ViewWidth * 16, y + _LineSpacing );
+				e.Graphics.DrawLine( new Pen( new SolidBrush( Color.FromArgb( 0x55EDEDED ) ) ), 
+					x, y + _LineSpacing + HexLinePanel.Font.Height*.5f, x + ViewWidth * asciiWidth, 
+					y + _LineSpacing + HexLinePanel.Font.Height*.5f 
+				);
 
 				for( int i = 0; i < ViewWidth; ++ i )
 				{
-					var c = _Hexs[i].ToString( CultureInfo.InvariantCulture );
+					var c = "0" + _Hexs[i].ToString( CultureInfo.InvariantCulture );
 					var cs = e.Graphics.MeasureString( c, HexLinePanel.Font, new PointF(0,0), StringFormat.GenericTypographic );
 					e.Graphics.DrawString( c, HexLinePanel.Font, brush, 
-						x + i*16, 
+						x + i*asciiWidth + 2, 
 						y + cs.Height*0.5f, 
 						StringFormat.GenericTypographic 
 					);
 				}
 			}
-			lineyOffset += Font.Height;
 
+			lineyOffset += HexLinePanel.Font.Height;
+			float extraLineOffset = _LineSpacing;
 			for( int line = 0; line < lineCount; ++ line )
 			{
-				// Line
-				float extraLineOffset = _LineSpacing;//(float)((Font.Height + _LineSpacing) * 0.7);
-				lineyOffset += extraLineOffset;
 				if( lineyOffset >= HexLinePanel.ClientSize.Height )
 				{
 					break;
 				}
 
 				string lineText = String.Format( "{0:x8}", offset ).PadLeft( 8, '0' ).ToUpper();
-				e.Graphics.DrawString( lineText, Font, brush, 0, lineyOffset );
+				e.Graphics.DrawString( lineText, HexLinePanel.Font, brush, 0, lineyOffset );
 			
 				if( _DrawByte )
 				{
@@ -309,16 +306,13 @@ namespace UEExplorer.UI.Dialogs
 							if( byteOffset == SelectedOffset )
 							{
 								// Draw the selection.
-								drawbrush = new SolidBrush( Color.Blue );
-								var p = new Pen( brush );
-								e.Graphics.DrawLine( p, 
-									new Point( (int)(byteColumoffset + (hexByte * HexSpacing)), 
-										(int)(lineyOffset + extraLineOffset) 
-									), 
-									new Point( (int)(byteColumoffset + ((hexByte + 1) * HexSpacing)), 
-										(int)(lineyOffset + extraLineOffset) 
-									) 
-								);   
+								var drawPen = new Pen( new SolidBrush( Color.Teal ) );
+								e.Graphics.DrawRectangle( drawPen, new Rectangle(
+									(int)(byteColumoffset + (hexByte * HexSpacing)),
+									(int)(lineyOffset),
+									(int)(HexSpacing),
+									(int)(_LineSpacing)
+								));  
 							}
 							else if( _ScriptSize > 0 )
 							{
@@ -329,29 +323,39 @@ namespace UEExplorer.UI.Dialogs
 									e.Graphics.DrawLine( p, new Point( (int)(byteColumoffset + (hexByte * HexSpacing)), 
 										(int)(lineyOffset + extraLineOffset) ), 
 										new Point( (int)(byteColumoffset + ((hexByte + 1) * HexSpacing)), 
-											(int)(lineyOffset + extraLineOffset) ) );   
+										(int)(lineyOffset + extraLineOffset) ) 
+									);   
 								}
 								else if( byteOffset == _ScriptOffset + _ScriptSize - 1 )
 								{
 									// Draw the selection.
-										var p = new Pen( new SolidBrush( Color.Orange ) );
+									var p = new Pen( new SolidBrush( Color.Orange ) );
 									e.Graphics.DrawLine( p, new Point( (int)(byteColumoffset + (hexByte * HexSpacing)), 
 										(int)(lineyOffset + extraLineOffset) ), 
 										new Point( (int)(byteColumoffset + ((hexByte + 1) * HexSpacing)), 
-											(int)(lineyOffset + extraLineOffset) ) );   
+										(int)(lineyOffset + extraLineOffset) ) 
+									);   
 								}
 							}
-							e.Graphics.DrawString( drawntext, Font, drawbrush, byteColumoffset + (hexByte * HexSpacing), lineyOffset );
+							e.Graphics.DrawString( drawntext, HexLinePanel.Font, drawbrush, 
+								byteColumoffset + (hexByte * HexSpacing), lineyOffset 
+							);
 
-							foreach( var s in Structure.MetaInfoList )
+							foreach( var s in _Structure.MetaInfoList )
 							{
 								if( byteOffset >= s.Position && byteOffset < s.Position + s.Size )
 								{
 									var p = new Pen( new SolidBrush( s.Color ) );
-									e.Graphics.DrawLine( p, new Point( (int)(byteColumoffset + (hexByte * HexSpacing)), 
-										(int)(lineyOffset + extraLineOffset) ), 
-										new Point( (int)(byteColumoffset + ((hexByte + 1) * HexSpacing)), 
-											(int)(lineyOffset + extraLineOffset) ) ); 		
+									e.Graphics.DrawLine( p, 
+										new Point( 
+											(int)(byteColumoffset + (hexByte * HexSpacing)), 
+											(int)(lineyOffset + extraLineOffset) 
+										), 
+										new Point( 
+											(int)(byteColumoffset + ((hexByte + 1) * HexSpacing)), 
+											(int)(lineyOffset + extraLineOffset) 
+										) 
+									); 		
 								}
 							}
 						}				
@@ -370,17 +374,22 @@ namespace UEExplorer.UI.Dialogs
 							if( byteOffset == SelectedOffset )
 							{
 								// Draw the selection.
-								drawbrush = new SolidBrush( Color.Blue );
-								var p = new Pen( brush );
-								e.Graphics.DrawLine( p, new Point( (int)(asciiColumoffset + (hexByte * 16)), 
-									(int)(lineyOffset + extraLineOffset) ), new Point( (int)(asciiColumoffset + ((hexByte + 1) * 16)), 
-										(int)(lineyOffset + extraLineOffset) ) );   
+								var drawPen = new Pen( new SolidBrush( Color.Teal ) );
+								e.Graphics.DrawRectangle( drawPen, new Rectangle(
+									(int)(asciiColumoffset + (hexByte * asciiWidth)),
+									(int)(lineyOffset),
+									(int)(HexSpacing),
+									(int)(_LineSpacing)
+								));    
 							}
-							e.Graphics.DrawString( drawntext, Font, drawbrush, asciiColumoffset + (hexByte * 16), lineyOffset );
+							e.Graphics.DrawString( drawntext, HexLinePanel.Font, drawbrush, 
+								asciiColumoffset + (hexByte * asciiWidth), lineyOffset 
+							);
 						}			
 					}
 				}
 				offset += ViewWidth;
+				lineyOffset += extraLineOffset;
 			}
 		}
 
@@ -405,12 +414,17 @@ namespace UEExplorer.UI.Dialogs
 			DissambledObject.Text = "";
 			DissambledName.Text = "";
 
-			((HexViewDialog)ParentForm).ToolStripStatusLabel_Position.Text = 
-				String.Format( 
-					"Position: {0} + {1}", 
-					HexObject.ExportTable != null ? HexObject.ExportTable.SerialOffset : 0, 
-					SelectedOffset 
-			);
+			var hexViewDialog = (HexViewDialog)ParentForm;
+			if( hexViewDialog != null )
+			{
+				hexViewDialog.ToolStripStatusLabel_Position.Text = 
+					String.Format( 
+						"Position: {0} + {1} ; 0x{2:x8}", 
+						HexObject.ExportTable != null ? HexObject.ExportTable.SerialOffset : 0, 
+						SelectedOffset,
+						HexObject.ExportTable != null ? HexObject.ExportTable.SerialOffset : 0 + SelectedOffset
+					);
+			}
 			var cb = new byte[8];
 			int i = 0;
  			for( ; SelectedOffset + i < Buffer.Length && i < 8; ++ i )
@@ -426,7 +440,7 @@ namespace UEExplorer.UI.Dialogs
 				}
 			}*/
 
-			DissambledChar.Text = "" + (char)cb[0] + "." + BitConverter.ToChar( cb, 0 );
+			DissambledChar.Text = string.Format( "{0}.{1}", (char)cb[0], BitConverter.ToChar( cb, 0 ) );
 			DissambledByte.Text = "" + cb[0];
 
 			DissambledShort.Text = "" + BitConverter.ToInt16( cb, 0 );
@@ -477,7 +491,7 @@ namespace UEExplorer.UI.Dialogs
 				{
 		  			++ byteCode;
 				}
-				DissambledByteCode.Text = "" + (ExprToken)byteCode + ":" + (CastToken)byteCode;
+				DissambledByteCode.Text = string.Format( "{0}:{1}", (ExprToken)byteCode, (CastToken)byteCode );
 			}
 			catch
 			{
@@ -485,7 +499,7 @@ namespace UEExplorer.UI.Dialogs
 			}
 
 			DissambledStruct.Text = String.Empty;
-			foreach( var s in Structure.MetaInfoList )
+			foreach( var s in _Structure.MetaInfoList )
 			{
 				if( SelectedOffset >= s.Position && SelectedOffset < s.Position + s.Size )
 				{
@@ -494,7 +508,7 @@ namespace UEExplorer.UI.Dialogs
 			}
 		}
 
-		private void vScrollBar1_Scroll( object sender, ScrollEventArgs e )
+		private void VScrollBar1_Scroll( object sender, ScrollEventArgs e )
 		{
 			HexLinePanel.Invalidate();
 		}
@@ -506,36 +520,37 @@ namespace UEExplorer.UI.Dialogs
 				return;
 			}
 
-			float X = e.X - HexLinePanel.Location.X;
-			float Y = e.Y - HexLinePanel.Location.Y;
+			float x = e.X - HexLinePanel.Location.X;
+			float y = e.Y - HexLinePanel.Location.Y;
 
 			int offset = (ViewWidth * vScrollBar1.Value);
-			int lineCount = Math.Min( (int)(HexLinePanel.ClientSize.Height / _LineSpacing), (Buffer.Length - offset) / ViewWidth + 
-				(((Buffer.Length - offset) % ViewWidth) > 0 ? 1 : 0) );
+			int lineCount = Math.Min( (int)(HexLinePanel.ClientSize.Height / _LineSpacing), 
+				(Buffer.Length - offset) / ViewWidth + 
+				(((Buffer.Length - offset) % ViewWidth) > 0 ? 1 : 0) 
+			);
 		
-			float lineyoffset = _LineSpacing;
+			float lineyoffset = HexLinePanel.Font.Height;
 			float byteoffset = _DrawByte ? 74 : 0;
 			float charoffset = byteoffset == 0 ? 74 : byteoffset + ColumnSize + ColumnOffset;
 
+			float extraLineOffset = _LineSpacing;
 			for( int line = 0; line < lineCount; ++ line )
 			{
-				float extraLineOffset = _LineSpacing;//(float)((Font.Height + _LineSpacing) * 0.7);
-				// Line
-				lineyoffset += extraLineOffset;
 				if( lineyoffset >= HexLinePanel.ClientSize.Height )
 				{
 					break;
 				}
 
 				// The user definitely didn't click on this line?, so skip!.
-				if( !(Y >= (lineyoffset + extraLineOffset) && Y <= (lineyoffset + (extraLineOffset * 2))) )
+				if( !(y >= (lineyoffset + extraLineOffset) && y <= (lineyoffset + (extraLineOffset * 2))) )
 				{
 					offset += ViewWidth;
+					lineyoffset += extraLineOffset;
 					continue;
 				}
 
 				// Check if the bytes field is selected.
-				if( _DrawByte && X >= byteoffset && X < charoffset )
+				if( _DrawByte && x >= byteoffset && x < charoffset )
 				{
 					for( int hexByte = 0; hexByte < ViewWidth; ++ hexByte )
 					{
@@ -544,7 +559,7 @@ namespace UEExplorer.UI.Dialogs
 						{							
 							if
 							( 
-								X >= (byteoffset + (hexByte * HexSpacing)) && X <= (byteoffset + ((hexByte + 1) * HexSpacing)) 
+								x >= (byteoffset + (hexByte * HexSpacing)) && x <= (byteoffset + ((hexByte + 1) * HexSpacing)) 
 							)
 							{
 								SelectedOffset = byteOffset;
@@ -557,8 +572,9 @@ namespace UEExplorer.UI.Dialogs
 				}
 
 				// Check if the ascii's field is selected.
-				if( _DrawASCII && X >= charoffset )
+				if( _DrawASCII && x >= charoffset )
 				{
+					const float asciiWidth = HexSpacing;
 					for( int hexByte = 0; hexByte < ViewWidth; ++ hexByte )
 					{
 						int byteOffset = (offset + hexByte);
@@ -566,7 +582,7 @@ namespace UEExplorer.UI.Dialogs
 						{
 							if
 							(
-								X >= (charoffset + (hexByte * 16)) && X <= (charoffset + ((hexByte + 1) * 16))
+								x >= (charoffset + (hexByte * asciiWidth)) && x <= (charoffset + ((hexByte + 1) * asciiWidth))
 							)
 							{
 								SelectedOffset = byteOffset;
@@ -578,10 +594,11 @@ namespace UEExplorer.UI.Dialogs
 					}
 				}
 				offset += ViewWidth;
+				lineyoffset += extraLineOffset;
 			}
 			//_SelectedOffset = -1;
 			//HexLinePanel.Invalidate();
-			this.Focus();
+			Focus();
 		}
 
 		private void UserControl_HexView_KeyDown( object sender, KeyEventArgs e )
@@ -620,7 +637,7 @@ namespace UEExplorer.UI.Dialogs
 				byte size;
 				Color color;
 				InitStructure( type, out size, out color );	
-				Structure.MetaInfoList.Add( new HexMetaInfo.BytesMetaInfo
+				_Structure.MetaInfoList.Add( new HexMetaInfo.BytesMetaInfo
 				{
 				    Name = dialog.TextBoxName.Text, Position = SelectedOffset, Size = size, Type = type,
 					Color = color
