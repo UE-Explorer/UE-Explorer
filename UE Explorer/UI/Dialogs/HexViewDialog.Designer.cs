@@ -36,8 +36,6 @@
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewASCIIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewByteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.viewDecimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.viewIntegerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyBytesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +56,7 @@
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(1024, 445);
+			this.panel1.Size = new System.Drawing.Size(983, 445);
 			this.panel1.TabIndex = 0;
 			// 
 			// statusStrip1
@@ -68,7 +66,7 @@
             this.ToolStripStatusLabel_Position});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 423);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(1024, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(983, 22);
 			this.statusStrip1.TabIndex = 1;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
@@ -88,12 +86,13 @@
 			// 
 			// menuStrip1
 			// 
+			this.menuStrip1.BackColor = System.Drawing.Color.White;
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewToolStripMenuItem,
             this.editToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1024, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(983, 24);
 			this.menuStrip1.TabIndex = 2;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -101,9 +100,7 @@
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewASCIIToolStripMenuItem,
-            this.viewByteToolStripMenuItem,
-            this.viewDecimalToolStripMenuItem,
-            this.viewIntegerToolStripMenuItem});
+            this.viewByteToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "View";
@@ -114,7 +111,7 @@
 			this.viewASCIIToolStripMenuItem.CheckOnClick = true;
 			this.viewASCIIToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.viewASCIIToolStripMenuItem.Name = "viewASCIIToolStripMenuItem";
-			this.viewASCIIToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+			this.viewASCIIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.viewASCIIToolStripMenuItem.Text = "View ASCII";
 			this.viewASCIIToolStripMenuItem.CheckedChanged += new System.EventHandler(this.viewASCIIToolStripMenuItem_CheckedChanged);
 			// 
@@ -124,25 +121,9 @@
 			this.viewByteToolStripMenuItem.CheckOnClick = true;
 			this.viewByteToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.viewByteToolStripMenuItem.Name = "viewByteToolStripMenuItem";
-			this.viewByteToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+			this.viewByteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.viewByteToolStripMenuItem.Text = "View Byte";
 			this.viewByteToolStripMenuItem.CheckedChanged += new System.EventHandler(this.viewByteToolStripMenuItem_CheckedChanged);
-			// 
-			// viewDecimalToolStripMenuItem
-			// 
-			this.viewDecimalToolStripMenuItem.CheckOnClick = true;
-			this.viewDecimalToolStripMenuItem.Name = "viewDecimalToolStripMenuItem";
-			this.viewDecimalToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-			this.viewDecimalToolStripMenuItem.Text = "View Decimal";
-			this.viewDecimalToolStripMenuItem.Visible = false;
-			// 
-			// viewIntegerToolStripMenuItem
-			// 
-			this.viewIntegerToolStripMenuItem.CheckOnClick = true;
-			this.viewIntegerToolStripMenuItem.Name = "viewIntegerToolStripMenuItem";
-			this.viewIntegerToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-			this.viewIntegerToolStripMenuItem.Text = "View Integer";
-			this.viewIntegerToolStripMenuItem.Visible = false;
 			// 
 			// editToolStripMenuItem
 			// 
@@ -193,20 +174,18 @@
 			this.userControl_HexView1.Buffer = null;
 			this.userControl_HexView1.DrawASCII = true;
 			this.userControl_HexView1.DrawByte = true;
-			this.userControl_HexView1.DrawDecimal = false;
-			this.userControl_HexView1.DrawInteger = false;
 			this.userControl_HexView1.Font = new System.Drawing.Font("Arial", 9.25F);
-			this.userControl_HexView1.Location = new System.Drawing.Point(0, 24);
+			this.userControl_HexView1.Location = new System.Drawing.Point(8, 30);
 			this.userControl_HexView1.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
 			this.userControl_HexView1.Name = "userControl_HexView1";
-			this.userControl_HexView1.Size = new System.Drawing.Size(1024, 399);
+			this.userControl_HexView1.Size = new System.Drawing.Size(967, 387);
 			this.userControl_HexView1.TabIndex = 0;
 			// 
 			// HexViewDialog
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.SystemColors.Window;
-			this.ClientSize = new System.Drawing.Size(1024, 445);
+			this.BackColor = System.Drawing.Color.White;
+			this.ClientSize = new System.Drawing.Size(983, 445);
 			this.Controls.Add(this.panel1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -234,8 +213,6 @@
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewASCIIToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewByteToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem viewDecimalToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem viewIntegerToolStripMenuItem;
 		internal System.Windows.Forms.ToolStripStatusLabel ToolStripStatusLabel_Position;
 		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem copyBytesToolStripMenuItem;

@@ -19,6 +19,11 @@ namespace UEExplorer.UI.Dialogs
 
 		public HexViewDialog( UObject uObject, UC_PackageExplorer owner ) : this()
 		{
+			if( uObject is UPackageObject )
+			{
+				editToolStripMenuItem.Enabled = false;
+			}
+
 			_Owner = owner;
 			userControl_HexView1.SetHexData( uObject );
 			try
