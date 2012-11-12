@@ -403,6 +403,7 @@
 			// 
 			this.VariableType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.VariableType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.VariableType.Enabled = false;
 			this.VariableType.FormattingEnabled = true;
 			this.VariableType.Location = new System.Drawing.Point(96, 48);
 			this.VariableType.Name = "VariableType";
@@ -431,6 +432,7 @@
 			// VariableTypeGroup
 			// 
 			this.VariableTypeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.VariableTypeGroup.Enabled = false;
 			this.VariableTypeGroup.Location = new System.Drawing.Point(96, 20);
 			this.VariableTypeGroup.Name = "VariableTypeGroup";
 			this.VariableTypeGroup.Size = new System.Drawing.Size(164, 20);

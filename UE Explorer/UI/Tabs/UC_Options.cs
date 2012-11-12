@@ -141,6 +141,9 @@ namespace UEExplorer.UI.Tabs
 
 			VariableTypeGroup.Text = vType.VFullName;
 			VariableType.SelectedIndex = VariableType.Items.IndexOf( vType.VType );
+
+			VariableTypeGroup.Enabled = true;
+			VariableType.Enabled = true;
 		}
 
 		private void VariableType_SelectedIndexChanged( object sender, EventArgs e )
@@ -159,12 +162,6 @@ namespace UEExplorer.UI.Tabs
 
 		private void NewArrayType_Click( object sender, EventArgs e )
 		{
-			if( VariableTypesTree.Nodes.Count == 0 )
-			{
-				VariableTypeGroup.Enabled = true;
-				VariableType.Enabled = true;	
-			}
-
 			var node = new TreeNode( "Package.Class.Property" )
 			{
 				Tag = new UnrealConfig.VariableType
