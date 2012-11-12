@@ -112,23 +112,24 @@ namespace UEExplorer
 				Options.VariableTypes = Options.DefaultVariableTypes;
 			}
 			UnrealConfig.VariableTypes = Options.VariableTypes;
-			UpdateIndention();
+			UnrealConfig.Indention = ParseIndention( Options.Indention );
 		}
 
-		internal static void UpdateIndention()
+		internal static string ParseIndention( int indentionCount )
 		{
-			if( Options.Indention == 4 )
-			{
-				UnrealConfig.Indention = "\t";
-			}
-			else
-			{
-				UnrealConfig.Indention = String.Empty;
-				for( var i = 0; i < Options.Indention; ++ i )
-				{
-					UnrealConfig.Indention += " ";
-				}		
-			}
+			//if( indentionCount == 4 )
+			//{
+			//    return "\t";
+			//}
+
+			//string indention = String.Empty;
+			//for( var i = 0; i < indentionCount; ++ i )
+			//{
+			//    indention += " ";
+			//}	
+			//return indention;
+
+			return String.Empty.PadLeft( indentionCount, ' ' );
 		}
 
 		internal static string ParseFormatOption( string input )

@@ -30,14 +30,23 @@
 		{
 			System.Windows.Forms.Label label2;
 			System.Windows.Forms.GroupBox groupBox3;
+			System.Windows.Forms.Panel panel1;
 			System.Windows.Forms.Label label5;
 			System.Windows.Forms.Label label4;
 			System.Windows.Forms.Label label3;
 			System.Windows.Forms.Label label6;
+			System.Windows.Forms.SplitContainer ArrayTypeDefinitionsSplitter;
+			this.BracketPreview = new System.Windows.Forms.RichTextBox();
 			this.IndentionNumeric = new System.Windows.Forms.NumericUpDown();
 			this.PreBeginBracket = new System.Windows.Forms.TextBox();
 			this.PreEndBracket = new System.Windows.Forms.TextBox();
 			this.SuppressComments = new System.Windows.Forms.CheckBox();
+			this.VariableTypesTree = new System.Windows.Forms.TreeView();
+			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.VariableType = new System.Windows.Forms.ComboBox();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.VariableTypeGroup = new System.Windows.Forms.TextBox();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.PathButton = new System.Windows.Forms.Button();
 			this.PathText = new System.Windows.Forms.TextBox();
@@ -56,27 +65,28 @@
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.DeleteArrayType = new System.Windows.Forms.Button();
 			this.NewArrayType = new System.Windows.Forms.Button();
-			this.groupBox6 = new System.Windows.Forms.GroupBox();
-			this.VariableType = new System.Windows.Forms.ComboBox();
-			this.label8 = new System.Windows.Forms.Label();
-			this.label7 = new System.Windows.Forms.Label();
-			this.VariableTypeGroup = new System.Windows.Forms.TextBox();
-			this.VariableTypesTree = new System.Windows.Forms.TreeView();
 			label2 = new System.Windows.Forms.Label();
 			groupBox3 = new System.Windows.Forms.GroupBox();
+			panel1 = new System.Windows.Forms.Panel();
 			label5 = new System.Windows.Forms.Label();
 			label4 = new System.Windows.Forms.Label();
 			label3 = new System.Windows.Forms.Label();
 			label6 = new System.Windows.Forms.Label();
+			ArrayTypeDefinitionsSplitter = new System.Windows.Forms.SplitContainer();
 			groupBox3.SuspendLayout();
+			panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.IndentionNumeric)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(ArrayTypeDefinitionsSplitter)).BeginInit();
+			ArrayTypeDefinitionsSplitter.Panel1.SuspendLayout();
+			ArrayTypeDefinitionsSplitter.Panel2.SuspendLayout();
+			ArrayTypeDefinitionsSplitter.SuspendLayout();
+			this.groupBox6.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_LicenseeMode)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Version)).BeginInit();
 			this.groupBox5.SuspendLayout();
-			this.groupBox6.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label2
@@ -90,6 +100,7 @@
 			// 
 			// groupBox3
 			// 
+			groupBox3.Controls.Add(panel1);
 			groupBox3.Controls.Add(this.IndentionNumeric);
 			groupBox3.Controls.Add(label5);
 			groupBox3.Controls.Add(label4);
@@ -103,6 +114,34 @@
 			groupBox3.TabIndex = 15;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Decompiler Output";
+			// 
+			// panel1
+			// 
+			panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			panel1.Controls.Add(this.BracketPreview);
+			panel1.Location = new System.Drawing.Point(7, 118);
+			panel1.Name = "panel1";
+			panel1.Size = new System.Drawing.Size(261, 100);
+			panel1.TabIndex = 9;
+			// 
+			// BracketPreview
+			// 
+			this.BracketPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.BracketPreview.BackColor = System.Drawing.Color.WhiteSmoke;
+			this.BracketPreview.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.BracketPreview.DetectUrls = false;
+			this.BracketPreview.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.BracketPreview.Location = new System.Drawing.Point(0, 0);
+			this.BracketPreview.Name = "BracketPreview";
+			this.BracketPreview.ReadOnly = true;
+			this.BracketPreview.Size = new System.Drawing.Size(260, 98);
+			this.BracketPreview.TabIndex = 8;
+			this.BracketPreview.Text = "";
 			// 
 			// IndentionNumeric
 			// 
@@ -126,7 +165,7 @@
 			// 
 			label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			label4.AutoSize = true;
-			label4.Location = new System.Drawing.Point(4, 180);
+			label4.Location = new System.Drawing.Point(135, 70);
 			label4.Name = "label4";
 			label4.Size = new System.Drawing.Size(120, 13);
 			label4.TabIndex = 4;
@@ -136,7 +175,7 @@
 			// 
 			label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			label3.AutoSize = true;
-			label3.Location = new System.Drawing.Point(4, 141);
+			label3.Location = new System.Drawing.Point(4, 70);
 			label3.Name = "label3";
 			label3.Size = new System.Drawing.Size(128, 13);
 			label3.TabIndex = 3;
@@ -146,18 +185,18 @@
 			// 
 			this.PreBeginBracket.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.PreBeginBracket.Location = new System.Drawing.Point(7, 157);
+			this.PreBeginBracket.Location = new System.Drawing.Point(7, 86);
 			this.PreBeginBracket.Name = "PreBeginBracket";
-			this.PreBeginBracket.Size = new System.Drawing.Size(262, 20);
+			this.PreBeginBracket.Size = new System.Drawing.Size(125, 20);
 			this.PreBeginBracket.TabIndex = 2;
 			// 
 			// PreEndBracket
 			// 
 			this.PreEndBracket.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.PreEndBracket.Location = new System.Drawing.Point(7, 197);
+			this.PreEndBracket.Location = new System.Drawing.Point(138, 86);
 			this.PreEndBracket.Name = "PreEndBracket";
-			this.PreEndBracket.Size = new System.Drawing.Size(262, 20);
+			this.PreEndBracket.Size = new System.Drawing.Size(129, 20);
 			this.PreEndBracket.TabIndex = 1;
 			// 
 			// SuppressComments
@@ -180,6 +219,93 @@
 			label6.TabIndex = 3;
 			label6.Text = "Input the path to UE Model Viewer to get integrated support for viewing Meshes an" +
     "d/or Textures through the Content tab!";
+			// 
+			// ArrayTypeDefinitionsSplitter
+			// 
+			ArrayTypeDefinitionsSplitter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			ArrayTypeDefinitionsSplitter.Location = new System.Drawing.Point(87, 19);
+			ArrayTypeDefinitionsSplitter.Name = "ArrayTypeDefinitionsSplitter";
+			// 
+			// ArrayTypeDefinitionsSplitter.Panel1
+			// 
+			ArrayTypeDefinitionsSplitter.Panel1.Controls.Add(this.VariableTypesTree);
+			// 
+			// ArrayTypeDefinitionsSplitter.Panel2
+			// 
+			ArrayTypeDefinitionsSplitter.Panel2.Controls.Add(this.groupBox6);
+			ArrayTypeDefinitionsSplitter.Size = new System.Drawing.Size(507, 148);
+			ArrayTypeDefinitionsSplitter.SplitterDistance = 250;
+			ArrayTypeDefinitionsSplitter.TabIndex = 4;
+			// 
+			// VariableTypesTree
+			// 
+			this.VariableTypesTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.VariableTypesTree.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.VariableTypesTree.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.VariableTypesTree.HideSelection = false;
+			this.VariableTypesTree.Location = new System.Drawing.Point(0, 0);
+			this.VariableTypesTree.Name = "VariableTypesTree";
+			this.VariableTypesTree.Size = new System.Drawing.Size(250, 148);
+			this.VariableTypesTree.TabIndex = 0;
+			this.VariableTypesTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.VariableTypesTree_AfterSelect);
+			// 
+			// groupBox6
+			// 
+			this.groupBox6.Controls.Add(this.VariableType);
+			this.groupBox6.Controls.Add(this.label8);
+			this.groupBox6.Controls.Add(this.label7);
+			this.groupBox6.Controls.Add(this.VariableTypeGroup);
+			this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox6.Location = new System.Drawing.Point(0, 0);
+			this.groupBox6.Name = "groupBox6";
+			this.groupBox6.Size = new System.Drawing.Size(253, 148);
+			this.groupBox6.TabIndex = 1;
+			this.groupBox6.TabStop = false;
+			this.groupBox6.Text = "Properties";
+			// 
+			// VariableType
+			// 
+			this.VariableType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.VariableType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.VariableType.Enabled = false;
+			this.VariableType.FormattingEnabled = true;
+			this.VariableType.Location = new System.Drawing.Point(46, 48);
+			this.VariableType.Name = "VariableType";
+			this.VariableType.Size = new System.Drawing.Size(200, 21);
+			this.VariableType.TabIndex = 3;
+			this.VariableType.SelectedIndexChanged += new System.EventHandler(this.VariableType_SelectedIndexChanged);
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(6, 48);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(31, 13);
+			this.label8.TabIndex = 2;
+			this.label8.Text = "Type";
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(6, 20);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(36, 13);
+			this.label7.TabIndex = 1;
+			this.label7.Text = "Group";
+			// 
+			// VariableTypeGroup
+			// 
+			this.VariableTypeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.VariableTypeGroup.Enabled = false;
+			this.VariableTypeGroup.Location = new System.Drawing.Point(46, 20);
+			this.VariableTypeGroup.Name = "VariableTypeGroup";
+			this.VariableTypeGroup.Size = new System.Drawing.Size(200, 20);
+			this.VariableTypeGroup.TabIndex = 0;
+			this.VariableTypeGroup.TextChanged += new System.EventHandler(this.VariableTypeGroup_TextChanged);
 			// 
 			// groupBox4
 			// 
@@ -242,9 +368,9 @@
 			this.CheckBox_SerObj.AutoSize = true;
 			this.CheckBox_SerObj.Location = new System.Drawing.Point(6, 19);
 			this.CheckBox_SerObj.Name = "CheckBox_SerObj";
-			this.CheckBox_SerObj.Size = new System.Drawing.Size(104, 17);
+			this.CheckBox_SerObj.Size = new System.Drawing.Size(116, 17);
 			this.CheckBox_SerObj.TabIndex = 5;
-			this.CheckBox_SerObj.Text = "Serialize Objects";
+			this.CheckBox_SerObj.Text = "Deserialize Objects";
 			this.CheckBox_SerObj.UseVisualStyleBackColor = true;
 			// 
 			// CheckBox_ImpObj
@@ -276,6 +402,7 @@
 			// NumericUpDown_LicenseeMode
 			// 
 			this.NumericUpDown_LicenseeMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.NumericUpDown_LicenseeMode.Enabled = false;
 			this.NumericUpDown_LicenseeMode.Location = new System.Drawing.Point(188, 96);
 			this.NumericUpDown_LicenseeMode.Maximum = new decimal(new int[] {
             65535,
@@ -289,6 +416,7 @@
 			// NumericUpDown_Version
 			// 
 			this.NumericUpDown_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.NumericUpDown_Version.Enabled = false;
 			this.NumericUpDown_Version.Location = new System.Drawing.Point(188, 70);
 			this.NumericUpDown_Version.Maximum = new decimal(new int[] {
             65535,
@@ -309,6 +437,7 @@
 			this.CheckBox_LicenseeMode.TabIndex = 13;
 			this.CheckBox_LicenseeMode.Text = "Force Licensee Version";
 			this.CheckBox_LicenseeMode.UseVisualStyleBackColor = true;
+			this.CheckBox_LicenseeMode.CheckedChanged += new System.EventHandler(this.CheckBox_LicenseeMode_CheckedChanged);
 			// 
 			// CheckBox_Version
 			// 
@@ -320,6 +449,7 @@
 			this.CheckBox_Version.TabIndex = 12;
 			this.CheckBox_Version.Text = "Force Version";
 			this.CheckBox_Version.UseVisualStyleBackColor = true;
+			this.CheckBox_Version.CheckedChanged += new System.EventHandler(this.CheckBox_Version_CheckedChanged);
 			// 
 			// label1
 			// 
@@ -353,10 +483,9 @@
 			// 
 			// groupBox5
 			// 
+			this.groupBox5.Controls.Add(ArrayTypeDefinitionsSplitter);
 			this.groupBox5.Controls.Add(this.DeleteArrayType);
 			this.groupBox5.Controls.Add(this.NewArrayType);
-			this.groupBox5.Controls.Add(this.groupBox6);
-			this.groupBox5.Controls.Add(this.VariableTypesTree);
 			this.groupBox5.Location = new System.Drawing.Point(10, 239);
 			this.groupBox5.Name = "groupBox5";
 			this.groupBox5.Size = new System.Drawing.Size(602, 173);
@@ -366,6 +495,7 @@
 			// 
 			// DeleteArrayType
 			// 
+			this.DeleteArrayType.Enabled = false;
 			this.DeleteArrayType.Location = new System.Drawing.Point(5, 49);
 			this.DeleteArrayType.Name = "DeleteArrayType";
 			this.DeleteArrayType.Size = new System.Drawing.Size(75, 23);
@@ -384,74 +514,6 @@
 			this.NewArrayType.UseVisualStyleBackColor = true;
 			this.NewArrayType.Click += new System.EventHandler(this.NewArrayType_Click);
 			// 
-			// groupBox6
-			// 
-			this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox6.Controls.Add(this.VariableType);
-			this.groupBox6.Controls.Add(this.label8);
-			this.groupBox6.Controls.Add(this.label7);
-			this.groupBox6.Controls.Add(this.VariableTypeGroup);
-			this.groupBox6.Location = new System.Drawing.Point(328, 20);
-			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(267, 147);
-			this.groupBox6.TabIndex = 1;
-			this.groupBox6.TabStop = false;
-			this.groupBox6.Text = "Properties";
-			// 
-			// VariableType
-			// 
-			this.VariableType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.VariableType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.VariableType.Enabled = false;
-			this.VariableType.FormattingEnabled = true;
-			this.VariableType.Location = new System.Drawing.Point(96, 48);
-			this.VariableType.Name = "VariableType";
-			this.VariableType.Size = new System.Drawing.Size(164, 21);
-			this.VariableType.TabIndex = 3;
-			this.VariableType.SelectedIndexChanged += new System.EventHandler(this.VariableType_SelectedIndexChanged);
-			// 
-			// label8
-			// 
-			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(6, 48);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(31, 13);
-			this.label8.TabIndex = 2;
-			this.label8.Text = "Type";
-			// 
-			// label7
-			// 
-			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(6, 20);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(36, 13);
-			this.label7.TabIndex = 1;
-			this.label7.Text = "Group";
-			// 
-			// VariableTypeGroup
-			// 
-			this.VariableTypeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.VariableTypeGroup.Enabled = false;
-			this.VariableTypeGroup.Location = new System.Drawing.Point(96, 20);
-			this.VariableTypeGroup.Name = "VariableTypeGroup";
-			this.VariableTypeGroup.Size = new System.Drawing.Size(164, 20);
-			this.VariableTypeGroup.TabIndex = 0;
-			this.VariableTypeGroup.TextChanged += new System.EventHandler(this.VariableTypeGroup_TextChanged);
-			// 
-			// VariableTypesTree
-			// 
-			this.VariableTypesTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.VariableTypesTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.VariableTypesTree.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.VariableTypesTree.HideSelection = false;
-			this.VariableTypesTree.Location = new System.Drawing.Point(87, 20);
-			this.VariableTypesTree.Name = "VariableTypesTree";
-			this.VariableTypesTree.Size = new System.Drawing.Size(234, 147);
-			this.VariableTypesTree.TabIndex = 0;
-			this.VariableTypesTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.VariableTypesTree_AfterSelect);
-			// 
 			// UC_Options
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,7 +529,14 @@
 			this.Size = new System.Drawing.Size(1026, 584);
 			groupBox3.ResumeLayout(false);
 			groupBox3.PerformLayout();
+			panel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.IndentionNumeric)).EndInit();
+			ArrayTypeDefinitionsSplitter.Panel1.ResumeLayout(false);
+			ArrayTypeDefinitionsSplitter.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(ArrayTypeDefinitionsSplitter)).EndInit();
+			ArrayTypeDefinitionsSplitter.ResumeLayout(false);
+			this.groupBox6.ResumeLayout(false);
+			this.groupBox6.PerformLayout();
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
@@ -477,8 +546,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_LicenseeMode)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Version)).EndInit();
 			this.groupBox5.ResumeLayout(false);
-			this.groupBox6.ResumeLayout(false);
-			this.groupBox6.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -513,6 +580,7 @@
 		private System.Windows.Forms.TreeView VariableTypesTree;
 		private System.Windows.Forms.Button DeleteArrayType;
 		private System.Windows.Forms.Button NewArrayType;
+		private System.Windows.Forms.RichTextBox BracketPreview;
 
 	}
 }

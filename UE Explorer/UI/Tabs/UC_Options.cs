@@ -57,6 +57,11 @@ namespace UEExplorer.UI.Tabs
 			}
 
 			base.TabCreated();
+
+			PreBeginBracket.TextChanged += PreBeginBracket_TextChanged;
+			PreEndBracket.TextChanged += PreEndBracket_TextChanged;
+			IndentionNumeric.ValueChanged += IndentionNumeric_ValueChanged;
+			UpdateBracketPreview();
 		}
 
 		public static IEnumerable<string> GetNativeTables()
@@ -99,7 +104,7 @@ namespace UEExplorer.UI.Tabs
 			UnrealConfig.PreEndBracket = Program.ParseFormatOption( Program.Options.PreEndBracket );
 
 			Program.Options.Indention = (int)IndentionNumeric.Value;
-			Program.UpdateIndention();
+			UnrealConfig.Indention = Program.ParseIndention( Program.Options.Indention );
 
 			Program.Options.VariableTypes.Clear();
 			foreach( TreeNode node in VariableTypesTree.Nodes )
@@ -144,6 +149,8 @@ namespace UEExplorer.UI.Tabs
 
 			VariableTypeGroup.Enabled = true;
 			VariableType.Enabled = true;
+
+			DeleteArrayType.Enabled = true;
 		}
 
 		private void VariableType_SelectedIndexChanged( object sender, EventArgs e )
@@ -187,7 +194,60 @@ namespace UEExplorer.UI.Tabs
 				//VariableTypeGroup.Text = String.Empty;
 				VariableTypeGroup.Enabled = false;
 				VariableType.Enabled = false;
+				DeleteArrayType.Enabled = false;
 			}
+		}
+
+		private void PreBeginBracket_TextChanged( object sender, EventArgs e )
+		{
+			UpdateBracketPreview();	
+		}
+
+		private void PreEndBracket_TextChanged( object sender, EventArgs e )
+		{
+			UpdateBracketPreview();
+		}
+
+		private void IndentionNumeric_ValueChanged( object sender, EventArgs e )
+		{
+			UpdateBracketPreview();
+		}
+
+		private void UpdateBracketPreview()
+		{
+			var preBB = UnrealConfig.PreBeginBracket;
+			var preEB = UnrealConfig.PreEndBracket;
+			var preTABS = UnrealConfig.Indention;
+			UnrealConfig.PreBeginBracket = Program.ParseFormatOption( PreBeginBracket.Text );
+			UnrealConfig.PreEndBracket = Program.ParseFormatOption( PreEndBracket.Text );
+			UnrealConfig.Indention = Program.ParseIndention( (int)IndentionNumeric.Value );
+
+			UDecompilingState.ResetTabs();
+
+			string output = "function Preview()" + UnrealConfig.PrintBeginBracket();
+			UDecompilingState.AddTab();
+				output += "\r\n" + UDecompilingState.Tabs + "if( true )" + UnrealConfig.PrintBeginBracket();
+				UDecompilingState.AddTab();
+					output += "\r\n" + UDecompilingState.Tabs + "[CODE]";
+				UDecompilingState.RemoveTab();
+				output += UnrealConfig.PrintEndBracket();
+			UDecompilingState.RemoveTab();
+			output += UnrealConfig.PrintEndBracket();
+			BracketPreview.Text = output;
+
+			UnrealConfig.PreBeginBracket = preBB;
+			UnrealConfig.PreEndBracket = preEB;
+			UnrealConfig.Indention = preTABS;
+		}
+
+		private void CheckBox_Version_CheckedChanged( object sender, EventArgs e )
+		{
+			NumericUpDown_Version.Enabled = CheckBox_Version.Checked; 
+		}
+
+		private void CheckBox_LicenseeMode_CheckedChanged( object sender, EventArgs e )
+		{
+			NumericUpDown_LicenseeMode.Enabled = CheckBox_LicenseeMode.Checked;
 		}
 	}
 }
