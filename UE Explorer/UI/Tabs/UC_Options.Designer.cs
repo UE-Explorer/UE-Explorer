@@ -28,6 +28,7 @@
 		/// </summary>
 		protected override void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.Label label2;
 			System.Windows.Forms.GroupBox groupBox3;
 			System.Windows.Forms.Panel panel1;
@@ -65,6 +66,7 @@
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.DeleteArrayType = new System.Windows.Forms.Button();
 			this.NewArrayType = new System.Windows.Forms.Button();
+			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			label2 = new System.Windows.Forms.Label();
 			groupBox3 = new System.Windows.Forms.GroupBox();
 			panel1 = new System.Windows.Forms.Panel();
@@ -150,6 +152,7 @@
 			this.IndentionNumeric.Name = "IndentionNumeric";
 			this.IndentionNumeric.Size = new System.Drawing.Size(86, 20);
 			this.IndentionNumeric.TabIndex = 7;
+			this.toolTip1.SetToolTip(this.IndentionNumeric, "Number of spaces for every indention/tab");
 			// 
 			// label5
 			// 
@@ -189,6 +192,7 @@
 			this.PreBeginBracket.Name = "PreBeginBracket";
 			this.PreBeginBracket.Size = new System.Drawing.Size(125, 20);
 			this.PreBeginBracket.TabIndex = 2;
+			this.toolTip1.SetToolTip(this.PreBeginBracket, "The pre-format of begin { brackets. %TABS% = indention, %NEWLINE% = new line");
 			// 
 			// PreEndBracket
 			// 
@@ -198,6 +202,7 @@
 			this.PreEndBracket.Name = "PreEndBracket";
 			this.PreEndBracket.Size = new System.Drawing.Size(129, 20);
 			this.PreEndBracket.TabIndex = 1;
+			this.toolTip1.SetToolTip(this.PreEndBracket, "The pre-format of end } brackets. %TABS% = indention, %NEWLINE% = new line");
 			// 
 			// SuppressComments
 			// 
@@ -207,6 +212,7 @@
 			this.SuppressComments.Size = new System.Drawing.Size(122, 17);
 			this.SuppressComments.TabIndex = 0;
 			this.SuppressComments.Text = "Suppress Comments";
+			this.toolTip1.SetToolTip(this.SuppressComments, "Hides comments such as // End:0x00");
 			this.SuppressComments.UseVisualStyleBackColor = true;
 			// 
 			// label6
@@ -276,6 +282,7 @@
 			this.VariableType.Name = "VariableType";
 			this.VariableType.Size = new System.Drawing.Size(200, 21);
 			this.VariableType.TabIndex = 3;
+			this.toolTip1.SetToolTip(this.VariableType, "The data type the array holds");
 			this.VariableType.SelectedIndexChanged += new System.EventHandler(this.VariableType_SelectedIndexChanged);
 			// 
 			// label8
@@ -305,6 +312,7 @@
 			this.VariableTypeGroup.Name = "VariableTypeGroup";
 			this.VariableTypeGroup.Size = new System.Drawing.Size(200, 20);
 			this.VariableTypeGroup.TabIndex = 0;
+			this.toolTip1.SetToolTip(this.VariableTypeGroup, "Array declaration location Package.Class.Name");
 			this.VariableTypeGroup.TextChanged += new System.EventHandler(this.VariableTypeGroup_TextChanged);
 			// 
 			// groupBox4
@@ -327,6 +335,7 @@
 			this.PathButton.Size = new System.Drawing.Size(29, 20);
 			this.PathButton.TabIndex = 1;
 			this.PathButton.Text = "...";
+			this.toolTip1.SetToolTip(this.PathButton, "Select path");
 			this.PathButton.UseVisualStyleBackColor = true;
 			this.PathButton.Click += new System.EventHandler(this.PathButton_Click);
 			// 
@@ -361,6 +370,7 @@
 			this.CheckBox_LinkObj.Size = new System.Drawing.Size(85, 17);
 			this.CheckBox_LinkObj.TabIndex = 6;
 			this.CheckBox_LinkObj.Text = "Link Objects";
+			this.toolTip1.SetToolTip(this.CheckBox_LinkObj, "Whether to link(connect) objects. For compatibility tests");
 			this.CheckBox_LinkObj.UseVisualStyleBackColor = true;
 			// 
 			// CheckBox_SerObj
@@ -371,6 +381,7 @@
 			this.CheckBox_SerObj.Size = new System.Drawing.Size(116, 17);
 			this.CheckBox_SerObj.TabIndex = 5;
 			this.CheckBox_SerObj.Text = "Deserialize Objects";
+			this.toolTip1.SetToolTip(this.CheckBox_SerObj, "Whether to deserialize(read) objects. For compatibility tests");
 			this.CheckBox_SerObj.UseVisualStyleBackColor = true;
 			// 
 			// CheckBox_ImpObj
@@ -436,6 +447,7 @@
 			this.CheckBox_LicenseeMode.Size = new System.Drawing.Size(137, 17);
 			this.CheckBox_LicenseeMode.TabIndex = 13;
 			this.CheckBox_LicenseeMode.Text = "Force Licensee Version";
+			this.toolTip1.SetToolTip(this.CheckBox_LicenseeMode, "Handle every package\'s licensee version as the specified version");
 			this.CheckBox_LicenseeMode.UseVisualStyleBackColor = true;
 			this.CheckBox_LicenseeMode.CheckedChanged += new System.EventHandler(this.CheckBox_LicenseeMode_CheckedChanged);
 			// 
@@ -448,6 +460,7 @@
 			this.CheckBox_Version.Size = new System.Drawing.Size(91, 17);
 			this.CheckBox_Version.TabIndex = 12;
 			this.CheckBox_Version.Text = "Force Version";
+			this.toolTip1.SetToolTip(this.CheckBox_Version, "Handle every package\'s version as the specified version");
 			this.CheckBox_Version.UseVisualStyleBackColor = true;
 			this.CheckBox_Version.CheckedChanged += new System.EventHandler(this.CheckBox_Version_CheckedChanged);
 			// 
@@ -470,14 +483,16 @@
 			this.ComboBox_NativeTable.Name = "ComboBox_NativeTable";
 			this.ComboBox_NativeTable.Size = new System.Drawing.Size(301, 21);
 			this.ComboBox_NativeTable.TabIndex = 10;
+			this.toolTip1.SetToolTip(this.ComboBox_NativeTable, "The NativeFunction definitions to use");
 			// 
 			// Button_Save
 			// 
-			this.Button_Save.Location = new System.Drawing.Point(537, 484);
+			this.Button_Save.Location = new System.Drawing.Point(618, 451);
 			this.Button_Save.Name = "Button_Save";
 			this.Button_Save.Size = new System.Drawing.Size(75, 23);
 			this.Button_Save.TabIndex = 12;
 			this.Button_Save.Text = "Save";
+			this.toolTip1.SetToolTip(this.Button_Save, "Save all changes");
 			this.Button_Save.UseVisualStyleBackColor = true;
 			this.Button_Save.Click += new System.EventHandler(this.Button_Save_Click);
 			// 
@@ -501,6 +516,7 @@
 			this.DeleteArrayType.Size = new System.Drawing.Size(75, 23);
 			this.DeleteArrayType.TabIndex = 3;
 			this.DeleteArrayType.Text = "Remove";
+			this.toolTip1.SetToolTip(this.DeleteArrayType, "Remove selected definition");
 			this.DeleteArrayType.UseVisualStyleBackColor = true;
 			this.DeleteArrayType.Click += new System.EventHandler(this.DeleteArrayType_Click);
 			// 
@@ -511,6 +527,7 @@
 			this.NewArrayType.Size = new System.Drawing.Size(75, 23);
 			this.NewArrayType.TabIndex = 2;
 			this.NewArrayType.Text = "Add";
+			this.toolTip1.SetToolTip(this.NewArrayType, "Add a new definition");
 			this.NewArrayType.UseVisualStyleBackColor = true;
 			this.NewArrayType.Click += new System.EventHandler(this.NewArrayType_Click);
 			// 
@@ -526,7 +543,7 @@
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.Button_Save);
 			this.Name = "UC_Options";
-			this.Size = new System.Drawing.Size(1026, 584);
+			this.Size = new System.Drawing.Size(1026, 501);
 			groupBox3.ResumeLayout(false);
 			groupBox3.PerformLayout();
 			panel1.ResumeLayout(false);
@@ -581,6 +598,7 @@
 		private System.Windows.Forms.Button DeleteArrayType;
 		private System.Windows.Forms.Button NewArrayType;
 		private System.Windows.Forms.RichTextBox BracketPreview;
+		private System.Windows.Forms.ToolTip toolTip1;
 
 	}
 }
