@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -100,8 +99,8 @@ namespace UEExplorer.UI
 					if( Path.GetExtension( file ) != ".dll" )
 						continue;
 
-					Assembly a = System.Reflection.Assembly.LoadFile( file );
-					Type[] types = a.GetExportedTypes();
+					var assembly = Assembly.LoadFile( file );
+					Type[] types = assembly.GetExportedTypes();
 					foreach( Type t in types )
 					{
 						Type i = t.GetInterface( "IExtension" );
