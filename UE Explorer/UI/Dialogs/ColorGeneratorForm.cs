@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace UEExplorer.UI.Dialogs
@@ -13,29 +13,29 @@ namespace UEExplorer.UI.Dialogs
 			InitializeComponent();
 		}
 
-		private void button2_Click( object sender, EventArgs e )
+		private void PickColorCodeButton_Click( object sender, EventArgs e )
 		{
-			var dr = colorDialog1.ShowDialog();
-			if( dr != DialogResult.OK )
+			var result = ColorDialog.ShowDialog();
+			if( result != DialogResult.OK )
 			{
-				// Don't add a color because the user didn't want it!
 				return;
 			}
-			textBox1.Text = textBox1.Text.Insert( textBox1.SelectionStart, checkBox1.Checked 
-				? ColorCodeGenerator.ConvertToUE3ColorCode( colorDialog1.Color ) 
-				: ColorCodeGenerator.ConvertToColorCode( colorDialog1.Color ) );
+			ColoredTextInput.Text = ColoredTextInput.Text.Insert( 
+				ColoredTextInput.SelectionStart, 
+				XMLFormatCheckBox.Checked 
+					? ColorCode.ToXMLCode( ColorDialog.Color ) 
+					: ColorCode.ToCode( ColorDialog.Color ) 
+			);
 		}
 
-		private void button1_Click( object sender, EventArgs e )
+		private void PickHTMLColorButton_Click( object sender, EventArgs e )
 		{
-			var dr = colorDialog1.ShowDialog();
-			if( dr != DialogResult.OK )
+			var result = ColorDialog.ShowDialog();
+			if( result != DialogResult.OK )
 			{
-				// Don't add a color cuz the user didn't want it!
 				return;
-			}
-													   
-			textBox3.Text = ColorCodeGenerator.RGBToHEX( colorDialog1.Color );
+			}									   
+			HTMLColorText.Text = ColorCode.ToHEX( ColorDialog.Color );
 		}
 
 		private struct ColoredText
@@ -44,128 +44,133 @@ namespace UEExplorer.UI.Dialogs
 			public Color Color;
 		}
 
-		private void panel1_Paint( object sender, PaintEventArgs e )
+		private void ColoredTextPreview_Paint( object sender, PaintEventArgs e )
 		{
-			if( textBox1.Text.Length == 0 )
+			if( ColoredTextInput.Text.Length == 0 )
 			{
-				e.Graphics.DrawString( "Colorized Preview", Font, new SolidBrush( Color.Black ), 0, 0 );
+				e.Graphics.DrawString( 
+					"Colorized Preview", 
+					ColoredTextPreview.Font, 
+					new SolidBrush( Color.Black ), 
+					0, 0 
+				);
 			}
 
 			// Grab all color codes and construct a structure 
 			// with the color code converted to a color and with the text next to it until the next color.
 			var colors = new List<ColoredText>();
-			string S = textBox1.Text;
-			for( var i = 0; i < S.Length; ++ i )
+			string s = ColoredTextInput.Text;
+			for( var i = 0; i < s.Length; ++ i )
 			{
-				if( S[i].ToString() == ColorCodeGenerator.Chr( ColorCodeGenerator.ColorTag ) )
+				if( s[i] != ColorCode.ColorTag || i + 3 >= s.Length ) 
+					continue;
+
+				var textColor = new ColoredText
 				{
-					if( i + 3 < S.Length )
-					{
-						ColoredText T;
-						byte[] ColorText = Encoding.GetEncoding( 1252 ).GetBytes( new char[] { S[i + 1], S[i + 2], S[i + 3] } );
-						T.Color = Color.FromArgb( (int)ColorText[0], (int)ColorText[1], (int)ColorText[2] );
-						T.Text = S.Substring( i + 4 );
-						for( int j = 0; j < T.Text.Length; ++ j )
-						{
-							if( T.Text[j].ToString() == ColorCodeGenerator.Chr( ColorCodeGenerator.ColorTag ) )
-							{
-								T.Text = T.Text.Remove( j );
-								break;
-							}
-						}
-						colors.Add( T );
-						i += 3 + T.Text.Length;
-					}
+					Color = Color.FromArgb( (byte)s[i + 1], (byte)s[i + 2], (byte)s[i + 3] ), 
+					Text = s.Substring( i + 4 )
+				};
+
+				for( int j = 0; j < textColor.Text.Length; ++ j )
+				{
+					if( textColor.Text[j] != ColorCode.ColorTag ) 
+						continue;
+
+					textColor.Text = textColor.Text.Remove( j );
+					break;
 				}
+				colors.Add( textColor );
+				i += 3 + textColor.Text.Length;
 			}
 
 			// Grab all text with no color code before it.
-			string xS = "";
-			for( int j = 0; j < textBox1.Text.Length; ++ j )
+			string remainingText = null;
+			for( int i = 0; i < ColoredTextInput.Text.Length; ++ i )
 			{
-				if( textBox1.Text[j].ToString() == ColorCodeGenerator.Chr( ColorCodeGenerator.ColorTag ) )
+				if( ColoredTextInput.Text[i] == ColorCode.ColorTag )
 				{
 					break;
 				}
-				xS = textBox1.Text.Substring( 0, j + 1 );
+
+				remainingText = ColoredTextInput.Text.Substring( 0, i + 1 );
 			}
 
-			if( xS != "" )
-			{
-				ColoredText T;
-				T.Text = xS;
-				T.Color = Color.Black;
-				colors.Insert( 0, T );
+			if( !String.IsNullOrEmpty( remainingText ) )
+			{ 
+				var textColor = new ColoredText
+				{
+					Text = remainingText,
+					Color = Color.Black
+				};
+				colors.Insert( 0, textColor );
 			}
 			
 			// Draw all grabbed colored text.
-			float xoff = 0;
-			float yoff = 0;
-			for( int i = 0; i < colors.Count; xoff += e.Graphics.MeasureString( colors[i].Text, Font ).Width, ++ i )
+			float x = 0.0f;
+			float y = 0.0f;
+			for( int i = 0; i < colors.Count; ++ i )
 			{	
-				// kinda buggy xd.
-				if( xoff + e.Graphics.MeasureString( colors[i].Text, Font ).Width >= panel1.ClientSize.Width )
+				var xl = e.Graphics.MeasureString( colors[i].Text, ColoredTextPreview.Font ).Width;
+				if( x + xl >= ColoredTextPreview.ClientSize.Width )
 				{			
-					xoff = 0;
-					yoff += Font.Height;
+					x = 0.0f;
+					y += ColoredTextPreview.Font.Height;
 				}
-				e.Graphics.DrawString( colors[i].Text, Font, new SolidBrush( colors[i].Color ), xoff, yoff );	
+				e.Graphics.DrawString( 
+					colors[i].Text, 
+					Font, 
+					new SolidBrush( colors[i].Color ), 
+					x, y 
+				);	
+				x += xl;
 			}
 		}
 
-		private void textBox1_TextChanged( object sender, EventArgs e )
+		private void ColoredTextPreview_TextChanged( object sender, EventArgs e )
 		{
-			panel1.Refresh();
+			ColoredTextPreview.Refresh();
 		}
 
-		private void panel1_SizeChanged( object sender, EventArgs e )
+		private void ColoredTextPreview_SizeChanged( object sender, EventArgs e )
 		{
-			panel1.Refresh();
-		}
-
-		private void ColorGeneratorForm_FontChanged( object sender, EventArgs e )
-		{
-			panel1.Refresh();
+			ColoredTextPreview.Refresh();
 		}
 	}
 
-	public static class ColorCodeGenerator
+	internal static class ColorCode
 	{
-		public const byte ColorTag = 0x1B;
+		public const char ColorTag = (char)0x1B;
 
-		public static string Chr( byte num )
+		public static string ToCode( Color c )
 		{
-			return Encoding.GetEncoding( 1252 ).GetString( new byte[]{ num } );
+			return 
+			(
+				ColorTag 
+				+ ((char)(c.R | 1)).ToString( CultureInfo.InvariantCulture ) 
+				+ ((char)(c.G | 1)).ToString( CultureInfo.InvariantCulture ) 
+				+ ((char)(c.B | 1)).ToString( CultureInfo.InvariantCulture )
+			).ToString( CultureInfo.InvariantCulture );
 		}
 
-		public static string ConvertToColorCode( Color colorToConvert )
-		{
-			string colorCode = Chr( Math.Max( colorToConvert.R, (byte)1 ) ) +
-				Chr( Math.Max( colorToConvert.G, (byte)1 ) ) +
-				Chr( Math.Max( colorToConvert.B, (byte)1 ) );
-
-			return Chr( ColorTag ) + colorCode;
-		}
-
-		public static string ConvertToUE3ColorCode( Color colorToConvert )
+		public static string ToXMLCode( Color c )
 		{
 			// e.g. "<Color:R=1.0,G=1.0,B=1.0,A=1.0>"
-			return "<Color:R=" +
-				(float)colorToConvert.R / 255 + ",G=" + 
-				(float)colorToConvert.G / 255 + ",B=" +
-				(float)colorToConvert.B / 255 + ",A=" +
-				(float)colorToConvert.A / 255 + ">";
+			return "<Color" 
+				+ ":R=" + c.R / 255F 
+				+ ",G=" + c.G / 255F 
+				+ ",B=" + c.B / 255F 
+				+ ",A=" + c.A / 255F 
+				+ "></Color>";
 		}
 
-		public static string RGBToHEX( Color colorToConvert )
+		public static string ToHEX( Color c )
 		{
-			return ColorTranslator.ToHtml( colorToConvert ); 
-			//return "#" + (ColorToConvert.ToArgb() & 0x00FFFFFF).ToString( "X6" );
+			return ColorTranslator.ToHtml( c ); 
 		}
 
-		public static Color HEXToRGB( string HEXToConvert )
+		public static Color ToRGB( string hex )
 		{
-			return ColorTranslator.FromHtml( HEXToConvert );
+			return ColorTranslator.FromHtml( hex );
 		}
 	}
 }
