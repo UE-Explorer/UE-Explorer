@@ -1507,15 +1507,22 @@ namespace UEExplorer.UI.Tabs
 									output = "Exception occurred while decompiling token: " + t.GetType().Name;
 									breakOut = true;
 								}
-								string chain = t.GetType().Name + "(" + t.Size + ")";
+								string chain = t.GetType().Name.Substring( 0, t.GetType().Name.Length - 5 ) 
+									+ "(" + t.Size + ")";
 								int inlinedTokens = codeDec.CurrentTokenIndex - orgIndex;
 								if( inlinedTokens > 0 )
 								{
 									++ orgIndex;
 									for( int i = 0; i < inlinedTokens; ++ i )
 									{
+										//var breakLine = i > 0 && i % 3 == 0;
+										//if( breakLine )
+										//{
+										//    chain += "\r\n\t\t";
+										//}
+										var tokenName = codeDec.DeserializedTokens[orgIndex + i].GetType().Name; 
 										chain += " -> " 
-											+ codeDec.DeserializedTokens[orgIndex + i].GetType().Name 
+											+ tokenName.Substring( 0, tokenName.Length - 5 ) 
 											+ "(" + codeDec.DeserializedTokens[orgIndex + i].Size + ")";
 									}
 								}
