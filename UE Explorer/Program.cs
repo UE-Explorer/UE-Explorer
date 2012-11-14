@@ -331,10 +331,14 @@ namespace UEExplorer
 		[XmlIgnore]
 		public readonly List<UnrealConfig.VariableType> DefaultVariableTypes = new List<UnrealConfig.VariableType>()
 		{
-			new UnrealConfig.VariableType{VFullName = "XInterface.GUIComponent.Controls", VType = "ObjectProperty"},
 			new UnrealConfig.VariableType{VFullName = "Engine.Actor.Skins", VType = "ObjectProperty"},	
 			new UnrealConfig.VariableType{VFullName = "Engine.Actor.Components", VType = "ObjectProperty"},
-			new UnrealConfig.VariableType{VFullName = "Engine.SkeletalMeshComponent.AnimSets", VType = "ObjectProperty"}
+			new UnrealConfig.VariableType{VFullName = "Engine.SkeletalMeshComponent.AnimSets", VType = "ObjectProperty"},
+			new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.InputLinks", VType = "StructProperty"},
+			new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.OutputLinks", VType = "StructProperty"},
+			new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.VariableLinks", VType = "StructProperty"},
+			new UnrealConfig.VariableType{VFullName = "Engine.SequenceAction.Targets", VType = "ObjectProperty"},
+			new UnrealConfig.VariableType{VFullName = "XInterface.GUIComponent.Controls", VType = "ObjectProperty"},
 		};
 		#endregion
 
