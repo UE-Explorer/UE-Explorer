@@ -309,7 +309,7 @@ namespace UEExplorer.UI.Tabs
 
 		internal class UnrealTableNode : TreeNode 
 		{
-			internal UnrealTable Table;
+			internal UObjectTableItem Table;
 			protected bool _Initialized;
 
 			public virtual void Initialize()
@@ -354,7 +354,7 @@ namespace UEExplorer.UI.Tabs
 
 				TreeView.BeginUpdate();
 				Nodes.Clear();
-				var exp = Table as UnrealExportTable;
+				var exp = Table as UExportTableItem;
 				ulong objFlags = exp.ObjectFlags;
 				if( objFlags != 0 )
 				{
@@ -363,8 +363,8 @@ namespace UEExplorer.UI.Tabs
 					flagNode.ToolTipText = UnrealMethods.FlagsListToString( UnrealMethods.FlagsToList( typeof(ObjectFlagsLO), typeof(ObjectFlagsHO), exp.ObjectFlags ) );	
 				}
 
-				Nodes.Add( "Export Offset:" + exp.TableOffset );
-				Nodes.Add( "Export Size:" + exp.TableSize );
+				Nodes.Add( "Export Offset:" + exp.Offset );
+				Nodes.Add( "Export Size:" + exp.Size );
 
 				if( exp.ExportFlags != 0 )
 				{
@@ -461,7 +461,7 @@ namespace UEExplorer.UI.Tabs
 
 				TreeView.BeginUpdate();
 				Nodes.Clear();
-				var imp = Table as UnrealImportTable;
+				var imp = Table as UImportTableItem;
 				if( imp.ObjectIndex != 0 )
 				{
 					Nodes.Add( "Object:" + imp.ObjectName + "(" + imp.ObjectIndex + ")" );
@@ -712,7 +712,7 @@ namespace UEExplorer.UI.Tabs
 			}
 			else
 			{
-				DataGridView_NameTable.Rows.Add( ((UnrealNameTable)nameTable).Name, String.Format( "{0:x4}", (nameTable as UnrealNameTable).Flags ) );
+				DataGridView_NameTable.Rows.Add( ((UNameTableItem)nameTable).Name, String.Format( "{0:x4}", (nameTable as UNameTableItem).Flags ) );
 			}
 		}
 
@@ -735,7 +735,7 @@ namespace UEExplorer.UI.Tabs
 				    _ExportNodes = new TreeNode[_UnrealPackage.ExportTableList.Count];
 				}
 
-				var exp = exportTable as UnrealExportTable;
+				var exp = exportTable as UExportTableItem;
 				var node = new ExportNode {Table = exp, Text = exp.ObjectName};
 				SetImageKeyForObject( exp, node );
 
@@ -788,7 +788,7 @@ namespace UEExplorer.UI.Tabs
 					_ExportNodes = new TreeNode[_UnrealPackage.ImportTableList.Count];
 				}
 
-				var imp = (importTable as UnrealImportTable);
+				var imp = (importTable as UImportTableItem);
 				ImportNode node = new ImportNode
 				{
 				    Table = imp,
@@ -895,7 +895,7 @@ namespace UEExplorer.UI.Tabs
 			TabPage_Deps.Text += " (" + TreeView_Deps.Nodes.Count + ")";
 		}
 
-		protected void GetDependencyOn( UnrealImportTable parent, TreeNode node )
+		protected void GetDependencyOn( UImportTableItem parent, TreeNode node )
 		{
 			if( node == null )
 				return;
@@ -910,7 +910,7 @@ namespace UEExplorer.UI.Tabs
 			SetImageKeyForObject( parent, node );
 		}
 
-		protected void SetImageKeyForObject( UnrealTable tableObject, TreeNode node )
+		protected void SetImageKeyForObject( UObjectTableItem tableObject, TreeNode node )
 		{
 			if( tableObject.Object != null )
 			{
