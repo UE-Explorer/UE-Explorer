@@ -67,6 +67,7 @@
 			this.menuItem25 = new System.Windows.Forms.MenuItem();
 			this.menuItem24 = new System.Windows.Forms.MenuItem();
 			this.menuItem6 = new System.Windows.Forms.MenuItem();
+			this.menuItem4 = new System.Windows.Forms.MenuItem();
 			this.menuItem27 = new System.Windows.Forms.MenuItem();
 			this.menuItem5 = new System.Windows.Forms.MenuItem();
 			this.tabStripItem1 = new Storm.TabControl.TabStripItem();
@@ -362,6 +363,7 @@
             menuItem26,
             this.menuItem24,
             this.menuItem6,
+            this.menuItem4,
             this.menuItem27,
             this.menuItem5});
 			this.menuItem3.Text = "&Help";
@@ -389,14 +391,20 @@
 			this.menuItem6.Text = "> Donate";
 			this.menuItem6.Click += new System.EventHandler(this.donateToolStripMenuItem1_Click);
 			// 
+			// menuItem4
+			// 
+			this.menuItem4.Index = 5;
+			this.menuItem4.Text = "> Contact";
+			this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
+			// 
 			// menuItem27
 			// 
-			this.menuItem27.Index = 5;
+			this.menuItem27.Index = 6;
 			this.menuItem27.Text = "-";
 			// 
 			// menuItem5
 			// 
-			this.menuItem5.Index = 6;
+			this.menuItem5.Index = 7;
 			this.menuItem5.Text = "&About...";
 			this.menuItem5.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
@@ -490,6 +498,7 @@
 		private Storm.TabControl.TabStripItem tabStripItem3;
 		private System.Windows.Forms.MenuItem menuItem6;
 		private System.Windows.Forms.MenuItem _ROF;
+		private System.Windows.Forms.MenuItem menuItem4;
 
 
 		// OnClick events!

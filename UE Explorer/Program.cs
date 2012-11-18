@@ -9,8 +9,8 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.VisualBasic.ApplicationServices;
-using System.Net;
 using UELib;
+using UELib.Core;
 
 namespace UEExplorer
 {
@@ -22,15 +22,44 @@ namespace UEExplorer
 	    private static FileStream _LogStream;
 
         [STAThread]
-        static void Main()
+        static void Main( string[] args )
         {
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault( false );
+
+			if( args.Length >= 2 )
+			{
+				var console = new UI.Main.ProgramConsole();
+				Application.Run( console );
+				Application.Exit();
+				return;	
+			}
 
 			StartLogStream();
 			var app = new SingleInstanceApplication();
 			app.Run( Environment.GetCommandLineArgs() );
 			EndLogStream();
+		}
+
+		public static readonly string PackageExportPath = Path.Combine( Application.StartupPath, "Exported" ); 
+		internal static string InitializeExportDirectory( this UnrealPackage package )
+		{
+			var exportPath = Path.Combine( PackageExportPath, 
+				Path.GetFileNameWithoutExtension( package.FullPackageName ) 
+			);
+	
+			if( Directory.Exists( exportPath ) )
+			{
+				var files = Directory.GetFiles( exportPath );
+				foreach( var file in files )
+				{
+					File.Delete( exportPath + file );
+				}			
+			}
+
+			var classPath = Path.Combine( exportPath, "Classes" );
+			Directory.CreateDirectory( classPath );
+			return classPath;
 		}
 
 		private static void StartLogStream()
@@ -158,6 +187,7 @@ namespace UEExplorer
 #endif
 
 		internal const string Donate_URL = WEBSITE_URL + "donate.html";
+		internal const string Contact_URL = WEBSITE_URL + "contact.html";
 		internal const string Program_URL = WEBSITE_URL + "portfolio/view/21/ue-explorer";
 		internal const string Program_Parm_ID = "data[items][id]=21";
 		internal const string Version_URL = WEBSITE_URL +  "apps/version/";

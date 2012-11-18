@@ -459,6 +459,11 @@ namespace UEExplorer.UI
 			Program.Options.Platform = Platform.Text;
 			Program.SaveConfig();
 		}
+
+		private void menuItem4_Click( object sender, EventArgs e )
+		{
+			System.Diagnostics.Process.Start( Program.Contact_URL );
+		}
 	}
 
 	public static class ProgressStatus
