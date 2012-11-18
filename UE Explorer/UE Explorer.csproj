@@ -254,6 +254,12 @@
     <Compile Include="UI\Dialogs\StructureInputDialog.Designer.cs">
       <DependentUpon>StructureInputDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Main\ProgramConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Main\ProgramConsole.Designer.cs">
+      <DependentUpon>ProgramConsole.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Tabs\UC_UClassFile.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -357,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\StructureInputDialog.resx">
       <DependentUpon>StructureInputDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Main\ProgramConsole.resx">
+      <DependentUpon>ProgramConsole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_Default.resx">
       <DependentUpon>UC_Default.cs</DependentUpon>
@@ -514,6 +523,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>if /I "$(ConfigurationName)" == "Release" Eazfuscator.NET.exe "$(TargetPath)" --msbuild-project-path "$(ProjectPath)" --msbuild-project-configuration "$(ConfigurationName)" --msbuild-project-platform "$(PlatformName)" --msbuild-solution-path "$(SolutionPath)" -n --newline-flush -v 3.2</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
