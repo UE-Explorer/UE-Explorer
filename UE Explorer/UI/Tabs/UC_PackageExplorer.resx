@@ -139,7 +139,7 @@
     <value>3, 3</value>
   </data>
   <data name="WPFHost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>973, 510</value>
+    <value>642, 510</value>
   </data>
   <data name="WPFHost.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -160,7 +160,7 @@
     <value>3, 37</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 516</value>
+    <value>648, 516</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -341,7 +341,7 @@
     <value>Yes</value>
   </data>
   <data name="ToolStrip_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 28</value>
+    <value>648, 28</value>
   </data>
   <data name="ToolStrip_Content.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -362,7 +362,7 @@
     <value>3, 6</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 28</value>
+    <value>648, 28</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -389,7 +389,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="Panel_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 556</value>
+    <value>654, 556</value>
   </data>
   <data name="Panel_Content.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1248,7 +1248,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADc
-        FgAAAk1TRnQBSQFMAgEBEQEAAbgBAQG4AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        FgAAAk1TRnQBSQFMAgEBEQEAAcABAQHAAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAAVADAAEBAQABCAYAARQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -2474,7 +2474,7 @@
     <value>1</value>
   </data>
   <data name="UScriptLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1312, 556</value>
+    <value>981, 556</value>
   </data>
   <data name="UScriptLayout.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2528,7 +2528,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1312, 556</value>
+    <value>981, 556</value>
   </data>
   <data name="&gt;&gt;TextEditorPanel.Name" xml:space="preserve">
     <value>TextEditorPanel</value>
@@ -2714,6 +2714,6 @@
     <value>UC_PackageExplorer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>UEExplorer.UI.UserControl_Tab, UE Explorer, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>UEExplorer.UI.UserControl_Tab, UE Explorer, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

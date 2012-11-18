@@ -47,7 +47,7 @@ namespace UEExplorer.UI.Tabs
 						ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance 
 					);
 					TextEditorPanel.searchWiki.Click += searchWiki_Click;
-					TextEditorPanel.textEditor.ContextMenuOpening += new System.Windows.Controls.ContextMenuEventHandler( contextMenu_ContextMenuOpening );
+					TextEditorPanel.textEditor.ContextMenuOpening += contextMenu_ContextMenuOpening;
 					TextEditorPanel.copy.Click += copy_Click;
 
 					// Fold all { } blocks
@@ -80,13 +80,19 @@ namespace UEExplorer.UI.Tabs
 		{
 			if( TextEditorPanel.textEditor.TextArea.Selection.Length == 0 )
 			{
-				TextEditorPanel.searchWiki.IsEnabled = false;
+				TextEditorPanel.searchWiki.Visibility = System.Windows.Visibility.Collapsed;
 				return;
 			}
 			var selection = GetSelection();
-			//myTextEditor1.searchWiki.IsEnabled = !selection.Contains( '\n' );
+			if( selection.IndexOf( '\n' ) != -1 )
+			{
+				TextEditorPanel.searchWiki.Visibility = System.Windows.Visibility.Collapsed;
+				return;
+			}
+			
+			TextEditorPanel.searchWiki.Visibility = System.Windows.Visibility.Visible;
 			TextEditorPanel.searchWiki.Header = "Search UnrealWiki for \"" 
-				+  selection.Substring( 0, 64 )
+				+  selection
 				+ "\"";
 		}
 
@@ -249,7 +255,7 @@ namespace UEExplorer.UI.Tabs
 
 		private void ReadMetaInfo()
 		{
-			foreach( var obj in _UnrealPackage.ObjectsList.Where((o) => o is UConst && o.Name.StartsWith( "META_DECOMPILER" ) ) )
+			foreach( var obj in _UnrealPackage.ObjectsList.Where(o => o is UConst && o.Name.StartsWith( "META_DECOMPILER" ) ) )
 			{
 				var value = ((UConst)obj).Value;
 				var parms = obj.Name.Substring( 16 ).Split( '_' );
@@ -598,14 +604,14 @@ namespace UEExplorer.UI.Tabs
 
 			if( _UnrealPackage.Version >= UnrealPackage.VCOOKEDPACKAGES )
 			{
-				flags.Add( "Cooked " + _UnrealPackage.IsCooked().ToString() );
+				flags.Add( "Cooked " + _UnrealPackage.IsCooked() );
 				flags.Add( "Compressed " + _UnrealPackage.HasPackageFlag( PackageFlags.Compressed ) );
 				flags.Add( "FullyCompressed " + _UnrealPackage.HasPackageFlag( PackageFlags.FullyCompressed ) );	
-				flags.Add( "Debug " + _UnrealPackage.IsDebug().ToString() );
-				flags.Add( "Script " + _UnrealPackage.IsScript().ToString() );
-				flags.Add( "Stripped " + _UnrealPackage.IsStripped().ToString() );			
-				flags.Add( "Map " + _UnrealPackage.IsMap().ToString() );
-				flags.Add( "Console " + _UnrealPackage.IsBigEndian.ToString() );
+				flags.Add( "Debug " + _UnrealPackage.IsDebug() );
+				flags.Add( "Script " + _UnrealPackage.IsScript() );
+				flags.Add( "Stripped " + _UnrealPackage.IsStripped() );			
+				flags.Add( "Map " + _UnrealPackage.IsMap() );
+				flags.Add( "Console " + _UnrealPackage.IsBigEndian );
 			}
 			else if( _UnrealPackage.Version > 61 && _UnrealPackage.Version <= 69 )		// <= UT99
 			{
@@ -716,8 +722,8 @@ namespace UEExplorer.UI.Tabs
 			}
 		}
 
-		private TreeNode[] _ExportNodes = null;
-		private int _NIndex = 0;
+		private TreeNode[] _ExportNodes;
+		private int _NIndex;
 		protected void CreateExportTable( object exportTable )
 		{
 			if( TreeView_Exports.InvokeRequired )
@@ -775,7 +781,7 @@ namespace UEExplorer.UI.Tabs
 		{
 			if( TreeView_Imports.InvokeRequired )
 			{
-				CreateTableDelegate del = new CreateTableDelegate( CreateImportTable );
+				CreateTableDelegate del = CreateImportTable;
 				for( int i = 0; i < _UnrealPackage.ImportTableList.Count; ++ i )
 				{
 					Invoke( del, _UnrealPackage.ImportTableList[i] );
@@ -1000,11 +1006,11 @@ namespace UEExplorer.UI.Tabs
 				File.WriteAllText( packagePath + "\\Classes\\" + Object.Name + UnrealExtensions.UnrealCodeExt, Object.Decompile() );
 			}	
 		   	CreateFlagsFile( packagePath );
-			DialogResult DR = MessageBox.Show( "Decompiled all package classes of " + _UnrealPackage.FullPackageName + " to " + packagePath +
+			var dr = MessageBox.Show( "Decompiled all package classes of " + _UnrealPackage.FullPackageName + " to " + packagePath +
 				"\r\n\r\nClick Yes if you want to go to the decompiled classes directory.", 
 				Application.ProductName,
 				MessageBoxButtons.YesNo );
-			if( DR == DialogResult.Yes )
+			if( dr == DialogResult.Yes )
 			{
 				System.Diagnostics.Process.Start( packagePath + "\\Classes" );
 			}
@@ -1012,7 +1018,8 @@ namespace UEExplorer.UI.Tabs
 
 		private void _OnExportScriptsClick( object sender, EventArgs e )
 		{
-			string packagePath = Application.StartupPath + "\\Exported\\" + Path.GetFileNameWithoutExtension( _UnrealPackage.FullPackageName ); 
+			string packagePath = Application.StartupPath + "\\Exported\\" 
+				+ Path.GetFileNameWithoutExtension( _UnrealPackage.FullPackageName ); 
 			if( Directory.Exists( packagePath ) )
 			{
 				string[] files = Directory.GetFiles( packagePath );
@@ -1034,11 +1041,12 @@ namespace UEExplorer.UI.Tabs
 				File.WriteAllText( packagePath + "\\Classes\\" + Object.Name + UnrealExtensions.UnrealCodeExt, output );
 			}				
 			CreateFlagsFile( packagePath );
-			DialogResult DR = MessageBox.Show( "Exported all package classes of " + _UnrealPackage.FullPackageName + " to " + packagePath +
+			var dr = MessageBox.Show( "Exported all package classes of " 
+				+ _UnrealPackage.FullPackageName + " to " + packagePath +
 				"\r\n\r\nClick Yes if you want to go to the exported classes directory.", 
 				Application.ProductName,
 				MessageBoxButtons.YesNo );
-			if( DR == DialogResult.Yes )
+			if( dr == DialogResult.Yes )
 			{
 				System.Diagnostics.Process.Start( packagePath + "\\Classes" );
 			}
@@ -1064,12 +1072,12 @@ namespace UEExplorer.UI.Tabs
 		{
 			try
 			{
-				var newTitle = String.Empty;
 				if( treeNode is IDecompilableNode )
 				{
 					SetContentText( treeNode, ((IDecompilableNode)treeNode).Decompile() );
 
 					// Assemble a title
+					string newTitle;
 					if( treeNode is IDecompilableObjectNode )
 					{
 						UObject obj;
@@ -1343,7 +1351,7 @@ namespace UEExplorer.UI.Tabs
 									break;
 
 								Image picture = new Bitmap( (int)tex.MipMaps[0].Width, (int)tex.MipMaps[0].Height );
-								var painter = System.Drawing.Graphics.FromImage( picture );
+								var painter = Graphics.FromImage( picture );
 								painter.Clear( Color.White );
 
 								for( int x = 0; x < tex.MipMaps[0].Width; ++ x )

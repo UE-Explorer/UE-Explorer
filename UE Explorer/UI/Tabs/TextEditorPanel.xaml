@@ -7,9 +7,9 @@
              d:DesignHeight="426" d:DesignWidth="514" xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit">
 		<avalonedit:TextEditor Name="textEditor" ShowLineNumbers="True" IsReadOnly="True" FontSize="14" FontFamily="Courier New" FontWeight="Normal" FontStyle="Normal" Grid.RowSpan="5" LineNumbersForeground="DarkCyan">
 			<avalonedit:TextEditor.ContextMenu>
-				<ContextMenu Name="contextMenu">
-					<MenuItem Header="Search UnrealWiki" Name="searchWiki"/>
+				<ContextMenu Name="contextMenu">	
 					<MenuItem Header="Copy" Name="copy"/>
+					<MenuItem Header="Search UnrealWiki" Name="searchWiki"/>
 			</ContextMenu>
 			</avalonedit:TextEditor.ContextMenu>
 		</avalonedit:TextEditor>
