@@ -233,4 +233,9 @@ Latest version: {1}</value>
 	<data name="SAVED">
 		<value xml:space="preserve">Saved!</value>
 	</data>
+	<data name="EXPORTED_ALL_PACKAGE_CLASSES">
+		<value xml:space="preserve">Exported all package classes of {0} to {1}
+
+Click Yes if you want to go to the output directory!</value>
+	</data>
 </root>

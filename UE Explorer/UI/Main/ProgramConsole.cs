@@ -3,7 +3,6 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using UELib;
-using UELib.Core;
 
 namespace UEExplorer.UI.Main
 {
@@ -45,14 +44,12 @@ namespace UEExplorer.UI.Main
 			{
 				case "export":
 				{ 
-					bool shouldExportClasses = false;
 					bool shouldExportScripts = false;
 
 					var exportType = options[1];
 					switch( exportType )
 					{
 						case "classes":
-							shouldExportClasses = true;
 							break;
 
 						case "scripts":
@@ -69,18 +66,7 @@ namespace UEExplorer.UI.Main
 						Console.WriteLine( "Exporting package " + filePath );
 						using( var package = UnrealLoader.LoadFullPackage( filePath ) )
 						{ 
-							var exportPath = package.InitializeExportDirectory();
-							foreach( UClass uClass in package.ObjectsList.FindAll( o => o is UClass && o.ExportTable != null ) )
-							{
-								var exportContent = shouldExportScripts && uClass.ScriptBuffer != null 
-									? uClass.ScriptBuffer.Decompile() 
-									: uClass.Decompile();
-								File.WriteAllText( 
-									Path.Combine( exportPath, uClass.Name ) + UnrealExtensions.UnrealCodeExt,
-									exportContent, Encoding.ASCII
-								);
-							}	
-
+							var exportPath = package.ExportPackageClasses( shouldExportScripts );
 							Console.WriteLine( "Package successfully exported to " + exportPath );
 							//Close();
 						}

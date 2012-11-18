@@ -106,6 +106,17 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exported all package classes of {0} to {1}
+        ///
+        ///Click Yes if you want to go to the output directory!.
+        /// </summary>
+        internal static string EXPORTED_ALL_PACKAGE_CLASSES {
+            get {
+                return ResourceManager.GetString("EXPORTED_ALL_PACKAGE_CLASSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Homepage.
         /// </summary>
         internal static string Homepage {

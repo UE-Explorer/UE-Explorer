@@ -10,7 +10,6 @@ using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.VisualBasic.ApplicationServices;
 using UELib;
-using UELib.Core;
 
 namespace UEExplorer
 {
@@ -39,27 +38,6 @@ namespace UEExplorer
 			var app = new SingleInstanceApplication();
 			app.Run( Environment.GetCommandLineArgs() );
 			EndLogStream();
-		}
-
-		public static readonly string PackageExportPath = Path.Combine( Application.StartupPath, "Exported" ); 
-		internal static string InitializeExportDirectory( this UnrealPackage package )
-		{
-			var exportPath = Path.Combine( PackageExportPath, 
-				Path.GetFileNameWithoutExtension( package.FullPackageName ) 
-			);
-	
-			if( Directory.Exists( exportPath ) )
-			{
-				var files = Directory.GetFiles( exportPath );
-				foreach( var file in files )
-				{
-					File.Delete( exportPath + file );
-				}			
-			}
-
-			var classPath = Path.Combine( exportPath, "Classes" );
-			Directory.CreateDirectory( classPath );
-			return classPath;
 		}
 
 		private static void StartLogStream()
@@ -214,7 +192,7 @@ namespace UEExplorer
 					Microsoft.Win32.RegistryKey extkey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( ext, true );
 					if( extkey != null )
 					{
-						if( (string)extkey.GetValue( "" ) == RegistryFileFolderName )
+						if( (string)extkey.GetValue( String.Empty ) == RegistryFileFolderName )
 						{
 							Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree( ext );
 						}
@@ -227,7 +205,7 @@ namespace UEExplorer
 
 				foreach( Microsoft.Win32.RegistryKey key in extkeys )
 				{
-					var reference = (string)key.GetValue( "" );
+					var reference = (string)key.GetValue( String.Empty );
 					if( reference != null )
 					{
 						Microsoft.Win32.RegistryKey k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( reference, true );
@@ -246,10 +224,10 @@ namespace UEExplorer
 					if( extkey == null )
 					{
 						extkey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey( ext );
-						extkey.SetValue( "", RegistryFileFolderName, Microsoft.Win32.RegistryValueKind.String );
+						extkey.SetValue( String.Empty, RegistryFileFolderName, Microsoft.Win32.RegistryValueKind.String );
 						extkey.SetValue( "Content Type", "application", Microsoft.Win32.RegistryValueKind.String );
 					}
-					else if( (string)(extkey.GetValue( "" )) != RegistryFileFolderName )
+					else if( (string)(extkey.GetValue( String.Empty )) != RegistryFileFolderName )
 					{		  
 						extkeys.Add( extkey );
 					}
@@ -258,13 +236,13 @@ namespace UEExplorer
 				Microsoft.Win32.RegistryKey unrealfilekey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey( RegistryFileFolderName );
 				if( unrealfilekey != null )
 				{
-					unrealfilekey.SetValue( "", "Unreal File" );
+					unrealfilekey.SetValue( String.Empty, "Unreal File" );
 					ToggleFileProperties( unrealfilekey );
 				}
 
 				foreach( Microsoft.Win32.RegistryKey key in extkeys )
 				{
-					string reference = (string)key.GetValue( "" );
+					string reference = (string)key.GetValue( String.Empty );
 					if( reference != null )
 					{
 						Microsoft.Win32.RegistryKey k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( reference, true );
@@ -285,12 +263,12 @@ namespace UEExplorer
 				// Should only add a icon reference if none was already set, so that .UT2 map files keep their original icon.
 				if( xkey != null )
 				{
-					string curkey = (string)xkey.GetValue( "" );
+					string curkey = (string)xkey.GetValue( String.Empty );
 					if( curkey != null )
 					{
 						string oldasc = (string)xkey.GetValue( "OldAssociation" );
 						xkey.SetValue( "OldAssociation", curkey, Microsoft.Win32.RegistryValueKind.String );
-						xkey.SetValue( "", oldasc ?? "", Microsoft.Win32.RegistryValueKind.String );
+						xkey.SetValue( String.Empty, oldasc ?? String.Empty, Microsoft.Win32.RegistryValueKind.String );
 					}
 				}
 
@@ -310,14 +288,14 @@ namespace UEExplorer
 						if( defaulticonkey != null )
 						{
 							string mykey = Path.Combine( Application.StartupPath, "unrealfile.ico" );
-							string oldassociation = (string)defaulticonkey.GetValue( "" );
+							string oldassociation = (string)defaulticonkey.GetValue( String.Empty );
 							if( oldassociation != mykey )
 							{
 								if( oldassociation != null )
 								{
 									defaulticonkey.SetValue( "OldAssociation", oldassociation, Microsoft.Win32.RegistryValueKind.String );
 								}	
-								defaulticonkey.SetValue( "", mykey, Microsoft.Win32.RegistryValueKind.String );
+								defaulticonkey.SetValue( String.Empty, mykey, Microsoft.Win32.RegistryValueKind.String );
 							}
 						}
 					}
@@ -325,9 +303,9 @@ namespace UEExplorer
 
 				var shellkey = key.CreateSubKey( "shell" );
 				var editkey = shellkey.CreateSubKey( "open in " + Application.ProductName );
-				editkey.SetValue( "", "&Open in " + Application.ProductName );
+				editkey.SetValue( String.Empty, "&Open in " + Application.ProductName );
 				var cmdkey = editkey.CreateSubKey( "command" );
-				cmdkey.SetValue( "", "\"" + Application.ExecutablePath + "\" \"%1\"", Microsoft.Win32.RegistryValueKind.ExpandString );
+				cmdkey.SetValue( String.Empty, "\"" + Application.ExecutablePath + "\" \"%1\"", Microsoft.Win32.RegistryValueKind.ExpandString );
 			}
 		}
 #endregion
@@ -359,7 +337,7 @@ namespace UEExplorer
 
 		public List<UnrealConfig.VariableType> VariableTypes;
 		[XmlIgnore]
-		public readonly List<UnrealConfig.VariableType> DefaultVariableTypes = new List<UnrealConfig.VariableType>()
+		public readonly List<UnrealConfig.VariableType> DefaultVariableTypes = new List<UnrealConfig.VariableType>
 		{
 			new UnrealConfig.VariableType{VFullName = "Engine.Actor.Skins", VType = "ObjectProperty"},	
 			new UnrealConfig.VariableType{VFullName = "Engine.Actor.Components", VType = "ObjectProperty"},

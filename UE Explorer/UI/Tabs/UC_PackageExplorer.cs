@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using UEExplorer.Properties;
@@ -31,12 +32,6 @@ namespace UEExplorer.UI.Tabs
 		/// </summary>
 		protected override void TabCreated()
 		{						
-			/*string uLangPath = Path.Combine( Application.StartupPath, "Config", "UnrealScript" );
-			if( File.Exists( uLangPath + ".LANG" ) )
-			{
-				ScriptPage.Document.LanguageFile = uLangPath;
-			}*/		
-
 			string langPath = Path.Combine( Application.StartupPath, "Config", "UnrealScript.xshd" );
 			if( File.Exists( langPath ) )
 			{
@@ -68,7 +63,6 @@ namespace UEExplorer.UI.Tabs
 		void copy_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
 			TextEditorPanel.textEditor.Copy();
-			//System.Windows.Clipboard.SetText( GetSelection() );
 		}
 
 		string GetSelection()
@@ -158,7 +152,7 @@ namespace UEExplorer.UI.Tabs
 
 				TabControl_General.TabPages.Remove( TabPage_Chunks );
 			}
-			catch( System.IO.FileLoadException )
+			catch( FileLoadException )
 			{
 				_UnrealPackage = null;
 				if( MessageBox.Show(
@@ -172,8 +166,6 @@ namespace UEExplorer.UI.Tabs
 				}
 				UnrealConfig.SuppressSignature = true;
 				goto reload;
-				//throw new UnrealException( "Invalid package signature!", e );
-
 			}
 			catch( Exception e )
 			{
@@ -275,10 +267,6 @@ namespace UEExplorer.UI.Tabs
 								break;
 						}
 						break;
-						
-					//const META_DECOMPILER_VAR_AUTHOR			= "AUTHOR";
-					//const META_DECOMPILER_VAR_COPYRIGHT			= "COPYRIGHT";
-					//const META_DECOMPILER_EVENT_ONLOAD_MESSAGE		= "POPUP_MESSAGE";
 
 					case "EVENT":
 						switch( parms[1] )
@@ -411,43 +399,6 @@ namespace UEExplorer.UI.Tabs
 					Nodes.Add( "Object Size:" + exp.SerialSize );
 					Nodes.Add( "Object Offset:" + exp.SerialOffset );
 				}	
-			
-				#if DEBUG
-					if( exp.Guid != Guid.Empty.ToString() )
-					{
-						Nodes.Add( "Guid:" + exp.Guid );
-					}
-				
-					try
-					{
-						if( exp.ComponentMap != null && exp.ComponentMap.Count > 0 )
-						{
-							var n = Nodes.Add( "ComponentsMap" );
-							foreach( var pair in exp.ComponentMap )
-							{
-								n.Nodes.Add( "Name:" + exp.Owner.GetIndexName( pair.Key ) + " Object:" + pair.Value );
-							}
-						}
-					}
-					catch{}
-
-					try
-					{
-						if( exp.NetObjects != null && exp.NetObjects.Count > 0 )
-						{
-							var n = Nodes.Add( "NetObjects" );
-							foreach( var obj in exp.NetObjects )
-							{
-								n.Nodes.Add( "Name:" + exp.Owner.GetIndexObjectName( obj ) + "(" + obj + ")" );
-							}
-						}
-					}
-					catch{}	
-				#endif
-				if( exp.Object != null && exp.Object.NetIndex != 0 )
-				{
-					Nodes.Add( "NetIndex:" + exp.Owner.GetIndexObjectName( exp.Object.NetIndex ) + "(" + exp.Object.NetIndex + ")" ); 
-				}
 				TreeView.EndUpdate();
 			}
 		}
@@ -495,9 +446,9 @@ namespace UEExplorer.UI.Tabs
 			}
 		}
 
-		private ProgramForm _Form = null;
+		private ProgramForm _Form;
 
-		private List<UClass> _ClassesList = null;
+		private List<UClass> _ClassesList;
 
 		public override void TabClosing()
 		{
@@ -558,11 +509,11 @@ namespace UEExplorer.UI.Tabs
 			// Package Info
 
 			// Section 1
-			VersionValue.Text 			= (_UnrealPackage.Version.ToString());
-			FlagsValue.Text 			= UnrealMethods.FlagToString( (_UnrealPackage.PackageFlags & ~(uint)PackageFlags.Protected) );
-			LicenseeValue.Text 			= _UnrealPackage.LicenseeVersion.ToString();
+			VersionValue.Text 	= (_UnrealPackage.Version.ToString());
+			FlagsValue.Text 	= UnrealMethods.FlagToString( (_UnrealPackage.PackageFlags & ~(uint)PackageFlags.Protected) );
+			LicenseeValue.Text 	= _UnrealPackage.LicenseeVersion.ToString();
 
-			Label_GUID.Text				= _UnrealPackage.GUID;
+			Label_GUID.Text		= _UnrealPackage.GUID;
 
 			// Section 2	
 			if( _UnrealPackage.Version >= 245 )
@@ -641,10 +592,15 @@ namespace UEExplorer.UI.Tabs
 
 				CreateClassesList();
 				// HACK:Add a MetaData object to the classes tree(hack because MetaData is not an actual class)
-				var metobj = _UnrealPackage.FindObject( "MetaData", typeof( UMetaData ), false );
+				var metobj = _UnrealPackage.FindObject( "MetaData", typeof( UMetaData ) );
 				if( metobj != null )
 				{
-					var node = new ObjectNode( metobj ) { ImageKey = "UClass", SelectedImageKey = "UClass", Text = metobj.Name };
+					var node = new ObjectNode( metobj )
+					{
+						ImageKey = "UClass", 
+						SelectedImageKey = "UClass", 
+						Text = metobj.Name
+					};
 					node.Nodes.Add( "DUMMYNODE" );
 					if( metobj.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
 					{
@@ -688,7 +644,12 @@ namespace UEExplorer.UI.Tabs
 			{
 				foreach( var chunk in _UnrealPackage.CompressedChunks )
 				{
-					this.DataGridView_Chunks.Rows.Add( chunk.UncompressedOffset, chunk.UncompressedSize, chunk.CompressedOffset, chunk.CompressedSize );
+					DataGridView_Chunks.Rows.Add( 
+						chunk.UncompressedOffset, 
+						chunk.UncompressedSize, 
+						chunk.CompressedOffset, 
+						chunk.CompressedSize 
+					);
 				}
 			}
 
@@ -718,7 +679,11 @@ namespace UEExplorer.UI.Tabs
 			}
 			else
 			{
-				DataGridView_NameTable.Rows.Add( ((UNameTableItem)nameTable).Name, String.Format( "{0:x4}", (nameTable as UNameTableItem).Flags ) );
+				DataGridView_NameTable.Rows.Add( 
+					((UNameTableItem)nameTable).Name, 
+					String.Format( "{0:x4}", 
+					((UNameTableItem)nameTable).Flags ) 
+				);
 			}
 		}
 
@@ -991,75 +956,30 @@ namespace UEExplorer.UI.Tabs
 
 		private void _OnExportClassesClick( object sender, EventArgs e )
 		{
-			string packagePath = Application.StartupPath + "\\Decompiled\\" + Path.GetFileNameWithoutExtension( _UnrealPackage.FullPackageName ); 
-			if( Directory.Exists( packagePath ) )
-			{
-				string[] files = Directory.GetFiles( packagePath );
-				foreach( string file in files )
-				{
-					File.Delete( packagePath + file );
-				}			
-			}
-			Directory.CreateDirectory( packagePath + "\\Classes" );
-			foreach( UClass Object in _ClassesList )
-			{
-				File.WriteAllText( packagePath + "\\Classes\\" + Object.Name + UnrealExtensions.UnrealCodeExt, Object.Decompile() );
-			}	
-		   	CreateFlagsFile( packagePath );
-			var dr = MessageBox.Show( "Decompiled all package classes of " + _UnrealPackage.FullPackageName + " to " + packagePath +
-				"\r\n\r\nClick Yes if you want to go to the decompiled classes directory.", 
-				Application.ProductName,
-				MessageBoxButtons.YesNo );
-			if( dr == DialogResult.Yes )
-			{
-				System.Diagnostics.Process.Start( packagePath + "\\Classes" );
-			}
+			DoExportPackageClasses();
 		}
 
 		private void _OnExportScriptsClick( object sender, EventArgs e )
-		{
-			string packagePath = Application.StartupPath + "\\Exported\\" 
-				+ Path.GetFileNameWithoutExtension( _UnrealPackage.FullPackageName ); 
-			if( Directory.Exists( packagePath ) )
-			{
-				string[] files = Directory.GetFiles( packagePath );
-				foreach( var file in files )
-				{
-					File.Delete( packagePath + file );
-				}			
-			}
-			Directory.CreateDirectory( packagePath + "\\Classes" );
-			foreach( var Object in _ClassesList )
-			{
-				if( Object.ScriptBuffer == null )
-				{
-					continue;
-				}
-
-				string output = Object.ScriptBuffer.Decompile();
-
-				File.WriteAllText( packagePath + "\\Classes\\" + Object.Name + UnrealExtensions.UnrealCodeExt, output );
-			}				
-			CreateFlagsFile( packagePath );
-			var dr = MessageBox.Show( "Exported all package classes of " 
-				+ _UnrealPackage.FullPackageName + " to " + packagePath +
-				"\r\n\r\nClick Yes if you want to go to the exported classes directory.", 
-				Application.ProductName,
-				MessageBoxButtons.YesNo );
-			if( dr == DialogResult.Yes )
-			{
-				System.Diagnostics.Process.Start( packagePath + "\\Classes" );
-			}
+		{	
+			DoExportPackageClasses( true );	
 		}
 
-		private void CreateFlagsFile( string packagePath )
+		private void DoExportPackageClasses( bool exportScripts = false )
 		{
-			var upkgContent = new string[4];
-			upkgContent[0] = "[Flags]";
-			upkgContent[1] = "AllowDownload=" + (_UnrealPackage.HasPackageFlag( PackageFlags.AllowDownload) ? "True" : "False");
-			upkgContent[2] = "ClientOptional=" + (_UnrealPackage.HasPackageFlag( PackageFlags.ClientOptional) ? "True" : "False");
-			upkgContent[3] = "ServerSideOnly=" + (_UnrealPackage.HasPackageFlag( PackageFlags.ServerSideOnly) ? "True" : "False");
-			File.WriteAllLines( packagePath + "\\Classes\\" + Path.GetFileNameWithoutExtension( _UnrealPackage.FullPackageName ) + UnrealExtensions.UnrealFlagsExt, upkgContent );
+			var exportPath = _UnrealPackage.ExportPackageClasses( exportScripts );
+			var dialogResult = MessageBox.Show( 
+				String.Format( 
+					Resources.EXPORTED_ALL_PACKAGE_CLASSES, 
+					_UnrealPackage.PackageName, 
+					exportPath 
+				), 
+				Application.ProductName,
+				MessageBoxButtons.YesNo 
+			);
+			if( dialogResult == DialogResult.Yes )
+			{
+				System.Diagnostics.Process.Start( exportPath );
+			}
 		}
 
 		internal void ReloadPackage()
@@ -1147,7 +1067,7 @@ namespace UEExplorer.UI.Tabs
 			{
 				var node = e.Node as ObjectNode;
 				// This makes sure that this only applies to the first Nodes of TreeView_Classes, and only the first time!
-				if( node != null && !(node.Object as UObject).InitializedNodes )
+				if( node != null && !((UObject)node.Object).InitializedNodes )
 				{
 					TreeView_Classes.BeginUpdate();
 					// Clear DUMMYNODE
@@ -1405,7 +1325,6 @@ namespace UEExplorer.UI.Tabs
 						(object sender, System.Diagnostics.DataReceivedEventArgs e)
 						{
 							log += e.Data;
-							return;
 						};
 						//app.WaitForExit();
 
@@ -1587,7 +1506,7 @@ namespace UEExplorer.UI.Tabs
 					MessageBox.Show( Resources.NO_OBJECT_WAS_FOUND, Application.ProductName );
 				}
 			}
-			catch( System.ArgumentOutOfRangeException exc )
+			catch( ArgumentOutOfRangeException exc )
 			{
 				MessageBox.Show( Resources.INVALID_OBJECT_INDEX + exc.ActualValue, Application.ProductName );
 			}
@@ -1599,7 +1518,7 @@ namespace UEExplorer.UI.Tabs
 			{
 				MessageBox.Show( Resources.NAME_IS + _UnrealPackage.NameTableList[(int)Num_NameIndex.Value].Name, Application.ProductName );
 			}
-			catch( System.ArgumentOutOfRangeException exc )
+			catch( ArgumentOutOfRangeException exc )
 			{
 				MessageBox.Show( Resources.INVALID_NAME_INDEX + exc.ActualValue, Application.ProductName );
 			}
@@ -1607,30 +1526,30 @@ namespace UEExplorer.UI.Tabs
 
 		private void ToolStripButton_Find_Click( object sender, EventArgs e )
 		{
-			if( this.TextEditorPanel == null )
+			if( TextEditorPanel == null )
 			{
 				return;
 			}
-			EditorUtil.FindText( this.TextEditorPanel, SearchBox.Text );
+			EditorUtil.FindText( TextEditorPanel, SearchBox.Text );
 		}
 
 		private void SearchBox_KeyPress_1( object sender, KeyPressEventArgs e )
 		{
-			if( this.TextEditorPanel == null )
+			if( TextEditorPanel == null )
 			{
 				return;
 			}
 
 			if( e.KeyChar == '\r' )
 			{
-				EditorUtil.FindText( this.TextEditorPanel, SearchBox.Text );	  
+				EditorUtil.FindText( TextEditorPanel, SearchBox.Text );	  
 				e.Handled = true;
 			}
 		}
 
 		public override void TabFind()
 		{
-			new FindDialog( this.TextEditorPanel ).Show();
+			new FindDialog( TextEditorPanel ).Show();
 		}
 
 		private struct BufferData
@@ -1902,7 +1821,7 @@ namespace UEExplorer.UI.Tabs
 			var exportableObject = ((ObjectNode)TreeView_Content.SelectedNode).Object as IUnrealExportable; 
 			((UObject)exportableObject).BeginDeserializing();
 
-			List<string> exts = exportableObject.ExportableExtensions.ToList();
+			var exts = exportableObject.ExportableExtensions.ToList();
 			string extensions = String.Empty;
 			foreach( string ext in exts )
 			{
@@ -1912,7 +1831,7 @@ namespace UEExplorer.UI.Tabs
 					extensions += "|";
 				}
 			}
-			var dialog = new SaveFileDialog(){Filter = extensions, FileName = ((UObject)exportableObject).Name};
+			var dialog = new SaveFileDialog{Filter = extensions, FileName = ((UObject)exportableObject).Name};
 			if( dialog.ShowDialog() == DialogResult.OK )
 			{
 				var stream = new FileStream( dialog.FileName, FileMode.Create, FileAccess.Write );
