@@ -185,5 +185,13 @@ namespace UEExplorer.UI.Dialogs
 				}
 			}
 		}
+
+		private void infoToolStripMenuItem_Click( object sender, EventArgs e )
+		{
+			MessageBox.Show(
+				"A red underline indicates the start position of the script related bytes.\r\n" +
+				"A orange underline indicates the end of the script related bytes(not necessary accurate!)"		
+			);
+		}
 	}
 }

@@ -71,6 +71,7 @@
 			this.defineNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.defineCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.defineIndexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.HexToolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.HexLinePanel = new UEExplorer.UI.Dialogs.HexPanel();
 			label1 = new System.Windows.Forms.Label();
 			label2 = new System.Windows.Forms.Label();
@@ -548,6 +549,7 @@
 			this.HexLinePanel.TabIndex = 2;
 			this.HexLinePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HexLinePanel_Paint);
 			this.HexLinePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseClick);
+			this.HexLinePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseMove);
 			// 
 			// UserControl_HexView
 			// 
@@ -603,5 +605,6 @@
 		private System.Windows.Forms.ToolStripMenuItem defineCodeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem defineIndexToolStripMenuItem;
 		private System.Windows.Forms.TextBox DissambledStruct;
+		private System.Windows.Forms.ToolTip HexToolTip;
 	}
 }
