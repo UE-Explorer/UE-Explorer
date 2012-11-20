@@ -67,10 +67,13 @@
 			this.menuItem24 = new System.Windows.Forms.MenuItem();
 			this.menuItem6 = new System.Windows.Forms.MenuItem();
 			this.menuItem4 = new System.Windows.Forms.MenuItem();
+			this.SocialMenuItem = new System.Windows.Forms.MenuItem();
 			this.menuItem27 = new System.Windows.Forms.MenuItem();
 			this.menuItem5 = new System.Windows.Forms.MenuItem();
 			this.tabStripItem1 = new Storm.TabControl.TabStripItem();
 			this.tabStripItem3 = new Storm.TabControl.TabStripItem();
+			this.OpenHome = new System.Windows.Forms.Button();
+			this.HomepageButton = new System.Windows.Forms.Button();
 			menuItem26 = new System.Windows.Forms.MenuItem();
 			this.UEStatusStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).BeginInit();
@@ -81,7 +84,7 @@
 			// 
 			menuItem26.Index = 2;
 			menuItem26.Text = "> &Home";
-			menuItem26.Click += new System.EventHandler(this.menuItem26_Click);
+			menuItem26.Click += new System.EventHandler(this.MenuItem26_Click);
 			// 
 			// UEStatusStrip
 			// 
@@ -227,7 +230,7 @@
 			this.menuItem8.Index = 0;
 			this.menuItem8.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
 			this.menuItem8.Text = "&Open File...";
-			this.menuItem8.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
+			this.menuItem8.Click += new System.EventHandler(this.OpenFileToolStripMenuItem_Click);
 			// 
 			// _ROF
 			// 
@@ -249,7 +252,7 @@
 			this.menuItem12.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
 			this.menuItem12.Text = "&Save File";
 			this.menuItem12.Visible = false;
-			this.menuItem12.Click += new System.EventHandler(this.saveFileToolStripMenuItem_Click);
+			this.menuItem12.Click += new System.EventHandler(this.SaveFileToolStripMenuItem_Click);
 			// 
 			// menuItem11
 			// 
@@ -261,7 +264,7 @@
 			this.menuItem10.Index = 5;
 			this.menuItem10.Shortcut = System.Windows.Forms.Shortcut.AltF4;
 			this.menuItem10.Text = "E&xit";
-			this.menuItem10.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+			this.menuItem10.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
 			// 
 			// menuItem2
 			// 
@@ -279,7 +282,7 @@
             this.menuItem22});
 			this.menuItem21.Shortcut = System.Windows.Forms.Shortcut.CtrlF;
 			this.menuItem21.Text = "Find";
-			this.menuItem21.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
+			this.menuItem21.Click += new System.EventHandler(this.FindToolStripMenuItem_Click);
 			// 
 			// menuItem22
 			// 
@@ -298,7 +301,7 @@
             this.menuItem19,
             this.menuItem20});
 			this.toolsToolStripMenuItem.Text = "&Tools";
-			this.toolsToolStripMenuItem.Popup += new System.EventHandler(this.toolsToolStripMenuItem_DropDownOpening);
+			this.toolsToolStripMenuItem.Popup += new System.EventHandler(this.ToolsToolStripMenuItem_DropDownOpening);
 			// 
 			// menuItem13
 			// 
@@ -316,7 +319,7 @@
 			this._CacheExtractorItem.Enabled = false;
 			this._CacheExtractorItem.Index = 2;
 			this._CacheExtractorItem.Text = "Cache Extractor";
-			this._CacheExtractorItem.Click += new System.EventHandler(this.unrealCacheExtractorToolStripMenuItem_Click);
+			this._CacheExtractorItem.Click += new System.EventHandler(this.UnrealCacheExtractorToolStripMenuItem_Click);
 			// 
 			// menuItem16
 			// 
@@ -327,7 +330,7 @@
 			// 
 			this.menuItem17.Index = 4;
 			this.menuItem17.Text = "Color Generator";
-			this.menuItem17.Click += new System.EventHandler(this.unrealColorGeneratorToolStripMenuItem_Click);
+			this.menuItem17.Click += new System.EventHandler(this.UnrealColorGeneratorToolStripMenuItem_Click);
 			// 
 			// menuItem19
 			// 
@@ -338,13 +341,13 @@
 			// 
 			this.menuItem20.Index = 6;
 			this.menuItem20.Text = "Registry Features Enabled";
-			this.menuItem20.Click += new System.EventHandler(this.toggleUEExplorerFileIconsToolStripMenuItem_Click);
+			this.menuItem20.Click += new System.EventHandler(this.ToggleUEExplorerFileIconsToolStripMenuItem_Click);
 			// 
 			// menuItem7
 			// 
 			this.menuItem7.Index = 3;
 			this.menuItem7.Text = "&Options";
-			this.menuItem7.Click += new System.EventHandler(this.menuItem7_Click);
+			this.menuItem7.Click += new System.EventHandler(this.MenuItem7_Click);
 			// 
 			// menuItem3
 			// 
@@ -356,6 +359,7 @@
             this.menuItem24,
             this.menuItem6,
             this.menuItem4,
+            this.SocialMenuItem,
             this.menuItem27,
             this.menuItem5});
 			this.menuItem3.Text = "&Help";
@@ -364,7 +368,7 @@
 			// 
 			this.menuItem23.Index = 0;
 			this.menuItem23.Text = "&Check for Updates...";
-			this.menuItem23.Click += new System.EventHandler(this.checkForUpdates);
+			this.menuItem23.Click += new System.EventHandler(this.CheckForUpdates);
 			// 
 			// menuItem25
 			// 
@@ -375,30 +379,36 @@
 			// 
 			this.menuItem24.Index = 3;
 			this.menuItem24.Text = "> &Forums";
-			this.menuItem24.Click += new System.EventHandler(this.menuItem24_Click);
+			this.menuItem24.Click += new System.EventHandler(this.MenuItem24_Click);
 			// 
 			// menuItem6
 			// 
 			this.menuItem6.Index = 4;
 			this.menuItem6.Text = "> Donate";
-			this.menuItem6.Click += new System.EventHandler(this.donateToolStripMenuItem1_Click);
+			this.menuItem6.Click += new System.EventHandler(this.DonateToolStripMenuItem1_Click);
 			// 
 			// menuItem4
 			// 
 			this.menuItem4.Index = 5;
 			this.menuItem4.Text = "> Contact";
-			this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
+			this.menuItem4.Click += new System.EventHandler(this.MenuItem4_Click);
+			// 
+			// SocialMenuItem
+			// 
+			this.SocialMenuItem.Index = 6;
+			this.SocialMenuItem.Text = "> Social";
+			this.SocialMenuItem.Click += new System.EventHandler(this.SocialMenuItem_Click);
 			// 
 			// menuItem27
 			// 
-			this.menuItem27.Index = 6;
+			this.menuItem27.Index = 7;
 			this.menuItem27.Text = "-";
 			// 
 			// menuItem5
 			// 
-			this.menuItem5.Index = 7;
+			this.menuItem5.Index = 8;
 			this.menuItem5.Text = "&About...";
-			this.menuItem5.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+			this.menuItem5.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
 			// 
 			// tabStripItem1
 			// 
@@ -418,6 +428,27 @@
 			this.tabStripItem3.TabStripParent = this.TabComponentsStrip;
 			this.tabStripItem3.Title = "TabStrip Page 2";
 			// 
+			// OpenHome
+			// 
+			this.OpenHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.OpenHome.Location = new System.Drawing.Point(832, 506);
+			this.OpenHome.Name = "OpenHome";
+			this.OpenHome.Size = new System.Drawing.Size(93, 30);
+			this.OpenHome.TabIndex = 0;
+			this.OpenHome.Text = "Homepage";
+			this.OpenHome.Click += new System.EventHandler(this.OpenHome_Click);
+			// 
+			// HomepageButton
+			// 
+			this.HomepageButton.Location = new System.Drawing.Point(12, 12);
+			this.HomepageButton.Name = "HomepageButton";
+			this.HomepageButton.Size = new System.Drawing.Size(75, 23);
+			this.HomepageButton.TabIndex = 8;
+			this.HomepageButton.Text = "Homepage";
+			this.HomepageButton.UseVisualStyleBackColor = true;
+			this.HomepageButton.Visible = false;
+			this.HomepageButton.Click += new System.EventHandler(this.OpenHome_Click);
+			// 
 			// ProgramForm
 			// 
 			this.AllowDrop = true;
@@ -427,6 +458,7 @@
 			this.BackgroundImage = global::UEExplorer.Properties.Resources.UE_ProgramLogo;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ClientSize = new System.Drawing.Size(929, 562);
+			this.Controls.Add(this.HomepageButton);
 			this.Controls.Add(this.TabComponentsStrip);
 			this.Controls.Add(this.UEStatusStrip);
 			this.DoubleBuffered = true;
@@ -455,7 +487,6 @@
 		internal System.Windows.Forms.ToolStripStatusLabel ProgressLabel;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		internal System.Windows.Forms.ToolStripProgressBar LoadingProgress;
-		internal Storm.TabControl.TabStrip TabComponentsStrip;
 		internal System.Windows.Forms.ToolStripDropDownButton SelectedNativeTable;
 		private System.Windows.Forms.MainMenu mainMenu1;
 		private System.Windows.Forms.MenuItem menuItem1;
@@ -491,6 +522,10 @@
 		private System.Windows.Forms.MenuItem menuItem6;
 		private System.Windows.Forms.MenuItem _ROF;
 		private System.Windows.Forms.MenuItem menuItem4;
+		private System.Windows.Forms.Button OpenHome;
+		private Storm.TabControl.TabStrip TabComponentsStrip;
+		private System.Windows.Forms.Button HomepageButton;
+		private System.Windows.Forms.MenuItem SocialMenuItem;
 
 
 		// OnClick events!

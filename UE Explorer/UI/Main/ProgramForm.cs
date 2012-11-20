@@ -114,11 +114,10 @@ namespace UEExplorer.UI
 								extensionname = ((ExtensionTitleAttribute)attribs[0]).Title;
 							}
 				 
-							var ext = Activator.CreateInstance( t ) as IExtension;
-
 							var item = menuItem13.MenuItems.Add( extensionname );
-							item.Click += ext.OnActivate;
+							var ext = Activator.CreateInstance( t ) as IExtension;
 							ext.Initialize( this );
+							item.Click += ext.OnActivate;
 
 							menuItem13.Enabled = true;
 						}
@@ -127,7 +126,7 @@ namespace UEExplorer.UI
 			}
 		}
 
-		private void toolsToolStripMenuItem_DropDownOpening( object sender, EventArgs e )
+		private void ToolsToolStripMenuItem_DropDownOpening( object sender, EventArgs e )
 		{
 			menuItem20.Checked = Program.AreFileTypesRegistered();
 
@@ -217,13 +216,13 @@ namespace UEExplorer.UI
 		}
 
 		#region Events
-		private void aboutToolStripMenuItem_Click( object sender, EventArgs e )
+		private void AboutToolStripMenuItem_Click( object sender, EventArgs e )
 		{
 			var about = new AboutForm();
 			about.ShowDialog();
 		}
 
-		private void openFileToolStripMenuItem_Click( object sender, EventArgs e )
+		private void OpenFileToolStripMenuItem_Click( object sender, EventArgs e )
 		{
 			var ofd = new OpenFileDialog
 			{
@@ -242,14 +241,14 @@ namespace UEExplorer.UI
 			}	
 		}
 
-		private void unrealColorGeneratorToolStripMenuItem_Click( object sender, EventArgs e )
+		private void UnrealColorGeneratorToolStripMenuItem_Click( object sender, EventArgs e )
 		{
 			// open a tool dialog!
 			var cgf = new ColorGeneratorForm();
 			cgf.Show();
 		}
 
-		private void unrealCacheExtractorToolStripMenuItem_Click( object sender, EventArgs e )
+		private void UnrealCacheExtractorToolStripMenuItem_Click( object sender, EventArgs e )
 		{
 			TManager.AddTabComponent( typeof(CacheExtractorTabComponent), 
 				Resources.ProgramForm_Cache_Extractor 
@@ -291,9 +290,10 @@ namespace UEExplorer.UI
 		private void TabComponentsStrip_TabStripItemClosed( object sender, EventArgs e )
 		{
 			TabComponentsStrip.Visible = TabComponentsStrip.Items.Count > 0;
+			HomepageButton.Visible = !TabComponentsStrip.Visible;
 		}
 
-		private void exitToolStripMenuItem_Click( object sender, EventArgs e )
+		private void ExitToolStripMenuItem_Click( object sender, EventArgs e )
 		{
    			Application.Exit();
 		}
@@ -316,7 +316,7 @@ namespace UEExplorer.UI
 			}
 		}
 
-		private void toggleUEExplorerFileIconsToolStripMenuItem_Click( object sender, EventArgs e )
+		private void ToggleUEExplorerFileIconsToolStripMenuItem_Click( object sender, EventArgs e )
 		{
 			if( !menuItem20.Checked )
 			{
@@ -339,26 +339,25 @@ namespace UEExplorer.UI
 
 		private void UEExplorer_Form_DragDrop( object sender, DragEventArgs e )
 		{
-			string allowedExtensions = UnrealExtensions.FormatUnrealExtensionsAsFilter().Replace( 
+			var allowedExtensions = UnrealExtensions.FormatUnrealExtensionsAsFilter().Replace( 
 				"*.u;", 
 				"*.u;*.uc;*.uci;" 
 			);
 
-			if( e.Data.GetDataPresent( DataFormats.FileDrop ) )
-			{
-				var files = (string[])e.Data.GetData( DataFormats.FileDrop );
+			if( !e.Data.GetDataPresent( DataFormats.FileDrop ) ) 
+				return;
 
-				foreach( string filePath in files )
+			var files = (string[])e.Data.GetData( DataFormats.FileDrop );
+			foreach( var filePath in files )
+			{
+				if( allowedExtensions.Contains( Path.GetExtension( filePath ) ) )
 				{
-					if( allowedExtensions.Contains( Path.GetExtension( filePath ) ) )
-					{
-						LoadFile( filePath );
-					}
+					LoadFile( filePath );
 				}
 			}
 		}
 
-		private void saveFileToolStripMenuItem_Click( object sender, EventArgs e )
+		private void SaveFileToolStripMenuItem_Click( object sender, EventArgs e )
 		{
 			if( TManager.SelectedComponent != null )
 			{
@@ -366,7 +365,7 @@ namespace UEExplorer.UI
 			}
 		}
 
-		private void findToolStripMenuItem_Click( object sender, EventArgs e )
+		private void FindToolStripMenuItem_Click( object sender, EventArgs e )
 		{
 			if( TManager.SelectedComponent != null )
 			{
@@ -375,12 +374,12 @@ namespace UEExplorer.UI
 		}
 		#endregion
 
-		private void donateToolStripMenuItem1_Click( object sender, EventArgs e )
+		private void DonateToolStripMenuItem1_Click( object sender, EventArgs e )
 		{
 			System.Diagnostics.Process.Start( Program.Donate_URL );
 		}
 
-		private void checkForUpdates( object sender, EventArgs e )
+		private void CheckForUpdates( object sender, EventArgs e )
 		{
 			try
 			{
@@ -432,17 +431,17 @@ namespace UEExplorer.UI
 			}
 		}
 
-		private void menuItem7_Click( object sender, EventArgs e )
+		private void MenuItem7_Click( object sender, EventArgs e )
 		{
 			TManager.AddTabComponent( typeof(UC_Options), Resources.Options );
 		}
 
-		private void menuItem24_Click( object sender, EventArgs e )
+		private void MenuItem24_Click( object sender, EventArgs e )
 		{
 			System.Diagnostics.Process.Start( Program.Forum_URL );
 		}
 
-		private void menuItem26_Click( object sender, EventArgs e )
+		private void MenuItem26_Click( object sender, EventArgs e )
 		{
 			System.Diagnostics.Process.Start( Program.WEBSITE_URL );
 		}
@@ -454,7 +453,7 @@ namespace UEExplorer.UI
 			Program.SaveConfig();
 		}
 
-		private void menuItem4_Click( object sender, EventArgs e )
+		private void MenuItem4_Click( object sender, EventArgs e )
 		{
 			System.Diagnostics.Process.Start( Program.Contact_URL );
 		}
@@ -462,6 +461,16 @@ namespace UEExplorer.UI
 		private void ProgramForm_FormClosed( object sender, FormClosedEventArgs e )
 		{
 			Program.LogManager.EndLogStream();
+		}
+
+		private void OpenHome_Click( object sender, EventArgs e )
+		{
+			TManager.AddTabComponent( typeof(UC_Default), Resources.Homepage );
+		}
+
+		private void SocialMenuItem_Click( object sender, EventArgs e )
+		{
+			System.Diagnostics.Process.Start( "http://www.facebook.com/UE.Explorer" );
 		}
 	}
 
