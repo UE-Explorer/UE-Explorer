@@ -444,6 +444,7 @@
 			this.MinimumSize = new System.Drawing.Size(800, 600);
 			this.Name = "ProgramForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProgramForm_FormClosed);
 			this.Shown += new System.EventHandler(this.Unreal_Explorer_Form_Shown);
 			this.DragDrop += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragDrop);
 			this.DragEnter += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragEnter);

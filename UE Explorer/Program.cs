@@ -17,9 +17,6 @@ namespace UEExplorer
 
     public static class Program
     {
-	    private static readonly string LogFilePath = Path.Combine( Application.StartupPath, "Log.txt" );
-	    private static FileStream _LogStream;
-
         [STAThread]
         static void Main( string[] args )
         {
@@ -34,27 +31,8 @@ namespace UEExplorer
 				return;	
 			}
 
-			StartLogStream();
 			var app = new SingleInstanceApplication();
 			app.Run( Environment.GetCommandLineArgs() );
-			EndLogStream();
-		}
-
-		private static void StartLogStream()
-		{
-			_LogStream = new FileStream( LogFilePath, FileMode.Create, FileAccess.Write  );
-			Console.SetOut( new StreamWriter( _LogStream ) );		
-		}
-
-		private static void EndLogStream()
-		{
-			if( _LogStream == null ) 
-				return;
-
-			_LogStream.Flush();
-			_LogStream.Close();
-			_LogStream.Dispose();	
-			_LogStream = null;
 		}
 
 		public class SingleInstanceApplication : WindowsFormsApplicationBase
@@ -85,6 +63,30 @@ namespace UEExplorer
 						((ProgramForm)MainForm).LoadFile( args[i] );
 					}
 				}
+			}
+		}
+
+		public static class LogManager
+		{
+			private const string				LogFileName = "Log.txt";
+			private static readonly string		LogFilePath = Path.Combine( Application.StartupPath, LogFileName );
+			private static FileStream			_LogStream;	
+
+			public static void StartLogStream()
+			{
+				_LogStream = new FileStream( LogFilePath, FileMode.Create, FileAccess.Write  );
+				Console.SetOut( new StreamWriter( _LogStream ) );		
+			}
+
+			public static void EndLogStream()
+			{
+				if( _LogStream == null ) 
+					return;
+
+				_LogStream.Flush();
+				_LogStream.Close();
+				_LogStream.Dispose();	
+				_LogStream = null;
 			}
 		}
 
@@ -313,7 +315,7 @@ namespace UEExplorer
 
 	[System.Reflection.ObfuscationAttribute(Exclude = true)]
 	public class XMLSettings
-	{
+	{																									  
 		#region Unreal Packages Decompiler Related Members
 		public string NTLPath = "NativesTableList_UT2004";
 

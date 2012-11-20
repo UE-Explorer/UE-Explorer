@@ -10,9 +10,9 @@ using UEExplorer.Properties;
 
 namespace UEExplorer.UI
 {
-	using UEExplorer.Development;
-	using UEExplorer.UI.Dialogs;
-	using UEExplorer.UI.Tabs;
+	using Development;
+	using Dialogs;
+	using Tabs;
 
 	using UELib;
 
@@ -144,6 +144,7 @@ namespace UEExplorer.UI
 
 		internal ProgramForm()
         {
+			Program.LogManager.StartLogStream();
 			Text = string.Format( "{0} {1}", Application.ProductName, Version );
 
             InitializeComponent();	
@@ -463,6 +464,11 @@ namespace UEExplorer.UI
 		private void menuItem4_Click( object sender, EventArgs e )
 		{
 			System.Diagnostics.Process.Start( Program.Contact_URL );
+		}
+
+		private void ProgramForm_FormClosed( object sender, FormClosedEventArgs e )
+		{
+			Program.LogManager.EndLogStream();
 		}
 	}
 
