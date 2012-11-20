@@ -1047,7 +1047,7 @@ namespace UEExplorer.UI.Tabs
 			node.ToolTipText = GetExceptionMessage( errorObject );
 		}
 
-		private string GetExceptionMessage( UObject errorObject )
+		private static string GetExceptionMessage( UObject errorObject )
 		{
 			return "Deserialization failed by the following exception:\n" 
 				+ errorObject.ThrownException.Message 
@@ -1100,16 +1100,16 @@ namespace UEExplorer.UI.Tabs
 			ShowNodeContextMenuStrip( TreeView_Exports, e, _OnExportsItemClicked );
 		}
 
-		private bool _SuppressNodeSelect = false;
+		private bool _SuppressNodeSelect;
 		private void TreeView_Content_NodeMouseClick( object sender, TreeNodeMouseClickEventArgs e )
 		{
 			switch( e.Button )
 			{
-				case System.Windows.Forms.MouseButtons.Left:	
+				case MouseButtons.Left:	
 					//PerformNodeAction( e.Node as IDecompileableObjectNode, "View Object" );
 					break;
 
-				case System.Windows.Forms.MouseButtons.Right:
+				case MouseButtons.Right:
 					_SuppressNodeSelect = true;
 					ShowNodeContextMenuStrip( TreeView_Content, e, _OnContentItemClicked );
 					break;
@@ -1178,7 +1178,7 @@ namespace UEExplorer.UI.Tabs
 							itemCollection.Add( "View Script" );	
 						}
 
-						if( unStruct.Properties != null )
+						if( unStruct.Properties != null && unStruct.Properties.Count > 0 )
 						{
 							itemCollection.Add( "View DefaultProperties" );	
 						}
