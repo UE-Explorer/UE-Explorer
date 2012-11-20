@@ -10,12 +10,13 @@ namespace UEExplorer.UI.Tabs
 
 		protected UserControl_Tab()
 		{
+			Dock = DockStyle.Fill;
 			InitializeComponent();
 		}
 
 		protected virtual void InitializeComponent()
 		{
-			Dock = DockStyle.Fill;	
+				
 		}
 
 		/// <summary>
