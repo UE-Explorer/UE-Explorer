@@ -35,6 +35,7 @@ namespace UEExplorer.UI.Dialogs
 			{
 				Text = uObject.Name;
 			}
+			Text = "Hex-Viewer: " + Text;
 		}
 
 		private void viewASCIIToolStripMenuItem_CheckedChanged( object sender, EventArgs e )
@@ -119,8 +120,8 @@ namespace UEExplorer.UI.Dialogs
 		{
 			var fsd = new SaveFileDialog()
 			{
-				FileName = userControl_HexView1.HexObject.GetOuterGroup() 
-					+ "." + userControl_HexView1.HexObject.GetClassName()
+				FileName = userControl_HexView1.Target.GetOuterGroup() 
+					+ "." + userControl_HexView1.Target.GetClassName()
 			};
 
 			if( fsd.ShowDialog() == DialogResult.OK )
@@ -131,7 +132,7 @@ namespace UEExplorer.UI.Dialogs
 
 		private void importBinaryFileToolStripMenuItem_Click( object sender, EventArgs e )
 		{
-			var hexObject = userControl_HexView1.HexObject;
+			var hexObject = userControl_HexView1.Target;
 
 			var osd = new OpenFileDialog()
 			{

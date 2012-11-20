@@ -43,6 +43,7 @@
 			this.importBinaryFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.userControl_HexView1 = new UEExplorer.UI.Dialogs.UserControl_HexView();
 			this.panel1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
@@ -90,8 +91,8 @@
 			// 
 			this.menuStrip1.BackColor = System.Drawing.Color.White;
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewToolStripMenuItem,
             this.editToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
@@ -114,7 +115,7 @@
 			this.viewASCIIToolStripMenuItem.CheckOnClick = true;
 			this.viewASCIIToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.viewASCIIToolStripMenuItem.Name = "viewASCIIToolStripMenuItem";
-			this.viewASCIIToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+			this.viewASCIIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.viewASCIIToolStripMenuItem.Text = "View ASCII";
 			this.viewASCIIToolStripMenuItem.CheckedChanged += new System.EventHandler(this.viewASCIIToolStripMenuItem_CheckedChanged);
 			// 
@@ -124,7 +125,7 @@
 			this.viewByteToolStripMenuItem.CheckOnClick = true;
 			this.viewByteToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.viewByteToolStripMenuItem.Name = "viewByteToolStripMenuItem";
-			this.viewByteToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+			this.viewByteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.viewByteToolStripMenuItem.Text = "View Byte";
 			this.viewByteToolStripMenuItem.CheckedChanged += new System.EventHandler(this.viewByteToolStripMenuItem_CheckedChanged);
 			// 
@@ -133,6 +134,7 @@
 			this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyBytesToolStripMenuItem,
             this.copyViewToolStripMenuItem,
+            this.toolStripSeparator1,
             this.exportBinaryFileToolStripMenuItem,
             this.importBinaryFileToolStripMenuItem});
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
@@ -143,14 +145,16 @@
 			// 
 			this.copyBytesToolStripMenuItem.Name = "copyBytesToolStripMenuItem";
 			this.copyBytesToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-			this.copyBytesToolStripMenuItem.Text = "Copy Bytes";
+			this.copyBytesToolStripMenuItem.Text = "Dump Bytes";
+			this.copyBytesToolStripMenuItem.ToolTipText = "Copy the bytes to your clipboard";
 			this.copyBytesToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
 			// 
 			// copyViewToolStripMenuItem
 			// 
 			this.copyViewToolStripMenuItem.Name = "copyViewToolStripMenuItem";
 			this.copyViewToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-			this.copyViewToolStripMenuItem.Text = "Copy View";
+			this.copyViewToolStripMenuItem.Text = "Dump Hex";
+			this.copyViewToolStripMenuItem.ToolTipText = "Copy the hex view to your clipboard";
 			this.copyViewToolStripMenuItem.Click += new System.EventHandler(this.copyAsViewToolStripMenuItem_Click);
 			// 
 			// exportBinaryFileToolStripMenuItem
@@ -158,6 +162,7 @@
 			this.exportBinaryFileToolStripMenuItem.Name = "exportBinaryFileToolStripMenuItem";
 			this.exportBinaryFileToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
 			this.exportBinaryFileToolStripMenuItem.Text = "Export Binary File";
+			this.exportBinaryFileToolStripMenuItem.ToolTipText = "Export all bytes to a binary file";
 			this.exportBinaryFileToolStripMenuItem.Click += new System.EventHandler(this.exportBinaryFileToolStripMenuItem_Click);
 			// 
 			// importBinaryFileToolStripMenuItem
@@ -165,12 +170,14 @@
 			this.importBinaryFileToolStripMenuItem.Name = "importBinaryFileToolStripMenuItem";
 			this.importBinaryFileToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
 			this.importBinaryFileToolStripMenuItem.Text = "Import Binary File";
+			this.importBinaryFileToolStripMenuItem.ToolTipText = "Import all bytes from a binary file";
 			this.importBinaryFileToolStripMenuItem.Click += new System.EventHandler(this.importBinaryFileToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.infoToolStripMenuItem});
+			this.helpToolStripMenuItem.Enabled = false;
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.helpToolStripMenuItem.Text = "Help";
@@ -182,6 +189,11 @@
 			this.infoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.infoToolStripMenuItem.Text = "Info";
 			this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(164, 6);
 			// 
 			// userControl_HexView1
 			// 
@@ -210,6 +222,7 @@
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.MinimumSize = new System.Drawing.Size(380, 0);
 			this.Name = "HexViewDialog";
+			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Hex Viewer";
 			this.panel1.ResumeLayout(false);
@@ -240,6 +253,7 @@
 		private System.Windows.Forms.ToolStripMenuItem importBinaryFileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
 	}
 }
