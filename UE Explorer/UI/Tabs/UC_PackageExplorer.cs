@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using UEExplorer.Properties;
@@ -32,7 +32,7 @@ namespace UEExplorer.UI.Tabs
 		/// </summary>
 		protected override void TabCreated()
 		{						
-			string langPath = Path.Combine( Application.StartupPath, "Config", "UnrealScript.xshd" );
+			var langPath = Path.Combine( Application.StartupPath, "Config", "UnrealScript.xshd" );
 			if( File.Exists( langPath ) )
 			{
 				try
@@ -41,9 +41,9 @@ namespace UEExplorer.UI.Tabs
 						new System.Xml.XmlTextReader( langPath ), 
 						ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance 
 					);
-					TextEditorPanel.searchWiki.Click += searchWiki_Click;
-					TextEditorPanel.textEditor.ContextMenuOpening += contextMenu_ContextMenuOpening;
-					TextEditorPanel.copy.Click += copy_Click;
+					TextEditorPanel.searchWiki.Click += SearchWiki_Click;
+					TextEditorPanel.textEditor.ContextMenuOpening += ContextMenu_ContextMenuOpening;
+					TextEditorPanel.copy.Click += Copy_Click;
 
 					// Fold all { } blocks
 					//var foldingManager = ICSharpCode.AvalonEdit.Folding.FoldingManager.Install(myTextEditor1.textEditor.TextArea);
@@ -60,7 +60,7 @@ namespace UEExplorer.UI.Tabs
 			base.TabCreated();
 		}
 
-		void copy_Click( object sender, System.Windows.RoutedEventArgs e )
+		void Copy_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
 			TextEditorPanel.textEditor.Copy();
 		}
@@ -70,7 +70,7 @@ namespace UEExplorer.UI.Tabs
 			return TextEditorPanel.textEditor.TextArea.Selection.GetText( TextEditorPanel.textEditor.Document );
 		}
 
-		void contextMenu_ContextMenuOpening( object sender, System.Windows.Controls.ContextMenuEventArgs e )
+		void ContextMenu_ContextMenuOpening( object sender, System.Windows.Controls.ContextMenuEventArgs e )
 		{
 			if( TextEditorPanel.textEditor.TextArea.Selection.Length == 0 )
 			{
@@ -90,7 +90,7 @@ namespace UEExplorer.UI.Tabs
 				+ "\"";
 		}
 
-		void searchWiki_Click( object sender, System.Windows.RoutedEventArgs e )
+		void SearchWiki_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
 			System.Diagnostics.Process.Start( 
 				String.Format( 
@@ -121,26 +121,28 @@ namespace UEExplorer.UI.Tabs
 
 			UnrealConfig.SuppressSignature = false;
 			reload:
-			ProgressStatus.SetStatus( "Loading Package..." );
+			ProgressStatus.SetStatus( Resources.PACKAGE_LOADING );
 			// Open the file.
 			try
 			{
-				UnrealConfig.Platform = (UnrealConfig.CookedPlatform)Enum.Parse( typeof(UnrealConfig.CookedPlatform), _Form.Platform.Text, true );
+				UnrealConfig.Platform = (UnrealConfig.CookedPlatform)Enum.Parse
+				( 
+					typeof(UnrealConfig.CookedPlatform), 
+					_Form.Platform.Text, true 
+				);
 				_UnrealPackage = UnrealLoader.LoadPackage( FileName );
 				UnrealConfig.SuppressSignature = false;
 				_SummarySize = _UnrealPackage.Stream.Position;
 
 				if( _UnrealPackage.CompressedChunks != null && _UnrealPackage.CompressedChunks.Capacity > 0 )
 				{
-					if( MessageBox.Show( "This package is compressed! Compressed packages are not supported."
-						+ "\r\n\r\nPlease consider decompressing the package using \"Unreal Package Decompressor\" from Gildor"
-						+ "\r\n\r\nYou can download the tool from http://www.gildor.org/downloads or press OK to go there now.",
-						"Notice", MessageBoxButtons.OKCancel, MessageBoxIcon.Question
+					if( MessageBox.Show( Resources.PACKAGE_IS_COMPRESSED,
+						Resources.NOTICE_TITLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Question
 					) == DialogResult.OK )
 					{
 						System.Diagnostics.Process.Start( "http://www.gildor.org/downloads" );
-						MessageBox.Show( "To use Gildor's tool, try \"decompress.exe PACKAGENAME.EXT\" you may have to specify -lzo.", 
-							"Notice", MessageBoxButtons.OK, MessageBoxIcon.Information 
+						MessageBox.Show( Resources.COMPRESSED_HOWTO, 
+							Resources.NOTICE_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Information 
 						);
 					}
 					TabControl_General.Selected -= TabControl_General_Selected;
@@ -156,8 +158,8 @@ namespace UEExplorer.UI.Tabs
 			{
 				_UnrealPackage = null;
 				if( MessageBox.Show(
-				        "This package has an unknown signature.\r\n\r\nAre you sure you want to try to deserialize this package? Clicking Yes might lead to unexpected results!",
-				        "Warning", MessageBoxButtons.YesNo
+				        Resources.PACKAGE_UNKNOWN_SIGNATURE,
+				        Resources.Warning, MessageBoxButtons.YesNo
 				    ) == DialogResult.No
 				)
 				{
@@ -184,7 +186,10 @@ namespace UEExplorer.UI.Tabs
 				catch( Exception e )
 				{
 					_UnrealPackage.NTLPackage = null;
-					throw new UnrealException( "Couldn't load " + NTLPath + "! \r\nEvent:Loading Package", e );
+					throw new UnrealException
+					( 
+						String.Format( "Couldn't load {0}! \r\nEvent:Loading Package", NTLPath ), e 
+					);
 				}
 			}
 
@@ -239,7 +244,7 @@ namespace UEExplorer.UI.Tabs
 
 			if( ONLOAD_MESSAGE != null )
 			{
-				MessageBox.Show( ONLOAD_MESSAGE, "Package's MetaInfo", MessageBoxButtons.OK );
+				MessageBox.Show( ONLOAD_MESSAGE, Resources.PACKAGE_METAINFO, MessageBoxButtons.OK );
 			}
 		}
 
@@ -247,7 +252,7 @@ namespace UEExplorer.UI.Tabs
 
 		private void ReadMetaInfo()
 		{
-			foreach( var obj in _UnrealPackage.ObjectsList.Where(o => o is UConst && o.Name.StartsWith( "META_DECOMPILER" ) ) )
+			foreach( var obj in _UnrealPackage.ObjectsList.Where( o => o is UConst && o.Name.StartsWith( "META_DECOMPILER" ) ) )
 			{
 				var value = ((UConst)obj).Value;
 				var parms = obj.Name.Substring( 16 ).Split( '_' );
@@ -353,8 +358,11 @@ namespace UEExplorer.UI.Tabs
 				if( objFlags != 0 )
 				{
 					string flagTitle = "Flags(" + UnrealMethods.FlagToString( exp.ObjectFlags ) + ")";
-					TreeNode flagNode = Nodes.Add( flagTitle  );
-					flagNode.ToolTipText = UnrealMethods.FlagsListToString( UnrealMethods.FlagsToList( typeof(ObjectFlagsLO), typeof(ObjectFlagsHO), exp.ObjectFlags ) );	
+					var flagNode = Nodes.Add( flagTitle  );
+					flagNode.ToolTipText = UnrealMethods.FlagsListToString
+					( 
+						UnrealMethods.FlagsToList( typeof(ObjectFlagsLO), typeof(ObjectFlagsHO), exp.ObjectFlags ) 
+					);	
 				}
 
 				Nodes.Add( "Export Offset:" + exp.Offset );
@@ -509,9 +517,9 @@ namespace UEExplorer.UI.Tabs
 			// Package Info
 
 			// Section 1
-			VersionValue.Text 	= (_UnrealPackage.Version.ToString());
+			VersionValue.Text 	= (_UnrealPackage.Version.ToString( CultureInfo.InvariantCulture ));
 			FlagsValue.Text 	= UnrealMethods.FlagToString( (_UnrealPackage.PackageFlags & ~(uint)PackageFlags.Protected) );
-			LicenseeValue.Text 	= _UnrealPackage.LicenseeVersion.ToString();
+			LicenseeValue.Text 	= _UnrealPackage.LicenseeVersion.ToString( CultureInfo.InvariantCulture );
 
 			Label_GUID.Text		= _UnrealPackage.GUID;
 
@@ -522,7 +530,7 @@ namespace UEExplorer.UI.Tabs
 				{
 					Label_EngineVersion.Visible		= true;
 					EngineValue.Visible				= true;
-					EngineValue.Text 				=  _UnrealPackage.EngineVersion.ToString();
+					EngineValue.Text 				=  _UnrealPackage.EngineVersion.ToString( CultureInfo.InvariantCulture );
 				}
 
 				if( _UnrealPackage.Group != "None" )
@@ -539,7 +547,7 @@ namespace UEExplorer.UI.Tabs
 				{
 					Label_CookerVersion.Visible		= true;
 					CookerValue.Visible				= true;
-					CookerValue.Text				= _UnrealPackage.CookerVersion.ToString();
+					CookerValue.Text				= _UnrealPackage.CookerVersion.ToString( CultureInfo.InvariantCulture );
 				}
 			}
 
@@ -548,9 +556,9 @@ namespace UEExplorer.UI.Tabs
 			// Automatic iterate through all package flags and return them as a string list
 			var flags = new List<string>
 			{
-			    "AllowDownload " + (_UnrealPackage.HasPackageFlag(PackageFlags.AllowDownload) ? "True" : "False"),
-			    "ClientOptional " + (_UnrealPackage.HasPackageFlag(PackageFlags.ClientOptional) ? "True" : "False"),
-			    "ServerSideOnly " + (_UnrealPackage.HasPackageFlag(PackageFlags.ServerSideOnly) ? "True" : "False")
+			    "AllowDownload " + _UnrealPackage.HasPackageFlag( PackageFlags.AllowDownload ),
+			    "ClientOptional " + _UnrealPackage.HasPackageFlag( PackageFlags.ClientOptional ),
+			    "ServerSideOnly " + _UnrealPackage.HasPackageFlag( PackageFlags.ServerSideOnly )
 			};
 
 			if( _UnrealPackage.Version >= UnrealPackage.VCOOKEDPACKAGES )
@@ -570,26 +578,17 @@ namespace UEExplorer.UI.Tabs
 				flags.Add( "Encrypted " + _UnrealPackage.HasPackageFlag( PackageFlags.Encrypted ) );
 			}
 
-			foreach( string flag in flags )
+			foreach( var flag in flags )
 			{
 				var r = new DataGridViewRow();
 	            r.CreateCells( DataGridView_Flags );
-				string[] vals = flag.Split( new char[1] { ' ' } );
+				var vals = flag.Split( new[]{ ' ' } );
 				r.SetValues( vals[0], vals[1] );
 	            DataGridView_Flags.Rows.Add( r );
 			}
 
 			if( _UnrealPackage.ObjectsList != null )
 			{
-				TabPage_Objects.Text += " (" + _UnrealPackage.ObjectsList.Count + ")";
-
-				TabPage_Tables.Text += " (" + (_UnrealPackage.ImportTableList.Count +
-					_UnrealPackage.ExportTableList.Count +
-					_UnrealPackage.NameTableList.Count) + ")";
-				TabPage_Names.Text += " (" + _UnrealPackage.NameTableList.Count + ")";
-				TabPage_Exports.Text += " (" + _UnrealPackage.ExportTableList.Count + ")";
-				TabPage_Imports.Text += " (" + _UnrealPackage.ImportTableList.Count + ")";
-
 				CreateClassesList();
 				// HACK:Add a MetaData object to the classes tree(hack because MetaData is not an actual class)
 				var metobj = _UnrealPackage.FindObject( "MetaData", typeof( UMetaData ) );
@@ -636,7 +635,6 @@ namespace UEExplorer.UI.Tabs
 
 			if( _UnrealPackage.GenerationsList != null )
 			{
-				TabPage_Generations.Text += " (" + _UnrealPackage.GenerationsList.Count + ")";
 				CreateGenerationsList();
 			}
 
@@ -720,7 +718,7 @@ namespace UEExplorer.UI.Tabs
 				else if( !_UnrealPackage.IsRegisteredClass( exp.ClassName != String.Empty ? exp.ClassName : "Class" ) )
 				{
 				    node.ForeColor = Color.DarkOrange;
-				    node.ToolTipText = "Class " + exp.ClassName + " isn't supported";
+				    node.ToolTipText = String.Format( "Class {0} isn't supported", exp.ClassName );
 				}
 
 				if( _NIndex == _UnrealPackage.ExportTableList.Count )
@@ -794,7 +792,6 @@ namespace UEExplorer.UI.Tabs
 			if( e.ObjectRef.Table.ClassIndex == 0 && e.ObjectRef.Name.ToLower() != "none" )
 			{
 				_ClassesList.Add( (UClass)e.ObjectRef );
-				return;
 			}
 		}
 
@@ -833,8 +830,6 @@ namespace UEExplorer.UI.Tabs
 				TreeView_Classes.Nodes.Add( node );	
 			}
 			TreeView_Classes.EndUpdate();
-
-			TabPage_Classes.Text += " (" + TreeView_Classes.Nodes.Count + ")";
 		}
 
 		protected void CreateDependenciesList()
@@ -860,10 +855,7 @@ namespace UEExplorer.UI.Tabs
 			if( TreeView_Deps.Nodes.Count == 0 )
 			{
 				TabControl_Objects.Controls.Remove( TabPage_Deps );
-				return;
 			}
-
-			TabPage_Deps.Text += " (" + TreeView_Deps.Nodes.Count + ")";
 		}
 
 		protected void GetDependencyOn( UImportTableItem parent, TreeNode node )
@@ -891,11 +883,7 @@ namespace UEExplorer.UI.Tabs
 				}
 				else
 				{
-					if( tableObject.ClassName == "Package" )
-					{
-						node.ImageKey = "List";
-					}
-					else node.ImageKey = tableObject.Object.GetType().Name;	
+					node.ImageKey = tableObject.ClassName == "Package" ? "List" : tableObject.Object.GetType().Name;	
 				}
 				node.SelectedImageKey = node.ImageKey;
 			}
@@ -951,7 +939,6 @@ namespace UEExplorer.UI.Tabs
 			}
 
 			TreeView_Content.Sort();
-			TabPage_Content.Text += " (" + TreeView_Content.Nodes.Count + ")";
 		}
 
 		private void _OnExportClassesClick( object sender, EventArgs e )
@@ -1118,7 +1105,8 @@ namespace UEExplorer.UI.Tabs
 			CheckIfNodeIsExportable( e.Node );
 		}
 
-		private void ShowNodeContextMenuStrip( TreeView tree, TreeNodeMouseClickEventArgs e, ToolStripItemClickedEventHandler itemClicked )
+		private static void ShowNodeContextMenuStrip( TreeView tree, TreeNodeMouseClickEventArgs e, 
+			ToolStripItemClickedEventHandler itemClicked )
 		{
 			tree.SelectedNode = e.Node;
 
@@ -1131,7 +1119,7 @@ namespace UEExplorer.UI.Tabs
 			viewToolsContextMenu.Show( tree, e.Location );	
 		}
 
-		private void BuildItemNodes( TreeNode performingNode, ToolStripItemCollection itemCollection )
+		private static void BuildItemNodes( TreeNode performingNode, ToolStripItemCollection itemCollection )
 		{
 			itemCollection.Clear();
 
@@ -1468,18 +1456,17 @@ namespace UEExplorer.UI.Tabs
 					case "View Buffer":
 					{
 						var obj = node.Object as UObject;
-						var HVD = new HexViewDialog( obj, this );
-						HVD.Show( _Form );
-						HVD.ShowInTaskbar = true;
+						var hvd = new HexViewDialog( obj, this );
+						hvd.Show( _Form );
 						break;
 					}
 
 					case "View Exception":
 					{
-						var ONode = node as ObjectNode;
-						if( ONode != null )
+						var oNode = node as ObjectNode;
+						if( oNode != null )
 						{
-							SetContentText( ONode, GetExceptionMessage( ((UObject)ONode.Object) ) );
+							SetContentText( oNode, GetExceptionMessage( ((UObject)oNode.Object) ) );
 						}
 						break;
 					}
@@ -1717,7 +1704,7 @@ namespace UEExplorer.UI.Tabs
 			HVD.ShowInTaskbar = true;
 		}
 
-		private List<TreeNode> _FilteredNodes = new List<TreeNode>();
+		private readonly List<TreeNode> _FilteredNodes = new List<TreeNode>();
 
 		private void FilterText_TextChanged( object sender, EventArgs e )
 		{
@@ -1749,28 +1736,29 @@ namespace UEExplorer.UI.Tabs
 			ReloadPackage();
 		}
 
-		private Pen borderPen = new Pen( Color.FromArgb( 237, 237, 237 ) );
-		private Pen linePen = new Pen( Color.White );
+		private readonly Pen _BorderPen = new Pen( Color.FromArgb( 237, 237, 237 ) );
+		private readonly Pen _LinePen = new Pen( Color.White );
+
 		private void panel4_Paint( object sender, PaintEventArgs e )
 		{
-			e.Graphics.DrawRectangle( borderPen, 0, 0, panel4.Width-1, panel4.Height-1 );
+			e.Graphics.DrawRectangle( _BorderPen, 0, 0, panel4.Width-1, panel4.Height-1 );
 		}
 
 		private void panel1_Paint( object sender, PaintEventArgs e )
 		{
-			e.Graphics.DrawRectangle( borderPen, 0, 0, panel1.Width-1, panel1.Height-1 );
+			e.Graphics.DrawRectangle( _BorderPen, 0, 0, panel1.Width-1, panel1.Height-1 );
 		}
 
 		private void toolStripSeparator1_Paint( object sender, PaintEventArgs e )
 		{
-			e.Graphics.FillRectangle( linePen.Brush, 2, 0, panel1.Width-4, panel1.Height );
-			e.Graphics.DrawLine( borderPen, e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Left, e.ClipRectangle.Bottom );
-			e.Graphics.DrawLine( borderPen, e.ClipRectangle.Right-1, e.ClipRectangle.Top, e.ClipRectangle.Right-1, e.ClipRectangle.Bottom );
+			e.Graphics.FillRectangle( _LinePen.Brush, 2, 0, panel1.Width-4, panel1.Height );
+			e.Graphics.DrawLine( _BorderPen, e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Left, e.ClipRectangle.Bottom );
+			e.Graphics.DrawLine( _BorderPen, e.ClipRectangle.Right-1, e.ClipRectangle.Top, e.ClipRectangle.Right-1, e.ClipRectangle.Bottom );
 		}
 
 		private void ToolStrip_Content_Paint( object sender, PaintEventArgs e )
 		{
-			e.Graphics.DrawRectangle( borderPen, 0, 0, ((Control)sender).Width-1, panel1.Height-1 );
+			e.Graphics.DrawRectangle( _BorderPen, 0, 0, ((Control)sender).Width-1, panel1.Height-1 );
 		}
 
 		private void TreeView_Deps_DrawNode( object sender, DrawTreeNodeEventArgs e )
@@ -1812,7 +1800,7 @@ namespace UEExplorer.UI.Tabs
 					checkBox.Checked = false;
 					return;
 				}
-				TreeView_Exports.Nodes.AddRange( (checkBox.Tag as List<TreeNode>).ToArray() );
+				TreeView_Exports.Nodes.AddRange( ((List<TreeNode>)checkBox.Tag).ToArray() );
 			}		
 		}
 

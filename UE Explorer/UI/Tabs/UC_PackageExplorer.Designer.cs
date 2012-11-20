@@ -1137,7 +1137,6 @@
 		internal System.Windows.Forms.TabControl TabControl_General;
 		internal System.Windows.Forms.TabPage TabPage_Package;
 		internal System.Windows.Forms.TabPage TabPage_Tables;
-		internal System.Windows.Forms.TabControl TabControl_Tables;
 		internal System.Windows.Forms.TabPage TabPage_Names;
 		internal System.Windows.Forms.TabPage TabPage_Exports;
 		internal System.Windows.Forms.TabPage TabPage_Imports;
@@ -1226,5 +1225,6 @@
 		private System.Windows.Forms.CheckBox checkBox3;
 		internal System.Windows.Forms.Button Button_Export;
 		public System.Windows.Forms.ToolStripDropDownButton ViewTools;
+		private System.Windows.Forms.TabControl TabControl_Tables;
 	}
 }

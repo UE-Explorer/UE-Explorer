@@ -238,4 +238,28 @@ Latest version: {1}</value>
 
 Click Yes if you want to go to the output directory!</value>
 	</data>
+	<data name="PACKAGE_IS_COMPRESSED">
+		<value xml:space="preserve">This package is compressed! Compressed packages are not supported.
+
+Please consider decompressing the package using "Unreal Package Decompressor" from Gildor
+
+You can download the tool from http://www.gildor.org/downloads or press OK to go there now.</value>
+	</data>
+	<data name="COMPRESSED_HOWTO">
+		<value xml:space="preserve">To use Gildor's tool, try "decompress.exe PACKAGENAME.EXT" you may have to specify -lzo.</value>
+	</data>
+	<data name="NOTICE_TITLE">
+		<value xml:space="preserve">Notice</value>
+	</data>
+	<data name="PACKAGE_UNKNOWN_SIGNATURE">
+		<value xml:space="preserve">This package has an unknown signature.
+
+Are you sure you want to try to deserialize this package? Clicking Yes might lead to unexpected results!</value>
+	</data>
+	<data name="PACKAGE_LOADING">
+		<value xml:space="preserve">Loading Package...</value>
+	</data>
+	<data name="PACKAGE_METAINFO">
+		<value xml:space="preserve">Package's MetaInfo</value>
+	</data>
 </root>

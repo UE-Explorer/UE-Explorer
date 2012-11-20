@@ -70,6 +70,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To use Gildor&apos;s tool, try &quot;decompress.exe PACKAGENAME.EXT&quot; you may have to specify -lzo..
+        /// </summary>
+        internal static string COMPRESSED_HOWTO {
+            get {
+                return ResourceManager.GetString("COMPRESSED_HOWTO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t save the package because of the following exception: {0}.
         /// </summary>
         internal static string COULDNT_SAVE_EXCEPTION {
@@ -171,6 +180,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notice.
+        /// </summary>
+        internal static string NOTICE_TITLE {
+            get {
+                return ResourceManager.GetString("NOTICE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Object is .
         /// </summary>
         internal static string OBJECT_IS {
@@ -194,6 +212,48 @@ namespace UEExplorer.Properties {
         internal static string Options {
             get {
                 return ResourceManager.GetString("Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This package is compressed! Compressed packages are not supported.
+        ///
+        ///Please consider decompressing the package using &quot;Unreal Package Decompressor&quot; from Gildor
+        ///
+        ///You can download the tool from http://www.gildor.org/downloads or press OK to go there now..
+        /// </summary>
+        internal static string PACKAGE_IS_COMPRESSED {
+            get {
+                return ResourceManager.GetString("PACKAGE_IS_COMPRESSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading Package....
+        /// </summary>
+        internal static string PACKAGE_LOADING {
+            get {
+                return ResourceManager.GetString("PACKAGE_LOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Package&apos;s MetaInfo.
+        /// </summary>
+        internal static string PACKAGE_METAINFO {
+            get {
+                return ResourceManager.GetString("PACKAGE_METAINFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This package has an unknown signature.
+        ///
+        ///Are you sure you want to try to deserialize this package? Clicking Yes might lead to unexpected results!.
+        /// </summary>
+        internal static string PACKAGE_UNKNOWN_SIGNATURE {
+            get {
+                return ResourceManager.GetString("PACKAGE_UNKNOWN_SIGNATURE", resourceCulture);
             }
         }
         
