@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Windows.Forms;
-using UELib;
+﻿using System.Windows.Forms;
 
 namespace UEExplorer.UI.Tabs
 {
@@ -17,7 +14,7 @@ namespace UEExplorer.UI.Tabs
 			DefaultPage.Navigate( Program.APPS_URL );
 			base.TabCreated();
 
-			Dock = System.Windows.Forms.DockStyle.Fill;
+			Dock = DockStyle.Fill;
 		}
 	}
 }

@@ -277,12 +277,12 @@ namespace UEExplorer.UI
 		private void TabComponentsStrip_TabStripItemClosing( TabStripItemClosingEventArgs e )
 		{
 			// Find the owner of this TabStripItem
-			foreach( var TC in TManager.Tabs )
+			foreach( var tc in TManager.Tabs )
 			{
-				if( TC.Tab == e.Item )
+				if( tc.Tab == e.Item )
 				{
-					TC.TabClosing();
-					TManager.Tabs.Remove( TC );
+					tc.TabClosing();
+					TManager.Tabs.Remove( tc );
 					break;
 				}
 			}	
@@ -296,13 +296,6 @@ namespace UEExplorer.UI
 		private void exitToolStripMenuItem_Click( object sender, EventArgs e )
 		{
    			Application.Exit();
-		}
-
-		private void unrealNativeTableGeneratorToolStripMenuItem_Click( object sender, EventArgs e )
-		{
-			TManager.AddTabComponent( typeof(UnrealNativesGeneratorTab), 
-				Resources.ProgramForm_Unreal_Natives_Table_Generator 
-			);
 		}
 
 		private void Unreal_Explorer_Form_Shown( object sender, EventArgs e )

@@ -286,12 +286,8 @@
     <Compile Include="UI\Tabs\UC_ModExplorer.Designer.cs">
       <DependentUpon>UC_ModExplorer.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Tabs\UnrealNativesGeneratorTab.cs" />
     <Compile Include="UI\Tabs\UserControl_Tab.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Tabs\UserControl_Tab.Designer.cs">
-      <DependentUpon>UserControl_Tab.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\HexViewDialog.cs">
       <SubType>Form</SubType>
@@ -329,12 +325,6 @@
     </Compile>
     <Compile Include="UI\Dialogs\UserControl_HexView.Designer.cs">
       <DependentUpon>UserControl_HexView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Tabs\UC_NativeGenerator.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Tabs\UC_NativeGenerator.Designer.cs">
-      <DependentUpon>UC_NativeGenerator.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Main\ProgramForm.cs">
       <SubType>Form</SubType>
@@ -406,9 +396,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\UserControl_HexView.resx">
       <DependentUpon>UserControl_HexView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Tabs\UC_NativeGenerator.resx">
-      <DependentUpon>UC_NativeGenerator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_PackageExplorer.resx">
       <DependentUpon>UC_PackageExplorer.cs</DependentUpon>
@@ -513,7 +500,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "" )]
 [assembly: AssemblyProduct( "UE Extensions" )]
-[assembly: AssemblyCopyright("Copyright 2011 Eliot van Uytfanghe.")]
+[assembly: AssemblyCopyright( "Copyright 2012 Eliot van Uytfanghe." )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible( false )]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid( "e05b96fe-1ea8-4312-b662-665d5daaa2ac" )]
+[assembly: Guid( "e4c70463-84c0-4851-ba33-7c1f17ade5bf" )]
 
 // Version information for an assembly consists of the following four values:
 //

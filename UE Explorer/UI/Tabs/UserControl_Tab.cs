@@ -1,19 +1,21 @@
 ﻿using System.Windows.Forms;
 using Storm.TabControl;
 
-namespace UEExplorer.UI
+namespace UEExplorer.UI.Tabs
 {
-	public partial class UserControl_Tab : UserControl, ITabComponent
+	public class UserControl_Tab : UserControl, ITabComponent
 	{
 		public TabsManager Owner{ get; set; }
 		public TabStripItem Tab{ get; set; }
 
-		public UserControl_Tab()
+		protected UserControl_Tab()
 		{
-			Owner = null;
-			Tab = null;
-			Dock = DockStyle.Fill;
 			InitializeComponent();
+		}
+
+		protected virtual void InitializeComponent()
+		{
+			Dock = DockStyle.Fill;	
 		}
 
 		/// <summary>

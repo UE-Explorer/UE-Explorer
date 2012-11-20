@@ -2,7 +2,7 @@
 {
 	using UEExplorer.UI;
 
-	partial class UC_ExecGenerator : UserControl_Tab
+	partial class UC_ExecGenerator
 	{
 		/// <summary> 
 		/// Required designer variable.

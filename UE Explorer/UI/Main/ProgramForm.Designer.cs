@@ -58,7 +58,6 @@
 			this._CacheExtractorItem = new System.Windows.Forms.MenuItem();
 			this.menuItem16 = new System.Windows.Forms.MenuItem();
 			this.menuItem17 = new System.Windows.Forms.MenuItem();
-			this.menuItem18 = new System.Windows.Forms.MenuItem();
 			this.menuItem19 = new System.Windows.Forms.MenuItem();
 			this.menuItem20 = new System.Windows.Forms.MenuItem();
 			this.menuItem7 = new System.Windows.Forms.MenuItem();
@@ -296,7 +295,6 @@
             this._CacheExtractorItem,
             this.menuItem16,
             this.menuItem17,
-            this.menuItem18,
             this.menuItem19,
             this.menuItem20});
 			this.toolsToolStripMenuItem.Text = "&Tools";
@@ -331,20 +329,14 @@
 			this.menuItem17.Text = "Color Generator";
 			this.menuItem17.Click += new System.EventHandler(this.unrealColorGeneratorToolStripMenuItem_Click);
 			// 
-			// menuItem18
-			// 
-			this.menuItem18.Index = 5;
-			this.menuItem18.Text = "Native Generator";
-			this.menuItem18.Click += new System.EventHandler(this.unrealNativeTableGeneratorToolStripMenuItem_Click);
-			// 
 			// menuItem19
 			// 
-			this.menuItem19.Index = 6;
+			this.menuItem19.Index = 5;
 			this.menuItem19.Text = "-";
 			// 
 			// menuItem20
 			// 
-			this.menuItem20.Index = 7;
+			this.menuItem20.Index = 6;
 			this.menuItem20.Text = "Registry Features Enabled";
 			this.menuItem20.Click += new System.EventHandler(this.toggleUEExplorerFileIconsToolStripMenuItem_Click);
 			// 
@@ -480,7 +472,6 @@
 		private System.Windows.Forms.MenuItem _CacheExtractorItem;
 		private System.Windows.Forms.MenuItem menuItem16;
 		private System.Windows.Forms.MenuItem menuItem17;
-		private System.Windows.Forms.MenuItem menuItem18;
 		private System.Windows.Forms.MenuItem menuItem19;
 		private System.Windows.Forms.MenuItem menuItem20;
 		private System.Windows.Forms.MenuItem menuItem2;

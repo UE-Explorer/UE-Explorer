@@ -25,7 +25,7 @@ namespace UEExplorer.UI.Tabs
 		/// <summary>
 		/// My Unreal file package!
 		/// </summary>
-		protected UnrealPackage _UnrealPackage;
+		private UnrealPackage _UnrealPackage;
 
 		/// <summary>
 		/// Called when the Tab is added to the chain.
