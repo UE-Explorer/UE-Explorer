@@ -1126,7 +1126,6 @@
 
 		#endregion
 
-		internal System.Windows.Forms.TabControl TabControl_General;
 		internal System.Windows.Forms.TabPage TabPage_Package;
 		internal System.Windows.Forms.TabPage TabPage_Tables;
 		internal System.Windows.Forms.TabPage TabPage_Names;
@@ -1146,8 +1145,6 @@
 		private System.Windows.Forms.ToolStripDropDownButton _Tools_StripDropDownButton;
 		public System.Windows.Forms.ToolStripMenuItem exportDecompiledClassesToolStripMenuItem;
 		public System.Windows.Forms.ToolStripMenuItem exportScriptClassesToolStripMenuItem;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Flag;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Value;
 		public System.Windows.Forms.ImageList VSIcons;
 		internal System.Windows.Forms.TreeView TreeView_Classes;
 		internal System.Windows.Forms.TreeView TreeView_Content;
@@ -1158,8 +1155,6 @@
 		internal System.Windows.Forms.TabPage TabPage_Deps;
 		internal System.Windows.Forms.TreeView TreeView_Deps;
 		private System.Windows.Forms.DataGridView DataGridView_NameTable;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.ToolStripButton FindButton;
 		private System.Windows.Forms.ToolStripButton NextButton;
 		private System.Windows.Forms.ToolStripButton PrevButton;
@@ -1167,17 +1162,10 @@
 		private TextEditorPanel TextEditorPanel;
 		internal System.Windows.Forms.TabPage TabPage_Generations;
 		private System.Windows.Forms.DataGridView DataGridView_GenerationsTable;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
 		private System.Windows.Forms.ToolStripMenuItem viewBufferToolStripMenuItem;
 		private System.Windows.Forms.ToolStripTextBox SearchBox;
 		internal System.Windows.Forms.TabPage TabPage_Chunks;
 		private System.Windows.Forms.DataGridView DataGridView_Chunks;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-		private System.Windows.Forms.DataGridViewTextBoxColumn CompressedOffset;
-		private System.Windows.Forms.DataGridViewTextBoxColumn CompressedSize;
 		internal System.Windows.Forms.Label LABEL_Copyright;
 		internal System.Windows.Forms.Label LABEL_Author;
 		private System.Windows.Forms.TextBox FilterText;
@@ -1218,5 +1206,17 @@
 		private System.Windows.Forms.TabControl TabControl_Tables;
 		private System.Windows.Forms.Label LNameIndex;
 		private System.Windows.Forms.Label LObjectIndex;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Flag;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Value;
+		private System.Windows.Forms.TabControl TabControl_General;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn CompressedOffset;
+		private System.Windows.Forms.DataGridViewTextBoxColumn CompressedSize;
 	}
 }

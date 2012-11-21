@@ -221,10 +221,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.nl-NL.Designer.cs">
+    <Compile Include="Properties\Resources.nl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.nl-NL.resx</DependentUpon>
+      <DependentUpon>Resources.nl.resx</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\ExceptionDialog.cs">
       <SubType>Form</SubType>
@@ -341,9 +341,9 @@
     <Compile Include="UI\Tabs\UC_PackageExplorer.Designer.cs">
       <DependentUpon>UC_PackageExplorer.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.nl-NL.resx">
+    <EmbeddedResource Include="Properties\Resources.nl.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.nl-NL.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.nl1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\ExceptionDialog.resx">
@@ -363,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Main\ProgramConsole.resx">
       <DependentUpon>ProgramConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Main\ProgramForm.nl.resx">
+      <DependentUpon>ProgramForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_Default.resx">
       <DependentUpon>UC_Default.cs</DependentUpon>
@@ -384,6 +387,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\SelectDialog.resx">
       <DependentUpon>SelectDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tabs\UC_PackageExplorer.nl.resx">
+      <DependentUpon>UC_PackageExplorer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_UClassFile.resx">
       <DependentUpon>UC_UClassFile.cs</DependentUpon>
@@ -501,7 +507,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
