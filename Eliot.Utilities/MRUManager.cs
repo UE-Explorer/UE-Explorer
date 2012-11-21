@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -14,6 +13,16 @@ namespace Eliot.Utilities
 		private static string _StoragePath = String.Empty;
 		private const string _StorageFileName = "MRU.xml";
 		public readonly List<String> Files = new List<string>();
+
+		[XmlIgnore]
+		private int _MaxCount = 15;
+
+		[XmlIgnore]
+		public int MaxCount
+		{
+			get{ return _MaxCount; }
+			set{ _MaxCount = value; }
+		}
 
 		private MRUManager()
 		{
@@ -41,7 +50,11 @@ namespace Eliot.Utilities
 				Files.Remove( path );
 			}
 
-			Files.Add( path );	
+			Files.Add( path );
+			if( Files.Count > MaxCount )
+			{
+				Files.RemoveAt( 0 );
+			}
 			OnRefreshEvent();
 		}
 

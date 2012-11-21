@@ -32,7 +32,6 @@ namespace UEExplorer.UI
 			}
 
 			SelectedNativeTable.Text = Program.Options.NTLPath;
-
 			Platform.Text = Program.Options.Platform;
 
 #if DEBUG
@@ -50,6 +49,13 @@ namespace UEExplorer.UI
 			_ROF.MenuItems.Clear();
 			for( int i = _MRUManager.Files.Count - 1; i >= 0; -- i )
 			{
+				if( !File.Exists( _MRUManager.Files[i] ) )
+				{
+					_MRUManager.Files.RemoveAt( i );
+					-- i;
+					continue;	
+				}
+
 				var item = _ROF.MenuItems.Add
 				( 
 					(_MRUManager.Files.Count - i) + " " + Path.GetFileName( _MRUManager.Files[i] ) 
