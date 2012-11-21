@@ -335,6 +335,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "About";
 			this.Load += new System.EventHandler(this.AboutForm_Load);
+			this.Shown += new System.EventHandler(this.AboutForm_Shown);
 			((System.ComponentModel.ISupportInitialize)(pictureBox1)).EndInit();
 			panel1.ResumeLayout(false);
 			panel1.PerformLayout();

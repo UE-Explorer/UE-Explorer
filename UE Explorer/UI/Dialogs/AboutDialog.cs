@@ -24,6 +24,10 @@ namespace UEExplorer.UI.Dialogs
 		 	VersionLabel.Text = "Version " + ProgramForm.Version;
 			CopyrightLabel.Text = AssemblyCopyright;
 			LinkLabel.Text = Program.WEBSITE_URL;		
+		}
+
+		private void AboutForm_Shown( object sender, EventArgs e )
+		{
 			InitializeDonators();
 		}
 
@@ -31,6 +35,10 @@ namespace UEExplorer.UI.Dialogs
 		private void InitializeDonators()
 		{
 			Refresh();
+
+			//var web = new WebClient();
+			//web.DownloadFileAsync( )
+
 			using( var buffer = new StreamReader( WebRequest.Create( DONATORS_URL ).Get() ) )
 			{ 
 				buffer.BaseStream.Position = 0;

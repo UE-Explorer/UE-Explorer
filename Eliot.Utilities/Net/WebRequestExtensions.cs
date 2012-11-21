@@ -18,7 +18,8 @@ namespace Eliot.Utilities.Net
 		public static string Post( this WebRequest webReq, string data )
 		{
 			var buffer = Encoding.UTF8.GetBytes( data );
-			webReq.Proxy = WebRequest.DefaultWebProxy;
+			webReq.Proxy = null;
+			//webReq.Proxy = WebRequest.DefaultWebProxy;
 			webReq.Method = "POST";
 			webReq.ContentType = "application/x-www-form-urlencoded";
 			webReq.ContentLength = buffer.Length;
@@ -47,7 +48,8 @@ namespace Eliot.Utilities.Net
 		/// <returns></returns>
 		public static MemoryStream Get( this WebRequest webReq )
 		{
-			webReq.Proxy = WebRequest.DefaultWebProxy;
+			//webReq.Proxy = WebRequest.DefaultWebProxy;
+			webReq.Proxy = null;
 			var buffer = new MemoryStream();
 			using( var response = webReq.GetResponse() )
 			{

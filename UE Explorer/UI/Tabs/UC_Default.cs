@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+﻿using System;
 
 namespace UEExplorer.UI.Tabs
 {
@@ -9,12 +9,8 @@ namespace UEExplorer.UI.Tabs
 		/// </summary>
 		protected override void TabCreated()
 		{
-			// ...
-
-			DefaultPage.Navigate( Program.APPS_URL );
 			base.TabCreated();
-
-			Dock = DockStyle.Fill;
+			DefaultPage.BeginInvoke( (Action)(() => DefaultPage.Navigate( Program.APPS_URL )) );
 		}
 	}
 }

@@ -79,7 +79,7 @@
 			groupBox1.Controls.Add(this.Button_Add);
 			groupBox1.Location = new System.Drawing.Point(3, 4);
 			groupBox1.Name = "groupBox1";
-			groupBox1.Size = new System.Drawing.Size(431, 494);
+			groupBox1.Size = new System.Drawing.Size(328, 494);
 			groupBox1.TabIndex = 5;
 			groupBox1.TabStop = false;
 			groupBox1.Text = "Scanned Packages";
@@ -92,7 +92,7 @@
 			this.TreeView_Packages.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.TreeView_Packages.Location = new System.Drawing.Point(6, 14);
 			this.TreeView_Packages.Name = "TreeView_Packages";
-			this.TreeView_Packages.Size = new System.Drawing.Size(419, 445);
+			this.TreeView_Packages.Size = new System.Drawing.Size(316, 445);
 			this.TreeView_Packages.TabIndex = 0;
 			// 
 			// Button_Add
@@ -101,7 +101,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.Button_Add.Location = new System.Drawing.Point(6, 465);
 			this.Button_Add.Name = "Button_Add";
-			this.Button_Add.Size = new System.Drawing.Size(419, 23);
+			this.Button_Add.Size = new System.Drawing.Size(316, 23);
 			this.Button_Add.TabIndex = 4;
 			this.Button_Add.Text = "Scan Package";
 			this.Button_Add.UseVisualStyleBackColor = true;
@@ -118,7 +118,7 @@
 			groupBox2.Controls.Add(label1);
 			groupBox2.Location = new System.Drawing.Point(3, 4);
 			groupBox2.Name = "groupBox2";
-			groupBox2.Size = new System.Drawing.Size(865, 93);
+			groupBox2.Size = new System.Drawing.Size(661, 93);
 			groupBox2.TabIndex = 6;
 			groupBox2.TabStop = false;
 			groupBox2.Text = "Natives Table List Package";
@@ -141,7 +141,7 @@
 			this.FileNameTextBox.Enabled = false;
 			this.FileNameTextBox.Location = new System.Drawing.Point(168, 14);
 			this.FileNameTextBox.Name = "FileNameTextBox";
-			this.FileNameTextBox.Size = new System.Drawing.Size(691, 20);
+			this.FileNameTextBox.Size = new System.Drawing.Size(487, 20);
 			this.FileNameTextBox.TabIndex = 1;
 			this.FileNameTextBox.Text = "Package Name POSTFIX";
 			// 
@@ -158,8 +158,8 @@
 			// splitContainer1.Panel2
 			// 
 			splitContainer1.Panel2.Controls.Add(groupBox2);
-			splitContainer1.Size = new System.Drawing.Size(1312, 501);
-			splitContainer1.SplitterDistance = 437;
+			splitContainer1.Size = new System.Drawing.Size(1005, 501);
+			splitContainer1.SplitterDistance = 334;
 			splitContainer1.TabIndex = 6;
 			// 
 			// OpenNTLDialog
@@ -175,7 +175,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(splitContainer1);
 			this.Name = "UC_NativeGenerator";
-			this.Size = new System.Drawing.Size(1312, 501);
+			this.Size = new System.Drawing.Size(1005, 501);
 			groupBox1.ResumeLayout(false);
 			groupBox2.ResumeLayout(false);
 			groupBox2.PerformLayout();

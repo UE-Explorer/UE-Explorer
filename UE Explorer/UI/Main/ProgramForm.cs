@@ -4,7 +4,6 @@ using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
 using Eliot.Utilities;
-using Eliot.Utilities.Net;
 using Storm.TabControl;
 using UEExplorer.Properties;
 
@@ -387,57 +386,67 @@ namespace UEExplorer.UI
 
 		private void CheckForUpdates( object sender, EventArgs e )
 		{
-			try
-			{
-				ProgressStatus.SaveStatus();
-				ProgressStatus.SetStatus( Resources.ProgramForm_checkForUpdates_Progress_Status );
+			ProgressStatus.SaveStatus();
+			ProgressStatus.SetStatus( Resources.ProgramForm_checkForUpdates_Progress_Status );
 
-				var result = WebRequest.Create( Program.Version_URL ).Post( Program.Program_Parm_ID ).Trim();
-				if( result != Version )
+			var web = new WebClient();
+			web.Headers["Content-Type"] = "application/x-www-form-urlencoded";
+			web.UploadStringCompleted += (stringSender, stringEvent) =>
+ 			{
+				try
 				{
-					if( MessageBox.Show(
-						string.Format( 
-							Resources.ProgramForm_checkForUpdates_New_Update,
-							Version,
-							result 
-						)
-						, Resources.ProgramForm_checkForUpdates_New_Version
-						, MessageBoxButtons.YesNo
-					) == DialogResult.Yes )
+					var result = stringEvent.Result.Trim();
+					if( result != Version )
 					{
-						System.Diagnostics.Process.Start( Program.Program_URL );
+						if( MessageBox.Show(
+							String.Format
+							(
+								Resources.NEW_VERSION_AVAILABLE_MESSAGE,
+								Version,
+								result
+							),
+							Resources.NEW_VERSION_AVAILABLE_TITLE,
+							MessageBoxButtons.YesNo ) == DialogResult.Yes )
+						{
+							System.Diagnostics.Process.Start( Program.Program_URL );
+						}
+					}
+					else
+					{
+						MessageBox.Show
+						(
+							String.Format
+							(
+								Resources.NO_NEW_VERSION_AVAILABLE_MESSAGE,
+								Application.ProductName
+							)
+						);
 					}
 				}
-				else
+				catch( Exception exc )
 				{
-					MessageBox.Show( string.Format( 
-							Resources.ProgramForm_checkForUpdates_Latest_Version, 
-							Application.ProductName 
-						) 
+					MessageBox.Show
+					(
+						String.Format
+						(
+							Resources.CHECKFORUPDATES_FAILED_MESSAGE
+								+ "\r\n\r\n{0}",
+							exc
+						),
+						Resources.Error,
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Error
 					);
 				}
-			}
-			catch( Exception exc )
-			{
-				MessageBox.Show
-				( 
-					string.Format
-					( 
-						Resources.ProgramForm_checkForUpdates_Failed, 
-						exc.Message 
-					),
-					Resources.Error, 
-					MessageBoxButtons.OK, 
-					MessageBoxIcon.Error
-				);
-			}
-			finally
-			{
-				ProgressStatus.ResetStatus();
-			}
+				finally
+				{ 
+					ProgressStatus.ResetStatus();
+				}
+			};
+			web.UploadStringAsync( new Uri( Program.Version_URL ), "Post", Program.Program_Parm_ID );
 		}
 
-		private void MenuItem7_Click( object sender, EventArgs e )
+	    private void MenuItem7_Click( object sender, EventArgs e )
 		{
 			TManager.AddTabComponent( typeof(UC_Options), Resources.Options );
 		}

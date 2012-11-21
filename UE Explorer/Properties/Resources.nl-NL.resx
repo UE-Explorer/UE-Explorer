@@ -155,7 +155,7 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
   <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
     <value>Do you want to go the folder with the exported content?</value>
   </data>
-  <data name="ProgramForm_checkForUpdates_New-Version" xml:space="preserve">
+  <data name="NEW_VERSION_AVAILABLE_TITLE" xml:space="preserve">
     <value>Een nieuwere versie is beschikbaar!</value>
     <comment>Dialog title.</comment>
   </data>
@@ -163,7 +163,7 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
     <value>Zoeken naar updates...</value>
     <comment>Status</comment>
   </data>
-  <data name="ProgramForm_checkForUpdates_Latest-Version" xml:space="preserve">
+  <data name="NO_NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
     <value>Je hebt de laatste versie van {0}</value>
     <comment>Dialog description</comment>
   </data>
@@ -175,9 +175,8 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
     <value>Opties</value>
     <comment>Tab title</comment>
   </data>
-  <data name="ProgramForm_checkForUpdates_Failed" xml:space="preserve">
-    <value>Zoeken naar een update gefaald. Probeer later nog eens opnieuw!
-Uitzondering: {0}</value>
+  <data name="CHECKFORUPDATES_FAILED_MESSAGE" xml:space="preserve">
+    <value>Zoeken naar een update gefaald. Probeer later nog eens opnieuw!</value>
   </data>
   <data name="Homepage" xml:space="preserve">
     <value>Hoofdpagina</value>
@@ -199,7 +198,7 @@ Uitzondering: {0}</value>
     <value>Bezig met het laden van {0}...</value>
     <comment>Status description.</comment>
   </data>
-  <data name="ProgramForm_checkForUpdates_New-Update" xml:space="preserve">
+  <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
     <value>Als je op ja klikt zul je naar de update gebracht worden!
 
 Jouw versie: {0}Laatste versie: {1}</value>

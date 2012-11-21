@@ -70,6 +70,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to request the latest version. Please try again later!.
+        /// </summary>
+        internal static string CHECKFORUPDATES_FAILED_MESSAGE {
+            get {
+                return ResourceManager.GetString("CHECKFORUPDATES_FAILED_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To use Gildor&apos;s tool, try &quot;decompress.exe PACKAGENAME.EXT&quot; you may have to specify -lzo..
         /// </summary>
         internal static string COMPRESSED_HOWTO {
@@ -216,6 +225,36 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clicking yes will bring you to the page with the latest version!
+        ///
+        ///Your version: {0}
+        ///Latest version: {1}.
+        /// </summary>
+        internal static string NEW_VERSION_AVAILABLE_MESSAGE {
+            get {
+                return ResourceManager.GetString("NEW_VERSION_AVAILABLE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new version is available!.
+        /// </summary>
+        internal static string NEW_VERSION_AVAILABLE_TITLE {
+            get {
+                return ResourceManager.GetString("NEW_VERSION_AVAILABLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have the latest version of {0}.
+        /// </summary>
+        internal static string NO_NEW_VERSION_AVAILABLE_MESSAGE {
+            get {
+                return ResourceManager.GetString("NO_NEW_VERSION_AVAILABLE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No Object was found..
         /// </summary>
         internal static string NO_OBJECT_WAS_FOUND {
@@ -317,46 +356,6 @@ namespace UEExplorer.Properties {
         internal static string ProgramForm_Cache_Extractor {
             get {
                 return ResourceManager.GetString("ProgramForm_Cache_Extractor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to request the latest version. Please try again later!
-        ///Exception:{0}.
-        /// </summary>
-        internal static string ProgramForm_checkForUpdates_Failed {
-            get {
-                return ResourceManager.GetString("ProgramForm_checkForUpdates_Failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You have the latest version of {0}.
-        /// </summary>
-        internal static string ProgramForm_checkForUpdates_Latest_Version {
-            get {
-                return ResourceManager.GetString("ProgramForm_checkForUpdates_Latest-Version", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clicking yes will bring you to the page with the latest version!
-        ///
-        ///Your version: {0}
-        ///Latest version: {1}.
-        /// </summary>
-        internal static string ProgramForm_checkForUpdates_New_Update {
-            get {
-                return ResourceManager.GetString("ProgramForm_checkForUpdates_New-Update", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A new version is available!.
-        /// </summary>
-        internal static string ProgramForm_checkForUpdates_New_Version {
-            get {
-                return ResourceManager.GetString("ProgramForm_checkForUpdates_New-Version", resourceCulture);
             }
         }
         
