@@ -58,12 +58,12 @@
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.TabControl_General = new System.Windows.Forms.TabControl();
 			this.TabPage_Package = new System.Windows.Forms.TabPage();
+			this.LNameIndex = new System.Windows.Forms.Label();
+			this.LObjectIndex = new System.Windows.Forms.Label();
 			this.Num_NameIndex = new System.Windows.Forms.NumericUpDown();
 			this.Num_ObjectIndex = new System.Windows.Forms.NumericUpDown();
 			this.FolderValue = new System.Windows.Forms.Label();
-			this.Button_FindObject = new System.Windows.Forms.Button();
 			this.Label_Folder = new System.Windows.Forms.Label();
-			this.Button_FindName = new System.Windows.Forms.Button();
 			this.BuildValue = new System.Windows.Forms.Label();
 			this.CookerValue = new System.Windows.Forms.Label();
 			this.EngineValue = new System.Windows.Forms.Label();
@@ -332,12 +332,12 @@
 			// 
 			this.TabPage_Package.BackColor = System.Drawing.Color.White;
 			this.TabPage_Package.CausesValidation = false;
+			this.TabPage_Package.Controls.Add(this.LNameIndex);
+			this.TabPage_Package.Controls.Add(this.LObjectIndex);
 			this.TabPage_Package.Controls.Add(this.Num_NameIndex);
 			this.TabPage_Package.Controls.Add(this.Num_ObjectIndex);
 			this.TabPage_Package.Controls.Add(this.FolderValue);
-			this.TabPage_Package.Controls.Add(this.Button_FindObject);
 			this.TabPage_Package.Controls.Add(this.Label_Folder);
-			this.TabPage_Package.Controls.Add(this.Button_FindName);
 			this.TabPage_Package.Controls.Add(this.BuildValue);
 			this.TabPage_Package.Controls.Add(this.CookerValue);
 			this.TabPage_Package.Controls.Add(this.EngineValue);
@@ -359,6 +359,16 @@
 			resources.ApplyResources(this.TabPage_Package, "TabPage_Package");
 			this.TabPage_Package.Name = "TabPage_Package";
 			// 
+			// LNameIndex
+			// 
+			resources.ApplyResources(this.LNameIndex, "LNameIndex");
+			this.LNameIndex.Name = "LNameIndex";
+			// 
+			// LObjectIndex
+			// 
+			resources.ApplyResources(this.LObjectIndex, "LObjectIndex");
+			this.LObjectIndex.Name = "LObjectIndex";
+			// 
 			// Num_NameIndex
 			// 
 			resources.ApplyResources(this.Num_NameIndex, "Num_NameIndex");
@@ -368,6 +378,7 @@
             0,
             0});
 			this.Num_NameIndex.Name = "Num_NameIndex";
+			this.Num_NameIndex.ValueChanged += new System.EventHandler(this.Num_NameIndex_ValueChanged);
 			// 
 			// Num_ObjectIndex
 			// 
@@ -383,6 +394,7 @@
             0,
             -2147483648});
 			this.Num_ObjectIndex.Name = "Num_ObjectIndex";
+			this.Num_ObjectIndex.ValueChanged += new System.EventHandler(this.Num_ObjectIndex_ValueChanged);
 			// 
 			// FolderValue
 			// 
@@ -391,31 +403,11 @@
 			this.FolderValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
 			this.FolderValue.Name = "FolderValue";
 			// 
-			// Button_FindObject
-			// 
-			this.Button_FindObject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-			this.Button_FindObject.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
-			this.Button_FindObject.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
-			this.Button_FindObject.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-			resources.ApplyResources(this.Button_FindObject, "Button_FindObject");
-			this.Button_FindObject.Name = "Button_FindObject";
-			this.Button_FindObject.UseVisualStyleBackColor = false;
-			// 
 			// Label_Folder
 			// 
 			resources.ApplyResources(this.Label_Folder, "Label_Folder");
 			this.Label_Folder.CausesValidation = false;
 			this.Label_Folder.Name = "Label_Folder";
-			// 
-			// Button_FindName
-			// 
-			this.Button_FindName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-			this.Button_FindName.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
-			this.Button_FindName.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
-			this.Button_FindName.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-			resources.ApplyResources(this.Button_FindName, "Button_FindName");
-			this.Button_FindName.Name = "Button_FindName";
-			this.Button_FindName.UseVisualStyleBackColor = false;
 			// 
 			// BuildValue
 			// 
@@ -1061,7 +1053,7 @@
 			resources.ApplyResources(this.viewBufferToolStripMenuItem, "viewBufferToolStripMenuItem");
 			this.viewBufferToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
 			this.viewBufferToolStripMenuItem.Name = "viewBufferToolStripMenuItem";
-			this.viewBufferToolStripMenuItem.Click += new System.EventHandler(this.viewBufferToolStripMenuItem_Click);
+			this.viewBufferToolStripMenuItem.Click += new System.EventHandler(this.ViewBufferToolStripMenuItem_Click);
 			// 
 			// ReloadButton
 			// 
@@ -1142,10 +1134,8 @@
 		internal System.Windows.Forms.TabPage TabPage_Imports;
 		internal System.Windows.Forms.TreeView TreeView_Exports;
 		internal System.Windows.Forms.TreeView TreeView_Imports;
-		internal System.Windows.Forms.Button Button_FindObject;
 		internal System.Windows.Forms.NumericUpDown Num_ObjectIndex;
 		internal System.Windows.Forms.NumericUpDown Num_NameIndex;
-		internal System.Windows.Forms.Button Button_FindName;
 		internal System.Windows.Forms.ToolStrip ToolStrip_Content;
 		private System.Windows.Forms.ToolStripButton ExportButton;
 		internal System.Windows.Forms.ToolStripLabel Label_ObjectName;
@@ -1226,5 +1216,7 @@
 		internal System.Windows.Forms.Button Button_Export;
 		public System.Windows.Forms.ToolStripDropDownButton ViewTools;
 		private System.Windows.Forms.TabControl TabControl_Tables;
+		private System.Windows.Forms.Label LNameIndex;
+		private System.Windows.Forms.Label LObjectIndex;
 	}
 }

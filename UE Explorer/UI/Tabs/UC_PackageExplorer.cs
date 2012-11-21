@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -85,15 +86,15 @@ namespace UEExplorer.UI.Tabs
 			}
 			
 			TextEditorPanel.searchWiki.Visibility = System.Windows.Visibility.Visible;
-			TextEditorPanel.searchWiki.Header = "Search UnrealWiki for \"" 
-				+  selection
-				+ "\"";
+			TextEditorPanel.searchWiki.Header = String.Format( Resources.SEARCH_WIKI_ITEM, selection );
 		}
 
 		void SearchWiki_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
-			System.Diagnostics.Process.Start( 
-				String.Format( 
+			Process.Start
+			( 
+				String.Format
+				( 
 					"http://wiki.beyondunreal.com/?ns0=1&ns100=1&ns102=1&ns104=1&ns106=1&search={0}&title=Special%3ASearch&fulltext=Advanced+search&fulltext=Advanced+search",
 					GetSelection()
 				) 
@@ -140,7 +141,7 @@ namespace UEExplorer.UI.Tabs
 						Resources.NOTICE_TITLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Question
 					) == DialogResult.OK )
 					{
-						System.Diagnostics.Process.Start( "http://www.gildor.org/downloads" );
+						Process.Start( "http://www.gildor.org/downloads" );
 						MessageBox.Show( Resources.COMPRESSED_HOWTO, 
 							Resources.NOTICE_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Information 
 						);
@@ -477,19 +478,19 @@ namespace UEExplorer.UI.Tabs
 			switch( e.EventId )
 			{
 				case UnrealPackage.PackageEventArgs.Id.Construct:
-					ProgressStatus.SetStatus( "Constructing Objects..." );
+					ProgressStatus.SetStatus( Resources.CONSTRUCTING_OBJECTS );
 					break;
 
 				case UnrealPackage.PackageEventArgs.Id.Deserialize:
-					ProgressStatus.SetStatus( "Deserializing Objects..." );
+					ProgressStatus.SetStatus( Resources.DESERIALIZING_OBJECTS );
 					break;
 
 				case UnrealPackage.PackageEventArgs.Id.Import:
-					ProgressStatus.SetStatus( "Importing Objects..." );
+					ProgressStatus.SetStatus( Resources.IMPORTING_OBJECTS );
 					break;
 
 				case UnrealPackage.PackageEventArgs.Id.Link:
-					ProgressStatus.SetStatus( "Linking Objects..." );
+					ProgressStatus.SetStatus( Resources.LINKING_OBJECTS );
 					break;
 				
 				case UnrealPackage.PackageEventArgs.Id.Object:
@@ -501,7 +502,7 @@ namespace UEExplorer.UI.Tabs
 		[MTAThreadAttribute]
 		protected void InitializeUI()
 		{
-			ProgressStatus.SetStatus( "Initializing UI..." );
+			ProgressStatus.SetStatus( Resources.INITIALIZING_UI );
 
 			// Disable misc' functionalities.
 			//causesvalidation = false;
@@ -512,8 +513,6 @@ namespace UEExplorer.UI.Tabs
 
 			TreeView_Classes.AfterSelect 							+= _OnClassesNodeSelected;
 			TreeView_Classes.BeforeExpand							+= _OnClassesNodeExpand;
-			Button_FindObject.Click 								+= _OnFindObjectClicked;
-			Button_FindName.Click 									+= _OnFindNameClicked;
 			// Package Info
 
 			// Section 1
@@ -657,8 +656,6 @@ namespace UEExplorer.UI.Tabs
 
 		private void EmptyIsPackage()
 		{
-			Button_FindName.Enabled = false;
-			Button_FindObject.Enabled = false;
 			exportScriptClassesToolStripMenuItem.Enabled = false;
 			exportDecompiledClassesToolStripMenuItem.Enabled = false;
 		}
@@ -965,7 +962,7 @@ namespace UEExplorer.UI.Tabs
 			);
 			if( dialogResult == DialogResult.Yes )
 			{
-				System.Diagnostics.Process.Start( exportPath );
+				Process.Start( exportPath );
 			}
 		}
 
@@ -1278,7 +1275,8 @@ namespace UEExplorer.UI.Tabs
 #endif
 					case "Open in UE Model Viewer":
 					{
-						System.Diagnostics.Process.Start( 
+						Process.Start
+						( 
 							Program.Options.UEModelAppPath, 
 							"-path=" + _UnrealPackage.PackageDirectory
 							+ " " + _UnrealPackage.PackageName
@@ -1300,7 +1298,8 @@ namespace UEExplorer.UI.Tabs
 							+ " -export"
 							+ " " + _UnrealPackage.PackageName
 							+ " " + node.Text;
-						var appInfo = new System.Diagnostics.ProcessStartInfo(
+						var appInfo = new ProcessStartInfo
+						(
 							Program.Options.UEModelAppPath, 
 							appArguments
 						);
@@ -1309,11 +1308,7 @@ namespace UEExplorer.UI.Tabs
 						appInfo.CreateNoWindow = false;
 						var app = System.Diagnostics.Process.Start( appInfo );
 						var log = String.Empty;
-						app.OutputDataReceived += delegate
-						(object sender, System.Diagnostics.DataReceivedEventArgs e)
-						{
-							log += e.Data;
-						};
+						app.OutputDataReceived += (sender, e) => log += e.Data;
 						//app.WaitForExit();
 
 						if( Directory.GetFiles( contentDir ).Length > 0 )
@@ -1329,8 +1324,10 @@ namespace UEExplorer.UI.Tabs
 						}
 						else
 						{
-							MessageBox.Show( 
-								string.Format( 
+							MessageBox.Show
+							( 
+								String.Format
+								( 
 									"The object was not exported.\r\n\r\nArguments:{0}\r\n\r\nLog:{1}", 
 									appArguments, 
 									log 
@@ -1475,39 +1472,6 @@ namespace UEExplorer.UI.Tabs
 			catch( Exception e )
 			{
 				ExceptionDialog.Show( "An exception occurred while performing: " + action, e );
-			}
-		}
-
-		private void _OnFindObjectClicked( object sender, EventArgs e )
-		{
-			int objectIndexToFind = (int)Num_ObjectIndex.Value;
-			try
-			{
-				var foundObject = _UnrealPackage.GetIndexObject( objectIndexToFind );
-				if( foundObject != null )
-				{
-					MessageBox.Show( Resources.OBJECT_IS + foundObject.Name, Application.ProductName );
-				}
-				else
-				{
-					MessageBox.Show( Resources.NO_OBJECT_WAS_FOUND, Application.ProductName );
-				}
-			}
-			catch( ArgumentOutOfRangeException exc )
-			{
-				MessageBox.Show( Resources.INVALID_OBJECT_INDEX + exc.ActualValue, Application.ProductName );
-			}
-		}
-
-		private void _OnFindNameClicked( object sender, EventArgs e )
-		{
-			try
-			{
-				MessageBox.Show( Resources.NAME_IS + _UnrealPackage.NameTableList[(int)Num_NameIndex.Value].Name, Application.ProductName );
-			}
-			catch( ArgumentOutOfRangeException exc )
-			{
-				MessageBox.Show( Resources.INVALID_NAME_INDEX + exc.ActualValue, Application.ProductName );
 			}
 		}
 
@@ -1696,12 +1660,11 @@ namespace UEExplorer.UI.Tabs
 			}
 		}
 
-		private void viewBufferToolStripMenuItem_Click( object sender, EventArgs e )
+		private void ViewBufferToolStripMenuItem_Click( object sender, EventArgs e )
 		{
 			var obj = new UPackageObject( _UnrealPackage, _SummarySize );
-			var HVD = new HexViewDialog( obj, this );
-			HVD.Show( _Form );
-			HVD.ShowInTaskbar = true;
+			var hvd = new HexViewDialog( obj, this );
+			hvd.Show( _Form );
 		}
 
 		private readonly List<TreeNode> _FilteredNodes = new List<TreeNode>();
@@ -1781,14 +1744,14 @@ namespace UEExplorer.UI.Tabs
 			if( !checkBox.Checked )
 			{
 				TreeView_Exports.BeginUpdate();
-				List<TreeNode> removedNodes = new List<TreeNode>();
+				var removedNodes = new List<TreeNode>();
 				for( int i = 0; i < TreeView_Exports.Nodes.Count; ++ i )
 				{
-					if( TreeView_Exports.Nodes[i].ImageKey == checkBox.ImageKey )
-					{
-						removedNodes.Add( TreeView_Exports.Nodes[i] );
-						TreeView_Exports.Nodes.RemoveAt( i );
-					}
+					if( TreeView_Exports.Nodes[i].ImageKey != checkBox.ImageKey )
+						continue;
+
+					removedNodes.Add( TreeView_Exports.Nodes[i] );
+					TreeView_Exports.Nodes.RemoveAt( i );
 				}
 				checkBox.Tag = removedNodes;
 				TreeView_Exports.EndUpdate();
@@ -1838,7 +1801,7 @@ namespace UEExplorer.UI.Tabs
 			{
 				exportable = soundObject.CompatableExport();	
 		
-				Button_Export.Text = string.Format( "Export {0} As...", node.Text );	
+				Button_Export.Text = String.Format( Resources.EXPORT_AS, node.Text );	
 			}
 
 			Button_Export.Enabled = exportable;
@@ -1868,6 +1831,36 @@ namespace UEExplorer.UI.Tabs
 			}
 
 			PerformNodeAction( decompilableObject, e.ClickedItem.Text );
+		}
+
+		private void Num_ObjectIndex_ValueChanged( object sender, EventArgs e )
+		{
+			int objectIndexToFind = (int)Num_ObjectIndex.Value;
+			try
+			{
+				var foundObject = _UnrealPackage.GetIndexObject( objectIndexToFind );
+				LObjectIndex.Text = foundObject != null 
+					? String.Format( Resources.OBJECT_IS, foundObject.Name ) 
+					: Resources.NO_OBJECT_WAS_FOUND;
+			}
+			catch( ArgumentOutOfRangeException exc )
+			{
+				LObjectIndex.Text = String.Format( Resources.INVALID_OBJECT_INDEX, exc.ActualValue );
+			}	
+		}
+
+		private void Num_NameIndex_ValueChanged( object sender, EventArgs e )
+		{
+			try
+			{
+				LNameIndex.Text = String.Format( Resources.NAME_IS, 
+					_UnrealPackage.NameTableList[(int)Num_NameIndex.Value].Name 
+				);
+			}
+			catch( ArgumentOutOfRangeException exc )
+			{
+				LNameIndex.Text = String.Format( Resources.INVALID_NAME_INDEX, exc.ActualValue );
+			}	
 		}
 	}
 

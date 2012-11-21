@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="NAME_IS" xml:space="preserve">
-    <value>Name is </value>
+    <value xml:space="preserve">Name is {0}</value>
   </data>
   <data name="OBJECT_IS" xml:space="preserve">
-    <value>Object is </value>
+    <value xml:space="preserve">Object is {0}</value>
   </data>
   <data name="Open_File" xml:space="preserve">
     <value>Open File</value>
@@ -130,13 +130,13 @@
     <value>Warning</value>
   </data>
   <data name="INVALID_NAME_INDEX" xml:space="preserve">
-    <value>Invalid Name index </value>
+    <value xml:space="preserve">Invalid Name index {0}</value>
   </data>
   <data name="NOT_AVAILABLE" xml:space="preserve">
     <value>N/A</value>
   </data>
   <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
-    <value>Invalid Object index </value>
+    <value xml:space="preserve">Invalid Object index {0}</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -261,5 +261,26 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
 	</data>
 	<data name="PACKAGE_METAINFO">
 		<value xml:space="preserve">Package's MetaInfo</value>
+	</data>
+	<data name="EXPORT_AS">
+		<value xml:space="preserve">Export {0} As...</value>
+	</data>
+	<data name="CONSTRUCTING_OBJECTS">
+		<value xml:space="preserve">Constructing Objects...</value>
+	</data>
+	<data name="DESERIALIZING_OBJECTS">
+		<value xml:space="preserve">Deserializing Objects...</value>
+	</data>
+	<data name="IMPORTING_OBJECTS">
+		<value xml:space="preserve">Importing Objects...</value>
+	</data>
+	<data name="LINKING_OBJECTS">
+		<value xml:space="preserve">Linking Objects...</value>
+	</data>
+	<data name="INITIALIZING_UI">
+		<value xml:space="preserve">Initializing UI...</value>
+	</data>
+	<data name="SEARCH_WIKI_ITEM">
+		<value xml:space="preserve">Search UnrealWiki for "{0}"</value>
 	</data>
 </root>

@@ -79,11 +79,29 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Constructing Objects....
+        /// </summary>
+        internal static string CONSTRUCTING_OBJECTS {
+            get {
+                return ResourceManager.GetString("CONSTRUCTING_OBJECTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t save the package because of the following exception: {0}.
         /// </summary>
         internal static string COULDNT_SAVE_EXCEPTION {
             get {
                 return ResourceManager.GetString("COULDNT_SAVE_EXCEPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deserializing Objects....
+        /// </summary>
+        internal static string DESERIALIZING_OBJECTS {
+            get {
+                return ResourceManager.GetString("DESERIALIZING_OBJECTS", resourceCulture);
             }
         }
         
@@ -115,6 +133,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export {0} As....
+        /// </summary>
+        internal static string EXPORT_AS {
+            get {
+                return ResourceManager.GetString("EXPORT_AS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exported all package classes of {0} to {1}
         ///
         ///Click Yes if you want to go to the output directory!.
@@ -135,7 +162,25 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid Name index .
+        ///   Looks up a localized string similar to Importing Objects....
+        /// </summary>
+        internal static string IMPORTING_OBJECTS {
+            get {
+                return ResourceManager.GetString("IMPORTING_OBJECTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initializing UI....
+        /// </summary>
+        internal static string INITIALIZING_UI {
+            get {
+                return ResourceManager.GetString("INITIALIZING_UI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Name index {0}.
         /// </summary>
         internal static string INVALID_NAME_INDEX {
             get {
@@ -144,7 +189,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid Object index .
+        ///   Looks up a localized string similar to Invalid Object index {0}.
         /// </summary>
         internal static string INVALID_OBJECT_INDEX {
             get {
@@ -153,7 +198,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name is .
+        ///   Looks up a localized string similar to Linking Objects....
+        /// </summary>
+        internal static string LINKING_OBJECTS {
+            get {
+                return ResourceManager.GetString("LINKING_OBJECTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name is {0}.
         /// </summary>
         internal static string NAME_IS {
             get {
@@ -189,7 +243,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Object is .
+        ///   Looks up a localized string similar to Object is {0}.
         /// </summary>
         internal static string OBJECT_IS {
             get {
@@ -395,6 +449,15 @@ namespace UEExplorer.Properties {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search UnrealWiki for &quot;{0}&quot;.
+        /// </summary>
+        internal static string SEARCH_WIKI_ITEM {
+            get {
+                return ResourceManager.GetString("SEARCH_WIKI_ITEM", resourceCulture);
             }
         }
         

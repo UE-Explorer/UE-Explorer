@@ -412,14 +412,68 @@
   <data name="TabControl_General.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="Num_NameIndex.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="LNameIndex.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LNameIndex.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LNameIndex.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 188</value>
+  </data>
+  <data name="LNameIndex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
+  </data>
+  <data name="LNameIndex.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="LNameIndex.Text" xml:space="preserve">
+    <value>Name Index</value>
+  </data>
+  <data name="&gt;&gt;LNameIndex.Name" xml:space="preserve">
+    <value>LNameIndex</value>
+  </data>
+  <data name="&gt;&gt;LNameIndex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LNameIndex.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;LNameIndex.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="LObjectIndex.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LObjectIndex.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 162</value>
+  </data>
+  <data name="LObjectIndex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
+  </data>
+  <data name="LObjectIndex.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="LObjectIndex.Text" xml:space="preserve">
+    <value>Object Index</value>
+  </data>
+  <data name="&gt;&gt;LObjectIndex.Name" xml:space="preserve">
+    <value>LObjectIndex</value>
+  </data>
+  <data name="&gt;&gt;LObjectIndex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LObjectIndex.Parent" xml:space="preserve">
+    <value>TabPage_Package</value>
+  </data>
+  <data name="&gt;&gt;LObjectIndex.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="Num_NameIndex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 185</value>
+    <value>3, 186</value>
   </data>
   <data name="Num_NameIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>73, 20</value>
   </data>
   <data name="Num_NameIndex.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -437,16 +491,13 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Num_NameIndex.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="Num_ObjectIndex.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>2</value>
   </data>
   <data name="Num_ObjectIndex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 151</value>
+    <value>3, 160</value>
   </data>
   <data name="Num_ObjectIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>73, 20</value>
   </data>
   <data name="Num_ObjectIndex.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -464,7 +515,7 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Num_ObjectIndex.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="FolderValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -497,34 +548,7 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;FolderValue.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="Button_FindObject.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="Button_FindObject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 145</value>
-  </data>
-  <data name="Button_FindObject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 28</value>
-  </data>
-  <data name="Button_FindObject.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="Button_FindObject.Text" xml:space="preserve">
-    <value>Find Object</value>
-  </data>
-  <data name="&gt;&gt;Button_FindObject.Name" xml:space="preserve">
-    <value>Button_FindObject</value>
-  </data>
-  <data name="&gt;&gt;Button_FindObject.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button_FindObject.Parent" xml:space="preserve">
-    <value>TabPage_Package</value>
-  </data>
-  <data name="&gt;&gt;Button_FindObject.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="Label_Folder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -563,33 +587,6 @@
     <value>TabPage_Package</value>
   </data>
   <data name="&gt;&gt;Label_Folder.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="Button_FindName.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="Button_FindName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 179</value>
-  </data>
-  <data name="Button_FindName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 28</value>
-  </data>
-  <data name="Button_FindName.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="Button_FindName.Text" xml:space="preserve">
-    <value>Find Name</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.Name" xml:space="preserve">
-    <value>Button_FindName</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.Parent" xml:space="preserve">
-    <value>TabPage_Package</value>
-  </data>
-  <data name="&gt;&gt;Button_FindName.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="BuildValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -872,7 +869,7 @@
     <value>NoControl</value>
   </data>
   <data name="LABEL_Copyright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 126</value>
+    <value>3, 135</value>
   </data>
   <data name="LABEL_Copyright.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 16</value>
@@ -908,7 +905,7 @@
     <value>NoControl</value>
   </data>
   <data name="LABEL_Author.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 106</value>
+    <value>3, 115</value>
   </data>
   <data name="LABEL_Author.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 17</value>
@@ -1248,7 +1245,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADc
-        FgAAAk1TRnQBSQFMAgEBEQEAAeABAQHgAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        FgAAAk1TRnQBSQFMAgEBEQEAAfgBAQH4AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAAVADAAEBAQABCAYAARQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
