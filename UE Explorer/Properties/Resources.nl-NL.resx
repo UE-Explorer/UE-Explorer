@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NAME_IS" xml:space="preserve">
+    <value>Naam is {0}</value>
+  </data>
+  <data name="OBJECT_IS" xml:space="preserve">
+    <value>Object is {0}</value>
+  </data>
+  <data name="Open_File" xml:space="preserve">
+    <value>Openen</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Waarschuwing</value>
+  </data>
+  <data name="INVALID_NAME_INDEX" xml:space="preserve">
+    <value>Ongeldig Name slot {0}</value>
+  </data>
+  <data name="NOT_AVAILABLE" xml:space="preserve">
+    <value>N/B</value>
+  </data>
+  <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
+    <value>Ongeldig Object slot {0}</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\UI\Main\ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RegistryWarning" xml:space="preserve">
+    <value>Enabling this will edit your registry file. 
+If you happen to move the "UE Explorer" folder, uninstall or update it, then please disable this before doing so!</value>
+  </data>
+  <data name="NO_OBJECT_WAS_FOUND" xml:space="preserve">
+    <value>Geen object gevonden.</value>
+  </data>
+  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
+    <value>Do you want to go the folder with the exported content?</value>
+  </data>
+  <data name="ProgramForm_checkForUpdates_New-Version" xml:space="preserve">
+    <value>Een nieuwere versie is beschikbaar!</value>
+    <comment>Dialog title.</comment>
+  </data>
+  <data name="ProgramForm_checkForUpdates_Progress-Status" xml:space="preserve">
+    <value>Zoeken naar updates...</value>
+    <comment>Status</comment>
+  </data>
+  <data name="ProgramForm_checkForUpdates_Latest-Version" xml:space="preserve">
+    <value>Je hebt de laatste versie van {0}</value>
+    <comment>Dialog description</comment>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Fout</value>
+    <comment>Dialog title</comment>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Opties</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="ProgramForm_checkForUpdates_Failed" xml:space="preserve">
+    <value>Zoeken naar een update gefaald. Probeer later nog eens opnieuw!
+Uitzondering: {0}</value>
+  </data>
+  <data name="Homepage" xml:space="preserve">
+    <value>Hoofdpagina</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="ProgramForm_Unreal_Natives_Table_Generator" xml:space="preserve">
+    <value>Unreal Natives Table Generator</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="ProgramForm_Cache_Extractor" xml:space="preserve">
+    <value>Cache Extractor</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="ProgramForm_LoadFile_Failed_loading_package" xml:space="preserve">
+    <value>Failed loading package: {0}</value>
+    <comment>Exception description.</comment>
+  </data>
+  <data name="ProgramForm_LoadFile_Loading_file" xml:space="preserve">
+    <value>Bezig met het laden van {0}...</value>
+    <comment>Status description.</comment>
+  </data>
+  <data name="ProgramForm_checkForUpdates_New-Update" xml:space="preserve">
+    <value>Als je op ja klikt zul je naar de update gebracht worden!
+
+Jouw versie: {0}Laatste versie: {1}</value>
+    <comment>Dialog description.</comment>
+  </data>
+  <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
+    <value>You cannot import binary files with an unequal length!</value>
+  </data>
+  <data name="SAVE_QUESTION_WARNING" xml:space="preserve">
+    <value>Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!</value>
+  </data>
+  <data name="SAVE_QUESTION" xml:space="preserve">
+    <value>Opslaan?</value>
+  </data>
+  <data name="COULDNT_SAVE_EXCEPTION" xml:space="preserve">
+    <value>Couldn't save the package because of the following exception: {0}</value>
+  </data>
+  <data name="ExceptionDialog_THANKS" xml:space="preserve">
+    <value>Thanks for reporting this exception occurrance!</value>
+  </data>
+  <data name="ExceptionDialog_FAIL" xml:space="preserve">
+    <value>Failed to send this report. Please try again later!</value>
+  </data>
+  <data name="SUCCESS" xml:space="preserve">
+    <value>Succesvol</value>
+  </data>
+  <data name="SAVE_SUCCESS" xml:space="preserve">
+    <value>Succcesvol opgeslaan!</value>
+  </data>
+  <data name="SAVED" xml:space="preserve">
+    <value>Opgeslaan!</value>
+  </data>
+  <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
+    <value>Exported all package classes of {0} to {1}
+
+Click Yes if you want to go to the output directory!</value>
+  </data>
+  <data name="PACKAGE_IS_COMPRESSED" xml:space="preserve">
+    <value>This package is compressed! Compressed packages are not supported.
+
+Please consider decompressing the package using "Unreal Package Decompressor" from Gildor
+
+You can download the tool from http://www.gildor.org/downloads or press OK to go there now.</value>
+  </data>
+  <data name="COMPRESSED_HOWTO" xml:space="preserve">
+    <value>To use Gildor's tool, try "decompress.exe PACKAGENAME.EXT" you may have to specify -lzo.</value>
+  </data>
+  <data name="NOTICE_TITLE" xml:space="preserve">
+    <value>Opmerking</value>
+  </data>
+  <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
+    <value>Dit paket heeft een onbekent handtekening.Ben je zeker dat je dit paket wilt openen? Op ja klikken kan leiden to onverwachte resultaten</value>
+  </data>
+  <data name="PACKAGE_LOADING" xml:space="preserve">
+    <value>Paket aant laden...</value>
+  </data>
+  <data name="PACKAGE_METAINFO" xml:space="preserve">
+    <value>Paket's MetaInfo</value>
+  </data>
+  <data name="EXPORT_AS" xml:space="preserve">
+    <value>Exporteer {0} als...</value>
+  </data>
+  <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
+    <value>Objecten aant constructeren...</value>
+  </data>
+  <data name="DESERIALIZING_OBJECTS" xml:space="preserve">
+    <value>Objecten aant lezen...</value>
+  </data>
+  <data name="IMPORTING_OBJECTS" xml:space="preserve">
+    <value>Objecten aant importeren...</value>
+  </data>
+  <data name="LINKING_OBJECTS" xml:space="preserve">
+    <value>Objecten aant verbinden...</value>
+  </data>
+  <data name="INITIALIZING_UI" xml:space="preserve">
+    <value>UI initializeren...</value>
+  </data>
+  <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
+    <value>Zoek UnrealWiki voor "{0}"</value>
+  </data>
+</root>

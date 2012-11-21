@@ -31,6 +31,8 @@ namespace UEExplorer
 				return;	
 			}
 
+			//Thread.CurrentThread.CurrentCulture = CultureInfo.InstalledUICulture;
+
 			var app = new SingleInstanceApplication();
 			app.Run( Environment.GetCommandLineArgs() );
 		}
