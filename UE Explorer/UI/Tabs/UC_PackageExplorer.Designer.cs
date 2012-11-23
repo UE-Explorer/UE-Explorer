@@ -29,31 +29,12 @@
 		protected override void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.TableLayoutPanel UScriptLayout;
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
 			System.Windows.Forms.Label label4;
-			System.Windows.Forms.Label Label_DetectedBuild;
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
+			System.Windows.Forms.SplitContainer splitContainer1;
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.Label Label_LicenseeMode;
-			System.Windows.Forms.Label Label_Flags;
-			System.Windows.Forms.Label Label_Version;
+			System.Windows.Forms.Panel filterPanel;
 			System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
-			this.Panel_Content = new System.Windows.Forms.Panel();
-			this.panel4 = new System.Windows.Forms.Panel();
-			this.WPFHost = new System.Windows.Forms.Integration.ElementHost();
-			this.TextEditorPanel = new UEExplorer.UI.Tabs.TextEditorPanel();
-			this.panel3 = new System.Windows.Forms.Panel();
-			this.ToolStrip_Content = new System.Windows.Forms.ToolStrip();
-			this.PrevButton = new System.Windows.Forms.ToolStripButton();
-			this.NextButton = new System.Windows.Forms.ToolStripButton();
-			this.ExportButton = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.SearchBox = new System.Windows.Forms.ToolStripTextBox();
-			this.FindButton = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-			this.Label_ObjectName = new System.Windows.Forms.ToolStripLabel();
-			this.ViewTools = new System.Windows.Forms.ToolStripDropDownButton();
 			this.Panel_Main = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.TabControl_General = new System.Windows.Forms.TabControl();
@@ -71,6 +52,7 @@
 			this.FlagsValue = new System.Windows.Forms.Label();
 			this.LicenseeValue = new System.Windows.Forms.Label();
 			this.Label_GUID = new System.Windows.Forms.TextBox();
+			this.Label_DetectedBuild = new System.Windows.Forms.Label();
 			this.LABEL_Copyright = new System.Windows.Forms.Label();
 			this.LABEL_Author = new System.Windows.Forms.Label();
 			this.DataGridView_Flags = new System.Windows.Forms.DataGridView();
@@ -78,6 +60,9 @@
 			this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Label_CookerVersion = new System.Windows.Forms.Label();
 			this.Label_EngineVersion = new System.Windows.Forms.Label();
+			this.Label_LicenseeMode = new System.Windows.Forms.Label();
+			this.Label_Flags = new System.Windows.Forms.Label();
+			this.Label_Version = new System.Windows.Forms.Label();
 			this.TabPage_Tables = new System.Windows.Forms.TabPage();
 			this.TabControl_Tables = new System.Windows.Forms.TabControl();
 			this.TabPage_Names = new System.Windows.Forms.TabPage();
@@ -85,7 +70,6 @@
 			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.TabPage_Exports = new System.Windows.Forms.TabPage();
-			this.filterPanel = new System.Windows.Forms.Panel();
 			this.checkBox9 = new System.Windows.Forms.CheckBox();
 			this.VSIcons = new System.Windows.Forms.ImageList(this.components);
 			this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -128,20 +112,32 @@
 			this.exportScriptClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ReloadButton = new System.Windows.Forms.ToolStripButton();
+			this.Panel_Content = new System.Windows.Forms.Panel();
+			this.panel4 = new System.Windows.Forms.Panel();
+			this.WPFHost = new System.Windows.Forms.Integration.ElementHost();
+			this.TextEditorPanel = new UEExplorer.UI.Tabs.TextEditorPanel();
+			this.panel3 = new System.Windows.Forms.Panel();
+			this.ToolStrip_Content = new System.Windows.Forms.ToolStrip();
+			this.PrevButton = new System.Windows.Forms.ToolStripButton();
+			this.NextButton = new System.Windows.Forms.ToolStripButton();
+			this.ExportButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.SearchBox = new System.Windows.Forms.ToolStripTextBox();
+			this.FindButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.Label_ObjectName = new System.Windows.Forms.ToolStripLabel();
+			this.ViewTools = new System.Windows.Forms.ToolStripDropDownButton();
 			this.label3 = new System.Windows.Forms.Label();
 			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-			UScriptLayout = new System.Windows.Forms.TableLayoutPanel();
 			label4 = new System.Windows.Forms.Label();
-			Label_DetectedBuild = new System.Windows.Forms.Label();
-			Label_LicenseeMode = new System.Windows.Forms.Label();
-			Label_Flags = new System.Windows.Forms.Label();
-			Label_Version = new System.Windows.Forms.Label();
+			splitContainer1 = new System.Windows.Forms.SplitContainer();
+			filterPanel = new System.Windows.Forms.Panel();
 			exportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			UScriptLayout.SuspendLayout();
-			this.Panel_Content.SuspendLayout();
-			this.panel4.SuspendLayout();
-			this.panel3.SuspendLayout();
-			this.ToolStrip_Content.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(splitContainer1)).BeginInit();
+			splitContainer1.Panel1.SuspendLayout();
+			splitContainer1.Panel2.SuspendLayout();
+			splitContainer1.SuspendLayout();
 			this.Panel_Main.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.TabControl_General.SuspendLayout();
@@ -154,7 +150,7 @@
 			this.TabPage_Names.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.DataGridView_NameTable)).BeginInit();
 			this.TabPage_Exports.SuspendLayout();
-			this.filterPanel.SuspendLayout();
+			filterPanel.SuspendLayout();
 			this.TabPage_Imports.SuspendLayout();
 			this.TabPage_Generations.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.DataGridView_GenerationsTable)).BeginInit();
@@ -168,144 +164,37 @@
 			((System.ComponentModel.ISupportInitialize)(this.DataGridView_Chunks)).BeginInit();
 			this.panel2.SuspendLayout();
 			this.ToolStrip_Main.SuspendLayout();
+			this.Panel_Content.SuspendLayout();
+			this.panel4.SuspendLayout();
+			this.panel3.SuspendLayout();
+			this.ToolStrip_Content.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// UScriptLayout
+			// label4
 			// 
-			resources.ApplyResources(UScriptLayout, "UScriptLayout");
-			UScriptLayout.Controls.Add(this.Panel_Content, 1, 0);
-			UScriptLayout.Controls.Add(this.Panel_Main);
-			UScriptLayout.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-			UScriptLayout.Name = "UScriptLayout";
+			resources.ApplyResources(label4, "label4");
+			label4.CausesValidation = false;
+			label4.Name = "label4";
 			// 
-			// Panel_Content
+			// splitContainer1
 			// 
-			resources.ApplyResources(this.Panel_Content, "Panel_Content");
-			this.Panel_Content.Controls.Add(this.panel4);
-			this.Panel_Content.Controls.Add(this.panel3);
-			this.Panel_Content.Name = "Panel_Content";
+			resources.ApplyResources(splitContainer1, "splitContainer1");
+			splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+			splitContainer1.Name = "splitContainer1";
 			// 
-			// panel4
+			// splitContainer1.Panel1
 			// 
-			resources.ApplyResources(this.panel4, "panel4");
-			this.panel4.Controls.Add(this.WPFHost);
-			this.panel4.Name = "panel4";
-			this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
+			splitContainer1.Panel1.Controls.Add(this.Panel_Main);
 			// 
-			// WPFHost
+			// splitContainer1.Panel2
 			// 
-			resources.ApplyResources(this.WPFHost, "WPFHost");
-			this.WPFHost.Name = "WPFHost";
-			this.WPFHost.Child = this.TextEditorPanel;
-			// 
-			// panel3
-			// 
-			resources.ApplyResources(this.panel3, "panel3");
-			this.panel3.Controls.Add(this.ToolStrip_Content);
-			this.panel3.Name = "panel3";
-			// 
-			// ToolStrip_Content
-			// 
-			resources.ApplyResources(this.ToolStrip_Content, "ToolStrip_Content");
-			this.ToolStrip_Content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-			this.ToolStrip_Content.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-			this.ToolStrip_Content.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.PrevButton,
-            this.NextButton,
-            this.ExportButton,
-            this.toolStripSeparator1,
-            this.SearchBox,
-            this.FindButton,
-            this.toolStripSeparator4,
-            this.toolStripSeparator3,
-            this.Label_ObjectName,
-            this.ViewTools});
-			this.ToolStrip_Content.Name = "ToolStrip_Content";
-			this.ToolStrip_Content.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-			this.ToolStrip_Content.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStrip_Content_Paint);
-			// 
-			// PrevButton
-			// 
-			resources.ApplyResources(this.PrevButton, "PrevButton");
-			this.PrevButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.PrevButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.PrevButton.Name = "PrevButton";
-			this.PrevButton.Click += new System.EventHandler(this.ToolStripButton_Backward_Click);
-			// 
-			// NextButton
-			// 
-			resources.ApplyResources(this.NextButton, "NextButton");
-			this.NextButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.NextButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.NextButton.Name = "NextButton";
-			this.NextButton.Click += new System.EventHandler(this.ToolStripButton_Forward_Click);
-			// 
-			// ExportButton
-			// 
-			resources.ApplyResources(this.ExportButton, "ExportButton");
-			this.ExportButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.ExportButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-			this.ExportButton.Name = "ExportButton";
-			this.ExportButton.Padding = new System.Windows.Forms.Padding(3);
-			this.ExportButton.Click += new System.EventHandler(this.toolStripButton1_Click);
-			// 
-			// toolStripSeparator1
-			// 
-			resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-			this.toolStripSeparator1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator1_Paint);
-			// 
-			// SearchBox
-			// 
-			resources.ApplyResources(this.SearchBox, "SearchBox");
-			this.SearchBox.Name = "SearchBox";
-			this.SearchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchBox_KeyPress_1);
-			// 
-			// FindButton
-			// 
-			resources.ApplyResources(this.FindButton, "FindButton");
-			this.FindButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.FindButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-			this.FindButton.Name = "FindButton";
-			this.FindButton.Padding = new System.Windows.Forms.Padding(3);
-			this.FindButton.Click += new System.EventHandler(this.ToolStripButton_Find_Click);
-			// 
-			// toolStripSeparator4
-			// 
-			resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
-			this.toolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.toolStripSeparator4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-			this.toolStripSeparator4.Name = "toolStripSeparator4";
-			this.toolStripSeparator4.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-			this.toolStripSeparator4.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator1_Paint);
-			// 
-			// toolStripSeparator3
-			// 
-			resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-			this.toolStripSeparator3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator1_Paint);
-			// 
-			// Label_ObjectName
-			// 
-			resources.ApplyResources(this.Label_ObjectName, "Label_ObjectName");
-			this.Label_ObjectName.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.Label_ObjectName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.Label_ObjectName.Name = "Label_ObjectName";
-			// 
-			// ViewTools
-			// 
-			resources.ApplyResources(this.ViewTools, "ViewTools");
-			this.ViewTools.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.ViewTools.Name = "ViewTools";
-			this.ViewTools.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ViewTools_DropDownItemClicked);
+			splitContainer1.Panel2.Controls.Add(this.Panel_Content);
 			// 
 			// Panel_Main
 			// 
-			resources.ApplyResources(this.Panel_Main, "Panel_Main");
 			this.Panel_Main.Controls.Add(this.panel1);
 			this.Panel_Main.Controls.Add(this.panel2);
+			resources.ApplyResources(this.Panel_Main, "Panel_Main");
 			this.Panel_Main.Name = "Panel_Main";
 			// 
 			// panel1
@@ -330,9 +219,6 @@
 			// 
 			// TabPage_Package
 			// 
-			resources.ApplyResources(this.TabPage_Package, "TabPage_Package");
-			this.TabPage_Package.BackColor = System.Drawing.Color.White;
-			this.TabPage_Package.CausesValidation = false;
 			this.TabPage_Package.Controls.Add(this.LNameIndex);
 			this.TabPage_Package.Controls.Add(this.LObjectIndex);
 			this.TabPage_Package.Controls.Add(this.Num_NameIndex);
@@ -347,17 +233,18 @@
 			this.TabPage_Package.Controls.Add(this.LicenseeValue);
 			this.TabPage_Package.Controls.Add(label4);
 			this.TabPage_Package.Controls.Add(this.Label_GUID);
-			this.TabPage_Package.Controls.Add(Label_DetectedBuild);
+			this.TabPage_Package.Controls.Add(this.Label_DetectedBuild);
 			this.TabPage_Package.Controls.Add(this.LABEL_Copyright);
 			this.TabPage_Package.Controls.Add(this.LABEL_Author);
 			this.TabPage_Package.Controls.Add(this.DataGridView_Flags);
 			this.TabPage_Package.Controls.Add(this.Label_CookerVersion);
 			this.TabPage_Package.Controls.Add(this.Label_EngineVersion);
-			this.TabPage_Package.Controls.Add(Label_LicenseeMode);
-			this.TabPage_Package.Controls.Add(Label_Flags);
-			this.TabPage_Package.Controls.Add(Label_Version);
-			this.TabPage_Package.ForeColor = System.Drawing.Color.Black;
+			this.TabPage_Package.Controls.Add(this.Label_LicenseeMode);
+			this.TabPage_Package.Controls.Add(this.Label_Flags);
+			this.TabPage_Package.Controls.Add(this.Label_Version);
+			resources.ApplyResources(this.TabPage_Package, "TabPage_Package");
 			this.TabPage_Package.Name = "TabPage_Package";
+			this.TabPage_Package.UseVisualStyleBackColor = true;
 			// 
 			// LNameIndex
 			// 
@@ -451,12 +338,6 @@
 			this.LicenseeValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
 			this.LicenseeValue.Name = "LicenseeValue";
 			// 
-			// label4
-			// 
-			resources.ApplyResources(label4, "label4");
-			label4.CausesValidation = false;
-			label4.Name = "label4";
-			// 
 			// Label_GUID
 			// 
 			resources.ApplyResources(this.Label_GUID, "Label_GUID");
@@ -466,9 +347,9 @@
 			// 
 			// Label_DetectedBuild
 			// 
-			resources.ApplyResources(Label_DetectedBuild, "Label_DetectedBuild");
-			Label_DetectedBuild.CausesValidation = false;
-			Label_DetectedBuild.Name = "Label_DetectedBuild";
+			resources.ApplyResources(this.Label_DetectedBuild, "Label_DetectedBuild");
+			this.Label_DetectedBuild.CausesValidation = false;
+			this.Label_DetectedBuild.Name = "Label_DetectedBuild";
 			// 
 			// LABEL_Copyright
 			// 
@@ -486,11 +367,11 @@
 			// 
 			// DataGridView_Flags
 			// 
-			resources.ApplyResources(this.DataGridView_Flags, "DataGridView_Flags");
 			this.DataGridView_Flags.AllowUserToAddRows = false;
 			this.DataGridView_Flags.AllowUserToDeleteRows = false;
 			this.DataGridView_Flags.AllowUserToResizeColumns = false;
 			this.DataGridView_Flags.AllowUserToResizeRows = false;
+			resources.ApplyResources(this.DataGridView_Flags, "DataGridView_Flags");
 			this.DataGridView_Flags.BackgroundColor = System.Drawing.Color.White;
 			this.DataGridView_Flags.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.DataGridView_Flags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -549,36 +430,36 @@
 			// 
 			// Label_LicenseeMode
 			// 
-			resources.ApplyResources(Label_LicenseeMode, "Label_LicenseeMode");
-			Label_LicenseeMode.CausesValidation = false;
-			Label_LicenseeMode.Name = "Label_LicenseeMode";
+			resources.ApplyResources(this.Label_LicenseeMode, "Label_LicenseeMode");
+			this.Label_LicenseeMode.CausesValidation = false;
+			this.Label_LicenseeMode.Name = "Label_LicenseeMode";
 			// 
 			// Label_Flags
 			// 
-			resources.ApplyResources(Label_Flags, "Label_Flags");
-			Label_Flags.CausesValidation = false;
-			Label_Flags.Name = "Label_Flags";
+			resources.ApplyResources(this.Label_Flags, "Label_Flags");
+			this.Label_Flags.CausesValidation = false;
+			this.Label_Flags.Name = "Label_Flags";
 			// 
 			// Label_Version
 			// 
-			resources.ApplyResources(Label_Version, "Label_Version");
-			Label_Version.CausesValidation = false;
-			Label_Version.Name = "Label_Version";
+			resources.ApplyResources(this.Label_Version, "Label_Version");
+			this.Label_Version.CausesValidation = false;
+			this.Label_Version.Name = "Label_Version";
 			// 
 			// TabPage_Tables
 			// 
-			resources.ApplyResources(this.TabPage_Tables, "TabPage_Tables");
 			this.TabPage_Tables.Controls.Add(this.TabControl_Tables);
+			resources.ApplyResources(this.TabPage_Tables, "TabPage_Tables");
 			this.TabPage_Tables.Name = "TabPage_Tables";
 			this.TabPage_Tables.UseVisualStyleBackColor = true;
 			// 
 			// TabControl_Tables
 			// 
-			resources.ApplyResources(this.TabControl_Tables, "TabControl_Tables");
 			this.TabControl_Tables.Controls.Add(this.TabPage_Names);
 			this.TabControl_Tables.Controls.Add(this.TabPage_Exports);
 			this.TabControl_Tables.Controls.Add(this.TabPage_Imports);
 			this.TabControl_Tables.Controls.Add(this.TabPage_Generations);
+			resources.ApplyResources(this.TabControl_Tables, "TabControl_Tables");
 			this.TabControl_Tables.ImageList = this.VSIcons;
 			this.TabControl_Tables.Name = "TabControl_Tables";
 			this.TabControl_Tables.SelectedIndex = 0;
@@ -586,14 +467,13 @@
 			// 
 			// TabPage_Names
 			// 
-			resources.ApplyResources(this.TabPage_Names, "TabPage_Names");
-			this.TabPage_Names.BackColor = System.Drawing.Color.White;
 			this.TabPage_Names.Controls.Add(this.DataGridView_NameTable);
+			resources.ApplyResources(this.TabPage_Names, "TabPage_Names");
 			this.TabPage_Names.Name = "TabPage_Names";
+			this.TabPage_Names.UseVisualStyleBackColor = true;
 			// 
 			// DataGridView_NameTable
 			// 
-			resources.ApplyResources(this.DataGridView_NameTable, "DataGridView_NameTable");
 			this.DataGridView_NameTable.AllowUserToAddRows = false;
 			this.DataGridView_NameTable.AllowUserToDeleteRows = false;
 			this.DataGridView_NameTable.AllowUserToOrderColumns = true;
@@ -604,6 +484,7 @@
 			this.DataGridView_NameTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
+			resources.ApplyResources(this.DataGridView_NameTable, "DataGridView_NameTable");
 			this.DataGridView_NameTable.EnableHeadersVisualStyles = false;
 			this.DataGridView_NameTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
 			this.DataGridView_NameTable.MultiSelect = false;
@@ -630,32 +511,35 @@
 			// 
 			// TabPage_Exports
 			// 
-			resources.ApplyResources(this.TabPage_Exports, "TabPage_Exports");
-			this.TabPage_Exports.BackColor = System.Drawing.Color.White;
-			this.TabPage_Exports.Controls.Add(this.filterPanel);
+			this.TabPage_Exports.Controls.Add(filterPanel);
 			this.TabPage_Exports.Controls.Add(this.TreeView_Exports);
+			resources.ApplyResources(this.TabPage_Exports, "TabPage_Exports");
 			this.TabPage_Exports.Name = "TabPage_Exports";
+			this.TabPage_Exports.UseVisualStyleBackColor = true;
 			// 
 			// filterPanel
 			// 
-			resources.ApplyResources(this.filterPanel, "filterPanel");
-			this.filterPanel.BackColor = System.Drawing.Color.WhiteSmoke;
-			this.filterPanel.Controls.Add(this.checkBox9);
-			this.filterPanel.Controls.Add(this.checkBox8);
-			this.filterPanel.Controls.Add(this.checkBox7);
-			this.filterPanel.Controls.Add(this.checkBox6);
-			this.filterPanel.Controls.Add(this.checkBox5);
-			this.filterPanel.Controls.Add(this.checkBox4);
-			this.filterPanel.Controls.Add(this.checkBox3);
-			this.filterPanel.Controls.Add(this.checkBox2);
-			this.filterPanel.Controls.Add(this.checkBox1);
-			this.filterPanel.Name = "filterPanel";
+			resources.ApplyResources(filterPanel, "filterPanel");
+			filterPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+			filterPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			filterPanel.Controls.Add(this.checkBox9);
+			filterPanel.Controls.Add(this.checkBox8);
+			filterPanel.Controls.Add(this.checkBox7);
+			filterPanel.Controls.Add(this.checkBox6);
+			filterPanel.Controls.Add(this.checkBox5);
+			filterPanel.Controls.Add(this.checkBox4);
+			filterPanel.Controls.Add(this.checkBox3);
+			filterPanel.Controls.Add(this.checkBox2);
+			filterPanel.Controls.Add(this.checkBox1);
+			filterPanel.Name = "filterPanel";
 			// 
 			// checkBox9
 			// 
 			resources.ApplyResources(this.checkBox9, "checkBox9");
+			this.checkBox9.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox9.Checked = true;
 			this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox9.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
 			this.checkBox9.ImageList = this.VSIcons;
 			this.checkBox9.Name = "checkBox9";
 			this.checkBox9.UseVisualStyleBackColor = false;
@@ -686,8 +570,10 @@
 			// checkBox8
 			// 
 			resources.ApplyResources(this.checkBox8, "checkBox8");
+			this.checkBox8.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox8.Checked = true;
 			this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
 			this.checkBox8.ImageList = this.VSIcons;
 			this.checkBox8.Name = "checkBox8";
 			this.checkBox8.UseVisualStyleBackColor = false;
@@ -696,8 +582,10 @@
 			// checkBox7
 			// 
 			resources.ApplyResources(this.checkBox7, "checkBox7");
+			this.checkBox7.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox7.Checked = true;
 			this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
 			this.checkBox7.ImageList = this.VSIcons;
 			this.checkBox7.Name = "checkBox7";
 			this.checkBox7.UseVisualStyleBackColor = false;
@@ -706,8 +594,10 @@
 			// checkBox6
 			// 
 			resources.ApplyResources(this.checkBox6, "checkBox6");
+			this.checkBox6.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox6.Checked = true;
 			this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
 			this.checkBox6.ImageList = this.VSIcons;
 			this.checkBox6.Name = "checkBox6";
 			this.checkBox6.UseVisualStyleBackColor = false;
@@ -716,8 +606,10 @@
 			// checkBox5
 			// 
 			resources.ApplyResources(this.checkBox5, "checkBox5");
+			this.checkBox5.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox5.Checked = true;
 			this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
 			this.checkBox5.ImageList = this.VSIcons;
 			this.checkBox5.Name = "checkBox5";
 			this.checkBox5.UseVisualStyleBackColor = false;
@@ -726,8 +618,10 @@
 			// checkBox4
 			// 
 			resources.ApplyResources(this.checkBox4, "checkBox4");
+			this.checkBox4.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox4.Checked = true;
 			this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
 			this.checkBox4.ImageList = this.VSIcons;
 			this.checkBox4.Name = "checkBox4";
 			this.checkBox4.UseVisualStyleBackColor = false;
@@ -736,8 +630,10 @@
 			// checkBox3
 			// 
 			resources.ApplyResources(this.checkBox3, "checkBox3");
+			this.checkBox3.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox3.Checked = true;
 			this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
 			this.checkBox3.ImageList = this.VSIcons;
 			this.checkBox3.Name = "checkBox3";
 			this.checkBox3.UseVisualStyleBackColor = false;
@@ -746,8 +642,10 @@
 			// checkBox2
 			// 
 			resources.ApplyResources(this.checkBox2, "checkBox2");
+			this.checkBox2.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox2.Checked = true;
 			this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
 			this.checkBox2.ImageList = this.VSIcons;
 			this.checkBox2.Name = "checkBox2";
 			this.checkBox2.UseVisualStyleBackColor = false;
@@ -756,8 +654,10 @@
 			// checkBox1
 			// 
 			resources.ApplyResources(this.checkBox1, "checkBox1");
+			this.checkBox1.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox1.Checked = true;
 			this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
 			this.checkBox1.ImageList = this.VSIcons;
 			this.checkBox1.Name = "checkBox1";
 			this.checkBox1.UseVisualStyleBackColor = false;
@@ -766,7 +666,6 @@
 			// TreeView_Exports
 			// 
 			resources.ApplyResources(this.TreeView_Exports, "TreeView_Exports");
-			this.TreeView_Exports.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.TreeView_Exports.CausesValidation = false;
 			this.TreeView_Exports.HideSelection = false;
 			this.TreeView_Exports.ImageList = this.VSIcons;
@@ -777,16 +676,16 @@
 			// 
 			// TabPage_Imports
 			// 
-			resources.ApplyResources(this.TabPage_Imports, "TabPage_Imports");
 			this.TabPage_Imports.BackColor = System.Drawing.Color.White;
 			this.TabPage_Imports.Controls.Add(this.TreeView_Imports);
+			resources.ApplyResources(this.TabPage_Imports, "TabPage_Imports");
 			this.TabPage_Imports.Name = "TabPage_Imports";
 			// 
 			// TreeView_Imports
 			// 
-			resources.ApplyResources(this.TreeView_Imports, "TreeView_Imports");
 			this.TreeView_Imports.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.TreeView_Imports.CausesValidation = false;
+			resources.ApplyResources(this.TreeView_Imports, "TreeView_Imports");
 			this.TreeView_Imports.HideSelection = false;
 			this.TreeView_Imports.ImageList = this.VSIcons;
 			this.TreeView_Imports.Name = "TreeView_Imports";
@@ -794,14 +693,13 @@
 			// 
 			// TabPage_Generations
 			// 
-			resources.ApplyResources(this.TabPage_Generations, "TabPage_Generations");
-			this.TabPage_Generations.BackColor = System.Drawing.Color.White;
 			this.TabPage_Generations.Controls.Add(this.DataGridView_GenerationsTable);
+			resources.ApplyResources(this.TabPage_Generations, "TabPage_Generations");
 			this.TabPage_Generations.Name = "TabPage_Generations";
+			this.TabPage_Generations.UseVisualStyleBackColor = true;
 			// 
 			// DataGridView_GenerationsTable
 			// 
-			resources.ApplyResources(this.DataGridView_GenerationsTable, "DataGridView_GenerationsTable");
 			this.DataGridView_GenerationsTable.AllowUserToAddRows = false;
 			this.DataGridView_GenerationsTable.AllowUserToDeleteRows = false;
 			this.DataGridView_GenerationsTable.AllowUserToOrderColumns = true;
@@ -813,6 +711,7 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.Column4});
+			resources.ApplyResources(this.DataGridView_GenerationsTable, "DataGridView_GenerationsTable");
 			this.DataGridView_GenerationsTable.EnableHeadersVisualStyles = false;
 			this.DataGridView_GenerationsTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
 			this.DataGridView_GenerationsTable.MultiSelect = false;
@@ -845,28 +744,28 @@
 			// 
 			// TabPage_Objects
 			// 
-			resources.ApplyResources(this.TabPage_Objects, "TabPage_Objects");
 			this.TabPage_Objects.Controls.Add(this.TabControl_Objects);
+			resources.ApplyResources(this.TabPage_Objects, "TabPage_Objects");
 			this.TabPage_Objects.Name = "TabPage_Objects";
 			this.TabPage_Objects.UseVisualStyleBackColor = true;
 			// 
 			// TabControl_Objects
 			// 
-			resources.ApplyResources(this.TabControl_Objects, "TabControl_Objects");
 			this.TabControl_Objects.Controls.Add(this.TabPage_Classes);
 			this.TabControl_Objects.Controls.Add(this.TabPage_Content);
 			this.TabControl_Objects.Controls.Add(this.TabPage_Deps);
+			resources.ApplyResources(this.TabControl_Objects, "TabControl_Objects");
 			this.TabControl_Objects.ImageList = this.VSIcons;
 			this.TabControl_Objects.Name = "TabControl_Objects";
 			this.TabControl_Objects.SelectedIndex = 0;
 			// 
 			// TabPage_Classes
 			// 
-			resources.ApplyResources(this.TabPage_Classes, "TabPage_Classes");
 			this.TabPage_Classes.BackColor = System.Drawing.Color.White;
 			this.TabPage_Classes.Controls.Add(this._SearchIcon);
 			this.TabPage_Classes.Controls.Add(this.TreeView_Classes);
 			this.TabPage_Classes.Controls.Add(this.FilterText);
+			resources.ApplyResources(this.TabPage_Classes, "TabPage_Classes");
 			this.TabPage_Classes.Name = "TabPage_Classes";
 			// 
 			// _SearchIcon
@@ -896,10 +795,10 @@
 			// 
 			// TabPage_Content
 			// 
-			resources.ApplyResources(this.TabPage_Content, "TabPage_Content");
 			this.TabPage_Content.BackColor = System.Drawing.Color.White;
 			this.TabPage_Content.Controls.Add(this.Button_Export);
 			this.TabPage_Content.Controls.Add(this.TreeView_Content);
+			resources.ApplyResources(this.TabPage_Content, "TabPage_Content");
 			this.TabPage_Content.Name = "TabPage_Content";
 			// 
 			// Button_Export
@@ -921,16 +820,16 @@
 			// 
 			// TabPage_Deps
 			// 
-			resources.ApplyResources(this.TabPage_Deps, "TabPage_Deps");
 			this.TabPage_Deps.BackColor = System.Drawing.Color.White;
 			this.TabPage_Deps.Controls.Add(this.TreeView_Deps);
+			resources.ApplyResources(this.TabPage_Deps, "TabPage_Deps");
 			this.TabPage_Deps.Name = "TabPage_Deps";
 			// 
 			// TreeView_Deps
 			// 
-			resources.ApplyResources(this.TreeView_Deps, "TreeView_Deps");
 			this.TreeView_Deps.BackColor = System.Drawing.Color.White;
 			this.TreeView_Deps.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.TreeView_Deps, "TreeView_Deps");
 			this.TreeView_Deps.HideSelection = false;
 			this.TreeView_Deps.ImageList = this.VSIcons;
 			this.TreeView_Deps.Name = "TreeView_Deps";
@@ -939,14 +838,13 @@
 			// 
 			// TabPage_Chunks
 			// 
-			resources.ApplyResources(this.TabPage_Chunks, "TabPage_Chunks");
 			this.TabPage_Chunks.BackColor = System.Drawing.Color.White;
 			this.TabPage_Chunks.Controls.Add(this.DataGridView_Chunks);
+			resources.ApplyResources(this.TabPage_Chunks, "TabPage_Chunks");
 			this.TabPage_Chunks.Name = "TabPage_Chunks";
 			// 
 			// DataGridView_Chunks
 			// 
-			resources.ApplyResources(this.DataGridView_Chunks, "DataGridView_Chunks");
 			this.DataGridView_Chunks.AllowUserToAddRows = false;
 			this.DataGridView_Chunks.AllowUserToDeleteRows = false;
 			this.DataGridView_Chunks.AllowUserToOrderColumns = true;
@@ -959,6 +857,7 @@
             this.dataGridViewTextBoxColumn4,
             this.CompressedOffset,
             this.CompressedSize});
+			resources.ApplyResources(this.DataGridView_Chunks, "DataGridView_Chunks");
 			this.DataGridView_Chunks.EnableHeadersVisualStyles = false;
 			this.DataGridView_Chunks.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
 			this.DataGridView_Chunks.MultiSelect = false;
@@ -1000,13 +899,14 @@
 			// panel2
 			// 
 			resources.ApplyResources(this.panel2, "panel2");
+			this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
 			this.panel2.Controls.Add(this.ToolStrip_Main);
 			this.panel2.Name = "panel2";
 			// 
 			// ToolStrip_Main
 			// 
+			this.ToolStrip_Main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
 			resources.ApplyResources(this.ToolStrip_Main, "ToolStrip_Main");
-			this.ToolStrip_Main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
 			this.ToolStrip_Main.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.ToolStrip_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._Tools_StripDropDownButton,
@@ -1017,7 +917,6 @@
 			// 
 			// _Tools_StripDropDownButton
 			// 
-			resources.ApplyResources(this._Tools_StripDropDownButton, "_Tools_StripDropDownButton");
 			this._Tools_StripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			this._Tools_StripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             exportingToolStripMenuItem,
@@ -1025,14 +924,15 @@
 			this._Tools_StripDropDownButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
 			this._Tools_StripDropDownButton.Name = "_Tools_StripDropDownButton";
 			this._Tools_StripDropDownButton.Padding = new System.Windows.Forms.Padding(3);
+			resources.ApplyResources(this._Tools_StripDropDownButton, "_Tools_StripDropDownButton");
 			// 
 			// exportingToolStripMenuItem
 			// 
-			resources.ApplyResources(exportingToolStripMenuItem, "exportingToolStripMenuItem");
 			exportingToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			exportingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportDecompiledClassesToolStripMenuItem,
             this.exportScriptClassesToolStripMenuItem});
+			resources.ApplyResources(exportingToolStripMenuItem, "exportingToolStripMenuItem");
 			exportingToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
 			exportingToolStripMenuItem.Name = "exportingToolStripMenuItem";
 			// 
@@ -1057,13 +957,138 @@
 			// 
 			// ReloadButton
 			// 
-			resources.ApplyResources(this.ReloadButton, "ReloadButton");
 			this.ReloadButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
 			this.ReloadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			this.ReloadButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(110)))), ((int)(((byte)(110)))));
 			this.ReloadButton.Name = "ReloadButton";
 			this.ReloadButton.Padding = new System.Windows.Forms.Padding(3);
+			resources.ApplyResources(this.ReloadButton, "ReloadButton");
 			this.ReloadButton.Click += new System.EventHandler(this.ReloadButton_Click);
+			// 
+			// Panel_Content
+			// 
+			this.Panel_Content.Controls.Add(this.panel4);
+			this.Panel_Content.Controls.Add(this.panel3);
+			resources.ApplyResources(this.Panel_Content, "Panel_Content");
+			this.Panel_Content.Name = "Panel_Content";
+			// 
+			// panel4
+			// 
+			resources.ApplyResources(this.panel4, "panel4");
+			this.panel4.Controls.Add(this.WPFHost);
+			this.panel4.Name = "panel4";
+			this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
+			// 
+			// WPFHost
+			// 
+			resources.ApplyResources(this.WPFHost, "WPFHost");
+			this.WPFHost.Name = "WPFHost";
+			this.WPFHost.Child = this.TextEditorPanel;
+			// 
+			// panel3
+			// 
+			resources.ApplyResources(this.panel3, "panel3");
+			this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+			this.panel3.Controls.Add(this.ToolStrip_Content);
+			this.panel3.Name = "panel3";
+			// 
+			// ToolStrip_Content
+			// 
+			resources.ApplyResources(this.ToolStrip_Content, "ToolStrip_Content");
+			this.ToolStrip_Content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+			this.ToolStrip_Content.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.ToolStrip_Content.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.PrevButton,
+            this.NextButton,
+            this.ExportButton,
+            this.toolStripSeparator1,
+            this.SearchBox,
+            this.FindButton,
+            this.toolStripSeparator4,
+            this.toolStripSeparator3,
+            this.Label_ObjectName,
+            this.ViewTools});
+			this.ToolStrip_Content.Name = "ToolStrip_Content";
+			this.ToolStrip_Content.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+			this.ToolStrip_Content.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStrip_Content_Paint);
+			// 
+			// PrevButton
+			// 
+			this.PrevButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.PrevButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			resources.ApplyResources(this.PrevButton, "PrevButton");
+			this.PrevButton.Name = "PrevButton";
+			this.PrevButton.Click += new System.EventHandler(this.ToolStripButton_Backward_Click);
+			// 
+			// NextButton
+			// 
+			this.NextButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.NextButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			resources.ApplyResources(this.NextButton, "NextButton");
+			this.NextButton.Name = "NextButton";
+			this.NextButton.Click += new System.EventHandler(this.ToolStripButton_Forward_Click);
+			// 
+			// ExportButton
+			// 
+			this.ExportButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			resources.ApplyResources(this.ExportButton, "ExportButton");
+			this.ExportButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+			this.ExportButton.Name = "ExportButton";
+			this.ExportButton.Padding = new System.Windows.Forms.Padding(3);
+			this.ExportButton.Click += new System.EventHandler(this.toolStripButton1_Click);
+			// 
+			// toolStripSeparator1
+			// 
+			resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+			this.toolStripSeparator1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator1_Paint);
+			// 
+			// SearchBox
+			// 
+			resources.ApplyResources(this.SearchBox, "SearchBox");
+			this.SearchBox.Name = "SearchBox";
+			this.SearchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchBox_KeyPress_1);
+			// 
+			// FindButton
+			// 
+			this.FindButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			resources.ApplyResources(this.FindButton, "FindButton");
+			this.FindButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+			this.FindButton.Name = "FindButton";
+			this.FindButton.Padding = new System.Windows.Forms.Padding(3);
+			this.FindButton.Click += new System.EventHandler(this.ToolStripButton_Find_Click);
+			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+			this.toolStripSeparator4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+			this.toolStripSeparator4.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator1_Paint);
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+			this.toolStripSeparator3.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator1_Paint);
+			// 
+			// Label_ObjectName
+			// 
+			this.Label_ObjectName.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.Label_ObjectName.BackColor = System.Drawing.Color.Transparent;
+			this.Label_ObjectName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.Label_ObjectName.Name = "Label_ObjectName";
+			resources.ApplyResources(this.Label_ObjectName, "Label_ObjectName");
+			// 
+			// ViewTools
+			// 
+			this.ViewTools.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			resources.ApplyResources(this.ViewTools, "ViewTools");
+			this.ViewTools.Name = "ViewTools";
+			this.ViewTools.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ViewTools_DropDownItemClicked);
 			// 
 			// label3
 			// 
@@ -1072,8 +1097,8 @@
 			// 
 			// toolStripButton1
 			// 
-			resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
 			this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
 			this.toolStripButton1.Name = "toolStripButton1";
 			// 
 			// UC_PackageExplorer
@@ -1081,15 +1106,12 @@
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
-			this.Controls.Add(UScriptLayout);
-			this.DoubleBuffered = true;
+			this.Controls.Add(splitContainer1);
 			this.Name = "UC_PackageExplorer";
-			UScriptLayout.ResumeLayout(false);
-			this.Panel_Content.ResumeLayout(false);
-			this.panel4.ResumeLayout(false);
-			this.panel3.ResumeLayout(false);
-			this.ToolStrip_Content.ResumeLayout(false);
-			this.ToolStrip_Content.PerformLayout();
+			splitContainer1.Panel1.ResumeLayout(false);
+			splitContainer1.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(splitContainer1)).EndInit();
+			splitContainer1.ResumeLayout(false);
 			this.Panel_Main.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.TabControl_General.ResumeLayout(false);
@@ -1103,7 +1125,7 @@
 			this.TabPage_Names.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.DataGridView_NameTable)).EndInit();
 			this.TabPage_Exports.ResumeLayout(false);
-			this.filterPanel.ResumeLayout(false);
+			filterPanel.ResumeLayout(false);
 			this.TabPage_Imports.ResumeLayout(false);
 			this.TabPage_Generations.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.DataGridView_GenerationsTable)).EndInit();
@@ -1120,14 +1142,17 @@
 			this.panel2.PerformLayout();
 			this.ToolStrip_Main.ResumeLayout(false);
 			this.ToolStrip_Main.PerformLayout();
+			this.Panel_Content.ResumeLayout(false);
+			this.panel4.ResumeLayout(false);
+			this.panel3.ResumeLayout(false);
+			this.ToolStrip_Content.ResumeLayout(false);
+			this.ToolStrip_Content.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		internal System.Windows.Forms.TabPage TabPage_Package;
-		internal System.Windows.Forms.TabPage TabPage_Tables;
 		internal System.Windows.Forms.TabPage TabPage_Names;
 		internal System.Windows.Forms.TabPage TabPage_Exports;
 		internal System.Windows.Forms.TabPage TabPage_Imports;
@@ -1135,9 +1160,7 @@
 		internal System.Windows.Forms.TreeView TreeView_Imports;
 		internal System.Windows.Forms.NumericUpDown Num_ObjectIndex;
 		internal System.Windows.Forms.NumericUpDown Num_NameIndex;
-		internal System.Windows.Forms.ToolStrip ToolStrip_Content;
 		private System.Windows.Forms.ToolStripButton ExportButton;
-		internal System.Windows.Forms.ToolStripLabel Label_ObjectName;
 		internal System.Windows.Forms.Panel Panel_Content;
 		internal System.Windows.Forms.DataGridView DataGridView_Flags;
 		private System.Windows.Forms.Panel Panel_Main;
@@ -1145,22 +1168,17 @@
 		private System.Windows.Forms.ToolStripDropDownButton _Tools_StripDropDownButton;
 		public System.Windows.Forms.ToolStripMenuItem exportDecompiledClassesToolStripMenuItem;
 		public System.Windows.Forms.ToolStripMenuItem exportScriptClassesToolStripMenuItem;
-		public System.Windows.Forms.ImageList VSIcons;
 		internal System.Windows.Forms.TreeView TreeView_Classes;
-		internal System.Windows.Forms.TreeView TreeView_Content;
 		internal System.Windows.Forms.TabPage TabPage_Objects;
-		internal System.Windows.Forms.TabControl TabControl_Objects;
 		internal System.Windows.Forms.TabPage TabPage_Classes;
 		internal System.Windows.Forms.TabPage TabPage_Content;
 		internal System.Windows.Forms.TabPage TabPage_Deps;
-		internal System.Windows.Forms.TreeView TreeView_Deps;
 		private System.Windows.Forms.DataGridView DataGridView_NameTable;
 		private System.Windows.Forms.ToolStripButton FindButton;
 		private System.Windows.Forms.ToolStripButton NextButton;
 		private System.Windows.Forms.ToolStripButton PrevButton;
 		private System.Windows.Forms.Integration.ElementHost WPFHost;
 		private TextEditorPanel TextEditorPanel;
-		internal System.Windows.Forms.TabPage TabPage_Generations;
 		private System.Windows.Forms.DataGridView DataGridView_GenerationsTable;
 		private System.Windows.Forms.ToolStripMenuItem viewBufferToolStripMenuItem;
 		private System.Windows.Forms.ToolStripTextBox SearchBox;
@@ -1178,9 +1196,6 @@
 		internal System.Windows.Forms.Label CookerValue;
 		internal System.Windows.Forms.Label EngineValue;
 		internal System.Windows.Forms.Label FolderValue;
-		internal System.Windows.Forms.Label Label_Folder;
-		internal System.Windows.Forms.Label Label_CookerVersion;
-		internal System.Windows.Forms.Label Label_EngineVersion;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.Panel panel1;
@@ -1191,7 +1206,6 @@
 		private System.Windows.Forms.PictureBox _SearchIcon;
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Panel filterPanel;
 		private System.Windows.Forms.CheckBox checkBox1;
 		private System.Windows.Forms.CheckBox checkBox2;
 		private System.Windows.Forms.CheckBox checkBox9;
@@ -1218,5 +1232,21 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
 		private System.Windows.Forms.DataGridViewTextBoxColumn CompressedOffset;
 		private System.Windows.Forms.DataGridViewTextBoxColumn CompressedSize;
+		private System.Windows.Forms.TabPage TabPage_Package;
+		private System.Windows.Forms.TabControl TabControl_Objects;
+		private System.Windows.Forms.TreeView TreeView_Content;
+		private System.Windows.Forms.TreeView TreeView_Deps;
+		private System.Windows.Forms.ToolStrip ToolStrip_Content;
+		private System.Windows.Forms.ImageList VSIcons;
+		internal System.Windows.Forms.Label Label_Folder;
+		private System.Windows.Forms.Label Label_DetectedBuild;
+		internal System.Windows.Forms.Label Label_CookerVersion;
+		internal System.Windows.Forms.Label Label_EngineVersion;
+		private System.Windows.Forms.Label Label_LicenseeMode;
+		private System.Windows.Forms.Label Label_Flags;
+		private System.Windows.Forms.Label Label_Version;
+		private System.Windows.Forms.ToolStripLabel Label_ObjectName;
+		private System.Windows.Forms.TabPage TabPage_Tables;
+		private System.Windows.Forms.TabPage TabPage_Generations;
 	}
 }
