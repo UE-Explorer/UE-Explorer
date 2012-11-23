@@ -105,36 +105,32 @@ namespace UEExplorer.UI.Tabs
 
 	public static class EditorUtil
 	{
-		private static int _CurrentIndex;
-
 		public static void FindText( TextEditorPanel editor, string text )
 		{
 			int fails = 0;
-			searchAgain:
 
-			if( _CurrentIndex >= editor.textEditor.Text.Length )
+			var currentIndex = editor.textEditor.CaretOffset;
+			if( currentIndex >= editor.textEditor.Text.Length )
 				return;
 
-			int textIndex = editor.textEditor.Text.IndexOf( text, _CurrentIndex, StringComparison.OrdinalIgnoreCase );
-
+			searchAgain:
+			int textIndex = editor.textEditor.Text.IndexOf( text, currentIndex, StringComparison.OrdinalIgnoreCase );
 			if( textIndex == -1 )
 			{
-				_CurrentIndex = 0;
+				currentIndex = 0;
 				if( fails > 0 )
 					return;
 
 				++ fails;
 				goto searchAgain;
 			}
-			else
-			{
-				var line = editor.textEditor.TextArea.Document.GetLocation( textIndex );
-	
-				editor.textEditor.ScrollTo( line.Line, line.Column );
-				editor.textEditor.Select( textIndex, text.Length );
 
-				_CurrentIndex = textIndex + 1;
-			}
+			var line = editor.textEditor.TextArea.Document.GetLocation( textIndex );
+	
+			editor.textEditor.ScrollTo( line.Line, line.Column );
+			editor.textEditor.Select( textIndex, text.Length );
+
+			editor.textEditor.CaretOffset = textIndex + text.Length;
 		}
 	}
 }
