@@ -130,13 +130,13 @@
     <value>Waarschuwing</value>
   </data>
   <data name="INVALID_NAME_INDEX" xml:space="preserve">
-    <value>Ongeldig Name slot {0}</value>
+    <value>Ongeldig naam slot {0}</value>
   </data>
   <data name="NOT_AVAILABLE" xml:space="preserve">
     <value>N/B</value>
   </data>
   <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
-    <value>Ongeldig Object slot {0}</value>
+    <value>Ongeldig object slot {0}</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -201,7 +201,8 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
   <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
     <value>Als je op ja klikt zul je naar de update gebracht worden!
 
-Jouw versie: {0}Laatste versie: {1}</value>
+Jouw versie: {0}
+Laatste versie: {1}</value>
     <comment>Dialog description.</comment>
   </data>
   <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
@@ -229,7 +230,7 @@ Jouw versie: {0}Laatste versie: {1}</value>
     <value>Succcesvol opgeslaan!</value>
   </data>
   <data name="SAVED" xml:space="preserve">
-    <value>Opgeslaan!</value>
+    <value>Opgeslagen!</value>
   </data>
   <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
     <value>Exported all package classes of {0} to {1}
@@ -250,7 +251,7 @@ You can download the tool from http://www.gildor.org/downloads or press OK to go
     <value>Opmerking</value>
   </data>
   <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
-    <value>Dit paket heeft een onbekent handtekening.Ben je zeker dat je dit paket wilt openen? Op ja klikken kan leiden to onverwachte resultaten</value>
+    <value>Dit paket heeft een onbekend handtekening. Ben je zeker dat je dit paket wilt openen? Op ja klikken kan leiden to onverwachte resultaten</value>
   </data>
   <data name="PACKAGE_LOADING" xml:space="preserve">
     <value>Paket aant laden...</value>
@@ -262,16 +263,16 @@ You can download the tool from http://www.gildor.org/downloads or press OK to go
     <value>Exporteer {0} als...</value>
   </data>
   <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
-    <value>Objecten aant constructeren...</value>
+    <value>Objecten constructeren...</value>
   </data>
   <data name="DESERIALIZING_OBJECTS" xml:space="preserve">
-    <value>Objecten aant lezen...</value>
+    <value>Objecten lezen...</value>
   </data>
   <data name="IMPORTING_OBJECTS" xml:space="preserve">
     <value>Objecten aant importeren...</value>
   </data>
   <data name="LINKING_OBJECTS" xml:space="preserve">
-    <value>Objecten aant verbinden...</value>
+    <value>Objecten verbinden...</value>
   </data>
   <data name="INITIALIZING_UI" xml:space="preserve">
     <value>UI initializeren...</value>

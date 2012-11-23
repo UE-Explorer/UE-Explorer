@@ -191,24 +191,129 @@
   <data name="ViewTools.Text" xml:space="preserve">
     <value>Bekijk</value>
   </data>
+  <data name="LNameIndex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="LNameIndex.Text" xml:space="preserve">
+    <value>Naam slot</value>
+  </data>
+  <data name="LObjectIndex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="LObjectIndex.Text" xml:space="preserve">
+    <value>Object slot</value>
+  </data>
+  <data name="FolderValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 69</value>
+  </data>
+  <data name="FolderValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
+  </data>
+  <data name="Label_Folder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 13</value>
+  </data>
+  <data name="Label_Folder.Text" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="BuildValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 49</value>
+  </data>
+  <data name="BuildValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
+  </data>
+  <data name="CookerValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 89</value>
+  </data>
+  <data name="CookerValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="EngineValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 69</value>
+  </data>
+  <data name="EngineValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="VersionValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 29</value>
+  </data>
+  <data name="VersionValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="FlagsValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 29</value>
+  </data>
+  <data name="FlagsValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
+  </data>
+  <data name="LicenseeValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 49</value>
+  </data>
+  <data name="LicenseeValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="Label_DetectedBuild.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="Label_DetectedBuild.Text" xml:space="preserve">
+    <value>Bouw</value>
+  </data>
+  <data name="LABEL_Copyright.Text" xml:space="preserve">
+    <value>Auteursrecht</value>
+  </data>
+  <data name="LABEL_Author.Text" xml:space="preserve">
+    <value>Auteur</value>
+  </data>
+  <data name="Flag.HeaderText" xml:space="preserve">
+    <value>Vlag</value>
+  </data>
+  <data name="Flag.ToolTipText" xml:space="preserve">
+    <value>Vlag naam</value>
+  </data>
+  <data name="Value.HeaderText" xml:space="preserve">
+    <value>Conditie</value>
+  </data>
+  <data name="Value.ToolTipText" xml:space="preserve">
+    <value>Vlag conditie</value>
+  </data>
+  <data name="Label_CookerVersion.Text" xml:space="preserve">
+    <value>Kooker Versie</value>
+  </data>
+  <data name="Label_EngineVersion.Text" xml:space="preserve">
+    <value>Motor Versie</value>
+  </data>
+  <data name="Label_LicenseeMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
+  </data>
+  <data name="Label_LicenseeMode.Text" xml:space="preserve">
+    <value>Licentiehouder Versie</value>
+  </data>
+  <data name="Label_Flags.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="Label_Flags.Text" xml:space="preserve">
+    <value>Vlaggen</value>
+  </data>
+  <data name="Label_Version.Text" xml:space="preserve">
+    <value>Versie</value>
+  </data>
   <data name="TabPage_Package.Text" xml:space="preserve">
     <value>Paket</value>
   </data>
-  <data name="TabPage_Tables.Text" xml:space="preserve">
-    <value>Tafels</value>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Naam</value>
   </data>
-  <data name="TabPage_Objects.Text" xml:space="preserve">
-    <value>Objecten</value>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Vlaggen</value>
   </data>
-  <data name="TabPage_Chunks.Text" xml:space="preserve">
-    <value>Brokken</value>
+  <data name="TabPage_Names.Text" xml:space="preserve">
+    <value>Namen</value>
   </data>
   <data name="VSIcons.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADc
-        FgAAAk1TRnQBSQFMAgEBEQEAAWgBAgFoAQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        FgAAAk1TRnQBSQFMAgEBEQEAAXgBAgF4AQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAAVADAAEBAQABCAYAARQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -308,128 +413,11 @@
         AYABAQL/AfABAAHAAXcBgAEBAv8B8AEAAeAF/wHwAQAB8QX/Cw==
 </value>
   </data>
-  <data name="LNameIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
-  </data>
-  <data name="LNameIndex.Text" xml:space="preserve">
-    <value>Naam slot</value>
-  </data>
-  <data name="LObjectIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
-  </data>
-  <data name="LObjectIndex.Text" xml:space="preserve">
-    <value>Object slot</value>
-  </data>
-  <data name="FolderValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 69</value>
-  </data>
-  <data name="FolderValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
-  </data>
-  <data name="Label_Folder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 13</value>
-  </data>
-  <data name="Label_Folder.Text" xml:space="preserve">
-    <value>Map</value>
-  </data>
-  <data name="BuildValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 49</value>
-  </data>
-  <data name="BuildValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
-  </data>
-  <data name="CookerValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 89</value>
-  </data>
-  <data name="CookerValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
-  </data>
-  <data name="EngineValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 69</value>
-  </data>
-  <data name="EngineValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
-  </data>
-  <data name="VersionValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 29</value>
-  </data>
-  <data name="VersionValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
-  </data>
-  <data name="FlagsValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 29</value>
-  </data>
-  <data name="FlagsValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
-  </data>
-  <data name="LicenseeValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 49</value>
-  </data>
-  <data name="LicenseeValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
-  </data>
-  <data name="Label_DetectedBuild.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
-  </data>
-  <data name="Label_DetectedBuild.Text" xml:space="preserve">
-    <value>Bouw</value>
-  </data>
-  <data name="LABEL_Copyright.Text" xml:space="preserve">
-    <value>Auteursrecht</value>
-  </data>
-  <data name="LABEL_Author.Text" xml:space="preserve">
-    <value>Auteur</value>
-  </data>
-  <data name="Flag.HeaderText" xml:space="preserve">
-    <value>Vlag</value>
-  </data>
-  <data name="Flag.ToolTipText" xml:space="preserve">
-    <value>Vlag naam</value>
-  </data>
-  <data name="Value.HeaderText" xml:space="preserve">
-    <value>Conditie</value>
-  </data>
-  <data name="Value.ToolTipText" xml:space="preserve">
-    <value>Vlag conditie</value>
-  </data>
-  <data name="Label_CookerVersion.Text" xml:space="preserve">
-    <value>Kooker Versie</value>
-  </data>
-  <data name="Label_EngineVersion.Text" xml:space="preserve">
-    <value>Motor Versie</value>
-  </data>
-  <data name="Label_LicenseeMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 13</value>
-  </data>
-  <data name="Label_LicenseeMode.Text" xml:space="preserve">
-    <value>licentiehouder Versie</value>
-  </data>
-  <data name="Label_Flags.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
-  </data>
-  <data name="Label_Flags.Text" xml:space="preserve">
-    <value>Vlaggen</value>
-  </data>
-  <data name="Label_Version.Text" xml:space="preserve">
-    <value>Versie</value>
-  </data>
-  <data name="TabPage_Names.Text" xml:space="preserve">
-    <value>Namen</value>
-  </data>
   <data name="TabPage_Exports.Text" xml:space="preserve">
     <value>Exportaties</value>
   </data>
   <data name="TabPage_Imports.Text" xml:space="preserve">
     <value>Importaties</value>
-  </data>
-  <data name="TabPage_Generations.Text" xml:space="preserve">
-    <value>Generaties</value>
-  </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Naam</value>
-  </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Vlaggen</value>
   </data>
   <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Namen</value>
@@ -440,8 +428,17 @@
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Net objecten</value>
   </data>
+  <data name="TabPage_Generations.Text" xml:space="preserve">
+    <value>Generaties</value>
+  </data>
+  <data name="TabPage_Tables.Text" xml:space="preserve">
+    <value>Tafels</value>
+  </data>
   <data name="TabPage_Classes.Text" xml:space="preserve">
     <value>Klassen</value>
+  </data>
+  <data name="Button_Export.Text" xml:space="preserve">
+    <value>Exporteer als...</value>
   </data>
   <data name="TabPage_Content.Text" xml:space="preserve">
     <value>Inhoud</value>
@@ -449,8 +446,8 @@
   <data name="TabPage_Deps.Text" xml:space="preserve">
     <value>Afhankelijkheden</value>
   </data>
-  <data name="Button_Export.Text" xml:space="preserve">
-    <value>Exporteer als...</value>
+  <data name="TabPage_Objects.Text" xml:space="preserve">
+    <value>Objecten</value>
   </data>
   <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
     <value>UC afstand</value>
@@ -464,8 +461,20 @@
   <data name="CompressedSize.HeaderText" xml:space="preserve">
     <value>C grootte</value>
   </data>
-  <data name="_Tools_StripDropDownButton.Text" xml:space="preserve">
-    <value>&amp;Extra</value>
+  <data name="TabPage_Chunks.Text" xml:space="preserve">
+    <value>Brokken</value>
+  </data>
+  <data name="exportDecompiledClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 22</value>
+  </data>
+  <data name="exportDecompiledClassesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exporteer &amp;Klassen</value>
+  </data>
+  <data name="exportScriptClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 22</value>
+  </data>
+  <data name="exportScriptClassesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exporteer &amp;Schriften</value>
   </data>
   <data name="exportingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 22</value>
@@ -473,23 +482,14 @@
   <data name="exportingToolStripMenuItem.Text" xml:space="preserve">
     <value>Ex&amp;porteren</value>
   </data>
-  <data name="exportDecompiledClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 22</value>
-  </data>
-  <data name="exportDecompiledClassesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exporteer &amp;Klassen</value>
-  </data>
-  <data name="exportScriptClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 22</value>
-  </data>
-  <data name="exportScriptClassesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exporteer &amp;Schriften</value>
-  </data>
   <data name="viewBufferToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 22</value>
   </data>
   <data name="viewBufferToolStripMenuItem.Text" xml:space="preserve">
     <value>Bekijk Buffer</value>
+  </data>
+  <data name="_Tools_StripDropDownButton.Text" xml:space="preserve">
+    <value>&amp;Extra</value>
   </data>
   <data name="ReloadButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 25</value>
