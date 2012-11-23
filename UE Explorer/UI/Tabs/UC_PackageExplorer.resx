@@ -895,7 +895,7 @@
     <value>0, 0</value>
   </data>
   <data name="DataGridView_NameTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 472</value>
+    <value>301, 464</value>
   </data>
   <data name="DataGridView_NameTable.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -919,7 +919,7 @@
     <value>4, 21</value>
   </data>
   <data name="TabPage_Names.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 472</value>
+    <value>301, 464</value>
   </data>
   <data name="TabPage_Names.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -968,7 +968,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADc
-        FgAAAk1TRnQBSQFMAgEBEQEAAfgBBAH4AQQBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        FgAAAk1TRnQBSQFMAgEBEQEAAUQBBQFEAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAAVADAAEBAQABCAYAARQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1435,7 +1435,7 @@
     <value>4, 21</value>
   </data>
   <data name="TabPage_Exports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 472</value>
+    <value>301, 464</value>
   </data>
   <data name="TabPage_Exports.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1471,7 +1471,7 @@
     <value>0</value>
   </data>
   <data name="TreeView_Imports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 472</value>
+    <value>301, 464</value>
   </data>
   <data name="TreeView_Imports.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1495,7 +1495,7 @@
     <value>4, 21</value>
   </data>
   <data name="TabPage_Imports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 472</value>
+    <value>301, 464</value>
   </data>
   <data name="TabPage_Imports.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1543,7 +1543,7 @@
     <value>0, 0</value>
   </data>
   <data name="DataGridView_GenerationsTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 472</value>
+    <value>301, 464</value>
   </data>
   <data name="DataGridView_GenerationsTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1567,7 +1567,7 @@
     <value>4, 21</value>
   </data>
   <data name="TabPage_Generations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 472</value>
+    <value>301, 464</value>
   </data>
   <data name="TabPage_Generations.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1600,7 +1600,7 @@
     <value>3, 2</value>
   </data>
   <data name="TabControl_Tables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 497</value>
+    <value>309, 489</value>
   </data>
   <data name="TabControl_Tables.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1624,7 +1624,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage_Tables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 497</value>
+    <value>309, 489</value>
   </data>
   <data name="TabPage_Tables.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1651,7 +1651,7 @@
     <value>Zoom</value>
   </data>
   <data name="_SearchIcon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 447</value>
+    <value>3, 439</value>
   </data>
   <data name="_SearchIcon.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 20</value>
@@ -1684,7 +1684,7 @@
     <value>0</value>
   </data>
   <data name="TreeView_Classes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 444</value>
+    <value>295, 436</value>
   </data>
   <data name="TreeView_Classes.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1705,7 +1705,7 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="FilterText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 447</value>
+    <value>28, 439</value>
   </data>
   <data name="FilterText.Size" type="System.Drawing.Size, System.Drawing">
     <value>270, 20</value>
@@ -1732,7 +1732,7 @@
     <value>4, 23</value>
   </data>
   <data name="TabPage_Classes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 470</value>
+    <value>301, 462</value>
   </data>
   <data name="TabPage_Classes.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1819,7 +1819,7 @@
     <value>4, 23</value>
   </data>
   <data name="TabPage_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 470</value>
+    <value>301, 462</value>
   </data>
   <data name="TabPage_Content.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1852,7 +1852,7 @@
     <value>0</value>
   </data>
   <data name="TreeView_Deps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 470</value>
+    <value>301, 462</value>
   </data>
   <data name="TreeView_Deps.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1876,7 +1876,7 @@
     <value>4, 23</value>
   </data>
   <data name="TabPage_Deps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 470</value>
+    <value>301, 462</value>
   </data>
   <data name="TabPage_Deps.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1906,7 +1906,7 @@
     <value>True</value>
   </data>
   <data name="TabControl_Objects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 497</value>
+    <value>309, 489</value>
   </data>
   <data name="TabControl_Objects.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1930,7 +1930,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage_Objects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 497</value>
+    <value>309, 489</value>
   </data>
   <data name="TabPage_Objects.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1981,7 +1981,7 @@
     <value>0, 0</value>
   </data>
   <data name="DataGridView_Chunks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 497</value>
+    <value>309, 489</value>
   </data>
   <data name="DataGridView_Chunks.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2005,7 +2005,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage_Chunks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 497</value>
+    <value>309, 489</value>
   </data>
   <data name="TabPage_Chunks.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2110,16 +2110,67 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="exportingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 22</value>
+    <value>207, 22</value>
   </data>
   <data name="exportingToolStripMenuItem.Text" xml:space="preserve">
     <value>Ex&amp;porting</value>
   </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 6</value>
+  </data>
+  <data name="findNextToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="findNextToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F3</value>
+  </data>
+  <data name="findNextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 22</value>
+  </data>
+  <data name="findNextToolStripMenuItem.Text" xml:space="preserve">
+    <value>Find Next</value>
+  </data>
+  <data name="findInDocumentToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="findInDocumentToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+F</value>
+  </data>
+  <data name="findInDocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 22</value>
+  </data>
+  <data name="findInDocumentToolStripMenuItem.Text" xml:space="preserve">
+    <value>Find in Document</value>
+  </data>
+  <data name="findInClassesToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+Shift+F</value>
+  </data>
+  <data name="findInClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 22</value>
+  </data>
+  <data name="findInClassesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Find in Classes...</value>
+  </data>
+  <data name="toolStripMenuItem1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="toolStripMenuItem1.Text" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 6</value>
+  </data>
   <data name="viewBufferToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="viewBufferToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+Shift+B</value>
+  </data>
   <data name="viewBufferToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 22</value>
+    <value>207, 22</value>
   </data>
   <data name="viewBufferToolStripMenuItem.Text" xml:space="preserve">
     <value>View Buffer</value>
@@ -2233,7 +2284,7 @@
     <value>3, 3</value>
   </data>
   <data name="WPFHost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>638, 515</value>
+    <value>966, 515</value>
   </data>
   <data name="WPFHost.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2257,7 +2308,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>644, 521</value>
+    <value>972, 521</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -2435,7 +2486,7 @@
     <value>Yes</value>
   </data>
   <data name="ToolStrip_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>644, 28</value>
+    <value>972, 28</value>
   </data>
   <data name="ToolStrip_Content.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -2456,7 +2507,7 @@
     <value>3, 3</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>644, 28</value>
+    <value>972, 28</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -2483,7 +2534,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="Panel_Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>650, 555</value>
+    <value>978, 555</value>
   </data>
   <data name="Panel_Content.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -2513,7 +2564,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>984, 555</value>
+    <value>1312, 555</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>330</value>
@@ -2567,7 +2618,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>984, 555</value>
+    <value>1312, 555</value>
   </data>
   <data name="&gt;&gt;Flag.Name" xml:space="preserve">
     <value>Flag</value>
@@ -2664,6 +2715,42 @@
   </data>
   <data name="&gt;&gt;exportScriptClassesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+    <value>toolStripSeparator2</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;findNextToolStripMenuItem.Name" xml:space="preserve">
+    <value>findNextToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;findNextToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;findInDocumentToolStripMenuItem.Name" xml:space="preserve">
+    <value>findInDocumentToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;findInDocumentToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;findInClassesToolStripMenuItem.Name" xml:space="preserve">
+    <value>findInClassesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;findInClassesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
+    <value>toolStripSeparator5</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;viewBufferToolStripMenuItem.Name" xml:space="preserve">
     <value>viewBufferToolStripMenuItem</value>

@@ -1524,11 +1524,11 @@ namespace UEExplorer.UI.Tabs
 			content = content.TrimStart( '\r', '\n' ).TrimEnd( '\r', '\n' );
 			if( content.Length > 0 )
 			{
-				FindButton.Enabled = true;
 				SearchBox.Enabled = true;
 				ExportButton.Enabled = true;
 				WPFHost.Enabled = true;
 				ViewTools.Enabled = true;
+				findInDocumentToolStripMenuItem.Enabled = true;
 			}
 
 			//TextEditorPanel.textEditor.Clear();
@@ -1861,6 +1861,168 @@ namespace UEExplorer.UI.Tabs
 			{
 				LNameIndex.Text = String.Format( Resources.INVALID_NAME_INDEX, exc.ActualValue );
 			}	
+		}
+
+		public class DocumentResult
+		{
+			public Object Document;
+			public List<FindResult> Results;
+		};
+
+		private int _FindCount;
+		private TabPage _FindTab;
+		private void FindInClassesToolStripMenuItem_Click( object sender, EventArgs e )
+		{
+			var findDialog = new FindDialog();
+			if( findDialog.ShowDialog() != DialogResult.OK )
+			{
+				return;
+			}
+
+			ProgressStatus.SaveStatus();
+			ProgressStatus.SetStatus( Resources.SEARCHING_CLASSES_STATUS );
+
+			var documentResults = new List<DocumentResult>();
+
+			var findText = findDialog.FindInput.Text;
+			foreach( var content in _ClassesList )
+			{
+				var	findContent = content.Decompile();
+				var findResults = FindText( findContent, findText );
+				if( !findResults.Any() )
+				{
+					continue;
+				}
+
+				var document = new DocumentResult
+				{
+					Results = findResults,
+					Document = content
+				};
+				documentResults.Add( document );
+			}
+			ProgressStatus.Reset();
+
+			if( documentResults.Count == 0 )
+			{
+				MessageBox.Show( String.Format( Resources.NO_FIND_RESULTS, findText ) );
+				return;
+			}
+
+			if( _FindTab != null )
+			{
+				TabControl_General.TabPages.Remove( _FindTab );	
+			}
+
+			_FindTab = new TabPage
+			{
+				Text = String.Format( Resources.FIND_RESULTS_TITLE, ++ _FindCount )
+			}; 
+
+			var treeResults = new TreeView{ Dock = DockStyle.Fill };
+			_FindTab.Controls.Add( treeResults );
+			TabControl_General.TabPages.Add( _FindTab );
+
+			TabControl_General.SelectTab( _FindTab );
+
+			foreach( var documentResult in documentResults )
+			{
+				var documentNode = treeResults.Nodes.Add( ((UClass)documentResult.Document).Name );
+				documentNode.Tag = documentResult;
+				foreach( var result in documentResult.Results )
+				{
+					var resultNode = documentNode.Nodes.Add( result.ToString() );
+					resultNode.Tag = result;
+				}
+			}
+
+			treeResults.AfterSelect += (nodeSender, nodeEvent) =>
+			{
+				var findResult = nodeEvent.Node.Tag as FindResult;
+				if( findResult == null )
+				{
+					return;
+				}
+
+				var documentResult = nodeEvent.Node.Parent.Tag as DocumentResult;
+
+				SetContentText( nodeEvent.Node, ((UClass)documentResult.Document).Decompile() );
+				TextEditorPanel.textEditor.ScrollTo( findResult.TextLine, findResult.TextColumn );
+				TextEditorPanel.textEditor.Select( findResult.TextIndex, findText.Length );
+			};
+		}
+
+		public class FindResult
+		{
+			public int TextIndex;
+			public int TextLine;
+			public int TextColumn;
+
+			public override string ToString()
+			{
+ 				return String.Format( "({0}, {1})", TextLine, TextColumn );
+			}
+		};
+
+		public static List<FindResult> FindText( string text, string keyword )
+		{
+			var results = new List<FindResult>();
+
+			var currentLine = 1;
+			var currentColumn = 1;
+			for( int i = 0; i < text.Length; ++ i )
+			{
+				if( text[i] == '\n' )
+				{
+					++ currentLine;
+					currentColumn = 1;
+					continue;
+				}
+
+				var startIndex = i;
+				for( int j = 0; j < keyword.Length; ++ j )
+				{
+					if( text[startIndex] == keyword[j] )
+					{
+						++ startIndex;
+						if( j == keyword.Length - 1 )
+						{
+							var result = new FindResult
+							{
+								TextIndex = startIndex - keyword.Length,
+								TextLine = currentLine,
+								TextColumn = currentColumn
+							};
+							results.Add( result );
+							break;
+						}
+						continue;	
+					}
+					break;
+				}
+				++ currentColumn;
+			}
+			return results;
+		}
+
+		private void findInDocumentToolStripMenuItem_Click( object sender, EventArgs e )
+		{
+			SearchBox.Focus();
+		}
+
+		private void SearchBox_TextChanged( object sender, EventArgs e )
+		{
+			FindButton.Enabled = SearchBox.Text.Length > 0;
+			findNextToolStripMenuItem.Enabled = FindButton.Enabled;
+		}
+
+		private void findNextToolStripMenuItem_Click( object sender, EventArgs e )
+		{
+			if( TextEditorPanel == null )
+			{
+				return;
+			}
+			EditorUtil.FindText( TextEditorPanel, SearchBox.Text );
 		}
 	}
 

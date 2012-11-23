@@ -97,7 +97,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Couldn&apos;t save the package because of the following exception: {0}.
+        ///   Looks up a localized string similar to Couldn&apos;t save the file because of the following exception: {0}.
         /// </summary>
         internal static string COULDNT_SAVE_EXCEPTION {
             get {
@@ -158,6 +158,15 @@ namespace UEExplorer.Properties {
         internal static string EXPORTED_ALL_PACKAGE_CLASSES {
             get {
                 return ResourceManager.GetString("EXPORTED_ALL_PACKAGE_CLASSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find Results {0}.
+        /// </summary>
+        internal static string FIND_RESULTS_TITLE {
+            get {
+                return ResourceManager.GetString("FIND_RESULTS_TITLE", resourceCulture);
             }
         }
         
@@ -226,7 +235,6 @@ namespace UEExplorer.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Clicking yes will bring you to the page with the latest version!
-        ///
         ///Your version: {0}
         ///Latest version: {1}.
         /// </summary>
@@ -242,6 +250,15 @@ namespace UEExplorer.Properties {
         internal static string NEW_VERSION_AVAILABLE_TITLE {
             get {
                 return ResourceManager.GetString("NEW_VERSION_AVAILABLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found no results with the specified text &quot;{0}&quot;..
+        /// </summary>
+        internal static string NO_FIND_RESULTS {
+            get {
+                return ResourceManager.GetString("NO_FIND_RESULTS", resourceCulture);
             }
         }
         
@@ -457,6 +474,15 @@ namespace UEExplorer.Properties {
         internal static string SEARCH_WIKI_ITEM {
             get {
                 return ResourceManager.GetString("SEARCH_WIKI_ITEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching classes....
+        /// </summary>
+        internal static string SEARCHING_CLASSES_STATUS {
+            get {
+                return ResourceManager.GetString("SEARCHING_CLASSES_STATUS", resourceCulture);
             }
         }
         

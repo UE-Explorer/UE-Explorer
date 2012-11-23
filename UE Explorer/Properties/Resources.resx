@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="NAME_IS" xml:space="preserve">
-    <value xml:space="preserve">Name is {0}</value>
+    <value>Name is {0}</value>
   </data>
   <data name="OBJECT_IS" xml:space="preserve">
-    <value xml:space="preserve">Object is {0}</value>
+    <value>Object is {0}</value>
   </data>
   <data name="Open_File" xml:space="preserve">
     <value>Open File</value>
@@ -130,13 +130,13 @@
     <value>Warning</value>
   </data>
   <data name="INVALID_NAME_INDEX" xml:space="preserve">
-    <value xml:space="preserve">Invalid Name index {0}</value>
+    <value>Invalid Name index {0}</value>
   </data>
   <data name="NOT_AVAILABLE" xml:space="preserve">
     <value>N/A</value>
   </data>
   <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
-    <value xml:space="preserve">Invalid Object index {0}</value>
+    <value>Invalid Object index {0}</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -152,134 +152,142 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
   <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-	<data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER">
-		<value xml:space="preserve">Do you want to go the folder with the exported content?</value>
-	</data>
-	<data name="NEW_VERSION_AVAILABLE_TITLE">
-		<value xml:space="preserve">A new version is available!</value>
-		<comment>Dialog title.</comment>
-	</data>
-	<data name="ProgramForm_checkForUpdates_Progress-Status">
-		<value xml:space="preserve">Checking for updates...</value>
-		<comment>Status</comment>
-	</data>
-	<data name="NO_NEW_VERSION_AVAILABLE_MESSAGE">
-		<value xml:space="preserve">You have the latest version of {0}</value>
-		<comment>Dialog description</comment>
-	</data>
-	<data name="Error">
-		<value xml:space="preserve">Error</value>
-		<comment>Dialog title</comment>
-	</data>
-	<data name="Options">
-		<value xml:space="preserve">Options</value>
-		<comment>Tab title</comment>
-	</data>
-	<data name="CHECKFORUPDATES_FAILED_MESSAGE">
-		<value xml:space="preserve">Failed to request the latest version. Please try again later!</value>
-	</data>
-	<data name="Homepage">
-		<value xml:space="preserve">Homepage</value>
-		<comment>Tab title</comment>
-	</data>
-	<data name="ProgramForm_Unreal_Natives_Table_Generator">
-		<value xml:space="preserve">Unreal Natives Table Generator</value>
-		<comment>Tab title</comment>
-	</data>
-	<data name="ProgramForm_Cache_Extractor">
-		<value xml:space="preserve">Cache Extractor</value>
-		<comment>Tab title</comment>
-	</data>
-	<data name="ProgramForm_LoadFile_Failed_loading_package">
-		<value xml:space="preserve">Failed loading package: {0}</value>
-		<comment>Exception description.</comment>
-	</data>
-	<data name="ProgramForm_LoadFile_Loading_file">
-		<value xml:space="preserve">Loading file {0}...</value>
-		<comment>Status description.</comment>
-	</data>
-	<data name="NEW_VERSION_AVAILABLE_MESSAGE">
-		<value xml:space="preserve">Clicking yes will bring you to the page with the latest version!
-
+  <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
+    <value>Do you want to go the folder with the exported content?</value>
+  </data>
+  <data name="NEW_VERSION_AVAILABLE_TITLE" xml:space="preserve">
+    <value>A new version is available!</value>
+    <comment>Dialog title.</comment>
+  </data>
+  <data name="ProgramForm_checkForUpdates_Progress-Status" xml:space="preserve">
+    <value>Checking for updates...</value>
+    <comment>Status</comment>
+  </data>
+  <data name="NO_NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
+    <value>You have the latest version of {0}</value>
+    <comment>Dialog description</comment>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+    <comment>Dialog title</comment>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="CHECKFORUPDATES_FAILED_MESSAGE" xml:space="preserve">
+    <value>Failed to request the latest version. Please try again later!</value>
+  </data>
+  <data name="Homepage" xml:space="preserve">
+    <value>Homepage</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="ProgramForm_Unreal_Natives_Table_Generator" xml:space="preserve">
+    <value>Unreal Natives Table Generator</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="ProgramForm_Cache_Extractor" xml:space="preserve">
+    <value>Cache Extractor</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="ProgramForm_LoadFile_Failed_loading_package" xml:space="preserve">
+    <value>Failed loading package: {0}</value>
+    <comment>Exception description.</comment>
+  </data>
+  <data name="ProgramForm_LoadFile_Loading_file" xml:space="preserve">
+    <value>Loading file {0}...</value>
+    <comment>Status description.</comment>
+  </data>
+  <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
+    <value>Clicking yes will bring you to the page with the latest version!
 Your version: {0}
 Latest version: {1}</value>
-		<comment>Dialog description.</comment>
-	</data>
-	<data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH">
-		<value xml:space="preserve">You cannot import binary files with an unequal length!</value>
-	</data>
-	<data name="SAVE_QUESTION_WARNING">
-		<value xml:space="preserve">Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!</value>
-	</data>
-	<data name="SAVE_QUESTION">
-		<value xml:space="preserve">Save?</value>
-	</data>
-	<data name="COULDNT_SAVE_EXCEPTION">
-		<value xml:space="preserve">Couldn't save the package because of the following exception: {0}</value>
-	</data>
-	<data name="ExceptionDialog_THANKS">
-		<value xml:space="preserve">Thanks for reporting this exception occurrance!</value>
-	</data>
-	<data name="ExceptionDialog_FAIL">
-		<value xml:space="preserve">Failed to send this report. Please try again later!</value>
-	</data>
-	<data name="SUCCESS">
-		<value xml:space="preserve">Successful</value>
-	</data>
-	<data name="SAVE_SUCCESS">
-		<value xml:space="preserve">Successfully saved!</value>
-	</data>
-	<data name="SAVED">
-		<value xml:space="preserve">Saved!</value>
-	</data>
-	<data name="EXPORTED_ALL_PACKAGE_CLASSES">
-		<value xml:space="preserve">Exported all package classes of {0} to {1}
+    <comment>Dialog description.</comment>
+  </data>
+  <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
+    <value>You cannot import binary files with an unequal length!</value>
+  </data>
+  <data name="SAVE_QUESTION_WARNING" xml:space="preserve">
+    <value>Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!</value>
+  </data>
+  <data name="SAVE_QUESTION" xml:space="preserve">
+    <value>Save?</value>
+  </data>
+  <data name="COULDNT_SAVE_EXCEPTION" xml:space="preserve">
+    <value>Couldn't save the file because of the following exception: {0}</value>
+  </data>
+  <data name="ExceptionDialog_THANKS" xml:space="preserve">
+    <value>Thanks for reporting this exception occurrance!</value>
+  </data>
+  <data name="ExceptionDialog_FAIL" xml:space="preserve">
+    <value>Failed to send this report. Please try again later!</value>
+  </data>
+  <data name="SUCCESS" xml:space="preserve">
+    <value>Successful</value>
+  </data>
+  <data name="SAVE_SUCCESS" xml:space="preserve">
+    <value>Successfully saved!</value>
+  </data>
+  <data name="SAVED" xml:space="preserve">
+    <value>Saved!</value>
+  </data>
+  <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
+    <value>Exported all package classes of {0} to {1}
 
 Click Yes if you want to go to the output directory!</value>
-	</data>
-	<data name="PACKAGE_IS_COMPRESSED">
-		<value xml:space="preserve">This package is compressed! Compressed packages are not supported.
+  </data>
+  <data name="PACKAGE_IS_COMPRESSED" xml:space="preserve">
+    <value>This package is compressed! Compressed packages are not supported.
 
 Please consider decompressing the package using "Unreal Package Decompressor" from Gildor
 
 You can download the tool from http://www.gildor.org/downloads or press OK to go there now.</value>
-	</data>
-	<data name="COMPRESSED_HOWTO">
-		<value xml:space="preserve">To use Gildor's tool, try "decompress.exe PACKAGENAME.EXT" you may have to specify -lzo.</value>
-	</data>
-	<data name="NOTICE_TITLE">
-		<value xml:space="preserve">Notice</value>
-	</data>
-	<data name="PACKAGE_UNKNOWN_SIGNATURE">
-		<value xml:space="preserve">This package has an unknown signature.
+  </data>
+  <data name="COMPRESSED_HOWTO" xml:space="preserve">
+    <value>To use Gildor's tool, try "decompress.exe PACKAGENAME.EXT" you may have to specify -lzo.</value>
+  </data>
+  <data name="NOTICE_TITLE" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
+    <value>This package has an unknown signature.
 
 Are you sure you want to try to deserialize this package? Clicking Yes might lead to unexpected results!</value>
-	</data>
-	<data name="PACKAGE_LOADING">
-		<value xml:space="preserve">Loading Package...</value>
-	</data>
-	<data name="PACKAGE_METAINFO">
-		<value xml:space="preserve">Package's MetaInfo</value>
-	</data>
-	<data name="EXPORT_AS">
-		<value xml:space="preserve">Export {0} As...</value>
-	</data>
-	<data name="CONSTRUCTING_OBJECTS">
-		<value xml:space="preserve">Constructing Objects...</value>
-	</data>
-	<data name="DESERIALIZING_OBJECTS">
-		<value xml:space="preserve">Deserializing Objects...</value>
-	</data>
-	<data name="IMPORTING_OBJECTS">
-		<value xml:space="preserve">Importing Objects...</value>
-	</data>
-	<data name="LINKING_OBJECTS">
-		<value xml:space="preserve">Linking Objects...</value>
-	</data>
-	<data name="INITIALIZING_UI">
-		<value xml:space="preserve">Initializing UI...</value>
-	</data>
-	<data name="SEARCH_WIKI_ITEM">
-		<value xml:space="preserve">Search UnrealWiki for "{0}"</value>
-	</data>
+  </data>
+  <data name="PACKAGE_LOADING" xml:space="preserve">
+    <value>Loading Package...</value>
+  </data>
+  <data name="PACKAGE_METAINFO" xml:space="preserve">
+    <value>Package's MetaInfo</value>
+  </data>
+  <data name="EXPORT_AS" xml:space="preserve">
+    <value>Export {0} As...</value>
+  </data>
+  <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
+    <value>Constructing Objects...</value>
+  </data>
+  <data name="DESERIALIZING_OBJECTS" xml:space="preserve">
+    <value>Deserializing Objects...</value>
+  </data>
+  <data name="IMPORTING_OBJECTS" xml:space="preserve">
+    <value>Importing Objects...</value>
+  </data>
+  <data name="LINKING_OBJECTS" xml:space="preserve">
+    <value>Linking Objects...</value>
+  </data>
+  <data name="INITIALIZING_UI" xml:space="preserve">
+    <value>Initializing UI...</value>
+  </data>
+  <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
+    <value>Search UnrealWiki for "{0}"</value>
+  </data>
+  <data name="FIND_RESULTS_TITLE" xml:space="preserve">
+    <value>Find Results {0}</value>
+  </data>
+  <data name="SEARCHING_CLASSES_STATUS" xml:space="preserve">
+    <value>Searching classes...</value>
+  </data>
+  <data name="NO_FIND_RESULTS" xml:space="preserve">
+    <value>Found no results with the specified text "{0}".</value>
+  </data>
 </root>

@@ -143,8 +143,8 @@
     <value>..\UI\Main\ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RegistryWarning" xml:space="preserve">
-    <value>Enabling this will edit your registry file. 
-If you happen to move the "UE Explorer" folder, uninstall or update it, then please disable this before doing so!</value>
+    <value>Dit zal jouw registery bewerken.
+Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eerst uitschakeld!</value>
   </data>
   <data name="NO_OBJECT_WAS_FOUND" xml:space="preserve">
     <value>Geen object gevonden.</value>
@@ -153,7 +153,7 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
     <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
-    <value>Do you want to go the folder with the exported content?</value>
+    <value>Wil je naar de /exported/ map gaan?</value>
   </data>
   <data name="NEW_VERSION_AVAILABLE_TITLE" xml:space="preserve">
     <value>Een nieuwere versie is beschikbaar!</value>
@@ -191,7 +191,7 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
     <comment>Tab title</comment>
   </data>
   <data name="ProgramForm_LoadFile_Failed_loading_package" xml:space="preserve">
-    <value>Failed loading package: {0}</value>
+    <value>Kon het paket niet laden: {0}</value>
     <comment>Exception description.</comment>
   </data>
   <data name="ProgramForm_LoadFile_Loading_file" xml:space="preserve">
@@ -206,22 +206,16 @@ Laatste versie: {1}</value>
     <comment>Dialog description.</comment>
   </data>
   <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
-    <value>You cannot import binary files with an unequal length!</value>
+    <value>Je kan geen binary bestanden importeren met een ongelijke lengte!</value>
   </data>
   <data name="SAVE_QUESTION_WARNING" xml:space="preserve">
-    <value>Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!</value>
+    <value>Weet je zeker dat je dit wilt opslaan? Waarschuwing deze veranderen zal permanent zijn, maak zeker dat je een backup hebt!</value>
   </data>
   <data name="SAVE_QUESTION" xml:space="preserve">
     <value>Opslaan?</value>
   </data>
   <data name="COULDNT_SAVE_EXCEPTION" xml:space="preserve">
-    <value>Couldn't save the package because of the following exception: {0}</value>
-  </data>
-  <data name="ExceptionDialog_THANKS" xml:space="preserve">
-    <value>Thanks for reporting this exception occurrance!</value>
-  </data>
-  <data name="ExceptionDialog_FAIL" xml:space="preserve">
-    <value>Failed to send this report. Please try again later!</value>
+    <value>Kon dit bestand niet opslaan vanwege de volgende uitzondering: {0}</value>
   </data>
   <data name="SUCCESS" xml:space="preserve">
     <value>Succesvol</value>
@@ -233,19 +227,18 @@ Laatste versie: {1}</value>
     <value>Opgeslagen!</value>
   </data>
   <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
-    <value>Exported all package classes of {0} to {1}
+    <value>Exporteerde alle klassen van {0} naar {1}
 
-Click Yes if you want to go to the output directory!</value>
+Klik op ja als je nu naar deze map wilt gebracht worden!</value>
   </data>
   <data name="PACKAGE_IS_COMPRESSED" xml:space="preserve">
-    <value>This package is compressed! Compressed packages are not supported.
+    <value>Dit paket is gecompresseerd! Deze pakketen zijn niet ondersteund.
+Om dit de decompresseren kan je "Unreal Package Decompressor" van Gildor downloaden.
 
-Please consider decompressing the package using "Unreal Package Decompressor" from Gildor
-
-You can download the tool from http://www.gildor.org/downloads or press OK to go there now.</value>
+Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.</value>
   </data>
   <data name="COMPRESSED_HOWTO" xml:space="preserve">
-    <value>To use Gildor's tool, try "decompress.exe PACKAGENAME.EXT" you may have to specify -lzo.</value>
+    <value>Om Gildor's tool te gebruiken, probeer het volgende "decompress.exe PACKAGENAME.EXT" het zou kunnen dat je -lzo zult moeten tevoegen.</value>
   </data>
   <data name="NOTICE_TITLE" xml:space="preserve">
     <value>Opmerking</value>
@@ -279,5 +272,11 @@ You can download the tool from http://www.gildor.org/downloads or press OK to go
   </data>
   <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
     <value>Zoek UnrealWiki voor "{0}"</value>
+  </data>
+  <data name="NO_FIND_RESULTS" xml:space="preserve">
+    <value>Er werden geen resultaten gevonden met de text "{0}".</value>
+  </data>
+  <data name="SEARCHING_CLASSES_STATUS" xml:space="preserve">
+    <value>Klassen worden doorzocht..</value>
   </data>
 </root>

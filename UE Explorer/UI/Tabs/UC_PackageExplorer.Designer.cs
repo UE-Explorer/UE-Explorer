@@ -110,6 +110,12 @@
 			this._Tools_StripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
 			this.exportDecompiledClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportScriptClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.findNextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.findInDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.findInClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.viewBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ReloadButton = new System.Windows.Forms.ToolStripButton();
 			this.Panel_Content = new System.Windows.Forms.Panel();
@@ -920,6 +926,9 @@
 			this._Tools_StripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			this._Tools_StripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             exportingToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.toolStripMenuItem1,
+            this.toolStripSeparator5,
             this.viewBufferToolStripMenuItem});
 			this._Tools_StripDropDownButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
 			this._Tools_StripDropDownButton.Name = "_Tools_StripDropDownButton";
@@ -947,6 +956,43 @@
 			resources.ApplyResources(this.exportScriptClassesToolStripMenuItem, "exportScriptClassesToolStripMenuItem");
 			this.exportScriptClassesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
 			this.exportScriptClassesToolStripMenuItem.Name = "exportScriptClassesToolStripMenuItem";
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findNextToolStripMenuItem,
+            this.findInDocumentToolStripMenuItem,
+            this.findInClassesToolStripMenuItem});
+			resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			// 
+			// findNextToolStripMenuItem
+			// 
+			resources.ApplyResources(this.findNextToolStripMenuItem, "findNextToolStripMenuItem");
+			this.findNextToolStripMenuItem.Name = "findNextToolStripMenuItem";
+			this.findNextToolStripMenuItem.Click += new System.EventHandler(this.findNextToolStripMenuItem_Click);
+			// 
+			// findInDocumentToolStripMenuItem
+			// 
+			resources.ApplyResources(this.findInDocumentToolStripMenuItem, "findInDocumentToolStripMenuItem");
+			this.findInDocumentToolStripMenuItem.Name = "findInDocumentToolStripMenuItem";
+			this.findInDocumentToolStripMenuItem.Click += new System.EventHandler(this.findInDocumentToolStripMenuItem_Click);
+			// 
+			// findInClassesToolStripMenuItem
+			// 
+			this.findInClassesToolStripMenuItem.Name = "findInClassesToolStripMenuItem";
+			resources.ApplyResources(this.findInClassesToolStripMenuItem, "findInClassesToolStripMenuItem");
+			this.findInClassesToolStripMenuItem.Click += new System.EventHandler(this.FindInClassesToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator5
+			// 
+			this.toolStripSeparator5.Name = "toolStripSeparator5";
+			resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
 			// 
 			// viewBufferToolStripMenuItem
 			// 
@@ -1049,6 +1095,7 @@
 			resources.ApplyResources(this.SearchBox, "SearchBox");
 			this.SearchBox.Name = "SearchBox";
 			this.SearchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchBox_KeyPress_1);
+			this.SearchBox.TextChanged += new System.EventHandler(this.SearchBox_TextChanged);
 			// 
 			// FindButton
 			// 
@@ -1248,5 +1295,11 @@
 		private System.Windows.Forms.ToolStripLabel Label_ObjectName;
 		private System.Windows.Forms.TabPage TabPage_Tables;
 		private System.Windows.Forms.TabPage TabPage_Generations;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem findInClassesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+		private System.Windows.Forms.ToolStripMenuItem findInDocumentToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem findNextToolStripMenuItem;
 	}
 }
