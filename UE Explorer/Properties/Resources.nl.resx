@@ -291,4 +291,7 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
   <data name="HexView_Position" xml:space="preserve">
     <value>Positie: {0} + {1} ; 0x{2:x8}</value>
   </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versie {0}</value>
+  </data>
 </root>

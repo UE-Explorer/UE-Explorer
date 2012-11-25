@@ -299,4 +299,7 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="HexView_Offset" xml:space="preserve">
     <value>Offset</value>
   </data>
+	<data name="Version">
+		<value xml:space="preserve">Version {0}</value>
+	</data>
 </root>

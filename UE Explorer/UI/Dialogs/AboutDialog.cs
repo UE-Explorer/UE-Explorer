@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.IO;
 using Eliot.Utilities;
 using Eliot.Utilities.Net;
+using UEExplorer.Properties;
 
 namespace UEExplorer.UI.Dialogs
 {
@@ -15,13 +16,13 @@ namespace UEExplorer.UI.Dialogs
 		public AboutForm()
 		{	
 			InitializeComponent();
-			Text = "About " + Application.ProductName;
+			Text += " " + Application.ProductName;
 		}	
 
 		private void AboutForm_Load( object sender, EventArgs e )
 		{
 			label4.Text = Application.ProductName;
-		 	VersionLabel.Text = "Version " + ProgramForm.Version;
+		 	VersionLabel.Text = String.Format( Resources.Version, ProgramForm.Version );
 			CopyrightLabel.Text = AssemblyCopyright;
 			LinkLabel.Text = Program.WEBSITE_URL;		
 		}
