@@ -79,6 +79,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Class {0} isn&apos;t supported.
+        /// </summary>
+        internal static string CLASS_ISNT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("CLASS_ISNT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To use Gildor&apos;s tool, try &quot;decompress.exe PACKAGENAME.EXT&quot; you may have to specify -lzo..
         /// </summary>
         internal static string COMPRESSED_HOWTO {
@@ -304,6 +313,114 @@ namespace UEExplorer.Properties {
         internal static string NO_OBJECT_WAS_FOUND {
             get {
                 return ResourceManager.GetString("NO_OBJECT_WAS_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export with UE Model Viewer.
+        /// </summary>
+        internal static string NodeItem_ExportWithUEModelViewer {
+            get {
+                return ResourceManager.GetString("NodeItem_ExportWithUEModelViewer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Managed Properties.
+        /// </summary>
+        internal static string NodeItem_ManagedProperties {
+            get {
+                return ResourceManager.GetString("NodeItem_ManagedProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open in UE Model Viewer.
+        /// </summary>
+        internal static string NodeItem_OpenInUEModelViewer {
+            get {
+                return ResourceManager.GetString("NodeItem_OpenInUEModelViewer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Buffer.
+        /// </summary>
+        internal static string NodeItem_ViewBuffer {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewBuffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Content.
+        /// </summary>
+        internal static string NodeItem_ViewContent {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View DefaultProperties.
+        /// </summary>
+        internal static string NodeItem_ViewDefaultProperties {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewDefaultProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Exception.
+        /// </summary>
+        internal static string NodeItem_ViewException {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Object.
+        /// </summary>
+        internal static string NodeItem_ViewObject {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Replication.
+        /// </summary>
+        internal static string NodeItem_ViewReplication {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewReplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Script.
+        /// </summary>
+        internal static string NodeItem_ViewScript {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Tokens.
+        /// </summary>
+        internal static string NodeItem_ViewTokens {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewTokens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Used Tags.
+        /// </summary>
+        internal static string NodeItem_ViewUsedTags {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewUsedTags", resourceCulture);
             }
         }
         

@@ -302,4 +302,43 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
 	<data name="Version">
 		<value xml:space="preserve">Version {0}</value>
 	</data>
+	<data name="CLASS_ISNT_SUPPORTED">
+		<value xml:space="preserve">Class {0} isn't supported</value>
+	</data>
+	<data name="NodeItem_ViewObject">
+		<value xml:space="preserve">View Object</value>
+	</data>
+	<data name="NodeItem_OpenInUEModelViewer">
+		<value xml:space="preserve">Open in UE Model Viewer</value>
+	</data>
+	<data name="NodeItem_ExportWithUEModelViewer">
+		<value xml:space="preserve">Export with UE Model Viewer</value>
+	</data>
+	<data name="NodeItem_ViewContent">
+		<value xml:space="preserve">View Content</value>
+	</data>
+	<data name="NodeItem_ViewUsedTags">
+		<value xml:space="preserve">View Used Tags</value>
+	</data>
+	<data name="NodeItem_ViewReplication">
+		<value xml:space="preserve">View Replication</value>
+	</data>
+	<data name="NodeItem_ViewTokens">
+		<value xml:space="preserve">View Tokens</value>
+	</data>
+	<data name="NodeItem_ViewScript">
+		<value xml:space="preserve">View Script</value>
+	</data>
+	<data name="NodeItem_ViewDefaultProperties">
+		<value xml:space="preserve">View DefaultProperties</value>
+	</data>
+	<data name="NodeItem_ViewBuffer">
+		<value xml:space="preserve">View Buffer</value>
+	</data>
+	<data name="NodeItem_ViewException">
+		<value xml:space="preserve">View Exception</value>
+	</data>
+	<data name="NodeItem_ManagedProperties">
+		<value xml:space="preserve">Managed Properties</value>
+	</data>
 </root>

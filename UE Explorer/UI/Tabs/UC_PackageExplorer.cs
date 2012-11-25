@@ -715,7 +715,7 @@ namespace UEExplorer.UI.Tabs
 				else if( !_UnrealPackage.IsRegisteredClass( exp.ClassName != String.Empty ? exp.ClassName : "Class" ) )
 				{
 				    node.ForeColor = Color.DarkOrange;
-				    node.ToolTipText = String.Format( "Class {0} isn't supported", exp.ClassName );
+				    node.ToolTipText = String.Format( Resources.CLASS_ISNT_SUPPORTED, exp.ClassName );
 				}
 
 				if( _NIndex == _UnrealPackage.ExportTableList.Count )
@@ -1090,7 +1090,7 @@ namespace UEExplorer.UI.Tabs
 			switch( e.Button )
 			{
 				case MouseButtons.Left:	
-					//PerformNodeAction( e.Node as IDecompileableObjectNode, "View Object" );
+					//PerformNodeAction( e.Node as IDecompileableObjectNode, "OBJECT" );
 					break;
 
 				case MouseButtons.Right:
@@ -1120,10 +1120,16 @@ namespace UEExplorer.UI.Tabs
 		{
 			itemCollection.Clear();
 
+			var addItem = (Action<string, string>)((title, id) =>
+			{
+				var item = itemCollection.Add( title );	
+				item.Name = id;
+			});
+
 			var decompilableNode = performingNode as IDecompilableNode;
 			if( decompilableNode != null ) 
 			{ 
-				itemCollection.Add( "View Object" );
+				addItem.Invoke( Resources.NodeItem_ViewObject, "OBJECT" );
 				var decompilableObjectNode = decompilableNode as IDecompilableObjectNode;
 				if( decompilableObjectNode != null )
 				{
@@ -1131,19 +1137,19 @@ namespace UEExplorer.UI.Tabs
 					{ 
 						if( File.Exists( Program.Options.UEModelAppPath	) )
 						{
-							itemCollection.Add( "Open in UE Model Viewer" );
+							addItem.Invoke( Resources.NodeItem_OpenInUEModelViewer, "OPEN_UEMODELVIEWER" );
 		#if DEBUG
-							itemCollection.Add( "Export with UE Model Viewer" );
+							addItem.Invoke( Resources.NodeItem_ExportWithUEModelViewer, "EXPORT_UEMODELVIEWER" );
 		#endif
 						}
 		#if DEBUG
-						itemCollection.Add( "View Content" );
+						addItem.Invoke( Resources.NodeItem_ViewContent, "CONTENT" );
 		#endif	
 					}
 
 					if( decompilableObjectNode.Object is UMetaData )
 					{
-						itemCollection.Add( "View Used Tags" );	
+						addItem.Invoke( Resources.NodeItem_ViewUsedTags, "USED_TAGS" );	
 					}
 
 					if( decompilableObjectNode.Object is UStruct )
@@ -1153,40 +1159,40 @@ namespace UEExplorer.UI.Tabs
 						{
 							if( decompilableObjectNode.Object is UClass )
 							{
-								itemCollection.Add( "View Replication" );	
+								addItem.Invoke( Resources.NodeItem_ViewReplication, "REPLICATION" );	
 							}
-							itemCollection.Add( "View Tokens" );
+							addItem.Invoke( Resources.NodeItem_ViewTokens, "TOKENS" );
 						}
 
 						if( decompilableObjectNode.Object is UClass )
 						{
-							itemCollection.Add( "View Script" );	
+							addItem.Invoke( Resources.NodeItem_ViewScript, "SCRIPT" );	
 						}
 
 						if( unStruct.Properties != null && unStruct.Properties.Count > 0 )
 						{
-							itemCollection.Add( "View DefaultProperties" );	
+							addItem.Invoke( Resources.NodeItem_ViewDefaultProperties, "DEFAULTPROPERTIES" );	
 						}
 					}
 
 					if( (decompilableObjectNode.Object as ISupportsBuffer) != null )
 					{ 
-						itemCollection.Add( "View Buffer" );
+						addItem.Invoke( Resources.NodeItem_ViewBuffer, "BUFFER" );
 					}
 
 					var myObj = decompilableObjectNode.Object as UObject;
 					if( myObj != null && myObj.ThrownException != null )
 					{
 						itemCollection.Add( new ToolStripSeparator() );
-						itemCollection.Add( "View Exception" );		
+						addItem.Invoke( Resources.NodeItem_ViewException, "EXCEPTION" );		
 					}
 
 					if( decompilableObjectNode.Object is IUnrealDeserializableObject )
 					{
 						itemCollection.Add( new ToolStripSeparator() );
-						itemCollection.Add( "Managed Properties" );
+						addItem.Invoke( Resources.NodeItem_ManagedProperties, "MANAGED_PROPERTIES" );
 						#if DEBUG
-							itemCollection.Add( "Force Deserialize" );
+							addItem.Invoke( "Force Deserialize", "FORCE_DESERIALIZE" );
 						#endif	
 					}
 				}
@@ -1197,7 +1203,7 @@ namespace UEExplorer.UI.Tabs
 		{
 			if( TreeView_Classes.SelectedNode is ObjectNode )
 			{
-				PerformNodeAction( TreeView_Classes.SelectedNode as ObjectNode, e.ClickedItem.Text );
+				PerformNodeAction( TreeView_Classes.SelectedNode as ObjectNode, e.ClickedItem.Name );
 			}			
 		}
 
@@ -1205,7 +1211,7 @@ namespace UEExplorer.UI.Tabs
 		{
 			if( TreeView_Exports.SelectedNode is ExportNode )
 			{
-				PerformNodeAction( TreeView_Exports.SelectedNode as ExportNode, e.ClickedItem.Text );
+				PerformNodeAction( TreeView_Exports.SelectedNode as ExportNode, e.ClickedItem.Name );
 			}	
 		}
 
@@ -1213,7 +1219,7 @@ namespace UEExplorer.UI.Tabs
 		{
 			if( TreeView_Content.SelectedNode is ObjectNode )
 			{
-				PerformNodeAction( TreeView_Content.SelectedNode as ObjectNode, e.ClickedItem.Text );
+				PerformNodeAction( TreeView_Content.SelectedNode as ObjectNode, e.ClickedItem.Name );
 			}	
 		}
 
@@ -1226,7 +1232,7 @@ namespace UEExplorer.UI.Tabs
 			{
 				switch( action )
 				{
-					case "View Used Tags":
+					case "USED_TAGS":
 					{
 						var n = node as ObjectNode;
 						if( n != null )
@@ -1242,7 +1248,7 @@ namespace UEExplorer.UI.Tabs
 					}
 
 #if DEBUG
-					case "View Content":
+					case "CONTENT":
 					{
 						var n = node as ObjectNode;
 						if( n != null )
@@ -1273,7 +1279,7 @@ namespace UEExplorer.UI.Tabs
 						break;
 					}
 #endif
-					case "Open in UE Model Viewer":
+					case "OPEN_UEMODELVIEWER":
 					{
 						Process.Start
 						( 
@@ -1285,7 +1291,7 @@ namespace UEExplorer.UI.Tabs
 						break;
 					}
 
-					case "Export with UE Model Viewer":
+					case "EXPORT_UEMODELVIEWER":
 					{
 						string packagePath = Application.StartupPath 
 							+ "\\Exported\\" 
@@ -1338,12 +1344,12 @@ namespace UEExplorer.UI.Tabs
 						break;
 					}						
 
-					case "View Object":
+					case "OBJECT":
 						Label_ObjectName.Text = node.Text;
 						SetContentText( node as TreeNode, node.Decompile() );
 						break;
 
-					case "Managed Properties":
+					case "MANAGED_PROPERTIES":
 						var propDialog = new PropertiesDialog();
 						propDialog.ObjectLabel.Text = node.Text;
 						propDialog.ObjectPropertiesGrid.SelectedObject = node.Object;
@@ -1351,7 +1357,7 @@ namespace UEExplorer.UI.Tabs
 						break;
 
 #if DEBUG
-					case "Force Deserialize":
+					case "FORCE_DESERIALIZE":
 						Label_ObjectName.Text = node.Text;
 
 						((IUnrealDeserializableObject)node.Object).BeginDeserializing();
@@ -1359,7 +1365,7 @@ namespace UEExplorer.UI.Tabs
 						break;
 #endif
 
-					case "View Replication":
+					case "REPLICATION":
 					{
 						var unClass = node.Object as UClass;
 						if( unClass != null )
@@ -1370,7 +1376,7 @@ namespace UEExplorer.UI.Tabs
 						break;
 					}
 
-					case "View Script":
+					case "SCRIPT":
 					{
 						var unClass = node.Object as UClass;
 						if( unClass != null && unClass.ScriptBuffer != null )
@@ -1381,7 +1387,7 @@ namespace UEExplorer.UI.Tabs
 						break;
 					}
 
-					case "View DefaultProperties":
+					case "DEFAULTPROPERTIES":
 					{
 						var unStruct = node.Object as UStruct;
 						if( unStruct != null )
@@ -1392,7 +1398,7 @@ namespace UEExplorer.UI.Tabs
 						break;
 					}
 
-					case "View Tokens":
+					case "TOKENS":
 					{
 						var unStruct = node.Object as UStruct;
 						if( unStruct != null && unStruct.ScriptSize > 0 )
@@ -1450,7 +1456,7 @@ namespace UEExplorer.UI.Tabs
 						break;
 					}
 
-					case "View Buffer":
+					case "BUFFER":
 					{
 						var obj = node.Object as UObject;
 						var hvd = new HexViewDialog( obj, this );
@@ -1458,7 +1464,7 @@ namespace UEExplorer.UI.Tabs
 						break;
 					}
 
-					case "View Exception":
+					case "EXCEPTION":
 					{
 						var oNode = node as ObjectNode;
 						if( oNode != null )
@@ -1816,7 +1822,7 @@ namespace UEExplorer.UI.Tabs
 				_SuppressNodeSelect = false;
 				return;
 			}
-			PerformNodeAction( e.Node as IDecompilableObjectNode, "View Object" );
+			PerformNodeAction( e.Node as IDecompilableObjectNode, "OBJECT" );
 		}
 
 		private void ViewTools_DropDownItemClicked( object sender, ToolStripItemClickedEventArgs e )
@@ -1830,7 +1836,7 @@ namespace UEExplorer.UI.Tabs
 				return;
 			}
 
-			PerformNodeAction( decompilableObject, e.ClickedItem.Text );
+			PerformNodeAction( decompilableObject, e.ClickedItem.Name );
 		}
 
 		private void Num_ObjectIndex_ValueChanged( object sender, EventArgs e )
