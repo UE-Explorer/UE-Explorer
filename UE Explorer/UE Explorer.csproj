@@ -378,6 +378,9 @@
     <EmbeddedResource Include="UI\Dialogs\StructureInputDialog.resx">
       <DependentUpon>StructureInputDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\UserControl_HexView.nl.resx">
+      <DependentUpon>UserControl_HexView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Main\ProgramConsole.resx">
       <DependentUpon>ProgramConsole.cs</DependentUpon>
     </EmbeddedResource>
@@ -521,7 +524,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
