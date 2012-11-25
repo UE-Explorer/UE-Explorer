@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace UEExplorer.UI.Dialogs
@@ -14,6 +8,11 @@ namespace UEExplorer.UI.Dialogs
 		public StructureInputDialog()
 		{
 			InitializeComponent();
+		}
+
+		private void StructureInputDialog_Shown( object sender, EventArgs e )
+		{
+			TextBoxName.Focus();
 		}
 	}
 }

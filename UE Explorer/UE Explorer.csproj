@@ -372,6 +372,9 @@
     <EmbeddedResource Include="UI\Dialogs\SendDialog.resx">
       <DependentUpon>SendDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\StructureInputDialog.nl.resx">
+      <DependentUpon>StructureInputDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\StructureInputDialog.resx">
       <DependentUpon>StructureInputDialog.cs</DependentUpon>
     </EmbeddedResource>
