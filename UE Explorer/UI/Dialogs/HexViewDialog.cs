@@ -26,16 +26,17 @@ namespace UEExplorer.UI.Dialogs
 
 			_Owner = owner;
 			userControl_HexView1.SetHexData( uObject );
+			string subTitle;
 			try
 			{
-				toolStripStatusLabel1.Text += ": " + String.Format( "{0}", userControl_HexView1.Buffer.Length ).PadLeft( 8, '0' );
-				Text = uObject.Package.PackageName + "." + uObject.GetOuterGroup() + " " + Text;
+				toolStripStatusLabel1.Text += String.Format( ": {0}", userControl_HexView1.Buffer.Length ).PadLeft( 8, '0' );
+				subTitle = uObject.Package.PackageName + "." + uObject.GetOuterGroup();
 			}
 			catch( Exception )
 			{
-				Text = uObject.Name;
+				subTitle = uObject.Name;
 			}
-			Text = "Hex-Viewer: " + Text;
+			Text = String.Format( "{0} - {1}", Text, subTitle );
 		}
 
 		private void viewASCIIToolStripMenuItem_CheckedChanged( object sender, EventArgs e )
