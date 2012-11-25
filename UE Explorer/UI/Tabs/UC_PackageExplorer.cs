@@ -1952,7 +1952,9 @@ namespace UEExplorer.UI.Tabs
 
 				var documentResult = nodeEvent.Node.Parent.Tag as DocumentResult;
 
-				SetContentText( nodeEvent.Node, ((UClass)documentResult.Document).Decompile() );
+				var unClass = ((UClass)documentResult.Document);
+				Label_ObjectName.Text = String.Format( "{0}: {1}, {2}", unClass.Name, findResult.TextLine, findResult.TextColumn ); 
+				SetContentText( nodeEvent.Node, unClass.Decompile() );
 				TextEditorPanel.textEditor.ScrollTo( findResult.TextLine, findResult.TextColumn );
 				TextEditorPanel.textEditor.Select( findResult.TextIndex, findText.Length );
 			};
@@ -1972,6 +1974,7 @@ namespace UEExplorer.UI.Tabs
 
 		public static List<FindResult> FindText( string text, string keyword )
 		{
+			keyword = keyword.ToLower();
 			var results = new List<FindResult>();
 
 			var currentLine = 1;
@@ -1988,7 +1991,7 @@ namespace UEExplorer.UI.Tabs
 				var startIndex = i;
 				for( int j = 0; j < keyword.Length; ++ j )
 				{
-					if( text[startIndex] == keyword[j] )
+					if( Char.ToLower( text[startIndex] ) == keyword[j] )
 					{
 						++ startIndex;
 						if( j == keyword.Length - 1 )
