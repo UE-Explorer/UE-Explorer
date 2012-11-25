@@ -159,7 +159,7 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
     <value>A new version is available!</value>
     <comment>Dialog title.</comment>
   </data>
-  <data name="ProgramForm_checkForUpdates_Progress-Status" xml:space="preserve">
+  <data name="ProgramForm_Check_for_Updates_Status" xml:space="preserve">
     <value>Checking for updates...</value>
     <comment>Status</comment>
   </data>
@@ -289,5 +289,14 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   </data>
   <data name="NO_FIND_RESULTS" xml:space="preserve">
     <value>Found no results with the specified text "{0}".</value>
+  </data>
+  <data name="HexView_Position" xml:space="preserve">
+    <value>Position: {0} + {1} ; 0x{2:x8}</value>
+  </data>
+  <data name="HexView_COULDNT_ACQUIRE_VALUE" xml:space="preserve">
+    <value>Couldn't acquire value</value>
+  </data>
+  <data name="HexView_Offset" xml:space="preserve">
+    <value>Offset</value>
   </data>
 </root>

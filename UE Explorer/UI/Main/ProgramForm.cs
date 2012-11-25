@@ -387,7 +387,7 @@ namespace UEExplorer.UI
 		private void CheckForUpdates( object sender, EventArgs e )
 		{
 			ProgressStatus.SaveStatus();
-			ProgressStatus.SetStatus( Resources.ProgramForm_checkForUpdates_Progress_Status );
+			ProgressStatus.SetStatus( Resources.ProgramForm_Check_for_Updates_Status );
 
 			var web = new WebClient();
 			web.Headers["Content-Type"] = "application/x-www-form-urlencoded";

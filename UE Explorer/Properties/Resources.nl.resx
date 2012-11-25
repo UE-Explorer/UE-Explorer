@@ -159,7 +159,7 @@ Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eer
     <value>Een nieuwere versie is beschikbaar!</value>
     <comment>Dialog title.</comment>
   </data>
-  <data name="ProgramForm_checkForUpdates_Progress-Status" xml:space="preserve">
+  <data name="ProgramForm_Check_for_Updates_Status" xml:space="preserve">
     <value>Zoeken naar updates...</value>
     <comment>Status</comment>
   </data>
@@ -278,5 +278,17 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
   </data>
   <data name="SEARCHING_CLASSES_STATUS" xml:space="preserve">
     <value>Klassen worden doorzocht..</value>
+  </data>
+  <data name="FIND_RESULTS_TITLE" xml:space="preserve">
+    <value>Zoek resultaten {0}</value>
+  </data>
+  <data name="HexView_COULDNT_ACQUIRE_VALUE" xml:space="preserve">
+    <value>Kon de waarde niet ophalen</value>
+  </data>
+  <data name="HexView_Offset" xml:space="preserve">
+    <value>Afstand</value>
+  </data>
+  <data name="HexView_Position" xml:space="preserve">
+    <value>Positie: {0} + {1} ; 0x{2:x8}</value>
   </data>
 </root>

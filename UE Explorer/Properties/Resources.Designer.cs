@@ -171,6 +171,33 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t acquire value.
+        /// </summary>
+        internal static string HexView_COULDNT_ACQUIRE_VALUE {
+            get {
+                return ResourceManager.GetString("HexView_COULDNT_ACQUIRE_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offset.
+        /// </summary>
+        internal static string HexView_Offset {
+            get {
+                return ResourceManager.GetString("HexView_Offset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position: {0} + {1} ; 0x{2:x8}.
+        /// </summary>
+        internal static string HexView_Position {
+            get {
+                return ResourceManager.GetString("HexView_Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Homepage.
         /// </summary>
         internal static string Homepage {
@@ -379,9 +406,9 @@ namespace UEExplorer.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Checking for updates....
         /// </summary>
-        internal static string ProgramForm_checkForUpdates_Progress_Status {
+        internal static string ProgramForm_Check_for_Updates_Status {
             get {
-                return ResourceManager.GetString("ProgramForm_checkForUpdates_Progress-Status", resourceCulture);
+                return ResourceManager.GetString("ProgramForm_Check_for_Updates_Status", resourceCulture);
             }
         }
         

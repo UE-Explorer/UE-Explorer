@@ -66,7 +66,7 @@ namespace UEExplorer.UI.Dialogs
 			const int		columnWidth				= 16;
 			
 			var buffer = userControl_HexView1.Buffer;
-			var input = "Offset".PadRight( firstColumnWidth, valueMargin ) + columnMargin
+			var input = Resources.HexView_Offset.PadRight( firstColumnWidth, valueMargin ) + columnMargin
 				+ "0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F ".PadRight( secondColumnWidth, valueMargin ) + columnMargin
 				+ "0 1 2 3 4 5 6 7 8 9 A B C D E F ".PadRight( thirdColumnWidth, valueMargin )
 				+ "\r\n";

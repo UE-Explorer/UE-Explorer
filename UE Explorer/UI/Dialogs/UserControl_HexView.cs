@@ -272,7 +272,7 @@ namespace UEExplorer.UI.Dialogs
 
 			Brush brush = new SolidBrush( ForeColor );
 
-			const string text = "Offset";
+			string text = Resources.HexView_Offset;
 			var textLength = e.Graphics.MeasureString( text, HexLinePanel.Font, 
 				new PointF(0,0), StringFormat.GenericTypographic 
 			);
@@ -501,8 +501,9 @@ namespace UEExplorer.UI.Dialogs
 			var hexViewDialog = (HexViewDialog)ParentForm;
 			if( hexViewDialog != null )
 			{
-				hexViewDialog.ToolStripStatusLabel_Position.Text = String.Format( 
-					"Position: {0} + {1} ; 0x{2:x8}", 
+				hexViewDialog.ToolStripStatusLabel_Position.Text = String.Format
+				( 
+					Resources.HexView_Position, 
 					Target.ExportTable != null ? Target.ExportTable.SerialOffset : 0, 
 					SelectedOffset,
 					Target.ExportTable != null ? Target.ExportTable.SerialOffset : SelectedOffset
@@ -741,7 +742,7 @@ namespace UEExplorer.UI.Dialogs
 						}
 						catch
 						{
-							message += "\r\n\r\nCouldn't acquire value";
+							message += "\r\n\r\n" + Resources.HexView_COULDNT_ACQUIRE_VALUE;
 						}
 					}
 					HexToolTip.Show( message, this,
