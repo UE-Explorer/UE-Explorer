@@ -39,22 +39,22 @@ namespace UEExplorer.UI.Tabs
 			PathText.Text = Program.Options.UEModelAppPath;
 			IndentionNumeric.Value = Program.Options.Indention;
 
-			foreach( var enumElement in Enum.GetNames( typeof(PropertyType) ) )
-			{
-				if( enumElement == "StructOffset" )
-					continue;
+			//foreach( var enumElement in Enum.GetNames( typeof(PropertyType) ) )
+			//{
+			//    if( enumElement == "StructOffset" )
+			//        continue;
 
-				VariableType.Items.Add( enumElement );	
-			}
+			//    VariableType.Items.Add( enumElement );	
+			//}
 
-			foreach( var type in Program.Options.VariableTypes )
-			{
-				var node = new TreeNode( type.VFullName ) 
-				{
-					Tag = type
-				};
-				VariableTypesTree.Nodes.Add( node );	
-			}
+			//foreach( var type in Program.Options.VariableTypes )
+			//{
+			//    var node = new TreeNode( type.VFullName ) 
+			//    {
+			//        Tag = type
+			//    };
+			//    VariableTypesTree.Nodes.Add( node );	
+			//}
 
 			base.TabCreated();
 
@@ -106,12 +106,12 @@ namespace UEExplorer.UI.Tabs
 			Program.Options.Indention = (int)IndentionNumeric.Value;
 			UnrealConfig.Indention = Program.ParseIndention( Program.Options.Indention );
 
-			Program.Options.VariableTypes.Clear();
-			foreach( TreeNode node in VariableTypesTree.Nodes )
-			{
-				Program.Options.VariableTypes.Add( node.Tag as UnrealConfig.VariableType );
-			}
-			UnrealConfig.VariableTypes = Program.Options.VariableTypes;
+			//Program.Options.VariableTypes.Clear();
+			//foreach( TreeNode node in VariableTypesTree.Nodes )
+			//{
+			//    Program.Options.VariableTypes.Add( node.Tag as UnrealConfig.VariableType );
+			//}
+			//UnrealConfig.VariableTypes = Program.Options.VariableTypes;
 
 			Program.SaveConfig();
 			MessageBox.Show( Resources.SAVE_SUCCESS, Resources.SAVED, 

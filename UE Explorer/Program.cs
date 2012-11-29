@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.VisualBasic.ApplicationServices;
+using UEExplorer.UI.Dialogs;
 using UELib;
 
 namespace UEExplorer
@@ -20,21 +21,28 @@ namespace UEExplorer
         [STAThread]
         static void Main( string[] args )
         {
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault( false );
-
-			if( args.Length >= 2 )
+			try
 			{
-				var console = new UI.Main.ProgramConsole();
-				Application.Run( console );
-				Application.Exit();
-				return;	
+				Application.EnableVisualStyles();
+				Application.SetCompatibleTextRenderingDefault( false );
+
+				if( args.Length >= 2 )
+				{
+					var console = new UI.Main.ProgramConsole();
+					Application.Run( console );
+					Application.Exit();
+					return;
+				}
+
+				//Thread.CurrentThread.CurrentCulture = CultureInfo.InstalledUICulture;
+
+				var app = new SingleInstanceApplication();
+				app.Run( Environment.GetCommandLineArgs() );
 			}
-
-			//Thread.CurrentThread.CurrentCulture = CultureInfo.InstalledUICulture;
-
-			var app = new SingleInstanceApplication();
-			app.Run( Environment.GetCommandLineArgs() );
+			catch( Exception exception )
+			{
+				ExceptionDialog.Show( "Internal crash!", exception );
+			}
 		}
 
 		public class SingleInstanceApplication : WindowsFormsApplicationBase
@@ -118,11 +126,11 @@ namespace UEExplorer
 			UnrealConfig.SuppressComments = Options.bSuppressComments;
 			UnrealConfig.PreBeginBracket = ParseFormatOption( Options.PreBeginBracket );
 			UnrealConfig.PreEndBracket = ParseFormatOption( Options.PreEndBracket );
-			if( Options.VariableTypes == null || Options.VariableTypes.Count == 0 )
-			{
-				Options.VariableTypes = Options.DefaultVariableTypes;
-			}
-			UnrealConfig.VariableTypes = Options.VariableTypes;
+			//if( Options.VariableTypes == null || Options.VariableTypes.Count == 0 )
+			//{
+			//    Options.VariableTypes = Options.DefaultVariableTypes;
+			//}
+			//UnrealConfig.VariableTypes = Options.VariableTypes;
 			UnrealConfig.Indention = ParseIndention( Options.Indention );
 		}
 
@@ -339,19 +347,19 @@ namespace UEExplorer
 		public string PreEndBracket = "%NEWLINE%%TABS%";
 		public int Indention = 4;
 
-		public List<UnrealConfig.VariableType> VariableTypes;
-		[XmlIgnore]
-		public readonly List<UnrealConfig.VariableType> DefaultVariableTypes = new List<UnrealConfig.VariableType>
-		{
-			new UnrealConfig.VariableType{VFullName = "Engine.Actor.Skins", VType = "ObjectProperty"},	
-			new UnrealConfig.VariableType{VFullName = "Engine.Actor.Components", VType = "ObjectProperty"},
-			new UnrealConfig.VariableType{VFullName = "Engine.SkeletalMeshComponent.AnimSets", VType = "ObjectProperty"},
-			new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.InputLinks", VType = "StructProperty"},
-			new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.OutputLinks", VType = "StructProperty"},
-			new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.VariableLinks", VType = "StructProperty"},
-			new UnrealConfig.VariableType{VFullName = "Engine.SequenceAction.Targets", VType = "ObjectProperty"},
-			new UnrealConfig.VariableType{VFullName = "XInterface.GUIComponent.Controls", VType = "ObjectProperty"},
-		};
+		//public List<UnrealConfig.VariableType> VariableTypes;
+		//[XmlIgnore]
+		//public readonly List<UnrealConfig.VariableType> DefaultVariableTypes = new List<UnrealConfig.VariableType>
+		//{
+		//    new UnrealConfig.VariableType{VFullName = "Engine.Actor.Skins", VType = "ObjectProperty"},	
+		//    new UnrealConfig.VariableType{VFullName = "Engine.Actor.Components", VType = "ObjectProperty"},
+		//    new UnrealConfig.VariableType{VFullName = "Engine.SkeletalMeshComponent.AnimSets", VType = "ObjectProperty"},
+		//    new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.InputLinks", VType = "StructProperty"},
+		//    new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.OutputLinks", VType = "StructProperty"},
+		//    new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.VariableLinks", VType = "StructProperty"},
+		//    new UnrealConfig.VariableType{VFullName = "Engine.SequenceAction.Targets", VType = "ObjectProperty"},
+		//    new UnrealConfig.VariableType{VFullName = "XInterface.GUIComponent.Controls", VType = "ObjectProperty"},
+		//};
 		#endregion
 
 		#region THIRDPARY

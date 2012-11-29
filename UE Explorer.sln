@@ -176,6 +176,7 @@ Global
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}.DecompileDebug|Mixed Platforms.Build.0 = DecompileDebug|Any CPU
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}.DecompileDebug|x86.ActiveCfg = DecompileDebug|Any CPU
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}.Publish|Any CPU.ActiveCfg = Publish|Any CPU
+		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}.Publish|Any CPU.Build.0 = Publish|Any CPU
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}.Publish|Mixed Platforms.ActiveCfg = Publish|Any CPU
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}.Publish|Mixed Platforms.Build.0 = Publish|Any CPU
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}.Publish|x86.ActiveCfg = Publish|Any CPU
@@ -265,7 +266,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateAssemblyVersion = True
 		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UpdateAssemblyVersion = True
 	EndGlobalSection
 EndGlobal
