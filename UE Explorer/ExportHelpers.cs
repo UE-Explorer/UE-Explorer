@@ -53,7 +53,9 @@ namespace UEExplorer
 		public static string ExportPackageClasses( this UnrealPackage package, bool exportScripts = false )
 		{
 			var exportPath = package.InitializeExportDirectory();
-			foreach( UClass uClass in package.ObjectsList.Where( o => o is UClass && o.ExportTable != null ) )
+			package.NTLPackage = new NativesTablePackage();
+			package.NTLPackage.LoadPackage( Program.Options.NTLPath ); 
+			foreach( UClass uClass in package.Objects.Where( o => o is UClass && o.ExportTable != null ) )
 			{
 				var exportContent = exportScripts && uClass.ScriptBuffer != null 
 					? uClass.ScriptBuffer.Decompile() 
