@@ -11,6 +11,8 @@ using System.Xml.Serialization;
 using Microsoft.VisualBasic.ApplicationServices;
 using UEExplorer.UI.Dialogs;
 using UELib;
+using UELib.Types;
+using Eliot.Utilities;
 
 namespace UEExplorer
 {
@@ -42,6 +44,7 @@ namespace UEExplorer
 			catch( Exception exception )
 			{
 				ExceptionDialog.Show( "Internal crash!", exception );
+				LogManager.EndLogStream();
 			}
 		}
 
@@ -94,7 +97,6 @@ namespace UEExplorer
 					return;
 
 				_LogStream.Flush();
-				_LogStream.Close();
 				_LogStream.Dispose();	
 				_LogStream = null;
 			}
@@ -126,28 +128,46 @@ namespace UEExplorer
 			UnrealConfig.SuppressComments = Options.bSuppressComments;
 			UnrealConfig.PreBeginBracket = ParseFormatOption( Options.PreBeginBracket );
 			UnrealConfig.PreEndBracket = ParseFormatOption( Options.PreEndBracket );
-			//if( Options.VariableTypes == null || Options.VariableTypes.Count == 0 )
-			//{
-			//    Options.VariableTypes = Options.DefaultVariableTypes;
-			//}
-			//UnrealConfig.VariableTypes = Options.VariableTypes;
+			if( Options.VariableTypes == null || Options.VariableTypes.Count == 0 )
+			{
+				Options.VariableTypes = new List<string>
+			    {
+					"Engine.Actors.Skin:ObjectProperty",
+					"Engine.Actor.Components:ObjectProperty",
+					"Engine.SkeletalMeshComponent.AnimSets:ObjectProperty",
+					"Engine.SequenceOp.InputLinks:StructProperty",
+					"Engine.SequenceOp.OutputLinks:StructProperty",
+					"Engine.SequenceOp.VariableLinks:StructProperty",
+					"Engine.SequenceAction.Targets:ObjectProperty",
+					"XInterface.GUIComponent.Controls:ObjectProperty",
+					"Engine.SkeletalMesh.Sockets:ObjectProperty"
+			    };
+
+			}
+			CopyVariableTypes();
 			UnrealConfig.Indention = ParseIndention( Options.Indention );
+		}
+
+		internal static Tuple<string, string, PropertyType> ParseVariable( string data )
+		{
+			var varGroup = data.Left( data.IndexOf( ':' ) );
+			var varName = varGroup.Mid( varGroup.LastIndexOf( '.' ) + 1 );
+			var varType = (PropertyType)Enum.Parse( typeof(PropertyType), data.Substring( data.IndexOf( ':' ) + 1 ) );
+			return Tuple.Create( varName, varGroup, varType );
+		}
+
+		internal static void CopyVariableTypes()
+		{
+			UnrealConfig.VariableTypes = new Dictionary<string, Tuple<string, PropertyType>>();
+			foreach( var varType in Options.VariableTypes )
+			{
+				var varData = ParseVariable( varType );
+				UnrealConfig.VariableTypes.Add( varData.Item1, Tuple.Create( varData.Item2, varData.Item3 ) );
+			}
 		}
 
 		internal static string ParseIndention( int indentionCount )
 		{
-			//if( indentionCount == 4 )
-			//{
-			//    return "\t";
-			//}
-
-			//string indention = String.Empty;
-			//for( var i = 0; i < indentionCount; ++ i )
-			//{
-			//    indention += " ";
-			//}	
-			//return indention;
-
 			return String.Empty.PadLeft( indentionCount, ' ' );
 		}
 
@@ -346,20 +366,7 @@ namespace UEExplorer
 		public string PreBeginBracket = "%NEWLINE%%TABS%";
 		public string PreEndBracket = "%NEWLINE%%TABS%";
 		public int Indention = 4;
-
-		//public List<UnrealConfig.VariableType> VariableTypes;
-		//[XmlIgnore]
-		//public readonly List<UnrealConfig.VariableType> DefaultVariableTypes = new List<UnrealConfig.VariableType>
-		//{
-		//    new UnrealConfig.VariableType{VFullName = "Engine.Actor.Skins", VType = "ObjectProperty"},	
-		//    new UnrealConfig.VariableType{VFullName = "Engine.Actor.Components", VType = "ObjectProperty"},
-		//    new UnrealConfig.VariableType{VFullName = "Engine.SkeletalMeshComponent.AnimSets", VType = "ObjectProperty"},
-		//    new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.InputLinks", VType = "StructProperty"},
-		//    new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.OutputLinks", VType = "StructProperty"},
-		//    new UnrealConfig.VariableType{VFullName = "Engine.SequenceOp.VariableLinks", VType = "StructProperty"},
-		//    new UnrealConfig.VariableType{VFullName = "Engine.SequenceAction.Targets", VType = "ObjectProperty"},
-		//    new UnrealConfig.VariableType{VFullName = "XInterface.GUIComponent.Controls", VType = "ObjectProperty"},
-		//};
+		public List<String> VariableTypes;
 		#endregion
 
 		#region THIRDPARY

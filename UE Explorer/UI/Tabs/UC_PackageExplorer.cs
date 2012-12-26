@@ -175,21 +175,21 @@ namespace UEExplorer.UI.Tabs
 				throw new UnrealException( e.Message, e );
 			}
 
-			string NTLPath = Path.Combine( Application.StartupPath, "Native Tables", Program.Options.NTLPath );
-			if( File.Exists( NTLPath + NativesTablePackage.Extension ) )
+			string ntlPath = Path.Combine( Application.StartupPath, "Native Tables", Program.Options.NTLPath );
+			if( File.Exists( ntlPath + NativesTablePackage.Extension ) )
 			{
 				// Load the native names.
 				try
 				{
 					_UnrealPackage.NTLPackage = new NativesTablePackage();
-					_UnrealPackage.NTLPackage.LoadPackage( NTLPath ); 
+					_UnrealPackage.NTLPackage.LoadPackage( ntlPath ); 
 				}
 				catch( Exception e )
 				{
 					_UnrealPackage.NTLPackage = null;
 					throw new UnrealException
 					( 
-						String.Format( "Couldn't load {0}! \r\nEvent:Loading Package", NTLPath ), e 
+						String.Format( "Couldn't load {0}! \r\nEvent:Loading Package", ntlPath ), e 
 					);
 				}
 			}
@@ -204,17 +204,19 @@ namespace UEExplorer.UI.Tabs
 			_UnrealPackage.NotifyObjectAdded += _OnNotifyObjectAdded;
 
 			ProgressStatus.ResetValue();
-			int max = Program.Options.InitFlags.HasFlag( UnrealPackage.InitFlags.Construct ) ? _UnrealPackage.ExportTableList.Count + _UnrealPackage.ImportTableList.Count : 0;
+			int max = Program.Options.InitFlags.HasFlag( UnrealPackage.InitFlags.Construct ) 
+				? _UnrealPackage.Exports.Count + _UnrealPackage.Imports.Count 
+				: 0;
 
 			if( Program.Options.InitFlags.HasFlag( UnrealPackage.InitFlags.Deserialize ) )
-				max += _UnrealPackage.ExportTableList.Count;
+				max += _UnrealPackage.Exports.Count;
 								
 			// Importing objects has been disabled FIXME:
 			/*if( Program.Options.InitFlags.HasFlag( UnrealPackage.InitFlags.Import ) )
 				max += _UnrealPackage.ImportTableList.Count;*/
 
 			if( Program.Options.InitFlags.HasFlag( UnrealPackage.InitFlags.Link ) )
-				max += _UnrealPackage.ExportTableList.Count;
+				max += _UnrealPackage.Exports.Count;
 
 			ProgressStatus.SetMaxProgress( max );
 			ProgressStatus.Loading.Visible = true;
@@ -253,7 +255,7 @@ namespace UEExplorer.UI.Tabs
 
 		private void ReadMetaInfo()
 		{
-			foreach( var obj in _UnrealPackage.ObjectsList.Where( o => o is UConst && o.Name.StartsWith( "META_DECOMPILER" ) ) )
+			foreach( var obj in _UnrealPackage.Objects.Where( o => o is UConst && o.Name.StartsWith( "META_DECOMPILER" ) ) )
 			{
 				var value = ((UConst)obj).Value;
 				var parms = obj.Name.Substring( 16 ).Split( '_' );
@@ -317,7 +319,7 @@ namespace UEExplorer.UI.Tabs
 			}
 		}
 
-		internal class ExportNode : UnrealTableNode, IDecompilableObjectNode
+		private class ExportNode : UnrealTableNode, IDecompilableObjectNode
 		{
 			public IUnrealDecompilable Object
 			{
@@ -412,7 +414,7 @@ namespace UEExplorer.UI.Tabs
 			}
 		}
 
-		internal class ImportNode : UnrealTableNode
+		private class ImportNode : UnrealTableNode
 		{
 			public ImportNode()
 			{
@@ -550,7 +552,7 @@ namespace UEExplorer.UI.Tabs
 				}
 			}
 
-			BuildValue.Text = _UnrealPackage.Build.GameID.ToString();
+			BuildValue.Text = _UnrealPackage.Build.Name.ToString();
 
 			// Automatic iterate through all package flags and return them as a string list
 			var flags = new List<string>
@@ -569,7 +571,7 @@ namespace UEExplorer.UI.Tabs
 				flags.Add( "Script " + _UnrealPackage.IsScript() );
 				flags.Add( "Stripped " + _UnrealPackage.IsStripped() );			
 				flags.Add( "Map " + _UnrealPackage.IsMap() );
-				flags.Add( "Console " + _UnrealPackage.IsBigEndian );
+				flags.Add( "Console " + _UnrealPackage.IsBigEndianEncoded );
 			}
 			else if( _UnrealPackage.Version > 61 && _UnrealPackage.Version <= 69 )		// <= UT99
 			{
@@ -586,7 +588,7 @@ namespace UEExplorer.UI.Tabs
 	            DataGridView_Flags.Rows.Add( r );
 			}
 
-			if( _UnrealPackage.ObjectsList != null )
+			if( _UnrealPackage.Objects != null )
 			{
 				CreateClassesList();
 				// HACK:Add a MetaData object to the classes tree(hack because MetaData is not an actual class)
@@ -632,7 +634,7 @@ namespace UEExplorer.UI.Tabs
 				EmptyIsPackage();
 			}
 
-			if( _UnrealPackage.GenerationsList != null )
+			if( _UnrealPackage.Generations != null )
 			{
 				CreateGenerationsList();
 			}
@@ -667,7 +669,7 @@ namespace UEExplorer.UI.Tabs
 			if( DataGridView_NameTable.InvokeRequired )
 			{
 				var del = new CreateTableDelegate( CreateNameTable );
-				foreach( var t in _UnrealPackage.NameTableList )
+				foreach( var t in _UnrealPackage.Names )
 				{
 					Invoke( del, t );
 				}
@@ -689,7 +691,7 @@ namespace UEExplorer.UI.Tabs
 			if( TreeView_Exports.InvokeRequired )
 			{
 				var del = new CreateTableDelegate( CreateExportTable );
-				foreach( var t in _UnrealPackage.ExportTableList )
+				foreach( var t in _UnrealPackage.Exports )
 				{
 					TreeView_Exports.Invoke( del, t );
 				}
@@ -698,7 +700,7 @@ namespace UEExplorer.UI.Tabs
 			{
 				if( _NIndex == 0 )
 				{
-				    _ExportNodes = new TreeNode[_UnrealPackage.ExportTableList.Count];
+				    _ExportNodes = new TreeNode[_UnrealPackage.Exports.Count];
 				}
 
 				var exp = exportTable as UExportTableItem;
@@ -718,7 +720,7 @@ namespace UEExplorer.UI.Tabs
 				    node.ToolTipText = String.Format( Resources.CLASS_ISNT_SUPPORTED, exp.ClassName );
 				}
 
-				if( _NIndex == _UnrealPackage.ExportTableList.Count )
+				if( _NIndex == _UnrealPackage.Exports.Count )
 				{
 					TreeView_Exports.BeginUpdate();
 				    TreeView_Exports.Nodes.AddRange( _ExportNodes );
@@ -742,16 +744,16 @@ namespace UEExplorer.UI.Tabs
 			if( TreeView_Imports.InvokeRequired )
 			{
 				CreateTableDelegate del = CreateImportTable;
-				for( int i = 0; i < _UnrealPackage.ImportTableList.Count; ++ i )
+				for( int i = 0; i < _UnrealPackage.Imports.Count; ++ i )
 				{
-					Invoke( del, _UnrealPackage.ImportTableList[i] );
+					Invoke( del, _UnrealPackage.Imports[i] );
 				}
 			}
 			else
 			{
 				if( _NIndex == 0 )
 				{
-					_ExportNodes = new TreeNode[_UnrealPackage.ImportTableList.Count];
+					_ExportNodes = new TreeNode[_UnrealPackage.Imports.Count];
 				}
 
 				var imp = (importTable as UImportTableItem);
@@ -765,7 +767,7 @@ namespace UEExplorer.UI.Tabs
 				SetImageKeyForObject( imp, node );
 
 
-				if( _NIndex == _UnrealPackage.ImportTableList.Count )
+				if( _NIndex == _UnrealPackage.Imports.Count )
 				{
 					TreeView_Exports.BeginUpdate();
 					TreeView_Imports.Nodes.AddRange( _ExportNodes );
@@ -831,13 +833,13 @@ namespace UEExplorer.UI.Tabs
 
 		protected void CreateDependenciesList()
 		{
-			if( _UnrealPackage.ObjectsList == null || _UnrealPackage.ObjectsList.Count == 0 )
+			if( _UnrealPackage.Objects == null || _UnrealPackage.Objects.Count == 0 )
 			{
 				TabControl_Objects.Controls.Remove( TabPage_Deps );
 				return;
 			}
 
-			foreach( var table in _UnrealPackage.ImportTableList )
+			foreach( var table in _UnrealPackage.Imports )
 			{										
 				// Actually a group...
 				if( table.OuterIndex != 0 )
@@ -860,7 +862,7 @@ namespace UEExplorer.UI.Tabs
 			if( node == null )
 				return;
 
-			foreach( var table in _UnrealPackage.ImportTableList.Where( table => table != parent && table.OuterTable == parent ) )
+			foreach( var table in _UnrealPackage.Imports.Where( table => table != parent && table.OuterTable == parent ) )
 			{
 				GetDependencyOn( table, node.Nodes.Add( table.ObjectName ) );
 			}
@@ -888,32 +890,30 @@ namespace UEExplorer.UI.Tabs
 
 		protected void CreateGenerationsList()
 		{
-			if( _UnrealPackage.GenerationsList == null || _UnrealPackage.GenerationsList.Count == 0 )
+			if( _UnrealPackage.Generations == null || _UnrealPackage.Generations.Count == 0 )
 			{
 				TabControl_Objects.Controls.Remove( TabPage_Generations );
 				return;
 			}
 
-			foreach( var gen in _UnrealPackage.GenerationsList )
+			foreach( var gen in _UnrealPackage.Generations )
 			{
-				DataGridView_GenerationsTable.Rows.Add( gen.NameCount, gen.ExportCount, gen.NetObjectCount );
+				DataGridView_GenerationsTable.Rows.Add( gen.NamesCount, gen.ExportsCount, gen.NetObjectsCount );
 			}
 		}
 
 		protected void CreateContentList()
 		{
-			if( _UnrealPackage.ObjectsList == null || _UnrealPackage.ObjectsList.Count == 0 )
+			if( _UnrealPackage.Objects == null || _UnrealPackage.Objects.Count == 0 )
 			{
 				TabControl_Objects.Controls.Remove( TabPage_Content );
 				return;
 			}
 
 			var groups = new List<ObjectNode>();
-			foreach( var obj in _UnrealPackage.ObjectsList.Where
-				(o => (
-					(o.ResistsInGroup()) || o.HasObjectFlag( ObjectFlagsLO.Automated )) 
-					&& o.ExportIndex > 0 
-					&& o.Outer != null
+			foreach( var obj in _UnrealPackage.Objects.Where(
+					o => (int)o > 0 && o.Outer != null 
+					&& (o.ResistsInGroup() || o.HasObjectFlag( ObjectFlagsLO.Automated ))
 				))
 			{
 				var groupNode = groups.Find( n => n.Text == obj.Outer.Name );
@@ -1133,7 +1133,7 @@ namespace UEExplorer.UI.Tabs
 				var decompilableObjectNode = decompilableNode as IDecompilableObjectNode;
 				if( decompilableObjectNode != null )
 				{
-					if( decompilableObjectNode.Object is UContent )
+					if( decompilableObjectNode.Object is IUnrealViewable )
 					{ 
 						if( File.Exists( Program.Options.UEModelAppPath	) )
 						{
@@ -1155,7 +1155,7 @@ namespace UEExplorer.UI.Tabs
 					if( decompilableObjectNode.Object is UStruct )
 					{
 						var unStruct = (decompilableObjectNode.Object as UStruct); 
-						if( unStruct.ScriptSize > 0 )
+						if( unStruct.DataScriptSize > 0 )
 						{
 							if( decompilableObjectNode.Object is UClass )
 							{
@@ -1164,7 +1164,8 @@ namespace UEExplorer.UI.Tabs
 							addItem.Invoke( Resources.NodeItem_ViewTokens, "TOKENS" );
 						}
 
-						if( decompilableObjectNode.Object is UClass )
+						var unClass = decompilableObjectNode.Object as UClass;
+						if( unClass != null && unClass.ScriptBuffer != null )
 						{
 							addItem.Invoke( Resources.NodeItem_ViewScript, "SCRIPT" );	
 						}
@@ -1253,7 +1254,7 @@ namespace UEExplorer.UI.Tabs
 						var n = node as ObjectNode;
 						if( n != null )
 						{
-							var cnode = n.Object as UContent;
+							var cnode = n.Object as IUnrealViewable;
 							if( cnode is UTexture )
 							{
 								var tex = ((UTexture)cnode);
@@ -1401,7 +1402,7 @@ namespace UEExplorer.UI.Tabs
 					case "TOKENS":
 					{
 						var unStruct = node.Object as UStruct;
-						if( unStruct != null && unStruct.ScriptSize > 0 )
+						if( unStruct != null && unStruct.DataScriptSize > 0 )
 						{
 							Label_ObjectName.Text = node.Text;
 
@@ -1860,7 +1861,7 @@ namespace UEExplorer.UI.Tabs
 			try
 			{
 				LNameIndex.Text = String.Format( Resources.NAME_IS, 
-					_UnrealPackage.NameTableList[(int)Num_NameIndex.Value].Name 
+					_UnrealPackage.Names[(int)Num_NameIndex.Value].Name 
 				);
 			}
 			catch( ArgumentOutOfRangeException exc )

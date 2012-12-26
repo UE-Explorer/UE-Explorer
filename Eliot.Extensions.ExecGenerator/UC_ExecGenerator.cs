@@ -53,13 +53,13 @@ namespace Eliot.Extensions.ExecGenerator
 				NPkg.InitializePackage( UnrealPackage.InitFlags.Construct | UnrealPackage.InitFlags.Link | UnrealPackage.InitFlags.RegisterClasses | UnrealPackage.InitFlags.Deserialize );
 
 				string klasbuffer = String.Empty;
-				foreach( UClass klas in NPkg.ObjectsList.OfType<UClass>() )
+				foreach( UClass klas in NPkg.Objects.OfType<UClass>() )
 				{
-					if( klas.ChildFunctions.Count == 0 )
+					if( klas.Functions.Count == 0 )
 						continue;
 
 					var execfunc = new List<UFunction>();
-					foreach( UFunction Func in klas.ChildFunctions )
+					foreach( UFunction Func in klas.Functions )
 					{
 						if( Func.HasFunctionFlag( FunctionFlags.Exec ) )
 						{
@@ -81,9 +81,9 @@ namespace Eliot.Extensions.ExecGenerator
 						foreach( UFunction func in execfunc )
 						{
 							klasbuffer += "\r\n;" + func.Name + " - '''???.'''";
-							if( func.ChildParams.Count > 0 )
+							if( func.Params.Count > 0 )
 							{
-								foreach( UProperty prop in func.ChildParams )
+								foreach( UProperty prop in func.Params )
 								{
 									string typetext = (prop.Type.ToString() == "Str" ? "string" : (string)prop.Type.ToString()).ToLower( System.Globalization.CultureInfo.CurrentCulture );
 									string friendlytypetext = prop.GetFriendlyType();

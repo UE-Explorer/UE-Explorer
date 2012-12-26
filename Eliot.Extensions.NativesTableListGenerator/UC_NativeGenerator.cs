@@ -50,19 +50,12 @@ namespace Eliot.Extensions.NativesTableListGenerator
 				package.RegisterClass( "Function", typeof(UFunction) );
 				package.InitializeExportObjects( UnrealPackage.InitFlags.Deserialize );
 
-				foreach( var function in package.ObjectsList.OfType<UFunction>() )
+				foreach( var function in package.Objects.OfType<UFunction>() )
 				{
 					if( !function.HasFunctionFlag( FunctionFlags.Native ) || function.NativeToken == 0 ) 
 						continue;
 
-					var item = new NativeTableItem
-					{
-						Name = function.FriendlyName,
-						OperPrecedence = function.OperPrecedence,
-						ByteToken = function.NativeToken
-					};
-					item.InitializeType( function );
-	
+					var item = new NativeTableItem( function );
 					var packageNode = TreeView_Packages.Nodes.Add( package.PackageName );
 					var itemNode = packageNode.Nodes.Add( item.Name );
 					itemNode.Nodes.Add( "Format:" + item.Type );

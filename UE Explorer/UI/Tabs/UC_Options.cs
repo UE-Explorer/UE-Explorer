@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -37,24 +38,21 @@ namespace UEExplorer.UI.Tabs
 			PreEndBracket.Text = Program.Options.PreEndBracket;
 
 			PathText.Text = Program.Options.UEModelAppPath;
+			PathText_TextChanged( PathText, new EventArgs() );
 			IndentionNumeric.Value = Program.Options.Indention;
 
-			//foreach( var enumElement in Enum.GetNames( typeof(PropertyType) ) )
-			//{
-			//    if( enumElement == "StructOffset" )
-			//        continue;
+			foreach( var enumElement in Enum.GetNames( typeof(PropertyType) ) )
+			{
+			    if( enumElement == "StructOffset" )
+			        continue;
 
-			//    VariableType.Items.Add( enumElement );	
-			//}
+			    VariableType.Items.Add( enumElement );	
+			}
 
-			//foreach( var type in Program.Options.VariableTypes )
-			//{
-			//    var node = new TreeNode( type.VFullName ) 
-			//    {
-			//        Tag = type
-			//    };
-			//    VariableTypesTree.Nodes.Add( node );	
-			//}
+			foreach( var pair in Program.Options.VariableTypes )
+			{
+			    VariableTypesTree.Nodes.Add( new TreeNode( pair ){Tag = pair} );	
+			}
 
 			base.TabCreated();
 
@@ -106,17 +104,22 @@ namespace UEExplorer.UI.Tabs
 			Program.Options.Indention = (int)IndentionNumeric.Value;
 			UnrealConfig.Indention = Program.ParseIndention( Program.Options.Indention );
 
-			//Program.Options.VariableTypes.Clear();
-			//foreach( TreeNode node in VariableTypesTree.Nodes )
-			//{
-			//    Program.Options.VariableTypes.Add( node.Tag as UnrealConfig.VariableType );
-			//}
-			//UnrealConfig.VariableTypes = Program.Options.VariableTypes;
+			Program.Options.VariableTypes.Clear();
+			foreach( TreeNode node in VariableTypesTree.Nodes )
+			{
+			    Program.Options.VariableTypes.Add( (string)node.Tag );
+			}
+			Program.CopyVariableTypes();
 
 			Program.SaveConfig();
 			MessageBox.Show( Resources.SAVE_SUCCESS, Resources.SAVED, 
 				MessageBoxButtons.OK, MessageBoxIcon.Information 
 			);
+		}
+
+		private static string FormatVariable( KeyValuePair<string, Tuple<string, PropertyType>> keyPair )
+		{
+			return keyPair.Value.Item1 + ":" + keyPair.Value.Item2;
 		}
 
 		private void PathButton_Click( object sender, EventArgs e )
@@ -142,10 +145,10 @@ namespace UEExplorer.UI.Tabs
 
 		private void VariableTypesTree_AfterSelect( object sender, TreeViewEventArgs e )
 		{
-			var vType = (UnrealConfig.VariableType)e.Node.Tag;
+			var varTuple = Program.ParseVariable( (string)e.Node.Tag );
 
-			VariableTypeGroup.Text = vType.VFullName;
-			VariableType.SelectedIndex = VariableType.Items.IndexOf( vType.VType );
+			VariableTypeGroup.Text = (string)e.Node.Tag;
+			VariableType.SelectedIndex = VariableType.Items.IndexOf( varTuple.Item3.ToString() );
 
 			VariableTypeGroup.Enabled = true;
 			VariableType.Enabled = true;
@@ -155,29 +158,19 @@ namespace UEExplorer.UI.Tabs
 
 		private void VariableType_SelectedIndexChanged( object sender, EventArgs e )
 		{
-			var vType = (UnrealConfig.VariableType)VariableTypesTree.SelectedNode.Tag;
-			vType.VType = (string)VariableType.SelectedItem;
+			var varData = Program.ParseVariable( (string)VariableTypesTree.SelectedNode.Tag );
+			VariableTypeGroup.Text = varData.Item2 + ":" + VariableType.SelectedItem;
 		}
 
 		private void VariableTypeGroup_TextChanged( object sender, EventArgs e )
 		{
-			var vType = (UnrealConfig.VariableType)VariableTypesTree.SelectedNode.Tag;
-			vType.VFullName = VariableTypeGroup.Text;
-
-			VariableTypesTree.SelectedNode.Text = vType.VFullName;
+			VariableTypesTree.SelectedNode.Tag = VariableTypeGroup.Text;
+			VariableTypesTree.SelectedNode.Text = (string)VariableTypesTree.SelectedNode.Tag;
 		}
 
 		private void NewArrayType_Click( object sender, EventArgs e )
 		{
-			var node = new TreeNode( "Package.Class.Property" )
-			{
-				Tag = new UnrealConfig.VariableType
-				{
-					VFullName = "Package.Class.Property",
-					VType = "ObjectProperty"
-				}
-			};
-
+			var node = new TreeNode( "Package.Class.Property:ObjectProperty" ){Tag = "Package.Class.Property:ObjectProperty"};
 			VariableTypesTree.Nodes.Add( node );
 			VariableTypesTree.SelectedNode = node;
 		}

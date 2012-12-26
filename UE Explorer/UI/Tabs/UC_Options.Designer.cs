@@ -36,7 +36,6 @@
 			System.Windows.Forms.Label label4;
 			System.Windows.Forms.Label label3;
 			System.Windows.Forms.Label label6;
-			System.Windows.Forms.SplitContainer ArrayTypeDefinitionsSplitter;
 			this.BracketPreview = new System.Windows.Forms.RichTextBox();
 			this.IndentionNumeric = new System.Windows.Forms.NumericUpDown();
 			this.PreBeginBracket = new System.Windows.Forms.TextBox();
@@ -74,14 +73,9 @@
 			label4 = new System.Windows.Forms.Label();
 			label3 = new System.Windows.Forms.Label();
 			label6 = new System.Windows.Forms.Label();
-			ArrayTypeDefinitionsSplitter = new System.Windows.Forms.SplitContainer();
 			groupBox3.SuspendLayout();
 			panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.IndentionNumeric)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(ArrayTypeDefinitionsSplitter)).BeginInit();
-			ArrayTypeDefinitionsSplitter.Panel1.SuspendLayout();
-			ArrayTypeDefinitionsSplitter.Panel2.SuspendLayout();
-			ArrayTypeDefinitionsSplitter.SuspendLayout();
 			this.groupBox6.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -102,6 +96,7 @@
 			// 
 			// groupBox3
 			// 
+			groupBox3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			groupBox3.Controls.Add(panel1);
 			groupBox3.Controls.Add(this.IndentionNumeric);
 			groupBox3.Controls.Add(label5);
@@ -110,9 +105,9 @@
 			groupBox3.Controls.Add(this.PreBeginBracket);
 			groupBox3.Controls.Add(this.PreEndBracket);
 			groupBox3.Controls.Add(this.SuppressComments);
-			groupBox3.Location = new System.Drawing.Point(337, 8);
+			groupBox3.Location = new System.Drawing.Point(335, 9);
 			groupBox3.Name = "groupBox3";
-			groupBox3.Size = new System.Drawing.Size(275, 224);
+			groupBox3.Size = new System.Drawing.Size(270, 224);
 			groupBox3.TabIndex = 15;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Decompiler Output";
@@ -126,7 +121,7 @@
 			panel1.Controls.Add(this.BracketPreview);
 			panel1.Location = new System.Drawing.Point(7, 118);
 			panel1.Name = "panel1";
-			panel1.Size = new System.Drawing.Size(261, 100);
+			panel1.Size = new System.Drawing.Size(256, 100);
 			panel1.TabIndex = 9;
 			// 
 			// BracketPreview
@@ -141,16 +136,16 @@
 			this.BracketPreview.Location = new System.Drawing.Point(0, 0);
 			this.BracketPreview.Name = "BracketPreview";
 			this.BracketPreview.ReadOnly = true;
-			this.BracketPreview.Size = new System.Drawing.Size(260, 98);
+			this.BracketPreview.Size = new System.Drawing.Size(255, 98);
 			this.BracketPreview.TabIndex = 8;
 			this.BracketPreview.Text = "";
 			// 
 			// IndentionNumeric
 			// 
 			this.IndentionNumeric.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.IndentionNumeric.Location = new System.Drawing.Point(181, 40);
+			this.IndentionNumeric.Location = new System.Drawing.Point(147, 40);
 			this.IndentionNumeric.Name = "IndentionNumeric";
-			this.IndentionNumeric.Size = new System.Drawing.Size(86, 20);
+			this.IndentionNumeric.Size = new System.Drawing.Size(116, 20);
 			this.IndentionNumeric.TabIndex = 7;
 			this.toolTip1.SetToolTip(this.IndentionNumeric, "Number of spaces for every indention/tab");
 			// 
@@ -158,7 +153,7 @@
 			// 
 			label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			label5.AutoSize = true;
-			label5.Location = new System.Drawing.Point(178, 21);
+			label5.Location = new System.Drawing.Point(144, 21);
 			label5.Name = "label5";
 			label5.Size = new System.Drawing.Size(90, 13);
 			label5.TabIndex = 6;
@@ -168,7 +163,7 @@
 			// 
 			label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			label4.AutoSize = true;
-			label4.Location = new System.Drawing.Point(135, 70);
+			label4.Location = new System.Drawing.Point(144, 70);
 			label4.Name = "label4";
 			label4.Size = new System.Drawing.Size(120, 13);
 			label4.TabIndex = 4;
@@ -190,7 +185,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.PreBeginBracket.Location = new System.Drawing.Point(7, 86);
 			this.PreBeginBracket.Name = "PreBeginBracket";
-			this.PreBeginBracket.Size = new System.Drawing.Size(125, 20);
+			this.PreBeginBracket.Size = new System.Drawing.Size(122, 20);
 			this.PreBeginBracket.TabIndex = 2;
 			this.toolTip1.SetToolTip(this.PreBeginBracket, "The pre-format of begin { brackets. %TABS% = indention, %NEWLINE% = new line");
 			// 
@@ -198,9 +193,9 @@
 			// 
 			this.PreEndBracket.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.PreEndBracket.Location = new System.Drawing.Point(138, 86);
+			this.PreEndBracket.Location = new System.Drawing.Point(147, 86);
 			this.PreEndBracket.Name = "PreEndBracket";
-			this.PreEndBracket.Size = new System.Drawing.Size(129, 20);
+			this.PreEndBracket.Size = new System.Drawing.Size(116, 20);
 			this.PreEndBracket.TabIndex = 1;
 			this.toolTip1.SetToolTip(this.PreEndBracket, "The pre-format of end } brackets. %TABS% = indention, %NEWLINE% = new line");
 			// 
@@ -217,56 +212,40 @@
 			// 
 			// label6
 			// 
-			label6.AutoSize = true;
 			label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
 			label6.Location = new System.Drawing.Point(3, 38);
 			label6.Name = "label6";
-			label6.Size = new System.Drawing.Size(579, 13);
+			label6.Size = new System.Drawing.Size(562, 61);
 			label6.TabIndex = 3;
 			label6.Text = "Input the path to UE Model Viewer to get integrated support for viewing Meshes an" +
     "d/or Textures through the Content tab!";
 			// 
-			// ArrayTypeDefinitionsSplitter
-			// 
-			ArrayTypeDefinitionsSplitter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			ArrayTypeDefinitionsSplitter.Location = new System.Drawing.Point(87, 19);
-			ArrayTypeDefinitionsSplitter.Name = "ArrayTypeDefinitionsSplitter";
-			// 
-			// ArrayTypeDefinitionsSplitter.Panel1
-			// 
-			ArrayTypeDefinitionsSplitter.Panel1.Controls.Add(this.VariableTypesTree);
-			// 
-			// ArrayTypeDefinitionsSplitter.Panel2
-			// 
-			ArrayTypeDefinitionsSplitter.Panel2.Controls.Add(this.groupBox6);
-			ArrayTypeDefinitionsSplitter.Size = new System.Drawing.Size(507, 148);
-			ArrayTypeDefinitionsSplitter.SplitterDistance = 250;
-			ArrayTypeDefinitionsSplitter.TabIndex = 4;
-			// 
 			// VariableTypesTree
 			// 
+			this.VariableTypesTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.VariableTypesTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.VariableTypesTree.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.VariableTypesTree.ForeColor = System.Drawing.SystemColors.Highlight;
 			this.VariableTypesTree.HideSelection = false;
-			this.VariableTypesTree.Location = new System.Drawing.Point(0, 0);
+			this.VariableTypesTree.Location = new System.Drawing.Point(6, 49);
 			this.VariableTypesTree.Name = "VariableTypesTree";
-			this.VariableTypesTree.Size = new System.Drawing.Size(250, 148);
+			this.VariableTypesTree.Size = new System.Drawing.Size(686, 194);
 			this.VariableTypesTree.TabIndex = 0;
 			this.VariableTypesTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.VariableTypesTree_AfterSelect);
 			// 
 			// groupBox6
 			// 
+			this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBox6.Controls.Add(this.VariableType);
 			this.groupBox6.Controls.Add(this.label8);
 			this.groupBox6.Controls.Add(this.label7);
 			this.groupBox6.Controls.Add(this.VariableTypeGroup);
-			this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupBox6.Location = new System.Drawing.Point(0, 0);
+			this.groupBox6.Location = new System.Drawing.Point(6, 249);
 			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(253, 148);
+			this.groupBox6.Size = new System.Drawing.Size(686, 81);
 			this.groupBox6.TabIndex = 1;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Properties";
@@ -278,9 +257,9 @@
 			this.VariableType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.VariableType.Enabled = false;
 			this.VariableType.FormattingEnabled = true;
-			this.VariableType.Location = new System.Drawing.Point(46, 48);
+			this.VariableType.Location = new System.Drawing.Point(62, 48);
 			this.VariableType.Name = "VariableType";
-			this.VariableType.Size = new System.Drawing.Size(200, 21);
+			this.VariableType.Size = new System.Drawing.Size(618, 21);
 			this.VariableType.TabIndex = 3;
 			this.toolTip1.SetToolTip(this.VariableType, "The data type the array holds");
 			this.VariableType.SelectedIndexChanged += new System.EventHandler(this.VariableType_SelectedIndexChanged);
@@ -308,29 +287,31 @@
 			this.VariableTypeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.VariableTypeGroup.Enabled = false;
-			this.VariableTypeGroup.Location = new System.Drawing.Point(46, 20);
+			this.VariableTypeGroup.Location = new System.Drawing.Point(62, 20);
 			this.VariableTypeGroup.Name = "VariableTypeGroup";
-			this.VariableTypeGroup.Size = new System.Drawing.Size(200, 20);
+			this.VariableTypeGroup.Size = new System.Drawing.Size(618, 20);
 			this.VariableTypeGroup.TabIndex = 0;
 			this.toolTip1.SetToolTip(this.VariableTypeGroup, "Array declaration location Package.Class.Name");
 			this.VariableTypeGroup.TextChanged += new System.EventHandler(this.VariableTypeGroup_TextChanged);
 			// 
 			// groupBox4
 			// 
+			this.groupBox4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.groupBox4.Controls.Add(label6);
 			this.groupBox4.Controls.Add(label2);
 			this.groupBox4.Controls.Add(this.PathButton);
 			this.groupBox4.Controls.Add(this.PathText);
-			this.groupBox4.Location = new System.Drawing.Point(10, 418);
+			this.groupBox4.Location = new System.Drawing.Point(11, 239);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(602, 60);
+			this.groupBox4.Size = new System.Drawing.Size(594, 105);
 			this.groupBox4.TabIndex = 16;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Third-Party";
 			// 
 			// PathButton
 			// 
-			this.PathButton.Location = new System.Drawing.Point(568, 13);
+			this.PathButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.PathButton.Location = new System.Drawing.Point(560, 13);
 			this.PathButton.Name = "PathButton";
 			this.PathButton.Size = new System.Drawing.Size(29, 20);
 			this.PathButton.TabIndex = 1;
@@ -346,18 +327,19 @@
 			this.PathText.ForeColor = System.Drawing.SystemColors.HighlightText;
 			this.PathText.Location = new System.Drawing.Point(123, 13);
 			this.PathText.Name = "PathText";
-			this.PathText.Size = new System.Drawing.Size(439, 20);
+			this.PathText.Size = new System.Drawing.Size(431, 20);
 			this.PathText.TabIndex = 0;
 			this.PathText.TextChanged += new System.EventHandler(this.PathText_TextChanged);
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.groupBox1.Controls.Add(this.CheckBox_LinkObj);
 			this.groupBox1.Controls.Add(this.CheckBox_SerObj);
 			this.groupBox1.Controls.Add(this.CheckBox_ImpObj);
-			this.groupBox1.Location = new System.Drawing.Point(10, 142);
+			this.groupBox1.Location = new System.Drawing.Point(10, 8);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(321, 90);
+			this.groupBox1.Size = new System.Drawing.Size(134, 224);
 			this.groupBox1.TabIndex = 13;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Package Initialization";
@@ -397,52 +379,55 @@
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.groupBox2.Controls.Add(this.NumericUpDown_LicenseeMode);
 			this.groupBox2.Controls.Add(this.NumericUpDown_Version);
 			this.groupBox2.Controls.Add(this.CheckBox_LicenseeMode);
 			this.groupBox2.Controls.Add(this.CheckBox_Version);
 			this.groupBox2.Controls.Add(this.label1);
 			this.groupBox2.Controls.Add(this.ComboBox_NativeTable);
-			this.groupBox2.Location = new System.Drawing.Point(10, 8);
+			this.groupBox2.Location = new System.Drawing.Point(150, 9);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(321, 128);
+			this.groupBox2.Size = new System.Drawing.Size(179, 224);
 			this.groupBox2.TabIndex = 14;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Package Deserialization";
 			// 
 			// NumericUpDown_LicenseeMode
 			// 
-			this.NumericUpDown_LicenseeMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.NumericUpDown_LicenseeMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.NumericUpDown_LicenseeMode.Enabled = false;
-			this.NumericUpDown_LicenseeMode.Location = new System.Drawing.Point(188, 96);
+			this.NumericUpDown_LicenseeMode.Location = new System.Drawing.Point(7, 195);
 			this.NumericUpDown_LicenseeMode.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
 			this.NumericUpDown_LicenseeMode.Name = "NumericUpDown_LicenseeMode";
-			this.NumericUpDown_LicenseeMode.Size = new System.Drawing.Size(123, 20);
+			this.NumericUpDown_LicenseeMode.Size = new System.Drawing.Size(166, 20);
 			this.NumericUpDown_LicenseeMode.TabIndex = 15;
 			// 
 			// NumericUpDown_Version
 			// 
-			this.NumericUpDown_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.NumericUpDown_Version.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.NumericUpDown_Version.Enabled = false;
-			this.NumericUpDown_Version.Location = new System.Drawing.Point(188, 70);
+			this.NumericUpDown_Version.Location = new System.Drawing.Point(7, 146);
 			this.NumericUpDown_Version.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
 			this.NumericUpDown_Version.Name = "NumericUpDown_Version";
-			this.NumericUpDown_Version.Size = new System.Drawing.Size(123, 20);
+			this.NumericUpDown_Version.Size = new System.Drawing.Size(166, 20);
 			this.NumericUpDown_Version.TabIndex = 14;
 			// 
 			// CheckBox_LicenseeMode
 			// 
 			this.CheckBox_LicenseeMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.CheckBox_LicenseeMode.AutoSize = true;
-			this.CheckBox_LicenseeMode.Location = new System.Drawing.Point(10, 96);
+			this.CheckBox_LicenseeMode.Location = new System.Drawing.Point(7, 172);
 			this.CheckBox_LicenseeMode.Name = "CheckBox_LicenseeMode";
 			this.CheckBox_LicenseeMode.Size = new System.Drawing.Size(137, 17);
 			this.CheckBox_LicenseeMode.TabIndex = 13;
@@ -455,7 +440,7 @@
 			// 
 			this.CheckBox_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.CheckBox_Version.AutoSize = true;
-			this.CheckBox_Version.Location = new System.Drawing.Point(10, 73);
+			this.CheckBox_Version.Location = new System.Drawing.Point(7, 123);
 			this.CheckBox_Version.Name = "CheckBox_Version";
 			this.CheckBox_Version.Size = new System.Drawing.Size(91, 17);
 			this.CheckBox_Version.TabIndex = 12;
@@ -481,15 +466,16 @@
 			this.ComboBox_NativeTable.FormattingEnabled = true;
 			this.ComboBox_NativeTable.Location = new System.Drawing.Point(10, 39);
 			this.ComboBox_NativeTable.Name = "ComboBox_NativeTable";
-			this.ComboBox_NativeTable.Size = new System.Drawing.Size(301, 21);
+			this.ComboBox_NativeTable.Size = new System.Drawing.Size(159, 21);
 			this.ComboBox_NativeTable.TabIndex = 10;
 			this.toolTip1.SetToolTip(this.ComboBox_NativeTable, "The NativeFunction definitions to use");
 			// 
 			// Button_Save
 			// 
-			this.Button_Save.Location = new System.Drawing.Point(618, 451);
+			this.Button_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.Button_Save.Location = new System.Drawing.Point(1246, 350);
 			this.Button_Save.Name = "Button_Save";
-			this.Button_Save.Size = new System.Drawing.Size(75, 23);
+			this.Button_Save.Size = new System.Drawing.Size(63, 23);
 			this.Button_Save.TabIndex = 12;
 			this.Button_Save.Text = "Save";
 			this.toolTip1.SetToolTip(this.Button_Save, "Save all changes");
@@ -498,20 +484,25 @@
 			// 
 			// groupBox5
 			// 
-			this.groupBox5.Controls.Add(ArrayTypeDefinitionsSplitter);
+			this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.groupBox5.Controls.Add(this.groupBox6);
+			this.groupBox5.Controls.Add(this.VariableTypesTree);
 			this.groupBox5.Controls.Add(this.DeleteArrayType);
 			this.groupBox5.Controls.Add(this.NewArrayType);
-			this.groupBox5.Location = new System.Drawing.Point(10, 239);
+			this.groupBox5.Location = new System.Drawing.Point(611, 8);
 			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(602, 173);
+			this.groupBox5.Size = new System.Drawing.Size(698, 336);
 			this.groupBox5.TabIndex = 17;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Array Type Definitions";
 			// 
 			// DeleteArrayType
 			// 
+			this.DeleteArrayType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.DeleteArrayType.Enabled = false;
-			this.DeleteArrayType.Location = new System.Drawing.Point(5, 49);
+			this.DeleteArrayType.Location = new System.Drawing.Point(617, 20);
 			this.DeleteArrayType.Name = "DeleteArrayType";
 			this.DeleteArrayType.Size = new System.Drawing.Size(75, 23);
 			this.DeleteArrayType.TabIndex = 3;
@@ -543,15 +534,11 @@
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.Button_Save);
 			this.Name = "UC_Options";
-			this.Size = new System.Drawing.Size(1026, 501);
+			this.Size = new System.Drawing.Size(1312, 500);
 			groupBox3.ResumeLayout(false);
 			groupBox3.PerformLayout();
 			panel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.IndentionNumeric)).EndInit();
-			ArrayTypeDefinitionsSplitter.Panel1.ResumeLayout(false);
-			ArrayTypeDefinitionsSplitter.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(ArrayTypeDefinitionsSplitter)).EndInit();
-			ArrayTypeDefinitionsSplitter.ResumeLayout(false);
 			this.groupBox6.ResumeLayout(false);
 			this.groupBox6.PerformLayout();
 			this.groupBox4.ResumeLayout(false);
