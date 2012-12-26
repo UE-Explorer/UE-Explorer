@@ -214,28 +214,30 @@ namespace UEExplorer.UI.Dialogs
 		private void InitializeMetaInfoFields()
 		{
 #if DEBUG || BINARYMETADATA
-			var randomizer1 = new Random( Target.BinaryMetaData.Fields.Count );
-			foreach( var binaryField in Target.BinaryMetaData.Fields )
+			if( Target.BinaryMetaData != null )
 			{
-				var red = randomizer1.Next( Byte.MaxValue );
-				var green = randomizer1.Next( Byte.MaxValue );
-				var blue = randomizer1.Next( Byte.MaxValue );
+				var randomizer1 = new Random( Target.BinaryMetaData.Fields.Count );
+				foreach( var binaryField in Target.BinaryMetaData.Fields )
+				{
+					var red = randomizer1.Next( Byte.MaxValue );
+					var green = randomizer1.Next( Byte.MaxValue );
+					var blue = randomizer1.Next( Byte.MaxValue );
 
-				_Structure.MetaInfoList.Add
-				(
-					new HexMetaInfo.BytesMetaInfo
-					{
-						Position = (int)(binaryField.Position),
-						Size = (int)binaryField.Size,
-						Type = "Generated",
-						Color = Color.FromArgb( red, green, blue ),
-						Name = binaryField.Name,
-						Tag = binaryField
-					}
-				);
+					_Structure.MetaInfoList.Add
+					(
+						new HexMetaInfo.BytesMetaInfo
+						{
+							Position = (int)(binaryField.Position),
+							Size = (int)binaryField.Size,
+							Type = "Generated",
+							Color = Color.FromArgb( red, green, blue ),
+							Name = binaryField.Name,
+							Tag = binaryField
+						}
+					);
+				}
 			}
 #endif
-
 			if( !(Target is UStruct) )
 				return;
 
