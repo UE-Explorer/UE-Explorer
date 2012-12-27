@@ -294,43 +294,46 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
   <data name="Version" xml:space="preserve">
     <value>Versie {0}</value>
   </data>
-	<data name="CLASS_ISNT_SUPPORTED">
-		<value xml:space="preserve">Klass {0} is niet ondersteund</value>
-	</data>
-	<data name="NodeItem_ViewObject">
-		<value xml:space="preserve">Bekijk object</value>
-	</data>
-	<data name="NodeItem_OpenInUEModelViewer">
-		<value xml:space="preserve">Openen in UE Model Viewer</value>
-	</data>
-	<data name="NodeItem_ExportWithUEModelViewer">
-		<value xml:space="preserve">Exporteer met UE Model Viewer</value>
-	</data>
-	<data name="NodeItem_ViewContent">
-		<value xml:space="preserve">Bekijk inhoud</value>
-	</data>
-	<data name="NodeItem_ViewUsedTags">
-		<value xml:space="preserve">Bekijk gebruikte tags</value>
-	</data>
-	<data name="NodeItem_ViewReplication">
-		<value xml:space="preserve">Bekijk Replication</value>
-	</data>
-	<data name="NodeItem_ViewTokens">
-		<value xml:space="preserve">Bekijk Tokens</value>
-	</data>
-	<data name="NodeItem_ViewScript">
-		<value xml:space="preserve">Bekijk Script</value>
-	</data>
-	<data name="NodeItem_ViewDefaultProperties">
-		<value xml:space="preserve">Bekijk DefaultProperties</value>
-	</data>
-	<data name="NodeItem_ViewBuffer">
-		<value xml:space="preserve">Bekijk Buffer</value>
-	</data>
-	<data name="NodeItem_ViewException">
-		<value xml:space="preserve">Bekijk uitzondering</value>
-	</data>
-	<data name="NodeItem_ManagedProperties">
-		<value xml:space="preserve">Managed eigenschappen</value>
-	</data>
+  <data name="CLASS_ISNT_SUPPORTED" xml:space="preserve">
+    <value>Klass {0} is niet ondersteund</value>
+  </data>
+  <data name="NodeItem_ViewObject" xml:space="preserve">
+    <value>Bekijk object</value>
+  </data>
+  <data name="NodeItem_OpenInUEModelViewer" xml:space="preserve">
+    <value>Openen in UE Model Viewer</value>
+  </data>
+  <data name="NodeItem_ExportWithUEModelViewer" xml:space="preserve">
+    <value>Exporteer met UE Model Viewer</value>
+  </data>
+  <data name="NodeItem_ViewContent" xml:space="preserve">
+    <value>Bekijk inhoud</value>
+  </data>
+  <data name="NodeItem_ViewUsedTags" xml:space="preserve">
+    <value>Bekijk gebruikte tags</value>
+  </data>
+  <data name="NodeItem_ViewReplication" xml:space="preserve">
+    <value>Bekijk Replication</value>
+  </data>
+  <data name="NodeItem_ViewTokens" xml:space="preserve">
+    <value>Bekijk Tokens</value>
+  </data>
+  <data name="NodeItem_ViewScript" xml:space="preserve">
+    <value>Bekijk Script</value>
+  </data>
+  <data name="NodeItem_ViewDefaultProperties" xml:space="preserve">
+    <value>Bekijk DefaultProperties</value>
+  </data>
+  <data name="NodeItem_ViewBuffer" xml:space="preserve">
+    <value>Bekijk Buffer</value>
+  </data>
+  <data name="NodeItem_ViewException" xml:space="preserve">
+    <value>Bekijk uitzondering</value>
+  </data>
+  <data name="NodeItem_ManagedProperties" xml:space="preserve">
+    <value>Managed eigenschappen</value>
+  </data>
+  <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
+    <value>Bekijk Table Buffer</value>
+  </data>
 </root>

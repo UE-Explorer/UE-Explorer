@@ -32,7 +32,7 @@
 			System.Windows.Forms.Label label4;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
 			System.Windows.Forms.SplitContainer splitContainer1;
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.Panel filterPanel;
 			System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
 			this.Panel_Main = new System.Windows.Forms.Panel();
@@ -389,14 +389,14 @@
 			this.DataGridView_Flags.MultiSelect = false;
 			this.DataGridView_Flags.Name = "DataGridView_Flags";
 			this.DataGridView_Flags.ReadOnly = true;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
 			this.DataGridView_Flags.RowHeadersVisible = false;
 			this.DataGridView_Flags.ShowCellErrors = false;
 			this.DataGridView_Flags.ShowEditingIcon = false;
@@ -696,6 +696,7 @@
 			this.TreeView_Imports.ImageList = this.VSIcons;
 			this.TreeView_Imports.Name = "TreeView_Imports";
 			this.TreeView_Imports.ShowNodeToolTips = true;
+			this.TreeView_Imports.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Imports_NodeMouseClick);
 			// 
 			// TabPage_Generations
 			// 

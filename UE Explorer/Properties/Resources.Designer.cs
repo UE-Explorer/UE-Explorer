@@ -407,6 +407,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View Table Buffer.
+        /// </summary>
+        internal static string NodeItem_ViewTableBuffer {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewTableBuffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Tokens.
         /// </summary>
         internal static string NodeItem_ViewTokens {
@@ -430,6 +439,15 @@ namespace UEExplorer.Properties {
         internal static string NOT_AVAILABLE {
             get {
                 return ResourceManager.GetString("NOT_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No target found for &quot;View Buffer&quot;.
+        /// </summary>
+        internal static string NoTargetForViewBuffer {
+            get {
+                return ResourceManager.GetString("NoTargetForViewBuffer", resourceCulture);
             }
         }
         

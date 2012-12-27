@@ -12,15 +12,13 @@ namespace UEExplorer.UI.Dialogs
 {
 	using Properties;
 	using UELib;
-	using UELib.Core;
-	using UELib.Tokens;
 	using UStruct = UELib.Core.UStruct;
 
 	// TODO: REFACTOR, and rewrite all of it to be more concise, less duplicational.
 	public partial class UserControl_HexView : UserControl
 	{
 		public byte[] Buffer{ get; set; }
-		public UObject Target{ get; private set; }
+		public IBuffered Target{ get; private set; }
 
 		public class HexMetaInfo 
 		{
@@ -182,13 +180,13 @@ namespace UEExplorer.UI.Dialogs
 			_Structure.MetaInfoList.AddRange( backupInfo );
 		}
 
-		public void SetHexData( UObject target )
+		public void SetHexData( IBuffered target )
 		{
 			if( target == null ) 
 				return;
 
 			Target = target;
-			Buffer = Target.GetBuffer();
+			Buffer = Target.CopyBuffer();
 			
 			if( Buffer != null )
 			{
@@ -214,10 +212,11 @@ namespace UEExplorer.UI.Dialogs
 		private void InitializeMetaInfoFields()
 		{
 #if DEBUG || BINARYMETADATA
-			if( Target.BinaryMetaData != null )
+			var binaryTarget = Target as IBinaryData;
+			if( binaryTarget != null && binaryTarget.BinaryMetaData != null )
 			{
-				var randomizer1 = new Random( Target.BinaryMetaData.Fields.Count );
-				foreach( var binaryField in Target.BinaryMetaData.Fields )
+				var randomizer1 = new Random( binaryTarget.BinaryMetaData.Fields.Count );
+				foreach( var binaryField in binaryTarget.BinaryMetaData.Fields )
 				{
 					var red = randomizer1.Next( Byte.MaxValue );
 					var green = randomizer1.Next( Byte.MaxValue );
@@ -267,22 +266,12 @@ namespace UEExplorer.UI.Dialogs
 			}
 		}
 
+		private readonly string _ConfigPath = System.IO.Path.Combine( Application.StartupPath, "DataStructures", "{0}", "{1}" ) + ".xml";
 		private string GetConfigPath()
 		{
-			string folderName = Target.Package != null 
-				? Target.Package.PackageName 
-				: Target.Name;
-
-			var outers = Target.Package != null 
-				? Target.GetOuterGroup() 
-				: folderName; 
-
-			return System.IO.Path.Combine( 
-				Application.StartupPath, 
-				"DataStructures",
-				folderName,
-				outers
-			) + ".xml";
+			var folderName = Target.GetBufferId( true );
+			folderName = folderName.Substring( 0, folderName.IndexOf( '.' ) );
+			return String.Format( _ConfigPath, folderName, Target.GetBufferId() );
 		}
 
 		private void HexLinePanel_Paint( object sender, PaintEventArgs e )
@@ -548,9 +537,9 @@ namespace UEExplorer.UI.Dialogs
 				hexViewDialog.ToolStripStatusLabel_Position.Text = String.Format
 				( 
 					Resources.HexView_Position, 
-					Target.ExportTable != null ? Target.ExportTable.SerialOffset : 0, 
+					Target.GetBufferPosition(), 
 					SelectedOffset,
-					Target.ExportTable != null ? Target.ExportTable.SerialOffset : SelectedOffset
+					Target.GetBufferPosition()
 				);
 			}
 			var bufferSelection = new byte[8];
@@ -571,7 +560,7 @@ namespace UEExplorer.UI.Dialogs
 
 			try
 			{
-				var index = UnrealReader.ReadIndexFromBuffer( bufferSelection, Target.Package );
+				var index = UnrealReader.ReadIndexFromBuffer( bufferSelection, Target.GetBuffer() );
 				DissambledIndex.Text = index.ToString( CultureInfo.InvariantCulture );
 			}
 			catch
@@ -581,7 +570,7 @@ namespace UEExplorer.UI.Dialogs
 
 			try
 			{
-				var obj = Target.Package.GetIndexObject( UnrealReader.ReadIndexFromBuffer( bufferSelection, Target.Package ) );
+				var obj = Target.GetBuffer().ParseObject( UnrealReader.ReadIndexFromBuffer( bufferSelection, Target.GetBuffer() ) );
 				DissambledObject.Text = obj == null ? Resources.NOT_AVAILABLE : obj.GetOuterGroup();
 			}
 			catch
@@ -591,28 +580,11 @@ namespace UEExplorer.UI.Dialogs
 
 			try
 			{
-				DissambledName.Text = String.Empty 
-					+ Target.Package.GetIndexName( UnrealReader.ReadIndexFromBuffer( bufferSelection, Target.Package ) );
+				DissambledName.Text = Target.GetBuffer().ParseName( UnrealReader.ReadIndexFromBuffer( bufferSelection, Target.GetBuffer() ) );
 			}
 			catch
 			{
 				DissambledName.Text = Resources.NOT_AVAILABLE;
-			}
-
-			try
-			{
-				byte byteCode = bufferSelection[0];
-				if( Target.Package.Version >= 184 && 
-					((byteCode >= (byte)ExprToken.Unknown && byteCode < (byte)ExprToken.ReturnNothing) 
-					|| (byteCode > (byte)ExprToken.NoDelegate && byteCode < (byte)ExprToken.ExtendedNative)) )
-				{
-		  			++ byteCode;
-				}
-				DissambledByteCode.Text = String.Format( "{0}:{1}", (ExprToken)byteCode, (CastToken)byteCode );
-			}
-			catch
-			{
-				DissambledByteCode.Text = Resources.NOT_AVAILABLE;
 			}
 
 			DissambledStruct.Text = String.Empty;

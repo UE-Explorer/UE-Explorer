@@ -31,7 +31,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HexViewDialog));
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.SizeLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.ToolStripStatusLabel_Position = new System.Windows.Forms.ToolStripStatusLabel();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +45,7 @@
 			this.viewByteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.userControl_HexView1 = new UEExplorer.UI.Dialogs.UserControl_HexView();
+			this.HexPanel = new UEExplorer.UI.Dialogs.UserControl_HexView();
 			this.panel1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
@@ -55,23 +55,23 @@
 			// 
 			this.panel1.Controls.Add(this.statusStrip1);
 			this.panel1.Controls.Add(this.menuStrip1);
-			this.panel1.Controls.Add(this.userControl_HexView1);
+			this.panel1.Controls.Add(this.HexPanel);
 			resources.ApplyResources(this.panel1, "panel1");
 			this.panel1.Name = "panel1";
 			// 
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
+            this.SizeLabel,
             this.ToolStripStatusLabel_Position});
 			resources.ApplyResources(this.statusStrip1, "statusStrip1");
 			this.statusStrip1.Name = "statusStrip1";
 			// 
 			// toolStripStatusLabel1
 			// 
-			this.toolStripStatusLabel1.BackColor = System.Drawing.Color.Transparent;
-			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-			resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+			this.SizeLabel.BackColor = System.Drawing.Color.Transparent;
+			this.SizeLabel.Name = "toolStripStatusLabel1";
+			resources.ApplyResources(this.SizeLabel, "toolStripStatusLabel1");
 			// 
 			// ToolStripStatusLabel_Position
 			// 
@@ -104,13 +104,13 @@
 			// 
 			this.copyBytesToolStripMenuItem.Name = "copyBytesToolStripMenuItem";
 			resources.ApplyResources(this.copyBytesToolStripMenuItem, "copyBytesToolStripMenuItem");
-			this.copyBytesToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+			this.copyBytesToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
 			// 
 			// copyViewToolStripMenuItem
 			// 
 			this.copyViewToolStripMenuItem.Name = "copyViewToolStripMenuItem";
 			resources.ApplyResources(this.copyViewToolStripMenuItem, "copyViewToolStripMenuItem");
-			this.copyViewToolStripMenuItem.Click += new System.EventHandler(this.copyAsViewToolStripMenuItem_Click);
+			this.copyViewToolStripMenuItem.Click += new System.EventHandler(this.CopyAsViewToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -121,13 +121,13 @@
 			// 
 			this.exportBinaryFileToolStripMenuItem.Name = "exportBinaryFileToolStripMenuItem";
 			resources.ApplyResources(this.exportBinaryFileToolStripMenuItem, "exportBinaryFileToolStripMenuItem");
-			this.exportBinaryFileToolStripMenuItem.Click += new System.EventHandler(this.exportBinaryFileToolStripMenuItem_Click);
+			this.exportBinaryFileToolStripMenuItem.Click += new System.EventHandler(this.ExportBinaryFileToolStripMenuItem_Click);
 			// 
 			// importBinaryFileToolStripMenuItem
 			// 
 			this.importBinaryFileToolStripMenuItem.Name = "importBinaryFileToolStripMenuItem";
 			resources.ApplyResources(this.importBinaryFileToolStripMenuItem, "importBinaryFileToolStripMenuItem");
-			this.importBinaryFileToolStripMenuItem.Click += new System.EventHandler(this.importBinaryFileToolStripMenuItem_Click);
+			this.importBinaryFileToolStripMenuItem.Click += new System.EventHandler(this.ImportBinaryFileToolStripMenuItem_Click);
 			// 
 			// viewToolStripMenuItem
 			// 
@@ -144,7 +144,7 @@
 			this.viewASCIIToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.viewASCIIToolStripMenuItem.Name = "viewASCIIToolStripMenuItem";
 			resources.ApplyResources(this.viewASCIIToolStripMenuItem, "viewASCIIToolStripMenuItem");
-			this.viewASCIIToolStripMenuItem.CheckedChanged += new System.EventHandler(this.viewASCIIToolStripMenuItem_CheckedChanged);
+			this.viewASCIIToolStripMenuItem.CheckedChanged += new System.EventHandler(this.ViewASCIIToolStripMenuItem_CheckedChanged);
 			// 
 			// viewByteToolStripMenuItem
 			// 
@@ -153,7 +153,7 @@
 			this.viewByteToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.viewByteToolStripMenuItem.Name = "viewByteToolStripMenuItem";
 			resources.ApplyResources(this.viewByteToolStripMenuItem, "viewByteToolStripMenuItem");
-			this.viewByteToolStripMenuItem.CheckedChanged += new System.EventHandler(this.viewByteToolStripMenuItem_CheckedChanged);
+			this.viewByteToolStripMenuItem.CheckedChanged += new System.EventHandler(this.ViewByteToolStripMenuItem_CheckedChanged);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -166,17 +166,16 @@
 			// 
 			resources.ApplyResources(this.infoToolStripMenuItem, "infoToolStripMenuItem");
 			this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-			this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
 			// 
 			// userControl_HexView1
 			// 
-			resources.ApplyResources(this.userControl_HexView1, "userControl_HexView1");
-			this.userControl_HexView1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-			this.userControl_HexView1.BackColor = System.Drawing.SystemColors.Window;
-			this.userControl_HexView1.Buffer = null;
-			this.userControl_HexView1.DrawASCII = true;
-			this.userControl_HexView1.DrawByte = true;
-			this.userControl_HexView1.Name = "userControl_HexView1";
+			resources.ApplyResources(this.HexPanel, "userControl_HexView1");
+			this.HexPanel.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+			this.HexPanel.BackColor = System.Drawing.SystemColors.Window;
+			this.HexPanel.Buffer = null;
+			this.HexPanel.DrawASCII = true;
+			this.HexPanel.DrawByte = true;
+			this.HexPanel.Name = "userControl_HexView1";
 			// 
 			// HexViewDialog
 			// 
@@ -200,9 +199,9 @@
 		#endregion
 
 		private System.Windows.Forms.Panel panel1;
-		private UserControl_HexView userControl_HexView1;
+		private UserControl_HexView HexPanel;
 		private System.Windows.Forms.StatusStrip statusStrip1;
-		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+		private System.Windows.Forms.ToolStripStatusLabel SizeLabel;
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewASCIIToolStripMenuItem;

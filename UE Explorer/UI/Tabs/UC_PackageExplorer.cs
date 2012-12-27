@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using UEExplorer.Properties;
+using UELib.Engine;
 
 namespace UEExplorer.UI.Tabs
 {
@@ -15,7 +16,6 @@ namespace UEExplorer.UI.Tabs
 
 	using UELib;
 	using UELib.Core;
-	using UELib.Engine;
 	using UELib.Flags;
 
 	[System.Runtime.InteropServices.ComVisible( false )]
@@ -377,34 +377,21 @@ namespace UEExplorer.UI.Tabs
 			{
 				File.WriteAllText( sfd.FileName, TextEditorPanel.textEditor.Text );
 			}
-		}	
+		}
 
-		internal class UnrealTableNode : TreeNode 
+		private abstract class UnrealTableNode : TreeNode 
 		{
 			internal UObjectTableItem Table;
 			protected bool _Initialized;
 
-			public virtual void Initialize()
-			{
-			}
+			public abstract void Initialize();
 		}
 
-		private class ExportNode : UnrealTableNode, IDecompilableObjectNode
+		private class ExportNode : UnrealTableNode, IDecompilableObject
 		{
 			public IUnrealDecompilable Object
 			{
 				get{ return Table.Object; }
-				set{ Table.Object = value as UObject; }
- 			}
-
-			public bool CanViewBuffer
-			{
-				get{ return true; }
-			}
-
-			public bool AllowDecompile
-			{
-				get{ return true; }
 			}
 
 			public string Decompile()
@@ -484,12 +471,26 @@ namespace UEExplorer.UI.Tabs
 			}
 		}
 
-		private class ImportNode : UnrealTableNode
+		private class ImportNode : UnrealTableNode, IDecompilableObject
 		{
+			public IUnrealDecompilable Object
+			{
+				get{ return Table.Object; }
+			}
+
+			public string Decompile()
+			{
+				string output = String.Empty;
+				output += "\r\nOffset:" + Table.Offset;
+				output += "\r\nSize:" + Table.Size;
+				return output;
+			}
+
 			public ImportNode()
 			{
 				Nodes.Add( "DUMMYNODE" );
 			}
+
 			public override void Initialize()
 			{
 				if( _Initialized )
@@ -975,16 +976,16 @@ namespace UEExplorer.UI.Tabs
 		{
 			try
 			{
-				if( treeNode is IDecompilableNode )
+				if( treeNode is IUnrealDecompilable )
 				{
-					SetContentText( treeNode, ((IDecompilableNode)treeNode).Decompile() );
+					SetContentText( treeNode, ((IUnrealDecompilable)treeNode).Decompile() );
 
 					// Assemble a title
 					string newTitle;
-					if( treeNode is IDecompilableObjectNode )
+					if( treeNode is IDecompilableObject )
 					{
 						UObject obj;
-						if( (obj = ((IDecompilableObjectNode)treeNode).Object as UObject) != null )
+						if( (obj = ((IDecompilableObject)treeNode).Object as UObject) != null )
 						{
 							newTitle = obj.GetOuterGroup();
 							if( obj.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
@@ -1050,7 +1051,7 @@ namespace UEExplorer.UI.Tabs
 			{
 				var node = e.Node as ObjectNode;
 				// This makes sure that this only applies to the first Nodes of TreeView_Classes, and only the first time!
-				if( node != null && !((UObject)node.Object).InitializedNodes )
+				if( node != null && !((UObject)node.Object).HasInitializedNodes )
 				{
 					TreeView_Classes.BeginUpdate();
 					// Clear DUMMYNODE
@@ -1125,11 +1126,11 @@ namespace UEExplorer.UI.Tabs
 				item.Name = id;
 			});
 
-			var decompilableNode = performingNode as IDecompilableNode;
+			var decompilableNode = performingNode as IUnrealDecompilable;
 			if( decompilableNode != null ) 
 			{ 
 				addItem.Invoke( Resources.NodeItem_ViewObject, "OBJECT" );
-				var decompilableObjectNode = decompilableNode as IDecompilableObjectNode;
+				var decompilableObjectNode = decompilableNode as IDecompilableObject;
 				if( decompilableObjectNode != null )
 				{
 					if( decompilableObjectNode.Object is IUnrealViewable )
@@ -1151,9 +1152,9 @@ namespace UEExplorer.UI.Tabs
 						addItem.Invoke( Resources.NodeItem_ViewUsedTags, "USED_TAGS" );	
 					}
 
-					if( decompilableObjectNode.Object is UStruct )
+					var unStruct = (decompilableObjectNode.Object as UStruct); 
+					if( unStruct != null )
 					{
-						var unStruct = (decompilableObjectNode.Object as UStruct); 
 						if( unStruct.DataScriptSize > 0 )
 						{
 							if( decompilableObjectNode.Object is UClass )
@@ -1169,26 +1170,35 @@ namespace UEExplorer.UI.Tabs
 							addItem.Invoke( Resources.NodeItem_ViewScript, "SCRIPT" );	
 						}
 
-						if( unStruct.Properties != null && unStruct.Properties.Count > 0 )
+						if( unStruct.Properties != null && unStruct.Properties.Any() )
 						{
 							addItem.Invoke( Resources.NodeItem_ViewDefaultProperties, "DEFAULTPROPERTIES" );	
 						}
 					}
 
-					if( (decompilableObjectNode.Object as ISupportsBuffer) != null )
-					{ 
-						addItem.Invoke( Resources.NodeItem_ViewBuffer, "BUFFER" );
+					var bufferedObject = decompilableObjectNode.Object as IBuffered;
+					if( bufferedObject != null && bufferedObject.GetBuffer() != null )
+					{
+						if( bufferedObject.GetBufferSize() > 0 )
+						{ 
+							addItem.Invoke( Resources.NodeItem_ViewBuffer, "BUFFER" );
+						}
+
+						var tableNode = decompilableObjectNode as UnrealTableNode;
+						if( tableNode != null && tableNode.Table != null )
+						{ 
+							addItem.Invoke( Resources.NodeItem_ViewTableBuffer, "TABLEBUFFER" );
+						}
 					}
 
 					var myObj = decompilableObjectNode.Object as UObject;
-					if( myObj != null && myObj.ThrownException != null )
+					if( myObj != null )
 					{
-						itemCollection.Add( new ToolStripSeparator() );
-						addItem.Invoke( Resources.NodeItem_ViewException, "EXCEPTION" );		
-					}
-
-					if( decompilableObjectNode.Object is IUnrealDeserializableObject )
-					{
+						if( myObj.ThrownException != null )
+						{
+							itemCollection.Add( new ToolStripSeparator() );
+							addItem.Invoke( Resources.NodeItem_ViewException, "EXCEPTION" );		
+						}
 						itemCollection.Add( new ToolStripSeparator() );
 						addItem.Invoke( Resources.NodeItem_ManagedProperties, "MANAGED_PROPERTIES" );
 						#if DEBUG
@@ -1201,29 +1211,20 @@ namespace UEExplorer.UI.Tabs
 
 		private void _OnClassesItemClicked( object sender, ToolStripItemClickedEventArgs e )
 		{
-			if( TreeView_Classes.SelectedNode is ObjectNode )
-			{
-				PerformNodeAction( TreeView_Classes.SelectedNode as ObjectNode, e.ClickedItem.Name );
-			}			
+			PerformNodeAction( TreeView_Classes.SelectedNode as IDecompilableObject, e.ClickedItem.Name );	
 		}
 
 		private void _OnExportsItemClicked( object sender, ToolStripItemClickedEventArgs e )
 		{
-			if( TreeView_Exports.SelectedNode is ExportNode )
-			{
-				PerformNodeAction( TreeView_Exports.SelectedNode as ExportNode, e.ClickedItem.Name );
-			}	
+			PerformNodeAction( TreeView_Exports.SelectedNode as IDecompilableObject, e.ClickedItem.Name );
 		}
 
 		private void _OnContentItemClicked( object sender, ToolStripItemClickedEventArgs e )
 		{
-			if( TreeView_Content.SelectedNode is ObjectNode )
-			{
-				PerformNodeAction( TreeView_Content.SelectedNode as ObjectNode, e.ClickedItem.Name );
-			}	
+			PerformNodeAction( TreeView_Content.SelectedNode as IDecompilableObject, e.ClickedItem.Name );
 		}
 
-		private void PerformNodeAction( IDecompilableObjectNode node, string action )
+		private void PerformNodeAction( IDecompilableObject node, string action )
 		{
 			if( node == null )
 				return;
@@ -1240,13 +1241,12 @@ namespace UEExplorer.UI.Tabs
 							var cnode = n.Object as UMetaData;
 							if( cnode != null )
 							{
-								Label_ObjectName.Text = node.Text;
+								Label_ObjectName.Text = ((TreeNode)node).Text;
 								SetContentText( node as TreeNode, cnode.GetUniqueMetas() );
 							}
 						}
 						break;
 					}
-
 #if DEBUG
 					case "CONTENT":
 					{
@@ -1286,7 +1286,7 @@ namespace UEExplorer.UI.Tabs
 							Program.Options.UEModelAppPath, 
 							"-path=" + _UnrealPackage.PackageDirectory
 							+ " " + _UnrealPackage.PackageName
-							+ " " + node.Text
+							+ " " + ((TreeNode)node).Text
 						);
 						break;
 					}
@@ -1303,7 +1303,7 @@ namespace UEExplorer.UI.Tabs
 							+ " " + "-out="  + contentDir
 							+ " -export"
 							+ " " + _UnrealPackage.PackageName
-							+ " " + node.Text;
+							+ " " + ((TreeNode)node).Text;
 						var appInfo = new ProcessStartInfo
 						(
 							Program.Options.UEModelAppPath, 
@@ -1312,7 +1312,7 @@ namespace UEExplorer.UI.Tabs
 						appInfo.UseShellExecute = false;
 						appInfo.RedirectStandardOutput = true;
 						appInfo.CreateNoWindow = false;
-						var app = System.Diagnostics.Process.Start( appInfo );
+						var app = Process.Start( appInfo );
 						var log = String.Empty;
 						app.OutputDataReceived += (sender, e) => log += e.Data;
 						//app.WaitForExit();
@@ -1325,7 +1325,7 @@ namespace UEExplorer.UI.Tabs
 								MessageBoxButtons.YesNo 
 								) == DialogResult.Yes )
 							{
-								System.Diagnostics.Process.Start( contentDir );
+								Process.Start( contentDir );
 							}
 						}
 						else
@@ -1345,22 +1345,22 @@ namespace UEExplorer.UI.Tabs
 					}						
 
 					case "OBJECT":
-						Label_ObjectName.Text = node.Text;
+						Label_ObjectName.Text = ((TreeNode)node).Text;
 						SetContentText( node as TreeNode, node.Decompile() );
 						break;
 
 					case "MANAGED_PROPERTIES":
 						var propDialog = new PropertiesDialog();
-						propDialog.ObjectLabel.Text = node.Text;
+						propDialog.ObjectLabel.Text = ((TreeNode)node).Text;
 						propDialog.ObjectPropertiesGrid.SelectedObject = node.Object;
 						propDialog.ShowDialog( this );
 						break;
 
 #if DEBUG
 					case "FORCE_DESERIALIZE":
-						Label_ObjectName.Text = node.Text;
+						Label_ObjectName.Text = ((TreeNode)node).Text;
 
-						((IUnrealDeserializableObject)node.Object).BeginDeserializing();
+						((UObject)node.Object).BeginDeserializing();
 						((UObject)node.Object).PostInitialize();
 						break;
 #endif
@@ -1403,7 +1403,7 @@ namespace UEExplorer.UI.Tabs
 						var unStruct = node.Object as UStruct;
 						if( unStruct != null && unStruct.DataScriptSize > 0 )
 						{
-							Label_ObjectName.Text = node.Text;
+							Label_ObjectName.Text = ((TreeNode)node).Text;
 
 							var codeDec = unStruct.ByteCodeManager;
 							codeDec.Deserialize();
@@ -1458,9 +1458,13 @@ namespace UEExplorer.UI.Tabs
 
 					case "BUFFER":
 					{
-						var obj = node.Object as UObject;
-						var hvd = new HexViewDialog( obj, this );
-						hvd.Show( _Form );
+						ViewBufferFor( node.Object as IBuffered );
+						break;
+					}
+
+					case "TABLEBUFFER":
+					{
+						ViewBufferFor( ((UnrealTableNode)(node)).Table );
 						break;
 					}
 
@@ -1668,9 +1672,19 @@ namespace UEExplorer.UI.Tabs
 
 		private void ViewBufferToolStripMenuItem_Click( object sender, EventArgs e )
 		{
-			var obj = new UPackageObject( _UnrealPackage, _SummarySize );
-			var hvd = new HexViewDialog( obj, this );
-			hvd.Show( _Form );
+			ViewBufferFor( _UnrealPackage );
+		}
+
+		private void ViewBufferFor( IBuffered target )
+		{
+			if( target == null )
+			{
+ 				MessageBox.Show( Resources.NoTargetForViewBuffer );
+				return;
+			}
+
+			var hexDialog = new HexViewDialog( target, this );
+			hexDialog.Show( _Form );
 		}
 
 		private readonly List<TreeNode> _FilteredNodes = new List<TreeNode>();
@@ -1822,7 +1836,7 @@ namespace UEExplorer.UI.Tabs
 				_SuppressNodeSelect = false;
 				return;
 			}
-			PerformNodeAction( e.Node as IDecompilableObjectNode, "OBJECT" );
+			PerformNodeAction( e.Node as IDecompilableObject, "OBJECT" );
 		}
 
 		private void ViewTools_DropDownItemClicked( object sender, ToolStripItemClickedEventArgs e )
@@ -1830,7 +1844,7 @@ namespace UEExplorer.UI.Tabs
 			if( _LastNodeContent == null )
 				return;
 
-			var decompilableObject = _LastNodeContent as IDecompilableObjectNode;
+			var decompilableObject = _LastNodeContent as IDecompilableObject;
 			if( decompilableObject == null )
 			{
 				return;
@@ -2033,26 +2047,18 @@ namespace UEExplorer.UI.Tabs
 			}
 			EditorUtil.FindText( TextEditorPanel, SearchBox.Text );
 		}
-	}
 
-	internal class UPackageObject : UObject
-	{
-		private readonly byte[] _MyBufferData;
-
-		public UPackageObject( UnrealPackage package, long summarySize )
+		private void _OnImportsItemClicked( object sender, ToolStripItemClickedEventArgs e )
 		{
-			_MyBufferData = new byte[summarySize];
-			package.Stream.Position = 0;
-			package.Stream.Read( _MyBufferData, 0, (int)summarySize );
-			//SwitchPackage( package );
-
-			Name = package.PackageName;
+			PerformNodeAction( TreeView_Imports.SelectedNode as IDecompilableObject, e.ClickedItem.Name );
 		}
 
-		/// <inheritdoc/>
-		public override byte[] GetBuffer()
+		private void TreeView_Imports_NodeMouseClick( object sender, TreeNodeMouseClickEventArgs e )
 		{
-			return _MyBufferData;
+			if( e.Button != MouseButtons.Right ) 
+				return;
+
+			ShowNodeContextMenuStrip( TreeView_Imports, e, _OnImportsItemClicked );
 		}
 	}
 }
