@@ -408,10 +408,13 @@
 			this.Controls.Add(this.HomepageButton);
 			this.Controls.Add(this.TabComponentsStrip);
 			this.Controls.Add(this.UEStatusStrip);
+			this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::UEExplorer.Properties.Settings.Default, "ProgramForm_Location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.DoubleBuffered = true;
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.Location = global::UEExplorer.Properties.Settings.Default.ProgramForm_Location;
 			this.Menu = this.mainMenu1;
 			this.Name = "ProgramForm";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProgramForm_FormClosing);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProgramForm_FormClosed);
 			this.Shown += new System.EventHandler(this.Unreal_Explorer_Form_Shown);
 			this.DragDrop += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragDrop);

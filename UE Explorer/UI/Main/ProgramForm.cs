@@ -487,6 +487,11 @@ namespace UEExplorer.UI
 		{
 			System.Diagnostics.Process.Start( "http://www.facebook.com/UE.Explorer" );
 		}
+
+		private void ProgramForm_FormClosing( object sender, FormClosingEventArgs e )
+		{
+			Properties.Settings.Default.Save();
+		}
 	}
 
 	public static class ProgressStatus

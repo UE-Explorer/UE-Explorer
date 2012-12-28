@@ -1,7 +1,18 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="UEExplorer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ProgramForm_Location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">500, 500</Value>
+    </Setting>
+    <Setting Name="ProgramForm_Size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">929, 562</Value>
+    </Setting>
+    <Setting Name="InfoContentSplitter_SplitterDistance" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">330</Value>
+    </Setting>
+    <Setting Name="ProgramForm_WindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
