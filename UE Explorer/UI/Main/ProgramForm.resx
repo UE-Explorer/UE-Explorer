@@ -141,7 +141,7 @@
     <value>False</value>
   </data>
   <data name="ProgressLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>806, 17</value>
+    <value>777, 17</value>
   </data>
   <data name="ProgressLabel.Text" xml:space="preserve">
     <value>Ready</value>
@@ -198,10 +198,10 @@
     <value>Platform</value>
   </data>
   <data name="UEStatusStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 540</value>
+    <value>0, 578</value>
   </data>
   <data name="UEStatusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>929, 22</value>
+    <value>900, 22</value>
   </data>
   <data name="UEStatusStrip.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -244,7 +244,7 @@
     <value>Storm.TabControl.TabStripItem, Storm.TabControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="TabComponentsStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>929, 540</value>
+    <value>900, 578</value>
   </data>
   <data name="TabComponentsStrip.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -496,7 +496,7 @@
     <value>Center</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>929, 562</value>
+    <value>900, 600</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2035,6 +2035,9 @@
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>800, 600</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>Manual</value>
   </data>
   <data name="&gt;&gt;menuItem26.Name" xml:space="preserve">
     <value>menuItem26</value>

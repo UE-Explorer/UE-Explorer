@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -21,7 +22,7 @@ namespace UEExplorer.UI
 		private MRUManager _MRUManager;
 
 		private void InitializeUI()
-		{		 
+		{		
 			ProgressStatus.Status = ProgressLabel;
 			ProgressStatus.Loading = LoadingProgress;
 
@@ -152,13 +153,21 @@ namespace UEExplorer.UI
 			Text = string.Format( "{0} {1}", Application.ProductName, Version );
 
             InitializeComponent();	
+			InitializeUserSettings();
 			InitializeConfig();
 			InitializeUI();
 
 			TManager = new TabsManager( this, TabComponentsStrip );
 		}
-		
-		public void LoadFile( string fileName )
+
+	    private void InitializeUserSettings()
+	    {
+			WindowState = Settings.Default.WindowState;
+			Size = Settings.Default.WindowSize;
+			Location = Settings.Default.WindowLocation;
+	    }
+
+	    public void LoadFile( string fileName )
 		{
 			ITabComponent tabComponent = null;
 
@@ -473,11 +482,6 @@ namespace UEExplorer.UI
 			System.Diagnostics.Process.Start( Program.Contact_URL );
 		}
 
-		private void ProgramForm_FormClosed( object sender, FormClosedEventArgs e )
-		{
-			Program.LogManager.EndLogStream();
-		}
-
 		private void OpenHome_Click( object sender, EventArgs e )
 		{
 			TManager.AddTabComponent( typeof(UC_Default), Resources.Homepage );
@@ -488,9 +492,26 @@ namespace UEExplorer.UI
 			System.Diagnostics.Process.Start( "http://www.facebook.com/UE.Explorer" );
 		}
 
-		private void ProgramForm_FormClosing( object sender, FormClosingEventArgs e )
+		private void OnClosed( object sender, FormClosedEventArgs e )
 		{
-			Properties.Settings.Default.Save();
+			Program.LogManager.EndLogStream();
+		}
+
+		private void OnClosing( object sender, FormClosingEventArgs e )
+		{
+			if( WindowState != FormWindowState.Normal )
+			{
+				Settings.Default.WindowLocation = RestoreBounds.Location;
+				Settings.Default.WindowSize = RestoreBounds.Size;
+			}
+			else
+			{
+				Settings.Default.WindowLocation = Location;
+				Settings.Default.WindowSize = Size;	
+			}
+
+			Settings.Default.WindowState = WindowState == FormWindowState.Minimized ? FormWindowState.Normal : WindowState;
+			Settings.Default.Save();	
 		}
 	}
 

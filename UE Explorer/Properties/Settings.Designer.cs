@@ -25,49 +25,37 @@ namespace UEExplorer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500, 500")]
-        public global::System.Drawing.Point ProgramForm_Location {
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point WindowLocation {
             get {
-                return ((global::System.Drawing.Point)(this["ProgramForm_Location"]));
+                return ((global::System.Drawing.Point)(this["WindowLocation"]));
             }
             set {
-                this["ProgramForm_Location"] = value;
+                this["WindowLocation"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("929, 562")]
-        public global::System.Drawing.Size ProgramForm_Size {
+        [global::System.Configuration.DefaultSettingValueAttribute("900, 600")]
+        public global::System.Drawing.Size WindowSize {
             get {
-                return ((global::System.Drawing.Size)(this["ProgramForm_Size"]));
+                return ((global::System.Drawing.Size)(this["WindowSize"]));
             }
             set {
-                this["ProgramForm_Size"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("330")]
-        public int InfoContentSplitter_SplitterDistance {
-            get {
-                return ((int)(this["InfoContentSplitter_SplitterDistance"]));
-            }
-            set {
-                this["InfoContentSplitter_SplitterDistance"] = value;
+                this["WindowSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public global::System.Windows.Forms.FormWindowState ProgramForm_WindowState {
+        public global::System.Windows.Forms.FormWindowState WindowState {
             get {
-                return ((global::System.Windows.Forms.FormWindowState)(this["ProgramForm_WindowState"]));
+                return ((global::System.Windows.Forms.FormWindowState)(this["WindowState"]));
             }
             set {
-                this["ProgramForm_WindowState"] = value;
+                this["WindowState"] = value;
             }
         }
     }
