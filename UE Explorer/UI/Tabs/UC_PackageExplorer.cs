@@ -149,6 +149,7 @@ namespace UEExplorer.UI.Tabs
                     TabControl_General.Selected -= TabControl_General_Selected;
                     TabControl_General.TabPages.Remove( TabPage_Objects );
                     TabControl_General.TabPages.Remove( TabPage_Tables );
+                    InitializeMetaInfo();
                     InitializeUI();
                     return;
                 }
@@ -194,7 +195,80 @@ namespace UEExplorer.UI.Tabs
                 }
             }
 
+            InitializeMetaInfo();
             InitializePackage();
+        }
+
+        private void InitializeMetaInfo()
+        {
+            // Section 1
+            VersionValue.Text 	= (_UnrealPackage.Version.ToString( CultureInfo.InvariantCulture ));
+            FlagsValue.Text 	= UnrealMethods.FlagToString( (_UnrealPackage.PackageFlags & ~(uint)PackageFlags.Protected) );
+            LicenseeValue.Text 	= _UnrealPackage.LicenseeVersion.ToString( CultureInfo.InvariantCulture );
+            Label_GUID.Text		= _UnrealPackage.GUID;
+
+            // Section 2	
+            if( _UnrealPackage.Version >= 245 )
+            {
+                if( _UnrealPackage.EngineVersion > 0 )
+                {
+                    Label_EngineVersion.Visible		= true;
+                    EngineValue.Visible				= true;
+                    EngineValue.Text 				=  _UnrealPackage.EngineVersion.ToString( CultureInfo.InvariantCulture );
+                }
+
+                if( _UnrealPackage.Group != "None" )
+                {
+                    Label_Folder.Visible			= true;
+                    FolderValue.Visible				= true;
+                    FolderValue.Text				= _UnrealPackage.Group;
+                }
+            }
+
+            if( _UnrealPackage.Version >= UnrealPackage.VCOOKEDPACKAGES )
+            {
+                if( _UnrealPackage.CookerVersion > 0 )
+                {
+                    Label_CookerVersion.Visible		= true;
+                    CookerValue.Visible				= true;
+                    CookerValue.Text				= _UnrealPackage.CookerVersion.ToString( CultureInfo.InvariantCulture );
+                }
+            }
+
+            BuildValue.Text = _UnrealPackage.Build.Name.ToString();
+
+            // Automatic iterate through all package flags and return them as a string list
+            var flags = new List<string>
+            {
+                "AllowDownload " + _UnrealPackage.HasPackageFlag( PackageFlags.AllowDownload ),
+                "ClientOptional " + _UnrealPackage.HasPackageFlag( PackageFlags.ClientOptional ),
+                "ServerSideOnly " + _UnrealPackage.HasPackageFlag( PackageFlags.ServerSideOnly )
+            };
+
+            if( _UnrealPackage.Version >= UnrealPackage.VCOOKEDPACKAGES )
+            {
+                flags.Add( "Cooked " + _UnrealPackage.IsCooked() );
+                flags.Add( "Compressed " + _UnrealPackage.HasPackageFlag( PackageFlags.Compressed ) );
+                flags.Add( "FullyCompressed " + _UnrealPackage.HasPackageFlag( PackageFlags.FullyCompressed ) );	
+                flags.Add( "Debug " + _UnrealPackage.IsDebug() );
+                flags.Add( "Script " + _UnrealPackage.IsScript() );
+                flags.Add( "Stripped " + _UnrealPackage.IsStripped() );			
+                flags.Add( "Map " + _UnrealPackage.IsMap() );
+                flags.Add( "Console " + _UnrealPackage.IsBigEndianEncoded );
+            }
+            else if( _UnrealPackage.Version > 61 && _UnrealPackage.Version <= 69 )		// <= UT99
+            {
+                flags.Add( "Encrypted " + _UnrealPackage.HasPackageFlag( PackageFlags.Encrypted ) );
+            }
+
+            foreach( var flag in flags )
+            {
+                var r = new DataGridViewRow();
+                r.CreateCells( DataGridView_Flags );
+                var vals = flag.Split( new[]{ ' ' } );
+                r.SetValues( vals[0], vals[1] );
+                DataGridView_Flags.Rows.Add( r );
+            }
         }
 
         private void InitializePackage()
@@ -223,75 +297,6 @@ namespace UEExplorer.UI.Tabs
 
             try
             {
-                // Section 1
-                VersionValue.Text 	= (_UnrealPackage.Version.ToString( CultureInfo.InvariantCulture ));
-                FlagsValue.Text 	= UnrealMethods.FlagToString( (_UnrealPackage.PackageFlags & ~(uint)PackageFlags.Protected) );
-                LicenseeValue.Text 	= _UnrealPackage.LicenseeVersion.ToString( CultureInfo.InvariantCulture );
-                Label_GUID.Text		= _UnrealPackage.GUID;
-
-                // Section 2	
-                if( _UnrealPackage.Version >= 245 )
-                {
-                    if( _UnrealPackage.EngineVersion > 0 )
-                    {
-                        Label_EngineVersion.Visible		= true;
-                        EngineValue.Visible				= true;
-                        EngineValue.Text 				=  _UnrealPackage.EngineVersion.ToString( CultureInfo.InvariantCulture );
-                    }
-
-                    if( _UnrealPackage.Group != "None" )
-                    {
-                        Label_Folder.Visible			= true;
-                        FolderValue.Visible				= true;
-                        FolderValue.Text				= _UnrealPackage.Group;
-                    }
-                }
-
-                if( _UnrealPackage.Version >= UnrealPackage.VCOOKEDPACKAGES )
-                {
-                    if( _UnrealPackage.CookerVersion > 0 )
-                    {
-                        Label_CookerVersion.Visible		= true;
-                        CookerValue.Visible				= true;
-                        CookerValue.Text				= _UnrealPackage.CookerVersion.ToString( CultureInfo.InvariantCulture );
-                    }
-                }
-
-                BuildValue.Text = _UnrealPackage.Build.Name.ToString();
-
-                // Automatic iterate through all package flags and return them as a string list
-                var flags = new List<string>
-                {
-                    "AllowDownload " + _UnrealPackage.HasPackageFlag( PackageFlags.AllowDownload ),
-                    "ClientOptional " + _UnrealPackage.HasPackageFlag( PackageFlags.ClientOptional ),
-                    "ServerSideOnly " + _UnrealPackage.HasPackageFlag( PackageFlags.ServerSideOnly )
-                };
-
-                if( _UnrealPackage.Version >= UnrealPackage.VCOOKEDPACKAGES )
-                {
-                    flags.Add( "Cooked " + _UnrealPackage.IsCooked() );
-                    flags.Add( "Compressed " + _UnrealPackage.HasPackageFlag( PackageFlags.Compressed ) );
-                    flags.Add( "FullyCompressed " + _UnrealPackage.HasPackageFlag( PackageFlags.FullyCompressed ) );	
-                    flags.Add( "Debug " + _UnrealPackage.IsDebug() );
-                    flags.Add( "Script " + _UnrealPackage.IsScript() );
-                    flags.Add( "Stripped " + _UnrealPackage.IsStripped() );			
-                    flags.Add( "Map " + _UnrealPackage.IsMap() );
-                    flags.Add( "Console " + _UnrealPackage.IsBigEndianEncoded );
-                }
-                else if( _UnrealPackage.Version > 61 && _UnrealPackage.Version <= 69 )		// <= UT99
-                {
-                    flags.Add( "Encrypted " + _UnrealPackage.HasPackageFlag( PackageFlags.Encrypted ) );
-                }
-
-                foreach( var flag in flags )
-                {
-                    var r = new DataGridViewRow();
-                    r.CreateCells( DataGridView_Flags );
-                    var vals = flag.Split( new[]{ ' ' } );
-                    r.SetValues( vals[0], vals[1] );
-                    DataGridView_Flags.Rows.Add( r );
-                }
-
                 Refresh();
                 _UnrealPackage.InitializePackage( Program.Options.InitFlags );
 
