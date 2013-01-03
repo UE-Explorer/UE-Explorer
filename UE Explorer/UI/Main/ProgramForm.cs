@@ -507,7 +507,7 @@ namespace UEExplorer.UI
             else
             {
                 Settings.Default.WindowLocation = Location;
-                Settings.Default.WindowSize = Size;	
+                Settings.Default.WindowSize = ClientSize;	
             }
 
             Settings.Default.WindowState = WindowState == FormWindowState.Minimized ? FormWindowState.Normal : WindowState;
