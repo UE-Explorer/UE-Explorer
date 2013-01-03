@@ -106,8 +106,6 @@ namespace UEExplorer.UI.Tabs
             LoadPackage();
         }
 
-        private long _SummarySize;
-
         private void LoadPackage()
         {
             if( Program.Options.bForceLicenseeMode )
@@ -133,7 +131,6 @@ namespace UEExplorer.UI.Tabs
                 );
                 _UnrealPackage = UnrealLoader.LoadPackage( FileName );
                 UnrealConfig.SuppressSignature = false;
-                _SummarySize = _UnrealPackage.Stream.Position;
 
                 if( _UnrealPackage.CompressedChunks != null && _UnrealPackage.CompressedChunks.Capacity > 0 )
                 {
@@ -665,6 +662,9 @@ namespace UEExplorer.UI.Tabs
         {
             exportScriptClassesToolStripMenuItem.Enabled = false;
             exportDecompiledClassesToolStripMenuItem.Enabled = false;
+
+            Num_ObjectIndex.Enabled = false;
+            Num_NameIndex.Enabled = false;
         }
 
         private delegate void CreateTableDelegate( object nameTable );
@@ -1864,9 +1864,9 @@ namespace UEExplorer.UI.Tabs
             int objectIndexToFind = (int)Num_ObjectIndex.Value;
             try
             {
-                var foundObject = _UnrealPackage.GetIndexObject( objectIndexToFind );
+                var foundObject = _UnrealPackage.GetIndexTable( objectIndexToFind );
                 LObjectIndex.Text = foundObject != null 
-                    ? String.Format( Resources.OBJECT_IS, foundObject.Name ) 
+                    ? String.Format( Resources.OBJECT_IS, foundObject.ObjectName ) 
                     : Resources.NO_OBJECT_WAS_FOUND;
             }
             catch( ArgumentOutOfRangeException exc )
