@@ -1104,8 +1104,6 @@ namespace UEExplorer.UI.Tabs
                     ShowNodeContextMenuStrip( TreeView_Content, e, _OnContentItemClicked );
                     break;
             }
-
-            CheckIfNodeIsExportable( e.Node );
         }
 
         private static void ShowNodeContextMenuStrip( TreeView tree, TreeNodeMouseClickEventArgs e, 
@@ -1796,14 +1794,17 @@ namespace UEExplorer.UI.Tabs
         private void Button_Export_Click( object sender, EventArgs e )
         {
             var exportableObject = ((ObjectNode)TreeView_Content.SelectedNode).Object as IUnrealExportable; 
+            if( (UObject)exportableObject == null )
+            {
+                return;
+            }
             ((UObject)exportableObject).BeginDeserializing();
 
-            var exts = exportableObject.ExportableExtensions.ToList();
             string extensions = String.Empty;
-            foreach( string ext in exts )
+            foreach( string ext in exportableObject.ExportableExtensions )
             {
                 extensions += string.Format( "{0}(*" + ".{0})|*.{0}", ext );
-                if( ext != exts.Last() )
+                if( ext != exportableObject.ExportableExtensions.Last() )
                 {
                     extensions += "|";
                 }
@@ -1812,7 +1813,7 @@ namespace UEExplorer.UI.Tabs
             if( dialog.ShowDialog() == DialogResult.OK )
             {
                 var stream = new FileStream( dialog.FileName, FileMode.Create, FileAccess.Write );
-                exportableObject.SerializeExport( exts[dialog.FilterIndex], stream );
+                exportableObject.SerializeExport( exportableObject.ExportableExtensions.ElementAt( dialog.FilterIndex - 1 ), stream );
                 stream.Flush();
                 stream.Close();
             }
@@ -1843,6 +1844,7 @@ namespace UEExplorer.UI.Tabs
                 return;
             }
             PerformNodeAction( e.Node as IDecompilableObject, "OBJECT" );
+            CheckIfNodeIsExportable( e.Node );
         }
 
         private void ViewTools_DropDownItemClicked( object sender, ToolStripItemClickedEventArgs e )
