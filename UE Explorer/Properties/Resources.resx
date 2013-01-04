@@ -342,9 +342,12 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
 		<value xml:space="preserve">Managed Properties</value>
 	</data>
 	<data name="NodeItem_ViewTableBuffer">
-		<value xml:space="preserve">View Table Buffer</value>
+		<value xml:space="preserve">Table Buffer</value>
 	</data>
 	<data name="NoTargetForViewBuffer">
 		<value xml:space="preserve">No target found for "View Buffer"</value>
+	</data>
+	<data name="NodeItem_DefaultBuffer">
+		<value xml:space="preserve">DefaultProperties Buffer</value>
 	</data>
 </root>

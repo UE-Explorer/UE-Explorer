@@ -381,9 +381,9 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private abstract class UnrealTableNode : TreeNode 
+        private abstract class UnrealTableNode : TreeNode, IContainsTable 
         {
-            internal UObjectTableItem Table;
+            public UObjectTableItem Table{ get; set; }
             protected bool _Initialized;
 
             public abstract void Initialize();
@@ -604,7 +604,7 @@ namespace UEExplorer.UI.Tabs
                         Text = metobj.Name
                     };
                     node.Nodes.Add( "DUMMYNODE" );
-                    if( metobj.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
+                    if( metobj.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
                     {
                         node.ForeColor = Color.Red;
                     }
@@ -715,7 +715,7 @@ namespace UEExplorer.UI.Tabs
                 node.SelectedImageKey = node.ImageKey;
                 _ExportNodes[_NIndex ++] = node;
 
-                if( exp.Object != null && exp.Object.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
+                if( exp.Object != null && exp.Object.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
                 {
                     AddSerToolTipError( node, exp.Object );
                 }
@@ -828,7 +828,7 @@ namespace UEExplorer.UI.Tabs
                 };
                 node.Nodes.Add( "DUMMYNODE" );
 
-                if( Object.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
+                if( Object.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
                 {
                     node.ForeColor = Color.Red;
                 }
@@ -994,7 +994,7 @@ namespace UEExplorer.UI.Tabs
                         if( (obj = ((IDecompilableObject)treeNode).Object as UObject) != null )
                         {
                             newTitle = obj.GetOuterGroup();
-                            if( obj.SerializationState.HasFlag( UObject.ObjectState.Errorlized ) )
+                            if( obj.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
                             {
                                 AddSerToolTipError( treeNode, obj );
                             }
@@ -1112,7 +1112,7 @@ namespace UEExplorer.UI.Tabs
             tree.SelectedNode = e.Node;
 
             var viewToolsContextMenu = new ContextMenuStrip();
-            BuildItemNodes( e.Node, viewToolsContextMenu.Items );
+            BuildItemNodes( e.Node, viewToolsContextMenu.Items, itemClicked );
             if( viewToolsContextMenu.Items.Count == 0 )
                 return;
 
@@ -1120,7 +1120,7 @@ namespace UEExplorer.UI.Tabs
             viewToolsContextMenu.Show( tree, e.Location );	
         }
 
-        private static void BuildItemNodes( TreeNode performingNode, ToolStripItemCollection itemCollection )
+        private static void BuildItemNodes( TreeNode performingNode, ToolStripItemCollection itemCollection, ToolStripItemClickedEventHandler itemClickEvent = null )
         {
             itemCollection.Clear();
 
@@ -1180,22 +1180,41 @@ namespace UEExplorer.UI.Tabs
                         }
                     }
 
+                    var myObj = decompilableObjectNode.Object as UObject;
+
                     var bufferedObject = decompilableObjectNode.Object as IBuffered;
                     if( bufferedObject != null && bufferedObject.GetBuffer() != null )
                     {
-                        if( bufferedObject.GetBufferSize() > 0 )
-                        { 
-                            addItem.Invoke( Resources.NodeItem_ViewBuffer, "BUFFER" );
-                        }
+                        var bufferedItem = new ToolStripMenuItem 
+                        {
+                            Text = Resources.NodeItem_ViewBuffer,
+                            Name = "BUFFER"
+                        };
 
-                        var tableNode = decompilableObjectNode as UnrealTableNode;
+                        bool shouldAddBufferItem = bufferedObject.GetBufferSize() > 0;
+
+                        var tableNode = decompilableObjectNode.Object as IContainsTable;
                         if( tableNode != null && tableNode.Table != null )
                         { 
-                            addItem.Invoke( Resources.NodeItem_ViewTableBuffer, "TABLEBUFFER" );
+                            var tableBufferItem = bufferedItem.DropDownItems.Add( Resources.NodeItem_ViewTableBuffer );
+                            tableBufferItem.Name = "TABLEBUFFER";
+                            shouldAddBufferItem = true;
+                        }
+
+                        if( myObj != null && myObj.Default != null && myObj.Default != myObj )
+                        {
+                            var defaultBufferItem = bufferedItem.DropDownItems.Add( Resources.NodeItem_DefaultBuffer );
+                            defaultBufferItem.Name = "DEFAULTBUFFER";  
+                            shouldAddBufferItem = true;
+                        }
+
+                        if( shouldAddBufferItem )
+                        {
+                            bufferedItem.DropDownItemClicked += itemClickEvent;
+                            itemCollection.Add( bufferedItem );
                         }
                     }
 
-                    var myObj = decompilableObjectNode.Object as UObject;
                     if( myObj != null )
                     {
                         if( myObj.ThrownException != null )
@@ -1396,7 +1415,7 @@ namespace UEExplorer.UI.Tabs
                         var unStruct = node.Object as UStruct;
                         if( unStruct != null )
                         {
-                            Label_ObjectName.Text = unStruct.Name;
+                            Label_ObjectName.Text = unStruct.Default.Name;
                             SetContentText( node as TreeNode, unStruct.FormatDefaultProperties() );
                         }
                         break;
@@ -1462,13 +1481,28 @@ namespace UEExplorer.UI.Tabs
 
                     case "BUFFER":
                     {
-                        ViewBufferFor( node.Object as IBuffered );
+                        var bufferObject = node.Object as IBuffered;
+                        if( bufferObject.GetBufferSize() > 0 )
+                        {
+                            ViewBufferFor( bufferObject );
+                        }
                         break;
                     }
 
                     case "TABLEBUFFER":
                     {
-                        ViewBufferFor( ((UnrealTableNode)(node)).Table );
+                        var tableObject = node as IContainsTable ?? node.Object as IContainsTable;
+                        ViewBufferFor( tableObject.Table );
+                        break;
+                    }
+
+                    case "DEFAULTBUFFER":
+                    {
+                        var unObject = node.Object as UObject;
+                        if( unObject != null )
+                        {
+                            ViewBufferFor( unObject.Default );
+                        }
                         break;
                     }
 

@@ -120,9 +120,6 @@
   <data name="NAME_IS" xml:space="preserve">
     <value>Naam is {0}</value>
   </data>
-  <data name="OBJECT_IS" xml:space="preserve">
-    <value>Object is {0}</value>
-  </data>
   <data name="Open_File" xml:space="preserve">
     <value>Openen</value>
   </data>
@@ -139,18 +136,12 @@
     <value>Ongeldig object slot {0}</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\UI\Main\ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RegistryWarning" xml:space="preserve">
     <value>Dit zal jouw registery bewerken.
 Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eerst uitschakeld!</value>
   </data>
   <data name="NO_OBJECT_WAS_FOUND" xml:space="preserve">
     <value>Geen object gevonden.</value>
-  </data>
-  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
     <value>Wil je naar de /exported/ map gaan?</value>
@@ -180,14 +171,6 @@ Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eer
   </data>
   <data name="Homepage" xml:space="preserve">
     <value>Hoofdpagina</value>
-    <comment>Tab title</comment>
-  </data>
-  <data name="ProgramForm_Unreal_Natives_Table_Generator" xml:space="preserve">
-    <value>Unreal Natives Table Generator</value>
-    <comment>Tab title</comment>
-  </data>
-  <data name="ProgramForm_Cache_Extractor" xml:space="preserve">
-    <value>Cache Extractor</value>
     <comment>Tab title</comment>
   </data>
   <data name="ProgramForm_LoadFile_Failed_loading_package" xml:space="preserve">
@@ -332,8 +315,5 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
   </data>
   <data name="NodeItem_ManagedProperties" xml:space="preserve">
     <value>Managed eigenschappen</value>
-  </data>
-  <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
-    <value>Bekijk Table Buffer</value>
   </data>
 </root>

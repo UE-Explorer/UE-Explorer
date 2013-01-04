@@ -317,6 +317,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DefaultProperties Buffer.
+        /// </summary>
+        internal static string NodeItem_DefaultBuffer {
+            get {
+                return ResourceManager.GetString("NodeItem_DefaultBuffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export with UE Model Viewer.
         /// </summary>
         internal static string NodeItem_ExportWithUEModelViewer {
@@ -407,7 +416,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Table Buffer.
+        ///   Looks up a localized string similar to Table Buffer.
         /// </summary>
         internal static string NodeItem_ViewTableBuffer {
             get {
