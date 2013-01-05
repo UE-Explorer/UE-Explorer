@@ -11,5 +11,23 @@
     <Setting Name="WindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
     </Setting>
+    <Setting Name="HexViewer_ViewASCII" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HexViewer_ViewByte" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HexViewerLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="HexViewerSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1000, 450</Value>
+    </Setting>
+    <Setting Name="HexViewerState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="HexPanel_SplitterDistance" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">219</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

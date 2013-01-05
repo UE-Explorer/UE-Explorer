@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
-    <value>Grootte</value>
+  <data name="SizeLabel.Text" xml:space="preserve">
+    <value>Grootte: {0}</value>
   </data>
   <data name="ToolStripStatusLabel_Position.Text" xml:space="preserve">
-    <value>Positie</value>
+    <value>Positie: {0}</value>
   </data>
   <data name="editToolStripMenuItem.Text" xml:space="preserve">
     <value>Be&amp;werken</value>

@@ -58,5 +58,77 @@ namespace UEExplorer.Properties {
                 this["WindowState"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HexViewer_ViewASCII {
+            get {
+                return ((bool)(this["HexViewer_ViewASCII"]));
+            }
+            set {
+                this["HexViewer_ViewASCII"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HexViewer_ViewByte {
+            get {
+                return ((bool)(this["HexViewer_ViewByte"]));
+            }
+            set {
+                this["HexViewer_ViewByte"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point HexViewerLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["HexViewerLocation"]));
+            }
+            set {
+                this["HexViewerLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000, 450")]
+        public global::System.Drawing.Size HexViewerSize {
+            get {
+                return ((global::System.Drawing.Size)(this["HexViewerSize"]));
+            }
+            set {
+                this["HexViewerSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState HexViewerState {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["HexViewerState"]));
+            }
+            set {
+                this["HexViewerState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("219")]
+        public int HexPanel_SplitterDistance {
+            get {
+                return ((int)(this["HexPanel_SplitterDistance"]));
+            }
+            set {
+                this["HexPanel_SplitterDistance"] = value;
+            }
+        }
     }
 }

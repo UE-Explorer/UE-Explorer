@@ -117,15 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="SizeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 17</value>
+  </data>
+  <data name="SizeLabel.Text" xml:space="preserve">
+    <value>Size: {0}</value>
+  </data>
+  <data name="ToolStripStatusLabel_Position.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 17</value>
+  </data>
+  <data name="ToolStripStatusLabel_Position.Text" xml:space="preserve">
+    <value>Position: {0}</value>
+  </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 423</value>
+    <value>0, 390</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>983, 22</value>
+    <value>984, 22</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
@@ -146,9 +158,9 @@
   <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>127, 17</value>
-  </metadata>
+  </data>
   <data name="copyBytesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 22</value>
   </data>
@@ -201,11 +213,32 @@
   <data name="editToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Edit</value>
   </data>
+  <data name="ViewASCIIItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 22</value>
+  </data>
+  <data name="ViewASCIIItem.Text" xml:space="preserve">
+    <value>View ASCII</value>
+  </data>
+  <data name="ViewByteItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 22</value>
+  </data>
+  <data name="ViewByteItem.Text" xml:space="preserve">
+    <value>View Byte</value>
+  </data>
   <data name="viewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
   </data>
   <data name="viewToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;View</value>
+  </data>
+  <data name="infoToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="infoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="infoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Info</value>
   </data>
   <data name="helpToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -220,7 +253,7 @@
     <value>0, 0</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>983, 24</value>
+    <value>984, 24</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -240,34 +273,34 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="userControl_HexView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="HexPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="userControl_HexView1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="HexPanel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.25pt</value>
   </data>
-  <data name="userControl_HexView1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="HexPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 30</value>
   </data>
-  <data name="userControl_HexView1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="HexPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>8, 6, 8, 6</value>
   </data>
-  <data name="userControl_HexView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>967, 387</value>
+  <data name="HexPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>968, 354</value>
   </data>
-  <data name="userControl_HexView1.TabIndex" type="System.Int32, mscorlib">
+  <data name="HexPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;userControl_HexView1.Name" xml:space="preserve">
-    <value>userControl_HexView1</value>
+  <data name="&gt;&gt;HexPanel.Name" xml:space="preserve">
+    <value>HexPanel</value>
   </data>
-  <data name="&gt;&gt;userControl_HexView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;HexPanel.Type" xml:space="preserve">
     <value>UEExplorer.UI.Dialogs.UserControl_HexView, UE Explorer, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;userControl_HexView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;HexPanel.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;userControl_HexView1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;HexPanel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -280,7 +313,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>983, 445</value>
+    <value>984, 412</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -297,61 +330,28 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 17</value>
-  </data>
-  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
-    <value>Size</value>
-  </data>
-  <data name="ToolStripStatusLabel_Position.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
-  </data>
-  <data name="ToolStripStatusLabel_Position.Text" xml:space="preserve">
-    <value>Position</value>
-  </data>
-  <data name="viewASCIIToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="viewASCIIToolStripMenuItem.Text" xml:space="preserve">
-    <value>View ASCII</value>
-  </data>
-  <data name="viewByteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="viewByteToolStripMenuItem.Text" xml:space="preserve">
-    <value>View Byte</value>
-  </data>
-  <data name="infoToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="infoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="infoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Info</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>983, 445</value>
+    <value>1000, 450</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>380, 0</value>
+    <value>500, 225</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
+    <value>Manual</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Hex Viewer</value>
   </data>
-  <data name="&gt;&gt;toolStripStatusLabel1.Name" xml:space="preserve">
-    <value>toolStripStatusLabel1</value>
+  <data name="&gt;&gt;SizeLabel.Name" xml:space="preserve">
+    <value>SizeLabel</value>
   </data>
-  <data name="&gt;&gt;toolStripStatusLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;SizeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripStatusLabel_Position.Name" xml:space="preserve">
@@ -402,16 +402,16 @@
   <data name="&gt;&gt;viewToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;viewASCIIToolStripMenuItem.Name" xml:space="preserve">
-    <value>viewASCIIToolStripMenuItem</value>
+  <data name="&gt;&gt;ViewASCIIItem.Name" xml:space="preserve">
+    <value>ViewASCIIItem</value>
   </data>
-  <data name="&gt;&gt;viewASCIIToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ViewASCIIItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;viewByteToolStripMenuItem.Name" xml:space="preserve">
-    <value>viewByteToolStripMenuItem</value>
+  <data name="&gt;&gt;ViewByteItem.Name" xml:space="preserve">
+    <value>ViewByteItem</value>
   </data>
-  <data name="&gt;&gt;viewByteToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ViewByteItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
