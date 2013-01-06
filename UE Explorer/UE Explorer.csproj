@@ -288,7 +288,7 @@
     <Compile Include="UI\Tabs\UC_Options.Designer.cs">
       <DependentUpon>UC_Options.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Tabs\TabsManager.cs" />
+    <Compile Include="UI\Tabs\TabsCollection.cs" />
     <Compile Include="UI\Tabs\UC_ModExplorer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -310,7 +310,6 @@
     <Compile Include="UI\Dialogs\AboutDialog.Designer.cs">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Tabs\CacheExtractorTab.cs" />
     <Compile Include="UI\Dialogs\ColorGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -527,7 +526,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

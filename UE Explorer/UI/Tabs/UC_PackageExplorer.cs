@@ -19,7 +19,7 @@ namespace UEExplorer.UI.Tabs
     using UELib.Flags;
 
     [System.Runtime.InteropServices.ComVisible( false )]
-    public partial class UC_PackageExplorer : UserControl_Tab, IHasFileName
+    public partial class UC_PackageExplorer : UserControl_Tab
     {
         public string FileName{ get; set; }
 
@@ -57,7 +57,7 @@ namespace UEExplorer.UI.Tabs
                 }
             }
 
-            _Form = Owner.Owner;
+            _Form = Tabs.Form;
             base.TabCreated();
         }
 
@@ -162,7 +162,7 @@ namespace UEExplorer.UI.Tabs
                     ) == DialogResult.No
                 )
                 {
-                    Owner.RemoveTab( this );
+                    Tabs.Remove( this );
                     return;
                 }
                 UnrealConfig.SuppressSignature = true;
@@ -974,8 +974,8 @@ namespace UEExplorer.UI.Tabs
 
         internal void ReloadPackage()
         {
-            Owner.RemoveTab( this );
-            Owner.Owner.LoadFile( FileName );
+            Tabs.Remove( this );
+            Tabs.Form.LoadFile( FileName );
         }
 
         private void OutputNodeObject( TreeNode treeNode )

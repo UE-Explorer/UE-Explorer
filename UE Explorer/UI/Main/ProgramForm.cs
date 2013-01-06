@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -18,7 +17,7 @@ namespace UEExplorer.UI
 
     public partial class ProgramForm : Form
     {		
-        public readonly TabsManager TManager;
+        public readonly TabsCollection Tabs;
         private MRUManager _MRUManager;
 
         private void InitializeUI()
@@ -157,7 +156,7 @@ namespace UEExplorer.UI
             InitializeConfig();
             InitializeUI();
 
-            TManager = new TabsManager( this, TabComponentsStrip );
+            Tabs = new TabsCollection( this, TabComponentsStrip );
         }
 
         private void InitializeUserSettings()
@@ -183,7 +182,7 @@ namespace UEExplorer.UI
                 switch( Path.GetExtension( fileName ) )
                 {
                     case ".uc": case ".uci":
-                        tabComponent = TManager.AddTabComponent( typeof(UC_UClassFile), 
+                        tabComponent = Tabs.Add( typeof(UC_UClassFile), 
                             Path.GetFileName( fileName ) 
                         );
                         var classFile = (UC_UClassFile)tabComponent;
@@ -197,7 +196,7 @@ namespace UEExplorer.UI
                         break;
 
                     default:
-                        tabComponent = TManager.AddTabComponent( typeof(UC_PackageExplorer), 
+                        tabComponent = Tabs.Add( typeof(UC_PackageExplorer), 
                             Path.GetFileName( fileName ) 
                         );
                         var unrealFile = (UC_PackageExplorer)tabComponent;
@@ -215,7 +214,7 @@ namespace UEExplorer.UI
             {
                 if( tabComponent != null )
                 {
-                    TManager.RemoveTab( tabComponent );
+                    Tabs.Remove( tabComponent );
                 }
                 ExceptionDialog.Show( string.Format( Resources.ProgramForm_LoadFile_Failed_loading_package, 
                     fileName ), e 
@@ -246,13 +245,13 @@ namespace UEExplorer.UI
                 Title = Resources.Open_File,
                 Multiselect = true
             };
-            if( ofd.ShowDialog( this ) == DialogResult.OK )
+            if( ofd.ShowDialog( this ) != DialogResult.OK )
+                return;
+
+            foreach( string fileName in ofd.FileNames )
             {
-                foreach( string fileName in ofd.FileNames )
-                {
-                    LoadFile( fileName );
-                }
-            }	
+                LoadFile( fileName );
+            }
         }
 
         private void UnrealColorGeneratorToolStripMenuItem_Click( object sender, EventArgs e )
@@ -264,21 +263,19 @@ namespace UEExplorer.UI
 
         private void UnrealCacheExtractorToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            TManager.AddTabComponent( typeof(CacheExtractorTabComponent), 
-                Resources.ProgramForm_Cache_Extractor 
-            );
+            Tabs.Add( typeof(UC_CacheExtractor), Resources.ProgramForm_Cache_Extractor );
         }
 
         private void TabComponentsStrip_TabStripItemSelectionChanged( TabStripItemChangedEventArgs e )
         {		
             // This delegate is called when UE is still none on startup
-            if( TManager.SelectedComponent == null || e.ChangeType == TabStripItemChangeTypes.Removed )
+            if( Tabs.SelectedComponent == null || e.ChangeType == TabStripItemChangeTypes.Removed )
             {
                 return;
             }
 
-            TManager.SelectedComponent.TabSelected();
-            var show = TManager.SelectedComponent is UC_UClassFile; 
+            Tabs.SelectedComponent.TabSelected();
+            var show = Tabs.SelectedComponent is UC_UClassFile; 
             menuItem12.Enabled = show;
             menuItem12.Visible = show;
             menuItem9.Enabled = show;
@@ -290,12 +287,12 @@ namespace UEExplorer.UI
         private void TabComponentsStrip_TabStripItemClosing( TabStripItemClosingEventArgs e )
         {
             // Find the owner of this TabStripItem
-            foreach( var tc in TManager.Tabs )
+            foreach( var tc in Tabs.Components )
             {
-                if( tc.Tab == e.Item )
+                if( tc.TabItem == e.Item )
                 {
                     tc.TabClosing();
-                    TManager.Tabs.Remove( tc );
+                    Tabs.Components.Remove( tc );
                     break;
                 }
             }	
@@ -324,9 +321,9 @@ namespace UEExplorer.UI
                 }
             }
 
-            if( TManager.Tabs.Count == 0 )
+            if( Tabs.Components.Count == 0 )
             {
-                TManager.AddTabComponent( typeof(UC_Default), Resources.Homepage );
+                Tabs.Add( typeof(UC_Default), Resources.Homepage );
             }
         }
 
@@ -373,17 +370,17 @@ namespace UEExplorer.UI
 
         private void SaveFileToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            if( TManager.SelectedComponent != null )
+            if( Tabs.SelectedComponent != null )
             {
-                TManager.SelectedComponent.TabSave();
+                Tabs.SelectedComponent.TabSave();
             }
         }
 
         private void FindToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            if( TManager.SelectedComponent != null )
+            if( Tabs.SelectedComponent != null )
             {
-                TManager.SelectedComponent.TabFind();
+                Tabs.SelectedComponent.TabFind();
             }
         }
         #endregion
@@ -457,7 +454,7 @@ namespace UEExplorer.UI
 
         private void MenuItem7_Click( object sender, EventArgs e )
         {
-            TManager.AddTabComponent( typeof(UC_Options), Resources.Options );
+            Tabs.Add( typeof(UC_Options), Resources.Options );
         }
 
         private void MenuItem24_Click( object sender, EventArgs e )
@@ -484,7 +481,7 @@ namespace UEExplorer.UI
 
         private void OpenHome_Click( object sender, EventArgs e )
         {
-            TManager.AddTabComponent( typeof(UC_Default), Resources.Homepage );
+            Tabs.Add( typeof(UC_Default), Resources.Homepage );
         }
 
         private void SocialMenuItem_Click( object sender, EventArgs e )

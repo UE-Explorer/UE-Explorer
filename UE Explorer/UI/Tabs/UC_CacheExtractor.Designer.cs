@@ -26,7 +26,7 @@
 		/// Required method for Designer support - do not modify 
 		/// the contents of this method with the code editor.
 		/// </summary>
-		private void InitializeComponent()
+		protected override void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
 			this.Cache_Layout = new System.Windows.Forms.TableLayoutPanel();
@@ -144,21 +144,21 @@
 			this.extractToolStripMenuItem1.Size = new System.Drawing.Size( 142, 22 );
 			this.extractToolStripMenuItem1.Text = "Extract Entry";
 			this.extractToolStripMenuItem1.ToolTipText = "Extracts the cache file to the correct directory";
-			this.extractToolStripMenuItem1.Click += new System.EventHandler( this.extractToolStripMenuItem1_Click );
+			this.extractToolStripMenuItem1.Click += new System.EventHandler( this.ExtractToolStripMenuItem1_Click );
 			// 
 			// deleteToolStripMenuItem1
 			// 
 			this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
 			this.deleteToolStripMenuItem1.Size = new System.Drawing.Size( 142, 22 );
 			this.deleteToolStripMenuItem1.Text = "Delete Entry";
-			this.deleteToolStripMenuItem1.Click += new System.EventHandler( this.deleteToolStripMenuItem1_Click );
+			this.deleteToolStripMenuItem1.Click += new System.EventHandler( this.DeleteToolStripMenuItem1_Click );
 			// 
 			// removeToolStripMenuItem1
 			// 
 			this.removeToolStripMenuItem1.Name = "removeToolStripMenuItem1";
 			this.removeToolStripMenuItem1.Size = new System.Drawing.Size( 142, 22 );
 			this.removeToolStripMenuItem1.Text = "Remove Entry";
-			this.removeToolStripMenuItem1.Click += new System.EventHandler( this.removeToolStripMenuItem1_Click );
+			this.removeToolStripMenuItem1.Click += new System.EventHandler( this.RemoveToolStripMenuItem1_Click );
 			// 
 			// Extension
 			// 
@@ -201,7 +201,7 @@
 			this.button1.TabIndex = 1;
 			this.button1.Text = "Validate Entries";
 			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler( this.button1_Click );
+			this.button1.Click += new System.EventHandler( this.Button1_Click );
 			// 
 			// Button_SelectDir
 			// 

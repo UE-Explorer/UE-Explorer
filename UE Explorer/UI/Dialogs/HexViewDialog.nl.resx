@@ -141,10 +141,10 @@
   <data name="viewToolStripMenuItem.Text" xml:space="preserve">
     <value>Beel&amp;d</value>
   </data>
-  <data name="viewASCIIToolStripMenuItem.Text" xml:space="preserve">
+  <data name="ViewASCIIItem.Text" xml:space="preserve">
     <value>Weergeef ASCII</value>
   </data>
-  <data name="viewByteToolStripMenuItem.Text" xml:space="preserve">
+  <data name="ViewByteItem.Text" xml:space="preserve">
     <value>Weergeef Byte</value>
   </data>
   <data name="helpToolStripMenuItem.Text" xml:space="preserve">
