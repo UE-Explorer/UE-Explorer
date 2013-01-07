@@ -58,6 +58,7 @@
             this.DissambledShort = new System.Windows.Forms.TextBox();
             this.DissambledByte = new System.Windows.Forms.TextBox();
             this.DissambledChar = new System.Windows.Forms.TextBox();
+            this.HexLinePanel = new UEExplorer.UI.Dialogs.HexPanel();
             this.Context_Structure = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.defineCharToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defineByteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,6 @@
             this.defineIndexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HexScrollBar = new System.Windows.Forms.VScrollBar();
             this.HexToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.HexLinePanel = new UEExplorer.UI.Dialogs.HexPanel();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             label14 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
@@ -98,6 +98,7 @@
             // 
             resources.ApplyResources(splitContainer1, "splitContainer1");
             splitContainer1.DataBindings.Add(new System.Windows.Forms.Binding("SplitterDistance", global::UEExplorer.Properties.Settings.Default, "HexPanel_SplitterDistance", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -326,6 +327,15 @@
             this.DissambledChar.ReadOnly = true;
             this.DissambledChar.TabStop = false;
             // 
+            // HexLinePanel
+            // 
+            this.HexLinePanel.ContextMenuStrip = this.Context_Structure;
+            resources.ApplyResources(this.HexLinePanel, "HexLinePanel");
+            this.HexLinePanel.Name = "HexLinePanel";
+            this.HexLinePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HexLinePanel_Paint);
+            this.HexLinePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseClick);
+            this.HexLinePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseMove);
+            // 
             // Context_Structure
             // 
             this.Context_Structure.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -398,15 +408,6 @@
             resources.ApplyResources(this.HexScrollBar, "HexScrollBar");
             this.HexScrollBar.Name = "HexScrollBar";
             this.HexScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.HexScrollBar_Scroll);
-            // 
-            // HexLinePanel
-            // 
-            this.HexLinePanel.ContextMenuStrip = this.Context_Structure;
-            resources.ApplyResources(this.HexLinePanel, "HexLinePanel");
-            this.HexLinePanel.Name = "HexLinePanel";
-            this.HexLinePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HexLinePanel_Paint);
-            this.HexLinePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseClick);
-            this.HexLinePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseMove);
             // 
             // UserControl_HexView
             // 
