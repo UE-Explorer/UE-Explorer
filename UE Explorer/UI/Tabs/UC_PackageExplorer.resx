@@ -153,9 +153,492 @@
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <metadata name="splitContainer1.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="filterPanel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="filterPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="checkBox9.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="checkBox9.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="checkBox9.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="checkBox9.ImageKey" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <metadata name="VSIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>268, 17</value>
+  </metadata>
+  <data name="VSIcons.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADc
+        FgAAAk1TRnQBSQFMAgEBEQEAAfwBBQH8AQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAAVADAAEBAQABCAYAARQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD//8ABAAJ7TcADPIB8z8A
+        AW1zAAlDwwABbTMADO0BB/cAAfQBFAHzAfIXAAFtAUMB/wkAAQcBDgH0AQABQwHsAQcB8wYAAf8B8QHv
+        AesBbQQAAf8BbQIAAfIB7wEHAfMFAAFDDgAB7AIAARQC/wEHAwAB9AEAAQcCAAEOAQABDgMAAe0EAAH0
+        AQ4DAAHrAgAB/wGSAQ4DAAHyA+8BvAH0AwABQw4AAf8BEQIAARMB7AHqAgAB/wEOAe0DAAEHAQABDgIA
+        AQ8B/wUAAe0DAAHvAQABvAEQBQAB8gXvAfACAAFDDwAB/wEVAwABFAIAAfEEAAEHAgABEAMAARMB/wMA
+        AQcEAAHxAQABEgYAAfIG7wIAAUMHAAFDCAAB/wEOAgABEQIAAe8DAAHtAwABQwHsARQCAAEUAf8BAAEH
+        AwAB7QEOAf8BAAESBgAB8gbvAgABQwcAAUMIAAHsAwABDgIAAesDAAEOAfQCAAHvAv8BFQIAAe0BAAEO
+        AgABBwEAAfQCAAESBgAB8gbvAgABQwcAAUMJAAHzAQcB7AFDAgABbQHrAe8B8QH/BgAB/wERAewCAAH0
+        AQ4BBwUAARIFAAEOAfMG7wIAAUMHAAFDAgAB7yQAARIEAAG8AfcB7AHxAbwE7wIAAf8H9AFDAgAB7xgA
+        AbwB9AMAAe0B/wUAARICAAH3Ae8B6wNtAZIB8gEHAu8FAAHvBwAB7wUAAewBEgEVAQ8DAAFDAQ4BEQEU
+        AeoBBwUAAQcBAAEQAfQBAAHsAQABFAH/BAABEgHsAQcB7AdtAe8B8QEHBQAB7wcAAe8FAAHyAQ4CAAEP
+        AgAB7AMAAewB/wIAAeoB9AEHAwABvAEAARECAAETAf8B7QIAAfAB7QptAesBBwUAAfII7wUAAQcDAAEV
+        AgABvAMAARMB/wIAAREBEAMAAQcCAAH/ARUCAAEPAQAB8wEAAf8B7wptAewB8QgAAfQJAAEHAwABDgES
+        AgAB8wEAAQ4CAAEUAf8BAAEPAwABBwQAAf8BFAMAAbwDAAH0Ae0GbQHrAbwB/wkAAfQIAAHwAwABBwHy
+        AewDAAHsAf8BFQIAAUMBAAEOAgABEAH0BAAB/wHsAwAB7AUAAfMB7ANtAe8B/wsAAf8HQwEAAfQBDgEA
+        AQcIAAH/AREBAAFtAgABDgEPAREB6gQAAe8BQwEQAg4BQwcAAfEB7QH/FwAB9AHwCgAB/wHsMQAB8QER
+        DAABEQHyMAABEA4AAREbAAHwA4YBvAMAAf8BAAL/AwAC/wEAAf8jAAHeAaoB3gYAAfMBhgHVArQBhgQA
+        AfMB7AFDAwABQwHsAfMEAAEPHgAB/wOqAQAB9ANJAfQBtAHcAQkB3AGLAfMEAAHsAQ4B8wMAAfMBDgHs
+        IwABsAHnAqoB9AFPAnIBTwFJAfQDtAHzBAAB/wETAQ4FAAEOARMB/yIAAbABqgHYAaoBTwGYAXgBlwFJ
+        AfQCAAESBQAC/wETAQ4FAAEOARMC/wIAAQ8eAAGwAdgBsAHeAfQBTwJJAfQBEgEAARIFAAH/AQAB/wEO
+        AQcFAAEHAQ4B/yIAAf8BsAH/ARIGAAESBgAC/wEOAW0HAAFtAQ4B/yUAARIEAAESAQABEgHeAaoB3gIA
+        Af8BAAH/AUMBBwUAAQcBQwH/AwABDyMAAewBKgGZARICAAH/A6oEAAH/ARMBQwUAAUMBEwH/JwABSwEy
+        AUsBmQIAAbAB5wKqBAAB/wETAUMFAAFDARMB/ycAATIBSwEyAUsCAAGwAaoB2AGqBQAB7AFDAfEDAAHx
+        AUMB7AYAAQcBAAEHBAABBwEAAQcYAAE4AXoCSwIAAbAB2AGwAd4FAAHzAewBQwMAAUMB7AHzAwABEAEA
+        AQ4B/wEAAf8DAAEOAf8BAAH/AgABERUAARsBOAF6AUsCAAH/AbAB/wUAAf8BAAL/AwAC/wEAAf8CAAHx
+        ARABDwYAAQ8EAAEQAfEWAAEbATgBGkwAAfQBpgEZPAAB9AGtAbMBpgH0KAABGgJzAW4CSwJKAQcJAAH0
+        Aa0B2wHVAbMBpgH0JwABWAGaAnoCeQJYAUoIAAH0AbQC3AHbAdUBswGmAfQBAAH0CgABGQGmAQkRAAHy
+        AWcB8QMAAVgCmgKRAa4CeQFKCQAB9AG0AtwB2wHVAbMBpgH0AYIB9AgAARkBtAKmAQkPAAHzAY0BjAFn
+        AfICAAF5A5oDegF5AUoJAALwAbQC3AHbAa0B8gGCAbABggH0BgABCQK0A6YBCQ0AAfIBjQGwAWcBggFn
+        Ad4BAAF5AaABmgKRAa4CegFLAW4CSwJKAQcCAAEbAioB8AG0AdwBrQHyAYIB2AG2AbABggH0BQADtASm
+        AQkFAAGgARoBmQHvAfcBAAHxAY0CsAFnAoIBZwEAAXkCoAOaAnoBSwF6AnkCWAFKAQABGwEqAlkBKgHw
+        AbQB8gGwA9gBtgGwAYIFAAK0AdsBCQGtA6YB/woAAY0DsAG2AoIBZwEAARsCeQNYAlIBeQKRAa4CeQFK
+        ARsBKgF6A1kBKgG8AbAD3gLYAbAB9AUAAbQB3AEJAdwBCQGLAqYEAAGgARoBmQEHAe8B9wEAAYICsAPY
+        AY0BZwcAAXkDmgN6AXkBSgEqAZoCegNZASoBGgGwA94BsAH0BgABugTcAQkBhgGmCwABjQGwBNgBtgGC
+        BwABeQGgAZoCkQGuAnoBSwExAaABmgJ6A1kBKgEaAbAB3gGwAfQHAAEZAboE3AEJAa0GAAGgAZkB7wH3
+        Af8CtgTYAbYB9AcAAXkCoAOaAnoBSwEbATEBoAGaAnoDWQEqARsBsAH0CQABGQG6A9wBugEZCwAB3gG2
+        Ad4C2AG2AfQIAAEbAnkDWAJSARoBAAEbATEBoAGaAnoBWQExARsBAAH0CwABGQG0AdwBugEZDQAB8wO2
+        AfQUAAEbATEBoAGaAXoBMQEbDwABGQG6AfQPAAHzAbYB9BYAARsBMQGgATEBGiMAAf8YAAEbATEBG0QA
+        AfQTAAEcKgAB9AGmAfQEAAH3DWYBdBAAAesEEwISBRMNAAH0Aa0BtAGmAfQDAAH3Af8B8QLwArwFCQG7
+        AWYBHBAAAbwH/wH0AhkBEwsAApEBtAHcAdsBtAGmAfQCAAH3Av8E9ALzAxkBuwFmAXQDAAEHAq4BbQFs
+        AeoCbAJmAe8CAAG8Af8CtQH/BbUBGQETCwABkQEAAfQBtAHcAdsBtAGmAfQBAAH3Af8B7QKRA64B8wJs
+        AWYBuwFmARwDAAHtAfIB8QHwArwCBwHvAbUBZgIAAbwF/wL0AxkBEwsAAZECAAH0AbQB3AGtAfQCAAH3
+        BDkD9AEZAvMBGQG7AWYBHAMAAfcB8wHyAfEB8AK8AgcB7wFsAgABvAH/ArUB/wW1ARkBEwcAARsDAAGR
+        AwAB8wG0AfQDAAG1ATkCAAE5A64DbAFmAbsBZgQAAfcB9AHzAfIBbQFsAWYBvAIHAWwCAAG8B/8C9AEZ
+        ARMGAAEbASoBGwIAAZECAAH/AYIB8wQAAe8JOQLzAQcBZgQAAbUB/wH0AfMB8gHxAfACvAEHAWwCAAG8
+        Bv8B7wFKAfEB9AETBQABGwEqAVkBKgEbAQABkQEAAf8BqgGwAYIB/wMAAbUB/wHtApEBOQMAATkBbAFm
+        AQcBZgQAAbUC/wH0AW0BbAFmAfACvAGuAgABvAH/AfMBbgHyAf8BvAFKAVIBDgHqAZICAAHvAUkBGwEq
+        A1kBKgORAbAC2AGwAYIB/wIAAbsE/wU5AvQBBwFmBAABtQP/AfQB8wHyAfEB8AG8Aa4CAAG0AQkBHAGZ
+        AUoB7QFKAXkBEgFZARABDgEiARIBbQFPATEBmgJ6AlkBKgEbAQAB/wGwAtgBsAGCAf8BAAG7B/8E9AEZ
+        AWYEAAEHBP8B9AHzAfIB8QHwAa4CAAG0AgkBHAGaAUoBeQHqAeUBFAFYAVIBMQEqARIBTwEbATEBmgJ6
+        AlkBKgEbAQAB/wGwAdgBsAH/AgAE1gHVA7QGrQQAAfEBBwG1Ae8BtQL3Ae0CkQEHAgADtAEJARwBegFz
+        AeUBFAJ6AlkBMgFzAU8BAAEbATEBmgJ6AlkBKgEbAQAB/wGwAf8DAAHWAQkF3AHWBdUBrRUAAfMBbgHl
+        AXMB5QN6AlkBcwFQAgABGwExAZoCegExARsDAAH/BAAF1gLVA7QBswOtFQABvAHDAW0D5QJ6AXkBbgFz
+        AZgDAAEbATEBmgExARssAAHvAZkB8AEcAu0C7AFuAbwCmAQAARsBMQEbKQABQgFNAT4HAAE+AwABKAMA
+        AUADAAFQAwABAQEAAQEFAAGAAQIWAAP/AQAC/wYAAv8GAAL/BgABwAEfBgABwAEfBgABwAEBBgABwAEB
+        BgAC/wYAAcABHwYAAcABHwYAAv8GAAHAAQEGAAHAAQEGAAL/BgAC/wYAAv8GAAH8AT8C/wGPAfgBhwHg
+        AfABDwGAAX8BAQHQAYMCwAEDAYABfwEBAYABgwHgAYABAQGAAX8DgQHAAYABAQGAAQ8BwQGDA4ABAQGA
+        AQ8BwQGBAYABhQGAAQEBgAEPAeEBgwHxAY8BgAEBAYABAQT/AYABAQGAAQEC/wH5Ac8BgAEBAfABAQHB
+        AYEB8AGHAYABAQHwAQEBwQGBAYABgQGAAQEB8AEBAcECgQKAAQEB/gEBAYEBgAGDAcAB4AEDAf4CAQHA
+        AYMBwAH4AQ8B/gEBAQ8B8AGDAcAB/gE/Av8BnwH5Bv8CAAEMAQAE/wIAAQ8C/wHgAekBywIAAQ8B/wGP
+        AcAB8QHHAT8B/AEMAQABCAEAAfEBxwIAAv8BAAEBAuMCAAL/AQABNwHDAeEBPwH8AQwCAAEvAaMB4wIA
+        AQ8B/wEPAd8BhwHxAgABDwH/AfcBoQGjAeMBPwH8AQwBAAH4AWEC4wIAAv8B+AFhAuMCAAL/AfgBYQHx
+        AccBCAEQAQwBAAH4AWEB8QHHAgABDwH/AfgBYwHpAcsBFAEoAQ8B/wH8AX8C/wH3Ae8BDAEAAv8B+Af/
+        AfABfwT/AYABPwHgAT8E/wGAAT8BwAEXAf4BPwH/AeMBgAE/AeABAwH8AR8B/wHBAYABPwHgAQEB+AEP
+        Af8CgAEAAcABAAH4AQcBwQEAAYABAAGAAQAB+AEDAf8BAAGAAwAB+AEHAYEBAAH+AgABAQH4AQcB/wEA
+        Af4CAAEDAfgBBwHgAQAB/gIAAQcB/AEHAf8BAQH+AQABgAEvAf4BDwH/AYMC/wHAAX8B/wEfAf8BxwL/
+        AeAE/wHvAv8B8Qj/Ae8B/wH+Bf8BxwGAAQAC/wEAAQ8B/wGDAYABAAL/AQABDwH+AQEBgAEAAeABAwEA
+        AQ8B/gKAAQAB4AEDAQABDwH+AcEBgAEAAeABAwEAAQ8B7gHjAYABAQHgAQMBAAEPAcYBxwGAAQEB4AED
+        AQABDwGCAYMBgAEBAeABAwEAAQwBAAEBAYABAQHgAQMDAAKAAQEB4AEDAwABQQGAAQEB4AEDAgABgAEj
+        AYABAQL/AfABAAHAAXcBgAEBAv8B8AEAAeAF/wHwAQAB8QX/Cw==
+</value>
+  </data>
+  <data name="checkBox9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 3</value>
+  </data>
+  <data name="checkBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="checkBox9.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;checkBox9.Name" xml:space="preserve">
+    <value>checkBox9</value>
+  </data>
+  <data name="&gt;&gt;checkBox9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox9.Parent" xml:space="preserve">
+    <value>filterPanel</value>
+  </data>
+  <data name="&gt;&gt;checkBox9.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="checkBox8.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="checkBox8.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="checkBox8.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="checkBox8.ImageKey" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="checkBox8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 3</value>
+  </data>
+  <data name="checkBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="checkBox8.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;checkBox8.Name" xml:space="preserve">
+    <value>checkBox8</value>
+  </data>
+  <data name="&gt;&gt;checkBox8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox8.Parent" xml:space="preserve">
+    <value>filterPanel</value>
+  </data>
+  <data name="&gt;&gt;checkBox8.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="checkBox7.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="checkBox7.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="checkBox7.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="checkBox7.ImageKey" xml:space="preserve">
+    <value>UState</value>
+  </data>
+  <data name="checkBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 3</value>
+  </data>
+  <data name="checkBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="checkBox7.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;checkBox7.Name" xml:space="preserve">
+    <value>checkBox7</value>
+  </data>
+  <data name="&gt;&gt;checkBox7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox7.Parent" xml:space="preserve">
+    <value>filterPanel</value>
+  </data>
+  <data name="&gt;&gt;checkBox7.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="checkBox6.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="checkBox6.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="checkBox6.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="checkBox6.ImageKey" xml:space="preserve">
+    <value>UFunction</value>
+  </data>
+  <data name="checkBox6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 3</value>
+  </data>
+  <data name="checkBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="checkBox6.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;checkBox6.Name" xml:space="preserve">
+    <value>checkBox6</value>
+  </data>
+  <data name="&gt;&gt;checkBox6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox6.Parent" xml:space="preserve">
+    <value>filterPanel</value>
+  </data>
+  <data name="&gt;&gt;checkBox6.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="checkBox5.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="checkBox5.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="checkBox5.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="checkBox5.ImageKey" xml:space="preserve">
+    <value>UProperty</value>
+  </data>
+  <data name="checkBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 3</value>
+  </data>
+  <data name="checkBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="checkBox5.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;checkBox5.Name" xml:space="preserve">
+    <value>checkBox5</value>
+  </data>
+  <data name="&gt;&gt;checkBox5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox5.Parent" xml:space="preserve">
+    <value>filterPanel</value>
+  </data>
+  <data name="&gt;&gt;checkBox5.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="checkBox4.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="checkBox4.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="checkBox4.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="checkBox4.ImageKey" xml:space="preserve">
+    <value>UStruct</value>
+  </data>
+  <data name="checkBox4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>101, 3</value>
+  </data>
+  <data name="checkBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="checkBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;checkBox4.Name" xml:space="preserve">
+    <value>checkBox4</value>
+  </data>
+  <data name="&gt;&gt;checkBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox4.Parent" xml:space="preserve">
+    <value>filterPanel</value>
+  </data>
+  <data name="&gt;&gt;checkBox4.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="checkBox3.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="checkBox3.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="checkBox3.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="checkBox3.ImageKey" xml:space="preserve">
+    <value>UEnum</value>
+  </data>
+  <data name="checkBox3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 3</value>
+  </data>
+  <data name="checkBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="checkBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;checkBox3.Name" xml:space="preserve">
+    <value>checkBox3</value>
+  </data>
+  <data name="&gt;&gt;checkBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox3.Parent" xml:space="preserve">
+    <value>filterPanel</value>
+  </data>
+  <data name="&gt;&gt;checkBox3.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="checkBox2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="checkBox2.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="checkBox2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="checkBox2.ImageKey" xml:space="preserve">
+    <value>UConst</value>
+  </data>
+  <data name="checkBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 3</value>
+  </data>
+  <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="checkBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;checkBox2.Name" xml:space="preserve">
+    <value>checkBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox2.Parent" xml:space="preserve">
+    <value>filterPanel</value>
+  </data>
+  <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="checkBox1.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="checkBox1.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="checkBox1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="checkBox1.ImageKey" xml:space="preserve">
+    <value>UClass</value>
+  </data>
+  <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 3</value>
+  </data>
+  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="checkBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;checkBox1.Name" xml:space="preserve">
+    <value>checkBox1</value>
+  </data>
+  <data name="&gt;&gt;checkBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox1.Parent" xml:space="preserve">
+    <value>filterPanel</value>
+  </data>
+  <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="filterPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="filterPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 32</value>
+  </data>
+  <data name="filterPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;filterPanel.Name" xml:space="preserve">
+    <value>filterPanel</value>
+  </data>
+  <data name="&gt;&gt;filterPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterPanel.Parent" xml:space="preserve">
+    <value>TabPage_Exports</value>
+  </data>
+  <data name="&gt;&gt;filterPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="exportingToolStripMenuItem.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="exportDecompiledClassesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="exportDecompiledClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="exportDecompiledClassesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export &amp;Classes</value>
+  </data>
+  <data name="exportScriptClassesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="exportScriptClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="exportScriptClassesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export &amp;Scripts</value>
+  </data>
+  <data name="exportingToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="exportingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="exportingToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ex&amp;porting</value>
+  </data>
   <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -685,7 +1168,7 @@
     <value>20</value>
   </data>
   <data name="DataGridView_Flags.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 274</value>
+    <value>303, 455</value>
   </data>
   <data name="DataGridView_Flags.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -942,462 +1425,6 @@
   <data name="&gt;&gt;TabPage_Names.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="filterPanel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="filterPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="checkBox9.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="checkBox9.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkBox9.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="checkBox9.ImageKey" xml:space="preserve">
-    <value>Unknown</value>
-  </data>
-  <metadata name="VSIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>268, 17</value>
-  </metadata>
-  <data name="VSIcons.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADc
-        FgAAAk1TRnQBSQFMAgEBEQEAAawBBQGsAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
-        AwABQAMAAVADAAEBAQABCAYAARQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
-        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
-        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
-        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
-        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
-        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
-        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
-        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
-        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
-        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
-        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
-        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
-        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
-        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
-        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
-        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
-        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
-        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
-        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
-        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
-        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
-        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
-        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
-        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
-        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
-        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
-        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
-        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD//8ABAAJ7TcADPIB8z8A
-        AW1zAAlDwwABbTMADO0BB/cAAfQBFAHzAfIXAAFtAUMB/wkAAQcBDgH0AQABQwHsAQcB8wYAAf8B8QHv
-        AesBbQQAAf8BbQIAAfIB7wEHAfMFAAFDDgAB7AIAARQC/wEHAwAB9AEAAQcCAAEOAQABDgMAAe0EAAH0
-        AQ4DAAHrAgAB/wGSAQ4DAAHyA+8BvAH0AwABQw4AAf8BEQIAARMB7AHqAgAB/wEOAe0DAAEHAQABDgIA
-        AQ8B/wUAAe0DAAHvAQABvAEQBQAB8gXvAfACAAFDDwAB/wEVAwABFAIAAfEEAAEHAgABEAMAARMB/wMA
-        AQcEAAHxAQABEgYAAfIG7wIAAUMHAAFDCAAB/wEOAgABEQIAAe8DAAHtAwABQwHsARQCAAEUAf8BAAEH
-        AwAB7QEOAf8BAAESBgAB8gbvAgABQwcAAUMIAAHsAwABDgIAAesDAAEOAfQCAAHvAv8BFQIAAe0BAAEO
-        AgABBwEAAfQCAAESBgAB8gbvAgABQwcAAUMJAAHzAQcB7AFDAgABbQHrAe8B8QH/BgAB/wERAewCAAH0
-        AQ4BBwUAARIFAAEOAfMG7wIAAUMHAAFDAgAB7yQAARIEAAG8AfcB7AHxAbwE7wIAAf8H9AFDAgAB7xgA
-        AbwB9AMAAe0B/wUAARICAAH3Ae8B6wNtAZIB8gEHAu8FAAHvBwAB7wUAAewBEgEVAQ8DAAFDAQ4BEQEU
-        AeoBBwUAAQcBAAEQAfQBAAHsAQABFAH/BAABEgHsAQcB7AdtAe8B8QEHBQAB7wcAAe8FAAHyAQ4CAAEP
-        AgAB7AMAAewB/wIAAeoB9AEHAwABvAEAARECAAETAf8B7QIAAfAB7QptAesBBwUAAfII7wUAAQcDAAEV
-        AgABvAMAARMB/wIAAREBEAMAAQcCAAH/ARUCAAEPAQAB8wEAAf8B7wptAewB8QgAAfQJAAEHAwABDgES
-        AgAB8wEAAQ4CAAEUAf8BAAEPAwABBwQAAf8BFAMAAbwDAAH0Ae0GbQHrAbwB/wkAAfQIAAHwAwABBwHy
-        AewDAAHsAf8BFQIAAUMBAAEOAgABEAH0BAAB/wHsAwAB7AUAAfMB7ANtAe8B/wsAAf8HQwEAAfQBDgEA
-        AQcIAAH/AREBAAFtAgABDgEPAREB6gQAAe8BQwEQAg4BQwcAAfEB7QH/FwAB9AHwCgAB/wHsMQAB8QER
-        DAABEQHyMAABEA4AAREbAAHwA4YBvAMAAf8BAAL/AwAC/wEAAf8jAAHeAaoB3gYAAfMBhgHVArQBhgQA
-        AfMB7AFDAwABQwHsAfMEAAEPHgAB/wOqAQAB9ANJAfQBtAHcAQkB3AGLAfMEAAHsAQ4B8wMAAfMBDgHs
-        IwABsAHnAqoB9AFPAnIBTwFJAfQDtAHzBAAB/wETAQ4FAAEOARMB/yIAAbABqgHYAaoBTwGYAXgBlwFJ
-        AfQCAAESBQAC/wETAQ4FAAEOARMC/wIAAQ8eAAGwAdgBsAHeAfQBTwJJAfQBEgEAARIFAAH/AQAB/wEO
-        AQcFAAEHAQ4B/yIAAf8BsAH/ARIGAAESBgAC/wEOAW0HAAFtAQ4B/yUAARIEAAESAQABEgHeAaoB3gIA
-        Af8BAAH/AUMBBwUAAQcBQwH/AwABDyMAAewBKgGZARICAAH/A6oEAAH/ARMBQwUAAUMBEwH/JwABSwEy
-        AUsBmQIAAbAB5wKqBAAB/wETAUMFAAFDARMB/ycAATIBSwEyAUsCAAGwAaoB2AGqBQAB7AFDAfEDAAHx
-        AUMB7AYAAQcBAAEHBAABBwEAAQcYAAE4AXoCSwIAAbAB2AGwAd4FAAHzAewBQwMAAUMB7AHzAwABEAEA
-        AQ4B/wEAAf8DAAEOAf8BAAH/AgABERUAARsBOAF6AUsCAAH/AbAB/wUAAf8BAAL/AwAC/wEAAf8CAAHx
-        ARABDwYAAQ8EAAEQAfEWAAEbATgBGkwAAfQBpgEZPAAB9AGtAbMBpgH0KAABGgJzAW4CSwJKAQcJAAH0
-        Aa0B2wHVAbMBpgH0JwABWAGaAnoCeQJYAUoIAAH0AbQC3AHbAdUBswGmAfQBAAH0CgABGQGmAQkRAAHy
-        AWcB8QMAAVgCmgKRAa4CeQFKCQAB9AG0AtwB2wHVAbMBpgH0AYIB9AgAARkBtAKmAQkPAAHzAY0BjAFn
-        AfICAAF5A5oDegF5AUoJAALwAbQC3AHbAa0B8gGCAbABggH0BgABCQK0A6YBCQ0AAfIBjQGwAWcBggFn
-        Ad4BAAF5AaABmgKRAa4CegFLAW4CSwJKAQcCAAEbAioB8AG0AdwBrQHyAYIB2AG2AbABggH0BQADtASm
-        AQkFAAGgARoBmQHvAfcBAAHxAY0CsAFnAoIBZwEAAXkCoAOaAnoBSwF6AnkCWAFKAQABGwEqAlkBKgHw
-        AbQB8gGwA9gBtgGwAYIFAAK0AdsBCQGtA6YB/woAAY0DsAG2AoIBZwEAARsCeQNYAlIBeQKRAa4CeQFK
-        ARsBKgF6A1kBKgG8AbAD3gLYAbAB9AUAAbQB3AEJAdwBCQGLAqYEAAGgARoBmQEHAe8B9wEAAYICsAPY
-        AY0BZwcAAXkDmgN6AXkBSgEqAZoCegNZASoBGgGwA94BsAH0BgABugTcAQkBhgGmCwABjQGwBNgBtgGC
-        BwABeQGgAZoCkQGuAnoBSwExAaABmgJ6A1kBKgEaAbAB3gGwAfQHAAEZAboE3AEJAa0GAAGgAZkB7wH3
-        Af8CtgTYAbYB9AcAAXkCoAOaAnoBSwEbATEBoAGaAnoDWQEqARsBsAH0CQABGQG6A9wBugEZCwAB3gG2
-        Ad4C2AG2AfQIAAEbAnkDWAJSARoBAAEbATEBoAGaAnoBWQExARsBAAH0CwABGQG0AdwBugEZDQAB8wO2
-        AfQUAAEbATEBoAGaAXoBMQEbDwABGQG6AfQPAAHzAbYB9BYAARsBMQGgATEBGiMAAf8YAAEbATEBG0QA
-        AfQTAAEcKgAB9AGmAfQEAAH3DWYBdBAAAesEEwISBRMNAAH0Aa0BtAGmAfQDAAH3Af8B8QLwArwFCQG7
-        AWYBHBAAAbwH/wH0AhkBEwsAApEBtAHcAdsBtAGmAfQCAAH3Av8E9ALzAxkBuwFmAXQDAAEHAq4BbQFs
-        AeoCbAJmAe8CAAG8Af8CtQH/BbUBGQETCwABkQEAAfQBtAHcAdsBtAGmAfQBAAH3Af8B7QKRA64B8wJs
-        AWYBuwFmARwDAAHtAfIB8QHwArwCBwHvAbUBZgIAAbwF/wL0AxkBEwsAAZECAAH0AbQB3AGtAfQCAAH3
-        BDkD9AEZAvMBGQG7AWYBHAMAAfcB8wHyAfEB8AK8AgcB7wFsAgABvAH/ArUB/wW1ARkBEwcAARsDAAGR
-        AwAB8wG0AfQDAAG1ATkCAAE5A64DbAFmAbsBZgQAAfcB9AHzAfIBbQFsAWYBvAIHAWwCAAG8B/8C9AEZ
-        ARMGAAEbASoBGwIAAZECAAH/AYIB8wQAAe8JOQLzAQcBZgQAAbUB/wH0AfMB8gHxAfACvAEHAWwCAAG8
-        Bv8B7wFKAfEB9AETBQABGwEqAVkBKgEbAQABkQEAAf8BqgGwAYIB/wMAAbUB/wHtApEBOQMAATkBbAFm
-        AQcBZgQAAbUC/wH0AW0BbAFmAfACvAGuAgABvAH/AfMBbgHyAf8BvAFKAVIBDgHqAZICAAHvAUkBGwEq
-        A1kBKgORAbAC2AGwAYIB/wIAAbsE/wU5AvQBBwFmBAABtQP/AfQB8wHyAfEB8AG8Aa4CAAG0AQkBHAGZ
-        AUoB7QFKAXkBEgFZARABDgEiARIBbQFPATEBmgJ6AlkBKgEbAQAB/wGwAtgBsAGCAf8BAAG7B/8E9AEZ
-        AWYEAAEHBP8B9AHzAfIB8QHwAa4CAAG0AgkBHAGaAUoBeQHqAeUBFAFYAVIBMQEqARIBTwEbATEBmgJ6
-        AlkBKgEbAQAB/wGwAdgBsAH/AgAE1gHVA7QGrQQAAfEBBwG1Ae8BtQL3Ae0CkQEHAgADtAEJARwBegFz
-        AeUBFAJ6AlkBMgFzAU8BAAEbATEBmgJ6AlkBKgEbAQAB/wGwAf8DAAHWAQkF3AHWBdUBrRUAAfMBbgHl
-        AXMB5QN6AlkBcwFQAgABGwExAZoCegExARsDAAH/BAAF1gLVA7QBswOtFQABvAHDAW0D5QJ6AXkBbgFz
-        AZgDAAEbATEBmgExARssAAHvAZkB8AEcAu0C7AFuAbwCmAQAARsBMQEbKQABQgFNAT4HAAE+AwABKAMA
-        AUADAAFQAwABAQEAAQEFAAGAAQIWAAP/AQAC/wYAAv8GAAL/BgABwAEfBgABwAEfBgABwAEBBgABwAEB
-        BgAC/wYAAcABHwYAAcABHwYAAv8GAAHAAQEGAAHAAQEGAAL/BgAC/wYAAv8GAAH8AT8C/wGPAfgBhwHg
-        AfABDwGAAX8BAQHQAYMCwAEDAYABfwEBAYABgwHgAYABAQGAAX8DgQHAAYABAQGAAQ8BwQGDA4ABAQGA
-        AQ8BwQGBAYABhQGAAQEBgAEPAeEBgwHxAY8BgAEBAYABAQT/AYABAQGAAQEC/wH5Ac8BgAEBAfABAQHB
-        AYEB8AGHAYABAQHwAQEBwQGBAYABgQGAAQEB8AEBAcECgQKAAQEB/gEBAYEBgAGDAcAB4AEDAf4CAQHA
-        AYMBwAH4AQ8B/gEBAQ8B8AGDAcAB/gE/Av8BnwH5Bv8CAAEMAQAE/wIAAQ8C/wHgAekBywIAAQ8B/wGP
-        AcAB8QHHAT8B/AEMAQABCAEAAfEBxwIAAv8BAAEBAuMCAAL/AQABNwHDAeEBPwH8AQwCAAEvAaMB4wIA
-        AQ8B/wEPAd8BhwHxAgABDwH/AfcBoQGjAeMBPwH8AQwBAAH4AWEC4wIAAv8B+AFhAuMCAAL/AfgBYQHx
-        AccBCAEQAQwBAAH4AWEB8QHHAgABDwH/AfgBYwHpAcsBFAEoAQ8B/wH8AX8C/wH3Ae8BDAEAAv8B+Af/
-        AfABfwT/AYABPwHgAT8E/wGAAT8BwAEXAf4BPwH/AeMBgAE/AeABAwH8AR8B/wHBAYABPwHgAQEB+AEP
-        Af8CgAEAAcABAAH4AQcBwQEAAYABAAGAAQAB+AEDAf8BAAGAAwAB+AEHAYEBAAH+AgABAQH4AQcB/wEA
-        Af4CAAEDAfgBBwHgAQAB/gIAAQcB/AEHAf8BAQH+AQABgAEvAf4BDwH/AYMC/wHAAX8B/wEfAf8BxwL/
-        AeAE/wHvAv8B8Qj/Ae8B/wH+Bf8BxwGAAQAC/wEAAQ8B/wGDAYABAAL/AQABDwH+AQEBgAEAAeABAwEA
-        AQ8B/gKAAQAB4AEDAQABDwH+AcEBgAEAAeABAwEAAQ8B7gHjAYABAQHgAQMBAAEPAcYBxwGAAQEB4AED
-        AQABDwGCAYMBgAEBAeABAwEAAQwBAAEBAYABAQHgAQMDAAKAAQEB4AEDAwABQQGAAQEB4AEDAgABgAEj
-        AYABAQL/AfABAAHAAXcBgAEBAv8B8AEAAeAF/wHwAQAB8QX/Cw==
-</value>
-  </data>
-  <data name="checkBox9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 3</value>
-  </data>
-  <data name="checkBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="checkBox9.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;checkBox9.Name" xml:space="preserve">
-    <value>checkBox9</value>
-  </data>
-  <data name="&gt;&gt;checkBox9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox9.Parent" xml:space="preserve">
-    <value>filterPanel</value>
-  </data>
-  <data name="&gt;&gt;checkBox9.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="checkBox8.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="checkBox8.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkBox8.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="checkBox8.ImageKey" xml:space="preserve">
-    <value>List</value>
-  </data>
-  <data name="checkBox8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 3</value>
-  </data>
-  <data name="checkBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="checkBox8.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;checkBox8.Name" xml:space="preserve">
-    <value>checkBox8</value>
-  </data>
-  <data name="&gt;&gt;checkBox8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox8.Parent" xml:space="preserve">
-    <value>filterPanel</value>
-  </data>
-  <data name="&gt;&gt;checkBox8.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="checkBox7.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="checkBox7.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkBox7.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="checkBox7.ImageKey" xml:space="preserve">
-    <value>UState</value>
-  </data>
-  <data name="checkBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 3</value>
-  </data>
-  <data name="checkBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="checkBox7.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;checkBox7.Name" xml:space="preserve">
-    <value>checkBox7</value>
-  </data>
-  <data name="&gt;&gt;checkBox7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox7.Parent" xml:space="preserve">
-    <value>filterPanel</value>
-  </data>
-  <data name="&gt;&gt;checkBox7.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="checkBox6.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="checkBox6.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkBox6.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="checkBox6.ImageKey" xml:space="preserve">
-    <value>UFunction</value>
-  </data>
-  <data name="checkBox6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 3</value>
-  </data>
-  <data name="checkBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="checkBox6.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;checkBox6.Name" xml:space="preserve">
-    <value>checkBox6</value>
-  </data>
-  <data name="&gt;&gt;checkBox6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox6.Parent" xml:space="preserve">
-    <value>filterPanel</value>
-  </data>
-  <data name="&gt;&gt;checkBox6.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="checkBox5.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="checkBox5.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkBox5.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="checkBox5.ImageKey" xml:space="preserve">
-    <value>UProperty</value>
-  </data>
-  <data name="checkBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 3</value>
-  </data>
-  <data name="checkBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="checkBox5.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;checkBox5.Name" xml:space="preserve">
-    <value>checkBox5</value>
-  </data>
-  <data name="&gt;&gt;checkBox5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox5.Parent" xml:space="preserve">
-    <value>filterPanel</value>
-  </data>
-  <data name="&gt;&gt;checkBox5.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="checkBox4.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="checkBox4.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkBox4.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="checkBox4.ImageKey" xml:space="preserve">
-    <value>UStruct</value>
-  </data>
-  <data name="checkBox4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 3</value>
-  </data>
-  <data name="checkBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="checkBox4.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;checkBox4.Name" xml:space="preserve">
-    <value>checkBox4</value>
-  </data>
-  <data name="&gt;&gt;checkBox4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox4.Parent" xml:space="preserve">
-    <value>filterPanel</value>
-  </data>
-  <data name="&gt;&gt;checkBox4.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="checkBox3.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="checkBox3.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkBox3.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="checkBox3.ImageKey" xml:space="preserve">
-    <value>UEnum</value>
-  </data>
-  <data name="checkBox3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 3</value>
-  </data>
-  <data name="checkBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="checkBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;checkBox3.Name" xml:space="preserve">
-    <value>checkBox3</value>
-  </data>
-  <data name="&gt;&gt;checkBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox3.Parent" xml:space="preserve">
-    <value>filterPanel</value>
-  </data>
-  <data name="&gt;&gt;checkBox3.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="checkBox2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="checkBox2.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkBox2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="checkBox2.ImageKey" xml:space="preserve">
-    <value>UConst</value>
-  </data>
-  <data name="checkBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 3</value>
-  </data>
-  <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="checkBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;checkBox2.Name" xml:space="preserve">
-    <value>checkBox2</value>
-  </data>
-  <data name="&gt;&gt;checkBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox2.Parent" xml:space="preserve">
-    <value>filterPanel</value>
-  </data>
-  <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="checkBox1.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="checkBox1.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkBox1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="checkBox1.ImageKey" xml:space="preserve">
-    <value>UClass</value>
-  </data>
-  <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 3</value>
-  </data>
-  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="checkBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;checkBox1.Name" xml:space="preserve">
-    <value>checkBox1</value>
-  </data>
-  <data name="&gt;&gt;checkBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox1.Parent" xml:space="preserve">
-    <value>filterPanel</value>
-  </data>
-  <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="filterPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="filterPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 32</value>
-  </data>
-  <data name="filterPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;filterPanel.Name" xml:space="preserve">
-    <value>filterPanel</value>
-  </data>
-  <data name="&gt;&gt;filterPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterPanel.Parent" xml:space="preserve">
-    <value>TabPage_Exports</value>
-  </data>
-  <data name="&gt;&gt;filterPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="TreeView_Exports.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -1411,7 +1438,7 @@
     <value>0</value>
   </data>
   <data name="TreeView_Exports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 433</value>
+    <value>295, 425</value>
   </data>
   <data name="TreeView_Exports.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1684,7 +1711,7 @@
     <value>0</value>
   </data>
   <data name="TreeView_Classes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 436</value>
+    <value>295, 432</value>
   </data>
   <data name="TreeView_Classes.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1839,20 +1866,20 @@
   <data name="&gt;&gt;TabPage_Content.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="TreeView_Deps.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="TreeView_Deps.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="TreeView_Deps.ImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="TreeView_Deps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>3, 3</value>
   </data>
   <data name="TreeView_Deps.SelectedImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="TreeView_Deps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 462</value>
+    <value>295, 456</value>
   </data>
   <data name="TreeView_Deps.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2085,36 +2112,6 @@
   <data name="ToolStrip_Main.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
-  <metadata name="exportingToolStripMenuItem.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="exportDecompiledClassesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="exportDecompiledClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="exportDecompiledClassesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export &amp;Classes</value>
-  </data>
-  <data name="exportScriptClassesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="exportScriptClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="exportScriptClassesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export &amp;Scripts</value>
-  </data>
-  <data name="exportingToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="exportingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
-  </data>
-  <data name="exportingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ex&amp;porting</value>
-  </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 6</value>
   </data>
@@ -2272,7 +2269,7 @@
     <value>0</value>
   </data>
   <data name="splitContainer1.Panel1MinSize" type="System.Int32, mscorlib">
-    <value>330</value>
+    <value>200</value>
   </data>
   <data name="panel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2623,6 +2620,30 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1312, 555</value>
   </data>
+  <data name="&gt;&gt;VSIcons.Name" xml:space="preserve">
+    <value>VSIcons</value>
+  </data>
+  <data name="&gt;&gt;VSIcons.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exportingToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportingToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportingToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exportDecompiledClassesToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportDecompiledClassesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportDecompiledClassesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exportScriptClassesToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportScriptClassesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportScriptClassesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;Flag.Name" xml:space="preserve">
     <value>Flag</value>
   </data>
@@ -2646,12 +2667,6 @@
   </data>
   <data name="&gt;&gt;Column2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;VSIcons.Name" xml:space="preserve">
-    <value>VSIcons</value>
-  </data>
-  <data name="&gt;&gt;VSIcons.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn1</value>
@@ -2700,24 +2715,6 @@
   </data>
   <data name="&gt;&gt;_Tools_StripDropDownButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;exportingToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportingToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;exportingToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;exportDecompiledClassesToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportDecompiledClassesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;exportDecompiledClassesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;exportScriptClassesToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportScriptClassesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;exportScriptClassesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>

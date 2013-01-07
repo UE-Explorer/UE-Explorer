@@ -135,7 +135,6 @@
   <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
     <value>Ongeldig object slot {0}</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="RegistryWarning" xml:space="preserve">
     <value>Dit zal jouw registery bewerken.
 Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eerst uitschakeld!</value>
@@ -315,5 +314,8 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
   </data>
   <data name="NodeItem_ManagedProperties" xml:space="preserve">
     <value>Managed eigenschappen</value>
+  </data>
+  <data name="ExportTextTitle" xml:space="preserve">
+    <value>Exporteer Text</value>
   </data>
 </root>

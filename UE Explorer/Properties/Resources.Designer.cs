@@ -171,6 +171,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export Text.
+        /// </summary>
+        internal static string ExportTextTitle {
+            get {
+                return ResourceManager.GetString("ExportTextTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Find Results {0}.
         /// </summary>
         internal static string FIND_RESULTS_TITLE {
@@ -682,6 +691,15 @@ namespace UEExplorer.Properties {
             get {
                 object obj = ResourceManager.GetObject("UE_ProgramLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unreal Class.
+        /// </summary>
+        internal static string UnrealClassFilter {
+            get {
+                return ResourceManager.GetString("UnrealClassFilter", resourceCulture);
             }
         }
         

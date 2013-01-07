@@ -28,6 +28,12 @@ namespace UEExplorer.UI.Tabs
         /// </summary>
         private UnrealPackage _UnrealPackage;
 
+        public override void TabInitialize()
+        {
+            splitContainer1.SplitterDistance = Settings.Default.PackageExplorer_SplitterDistance;
+            base.TabInitialize();
+        }
+
         /// <summary>
         /// Called when the Tab is added to the chain.
         /// </summary>
@@ -370,9 +376,9 @@ namespace UEExplorer.UI.Tabs
             var sfd = new SaveFileDialog
             {
                 DefaultExt = "uc",
-                Filter = "Unreal Class(*.uc)|*.uc",
+                Filter = String.Format( "{0}(*.uc)|*.uc", Resources.UnrealClassFilter ),
                 FilterIndex = 1,
-                Title = "Export Text",
+                Title = Resources.ExportTextTitle,
                 FileName = Label_ObjectName.Text + UnrealExtensions.UnrealCodeExt
             };
             if( sfd.ShowDialog() == DialogResult.OK )
@@ -2099,6 +2105,12 @@ namespace UEExplorer.UI.Tabs
                 return;
 
             ShowNodeContextMenuStrip( TreeView_Imports, e, _OnImportsItemClicked );
+        }
+
+        private void SplitContainer1_SplitterMoved( object sender, SplitterEventArgs e )
+        {
+            Settings.Default.PackageExplorer_SplitterDistance = splitContainer1.SplitterDistance;
+            Settings.Default.Save();
         }
     }
 }

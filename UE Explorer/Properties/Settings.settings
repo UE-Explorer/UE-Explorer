@@ -29,5 +29,8 @@
     <Setting Name="HexPanel_SplitterDistance" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">219</Value>
     </Setting>
+    <Setting Name="PackageExplorer_SplitterDistance" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">330</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

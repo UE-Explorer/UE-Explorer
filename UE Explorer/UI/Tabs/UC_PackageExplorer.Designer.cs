@@ -31,10 +31,22 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label label4;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
-            System.Windows.Forms.SplitContainer splitContainer1;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.Panel filterPanel;
             System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.VSIcons = new System.Windows.Forms.ImageList(this.components);
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.exportDecompiledClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportScriptClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.Panel_Main = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.TabControl_General = new System.Windows.Forms.TabControl();
@@ -70,16 +82,6 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TabPage_Exports = new System.Windows.Forms.TabPage();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.VSIcons = new System.Windows.Forms.ImageList(this.components);
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.TreeView_Exports = new System.Windows.Forms.TreeView();
             this.TabPage_Imports = new System.Windows.Forms.TabPage();
             this.TreeView_Imports = new System.Windows.Forms.TreeView();
@@ -108,8 +110,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.ToolStrip_Main = new System.Windows.Forms.ToolStrip();
             this._Tools_StripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.exportDecompiledClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportScriptClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.findNextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -137,13 +137,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             label4 = new System.Windows.Forms.Label();
-            splitContainer1 = new System.Windows.Forms.SplitContainer();
             filterPanel = new System.Windows.Forms.Panel();
             exportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(splitContainer1)).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
-            splitContainer1.SuspendLayout();
+            filterPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.Panel_Main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.TabControl_General.SuspendLayout();
@@ -156,7 +156,6 @@
             this.TabPage_Names.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_NameTable)).BeginInit();
             this.TabPage_Exports.SuspendLayout();
-            filterPanel.SuspendLayout();
             this.TabPage_Imports.SuspendLayout();
             this.TabPage_Generations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_GenerationsTable)).BeginInit();
@@ -182,19 +181,188 @@
             label4.CausesValidation = false;
             label4.Name = "label4";
             // 
+            // filterPanel
+            // 
+            resources.ApplyResources(filterPanel, "filterPanel");
+            filterPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            filterPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            filterPanel.Controls.Add(this.checkBox9);
+            filterPanel.Controls.Add(this.checkBox8);
+            filterPanel.Controls.Add(this.checkBox7);
+            filterPanel.Controls.Add(this.checkBox6);
+            filterPanel.Controls.Add(this.checkBox5);
+            filterPanel.Controls.Add(this.checkBox4);
+            filterPanel.Controls.Add(this.checkBox3);
+            filterPanel.Controls.Add(this.checkBox2);
+            filterPanel.Controls.Add(this.checkBox1);
+            filterPanel.Name = "filterPanel";
+            // 
+            // checkBox9
+            // 
+            resources.ApplyResources(this.checkBox9, "checkBox9");
+            this.checkBox9.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox9.Checked = true;
+            this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox9.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
+            this.checkBox9.ImageList = this.VSIcons;
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.UseVisualStyleBackColor = false;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
+            // 
+            // VSIcons
+            // 
+            this.VSIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("VSIcons.ImageStream")));
+            this.VSIcons.TransparentColor = System.Drawing.Color.Fuchsia;
+            this.VSIcons.Images.SetKeyName(0, "Unknown");
+            this.VSIcons.Images.SetKeyName(1, "UClass");
+            this.VSIcons.Images.SetKeyName(2, "UObject");
+            this.VSIcons.Images.SetKeyName(3, "UConst");
+            this.VSIcons.Images.SetKeyName(4, "UEnum");
+            this.VSIcons.Images.SetKeyName(5, "UStruct");
+            this.VSIcons.Images.SetKeyName(6, "UProperty");
+            this.VSIcons.Images.SetKeyName(7, "UFunction");
+            this.VSIcons.Images.SetKeyName(8, "UState");
+            this.VSIcons.Images.SetKeyName(9, "List");
+            this.VSIcons.Images.SetKeyName(10, "text");
+            this.VSIcons.Images.SetKeyName(11, "tree");
+            this.VSIcons.Images.SetKeyName(12, "object");
+            this.VSIcons.Images.SetKeyName(13, "multiple");
+            this.VSIcons.Images.SetKeyName(14, "import");
+            this.VSIcons.Images.SetKeyName(15, "export");
+            this.VSIcons.Images.SetKeyName(16, "text-left");
+            // 
+            // checkBox8
+            // 
+            resources.ApplyResources(this.checkBox8, "checkBox8");
+            this.checkBox8.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox8.Checked = true;
+            this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
+            this.checkBox8.ImageList = this.VSIcons;
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.UseVisualStyleBackColor = false;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
+            // 
+            // checkBox7
+            // 
+            resources.ApplyResources(this.checkBox7, "checkBox7");
+            this.checkBox7.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox7.Checked = true;
+            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
+            this.checkBox7.ImageList = this.VSIcons;
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.UseVisualStyleBackColor = false;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
+            // 
+            // checkBox6
+            // 
+            resources.ApplyResources(this.checkBox6, "checkBox6");
+            this.checkBox6.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox6.Checked = true;
+            this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
+            this.checkBox6.ImageList = this.VSIcons;
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.UseVisualStyleBackColor = false;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
+            // 
+            // checkBox5
+            // 
+            resources.ApplyResources(this.checkBox5, "checkBox5");
+            this.checkBox5.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox5.Checked = true;
+            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
+            this.checkBox5.ImageList = this.VSIcons;
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.UseVisualStyleBackColor = false;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
+            // 
+            // checkBox4
+            // 
+            resources.ApplyResources(this.checkBox4, "checkBox4");
+            this.checkBox4.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox4.Checked = true;
+            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
+            this.checkBox4.ImageList = this.VSIcons;
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.UseVisualStyleBackColor = false;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
+            // 
+            // checkBox3
+            // 
+            resources.ApplyResources(this.checkBox3, "checkBox3");
+            this.checkBox3.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox3.Checked = true;
+            this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
+            this.checkBox3.ImageList = this.VSIcons;
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.UseVisualStyleBackColor = false;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
+            // 
+            // checkBox2
+            // 
+            resources.ApplyResources(this.checkBox2, "checkBox2");
+            this.checkBox2.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
+            this.checkBox2.ImageList = this.VSIcons;
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = false;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
+            // 
+            // checkBox1
+            // 
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
+            this.checkBox1.ImageList = this.VSIcons;
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = false;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
+            // 
+            // exportingToolStripMenuItem
+            // 
+            exportingToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            exportingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportDecompiledClassesToolStripMenuItem,
+            this.exportScriptClassesToolStripMenuItem});
+            resources.ApplyResources(exportingToolStripMenuItem, "exportingToolStripMenuItem");
+            exportingToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            exportingToolStripMenuItem.Name = "exportingToolStripMenuItem";
+            // 
+            // exportDecompiledClassesToolStripMenuItem
+            // 
+            resources.ApplyResources(this.exportDecompiledClassesToolStripMenuItem, "exportDecompiledClassesToolStripMenuItem");
+            this.exportDecompiledClassesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.exportDecompiledClassesToolStripMenuItem.Name = "exportDecompiledClassesToolStripMenuItem";
+            // 
+            // exportScriptClassesToolStripMenuItem
+            // 
+            resources.ApplyResources(this.exportScriptClassesToolStripMenuItem, "exportScriptClassesToolStripMenuItem");
+            this.exportScriptClassesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.exportScriptClassesToolStripMenuItem.Name = "exportScriptClassesToolStripMenuItem";
+            // 
             // splitContainer1
             // 
-            resources.ApplyResources(splitContainer1, "splitContainer1");
-            splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            splitContainer1.Name = "splitContainer1";
+            resources.ApplyResources(this.splitContainer1, "splitContainer1");
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(this.Panel_Main);
+            this.splitContainer1.Panel1.Controls.Add(this.Panel_Main);
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(this.Panel_Content);
+            this.splitContainer1.Panel2.Controls.Add(this.Panel_Content);
+            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainer1_SplitterMoved);
             // 
             // Panel_Main
             // 
@@ -524,156 +692,9 @@
             this.TabPage_Exports.Name = "TabPage_Exports";
             this.TabPage_Exports.UseVisualStyleBackColor = true;
             // 
-            // filterPanel
-            // 
-            resources.ApplyResources(filterPanel, "filterPanel");
-            filterPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-            filterPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            filterPanel.Controls.Add(this.checkBox9);
-            filterPanel.Controls.Add(this.checkBox8);
-            filterPanel.Controls.Add(this.checkBox7);
-            filterPanel.Controls.Add(this.checkBox6);
-            filterPanel.Controls.Add(this.checkBox5);
-            filterPanel.Controls.Add(this.checkBox4);
-            filterPanel.Controls.Add(this.checkBox3);
-            filterPanel.Controls.Add(this.checkBox2);
-            filterPanel.Controls.Add(this.checkBox1);
-            filterPanel.Name = "filterPanel";
-            // 
-            // checkBox9
-            // 
-            resources.ApplyResources(this.checkBox9, "checkBox9");
-            this.checkBox9.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox9.Checked = true;
-            this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox9.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox9.ImageList = this.VSIcons;
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.UseVisualStyleBackColor = false;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // VSIcons
-            // 
-            this.VSIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("VSIcons.ImageStream")));
-            this.VSIcons.TransparentColor = System.Drawing.Color.Fuchsia;
-            this.VSIcons.Images.SetKeyName(0, "Unknown");
-            this.VSIcons.Images.SetKeyName(1, "UClass");
-            this.VSIcons.Images.SetKeyName(2, "UObject");
-            this.VSIcons.Images.SetKeyName(3, "UConst");
-            this.VSIcons.Images.SetKeyName(4, "UEnum");
-            this.VSIcons.Images.SetKeyName(5, "UStruct");
-            this.VSIcons.Images.SetKeyName(6, "UProperty");
-            this.VSIcons.Images.SetKeyName(7, "UFunction");
-            this.VSIcons.Images.SetKeyName(8, "UState");
-            this.VSIcons.Images.SetKeyName(9, "List");
-            this.VSIcons.Images.SetKeyName(10, "text");
-            this.VSIcons.Images.SetKeyName(11, "tree");
-            this.VSIcons.Images.SetKeyName(12, "object");
-            this.VSIcons.Images.SetKeyName(13, "multiple");
-            this.VSIcons.Images.SetKeyName(14, "import");
-            this.VSIcons.Images.SetKeyName(15, "export");
-            this.VSIcons.Images.SetKeyName(16, "text-left");
-            // 
-            // checkBox8
-            // 
-            resources.ApplyResources(this.checkBox8, "checkBox8");
-            this.checkBox8.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox8.Checked = true;
-            this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox8.ImageList = this.VSIcons;
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.UseVisualStyleBackColor = false;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox7
-            // 
-            resources.ApplyResources(this.checkBox7, "checkBox7");
-            this.checkBox7.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox7.Checked = true;
-            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox7.ImageList = this.VSIcons;
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.UseVisualStyleBackColor = false;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox6
-            // 
-            resources.ApplyResources(this.checkBox6, "checkBox6");
-            this.checkBox6.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox6.Checked = true;
-            this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox6.ImageList = this.VSIcons;
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.UseVisualStyleBackColor = false;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox5
-            // 
-            resources.ApplyResources(this.checkBox5, "checkBox5");
-            this.checkBox5.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox5.Checked = true;
-            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox5.ImageList = this.VSIcons;
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.UseVisualStyleBackColor = false;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox4
-            // 
-            resources.ApplyResources(this.checkBox4, "checkBox4");
-            this.checkBox4.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox4.Checked = true;
-            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox4.ImageList = this.VSIcons;
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.UseVisualStyleBackColor = false;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox3
-            // 
-            resources.ApplyResources(this.checkBox3, "checkBox3");
-            this.checkBox3.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox3.Checked = true;
-            this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox3.ImageList = this.VSIcons;
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = false;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox2
-            // 
-            resources.ApplyResources(this.checkBox2, "checkBox2");
-            this.checkBox2.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox2.ImageList = this.VSIcons;
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.UseVisualStyleBackColor = false;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox1
-            // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox1.ImageList = this.VSIcons;
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = false;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
             // TreeView_Exports
             // 
             resources.ApplyResources(this.TreeView_Exports, "TreeView_Exports");
-            this.TreeView_Exports.CausesValidation = false;
             this.TreeView_Exports.HideSelection = false;
             this.TreeView_Exports.ImageList = this.VSIcons;
             this.TreeView_Exports.Name = "TreeView_Exports";
@@ -691,7 +712,6 @@
             // TreeView_Imports
             // 
             this.TreeView_Imports.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TreeView_Imports.CausesValidation = false;
             resources.ApplyResources(this.TreeView_Imports, "TreeView_Imports");
             this.TreeView_Imports.HideSelection = false;
             this.TreeView_Imports.ImageList = this.VSIcons;
@@ -836,9 +856,9 @@
             // 
             // TreeView_Deps
             // 
+            resources.ApplyResources(this.TreeView_Deps, "TreeView_Deps");
             this.TreeView_Deps.BackColor = System.Drawing.Color.White;
             this.TreeView_Deps.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.TreeView_Deps, "TreeView_Deps");
             this.TreeView_Deps.HideSelection = false;
             this.TreeView_Deps.ImageList = this.VSIcons;
             this.TreeView_Deps.Name = "TreeView_Deps";
@@ -937,28 +957,6 @@
             this._Tools_StripDropDownButton.Name = "_Tools_StripDropDownButton";
             this._Tools_StripDropDownButton.Padding = new System.Windows.Forms.Padding(3);
             resources.ApplyResources(this._Tools_StripDropDownButton, "_Tools_StripDropDownButton");
-            // 
-            // exportingToolStripMenuItem
-            // 
-            exportingToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            exportingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportDecompiledClassesToolStripMenuItem,
-            this.exportScriptClassesToolStripMenuItem});
-            resources.ApplyResources(exportingToolStripMenuItem, "exportingToolStripMenuItem");
-            exportingToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            exportingToolStripMenuItem.Name = "exportingToolStripMenuItem";
-            // 
-            // exportDecompiledClassesToolStripMenuItem
-            // 
-            resources.ApplyResources(this.exportDecompiledClassesToolStripMenuItem, "exportDecompiledClassesToolStripMenuItem");
-            this.exportDecompiledClassesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.exportDecompiledClassesToolStripMenuItem.Name = "exportDecompiledClassesToolStripMenuItem";
-            // 
-            // exportScriptClassesToolStripMenuItem
-            // 
-            resources.ApplyResources(this.exportScriptClassesToolStripMenuItem, "exportScriptClassesToolStripMenuItem");
-            this.exportScriptClassesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.exportScriptClassesToolStripMenuItem.Name = "exportScriptClassesToolStripMenuItem";
             // 
             // toolStripSeparator2
             // 
@@ -1156,12 +1154,13 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(splitContainer1);
+            this.Controls.Add(this.splitContainer1);
             this.Name = "UC_PackageExplorer";
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(splitContainer1)).EndInit();
-            splitContainer1.ResumeLayout(false);
+            filterPanel.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.Panel_Main.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.TabControl_General.ResumeLayout(false);
@@ -1175,7 +1174,6 @@
             this.TabPage_Names.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_NameTable)).EndInit();
             this.TabPage_Exports.ResumeLayout(false);
-            filterPanel.ResumeLayout(false);
             this.TabPage_Imports.ResumeLayout(false);
             this.TabPage_Generations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_GenerationsTable)).EndInit();
@@ -1203,11 +1201,8 @@
 
 		#endregion
 
-		internal System.Windows.Forms.TabPage TabPage_Names;
-		internal System.Windows.Forms.TabPage TabPage_Exports;
-		internal System.Windows.Forms.TabPage TabPage_Imports;
-		internal System.Windows.Forms.TreeView TreeView_Exports;
-		internal System.Windows.Forms.TreeView TreeView_Imports;
+        internal System.Windows.Forms.TabPage TabPage_Names;
+        internal System.Windows.Forms.TabPage TabPage_Imports;
 		internal System.Windows.Forms.NumericUpDown Num_ObjectIndex;
 		internal System.Windows.Forms.NumericUpDown Num_NameIndex;
 		private System.Windows.Forms.ToolStripButton ExportButton;
@@ -1217,11 +1212,9 @@
 		private System.Windows.Forms.ToolStrip ToolStrip_Main;
 		private System.Windows.Forms.ToolStripDropDownButton _Tools_StripDropDownButton;
 		public System.Windows.Forms.ToolStripMenuItem exportDecompiledClassesToolStripMenuItem;
-		public System.Windows.Forms.ToolStripMenuItem exportScriptClassesToolStripMenuItem;
-		internal System.Windows.Forms.TreeView TreeView_Classes;
+        public System.Windows.Forms.ToolStripMenuItem exportScriptClassesToolStripMenuItem;
 		internal System.Windows.Forms.TabPage TabPage_Objects;
-		internal System.Windows.Forms.TabPage TabPage_Classes;
-		internal System.Windows.Forms.TabPage TabPage_Content;
+        internal System.Windows.Forms.TabPage TabPage_Classes;
 		internal System.Windows.Forms.TabPage TabPage_Deps;
 		private System.Windows.Forms.DataGridView DataGridView_NameTable;
 		private System.Windows.Forms.ToolStripButton FindButton;
@@ -1304,5 +1297,11 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 		private System.Windows.Forms.ToolStripMenuItem findInDocumentToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem findNextToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TabPage TabPage_Exports;
+        private System.Windows.Forms.TreeView TreeView_Exports;
+        private System.Windows.Forms.TreeView TreeView_Imports;
+        private System.Windows.Forms.TreeView TreeView_Classes;
+        private System.Windows.Forms.TabPage TabPage_Content;
 	}
 }
