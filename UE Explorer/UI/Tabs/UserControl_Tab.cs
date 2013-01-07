@@ -1,12 +1,17 @@
 ﻿using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Storm.TabControl;
 
 namespace UEExplorer.UI.Tabs
 {
-    public abstract class UserControl_Tab : UserControl, ITabComponent
+    [ComVisible( false )]
+    public class UserControl_Tab : UserControl, ITabComponent
     {
+        [ComVisible( false )]
         public TabsCollection Tabs{ protected get; set; }
+
+        [ComVisible( false )]
         public TabStripItem TabItem{ get; set; }
 
         protected UserControl_Tab()
@@ -18,7 +23,9 @@ namespace UEExplorer.UI.Tabs
             InitializeComponent();
         }
 
-        protected abstract void InitializeComponent();
+        protected virtual void InitializeComponent()
+        {
+        }
 
         /// <summary>
         /// Called after the tab was constructed.

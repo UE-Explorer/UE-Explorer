@@ -32,7 +32,7 @@
             System.Windows.Forms.Label label4;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
             System.Windows.Forms.SplitContainer splitContainer1;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.Panel filterPanel;
             System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
             this.Panel_Main = new System.Windows.Forms.Panel();
@@ -208,7 +208,7 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.TabControl_General);
             this.panel1.Name = "panel1";
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
             // TabControl_General
             // 
@@ -221,6 +221,7 @@
             this.TabControl_General.ImageList = this.VSIcons;
             this.TabControl_General.Name = "TabControl_General";
             this.TabControl_General.SelectedIndex = 0;
+            this.TabControl_General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl_General_Selecting);
             this.TabControl_General.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl_General_Selected);
             // 
             // TabPage_Package
@@ -389,14 +390,14 @@
             this.DataGridView_Flags.MultiSelect = false;
             this.DataGridView_Flags.Name = "DataGridView_Flags";
             this.DataGridView_Flags.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridView_Flags.RowHeadersVisible = false;
             this.DataGridView_Flags.ShowCellErrors = false;
             this.DataGridView_Flags.ShowEditingIcon = false;
@@ -765,6 +766,7 @@
             this.TabControl_Objects.ImageList = this.VSIcons;
             this.TabControl_Objects.Name = "TabControl_Objects";
             this.TabControl_Objects.SelectedIndex = 0;
+            this.TabControl_Objects.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl_Objects_Selecting);
             // 
             // TabPage_Classes
             // 
@@ -976,13 +978,13 @@
             // 
             resources.ApplyResources(this.findNextToolStripMenuItem, "findNextToolStripMenuItem");
             this.findNextToolStripMenuItem.Name = "findNextToolStripMenuItem";
-            this.findNextToolStripMenuItem.Click += new System.EventHandler(this.findNextToolStripMenuItem_Click);
+            this.findNextToolStripMenuItem.Click += new System.EventHandler(this.FindNextToolStripMenuItem_Click);
             // 
             // findInDocumentToolStripMenuItem
             // 
             resources.ApplyResources(this.findInDocumentToolStripMenuItem, "findInDocumentToolStripMenuItem");
             this.findInDocumentToolStripMenuItem.Name = "findInDocumentToolStripMenuItem";
-            this.findInDocumentToolStripMenuItem.Click += new System.EventHandler(this.findInDocumentToolStripMenuItem_Click);
+            this.findInDocumentToolStripMenuItem.Click += new System.EventHandler(this.FindInDocumentToolStripMenuItem_Click);
             // 
             // findInClassesToolStripMenuItem
             // 
@@ -1024,7 +1026,7 @@
             resources.ApplyResources(this.panel4, "panel4");
             this.panel4.Controls.Add(this.WPFHost);
             this.panel4.Name = "panel4";
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel4_Paint);
             // 
             // WPFHost
             // 
@@ -1082,14 +1084,14 @@
             this.ExportButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.ExportButton.Name = "ExportButton";
             this.ExportButton.Padding = new System.Windows.Forms.Padding(3);
-            this.ExportButton.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.ExportButton.Click += new System.EventHandler(this.ToolStripButton1_Click);
             // 
             // toolStripSeparator1
             // 
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator1_Paint);
+            this.toolStripSeparator1.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStripSeparator1_Paint);
             // 
             // SearchBox
             // 
@@ -1114,14 +1116,14 @@
             this.toolStripSeparator4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.toolStripSeparator4.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator1_Paint);
+            this.toolStripSeparator4.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStripSeparator1_Paint);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-            this.toolStripSeparator3.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator1_Paint);
+            this.toolStripSeparator3.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStripSeparator1_Paint);
             // 
             // Label_ObjectName
             // 
