@@ -150,9 +150,24 @@ namespace UEExplorer
 
         internal static Tuple<string, string, PropertyType> ParseVariable( string data )
         {
-            var varGroup = data.Left( data.IndexOf( ':' ) );
+            retry:
+            var groupIndex = data.IndexOf( ':' );
+            if( groupIndex == -1 )
+            {
+                data += ":ObjectProperty"; 
+                goto retry;
+            }
+            var varGroup = data.Left( groupIndex );
             var varName = varGroup.Mid( varGroup.LastIndexOf( '.' ) + 1 );
-            var varType = (PropertyType)Enum.Parse( typeof(PropertyType), data.Substring( data.IndexOf( ':' ) + 1 ) );
+            PropertyType varType;
+            try
+            {
+                varType = (PropertyType)Enum.Parse( typeof(PropertyType), data.Substring( groupIndex + 1 ) );
+            }
+            catch( Exception )
+            {
+                varType = PropertyType.ObjectProperty;
+            }
             return Tuple.Create( varName, varGroup, varType );
         }
 
