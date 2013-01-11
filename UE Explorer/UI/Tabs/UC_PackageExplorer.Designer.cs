@@ -786,7 +786,6 @@
             this.TabControl_Objects.ImageList = this.VSIcons;
             this.TabControl_Objects.Name = "TabControl_Objects";
             this.TabControl_Objects.SelectedIndex = 0;
-            this.TabControl_Objects.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl_Objects_Selecting);
             // 
             // TabPage_Classes
             // 

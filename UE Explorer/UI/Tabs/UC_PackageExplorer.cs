@@ -843,37 +843,14 @@ namespace UEExplorer.UI.Tabs
 
             if( e.TabPage == TabPage_Objects )
             {
-                TabControl_Objects_Selecting( TabControl_Objects, 
-                    new TabControlCancelEventArgs( TabPage_Classes, 0, false, TabControlAction.Selecting ) 
-                ); 
-            }
-        }
+                if( TreeView_Classes.Nodes.Count == 0 )
+                    CreateClassesList();
 
-        private void TabControl_Objects_Selecting( object sender, TabControlCancelEventArgs e )
-        {
-            if( e.Action != TabControlAction.Selecting )
-                return;
+                if( TreeView_Deps.Nodes.Count == 0 )
+                    CreateDependenciesList();  
 
-            if( e.TabPage == TabPage_Classes )
-            {
-                if( TreeView_Classes.Nodes.Count > 0 )
-                    return;
-
-                CreateClassesList();
-            }
-            else if( e.TabPage == TabPage_Deps )
-            {
-                if( TreeView_Deps.Nodes.Count > 0 )
-                    return;
-
-                CreateDependenciesList();   
-            }
-            else if( e.TabPage == TabPage_Content )
-            {
-                if( TreeView_Content.Nodes.Count > 0 )
-                    return;
-
-                CreateContentList(); 
+                if( TreeView_Content.Nodes.Count == 0 )
+                    CreateContentList(); 
             }
         }
 
