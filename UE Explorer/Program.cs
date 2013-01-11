@@ -362,7 +362,7 @@ namespace UEExplorer
     public class XMLSettings
     {																									  
         #region Unreal Packages Decompiler Related Members
-        public string NTLPath = "NativesTableList_UT2004";
+        public string NTLPath = "NativesTableList_UDK-2012-05";
 
         public UnrealPackage.InitFlags InitFlags = UnrealPackage.InitFlags.All;
         public bool bForceVersion;
