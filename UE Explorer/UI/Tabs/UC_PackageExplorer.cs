@@ -893,6 +893,17 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
+        private ObjectNode CreateObjectNode( UObjectTableItem item )
+        {
+            var objectNode = new ObjectNode( item.Object )
+            {
+                Text = item.ObjectName, 
+                Tag = item
+            };
+            SetImageKeyForObject( item, objectNode );  
+            return objectNode;
+        }
+
         private void CreateGenerationsList()
         {
             foreach( var gen in _UnrealPackage.Generations )
@@ -901,27 +912,58 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private void CreateContentList()
+        private void TreeView_Content_BeforeExpand( object sender, TreeViewCancelEventArgs e )
         {
-            var groups = new List<ObjectNode>();
-            foreach( var obj in _UnrealPackage.Objects.Where(
-                    o => (int)o > 0 && o.Outer != null 
-                    && (o.ResistsInGroup() || o.HasObjectFlag( ObjectFlagsLO.Automated ))
-                ))
+            var objectNode = e.Node as ObjectNode;
+            if( objectNode == null )
+                return;
+
+            var item = objectNode.Tag as UObjectTableItem;
+            if( item == null )
+                return;
+
+            // Kill dummies.
+            objectNode.Nodes.Clear();
+            TreeView_Content.BeginUpdate();
+            CreateContentNodesFor( item, objectNode.Nodes, true );
+            TreeView_Content.EndUpdate();
+        }
+
+        // Lazy recursive.
+        private void CreateContentNodesFor( UObjectTableItem item, TreeNodeCollection nodeContainer, bool recursive = false )
+        {
+            if( !recursive )
             {
-                var groupNode = groups.Find( n => n.Text == obj.Outer.Name );
-                if( groupNode == null )
-                {
-                    groupNode = new ObjectNode( obj.Outer ) { Text = obj.Outer.Name };
-                    SetImageKeyForObject( obj.Outer.Table, groupNode );
-                    groups.Add( groupNode );
-                }
-                var objectNode = new ObjectNode( obj ){Text = obj.Name};
-                SetImageKeyForObject( obj.Table, objectNode );
-                groupNode.Nodes.Add( objectNode );
+                ObjectNode objectNode = CreateObjectNode( item );
+                nodeContainer.Add( objectNode );
+                nodeContainer = objectNode.Nodes;
             }
 
-            TreeView_Content.Nodes.AddRange( groups.ToArray() );
+            foreach( var obj in _UnrealPackage.Exports )
+            {
+                if( obj.OuterTable == null || obj.OuterTable != item )
+                    continue;
+
+                if( !recursive )
+                {
+                    nodeContainer.Add( "DUMMYNODE" );
+                    break;
+                }
+                CreateContentNodesFor( obj, nodeContainer );
+            }
+        }
+
+        private void CreateContentList()
+        {
+            TreeView_Content.BeginUpdate();
+            foreach( var obj in _UnrealPackage.Exports )
+            {
+                if( obj.OuterTable == null & obj.ClassName == "Package" )
+                {
+                    CreateContentNodesFor( obj, TreeView_Content.Nodes );
+                }
+            }
+            TreeView_Content.EndUpdate();
             TreeView_Content.Sort();
         }
 
