@@ -1579,12 +1579,14 @@ namespace UEExplorer.UI.Tabs
             public string Text;
             public string Label;
             public TreeNode Node;
+
+            public double Y, X;
         }
         private readonly List<BufferData> _ContentBuffer = new List<BufferData>();
         private int _BufferIndex = -1;
         private TreeNode _LastNodeContent;
 
-        private void SetContentText( TreeNode node, string content, bool skip = false )
+        private void SetContentText( TreeNode node, string content, bool skip = false, bool resetView = true )
         {
             if( _LastNodeContent != node )
             {
@@ -1602,9 +1604,11 @@ namespace UEExplorer.UI.Tabs
                 findInDocumentToolStripMenuItem.Enabled = true;
             }
 
-            //TextEditorPanel.textEditor.Clear();
             TextEditorPanel.textEditor.Text = content;
-            TextEditorPanel.textEditor.ScrollToHome();
+            if( resetView )
+            {
+                TextEditorPanel.textEditor.ScrollToHome();
+            }
 
             if( skip )
                 return;
@@ -1617,6 +1621,7 @@ namespace UEExplorer.UI.Tabs
                     return;
                 }
 
+                StoreViewForBuffer( _BufferIndex );
                 // Clean all above buffers when a new node was user-selected
                 if( (_ContentBuffer.Count - 1) - _BufferIndex > 0 )
                 {
@@ -1626,6 +1631,7 @@ namespace UEExplorer.UI.Tabs
                 }
             }
 
+            
             var bd = new BufferData{ Text = content, Node = node, Label = Label_ObjectName.Text };
             _ContentBuffer.Add( bd );
 
@@ -1642,21 +1648,36 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
+        private void StoreViewForBuffer( int bufferIndex )
+        {
+            var content = _ContentBuffer[bufferIndex];
+            content.X = TextEditorPanel.textEditor.HorizontalOffset;
+            content.Y = TextEditorPanel.textEditor.VerticalOffset;
+            _ContentBuffer[bufferIndex] = content;
+        }
+
+        private void RestoreBufferedContent( int bufferIndex )
+        {
+            Label_ObjectName.Text = _ContentBuffer[bufferIndex].Label;
+            SetContentText( _ContentBuffer[bufferIndex].Node, _ContentBuffer[bufferIndex].Text, true );
+            SelectNode( _ContentBuffer[bufferIndex].Node );   
+
+            TextEditorPanel.textEditor.ScrollToVerticalOffset( _ContentBuffer[bufferIndex].Y );
+            TextEditorPanel.textEditor.ScrollToHorizontalOffset( _ContentBuffer[bufferIndex].X );
+        }
+
         private void ToolStripButton_Backward_Click( object sender, EventArgs e )
         {
             if( _BufferIndex - 1 > -1 )
             {
                 FilterText.Text = String.Empty;
-                -- _BufferIndex;
-                Label_ObjectName.Text = _ContentBuffer[_BufferIndex].Label;
-                SetContentText( _ContentBuffer[_BufferIndex].Node, _ContentBuffer[_BufferIndex].Text, true );
-                SelectNode( _ContentBuffer[_BufferIndex].Node );
+                StoreViewForBuffer( _BufferIndex );
+                RestoreBufferedContent( -- _BufferIndex );
 
                 if( _BufferIndex == 0 )
                 {
                     PrevButton.Enabled = false;
                 }
-
                 NextButton.Enabled = true;
             }
         }
@@ -1666,10 +1687,8 @@ namespace UEExplorer.UI.Tabs
             if( _BufferIndex + 1 < _ContentBuffer.Count )
             {
                 FilterText.Text = String.Empty;
-                ++ _BufferIndex;
-                Label_ObjectName.Text = _ContentBuffer[_BufferIndex].Label;
-                SetContentText( _ContentBuffer[_BufferIndex].Node, _ContentBuffer[_BufferIndex].Text, true );
-                SelectNode( _ContentBuffer[_BufferIndex].Node );
+                StoreViewForBuffer( _BufferIndex );
+                RestoreBufferedContent( ++ _BufferIndex );
 
                 if( _BufferIndex == _ContentBuffer.Count-1 )
                 {
@@ -2030,10 +2049,11 @@ namespace UEExplorer.UI.Tabs
                 }
 
                 var documentResult = nodeEvent.Node.Parent.Tag as DocumentResult;
-
                 var unClass = ((UClass)documentResult.Document);
+
                 Label_ObjectName.Text = String.Format( "{0}: {1}, {2}", unClass.Name, findResult.TextLine, findResult.TextColumn ); 
-                SetContentText( nodeEvent.Node, unClass.Decompile() );
+                SetContentText( nodeEvent.Node, unClass.Decompile(), false, false );
+
                 TextEditorPanel.textEditor.ScrollTo( findResult.TextLine, findResult.TextColumn );
                 TextEditorPanel.textEditor.Select( findResult.TextIndex, findText.Length );
             };
