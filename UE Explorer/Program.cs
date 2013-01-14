@@ -132,7 +132,7 @@ namespace UEExplorer
             {
                 Options.VariableTypes = new List<string>
                 {
-                    "Engine.Actors.Skin:ObjectProperty",
+                    "Engine.Actors.Skins:ObjectProperty",
                     "Engine.Actor.Components:ObjectProperty",
                     "Engine.SkeletalMeshComponent.AnimSets:ObjectProperty",
                     "Engine.SequenceOp.InputLinks:StructProperty",
@@ -140,7 +140,8 @@ namespace UEExplorer
                     "Engine.SequenceOp.VariableLinks:StructProperty",
                     "Engine.SequenceAction.Targets:ObjectProperty",
                     "XInterface.GUIComponent.Controls:ObjectProperty",
-                    "Engine.SkeletalMesh.Sockets:ObjectProperty"
+                    "Engine.Material.Expressions:ObjectProperty",
+                    "Engine.ParticleSystem.Emitters:ObjectProperty"
                 };
 
             }
