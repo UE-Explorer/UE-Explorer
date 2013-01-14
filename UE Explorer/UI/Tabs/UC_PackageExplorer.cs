@@ -624,9 +624,8 @@ namespace UEExplorer.UI.Tabs
                 TabControl_Objects.Controls.Remove( TabPage_Generations );
             }
 
-            if( _UnrealPackage.Objects == null || _UnrealPackage.Objects.Count == 0 
-                || !_UnrealPackage.Objects.Any( o => (int)o > 0 && o.Outer != null 
-                    && (o.ResistsInGroup() || o.HasObjectFlag( ObjectFlagsLO.Automated )) ) )
+            if( _UnrealPackage.Exports == null || _UnrealPackage.Exports.Count == 0 
+                || !_UnrealPackage.Exports.Any( obj => obj.OuterTable == null & obj.ClassName == "Package") )
             {
                 TabControl_Objects.Controls.Remove( TabPage_Content );   
             }
@@ -1179,10 +1178,10 @@ namespace UEExplorer.UI.Tabs
                         addItem.Invoke( Resources.NodeItem_ViewUsedTags, "USED_TAGS" );	
                     }
 
-                    var unStruct = (decompilableObjectNode.Object as UStruct); 
-                    if( unStruct != null )
+                    var uStruct = (decompilableObjectNode.Object as UStruct); 
+                    if( uStruct != null )
                     {
-                        if( unStruct.DataScriptSize > 0 )
+                        if( uStruct.DataScriptSize > 0 )
                         {
                             if( decompilableObjectNode.Object is UClass )
                             {
@@ -1191,13 +1190,22 @@ namespace UEExplorer.UI.Tabs
                             addItem.Invoke( Resources.NodeItem_ViewTokens, "TOKENS" );
                         }
 
-                        var unClass = decompilableObjectNode.Object as UClass;
-                        if( unClass != null && unClass.ScriptBuffer != null )
+                        if( uStruct.ScriptText != null )
                         {
-                            addItem.Invoke( Resources.NodeItem_ViewScript, "SCRIPT" );	
+                            addItem.Invoke( Resources.NodeItem_ViewScript, "SCRIPT" );
                         }
 
-                        if( unStruct.Properties != null && unStruct.Properties.Any() )
+                        if( uStruct.ProcessedText != null )
+                        {
+                            addItem.Invoke( Resources.NodeItem_ViewProcessedScript, "PROCESSEDSCRIPT" );
+                        }
+                            
+                        if( uStruct.CppText != null )
+                        {
+                            addItem.Invoke( Resources.NodeItem_ViewCPPText, "CPPSCRIPT" );
+                        }
+
+                        if( uStruct.Properties != null && uStruct.Properties.Any() )
                         {
                             addItem.Invoke( Resources.NodeItem_ViewDefaultProperties, "DEFAULTPROPERTIES" );	
                         }
@@ -1424,11 +1432,33 @@ namespace UEExplorer.UI.Tabs
 
                     case "SCRIPT":
                     {
-                        var unClass = node.Object as UClass;
-                        if( unClass != null && unClass.ScriptBuffer != null )
+                        var str = node.Object as UStruct;
+                        if( str != null && str.ScriptText != null )
                         {
-                            Label_ObjectName.Text = unClass.ScriptBuffer.Name;
-                            SetContentText( node as TreeNode, unClass.ScriptBuffer.Decompile() );
+                            Label_ObjectName.Text = str.ScriptText.Name;
+                            SetContentText( node as TreeNode, str.ScriptText.Decompile() );
+                        }
+                        break;
+                    }
+
+                    case "CPPSCRIPT":
+                    {
+                        var str = node.Object as UStruct;
+                        if( str != null && str.CppText != null )
+                        {
+                            Label_ObjectName.Text = str.CppText.Name;
+                            SetContentText( node as TreeNode, str.CppText.Decompile() );
+                        }
+                        break;
+                    }
+
+                    case "PROCESSEDSCRIPT":
+                    {
+                        var str = node.Object as UStruct;
+                        if( str != null && str.ProcessedText != null )
+                        {
+                            Label_ObjectName.Text = str.ProcessedText.Name;
+                            SetContentText( node as TreeNode, str.ProcessedText.Decompile() );
                         }
                         break;
                     }

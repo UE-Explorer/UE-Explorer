@@ -356,4 +356,10 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="ExportTextTitle" xml:space="preserve">
     <value>Export Text</value>
   </data>
+	<data name="NodeItem_ViewProcessedScript">
+		<value xml:space="preserve">View Processed Script</value>
+	</data>
+	<data name="NodeItem_ViewCPPText">
+		<value xml:space="preserve">View CPP Script</value>
+	</data>
 </root>

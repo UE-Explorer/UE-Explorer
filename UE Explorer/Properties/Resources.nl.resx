@@ -318,4 +318,10 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
   <data name="ExportTextTitle" xml:space="preserve">
     <value>Exporteer Text</value>
   </data>
+	<data name="NodeItem_ViewProcessedScript">
+		<value xml:space="preserve">Bekijk Processed Script</value>
+	</data>
+	<data name="NodeItem_ViewCPPText">
+		<value xml:space="preserve">Bekijk CPP Script</value>
+	</data>
 </root>

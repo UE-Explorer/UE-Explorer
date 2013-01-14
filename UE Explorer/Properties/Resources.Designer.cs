@@ -380,6 +380,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View CPP Script.
+        /// </summary>
+        internal static string NodeItem_ViewCPPText {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewCPPText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View DefaultProperties.
         /// </summary>
         internal static string NodeItem_ViewDefaultProperties {
@@ -403,6 +412,15 @@ namespace UEExplorer.Properties {
         internal static string NodeItem_ViewObject {
             get {
                 return ResourceManager.GetString("NodeItem_ViewObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Processed Script.
+        /// </summary>
+        internal static string NodeItem_ViewProcessedScript {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewProcessedScript", resourceCulture);
             }
         }
         

@@ -57,8 +57,8 @@ namespace UEExplorer
 			package.NTLPackage.LoadPackage( Path.Combine( Application.StartupPath, "Native Tables", Program.Options.NTLPath ) ); 
 			foreach( UClass uClass in package.Objects.Where( o => o is UClass && o.ExportTable != null ) )
 			{
-				var exportContent = exportScripts && uClass.ScriptBuffer != null 
-					? uClass.ScriptBuffer.Decompile() 
+				var exportContent = exportScripts && uClass.ScriptText != null 
+					? uClass.ScriptText.Decompile() 
 					: uClass.Decompile();
 
 				File.WriteAllText( 
