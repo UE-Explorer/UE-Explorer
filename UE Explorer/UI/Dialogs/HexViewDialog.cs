@@ -208,7 +208,7 @@ namespace UEExplorer.UI.Dialogs
             else
             {
                 Settings.Default.HexViewerLocation = Location;
-                Settings.Default.HexViewerSize = ClientSize;	
+                Settings.Default.HexViewerSize = Size;	
             }
 
             Settings.Default.HexViewerState = WindowState == FormWindowState.Minimized ? FormWindowState.Normal : WindowState;
