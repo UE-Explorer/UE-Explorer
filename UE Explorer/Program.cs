@@ -132,7 +132,7 @@ namespace UEExplorer
             {
                 Options.VariableTypes = new List<string>
                 {
-                    "Engine.Actors.Skins:ObjectProperty",
+                    "Engine.Actor.Skins:ObjectProperty",
                     "Engine.Actor.Components:ObjectProperty",
                     "Engine.SkeletalMeshComponent.AnimSets:ObjectProperty",
                     "Engine.SequenceOp.InputLinks:StructProperty",
