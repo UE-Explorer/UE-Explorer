@@ -17,15 +17,15 @@ namespace UEExplorer.UI
         void TabFind();
     }
 
-    public class TabsCollection
+    public class TabsCollection : IDisposable
     {
-        public readonly ProgramForm             Form;
-        public readonly List<ITabComponent>     Components = new List<ITabComponent>();
+        public ProgramForm                      Form;
+        public List<ITabComponent>              Components = new List<ITabComponent>();
         public ITabComponent                    SelectedComponent
         {
             get{ return Components.Find( tabComp => tabComp.TabItem == _TabsControl.SelectedItem ); }
         }
-        private readonly TabStrip               _TabsControl;
+        private TabStrip                        _TabsControl;
 
         public TabsCollection( ProgramForm owner, TabStrip tabsControl )
         {
@@ -64,8 +64,16 @@ namespace UEExplorer.UI
 
         public void Remove( ITabComponent delComponent )
         {
+            delComponent.TabClosing();
             _TabsControl.RemoveTab( delComponent.TabItem );
             Components.Remove( delComponent );	// Handled elsewhere
+        }
+
+        public void Dispose()
+        {
+            Form = null;
+            _TabsControl = null;
+            Components = null;
         }
     }
 }

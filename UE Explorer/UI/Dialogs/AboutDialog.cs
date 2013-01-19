@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Net;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using Eliot.Utilities;
 using Eliot.Utilities.Net;
 using UEExplorer.Properties;
 
 namespace UEExplorer.UI.Dialogs
 {
-	public partial class AboutForm : Form
+	public partial class AboutDialog : Form
 	{
-		public AboutForm()
+		public AboutDialog()
 		{	
 			InitializeComponent();
 			Text += " " + Application.ProductName;

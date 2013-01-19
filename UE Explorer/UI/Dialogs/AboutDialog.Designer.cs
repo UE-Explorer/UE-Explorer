@@ -1,6 +1,6 @@
 ﻿namespace UEExplorer.UI.Dialogs
 {
-	partial class AboutForm
+	partial class AboutDialog
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			System.Windows.Forms.PictureBox pictureBox1;
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutDialog));
 			System.Windows.Forms.Label label1;
 			System.Windows.Forms.Panel panel1;
 			System.Windows.Forms.Label label2;

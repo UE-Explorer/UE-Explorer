@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
@@ -17,7 +18,7 @@ namespace UEExplorer.UI
 
     public partial class ProgramForm : Form
     {		
-        public readonly TabsCollection Tabs;
+        public TabsCollection Tabs;
         private MRUManager _MRUManager;
 
         private void InitializeUI()
@@ -231,26 +232,30 @@ namespace UEExplorer.UI
         #region Events
         private void AboutToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            var about = new AboutForm();
-            about.ShowDialog();
+            using( var about = new AboutDialog() )
+            {
+                about.ShowDialog();
+            }
         }
 
         private void OpenFileToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            var ofd = new OpenFileDialog
+            using( var ofd = new OpenFileDialog
             {
                 DefaultExt = "u",
                 Filter = UnrealExtensions.FormatUnrealExtensionsAsFilter().Replace( "*.u;", "*.u;*.uc;*.uci;" ),
                 FilterIndex = 1,
                 Title = Resources.Open_File,
                 Multiselect = true
-            };
-            if( ofd.ShowDialog( this ) != DialogResult.OK )
-                return;
-
-            foreach( string fileName in ofd.FileNames )
+            } )
             {
-                LoadFile( fileName );
+                if( ofd.ShowDialog( this ) != DialogResult.OK )
+                    return;
+
+                foreach( string fileName in ofd.FileNames )
+                {
+                    LoadFile( fileName );
+                }
             }
         }
 
@@ -287,15 +292,11 @@ namespace UEExplorer.UI
         private void TabComponentsStrip_TabStripItemClosing( TabStripItemClosingEventArgs e )
         {
             // Find the owner of this TabStripItem
-            foreach( var tc in Tabs.Components )
+            foreach( var tc in Tabs.Components.Where( tab => tab.TabItem == e.Item ) )
             {
-                if( tc.TabItem == e.Item )
-                {
-                    tc.TabClosing();
-                    Tabs.Components.Remove( tc );
-                    break;
-                }
-            }	
+                Tabs.Remove( tc );
+                break;
+            }
         }
 
         private void TabComponentsStrip_TabStripItemClosed( object sender, EventArgs e )
@@ -395,61 +396,63 @@ namespace UEExplorer.UI
             ProgressStatus.SaveStatus();
             ProgressStatus.SetStatus( Resources.ProgramForm_Check_for_Updates_Status );
 
-            var web = new WebClient();
-            web.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-            web.UploadStringCompleted += (stringSender, stringEvent) =>
+            using( var web = new WebClient() )
             {
-                try
+                web.Headers["Content-Type"] = "application/x-www-form-urlencoded";
+                web.UploadStringCompleted += ( stringSender, stringEvent ) =>
                 {
-                    var result = stringEvent.Result.Trim();
-                    if( result != Version )
+                    try
                     {
-                        if( MessageBox.Show(
-                            String.Format
-                            (
-                                Resources.NEW_VERSION_AVAILABLE_MESSAGE,
-                                Version,
-                                result
-                            ),
-                            Resources.NEW_VERSION_AVAILABLE_TITLE,
-                            MessageBoxButtons.YesNo ) == DialogResult.Yes )
+                        var result = stringEvent.Result.Trim();
+                        if( result != Version )
                         {
-                            System.Diagnostics.Process.Start( Program.Program_URL );
+                            if( MessageBox.Show(
+                                String.Format
+                                (
+                                    Resources.NEW_VERSION_AVAILABLE_MESSAGE,
+                                    Version,
+                                    result
+                                ),
+                                Resources.NEW_VERSION_AVAILABLE_TITLE,
+                                MessageBoxButtons.YesNo ) == DialogResult.Yes )
+                            {
+                                System.Diagnostics.Process.Start( Program.Program_URL );
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show
+                            (
+                                String.Format
+                                (
+                                    Resources.NO_NEW_VERSION_AVAILABLE_MESSAGE,
+                                    Application.ProductName
+                                )
+                            );
                         }
                     }
-                    else
+                    catch( Exception exc )
                     {
                         MessageBox.Show
                         (
                             String.Format
                             (
-                                Resources.NO_NEW_VERSION_AVAILABLE_MESSAGE,
-                                Application.ProductName
-                            )
+                                Resources.CHECKFORUPDATES_FAILED_MESSAGE
+                                + "\r\n\r\n{0}",
+                                exc
+                            ),
+                        Resources.Error,
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
                         );
                     }
-                }
-                catch( Exception exc )
-                {
-                    MessageBox.Show
-                    (
-                        String.Format
-                        (
-                            Resources.CHECKFORUPDATES_FAILED_MESSAGE
-                                + "\r\n\r\n{0}",
-                            exc
-                        ),
-                        Resources.Error,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
-                }
-                finally
-                { 
-                    ProgressStatus.ResetStatus();
-                }
-            };
-            web.UploadStringAsync( new Uri( Program.Version_URL ), "Post", Program.Program_Parm_ID );
+                    finally
+                    {
+                        ProgressStatus.ResetStatus();
+                    }
+                };
+                web.UploadStringAsync( new Uri( Program.Version_URL ), "Post", Program.Program_Parm_ID );
+            }
         }
 
         private void MenuItem7_Click( object sender, EventArgs e )
@@ -510,6 +513,35 @@ namespace UEExplorer.UI
             Settings.Default.WindowState = WindowState == FormWindowState.Minimized ? FormWindowState.Normal : WindowState;
             Settings.Default.Save();	
         }
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if( disposing )
+            {
+                ProgressStatus.Dispose();
+                if( _MRUManager != null )
+                {
+                    _MRUManager.RefreshEvent -= RefreshMRUEvent;
+                    _MRUManager = null;
+                }
+
+                if( components != null )
+                {
+                    components.Dispose();
+                }
+
+                if( Tabs != null )
+                {
+                    Tabs.Dispose();
+                    Tabs = null;
+                }
+            }
+            base.Dispose( disposing );
+        }
     }
 
     public static class ProgressStatus
@@ -518,6 +550,21 @@ namespace UEExplorer.UI
         public static ToolStripStatusLabel Status;
 
         private static string _SavedStatus;
+
+        public static void Dispose()
+        {
+            if( Loading != null )
+            {
+                Loading.Dispose();
+                Loading = null;
+            }
+
+            if( Status != null )
+            {
+                Status.Dispose();
+                Status = null;
+            }
+        }
 
         public static void SetStatus( string status )
         {
