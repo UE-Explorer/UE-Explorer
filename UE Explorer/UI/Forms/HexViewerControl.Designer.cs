@@ -1,6 +1,6 @@
-﻿namespace UEExplorer.UI.Dialogs
+﻿namespace UEExplorer.UI.Forms
 {
-	partial class UserControl_HexView
+	partial class HexViewerControl
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -30,7 +30,7 @@
 		{
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.SplitContainer splitContainer1;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControl_HexView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HexViewerControl));
             System.Windows.Forms.Label label14;
             System.Windows.Forms.Label label13;
             System.Windows.Forms.Label label11;
@@ -58,7 +58,7 @@
             this.DissambledShort = new System.Windows.Forms.TextBox();
             this.DissambledByte = new System.Windows.Forms.TextBox();
             this.DissambledChar = new System.Windows.Forms.TextBox();
-            this.HexLinePanel = new UEExplorer.UI.Dialogs.HexPanel();
+            this.HexLinePanel = new UEExplorer.UI.Forms.HexViewerPanel();
             this.Context_Structure = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.defineCharToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defineByteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -433,7 +433,7 @@
 		#endregion
 
 		private System.Windows.Forms.VScrollBar HexScrollBar;
-		private HexPanel HexLinePanel;
+		private HexViewerPanel HexLinePanel;
 		private System.Windows.Forms.TextBox DissambledChar;
 		private System.Windows.Forms.TextBox DissambledByte;
 		private System.Windows.Forms.TextBox DissambledShort;

@@ -264,6 +264,10 @@
     <Compile Include="UI\Dialogs\StructureInputDialog.Designer.cs">
       <DependentUpon>StructureInputDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\ColorCode.cs" />
+    <Compile Include="UI\Forms\HexViewerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Main\ProgramConsole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,11 +302,11 @@
     <Compile Include="UI\Tabs\UserControl_Tab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Dialogs\HexViewDialog.cs">
+    <Compile Include="UI\Forms\HexViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Dialogs\HexViewDialog.Designer.cs">
-      <DependentUpon>HexViewDialog.cs</DependentUpon>
+    <Compile Include="UI\Forms\HexViewerForm.Designer.cs">
+      <DependentUpon>HexViewerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\AboutDialog.cs">
       <SubType>Form</SubType>
@@ -310,17 +314,11 @@
     <Compile Include="UI\Dialogs\AboutDialog.Designer.cs">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\ColorGeneratorForm.cs">
+    <Compile Include="UI\Forms\ColorGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Dialogs\ColorGeneratorForm.Designer.cs">
+    <Compile Include="UI\Forms\ColorGeneratorForm.Designer.cs">
       <DependentUpon>ColorGeneratorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Dialogs\SelectDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Dialogs\SelectDialog.Designer.cs">
-      <DependentUpon>SelectDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Tabs\UC_CacheExtractor.cs">
       <SubType>UserControl</SubType>
@@ -328,11 +326,11 @@
     <Compile Include="UI\Tabs\UC_CacheExtractor.Designer.cs">
       <DependentUpon>UC_CacheExtractor.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\UserControl_HexView.cs">
+    <Compile Include="UI\Forms\HexViewerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Dialogs\UserControl_HexView.Designer.cs">
-      <DependentUpon>UserControl_HexView.cs</DependentUpon>
+    <Compile Include="UI\Forms\HexViewerControl.Designer.cs">
+      <DependentUpon>HexViewerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Main\ProgramForm.cs">
       <SubType>Form</SubType>
@@ -365,8 +363,8 @@
     <EmbeddedResource Include="UI\Dialogs\FindDialog.resx">
       <DependentUpon>FindDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Dialogs\HexViewDialog.nl.resx">
-      <DependentUpon>HexViewDialog.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\HexViewerForm.nl.resx">
+      <DependentUpon>HexViewerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\PropertiesDialog.resx">
       <DependentUpon>PropertiesDialog.cs</DependentUpon>
@@ -380,8 +378,8 @@
     <EmbeddedResource Include="UI\Dialogs\StructureInputDialog.resx">
       <DependentUpon>StructureInputDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Dialogs\UserControl_HexView.nl.resx">
-      <DependentUpon>UserControl_HexView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\HexViewerControl.nl.resx">
+      <DependentUpon>HexViewerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Main\ProgramConsole.resx">
       <DependentUpon>ProgramConsole.cs</DependentUpon>
@@ -398,18 +396,15 @@
     <EmbeddedResource Include="UI\Tabs\UC_ModExplorer.resx">
       <DependentUpon>UC_ModExplorer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Dialogs\HexViewDialog.resx">
-      <DependentUpon>HexViewDialog.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\HexViewerForm.resx">
+      <DependentUpon>HexViewerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Dialogs\ColorGeneratorForm.resx">
+    <EmbeddedResource Include="UI\Forms\ColorGeneratorForm.resx">
       <DependentUpon>ColorGeneratorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Dialogs\SelectDialog.resx">
-      <DependentUpon>SelectDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_PackageExplorer.nl.resx">
       <DependentUpon>UC_PackageExplorer.cs</DependentUpon>
@@ -430,8 +425,8 @@
     <EmbeddedResource Include="UI\Tabs\UC_CacheExtractor.resx">
       <DependentUpon>UC_CacheExtractor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Dialogs\UserControl_HexView.resx">
-      <DependentUpon>UserControl_HexView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\HexViewerControl.resx">
+      <DependentUpon>HexViewerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_PackageExplorer.resx">
       <DependentUpon>UC_PackageExplorer.cs</DependentUpon>
@@ -528,7 +523,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using UEExplorer.Properties;
+using UEExplorer.UI.Forms;
 using UELib.Engine;
 
 namespace UEExplorer.UI.Tabs
@@ -1472,12 +1473,13 @@ namespace UEExplorer.UI.Tabs
                         break;
 
                     case "MANAGED_PROPERTIES":
-                        var propDialog = new PropertiesDialog
+                        using( var propDialog = new PropertiesDialog{
+                                ObjectLabel = {Text = ((TreeNode)node).Text},
+                                ObjectPropertiesGrid = {SelectedObject = node.Object}
+                            } )
                         {
-                            ObjectLabel = {Text = ((TreeNode)node).Text},
-                            ObjectPropertiesGrid = {SelectedObject = node.Object}
-                        };
-                        propDialog.ShowDialog( this );
+                            propDialog.ShowDialog( this );
+                        }
                         break;
 
 #if DEBUG
@@ -1672,7 +1674,10 @@ namespace UEExplorer.UI.Tabs
 
         public override void TabFind()
         {
-            new FindDialog( TextEditorPanel ).Show();
+            using( var findDialog = new FindDialog( TextEditorPanel ) )
+            {
+                findDialog.ShowDialog();
+            }
         }
 
         private struct BufferData
@@ -1864,7 +1869,7 @@ namespace UEExplorer.UI.Tabs
                 return;
             }
 
-            var hexDialog = new HexViewDialog( target, this );
+            var hexDialog = new HexViewerForm( target, this );
             hexDialog.Show( _Form );
         }
 
@@ -2064,18 +2069,20 @@ namespace UEExplorer.UI.Tabs
         private TabPage _FindTab;
         private void FindInClassesToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            var findDialog = new FindDialog();
-            if( findDialog.ShowDialog() != DialogResult.OK )
+            string findText;
+            using( var findDialog = new FindDialog() )
             {
-                return;
+                if( findDialog.ShowDialog() != DialogResult.OK )
+                {
+                    return;
+                }
+                findText = findDialog.FindInput.Text;
             }
 
             ProgressStatus.SaveStatus();
             ProgressStatus.SetStatus( Resources.SEARCHING_CLASSES_STATUS );
 
             var documentResults = new List<DocumentResult>();
-
-            var findText = findDialog.FindInput.Text;
             foreach( var content in _ClassesList )
             {
                 var	findContent = content.Decompile();

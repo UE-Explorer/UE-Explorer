@@ -6,13 +6,13 @@ using UEExplorer.Properties;
 using UEExplorer.UI.Tabs;
 using UELib;
 
-namespace UEExplorer.UI.Dialogs
+namespace UEExplorer.UI.Forms
 {
-    public partial class HexViewDialog : Form
+    public partial class HexViewerForm : Form
     {
         private readonly UC_PackageExplorer _Owner;
 
-        public HexViewDialog()
+        public HexViewerForm()
         {
             InitializeComponent();
             InitializeUserSettings();     
@@ -38,7 +38,7 @@ namespace UEExplorer.UI.Dialogs
             ViewByteItem.Checked = Settings.Default.HexViewer_ViewByte;
         }
 
-        public HexViewDialog( IBuffered target, UC_PackageExplorer owner ) : this()
+        public HexViewerForm( IBuffered target, UC_PackageExplorer owner ) : this()
         {
             if( target == null )
             {
@@ -131,7 +131,7 @@ namespace UEExplorer.UI.Dialogs
                     }
                     else
                     {
-                        input += UserControl_HexView.FilterByte( buffer[index] ).ToString( CultureInfo.InvariantCulture );	
+                        input += HexViewerControl.FilterByte( buffer[index] ).ToString( CultureInfo.InvariantCulture );	
                     }
     
                     if( j < columnWidth - 1 )

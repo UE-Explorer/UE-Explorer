@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Eliot.Utilities;
 using Storm.TabControl;
 using UEExplorer.Properties;
+using UEExplorer.UI.Forms;
 
 namespace UEExplorer.UI
 {

@@ -1,4 +1,4 @@
-﻿namespace UEExplorer.UI.Dialogs
+﻿namespace UEExplorer.UI.Forms
 {
 	partial class ColorGeneratorForm
 	{

@@ -1,6 +1,6 @@
-﻿namespace UEExplorer.UI.Dialogs
+﻿namespace UEExplorer.UI.Forms
 {
-	partial class HexViewDialog
+	partial class HexViewerForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HexViewDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HexViewerForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.SizeLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -45,7 +45,7 @@
             this.ViewByteItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.HexPanel = new UEExplorer.UI.Dialogs.UserControl_HexView();
+            this.HexPanel = new UEExplorer.UI.Forms.HexViewerControl();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -200,7 +200,7 @@
 		#endregion
 
 		private System.Windows.Forms.Panel panel1;
-		private UserControl_HexView HexPanel;
+		private HexViewerControl HexPanel;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel SizeLabel;
 		private System.Windows.Forms.MenuStrip menuStrip1;

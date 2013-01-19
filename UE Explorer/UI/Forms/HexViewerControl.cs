@@ -9,15 +9,16 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using Eliot.Utilities;
+using UEExplorer.UI.Dialogs;
 
-namespace UEExplorer.UI.Dialogs
+namespace UEExplorer.UI.Forms
 {
     using Properties;
     using UELib;
     using UStruct = UELib.Core.UStruct;
 
     // TODO: REFACTOR, and rewrite all of it to be more concise, less duplicational.
-    public partial class UserControl_HexView : UserControl
+    public partial class HexViewerControl : UserControl
     {
         public byte[] Buffer{ get; set; }
         public IBuffered Target{ get; private set; }
@@ -77,7 +78,7 @@ namespace UEExplorer.UI.Dialogs
         }
         #endregion
 
-        public UserControl_HexView()
+        public HexViewerControl()
         {
             InitializeComponent();
         }
@@ -768,36 +769,38 @@ namespace UEExplorer.UI.Dialogs
 
         private void Context_Structure_ItemClicked( object sender, ToolStripItemClickedEventArgs e )
         {
-            var dialog = new StructureInputDialog();
-            var type = e.ClickedItem.Text.Mid( e.ClickedItem.Text.LastIndexOf( ' ' ) + 1 );
-            dialog.TextBoxName.Text = type;
-            if( dialog.ShowDialog() == DialogResult.OK )
+            using( var dialog = new StructureInputDialog() )
             {
-                if( dialog.TextBoxName.Text == String.Empty )
+                var type = e.ClickedItem.Text.Mid( e.ClickedItem.Text.LastIndexOf( ' ' ) + 1 );
+                dialog.TextBoxName.Text = type;
+                if( dialog.ShowDialog() == DialogResult.OK )
                 {
-                    // Show error box?
-                    return;
-                }
-
-                byte size;
-                Color color;
-                InitStructure( type, out size, out color );	
-                _Structure.MetaInfoList.Add
-                ( 
-                    new HexMetaInfo.BytesMetaInfo
+                    if( dialog.TextBoxName.Text == String.Empty )
                     {
-                        Name = dialog.TextBoxName.Text, 
-                        Position = SelectedOffset, 
-                        Size = size, 
-                        Type = type,
-                        Color = color
-                    } 
-                );
+                        // Show error box?
+                        return;
+                    }
 
-                var path = GetConfigPath();
-                SaveConfig( path );
+                    byte size;
+                    Color color;
+                    InitStructure( type, out size, out color );	
+                    _Structure.MetaInfoList.Add
+                    ( 
+                        new HexMetaInfo.BytesMetaInfo
+                        {
+                            Name = dialog.TextBoxName.Text, 
+                            Position = SelectedOffset, 
+                            Size = size, 
+                            Type = type,
+                            Color = color
+                        } 
+                    );
 
-                HexLinePanel.Invalidate();
+                    var path = GetConfigPath();
+                    SaveConfig( path );
+
+                    HexLinePanel.Invalidate();
+                }
             }
         }
 
@@ -869,17 +872,6 @@ namespace UEExplorer.UI.Dialogs
             DataInfoPanel.Invalidate();
             HexLinePanel.Invalidate();
             UpdateScrollBar();
-        }
-    }
-
-    public class HexPanel : Panel
-    {
-        public HexPanel()
-        {
-            SetStyle( ControlStyles.UserPaint, true );
-            SetStyle( ControlStyles.AllPaintingInWmPaint, true );
-            SetStyle( ControlStyles.OptimizedDoubleBuffer, true );
-            SetStyle( ControlStyles.ResizeRedraw, true );
         }
     }
 }
