@@ -1,7 +1,4 @@
-﻿/***********************************************************************
- * Copyright 2009-2012 Eliot Van Uytfanghe. All rights reserved. 
- **********************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;

@@ -1,7 +1,4 @@
-﻿/***********************************************************************
- * Copyright 2009-2012 Eliot Van Uytfanghe. All rights reserved. 
- **********************************************************************/
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;

@@ -11,8 +11,8 @@
 		
 		body > div
 		{
-			border-left: 1px solid #AAAAAA;
-			border-bottom: 1px solid #AAAAAA;
+			border-left: 1px solid #ddd;
+			border-bottom: 1px solid #ddd;
 			margin-left:4px;
 			padding-left:16px;
 			-moz-border-radius:6px;
@@ -29,11 +29,13 @@
 			-moz-border-radius:6px;
 			-webkit-border-radius:6px;
 			border-radius:6px;
+			color:#002254;
 		}
 		
 		div div	p
 		{
 			max-width:800px;	
+			font-size:0.8em;
 		}
 
 		h1
@@ -44,6 +46,7 @@
 		div div h2
 		{
 			color:#000088;
+			text-decoration:underline;
 		}
 		
 		a
@@ -53,24 +56,13 @@
 			a:visited
 			{
 				color:inherit;
+				color:blue;
 			}
 			a:hover
 			{
-				color:blue;
+				color:darkblue;
 				text-decoration:underline;
 			}
-
-		div div h2:before
-		{
-			color:Gray;
-			content:"> ";	
-		}
-
-		div div h2:after
-		{
-			color:Gray;
-			content:" <";	
-		}
 
 		div div > a
 		{
@@ -99,9 +91,21 @@
 		<div>
 			<h2><a href="http://eliotvu.com">Eliot.UELib</a></h2>
 			<p>Copyright (C) 2009-2013 Eliot van Uytfanghe. All rights reserved.</p>
+		</div>	  
+		<div>
+			<h2><a href="http://eliotvu.com">Eliot.Utilities</a></h2>	
+			<a href="http://opensource.org/licenses/MIT">MIT License</a>
+			<p>
+				Copyright (c) 2012-2013 Eliot van Uytfanghe
+				<br/><br/>
+				Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+				<br/><br/>
+				The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+				<br/><br/>
+				THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+			</p>
 		</div>
 	</div>
-	<p>This software uses several libraries to accomplish what it does. Below are the licenses those libraries use.</p>
 	<h1>Third-party licenses</h1>
 	<div>   
 		<div>
@@ -124,7 +128,7 @@
 		</div>
 	</div>
 	<p>
-	I hope I've done this right... :> Got any questions, then head to my <a style="color:Blue" href="http://eliotvu.com">website</a>
+	- <a href="http://eliotvu.com">EliotVU.com</a>
 	</p>
 </body>
 </html>
