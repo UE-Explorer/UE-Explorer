@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using UEExplorer.Properties;
 using UEExplorer.UI.Forms;
+using UEExplorer.UI.Nodes;
 using UELib.Engine;
 
 namespace UEExplorer.UI.Tabs
@@ -396,153 +397,6 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private abstract class UnrealTableNode : TreeNode, IContainsTable 
-        {
-            public UObjectTableItem Table{ get; set; }
-            protected bool _Initialized;
-        }
-
-        private sealed class ExportNode : UnrealTableNode, IDecompilableObject
-        {
-            public IUnrealDecompilable Object
-            {
-                get{ return Table.Object; }
-            }
-
-            public string Decompile()
-            {
-                return Table.Object.Decompile();
-            }
-
-            public ExportNode()
-            {
-                Nodes.Add( "DUMMYNODE" );
-            }
-
-            public void Initialize()
-            {
-                if( _Initialized )
-                    return;
-
-                _Initialized = true;
-
-                TreeView.BeginUpdate();
-                Nodes.Clear();
-                var exp = Table as UExportTableItem;
-                ulong objFlags = exp.ObjectFlags;
-                if( objFlags != 0 )
-                {
-                    string flagTitle = "Flags(" + UnrealMethods.FlagToString( exp.ObjectFlags ) + ")";
-                    var flagNode = Nodes.Add( flagTitle  );
-                    flagNode.ToolTipText = UnrealMethods.FlagsListToString
-                    ( 
-                        UnrealMethods.FlagsToList( typeof(ObjectFlagsLO), typeof(ObjectFlagsHO), exp.ObjectFlags ) 
-                    );	
-                }
-
-                Nodes.Add( "Export Offset:" + exp.Offset );
-                Nodes.Add( "Export Size:" + exp.Size );
-
-                if( exp.ExportFlags != 0 )
-                {
-                    Nodes.Add( "Export Flags:" + UnrealMethods.FlagToString( exp.ExportFlags ) );
-                }
-                
-                if( exp.ClassIndex == 0 )
-                {
-                    Nodes.Add( "Class:Class(" + exp.ClassIndex + ")" );
-                }
-                else
-                {
-                    Nodes.Add( "Class:" + exp.ClassTable.ObjectName + "(" + exp.ClassIndex + ")" );
-                }
-
-                if( exp.SuperIndex != 0 )
-                {
-                    Nodes.Add( "Super:" + exp.SuperTable.ObjectName + "(" + exp.SuperIndex + ")" );
-                }
-
-                if( exp.OuterIndex != 0 )
-                {
-                    Nodes.Add( "Outer:" + exp.OuterTable.ObjectName + "(" + exp.OuterIndex + ")" );
-                }
-
-                if( exp.ObjectIndex != 0 )
-                {
-                    Nodes.Add( "Object:" + exp.ObjectName + "(" + exp.ObjectIndex + ")" );
-                }
-
-                if( exp.ArchetypeIndex != 0 )
-                {
-                    Nodes.Add( "Archetype:" + exp.ArchetypeName + "(" + exp.ArchetypeIndex + ")" );
-                }
-
-                if( exp.SerialSize > 0 )
-                {
-                    Nodes.Add( "Object Size:" + exp.SerialSize );
-                    Nodes.Add( "Object Offset:" + exp.SerialOffset );
-                }	
-                TreeView.EndUpdate();
-            }
-        }
-
-        private sealed class ImportNode : UnrealTableNode, IDecompilableObject
-        {
-            public IUnrealDecompilable Object
-            {
-                get{ return Table.Object; }
-            }
-
-            public string Decompile()
-            {
-                string output = String.Empty;
-                output += "\r\nOffset:" + Table.Offset;
-                output += "\r\nSize:" + Table.Size;
-                return output;
-            }
-
-            public ImportNode()
-            {
-                Nodes.Add( "DUMMYNODE" );
-            }
-
-            public void Initialize()
-            {
-                if( _Initialized )
-                    return;
-
-                _Initialized = true;
-
-                TreeView.BeginUpdate();
-                Nodes.Clear();
-                var imp = Table as UImportTableItem;
-                if( imp.ObjectIndex != 0 )
-                {
-                    Nodes.Add( "Object:" + imp.ObjectName + "(" + imp.ObjectIndex + ")" );
-                }
-
-                if( imp.ClassIndex == 0 )
-                {
-                    Nodes.Add( "Class:Class(" + imp.ClassIndex + ")" );
-                }
-                else
-                {
-                    Nodes.Add( "Class:" + imp.ClassName + "(" + imp.ClassIndex + ")" );
-                }
-
-                if( imp.PackageIndex != 0 )
-                {
-                    Nodes.Add( "ClassPackage:" + imp.PackageName + "(" + imp.PackageIndex + ")" );
-                }
-
-                if( imp.OuterIndex != 0 )
-                {
-                    Nodes.Add( "Outer:" + imp.OuterName + "(" + imp.OuterIndex + ")" );
-                }
-                TreeView.EndUpdate();
-            }
-        }
-
         private ProgramForm _Form;
         private List<UClass> _ClassesList;
 
@@ -564,6 +418,9 @@ namespace UEExplorer.UI.Tabs
             {
                 exportDecompiledClassesToolStripMenuItem.Click -= _OnExportClassesClick;
                 exportScriptClassesToolStripMenuItem.Click -= _OnExportScriptsClick;
+
+                TreeView_Classes.AfterSelect -= _OnClassesNodeSelected;
+                TreeView_Classes.BeforeExpand -= _OnClassesNodeExpand;
 
                 _BorderPen.Dispose();
                 _LinePen.Dispose();
@@ -611,7 +468,6 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        [MTAThreadAttribute]
         private void InitializeUI()
         {
             ProgressStatus.SetStatus( Resources.INITIALIZING_UI );
@@ -727,7 +583,7 @@ namespace UEExplorer.UI.Tabs
                 }
 
                 var exp = exportTable as UExportTableItem;
-                var node = new ExportNode {Table = exp, Text = exp.ObjectName};
+                var node = new UExportNode {Table = exp, Text = exp.ObjectName};
                 InitializeObjectNode( exp, node );
 
                 _ThreadingNodes[_ThreadingNodeIndex ++] = node;
@@ -761,16 +617,13 @@ namespace UEExplorer.UI.Tabs
                 }
 
                 var imp = (importTable as UImportTableItem);
-                ImportNode node = new ImportNode
+                UImportNode node = new UImportNode
                 {
                     Table = imp,
                     Text = imp.ObjectName
                 };
-                _ThreadingNodes[_ThreadingNodeIndex ++] = node;
-
                 InitializeObjectNode( imp, node );
-
-
+                _ThreadingNodes[_ThreadingNodeIndex ++] = node;
                 if( _ThreadingNodeIndex == _UnrealPackage.Imports.Count )
                 {
                     TreeView_Exports.BeginUpdate();
@@ -782,24 +635,23 @@ namespace UEExplorer.UI.Tabs
             }
         }	
 
-        private void _OnImportNodeExpand( object sender, TreeViewCancelEventArgs e )
+        private static void _OnImportNodeExpand( object sender, TreeViewCancelEventArgs e )
         {
-            var importNode = e.Node as ImportNode;
+            var importNode = e.Node as UTableNode;
             if( importNode != null )
             {
-                importNode.Initialize();
+                importNode.Expanded();
             }
         }
 
-        private void _OnExportNodeExpand( object sender, TreeViewCancelEventArgs e )
+        private static void _OnExportNodeExpand( object sender, TreeViewCancelEventArgs e )
         {
-            var exportNode = e.Node as ExportNode;
+            var exportNode = e.Node as UTableNode;
             if( exportNode != null )
             {
-                exportNode.Initialize();
+                exportNode.Expanded();
             }
         }
-
 
         private void _OnNotifyObjectAdded( object sender, ObjectEventArgs e )
         {
@@ -2057,13 +1909,7 @@ namespace UEExplorer.UI.Tabs
             {
                 LNameIndex.Text = String.Format( Resources.INVALID_NAME_INDEX, exc.ActualValue );
             }	
-        }
-
-        public class DocumentResult
-        {
-            public Object Document;
-            public List<FindResult> Results;
-        };
+        }    
 
         private int _FindCount;
         private TabPage _FindTab;
@@ -2082,17 +1928,17 @@ namespace UEExplorer.UI.Tabs
             ProgressStatus.SaveStatus();
             ProgressStatus.SetStatus( Resources.SEARCHING_CLASSES_STATUS );
 
-            var documentResults = new List<DocumentResult>();
+            var documentResults = new List<TextSearchHelpers.DocumentResult>();
             foreach( var content in _ClassesList )
             {
                 var	findContent = content.Decompile();
-                var findResults = FindText( findContent, findText );
+                var findResults = TextSearchHelpers.FindText( findContent, findText );
                 if( !findResults.Any() )
                 {
                     continue;
                 }
 
-                var document = new DocumentResult
+                var document = new TextSearchHelpers.DocumentResult
                 {
                     Results = findResults,
                     Document = content
@@ -2136,13 +1982,13 @@ namespace UEExplorer.UI.Tabs
 
             treeResults.AfterSelect += (nodeSender, nodeEvent) =>
             {
-                var findResult = nodeEvent.Node.Tag as FindResult;
+                var findResult = nodeEvent.Node.Tag as TextSearchHelpers.FindResult;
                 if( findResult == null )
                 {
                     return;
                 }
 
-                var documentResult = nodeEvent.Node.Parent.Tag as DocumentResult;
+                var documentResult = nodeEvent.Node.Parent.Tag as TextSearchHelpers.DocumentResult;
                 var unClass = ((UClass)documentResult.Document);
 
                 Label_ObjectName.Text = String.Format( "{0}: {1}, {2}", unClass.Name, findResult.TextLine, findResult.TextColumn ); 
@@ -2151,60 +1997,6 @@ namespace UEExplorer.UI.Tabs
                 TextEditorPanel.textEditor.ScrollTo( findResult.TextLine, findResult.TextColumn );
                 TextEditorPanel.textEditor.Select( findResult.TextIndex, findText.Length );
             };
-        }
-
-        public class FindResult
-        {
-            public int TextIndex;
-            public int TextLine;
-            public int TextColumn;
-
-            public override string ToString()
-            {
-                return String.Format( "({0}, {1})", TextLine, TextColumn );
-            }
-        };
-
-        public static List<FindResult> FindText( string text, string keyword )
-        {
-            keyword = keyword.ToLower();
-            var results = new List<FindResult>();
-
-            var currentLine = 1;
-            var currentColumn = 1;
-            for( int i = 0; i < text.Length; ++ i )
-            {
-                if( text[i] == '\n' )
-                {
-                    ++ currentLine;
-                    currentColumn = 1;
-                    continue;
-                }
-
-                var startIndex = i;
-                for( int j = 0; j < keyword.Length; ++ j )
-                {
-                    if( Char.ToLower( text[startIndex] ) == keyword[j] )
-                    {
-                        ++ startIndex;
-                        if( j == keyword.Length - 1 )
-                        {
-                            var result = new FindResult
-                            {
-                                TextIndex = startIndex - keyword.Length,
-                                TextLine = currentLine,
-                                TextColumn = currentColumn
-                            };
-                            results.Add( result );
-                            break;
-                        }
-                        continue;	
-                    }
-                    break;
-                }
-                ++ currentColumn;
-            }
-            return results;
         }
 
         private void FindInDocumentToolStripMenuItem_Click( object sender, EventArgs e )

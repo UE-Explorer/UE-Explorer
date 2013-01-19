@@ -98,7 +98,10 @@ namespace UEExplorer.UI.Tabs
 
 		public override void TabFind()
 		{
-			new FindDialog( _MyTextEditor1 ).ShowDialog();
+			using( var findDialog = new FindDialog( _MyTextEditor1 ) )
+			{
+			    findDialog.ShowDialog();    
+			}
 		}
 	}
 

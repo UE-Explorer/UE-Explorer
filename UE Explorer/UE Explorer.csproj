@@ -234,6 +234,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.nl.resx</DependentUpon>
     </Compile>
+    <Compile Include="TextSearchHelpers.cs" />
     <Compile Include="UI\Dialogs\ExceptionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -274,6 +275,7 @@
     <Compile Include="UI\Main\ProgramConsole.Designer.cs">
       <DependentUpon>ProgramConsole.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Nodes\TableNodes.cs" />
     <Compile Include="UI\Tabs\UC_UClassFile.cs">
       <SubType>UserControl</SubType>
     </Compile>
