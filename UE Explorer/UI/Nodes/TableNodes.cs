@@ -125,7 +125,7 @@ namespace UEExplorer.UI.Nodes
                 Nodes.Clear();
                 Nodes.Add( "Object:" + Table );
                 Nodes.Add( "Class:" + Table.ClassName + "(" + Table.ClassIndex + ")" );
-                Nodes.Add( "Package:" + Table.PackageName + "(" + Table.PackageIndex + ")" );
+                Nodes.Add( "Package:" + Table.PackageName + "(" + (int)Table.PackageName + ")" );
                 if( Table.OuterIndex != 0 )
                 {
                     Nodes.Add( "Outer:" + Table.OuterTable );

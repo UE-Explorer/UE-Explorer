@@ -1077,7 +1077,7 @@ namespace UEExplorer.UI.Tabs
                     var uStruct = (decompilableObjectNode.Object as UStruct); 
                     if( uStruct != null )
                     {
-                        if( uStruct.DataScriptSize > 0 )
+                        if( uStruct.ByteCodeManager != null )
                         {
                             if( decompilableObjectNode.Object is UClass )
                             {
@@ -1401,7 +1401,7 @@ namespace UEExplorer.UI.Tabs
                     case "TOKENS":
                     {
                         var unStruct = node.Object as UStruct;
-                        if( unStruct != null && unStruct.DataScriptSize > 0 )
+                        if( unStruct != null && unStruct.ByteCodeManager != null )
                         {
                             Label_ObjectName.Text = ((TreeNode)node).Text;
 
