@@ -292,7 +292,6 @@ namespace UEExplorer.UI
 
         private void TabComponentsStrip_TabStripItemClosing( TabStripItemClosingEventArgs e )
         {
-            // Find the owner of this TabStripItem
             foreach( var tc in Tabs.Components.Where( tab => tab.TabItem == e.Item ) )
             {
                 Tabs.Remove( tc );

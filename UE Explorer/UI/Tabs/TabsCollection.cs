@@ -65,8 +65,7 @@ namespace UEExplorer.UI
         public void Remove( ITabComponent delComponent )
         {
             delComponent.TabClosing();
-            _TabsControl.RemoveTab( delComponent.TabItem );
-            Components.Remove( delComponent );	// Handled elsewhere
+            Components.Remove( delComponent );
         }
 
         public void Dispose()
