@@ -542,6 +542,11 @@ namespace UEExplorer.UI
             }
             base.Dispose( disposing );
         }
+
+        private void ReportAnIssue( object sender, EventArgs e )
+        {
+            System.Diagnostics.Process.Start( "https://bitbucket.org/eliotvu/ue-explorer/issues" );
+        }
     }
 
     public static class ProgressStatus

@@ -384,6 +384,9 @@
   <data name="menuItem7.Text" xml:space="preserve">
     <value>&amp;Options</value>
   </data>
+  <data name="menuItem15.Text" xml:space="preserve">
+    <value>&gt; Report an issue</value>
+  </data>
   <data name="menuItem23.Text" xml:space="preserve">
     <value>&amp;Check for Updates...</value>
   </data>
@@ -400,7 +403,7 @@
     <value>&gt; Contact</value>
   </data>
   <data name="SocialMenuItem.Text" xml:space="preserve">
-    <value>&gt; Social</value>
+    <value>&gt; Social (Facebook)</value>
   </data>
   <data name="menuItem27.Text" xml:space="preserve">
     <value>-</value>
@@ -2205,6 +2208,12 @@
     <value>menuItem3</value>
   </data>
   <data name="&gt;&gt;menuItem3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuItem15.Name" xml:space="preserve">
+    <value>menuItem15</value>
+  </data>
+  <data name="&gt;&gt;menuItem15.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;menuItem23.Name" xml:space="preserve">

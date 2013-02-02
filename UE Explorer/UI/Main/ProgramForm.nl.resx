@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="menuItem26.Text" xml:space="preserve">
-    <value>&gt; &amp;Thuis</value>
+    <value>&gt; &amp;Homepagina</value>
   </data>
   <data name="ProgressLabel.Text" xml:space="preserve">
     <value>Gereed</value>
@@ -156,14 +156,20 @@
   <data name="menuItem7.Text" xml:space="preserve">
     <value>&amp;Opties</value>
   </data>
+  <data name="menuItem15.Text" xml:space="preserve">
+    <value>&gt; Meld een probleem</value>
+  </data>
   <data name="menuItem23.Text" xml:space="preserve">
     <value>&amp;Zoeken naar updates...</value>
   </data>
   <data name="menuItem6.Text" xml:space="preserve">
     <value>&gt; Doneer</value>
   </data>
+  <data name="menuItem4.Text" xml:space="preserve">
+    <value>&gt; Contacteer</value>
+  </data>
   <data name="SocialMenuItem.Text" xml:space="preserve">
-    <value>&gt; Sociaal</value>
+    <value>&gt; Sociaal (Facebook)</value>
   </data>
   <data name="menuItem5.Text" xml:space="preserve">
     <value>&amp;Over..</value>

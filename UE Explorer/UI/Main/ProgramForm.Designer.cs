@@ -49,6 +49,7 @@
             this.menuItem20 = new System.Windows.Forms.MenuItem();
             this.menuItem7 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.menuItem15 = new System.Windows.Forms.MenuItem();
             this.menuItem23 = new System.Windows.Forms.MenuItem();
             this.menuItem25 = new System.Windows.Forms.MenuItem();
             this.menuItem24 = new System.Windows.Forms.MenuItem();
@@ -69,7 +70,7 @@
             // 
             // menuItem26
             // 
-            menuItem26.Index = 2;
+            menuItem26.Index = 3;
             resources.ApplyResources(menuItem26, "menuItem26");
             menuItem26.Click += new System.EventHandler(this.MenuItem26_Click);
             // 
@@ -299,6 +300,7 @@
             // 
             this.menuItem3.Index = 4;
             this.menuItem3.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem15,
             this.menuItem23,
             this.menuItem25,
             menuItem26,
@@ -310,49 +312,55 @@
             this.menuItem5});
             resources.ApplyResources(this.menuItem3, "menuItem3");
             // 
+            // menuItem15
+            // 
+            this.menuItem15.Index = 0;
+            resources.ApplyResources(this.menuItem15, "menuItem15");
+            this.menuItem15.Click += new System.EventHandler(this.ReportAnIssue);
+            // 
             // menuItem23
             // 
-            this.menuItem23.Index = 0;
+            this.menuItem23.Index = 1;
             resources.ApplyResources(this.menuItem23, "menuItem23");
             this.menuItem23.Click += new System.EventHandler(this.CheckForUpdates);
             // 
             // menuItem25
             // 
-            this.menuItem25.Index = 1;
+            this.menuItem25.Index = 2;
             resources.ApplyResources(this.menuItem25, "menuItem25");
             // 
             // menuItem24
             // 
-            this.menuItem24.Index = 3;
+            this.menuItem24.Index = 4;
             resources.ApplyResources(this.menuItem24, "menuItem24");
             this.menuItem24.Click += new System.EventHandler(this.MenuItem24_Click);
             // 
             // menuItem6
             // 
-            this.menuItem6.Index = 4;
+            this.menuItem6.Index = 5;
             resources.ApplyResources(this.menuItem6, "menuItem6");
             this.menuItem6.Click += new System.EventHandler(this.DonateToolStripMenuItem1_Click);
             // 
             // menuItem4
             // 
-            this.menuItem4.Index = 5;
+            this.menuItem4.Index = 6;
             resources.ApplyResources(this.menuItem4, "menuItem4");
             this.menuItem4.Click += new System.EventHandler(this.MenuItem4_Click);
             // 
             // SocialMenuItem
             // 
-            this.SocialMenuItem.Index = 6;
+            this.SocialMenuItem.Index = 7;
             resources.ApplyResources(this.SocialMenuItem, "SocialMenuItem");
             this.SocialMenuItem.Click += new System.EventHandler(this.SocialMenuItem_Click);
             // 
             // menuItem27
             // 
-            this.menuItem27.Index = 7;
+            this.menuItem27.Index = 8;
             resources.ApplyResources(this.menuItem27, "menuItem27");
             // 
             // menuItem5
             // 
-            this.menuItem5.Index = 8;
+            this.menuItem5.Index = 9;
             resources.ApplyResources(this.menuItem5, "menuItem5");
             this.menuItem5.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -458,6 +466,7 @@
         private System.Windows.Forms.Button HomepageButton;
         private System.Windows.Forms.MenuItem SocialMenuItem;
         private System.Windows.Forms.MainMenu mainMenu1;
+        private System.Windows.Forms.MenuItem menuItem15;
 
 
         // OnClick events!
