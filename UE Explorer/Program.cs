@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -22,10 +23,15 @@ namespace UEExplorer
         {
             try
             {
+                foreach( var arg in args )
+                {
+                    Console.WriteLine( "Argument: " + arg );
+                }
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault( false );
 
-                if( args.Length >= 2 )
+                if( args.Length >= 2 && ((IList)args).Contains( "-console" ) )
                 {
                     var console = new UI.Main.ProgramConsole();
                     Application.Run( console );
@@ -41,8 +47,24 @@ namespace UEExplorer
             catch( Exception exception )
             {
                 ExceptionDialog.Show( "Internal crash!", exception );
-                LogManager.EndLogStream();
             }
+            finally
+            {
+                LogManager.EndLogStream();   
+            }
+        }
+
+        public static IEnumerable<string> ParseArguments( IEnumerable<string> args )
+        {
+            IList<string> options = new List<string>();
+            foreach( var arg in args )
+            {
+                if( arg.StartsWith( "-" ) )
+                {
+                    options.Add( arg.Substring( 1 ) );     
+                }
+            }
+            return options;
         }
 
         public class SingleInstanceApplication : WindowsFormsApplicationBase

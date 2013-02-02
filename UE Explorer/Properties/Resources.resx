@@ -362,4 +362,23 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
 	<data name="NodeItem_ViewCPPText">
 		<value xml:space="preserve">View CPP Script</value>
 	</data>
+	<data name="THING_DOESNT_EXIST">
+		<value xml:space="preserve">{0} doesn't exist!</value>
+	</data>
+	<data name="UNRECOGNIZED_EXPORT_TYPE">
+		<value xml:space="preserve">Unrecognized export type {0}</value>
+	</data>
+	<data name="EXPORTING_PACKAGE">
+		<value xml:space="preserve">Exporting package {0}</value>
+	</data>
+	<data name="PACKAGE_EXPORTED_TO">
+		<value xml:space="preserve">Package successfully exported to {0}</value>
+	</data>
+	<data name="EXCEPTION_OCCURRED_WHILE_EXPORTING">
+		<value xml:space="preserve">An exception occurred while exporting {0}
+{1}</value>
+	</data>
+	<data name="UNRECOGNIZED_COMMANDLINE_OPTION">
+		<value xml:space="preserve">Unrecognized commandline option {0}</value>
+	</data>
 </root>

@@ -2,113 +2,136 @@
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using UEExplorer.Properties;
 using UELib;
 
 namespace UEExplorer.UI.Main
 {
-	public partial class ProgramConsole : Form
-	{
-		private ConsoleWriter _ConsoleWriter;
+    public partial class ProgramConsole : Form
+    {
+        private ConsoleWriter _ConsoleWriter;
 
-		public ProgramConsole()
-		{
-			InitializeComponent();
+        public ProgramConsole()
+        {
+            InitializeComponent();
 
-			_ConsoleWriter = new ConsoleWriter( ConsoleOutput );
-			Console.SetOut( _ConsoleWriter );
-		}
+            _ConsoleWriter = new ConsoleWriter( ConsoleOutput );
+            Console.SetOut( _ConsoleWriter );
+        }
 
-		private void Console_FormClosed( object sender, FormClosedEventArgs e )
-		{
-			if( _ConsoleWriter != null )
-			{ 
-				_ConsoleWriter.Dispose();
-				_ConsoleWriter = null;
-			}
-			Application.Exit();
-		}
+        private void Console_FormClosed( object sender, FormClosedEventArgs e )
+        {
+            if( _ConsoleWriter != null )
+            { 
+                _ConsoleWriter.Close();
+                _ConsoleWriter = null;
+            }
+            Application.Exit();
+        }
 
-		private void ProgramConsole_Shown( object sender, EventArgs e )
-		{
-			var args = Environment.GetCommandLineArgs();
-			var filePath = args[1];
-			if( !File.Exists( filePath ) )
-			{
-				Console.WriteLine( filePath + " doesn't exist!" );
-				return;		
-			}
+        private void ProgramConsole_Shown( object sender, EventArgs e )
+        {
+            var args = Environment.GetCommandLineArgs();
+            var filePath = args[1];
+            if( !File.Exists( filePath ) )
+            {
+                Console.WriteLine( Resources.THING_DOESNT_EXIST, filePath );
+                return;		
+            }
 
-			var options = args[2].Split( '=' );
-			var option = options[0];
-			switch( option )
-			{
-				case "export":
-				{ 
-					bool shouldExportScripts = false;
+            var options = Program.ParseArguments( args );
+            foreach( var option in options )
+            {
+                var primary = option;
+                var secondary = String.Empty;
+                if( option.Contains( "=" ) )
+                {
+                    var doubleOption = option.Split( '=' );
+                    primary = doubleOption[0];
+                    secondary = doubleOption[1];
+                }
 
-					var exportType = options[1];
-					switch( exportType )
-					{
-						case "classes":
-							break;
+                switch( primary )
+                {
+                    case "console":
+                        break;
 
-						case "scripts":
-							shouldExportScripts = true;
-							break;
+                    case "export":
+                    { 
+                        bool shouldExportScripts = false;
+                        switch( secondary )
+                        {
+                            case "classes":
+                                break;
 
-						default:
-							Console.WriteLine( "Unrecognized export type " + exportType );
-							return;
-					}
+                            case "scripts":
+                                shouldExportScripts = true;
+                                break;
 
-					try
-					{
-						Console.WriteLine( "Exporting package " + filePath );
-						using( var package = UnrealLoader.LoadFullPackage( filePath ) )
-						{ 
-							var exportPath = package.ExportPackageClasses( shouldExportScripts );
-							Console.WriteLine( "Package successfully exported to " + exportPath );
-							//Close();
-						}
-					}
-					catch
-					{
-						Console.WriteLine( "An exception occurred while exporting " + filePath );
-					}
-					break;
-				}
+                            default:
+                                Console.WriteLine( Resources.UNRECOGNIZED_EXPORT_TYPE, secondary );
+                                return;
+                        }
 
-				default:
-					Console.WriteLine( "Unrecognized commandline option " + option );
-					break;
-			}
-		}
-	}
+                        try
+                        {
+                            Console.WriteLine( Resources.EXPORTING_PACKAGE, filePath );
+                            using( var package = UnrealLoader.LoadFullPackage( filePath ) )
+                            { 
+                                var exportPath = package.ExportPackageClasses( shouldExportScripts );
+                                Console.WriteLine( Resources.PACKAGE_EXPORTED_TO, exportPath );
+                            }
+                        }
+                        catch( Exception exc )
+                        {
+                            Console.WriteLine( Resources.EXCEPTION_OCCURRED_WHILE_EXPORTING, filePath, exc );
+                        }
+                        break;
+                    }
 
-	public class ConsoleWriter : TextWriter
-	{
-		private readonly RichTextBox _Output;
-		private readonly Encoding _Encoding = Encoding.ASCII;
-		public override Encoding Encoding
-		{
-			get{ return _Encoding; }
-		}
+                    default:
+                        Console.WriteLine( Resources.UNRECOGNIZED_COMMANDLINE_OPTION, primary );
+                        break;   
+                }
+            }
+        }
+    }
 
-		public ConsoleWriter( RichTextBox output )
-		{
-			_Output = output;		
-		}
+    public class ConsoleWriter : TextWriter
+    {
+        private readonly RichTextBox _Output;
+        private readonly Encoding _Encoding = Encoding.ASCII;
+        private string _LastWrite = String.Empty;
+        public override Encoding Encoding
+        {
+            get{ return _Encoding; }
+        }
 
-		public override void Write( string value )
-		{
-			base.Write( value );
-			_Output.Text += value;
-		} 
+        public ConsoleWriter( RichTextBox output )
+        {
+            _Output = output;		
+        }
 
-		public override void WriteLine( string value )
-		{
-			base.WriteLine( value );
-			_Output.Text += "\r\n" + value;
-		}
-	}
+        public override void Write( string value )
+        {
+            string trimmedValue = value.Trim();
+            if( trimmedValue == NewLine && _LastWrite == NewLine )
+                return;
+
+            base.Write( value );
+            _Output.Text += value;
+            _LastWrite = trimmedValue;
+        } 
+
+        public override void WriteLine( string value )
+        {
+            string trimmedValue = value.Trim();
+            if( trimmedValue == NewLine && _LastWrite == NewLine )
+                return;
+
+            base.WriteLine( value );
+            _Output.Text += NewLine + value;
+            _LastWrite = trimmedValue;
+        }
+    }
 }
