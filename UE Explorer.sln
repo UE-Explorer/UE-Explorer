@@ -199,6 +199,7 @@ Global
 		{7167B940-B5A5-4434-825A-69510441E513}.Publish|x86.ActiveCfg = Publish
 		{7167B940-B5A5-4434-825A-69510441E513}.Publish|x86.Build.0 = Publish
 		{7167B940-B5A5-4434-825A-69510441E513}.Release|Any CPU.ActiveCfg = Release
+		{7167B940-B5A5-4434-825A-69510441E513}.Release|Any CPU.Build.0 = Release
 		{7167B940-B5A5-4434-825A-69510441E513}.Release|Mixed Platforms.ActiveCfg = Release
 		{7167B940-B5A5-4434-825A-69510441E513}.Release|x86.ActiveCfg = Release
 		{5F9A0DC6-D87E-4020-BD30-788CB4684F08}.Debug|Any CPU.ActiveCfg = Debug|x86
@@ -266,7 +267,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateAssemblyVersion = True
 		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UpdateAssemblyVersion = True
 	EndGlobalSection
 EndGlobal

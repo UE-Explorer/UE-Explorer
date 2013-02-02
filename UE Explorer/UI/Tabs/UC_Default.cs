@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace UEExplorer.UI.Tabs
 {
@@ -10,7 +11,7 @@ namespace UEExplorer.UI.Tabs
 		protected override void TabCreated()
 		{
 			base.TabCreated();
-			DefaultPage.BeginInvoke( (Action)(() => DefaultPage.Navigate( Program.APPS_URL )) );
+			DefaultPage.BeginInvoke( (Action)(() => DefaultPage.Navigate( Program.APPS_URL + "?version=" + Application.ProductVersion )) );
 		}
 	}
 }
