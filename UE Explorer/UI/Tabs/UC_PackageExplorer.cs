@@ -414,16 +414,66 @@ namespace UEExplorer.UI.Tabs
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose( bool disposing )
         {
+            Console.WriteLine( "Disposing UC_PackageExplorer " + disposing );
             if( disposing )
             {
                 exportDecompiledClassesToolStripMenuItem.Click -= _OnExportClassesClick;
                 exportScriptClassesToolStripMenuItem.Click -= _OnExportScriptsClick;
-
                 TreeView_Classes.AfterSelect -= _OnClassesNodeSelected;
                 TreeView_Classes.BeforeExpand -= _OnClassesNodeExpand;
+                Num_ObjectIndex.ValueChanged -= Num_ObjectIndex_ValueChanged;
+                Num_NameIndex.ValueChanged -= Num_NameIndex_ValueChanged;
+                checkBox9.CheckedChanged -= FilterByClassCheckBox;
+                checkBox8.CheckedChanged -= FilterByClassCheckBox;
+                checkBox7.CheckedChanged -= FilterByClassCheckBox;
+                checkBox6.CheckedChanged -= FilterByClassCheckBox;
+                checkBox5.CheckedChanged -= FilterByClassCheckBox;
+                checkBox4.CheckedChanged -= FilterByClassCheckBox;
+                checkBox3.CheckedChanged -= FilterByClassCheckBox;
+                checkBox2.CheckedChanged -= FilterByClassCheckBox;
+                checkBox1.CheckedChanged -= FilterByClassCheckBox;
+                splitContainer1.SplitterMoved -= SplitContainer1_SplitterMoved;
+                panel1.Paint -= Panel1_Paint;
+
+                TabControl_General.Selecting -= TabControl_General_Selecting;
+                TabControl_General.Selected -= TabControl_General_Selected;
+
+                TabControl_Tables.Selected -= TabControl_Tables_Selected;
+
+                TreeView_Exports.AfterSelect -= _OnExportsNodeSelected;
+                TreeView_Exports.NodeMouseClick -= TreeView_Exports_NodeMouseClick;
+                TreeView_Imports.NodeMouseClick -= TreeView_Imports_NodeMouseClick;
+                TreeView_Classes.NodeMouseClick -= TreeView_Classes_NodeMouseClick;
+
+                this.FilterText.TextChanged -= this.FilterText_TextChanged;
+                this.Button_Export.Click -= this.Button_Export_Click;
+                this.TreeView_Content.BeforeExpand -= this.TreeView_Content_BeforeExpand;
+                this.TreeView_Content.AfterSelect -= this.TreeView_Content_AfterSelect;
+                this.TreeView_Content.NodeMouseClick -= this.TreeView_Content_NodeMouseClick;
+                this.TreeView_Deps.DrawNode -= this.TreeView_Deps_DrawNode;
+                this.ToolStrip_Main.Paint -= this.ToolStrip_Content_Paint;
+                this.findNextToolStripMenuItem.Click -= this.FindNextToolStripMenuItem_Click;
+                this.findInDocumentToolStripMenuItem.Click -= this.FindInDocumentToolStripMenuItem_Click;
+                this.findInClassesToolStripMenuItem.Click -= this.FindInClassesToolStripMenuItem_Click;
+                this.viewBufferToolStripMenuItem.Click -= this.ViewBufferToolStripMenuItem_Click;
+                this.ReloadButton.Click -= this.ReloadButton_Click;
+                this.panel4.Paint -= this.Panel4_Paint;
+                this.ToolStrip_Content.Paint -= this.ToolStrip_Content_Paint;
+                this.PrevButton.Click -= this.ToolStripButton_Backward_Click;
+                this.NextButton.Click -= this.ToolStripButton_Forward_Click;
+                this.ExportButton.Click -= this.ToolStripButton1_Click;
+                this.toolStripSeparator1.Paint -= this.ToolStripSeparator1_Paint;
+                this.SearchBox.KeyPress -= this.SearchBox_KeyPress_1;
+                this.SearchBox.TextChanged -= this.SearchBox_TextChanged;
+                this.FindButton.Click -= this.ToolStripButton_Find_Click;
+                this.toolStripSeparator4.Paint -= this.ToolStripSeparator1_Paint;
+                this.toolStripSeparator3.Paint -= this.ToolStripSeparator1_Paint;
+                this.ViewTools.DropDownItemClicked -= this.ViewTools_DropDownItemClicked;
 
                 _BorderPen.Dispose();
                 _LinePen.Dispose();
+
+                WPFHost.Dispose();
 
                 _ClassesList = null;
                 _Form = null;
@@ -883,7 +933,7 @@ namespace UEExplorer.UI.Tabs
 
         internal void ReloadPackage()
         {
-            Tabs.Remove( this );
+            Tabs.Remove( this, true );
             Tabs.Form.LoadFile( FileName );
         }
 
@@ -1844,12 +1894,14 @@ namespace UEExplorer.UI.Tabs
                 }
             }
             var dialog = new SaveFileDialog{Filter = extensions, FileName = ((UObject)exportableObject).Name};
-            if( dialog.ShowDialog() == DialogResult.OK )
+            if( dialog.ShowDialog() != DialogResult.OK )
+                return;
+
+            using( var stream = new FileStream( dialog.FileName, FileMode.Create, FileAccess.Write ) )
             {
-                var stream = new FileStream( dialog.FileName, FileMode.Create, FileAccess.Write );
-                exportableObject.SerializeExport( exportableObject.ExportableExtensions.ElementAt( dialog.FilterIndex - 1 ), stream );
+                exportableObject.SerializeExport(
+                    exportableObject.ExportableExtensions.ElementAt( dialog.FilterIndex - 1 ), stream );
                 stream.Flush();
-                stream.Close();
             }
         }
 

@@ -62,9 +62,13 @@ namespace UEExplorer.UI
             return tabComp;
         }
 
-        public void Remove( ITabComponent delComponent )
+        public void Remove( ITabComponent delComponent, bool fullRemove = false )
         {
-            delComponent.TabClosing();
+            if( fullRemove )
+            {
+                _TabsControl.RemoveTab( delComponent.TabItem );
+                 delComponent.TabItem.Dispose();
+            }
             Components.Remove( delComponent );
         }
 

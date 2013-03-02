@@ -15,6 +15,8 @@
 		{
 			if( disposing && (components != null) )
 			{
+                DefaultPage.Dispose();
+                panel1.Dispose();
 				components.Dispose();
 			}
 			base.Dispose( disposing );

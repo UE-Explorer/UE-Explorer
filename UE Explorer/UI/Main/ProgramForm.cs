@@ -294,6 +294,7 @@ namespace UEExplorer.UI
         {
             foreach( var tc in Tabs.Components.Where( tab => tab.TabItem == e.Item ) )
             {
+                tc.TabClosing();
                 Tabs.Remove( tc );
                 break;
             }
