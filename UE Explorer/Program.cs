@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -36,13 +38,18 @@ namespace UEExplorer
                     var console = new UI.Main.ProgramConsole();
                     Application.Run( console );
                     Application.Exit();
-                    return;
                 }
-
-                //Thread.CurrentThread.CurrentCulture = CultureInfo.InstalledUICulture;
-
-                var app = new SingleInstanceApplication();
-                app.Run( Environment.GetCommandLineArgs() );
+                else if( ((IList)args).Contains( "-newwindow" ) )
+                {
+                    var window = new ProgramForm();
+                    Application.Run( window );
+                }
+                else
+                {
+                    //Thread.CurrentThread.CurrentCulture = CultureInfo.InstalledUICulture;
+                    var app = new SingleInstanceApplication();
+                    app.Run( Environment.GetCommandLineArgs() );
+                }
             }
             catch( Exception exception )
             {
@@ -100,13 +107,25 @@ namespace UEExplorer
 
         public static class LogManager
         {
-            private const string				LogFileName = "Log.txt";
+            private const string				LogFileName = "Log{0}.txt";
             private static readonly string		LogFilePath = Path.Combine( Application.StartupPath, LogFileName );
             private static FileStream			_LogStream;	
 
             public static void StartLogStream()
             {
-                _LogStream = new FileStream( LogFilePath, FileMode.Create, FileAccess.Write  );
+                int failCount = 0;
+                retry:
+                var logPath = String.Format( LogFilePath, failCount > 0 ? failCount.ToString( CultureInfo.InvariantCulture ) : String.Empty );
+                try
+                {
+                    _LogStream = new FileStream( logPath, FileMode.Create, FileAccess.Write );
+                }
+                catch( IOException )
+                {
+                    ++ failCount;
+                    goto retry;
+                }
+                Debug.Assert( _LogStream != null, "Couldn't open file" + Path.GetFileName( logPath ) );
                 Console.SetOut( new StreamWriter( _LogStream ) );		
             }
 
