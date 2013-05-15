@@ -78,7 +78,7 @@ namespace UEExplorer.UI.Forms
 
         private void CopyToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            Clipboard.SetText( BitConverter.ToString( HexPanel.Buffer ) );
+            Clipboard.SetText( BitConverter.ToString( HexPanel.Buffer ).Replace( '-', ' ' ) );
         }
 
         private void CopyAsViewToolStripMenuItem_Click( object sender, EventArgs e )
