@@ -59,7 +59,7 @@ namespace UEExplorer.UI
 
                 var item = _ROF.MenuItems.Add
                 ( 
-                    (_MRUManager.Files.Count - i) + " " + Path.GetFileName( _MRUManager.Files[i] ) 
+                    (_MRUManager.Files.Count - i) + " " + Path.GetFileName( _MRUManager.Files[i] ) + " -> " + Path.GetDirectoryName( _MRUManager.Files[i] )
                 );		
                 item.Tag = _MRUManager.Files[i];
                 item.Click += _ROF_ItemClicked; 
