@@ -224,7 +224,11 @@ namespace UEExplorer.UI.Tabs
                 {
                     Label_EngineVersion.Visible		= true;
                     EngineValue.Visible				= true;
-                    EngineValue.Text 				=  _UnrealPackage.EngineVersion.ToString( CultureInfo.InvariantCulture );
+                    var v = _UnrealPackage.EngineVersion & 0x0000FFFF;
+                    var l = _UnrealPackage.EngineVersion >> 16;
+                    EngineValue.Text =  l > 0 
+                        ? String.Format( "{0}/{1}", v, l.ToString( CultureInfo.InvariantCulture ).PadLeft( v.ToString( CultureInfo.InvariantCulture ).Length, '0' ) )
+                        : v.ToString( CultureInfo.InvariantCulture );
                 }
 
                 if( _UnrealPackage.Group != "None" )
@@ -241,7 +245,11 @@ namespace UEExplorer.UI.Tabs
                 {
                     Label_CookerVersion.Visible		= true;
                     CookerValue.Visible				= true;
-                    CookerValue.Text				= _UnrealPackage.CookerVersion.ToString( CultureInfo.InvariantCulture );
+                    var v = _UnrealPackage.CookerVersion & 0x0000FFFF;
+                    var l = _UnrealPackage.CookerVersion >> 16;
+                    CookerValue.Text = l > 0 
+                        ? String.Format( "{0}/{1}", v, l.ToString( CultureInfo.InvariantCulture ).PadLeft( v.ToString( CultureInfo.InvariantCulture ).Length, '0' ) )
+                        : v.ToString( CultureInfo.InvariantCulture );
                 }
             }
 
