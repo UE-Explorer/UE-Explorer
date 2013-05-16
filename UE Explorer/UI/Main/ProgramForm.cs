@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using Eliot.Utilities;
 using Storm.TabControl;
 using UEExplorer.Properties;
@@ -327,6 +328,8 @@ namespace UEExplorer.UI
             {
                 Tabs.Add( typeof(UC_Default), Resources.Homepage );
             }
+
+            AutoUpdater.Start( Program.UPDATE_URL + "&installed_version=" + Version );
         }
 
         private void ToggleUEExplorerFileIconsToolStripMenuItem_Click( object sender, EventArgs e )
