@@ -257,6 +257,7 @@ namespace UEExplorer
         internal const string Version_URL = WEBSITE_URL +  "apps/version/";
         internal const string Forum_URL = WEBSITE_URL + "forum/";
         internal const string APPS_URL = WEBSITE_URL + "apps/ue_explorer/";
+        internal const string UPDATE_URL = WEBSITE_URL + "files/ue-explorer/update.xml?auto=1";
 
 #region Registry	
         private const string RegistryFileFolderName = "UEExplorer.AnyUnrealFile";
