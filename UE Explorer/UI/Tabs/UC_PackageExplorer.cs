@@ -1461,7 +1461,7 @@ namespace UEExplorer.UI.Tabs
                         var unStruct = node.Object as UStruct;
                         if( unStruct != null && unStruct.ByteCodeManager != null )
                         {
-                            Label_ObjectName.Text = ((TreeNode)node).Text;
+                            Label_ObjectName.Text = unStruct.GetOuterGroup() + " - Tokens";
 
                             var codeDec = unStruct.ByteCodeManager;
                             codeDec.Deserialize();
@@ -1471,6 +1471,17 @@ namespace UEExplorer.UI.Tabs
                             while( codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count )
                             {
                                 var t = codeDec.NextToken;
+                                var tokenHeader = (Func<UStruct.UByteCodeDecompiler.Token, string>)((tkn) =>
+                                {
+                                    var tokenName = tkn.GetType().Name.Substring( 0, tkn.GetType().Name.Length - 5 );
+                                    tokenName = String.Concat( tokenName.Select( (c) => Char.IsUpper( c ) ? c.ToString( CultureInfo.InvariantCulture ) : String.Empty ) );
+                                    if( tkn is UStruct.UByteCodeDecompiler.CastToken )
+                                    {
+                                        tokenName = "C" + tokenName;
+                                    }
+                                    return String.Format( "{0}({1}/{2})", tokenName, tkn.Size, tkn.StorageSize );
+                                });
+
                                 int orgIndex = codeDec.CurrentTokenIndex;
                                 string output;
                                 bool breakOut = false;
@@ -1483,32 +1494,38 @@ namespace UEExplorer.UI.Tabs
                                     output = "Exception occurred while decompiling token: " + t.GetType().Name;
                                     breakOut = true;
                                 }
-                                string chain = t.GetType().Name.Substring( 0, t.GetType().Name.Length - 5 ) 
-                                    + "(" + t.Size + ")";
+
+                                string chain = tokenHeader( t );
                                 int inlinedTokens = codeDec.CurrentTokenIndex - orgIndex;
                                 if( inlinedTokens > 0 )
                                 {
                                     ++ orgIndex;
                                     for( int i = 0; i < inlinedTokens; ++ i )
                                     {
-                                        //var breakLine = i > 0 && i % 3 == 0;
-                                        //if( breakLine )
-                                        //{
-                                        //    chain += "\r\n\t\t";
-                                        //}
-                                        var tokenName = codeDec.DeserializedTokens[orgIndex + i].GetType().Name; 
-                                        chain += " -> " 
-                                            + tokenName.Substring( 0, tokenName.Length - 5 ) 
-                                            + "(" + codeDec.DeserializedTokens[orgIndex + i].Size + ")";
+                                        chain += " -> " + tokenHeader( codeDec.DeserializedTokens[orgIndex + i] );
                                     }
                                 }
 
-                                content += "(0x" + String.Format( "{0:x3}", t.Position ).ToUpper() + ") " + chain 
-                                    + (output != String.Empty ? "\r\n\t" + output + "\r\n" : "\r\n");
+                                var buffer = new byte[t.StorageSize];
+                                _UnrealPackage.Stream.Position = unStruct.ExportTable.SerialOffset + unStruct.ScriptOffset + t.StoragePosition;
+                                _UnrealPackage.Stream.Read( buffer, 0, buffer.Length );
+
+                                content += String.Format( "({0:X3}/{1:X3}) [{3}]\r\n\t{2}\r\n\t{4}\r\n", 
+                                    t.Position, t.StoragePosition, 
+                                    chain, BitConverter.ToString( buffer ).Replace( '-', ' ' ),
+                                    output != String.Empty ? output + "\r\n" : output
+                                );
 
                                 if( breakOut )
                                     break;
                             }
+                            content += "// The structure is as follows:" +
+                                       "\r\n" +
+                                       "// \t(MemoryPosition/StoragePosition) [Bytecodes]" +
+                                       "\r\n" +
+                                       "// \t\tToken(MemorySize/MemoryPosition) -> ..." +
+                                       "\r\n" +
+                                       "// \t\tCode";
                             SetContentText( node as TreeNode, content );
                         }
                         break;

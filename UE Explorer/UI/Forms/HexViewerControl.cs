@@ -32,6 +32,9 @@ namespace UEExplorer.UI.Forms
                 [XmlIgnore]
                 public int Size;
 
+                [XmlIgnore]
+                public int HoverSize;
+
                 public string Type;
 
                 public string Name;
@@ -272,8 +275,9 @@ namespace UEExplorer.UI.Forms
                 (
                     new HexMetaInfo.BytesMetaInfo
                     {
-                        Position = (int)(token.StoragePosition - 1) + (int)unStruct.ScriptOffset,
+                        Position = (int)(token.StoragePosition) + (int)unStruct.ScriptOffset,
                         Size = 1,
+                        HoverSize = token.StorageSize,
                         Type = "Generated",
                         Color = Color.FromArgb( Byte.MaxValue, red, green, blue ),
                         Name = token.GetType().Name,
@@ -426,6 +430,14 @@ namespace UEExplorer.UI.Forms
             
                 if( _DrawByte )
                 {
+                    var hoveredMetaItem = _Structure.MetaInfoList.Find( (t) => t.Tag is UStruct.UByteCodeDecompiler.Token 
+                        && (t.Position == HoveredOffset) 
+                    );
+
+                    var selectedMetaItem = _Structure.MetaInfoList.Find( (t) => t.Tag is UStruct.UByteCodeDecompiler.Token 
+                        && (t.Position == SelectedOffset) 
+                    );
+
                     for( int hexByte = 0; hexByte < CellCount; ++ hexByte )
                     {
                         int byteOffset = (offset + hexByte);
@@ -438,7 +450,8 @@ namespace UEExplorer.UI.Forms
 
                             foreach( var s in _Structure.MetaInfoList )
                             {
-                                if( byteOffset < s.Position || byteOffset >= s.Position + s.Size )
+                                var drawSize = hoveredMetaItem == s || selectedMetaItem == s ? s.HoverSize > 0 ? s.HoverSize : s.Size : s.Size;
+                                if( byteOffset < s.Position || byteOffset >= s.Position + drawSize )
                                     continue;
 
                                 var y1 = (int)lineOffsetY; 
@@ -447,7 +460,7 @@ namespace UEExplorer.UI.Forms
                                 var x2 = (int)(byteColumnOffset + (hexByte + 1)*CellWidth);
                                 var p = new Pen( new SolidBrush( s.Color ) );
 
-                                if( s.Tag is UStruct.UByteCodeDecompiler.Token )
+                                if( s.Tag is UStruct.UByteCodeDecompiler.Token && hoveredMetaItem != s && selectedMetaItem != s )
                                 {
                                     e.Graphics.DrawLine( p, x1, y2, x2, y2 );
                                 }
@@ -455,7 +468,7 @@ namespace UEExplorer.UI.Forms
                                 {
                                     var rectBrush = new SolidBrush( Color.FromArgb( 128, s.Color.R, s.Color.G, s.Color.B ) );
                                     e.Graphics.FillRectangle( rectBrush, x1, y1, CellWidth, extraLineOffset );
-                                    if( HoveredOffset >= s.Position && HoveredOffset < s.Position + s.Size )
+                                    if( HoveredOffset >= s.Position && HoveredOffset < s.Position + drawSize )
                                     {
                                         var borderPen = new Pen( _HoveredFieldBrush );
                                         e.Graphics.DrawLine( borderPen, x1, y1, x2, y1 );		// Top	
@@ -464,7 +477,7 @@ namespace UEExplorer.UI.Forms
                                         if( byteOffset == s.Position )
                                             e.Graphics.DrawLine( borderPen, x1, y1, x1, y2 );	// Left
 
-                                        if( byteOffset == s.Position + s.Size - 1 )
+                                        if( byteOffset == s.Position + drawSize - 1 )
                                             e.Graphics.DrawLine( borderPen, x2, y1, x2, y2 );	// Right
                                     }
                                 }
