@@ -51,8 +51,14 @@ namespace UEExplorer.UI.Main
                     secondary = doubleOption[1];
                 }
 
+                var closeWhenDone = false;
                 switch( primary )
                 {
+                    case "silent":
+                        closeWhenDone = true;
+                        Hide();
+                        break;
+
                     case "console":
                         break;
 
@@ -92,6 +98,11 @@ namespace UEExplorer.UI.Main
                     default:
                         Console.WriteLine( Resources.UNRECOGNIZED_COMMANDLINE_OPTION, primary );
                         break;   
+                }
+
+                if( closeWhenDone )
+                {
+                    Close();
                 }
             }
         }
