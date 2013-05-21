@@ -375,6 +375,12 @@
     <EmbeddedResource Include="UI\Dialogs\FindDialog.resx">
       <DependentUpon>FindDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\PropertiesDialog.nl.resx">
+      <DependentUpon>PropertiesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\ColorGeneratorForm.nl.resx">
+      <DependentUpon>ColorGeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\HexViewerFAQ.nl.resx">
       <DependentUpon>HexViewerFAQ.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -409,6 +415,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_Default.resx">
       <DependentUpon>UC_Default.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tabs\UC_Options.nl.resx">
+      <DependentUpon>UC_Options.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_Options.resx">
       <DependentUpon>UC_Options.cs</DependentUpon>
