@@ -117,34 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="EditMenuItem.Text" xml:space="preserve">
+    <value>Cel bewerken</value>
+  </data>
   <data name="defineCharToolStripMenuItem.Text" xml:space="preserve">
-    <value>Defineer Char</value>
+    <value>Char definiëren</value>
   </data>
   <data name="defineByteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Defineer Byte</value>
+    <value>Byte definiëren</value>
   </data>
   <data name="defineShortToolStripMenuItem.Text" xml:space="preserve">
-    <value>Defineer Short</value>
+    <value>Short definiëren</value>
   </data>
   <data name="defineIntToolStripMenuItem.Text" xml:space="preserve">
-    <value>Defineer Int</value>
+    <value>Int definiëren</value>
   </data>
   <data name="defineLongToolStripMenuItem.Text" xml:space="preserve">
-    <value>Defineer Long</value>
+    <value>Long definiëren</value>
   </data>
   <data name="defineFloatToolStripMenuItem.Text" xml:space="preserve">
-    <value>Defineer Float</value>
+    <value>Float definiëren</value>
   </data>
   <data name="defineObjectToolStripMenuItem.Text" xml:space="preserve">
-    <value>Defineer Object</value>
+    <value>Object definiëren</value>
   </data>
   <data name="defineNameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Defineer Name</value>
+    <value>Name definiëren</value>
   </data>
   <data name="defineCodeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Defineer Code</value>
+    <value>Code definiëren</value>
   </data>
   <data name="defineIndexToolStripMenuItem.Text" xml:space="preserve">
-    <value>Defineer Index</value>
+    <value>Index definiëren</value>
   </data>
 </root>

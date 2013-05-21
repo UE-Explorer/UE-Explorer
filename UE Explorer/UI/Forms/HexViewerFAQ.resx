@@ -117,76 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SizeLabel.Text" xml:space="preserve">
-    <value>Grootte: {0}</value>
-  </data>
-  <data name="ToolStripStatusLabel_Position.Text" xml:space="preserve">
-    <value>Positie: {0}</value>
-  </data>
-  <data name="editToolStripMenuItem.Text" xml:space="preserve">
-    <value>Be&amp;werken</value>
-  </data>
-  <data name="CopyBytesItem.Text" xml:space="preserve">
-    <value>Hex bytes kopiëren</value>
-  </data>
-  <data name="CopyBytesItem.ToolTipText" xml:space="preserve">
-    <value>Kopiër bytes naar je klembord</value>
-  </data>
-  <data name="CopyHexViewItem.Text" xml:space="preserve">
-    <value>Hex formaat kopiëren</value>
-  </data>
-  <data name="CopyHexViewItem.ToolTipText" xml:space="preserve">
-    <value>Kopiër bytes(in hex formaat) naar je klembord</value>
-  </data>
-  <data name="CopyAddressItem.Text" xml:space="preserve">
-    <value>Adres kopiëren</value>
-  </data>
-  <data name="CopyAddressItem.ToolTipText" xml:space="preserve">
-    <value>Kopiër het adres naar je klembord</value>
-  </data>
-  <data name="CopySizeItem.Text" xml:space="preserve">
-    <value>Grootte kopiëren</value>
-  </data>
-  <data name="CopySizeItem.ToolTipText" xml:space="preserve">
-    <value>Kopiër de grootte naar je klembord</value>
-  </data>
-  <data name="ExportBinaryItem.Text" xml:space="preserve">
-    <value>&amp;Exporteer binary bestand</value>
-  </data>
-  <data name="ExportBinaryItem.ToolTipText" xml:space="preserve">
-    <value>Exporteer alle bytes naar een binary bestand</value>
-  </data>
-  <data name="ImportBinaryItem.Text" xml:space="preserve">
-    <value>&amp;Importeer binary bestand</value>
-  </data>
-  <data name="ImportBinaryItem.ToolTipText" xml:space="preserve">
-    <value>Importeer alle bytes van een binary bestand</value>
-  </data>
-  <data name="SaveItem.Text" xml:space="preserve">
-    <value>Permanent wijzigingen opslaan</value>
-  </data>
-  <data name="ReloadBufferItem.Text" xml:space="preserve">
-    <value>Herlaad buffer</value>
-  </data>
-  <data name="ReloadBufferItem.ToolTipText" xml:space="preserve">
-    <value>Dit kan leiden tot onverwachte resultaten zoals crashen van dit program of jouw computer!</value>
-  </data>
-  <data name="ReloadPackageItem.Text" xml:space="preserve">
-    <value>Herlaad paket</value>
-  </data>
-  <data name="ReloadPackageItem.ToolTipText" xml:space="preserve">
-    <value>Dit zal deze kader en zijn ouder sluiten, en dan het paket herladen!</value>
-  </data>
-  <data name="viewToolStripMenuItem.Text" xml:space="preserve">
-    <value>Beel&amp;d</value>
-  </data>
-  <data name="ViewASCIIItem.Text" xml:space="preserve">
-    <value>Toon ASCII</value>
-  </data>
-  <data name="ViewByteItem.Text" xml:space="preserve">
-    <value>Toon Byte</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Hex Bekijker</value>
+  <data name="FAQTextBox.Text" xml:space="preserve">
+    <value>Q: How do I modify the cells?
+
+A: Double Mouse Click on a cell to activate editing.
+
+  - You can now press any of the 0-9 or A-F key, it will replace the active hex unit(highlighted in black) and then move on to the next hex unit and so on!
+
+  - Once you have made a modification you will be able to save it using Edit-&gt;Permanently Save Modifications" or CTRL+S. 
+
+  - Either continue editing or update UE Explorer to adapt to the changes by doing Edit-&gt;Reload Package or Edit-&gt;Reload Buffer or just CTRL+R/CTRL+D.
+
+
+Q: What is Name/Object/Index/Struct
+
+A: 
+  - Name: Starting from the selected cell the next (1-5 or 8 bytes) will be used to calculate an index to the Names table.
+
+  - Object: Starting from the selected cell the next (1-5 or 4 bytes) will be used to calculate an index to the Exports/Imports table.
+
+  - Index: Starting from the selected cell the next (1-5 or 4 bytes) will be used to calculate packed indices, may be used for the size of an array or string.
+
+  - Struct: Displays a name for the selected byte or group of bytes such as Tokens or explicitly defined structs.
+</value>
   </data>
 </root>

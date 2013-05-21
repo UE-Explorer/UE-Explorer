@@ -269,6 +269,12 @@
       <DependentUpon>StructureInputDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\ColorCode.cs" />
+    <Compile Include="UI\Forms\HexViewerFAQ.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\HexViewerFAQ.Designer.cs">
+      <DependentUpon>HexViewerFAQ.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\HexViewerPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -367,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\FindDialog.resx">
       <DependentUpon>FindDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\HexViewerFAQ.resx">
+      <DependentUpon>HexViewerFAQ.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\HexViewerForm.nl.resx">
       <DependentUpon>HexViewerForm.cs</DependentUpon>
@@ -528,7 +537,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

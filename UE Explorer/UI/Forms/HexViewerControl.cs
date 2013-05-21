@@ -212,14 +212,23 @@ namespace UEExplorer.UI.Forms
             if( Buffer == null )
                 return;
 
-            var totalLines = (int)Math.Ceiling( Buffer.Length/(float)CellCount );
-            var visibleLines = (int)Math.Ceiling( HexLinePanel.Height/CellHeight - 1.0 ); 
+            var totalLines = Math.Ceiling( Buffer.Length/(float)CellCount ) + 2;
+            var visibleLines = Math.Ceiling( HexLinePanel.Height/CellHeight ); 
             var trailingLines =  totalLines % visibleLines;
             var scrollableLines = totalLines - trailingLines;
 
             HexScrollBar.Minimum = 0;
-            HexScrollBar.Maximum = totalLines;
-            HexScrollBar.Visible = totalLines > 0 && totalLines > visibleLines;
+            HexScrollBar.Maximum = (int)Math.Max( totalLines, 0 );
+            //HexScrollBar.Visible = totalLines > 0 && totalLines > visibleLines;
+        }
+
+        /// <summary>
+        /// Attempts to update its state to the current's target state.
+        /// </summary>
+        public void Reload()
+        {
+            _Structure.MetaInfoList.Clear();
+            InitializeMetaInfoFields();    
         }
 
         private void InitializeMetaInfoFields()
@@ -261,7 +270,7 @@ namespace UEExplorer.UI.Forms
                 return;
 
             var unStruct = Target as UStruct;
-            if( unStruct.ByteCodeManager == null || unStruct.ByteCodeManager.DeserializedTokens.Count <= 0 )
+            if( unStruct.ByteCodeManager == null || unStruct.ByteCodeManager.DeserializedTokens == null || unStruct.ByteCodeManager.DeserializedTokens.Count <= 0 )
                 return;
 
             var randomizer2 = new Random( unStruct.ByteCodeManager.DeserializedTokens.Count );
@@ -299,9 +308,9 @@ namespace UEExplorer.UI.Forms
         private readonly SolidBrush _EvenBrush = new SolidBrush( Color.FromArgb( 80, 80, 80 ) );
         private readonly SolidBrush _OddBrush = new SolidBrush( Color.FromArgb( 150, 150, 150 ) );
         private readonly SolidBrush _OffsetBrush = new SolidBrush( Color.FromArgb( 160, 160, 160 ) );
-        private readonly SolidBrush _SelectedBrush = new SolidBrush( Color.Blue );
-        private readonly SolidBrush _HoveredBrush = new SolidBrush( Color.Teal );
-        private readonly SolidBrush _HoveredFieldBrush = new SolidBrush( Color.Black );
+        private readonly SolidBrush _SelectedBrush = new SolidBrush( Color.FromArgb( unchecked((int)0x880000FF) ) );
+        private readonly SolidBrush _HoveredBrush = new SolidBrush( Color.FromArgb( unchecked((int)0x880088FF) ) );
+        private readonly SolidBrush _HoveredFieldBrush = new SolidBrush( Color.FromArgb( unchecked((int)0x88000000) ) );
 
         private void HexLinePanel_Paint( object sender, PaintEventArgs e )
         {
@@ -448,40 +457,74 @@ namespace UEExplorer.UI.Forms
                                 : textBrush;
                             string drawntext = String.Format( "{0:x2}", Buffer[byteOffset] ).ToUpper();
 
+                            var y1 = (int)lineOffsetY; 
+                            var y2 = (int)(lineOffsetY + extraLineOffset);
+                            var x1 = (int)(byteColumnOffset + hexByte*CellWidth);
+                            var x2 = (int)(byteColumnOffset + (hexByte + 1)*CellWidth);
+
                             foreach( var s in _Structure.MetaInfoList )
                             {
                                 var drawSize = hoveredMetaItem == s || selectedMetaItem == s ? s.HoverSize > 0 ? s.HoverSize : s.Size : s.Size;
                                 if( byteOffset < s.Position || byteOffset >= s.Position + drawSize )
                                     continue;
 
-                                var y1 = (int)lineOffsetY; 
-                                var y2 = (int)(lineOffsetY + extraLineOffset);
-                                var x1 = (int)(byteColumnOffset + hexByte*CellWidth);
-                                var x2 = (int)(byteColumnOffset + (hexByte + 1)*CellWidth);
+                                var cellHeight = extraLineOffset;
+                                var cellRectangleY = (float)y1;
                                 var p = new Pen( new SolidBrush( s.Color ) );
-
-                                if( s.Tag is UStruct.UByteCodeDecompiler.Token && hoveredMetaItem != s && selectedMetaItem != s )
+                                if( s.Tag is UStruct.UByteCodeDecompiler.Token )
                                 {
-                                    e.Graphics.DrawLine( p, x1, y2, x2, y2 );
+                                    cellHeight *= 0.5F;     
+                                    cellRectangleY = y1 + (y2 - y1)*0.5F - cellHeight*0.5F; 
                                 }
-                                else
+                                var rectBrush = new SolidBrush( Color.FromArgb( 60, s.Color.R, s.Color.G, s.Color.B ) );
+                                e.Graphics.FillRectangle( rectBrush, x1, cellRectangleY, CellWidth, cellHeight );
+                                if( HoveredOffset >= s.Position && HoveredOffset < s.Position + drawSize )
                                 {
-                                    var rectBrush = new SolidBrush( Color.FromArgb( 128, s.Color.R, s.Color.G, s.Color.B ) );
-                                    e.Graphics.FillRectangle( rectBrush, x1, y1, CellWidth, extraLineOffset );
-                                    if( HoveredOffset >= s.Position && HoveredOffset < s.Position + drawSize )
-                                    {
-                                        var borderPen = new Pen( _HoveredFieldBrush );
-                                        e.Graphics.DrawLine( borderPen, x1, y1, x2, y1 );		// Top	
-                                        e.Graphics.DrawLine( borderPen, x1, y2, x2, y2 );		// Bottom
+                                    var borderPen = new Pen( _HoveredFieldBrush );
+                                    e.Graphics.DrawLine( borderPen, x1, y1, x2, y1 );		// Top	
+                                    e.Graphics.DrawLine( borderPen, x1, y2, x2, y2 );		// Bottom
 
-                                        if( byteOffset == s.Position )
-                                            e.Graphics.DrawLine( borderPen, x1, y1, x1, y2 );	// Left
+                                    if( byteOffset == s.Position )
+                                        e.Graphics.DrawLine( borderPen, x1, y1, x1, y2 );	// Left
 
-                                        if( byteOffset == s.Position + drawSize - 1 )
-                                            e.Graphics.DrawLine( borderPen, x2, y1, x2, y2 );	// Right
-                                    }
+                                    if( byteOffset == s.Position + drawSize - 1 )
+                                        e.Graphics.DrawLine( borderPen, x2, y1, x2, y2 );	// Right
                                 }
                                 drawbrush = new SolidBrush( drawbrush.Color.Darken( 30F ) );
+                            }
+
+                            // Render edit carret.
+                            if( byteOffset == _ActiveOffset )
+                            {
+                                e.Graphics.FillRectangle( drawbrush, new Rectangle(
+                                    x1, y1,
+                                    (int)(CellWidth), (int)(CellHeight)
+                                )); 
+                                //if( (DateTime.Now - _CarretStartTime).TotalMilliseconds % 600 < 500 )
+                                //{
+                                    var nibbleWidth = (x2 - x1)*0.5F;
+                                    switch( _ActiveNibbleIndex )
+                                    {
+                                        case 0:
+                                            e.Graphics.DrawLine( new Pen(
+                                                    new SolidBrush( Color.FromArgb( unchecked((int)0xEE000000) ) ), 
+                                                    nibbleWidth
+                                                ), 
+                                                x1 + 1 + nibbleWidth*0.5F, y1, x1 + 1 + nibbleWidth*0.5F, y2 
+                                            );
+                                            break;
+
+                                        case 1:
+                                            e.Graphics.DrawLine( new Pen( 
+                                                    new SolidBrush( Color.FromArgb( unchecked((int)0xEE000000) ) ), 
+                                                    nibbleWidth
+                                                ), 
+                                                (x1 + nibbleWidth) + nibbleWidth*0.5F, y1, (x1 + nibbleWidth) + nibbleWidth*0.5F, y2 
+                                            );
+                                            break;
+                                    }
+                                    drawbrush = new SolidBrush( Color.White );
+                                //}
                             }
 
                             e.Graphics.DrawString( drawntext, HexLinePanel.Font, drawbrush, 
@@ -589,6 +632,13 @@ namespace UEExplorer.UI.Forms
             return '.';
         }
 
+        /// <summary>
+        /// Editing byte's buffer index.
+        /// </summary>
+        private int _ActiveOffset = -1;
+        private int _ActiveNibbleIndex;
+        private DateTime _CarretStartTime;
+
         private int _SelectedOffset = -1;
         private int SelectedOffset
         {
@@ -678,7 +728,19 @@ namespace UEExplorer.UI.Forms
 
         private void HexScrollBar_Scroll( object sender, ScrollEventArgs e )
         {
-            switch( e.Type )
+            if( _LastKeyWasLeft )
+            {
+                SelectedOffset = Math.Max( SelectedOffset - 1, 0 );    
+                e.NewValue = e.OldValue;
+                _LastKeyWasLeft = false;
+            }
+            else if( _LastKeyWasRight )
+            {
+                SelectedOffset= Math.Min( SelectedOffset + 1, Buffer.Length - 1 ); 
+                e.NewValue = e.OldValue;
+                _LastKeyWasRight = false;
+            }
+            else switch( e.Type )
             {
                 case ScrollEventType.SmallDecrement:
                     SelectedOffset = e.ScrollOrientation == ScrollOrientation.VerticalScroll
@@ -701,8 +763,34 @@ namespace UEExplorer.UI.Forms
             {
                 return;
             }
+            //ActiveOffset = -1;
+
             SelectedOffset = GetHoveredByte( e );
             HexScrollBar.Focus();
+            HexLinePanel.Invalidate();
+        }
+
+        private void HexLinePanel_MouseDoubleClick( object sender, MouseEventArgs e )
+        {
+            if( Buffer == null )
+            {
+                return;
+            }
+
+            ActivateCell( GetHoveredByte( e ) );
+        }
+
+        private void ActivateCell( int index )
+        {
+            if( index == -1 )
+                return;
+
+            _ActiveOffset = index;
+            _ActiveNibbleIndex = 0;
+            HexScrollBar.Focus();
+
+            _CarretStartTime = DateTime.Now;
+            HexLinePanel.Invalidate();   
         }
 
         private int GetHoveredByte( MouseEventArgs e )
@@ -782,6 +870,12 @@ namespace UEExplorer.UI.Forms
 
         private void Context_Structure_ItemClicked( object sender, ToolStripItemClickedEventArgs e )
         {
+            if( e.ClickedItem == EditMenuItem )
+            {
+                ActivateCell( HoveredOffset != -1 ? HoveredOffset : SelectedOffset );
+                return;
+            }
+
             using( var dialog = new StructureInputDialog() )
             {
                 var type = e.ClickedItem.Text.Mid( e.ClickedItem.Text.LastIndexOf( ' ' ) + 1 );
@@ -885,6 +979,110 @@ namespace UEExplorer.UI.Forms
             DataInfoPanel.Invalidate();
             HexLinePanel.Invalidate();
             UpdateScrollBar();
+        }
+
+        public delegate void BufferModifiedEventHandler();
+
+        public event BufferModifiedEventHandler BufferModifiedEvent = null;
+        private void OnBufferModifiedEvent()
+        {
+            if( BufferModifiedEvent != null )
+            {
+                BufferModifiedEvent.Invoke();
+            }
+        }
+
+        private bool _LastKeyWasLeft, _LastKeyWasRight;
+
+        private void EditKeyDown( object sender, KeyEventArgs e )
+        {
+            // HACK: To determine the cause of increment and decrement events when scrolling.
+            _LastKeyWasLeft = e.KeyCode == Keys.Left;    
+            _LastKeyWasRight = e.KeyCode == Keys.Right; 
+            if( _LastKeyWasLeft || _LastKeyWasRight )
+            {
+                return;
+            }
+
+            if( _ActiveOffset == -1 )
+                return;
+
+            if( e.KeyCode == Keys.Return )
+            {
+                _ActiveOffset = -1;
+            }
+            else
+            {
+                var hexKeyIndex = HexKeyCodeToIndex( e.KeyCode );
+                if( hexKeyIndex == -1 )
+                    return;
+
+                _CarretStartTime = DateTime.Now;
+                byte newByte = Buffer[_ActiveOffset];
+                switch( _ActiveNibbleIndex )
+                {
+                    case 0:
+                        newByte = (byte)((byte)(newByte & 0x0F) | (hexKeyIndex << 4));
+                        Buffer[_ActiveOffset] = newByte;
+                        _ActiveNibbleIndex = 1;
+                        break;
+
+                    case 1:
+                        newByte = (byte)((byte)(newByte & 0xF0) | hexKeyIndex);
+                        Buffer[_ActiveOffset] = newByte;
+                        _ActiveOffset = Math.Min( _ActiveOffset + 1, Buffer.Length - 1 );
+                        _ActiveNibbleIndex = 0;
+                        break;
+                }
+                OnBufferModifiedEvent();
+            }
+            HexLinePanel.Invalidate();
+            e.SuppressKeyPress = true;
+        }
+
+        private static int HexKeyCodeToIndex( Keys keyCode )
+        {
+            switch( keyCode )
+            {
+                case Keys.NumPad0:
+                    return 0;
+                case Keys.NumPad1:
+                    return 1;
+                case Keys.NumPad2:
+                    return 2;
+                case Keys.NumPad3:
+                    return 3;
+                case Keys.NumPad4:
+                    return 4;
+                case Keys.NumPad5:
+                    return 5;
+                case Keys.NumPad6:
+                    return 6;
+                case Keys.NumPad7:
+                    return 7;
+                case Keys.NumPad8:
+                    return 8;
+                case Keys.NumPad9:
+                    return 9;
+                case Keys.A:
+                    return 10;
+                case Keys.B:
+                    return 11;
+                case Keys.C:
+                    return 12;
+                case Keys.D:
+                    return 13;
+                case Keys.E:
+                    return 14;
+                case Keys.F:
+                    return 15;
+            }
+            return -1;
+        }
+
+        private void HexScrollBar_KeyDown( object sender, KeyEventArgs e )
+        {
+            EditKeyDown( sender, e );
         }
     }
 }

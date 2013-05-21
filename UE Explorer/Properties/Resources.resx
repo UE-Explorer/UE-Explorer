@@ -381,4 +381,9 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
 	<data name="UNRECOGNIZED_COMMANDLINE_OPTION">
 		<value xml:space="preserve">Unrecognized commandline option {0}</value>
 	</data>
+	<data name="COULDNT_RELOAD_OBJECT">
+		<value xml:space="preserve">Couldn't reload due to the following error:
+
+	{0}</value>
+	</data>
 </root>

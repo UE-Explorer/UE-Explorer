@@ -5,12 +5,13 @@ using System.Windows.Forms;
 using UEExplorer.Properties;
 using UEExplorer.UI.Tabs;
 using UELib;
+using UELib.Core;
 
 namespace UEExplorer.UI.Forms
 {
     public partial class HexViewerForm : Form
     {
-        private readonly UC_PackageExplorer _Owner;
+        private readonly UC_PackageExplorer _PackageExplorer;
 
         public HexViewerForm()
         {
@@ -38,7 +39,7 @@ namespace UEExplorer.UI.Forms
             ViewByteItem.Checked = Settings.Default.HexViewer_ViewByte;
         }
 
-        public HexViewerForm( IBuffered target, UC_PackageExplorer owner ) : this()
+        public HexViewerForm( IBuffered target, UC_PackageExplorer packageExplorer ) : this()
         {
             if( target == null )
             {
@@ -50,7 +51,7 @@ namespace UEExplorer.UI.Forms
                 editToolStripMenuItem.Enabled = false;
             }
 
-            _Owner = owner;
+            _PackageExplorer = packageExplorer;
             HexPanel.SetHexData( target );
             Text = String.Format( "{0} - {1}", Text, target.GetBufferId( true ) );
 
@@ -60,6 +61,7 @@ namespace UEExplorer.UI.Forms
 
             OnHexPanelOffsetChanged( 0 );
             HexPanel.OffsetChangedEvent += OnHexPanelOffsetChanged;
+            HexPanel.BufferModifiedEvent += (() => {SaveItem.Enabled = true;});
         }
 
         private void ViewASCIIToolStripMenuItem_CheckedChanged( object sender, EventArgs e )
@@ -176,26 +178,84 @@ namespace UEExplorer.UI.Forms
                 );
                 if( result == DialogResult.Yes )
                 {
-                    target.GetBuffer().Dispose();
-                    using( var package = UnrealPackage.DeserializePackage( target.GetBuffer().Name, FileAccess.ReadWrite ) )
-                    { 
-                        package.Stream.Seek( target.GetBufferPosition(), SeekOrigin.Begin );
-                        try
-                        { 
-                            package.Stream.Write( buffer, 0, buffer.Length );
-                            package.Stream.Flush();
-                            package.Stream.Dispose();
-
-                            Close();
-                            _Owner.ReloadPackage();
-                        }
-                        catch( IOException exc )
-                        {
-                            MessageBox.Show( string.Format( Resources.COULDNT_SAVE_EXCEPTION, exc ) );
-                        }	
+                    if( ReplaceBuffer( target, buffer ) )
+                    {
+                        ReloadObject();   
                     }
                 }
             }
+        }
+
+        private void SaveModificationsToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            if( ReplaceBuffer( HexPanel.Target, HexPanel.Buffer ) )
+            {
+                SaveItem.Enabled = false;  
+            }
+        }
+
+        private void ReloadPackageToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            ReloadPackage();
+        }
+
+        private void RedeserializeObjectOnlyUseAtOwnRiskToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            ReloadObject(); 
+
+            // Try renew the buffer, in case modifications were made outside of Hex Viewer.
+            ReplaceBuffer( HexPanel.Target, HexPanel.Buffer );
+        }
+
+        private void ReloadObject()
+        {
+            try
+            {
+                var obj = HexPanel.Target as UObject;
+                if( obj != null )
+                {
+#if DEBUG || BINARY_METADATA
+                    obj.BinaryMetaData.Fields = null;
+#endif
+                    obj.BeginDeserializing();
+                    obj.PostInitialize();
+
+                    _PackageExplorer.SetContentText( null, obj.Decompile(), true, false );
+
+                    HexPanel.Reload();
+                }
+            }
+            catch( Exception e )
+            {
+                MessageBox.Show( String.Format( Resources.COULDNT_RELOAD_OBJECT, e ), Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error );  
+            }
+        }
+
+        private void ReloadPackage()
+        {
+            Close();
+            _PackageExplorer.ReloadPackage();   
+        }
+
+        private static bool ReplaceBuffer( IBuffered target, byte[] buffer )
+        {
+            target.GetBuffer().Dispose();
+            using( var package = UnrealPackage.DeserializePackage( target.GetBuffer().Name, FileAccess.ReadWrite ) )
+            { 
+                package.Stream.Seek( target.GetBufferPosition(), SeekOrigin.Begin );
+                try
+                { 
+                    package.Stream.Write( buffer, 0, buffer.Length );
+                    package.Stream.Flush();
+                    package.Stream.Dispose();
+                    return true;
+                }
+                catch( IOException exc )
+                {
+                    MessageBox.Show( string.Format( Resources.COULDNT_SAVE_EXCEPTION, exc ) );
+                }	
+            }   
+            return false;
         }
 
         private void HexViewDialog_FormClosing( object sender, FormClosingEventArgs e )
@@ -213,6 +273,21 @@ namespace UEExplorer.UI.Forms
 
             Settings.Default.HexViewerState = WindowState == FormWindowState.Minimized ? FormWindowState.Normal : WindowState;
             Settings.Default.Save();
+        }
+
+        private void HelpToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            FAQControl.Visible = !FAQControl.Visible;
+        }
+
+        private void CopyAddressToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            Clipboard.SetText( String.Format( "0x{0:X8}", HexPanel.Target.GetBufferPosition() ) );
+        }
+
+        private void CopySizeInHexToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            Clipboard.SetText( String.Format( "0x{0:X8}", HexPanel.Target.GetBufferSize() ) );
         }
     }
 }

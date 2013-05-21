@@ -106,6 +106,17 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t reload due to the following error:
+        ///
+        ///	{0}.
+        /// </summary>
+        internal static string COULDNT_RELOAD_OBJECT {
+            get {
+                return ResourceManager.GetString("COULDNT_RELOAD_OBJECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t save the file because of the following exception: {0}.
         /// </summary>
         internal static string COULDNT_SAVE_EXCEPTION {

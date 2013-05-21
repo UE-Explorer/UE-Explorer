@@ -1619,7 +1619,7 @@ namespace UEExplorer.UI.Tabs
         private int _BufferIndex = -1;
         private TreeNode _LastNodeContent;
 
-        private void SetContentText( TreeNode node, string content, bool skip = false, bool resetView = true )
+        public void SetContentText( TreeNode node, string content, bool skip = false, bool resetView = true )
         {
             if( _LastNodeContent != node )
             {
