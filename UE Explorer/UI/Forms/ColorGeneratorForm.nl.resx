@@ -117,74 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="menuItem26.Text" xml:space="preserve">
-    <value>&gt; &amp;Homepagina</value>
+  <data name="PickColorCodeButton.Text" xml:space="preserve">
+    <value>Kies kleur</value>
   </data>
-  <data name="ProgressLabel.Text" xml:space="preserve">
-    <value>Gereed</value>
+  <data name="PickHTMLColorButton.Text" xml:space="preserve">
+    <value>Kies kleur</value>
   </data>
-  <data name="menuItem1.Text" xml:space="preserve">
-    <value>&amp;Bestand</value>
-  </data>
-  <data name="menuItem8.Text" xml:space="preserve">
-    <value>&amp;Openen...</value>
-  </data>
-  <data name="_ROF.Text" xml:space="preserve">
-    <value>Onlangs geopend</value>
-  </data>
-  <data name="menuItem12.Text" xml:space="preserve">
-    <value>Op&amp;slaan</value>
-  </data>
-  <data name="menuItem10.Text" xml:space="preserve">
-    <value>Afsluit&amp;en</value>
-  </data>
-  <data name="menuItem2.Text" xml:space="preserve">
-    <value>Bewerken</value>
-  </data>
-  <data name="menuItem21.Text" xml:space="preserve">
-    <value>Zoeken</value>
-  </data>
-  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Extra</value>
-  </data>
-  <data name="menuItem13.Text" xml:space="preserve">
-    <value>Uitbreidingen</value>
-  </data>
-  <data name="_CacheExtractorItem.Text" xml:space="preserve">
-    <value>Cache extractor</value>
-  </data>
-  <data name="menuItem17.Text" xml:space="preserve">
-    <value>Kleur generator...</value>
-  </data>
-  <data name="menuItem20.Text" xml:space="preserve">
-    <value>Registratie functies ingeschakeld</value>
-  </data>
-  <data name="menuItem7.Text" xml:space="preserve">
-    <value>&amp;Opties</value>
-  </data>
-  <data name="menuItem15.Text" xml:space="preserve">
-    <value>&gt; Meld een probleem</value>
-  </data>
-  <data name="menuItem23.Text" xml:space="preserve">
-    <value>&amp;Zoeken naar updates...</value>
-  </data>
-  <data name="menuItem6.Text" xml:space="preserve">
-    <value>&gt; Doneer</value>
-  </data>
-  <data name="menuItem4.Text" xml:space="preserve">
-    <value>&gt; Contacteer</value>
-  </data>
-  <data name="SocialMenuItem.Text" xml:space="preserve">
-    <value>&gt; Sociaal (Facebook)</value>
-  </data>
-  <data name="menuItem5.Text" xml:space="preserve">
-    <value>&amp;Over..</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="HomepageButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 23</value>
-  </data>
-  <data name="HomepageButton.Text" xml:space="preserve">
-    <value>Hoofdpagina</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>UE Kleur Generator</value>
   </data>
 </root>
