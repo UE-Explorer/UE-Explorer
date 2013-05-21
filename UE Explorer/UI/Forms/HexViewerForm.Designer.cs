@@ -35,23 +35,26 @@
             this.SizeLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ToolStripStatusLabel_Position = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hexWorkshopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ExportBinaryItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImportBinaryItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.CopyBytesItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyHexViewItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.CopyAddressItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopySizeItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ExportBinaryItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ImportBinaryItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.SaveItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.ReloadBufferItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReloadPackageItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewASCIIItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewByteItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewASCIIItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HexPanel = new UEExplorer.UI.Forms.HexViewerControl();
             this.panel1.SuspendLayout();
@@ -97,11 +100,32 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openInToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
+            // 
+            // openInToolStripMenuItem
+            // 
+            this.openInToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hexWorkshopToolStripMenuItem});
+            this.openInToolStripMenuItem.Name = "openInToolStripMenuItem";
+            resources.ApplyResources(this.openInToolStripMenuItem, "openInToolStripMenuItem");
+            // 
+            // hexWorkshopToolStripMenuItem
+            // 
+            this.hexWorkshopToolStripMenuItem.Name = "hexWorkshopToolStripMenuItem";
+            resources.ApplyResources(this.hexWorkshopToolStripMenuItem, "hexWorkshopToolStripMenuItem");
+            this.hexWorkshopToolStripMenuItem.Click += new System.EventHandler(this.HEXWorkshopToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -122,6 +146,34 @@
             this.editToolStripMenuItem.ForeColor = System.Drawing.Color.DarkRed;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
+            // 
+            // SaveItem
+            // 
+            resources.ApplyResources(this.SaveItem, "SaveItem");
+            this.SaveItem.Name = "SaveItem";
+            this.SaveItem.Click += new System.EventHandler(this.SaveModificationsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
+            // ExportBinaryItem
+            // 
+            this.ExportBinaryItem.Name = "ExportBinaryItem";
+            resources.ApplyResources(this.ExportBinaryItem, "ExportBinaryItem");
+            this.ExportBinaryItem.Click += new System.EventHandler(this.ExportBinaryFileToolStripMenuItem_Click);
+            // 
+            // ImportBinaryItem
+            // 
+            this.ImportBinaryItem.Name = "ImportBinaryItem";
+            resources.ApplyResources(this.ImportBinaryItem, "ImportBinaryItem");
+            this.ImportBinaryItem.Click += new System.EventHandler(this.ImportBinaryFileToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
             // CopyBytesItem
             // 
@@ -152,34 +204,6 @@
             resources.ApplyResources(this.CopySizeItem, "CopySizeItem");
             this.CopySizeItem.Click += new System.EventHandler(this.CopySizeInHexToolStripMenuItem_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            // 
-            // ExportBinaryItem
-            // 
-            this.ExportBinaryItem.Name = "ExportBinaryItem";
-            resources.ApplyResources(this.ExportBinaryItem, "ExportBinaryItem");
-            this.ExportBinaryItem.Click += new System.EventHandler(this.ExportBinaryFileToolStripMenuItem_Click);
-            // 
-            // ImportBinaryItem
-            // 
-            this.ImportBinaryItem.Name = "ImportBinaryItem";
-            resources.ApplyResources(this.ImportBinaryItem, "ImportBinaryItem");
-            this.ImportBinaryItem.Click += new System.EventHandler(this.ImportBinaryFileToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
-            // SaveItem
-            // 
-            resources.ApplyResources(this.SaveItem, "SaveItem");
-            this.SaveItem.Name = "SaveItem";
-            this.SaveItem.Click += new System.EventHandler(this.SaveModificationsToolStripMenuItem_Click);
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -206,15 +230,6 @@
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
             // 
-            // ViewASCIIItem
-            // 
-            this.ViewASCIIItem.Checked = true;
-            this.ViewASCIIItem.CheckOnClick = true;
-            this.ViewASCIIItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ViewASCIIItem.Name = "ViewASCIIItem";
-            resources.ApplyResources(this.ViewASCIIItem, "ViewASCIIItem");
-            this.ViewASCIIItem.CheckedChanged += new System.EventHandler(this.ViewASCIIToolStripMenuItem_CheckedChanged);
-            // 
             // ViewByteItem
             // 
             this.ViewByteItem.Checked = true;
@@ -223,6 +238,15 @@
             this.ViewByteItem.Name = "ViewByteItem";
             resources.ApplyResources(this.ViewByteItem, "ViewByteItem");
             this.ViewByteItem.CheckedChanged += new System.EventHandler(this.ViewByteToolStripMenuItem_CheckedChanged);
+            // 
+            // ViewASCIIItem
+            // 
+            this.ViewASCIIItem.Checked = true;
+            this.ViewASCIIItem.CheckOnClick = true;
+            this.ViewASCIIItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ViewASCIIItem.Name = "ViewASCIIItem";
+            resources.ApplyResources(this.ViewASCIIItem, "ViewASCIIItem");
+            this.ViewASCIIItem.CheckedChanged += new System.EventHandler(this.ViewASCIIToolStripMenuItem_CheckedChanged);
             // 
             // helpToolStripMenuItem
             // 
@@ -288,6 +312,9 @@
         private System.Windows.Forms.ToolStripMenuItem ReloadBufferItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openInToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hexWorkshopToolStripMenuItem;
 
 	}
 }

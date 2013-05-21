@@ -36,35 +36,22 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.FAQTextBox);
-            this.panel1.Location = new System.Drawing.Point(3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(680, 304);
-            this.panel1.TabIndex = 2;
             // 
             // FAQTextBox
             // 
-            this.FAQTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FAQTextBox.Location = new System.Drawing.Point(4, 4);
-            this.FAQTextBox.Multiline = true;
+            resources.ApplyResources(this.FAQTextBox, "FAQTextBox");
             this.FAQTextBox.Name = "FAQTextBox";
             this.FAQTextBox.ReadOnly = true;
-            this.FAQTextBox.Size = new System.Drawing.Size(672, 296);
-            this.FAQTextBox.TabIndex = 2;
-            this.FAQTextBox.Text = resources.GetString("FAQTextBox.Text");
             // 
             // HexViewerFAQ
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.panel1);
             this.Name = "HexViewerFAQ";
-            this.Size = new System.Drawing.Size(686, 311);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

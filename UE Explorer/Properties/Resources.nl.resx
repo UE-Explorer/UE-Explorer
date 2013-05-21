@@ -127,13 +127,13 @@
     <value>Waarschuwing</value>
   </data>
   <data name="INVALID_NAME_INDEX" xml:space="preserve">
-    <value>Ongeldig naam slot {0}</value>
+    <value>Ongeldige naam index {0}</value>
   </data>
   <data name="NOT_AVAILABLE" xml:space="preserve">
     <value>N/B</value>
   </data>
   <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
-    <value>Ongeldig object slot {0}</value>
+    <value>Ongeldige object index {0}</value>
   </data>
   <data name="RegistryWarning" xml:space="preserve">
     <value>Dit zal jouw registery bewerken.
@@ -166,7 +166,7 @@ Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eer
     <comment>Tab title</comment>
   </data>
   <data name="CHECKFORUPDATES_FAILED_MESSAGE" xml:space="preserve">
-    <value>Zoeken naar een update gefaald. Probeer later nog eens opnieuw!</value>
+    <value>Zoeken naar een update is mislukt. Probeer later nog een keer opnieuw!</value>
   </data>
   <data name="Homepage" xml:space="preserve">
     <value>Hoofdpagina</value>
@@ -183,15 +183,15 @@ Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eer
   <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
     <value>Als je op ja klikt zul je naar de update gebracht worden!
 
-Jouw versie: {0}
+Huidige versie: {0}
 Laatste versie: {1}</value>
     <comment>Dialog description.</comment>
   </data>
   <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
-    <value>Je kan geen binary bestanden importeren met een ongelijke lengte!</value>
+    <value>Je kan geen binair bestanden importeren met een ongelijke lengte!</value>
   </data>
   <data name="SAVE_QUESTION_WARNING" xml:space="preserve">
-    <value>Weet je zeker dat je dit wilt opslaan? Waarschuwing deze veranderen zal permanent zijn, maak zeker dat je een backup hebt!</value>
+    <value>Weet je zeker dat je dit wilt opslaan? Deze veranderingen zullen permanent zijn, maak zeker dat je een reservekopie hebt!</value>
   </data>
   <data name="SAVE_QUESTION" xml:space="preserve">
     <value>Opslaan?</value>
@@ -203,7 +203,7 @@ Laatste versie: {1}</value>
     <value>Succesvol</value>
   </data>
   <data name="SAVE_SUCCESS" xml:space="preserve">
-    <value>Succcesvol opgeslaan!</value>
+    <value>Succesvol opgeslaan!</value>
   </data>
   <data name="SAVED" xml:space="preserve">
     <value>Opgeslagen!</value>
@@ -226,7 +226,7 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
     <value>Opmerking</value>
   </data>
   <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
-    <value>Dit paket heeft een onbekend handtekening. Ben je zeker dat je dit paket wilt openen? Op ja klikken kan leiden to onverwachte resultaten</value>
+    <value>Dit paket heeft een onbekend handtekening. Ben je zeker dat je dit paket wilt openen? Op ja klikken kan leiden to onverwachte resultaten!</value>
   </data>
   <data name="PACKAGE_LOADING" xml:space="preserve">
     <value>Paket aant laden...</value>
@@ -256,7 +256,7 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
     <value>Zoek UnrealWiki voor "{0}"</value>
   </data>
   <data name="NO_FIND_RESULTS" xml:space="preserve">
-    <value>Er werden geen resultaten gevonden met de text "{0}".</value>
+    <value>Er werden geen resultaten gevonden met deze text "{0}".</value>
   </data>
   <data name="SEARCHING_CLASSES_STATUS" xml:space="preserve">
     <value>Klassen worden doorzocht..</value>
@@ -283,7 +283,7 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
     <value>Bekijk object</value>
   </data>
   <data name="NodeItem_OpenInUEModelViewer" xml:space="preserve">
-    <value>Openen in UE Model Viewer</value>
+    <value>Openen met UE Model Viewer</value>
   </data>
   <data name="NodeItem_ExportWithUEModelViewer" xml:space="preserve">
     <value>Exporteer met UE Model Viewer</value>
@@ -295,33 +295,66 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
     <value>Bekijk gebruikte tags</value>
   </data>
   <data name="NodeItem_ViewReplication" xml:space="preserve">
-    <value>Bekijk Replication</value>
+    <value>Bekijk replicatie</value>
   </data>
   <data name="NodeItem_ViewTokens" xml:space="preserve">
-    <value>Bekijk Tokens</value>
+    <value>Bekijk tokens</value>
   </data>
   <data name="NodeItem_ViewScript" xml:space="preserve">
-    <value>Bekijk Script</value>
+    <value>Bekijk script</value>
   </data>
   <data name="NodeItem_ViewDefaultProperties" xml:space="preserve">
-    <value>Bekijk DefaultProperties</value>
+    <value>Bekijk standaard eigenschappen</value>
   </data>
   <data name="NodeItem_ViewBuffer" xml:space="preserve">
-    <value>Bekijk Buffer</value>
+    <value>Bekijk buffer</value>
   </data>
   <data name="NodeItem_ViewException" xml:space="preserve">
     <value>Bekijk uitzondering</value>
   </data>
   <data name="NodeItem_ManagedProperties" xml:space="preserve">
-    <value>Managed eigenschappen</value>
+    <value>Beheerde eigenschappen</value>
+  </data>
+  <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
+    <value>Tabel buffer</value>
+  </data>
+  <data name="NoTargetForViewBuffer" xml:space="preserve">
+    <value>Geen doelwit gevonden voor "Bekijk buffer"</value>
+  </data>
+	<data name="NodeItem_DefaultBuffer" xml:space="preserve">
+    <value>Standaard eigenschappen buffer</value>
+  </data>
+	<data name="UnrealClassFilter" xml:space="preserve">
+    <value>Unreal klass</value>
   </data>
   <data name="ExportTextTitle" xml:space="preserve">
-    <value>Exporteer Text</value>
+    <value>Exporteer text</value>
   </data>
 	<data name="NodeItem_ViewProcessedScript">
-		<value xml:space="preserve">Bekijk Processed Script</value>
+		<value xml:space="preserve">Bekijk verwerkte script</value>
 	</data>
 	<data name="NodeItem_ViewCPPText">
-		<value xml:space="preserve">Bekijk CPP Script</value>
+		<value xml:space="preserve">Bekijk CPP script</value>
+	</data>
+	<data name="THING_DOESNT_EXIST">
+		<value xml:space="preserve">{0} bestaat niet!</value>
+	</data>
+	<data name="UNRECOGNIZED_EXPORT_TYPE">
+		<value xml:space="preserve">Niet herkende export type {0}</value>
+	</data>
+	<data name="EXCEPTION_OCCURRED_WHILE_EXPORTING">
+		<value xml:space="preserve">Een uitzondering vondt plaats tijdens het exporteren van {0}
+{1}</value>
+	</data>
+	<data name="UNRECOGNIZED_COMMANDLINE_OPTION">
+		<value xml:space="preserve">Niet herkende commandline optie {0}</value>
+	</data>
+	<data name="COULDNT_RELOAD_OBJECT">
+		<value xml:space="preserve">Kon niet herladen vanwege deze fout:
+
+	{0}</value>
+	</data>
+	<data name="PLEASE_SELECT_PATH">
+		<value xml:space="preserve">Het pad naar {0} is niet geconfigureerd. Selecteer de toepassing van het programma!</value>
 	</data>
 </root>

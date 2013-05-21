@@ -382,8 +382,11 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
 		<value xml:space="preserve">Unrecognized commandline option {0}</value>
 	</data>
 	<data name="COULDNT_RELOAD_OBJECT">
-		<value xml:space="preserve">Couldn't reload due to the following error:
+		<value xml:space="preserve">Couldn't reload due this error:
 
 	{0}</value>
+	</data>
+	<data name="PLEASE_SELECT_PATH">
+		<value xml:space="preserve">The path to {0} is not configured. Select the program's executable!</value>
 	</data>
 </root>

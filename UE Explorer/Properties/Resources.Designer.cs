@@ -106,7 +106,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Couldn&apos;t reload due to the following error:
+        ///   Looks up a localized string similar to Couldn&apos;t reload due this error:
         ///
         ///	{0}.
         /// </summary>
@@ -601,6 +601,15 @@ namespace UEExplorer.Properties {
         internal static string PACKAGE_UNKNOWN_SIGNATURE {
             get {
                 return ResourceManager.GetString("PACKAGE_UNKNOWN_SIGNATURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The path to {0} is not configured. Select the program&apos;s executable!.
+        /// </summary>
+        internal static string PLEASE_SELECT_PATH {
+            get {
+                return ResourceManager.GetString("PLEASE_SELECT_PATH", resourceCulture);
             }
         }
         

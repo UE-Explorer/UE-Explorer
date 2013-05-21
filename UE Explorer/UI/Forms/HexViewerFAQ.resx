@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="FAQTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>672, 296</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FAQTextBox.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FAQTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="FAQTextBox.Text" xml:space="preserve">
     <value>Q: How do I modify the cells?
 
@@ -124,21 +142,78 @@ A: Double Mouse Click on a cell to activate editing.
 
   - You can now press any of the 0-9 or A-F key, it will replace the active hex unit(highlighted in black) and then move on to the next hex unit and so on!
 
-  - Once you have made a modification you will be able to save it using Edit-&gt;Permanently Save Modifications" or CTRL+S. 
+  - Once you have made a modification you will be able to save it using Edit-&gt;Permanently Save Modifications or CTRL + S. 
 
-  - Either continue editing or update UE Explorer to adapt to the changes by doing Edit-&gt;Reload Package or Edit-&gt;Reload Buffer or just CTRL+R/CTRL+D.
+  - Either continue editing or update UE Explorer to adapt to the changes by doing Edit-&gt;Reload Package or Edit-&gt;Reload Buffer or just CTRL + R/CTRL + D.
 
 
-Q: What is Name/Object/Index/Struct
+Q: What are (Name / Object / Index / Struct)?
 
 A: 
-  - Name: Starting from the selected cell the next (1-5 or 8 bytes) will be used to calculate an index to the Names table.
+  - Name: Starting from the selected cell, the next (1-5 or 8 bytes) will be used to calculate an index to the Names table.
 
-  - Object: Starting from the selected cell the next (1-5 or 4 bytes) will be used to calculate an index to the Exports/Imports table.
+  - Object: Starting from the selected cell, the next (1-5 or 4 bytes) will be used to calculate an index to the Exports/Imports table.
 
-  - Index: Starting from the selected cell the next (1-5 or 4 bytes) will be used to calculate packed indices, may be used for the size of an array or string.
+  - Index: Starting from the selected cell, the next (1-5 or 4 bytes) will be used to calculate packed indices, may be used for the size of an array or string.
 
   - Struct: Displays a name for the selected byte or group of bytes such as Tokens or explicitly defined structs.
 </value>
   </data>
+  <data name="&gt;&gt;FAQTextBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>686, 311</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 4</value>
+  </data>
+  <data name="&gt;&gt;FAQTextBox.Name" xml:space="preserve">
+    <value>FAQTextBox</value>
+  </data>
+  <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="FAQTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>HexViewerFAQ</value>
+  </data>
+  <data name="FAQTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="panel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;FAQTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>680, 304</value>
+  </data>
+  <data name="&gt;&gt;FAQTextBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

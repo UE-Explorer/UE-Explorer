@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
@@ -288,6 +289,41 @@ namespace UEExplorer.UI.Forms
         private void CopySizeInHexToolStripMenuItem_Click( object sender, EventArgs e )
         {
             Clipboard.SetText( String.Format( "0x{0:X8}", HexPanel.Target.GetBufferSize() ) );
+        }
+
+        private void HEXWorkshopToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            var appExists = File.Exists( Program.Options.HEXWorkshopAppPath );
+            if( !appExists )
+            {
+                if( MessageBox.Show( String.Format( Resources.PLEASE_SELECT_PATH, "Hex Workshop" ), Resources.NOT_AVAILABLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Question ) == DialogResult.Cancel )
+                    return;
+
+                var ofd = new OpenFileDialog()
+                {
+                    Filter = "Hex Workshop(HWorks32.exe)|HWorks32.exe", 
+                    FileName = Path.Combine( "%ProgramW6432%", "BreakPoint Software", "Hex Workshop v6", "HWorks32.exe" )
+                };
+                if( ofd.ShowDialog() != DialogResult.OK )
+                    return;
+
+                Program.Options.HEXWorkshopAppPath = ofd.FileName;
+                Program.SaveConfig();
+            }
+
+            var appPath = Program.Options.HEXWorkshopAppPath;
+            var filePath = _PackageExplorer.FileName;
+            var pos = HexPanel.Target.GetBufferPosition();
+            var size = HexPanel.Target.GetBufferSize();
+
+            var appArguments = String.Format( "\"{0}\" /GOTO:{1} /SELECT:{2}", filePath, pos, size );
+            var appInfo = new ProcessStartInfo( appPath, appArguments )
+            {
+                UseShellExecute = false, 
+                RedirectStandardOutput = true, 
+                CreateNoWindow = false
+            };
+            var app = Process.Start( appInfo );
         }
     }
 }
