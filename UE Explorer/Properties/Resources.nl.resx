@@ -173,7 +173,7 @@ Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eer
     <comment>Tab title</comment>
   </data>
   <data name="ProgramForm_LoadFile_Failed_loading_package" xml:space="preserve">
-    <value>Kon het paket niet laden: {0}</value>
+    <value>Kon het pakket niet laden: {0}</value>
     <comment>Exception description.</comment>
   </data>
   <data name="ProgramForm_LoadFile_Loading_file" xml:space="preserve">
@@ -214,7 +214,7 @@ Laatste versie: {1}</value>
 Klik op ja als je nu naar deze map wilt gebracht worden!</value>
   </data>
   <data name="PACKAGE_IS_COMPRESSED" xml:space="preserve">
-    <value>Dit paket is gecompresseerd! Deze pakketen zijn niet ondersteund.
+    <value>Dit pakket is gecompresseerd! Deze pakketen zijn niet ondersteund.
 Om dit de decompresseren kan je "Unreal Package Decompressor" van Gildor downloaden.
 
 Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.</value>
@@ -226,13 +226,13 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
     <value>Opmerking</value>
   </data>
   <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
-    <value>Dit paket heeft een onbekend handtekening. Ben je zeker dat je dit paket wilt openen? Op ja klikken kan leiden to onverwachte resultaten!</value>
+    <value>Dit pakket heeft een onbekend handtekening. Ben je zeker dat je dit pakket wilt openen? Op ja klikken kan leiden to onverwachte resultaten!</value>
   </data>
   <data name="PACKAGE_LOADING" xml:space="preserve">
-    <value>Paket aant laden...</value>
+    <value>Pakket aant laden...</value>
   </data>
   <data name="PACKAGE_METAINFO" xml:space="preserve">
-    <value>Paket's MetaInfo</value>
+    <value>Pakket's MetaInfo</value>
   </data>
   <data name="EXPORT_AS" xml:space="preserve">
     <value>Exporteer {0} als...</value>
@@ -350,7 +350,7 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
 		<value xml:space="preserve">Niet herkende commandline optie {0}</value>
 	</data>
 	<data name="COULDNT_RELOAD_OBJECT">
-		<value xml:space="preserve">Kon niet herladen vanwege deze fout:
+		<value xml:space="preserve">Kon niet opnieuw laden vanwege deze fout:
 
 	{0}</value>
 	</data>

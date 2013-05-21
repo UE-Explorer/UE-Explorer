@@ -133,19 +133,19 @@
     <value>Be&amp;werken</value>
   </data>
   <data name="SaveItem.Text" xml:space="preserve">
-    <value>Permanent wijzigingen opslaan</value>
+    <value>Wijzigingen permanent opslaan</value>
   </data>
   <data name="ExportBinaryItem.Text" xml:space="preserve">
-    <value>&amp;Exporteer binary bestand</value>
+    <value>&amp;Exporteer binair bestand</value>
   </data>
   <data name="ExportBinaryItem.ToolTipText" xml:space="preserve">
-    <value>Exporteer alle bytes naar een binary bestand</value>
+    <value>Exporteer alle bytes naar een binair bestand</value>
   </data>
   <data name="ImportBinaryItem.Text" xml:space="preserve">
-    <value>&amp;Importeer binary bestand</value>
+    <value>&amp;Importeer binair bestand</value>
   </data>
   <data name="ImportBinaryItem.ToolTipText" xml:space="preserve">
-    <value>Importeer alle bytes van een binary bestand</value>
+    <value>Importeer alle bytes van een binair bestand</value>
   </data>
   <data name="CopyBytesItem.Text" xml:space="preserve">
     <value>Hex bytes kopiëren</value>
@@ -172,16 +172,16 @@
     <value>Kopiër de grootte naar je klembord</value>
   </data>
   <data name="ReloadBufferItem.Text" xml:space="preserve">
-    <value>Herlaad buffer</value>
+    <value>Buffer opnieuw laden</value>
   </data>
   <data name="ReloadBufferItem.ToolTipText" xml:space="preserve">
     <value>Dit kan leiden tot onverwachte resultaten zoals crashen van dit program of jouw computer!</value>
   </data>
   <data name="ReloadPackageItem.Text" xml:space="preserve">
-    <value>Herlaad paket</value>
+    <value>Pakket opnieuw laden</value>
   </data>
   <data name="ReloadPackageItem.ToolTipText" xml:space="preserve">
-    <value>Dit zal deze kader en zijn ouder sluiten, en dan het paket herladen!</value>
+    <value>Dit zal deze kader en zijn ouder sluiten, en dan het pakket opnieuw laden!</value>
   </data>
   <data name="viewToolStripMenuItem.Text" xml:space="preserve">
     <value>Beel&amp;d</value>
