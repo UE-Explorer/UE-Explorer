@@ -559,7 +559,7 @@
     <value>$this</value>
   </data>
   <data name="CheckBox_Version.Text" xml:space="preserve">
-    <value>Force Version</value>
+    <value>Simulated Version</value>
   </data>
   <data name="NumericUpDown_LicenseeMode.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1201,7 +1201,7 @@
     <value>False</value>
   </data>
   <data name="CheckBox_LicenseeMode.Text" xml:space="preserve">
-    <value>Force Licensee Version</value>
+    <value>Simulated Licensee</value>
   </data>
   <data name="&gt;&gt;label6.Parent" xml:space="preserve">
     <value>groupBox4</value>
