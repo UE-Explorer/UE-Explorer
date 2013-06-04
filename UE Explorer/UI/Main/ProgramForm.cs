@@ -315,6 +315,8 @@ namespace UEExplorer.UI
         private void Unreal_Explorer_Form_Shown( object sender, EventArgs e )
         {
             Refresh();
+
+            Tabs.Add( typeof(UC_Default), Resources.Homepage );
             var args = Environment.GetCommandLineArgs();
             for( int i = 1; i < args.Length; ++ i )
             {
@@ -322,11 +324,6 @@ namespace UEExplorer.UI
                 {
                     LoadFile( args[i] );
                 }
-            }
-
-            if( Tabs.Components.Count == 0 )
-            {
-                Tabs.Add( typeof(UC_Default), Resources.Homepage );
             }
 
             AutoUpdater.Start( Program.UPDATE_URL + "&installed_version=" + Version );
