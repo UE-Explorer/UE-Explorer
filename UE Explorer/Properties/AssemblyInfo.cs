@@ -8,7 +8,7 @@ using System.Resources;
 [assembly: AssemblyTitle("UE Explorer")]
 [assembly: AssemblyDescription( "An UnrealScript decompiler for Unreal Engine 1, 2, and 3. Supporting all Epic Games for the PC such as Unreal, UT, UT2004, UT3, and the Unreal Development Kit(UDK)." )]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("EliotVU")]
 [assembly: AssemblyProduct("UE Explorer")]
 [assembly: AssemblyCopyright("© 2009-2013 Eliot van Uytfanghe. All rights reserved.")]
 [assembly: AssemblyTrademark("")]

@@ -84,7 +84,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\..\..\..\..\..\..\Program Files %28x86%29\UE Explorer\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;DEBUG_WITH_LOCALHOST</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <Optimize>true</Optimize>
     <DebugType>full</DebugType>
@@ -197,8 +197,8 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoUpdater.NET">
-      <HintPath>libs\AutoUpdater.NET.dll</HintPath>
+    <Reference Include="AutoUpdater.NET, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\AutoUpdater.NET\AutoUpdater.NET\bin\Release\AutoUpdater.NET.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
@@ -365,6 +365,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\AboutDialog.nl.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\ExceptionDialog.resx">
       <DependentUpon>ExceptionDialog.cs</DependentUpon>

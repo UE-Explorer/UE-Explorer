@@ -389,4 +389,7 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
 	<data name="PLEASE_SELECT_PATH">
 		<value xml:space="preserve">The path to {0} is not configured. Select the program's executable!</value>
 	</data>
+	<data name="CHECKING_FOR_UPDATES_LOG">
+		<value xml:space="preserve">Checking for updates(Current version is {0})...</value>
+	</data>
 </root>

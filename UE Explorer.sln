@@ -26,12 +26,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Extensions.ExecGenera
 	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Install UE Explorer", "Setup\Setup.vdproj", "{7167B940-B5A5-4434-825A-69510441E513}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7E45273F-434F-42FA-8269-0E760AEB41E1} = {7E45273F-434F-42FA-8269-0E760AEB41E1}
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13} = {FB9E7E6B-B19F-4F37-A708-2996190CEF13}
+		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77} = {FE7B4B6E-D050-4B66-AC12-3D28E4917D77}
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3} = {E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1} = {6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}
+		{C240217D-9B6A-46D4-892F-12C64853F8AE} = {C240217D-9B6A-46D4-892F-12C64853F8AE}
+		{760F1D8A-0963-45DA-9E92-220E05EBAD2A} = {760F1D8A-0963-45DA-9E92-220E05EBAD2A}
+		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1} = {4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UE Explorer.Forms", "Eliot.UE Explorer.Forms\Eliot.UE Explorer.Forms.csproj", "{5F9A0DC6-D87E-4020-BD30-788CB4684F08}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Utilities", "Eliot.Utilities\Eliot.Utilities.csproj", "{C240217D-9B6A-46D4-892F-12C64853F8AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Extensions.NTLGenerator", "Eliot.Extensions.NativesTableListGenerator\Eliot.Extensions.NTLGenerator.csproj", "{FE7B4B6E-D050-4B66-AC12-3D28E4917D77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdater.NET", "..\AutoUpdater.NET\AutoUpdater.NET\AutoUpdater.NET.csproj", "{FB9E7E6B-B19F-4F37-A708-2996190CEF13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -199,7 +211,6 @@ Global
 		{7167B940-B5A5-4434-825A-69510441E513}.Publish|x86.ActiveCfg = Publish
 		{7167B940-B5A5-4434-825A-69510441E513}.Publish|x86.Build.0 = Publish
 		{7167B940-B5A5-4434-825A-69510441E513}.Release|Any CPU.ActiveCfg = Release
-		{7167B940-B5A5-4434-825A-69510441E513}.Release|Any CPU.Build.0 = Release
 		{7167B940-B5A5-4434-825A-69510441E513}.Release|Mixed Platforms.ActiveCfg = Release
 		{7167B940-B5A5-4434-825A-69510441E513}.Release|x86.ActiveCfg = Release
 		{5F9A0DC6-D87E-4020-BD30-788CB4684F08}.Debug|Any CPU.ActiveCfg = Debug|x86
@@ -262,6 +273,26 @@ Global
 		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.DecompileDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.DecompileDebug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.DecompileDebug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.DecompileDebug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.DecompileDebug|x86.ActiveCfg = Debug|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Publish|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Publish|Any CPU.Build.0 = Release|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Publish|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Publish|Mixed Platforms.Build.0 = Release|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Publish|x86.ActiveCfg = Release|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

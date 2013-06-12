@@ -244,7 +244,7 @@ namespace UEExplorer
 #endregion
 
         internal const string WEBSITE_URL = 
-#if DEBUG
+#if DEBUG_WITH_LOCALHOST
             "http://localhost/Eliot/";
 #else
             "http://eliotvu.com/";
@@ -252,12 +252,13 @@ namespace UEExplorer
 
         internal const string Donate_URL = WEBSITE_URL + "donate.html";
         internal const string Contact_URL = WEBSITE_URL + "contact.html";
-        internal const string Program_URL = WEBSITE_URL + "portfolio/view/21/ue-explorer";
-        internal const string Program_Parm_ID = "data[items][id]=21";
-        internal const string Version_URL = WEBSITE_URL +  "apps/version/";
+        //internal const string Program_URL = WEBSITE_URL + "portfolio/view/21/ue-explorer";
+        //internal const string Program_Parm_ID = "data[items][id]=21";
+        //internal const string Version_URL = WEBSITE_URL +  "apps/version/";
         internal const string Forum_URL = WEBSITE_URL + "forum/";
         internal const string APPS_URL = WEBSITE_URL + "apps/ue_explorer/";
-        internal const string UPDATE_URL = WEBSITE_URL + "files/ue-explorer/update.xml?auto=1";
+        internal const string UPDATE_URL = WEBSITE_URL + "updates/ue-explorer.xml" + UPDATE_QUERY;
+        internal const string UPDATE_QUERY = "?auto=1&installed_version={0}";
 
 #region Registry	
         private const string RegistryFileFolderName = "UEExplorer.AnyUnrealFile";

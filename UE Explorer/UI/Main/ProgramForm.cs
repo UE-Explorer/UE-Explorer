@@ -6,9 +6,11 @@ using System.Reflection;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
 using Eliot.Utilities;
+using Microsoft.Win32;
 using Storm.TabControl;
 using UEExplorer.Properties;
 using UEExplorer.UI.Forms;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 
 namespace UEExplorer.UI
 {
@@ -314,6 +316,7 @@ namespace UEExplorer.UI
 
         private void Unreal_Explorer_Form_Shown( object sender, EventArgs e )
         {
+            CheckForUpdates();
             Refresh();
 
             Tabs.Add( typeof(UC_Default), Resources.Homepage );
@@ -325,8 +328,6 @@ namespace UEExplorer.UI
                     LoadFile( args[i] );
                 }
             }
-
-            AutoUpdater.Start( Program.UPDATE_URL + "&installed_version=" + Version );
         }
 
         private void ToggleUEExplorerFileIconsToolStripMenuItem_Click( object sender, EventArgs e )
@@ -392,68 +393,86 @@ namespace UEExplorer.UI
             System.Diagnostics.Process.Start( Program.Donate_URL );
         }
 
-        private void CheckForUpdates( object sender, EventArgs e )
+        private void CheckForUpdates()
         {
-            ProgressStatus.SaveStatus();
-            ProgressStatus.SetStatus( Resources.ProgramForm_Check_for_Updates_Status );
+            Console.WriteLine( Resources.CHECKING_FOR_UPDATES_LOG, Version );
+            AutoUpdater.Start( String.Format( Program.UPDATE_URL, Version ) );    
+        }
 
-            using( var web = new WebClient() )
+        private const string APP_KEY = "EliotVU";
+        private void OnCheckForUpdates( object sender, EventArgs e )
+        {
+            var softKey = Registry.CurrentUser.OpenSubKey( "Software", true );
+            if( softKey != null )
             {
-                web.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-                web.UploadStringCompleted += ( stringSender, stringEvent ) =>
+                var appKey = softKey.OpenSubKey( APP_KEY );
+                if( appKey != null )
                 {
-                    try
-                    {
-                        var result = stringEvent.Result.Trim();
-                        if( result != Version )
-                        {
-                            if( MessageBox.Show(
-                                String.Format
-                                (
-                                    Resources.NEW_VERSION_AVAILABLE_MESSAGE,
-                                    Version,
-                                    result
-                                ),
-                                Resources.NEW_VERSION_AVAILABLE_TITLE,
-                                MessageBoxButtons.YesNo ) == DialogResult.Yes )
-                            {
-                                System.Diagnostics.Process.Start( Program.Program_URL );
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show
-                            (
-                                String.Format
-                                (
-                                    Resources.NO_NEW_VERSION_AVAILABLE_MESSAGE,
-                                    Application.ProductName
-                                )
-                            );
-                        }
-                    }
-                    catch( Exception exc )
-                    {
-                        MessageBox.Show
-                        (
-                            String.Format
-                            (
-                                Resources.CHECKFORUPDATES_FAILED_MESSAGE
-                                + "\r\n\r\n{0}",
-                                exc
-                            ),
-                        Resources.Error,
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error
-                        );
-                    }
-                    finally
-                    {
-                        ProgressStatus.ResetStatus();
-                    }
-                };
-                web.UploadStringAsync( new Uri( Program.Version_URL ), "Post", Program.Program_Parm_ID );
+                    softKey.DeleteSubKeyTree( APP_KEY );
+                }
             }
+            CheckForUpdates();
+
+            //ProgressStatus.SaveStatus();
+            //ProgressStatus.SetStatus( Resources.ProgramForm_Check_for_Updates_Status );
+
+            //using( var web = new WebClient() )
+            //{
+            //    web.Headers["Content-Type"] = "application/x-www-form-urlencoded";
+            //    web.UploadStringCompleted += ( stringSender, stringEvent ) =>
+            //    {
+            //        try
+            //        {
+            //            var result = stringEvent.Result.Trim();
+            //            if( result != Version )
+            //            {
+            //                if( MessageBox.Show(
+            //                    String.Format
+            //                    (
+            //                        Resources.NEW_VERSION_AVAILABLE_MESSAGE,
+            //                        Version,
+            //                        result
+            //                    ),
+            //                    Resources.NEW_VERSION_AVAILABLE_TITLE,
+            //                    MessageBoxButtons.YesNo ) == DialogResult.Yes )
+            //                {
+            //                    System.Diagnostics.Process.Start( Program.Program_URL );
+            //                }
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show
+            //                (
+            //                    String.Format
+            //                    (
+            //                        Resources.NO_NEW_VERSION_AVAILABLE_MESSAGE,
+            //                        Application.ProductName
+            //                    )
+            //                );
+            //            }
+            //        }
+            //        catch( Exception exc )
+            //        {
+            //            MessageBox.Show
+            //            (
+            //                String.Format
+            //                (
+            //                    Resources.CHECKFORUPDATES_FAILED_MESSAGE
+            //                    + "\r\n\r\n{0}",
+            //                    exc
+            //                ),
+            //            Resources.Error,
+            //                MessageBoxButtons.OK,
+            //                MessageBoxIcon.Error
+            //            );
+            //        }
+            //        finally
+            //        {
+            //            ProgressStatus.ResetStatus();
+            //        }
+            //    };
+            //    web.UploadStringAsync( new Uri( Program.Version_URL ), "Post", Program.Program_Parm_ID );
+            //}
         }
 
         private void MenuItem7_Click( object sender, EventArgs e )

@@ -322,7 +322,7 @@
             // 
             this.menuItem23.Index = 1;
             resources.ApplyResources(this.menuItem23, "menuItem23");
-            this.menuItem23.Click += new System.EventHandler(this.CheckForUpdates);
+            this.menuItem23.Click += new System.EventHandler(this.OnCheckForUpdates);
             // 
             // menuItem25
             // 

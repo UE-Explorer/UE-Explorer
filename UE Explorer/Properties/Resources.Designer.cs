@@ -79,6 +79,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking for updates(Current version is {0})....
+        /// </summary>
+        internal static string CHECKING_FOR_UPDATES_LOG {
+            get {
+                return ResourceManager.GetString("CHECKING_FOR_UPDATES_LOG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Class {0} isn&apos;t supported.
         /// </summary>
         internal static string CLASS_ISNT_SUPPORTED {
