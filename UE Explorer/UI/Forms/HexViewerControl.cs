@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
@@ -1013,6 +1014,11 @@ namespace UEExplorer.UI.Forms
             }
             else
             {
+                if( e.KeyCode == Keys.Shift )
+                {
+                    return;
+                }
+
                 var hexKeyIndex = HexKeyCodeToIndex( e.KeyCode );
                 if( hexKeyIndex == -1 )
                     return;
@@ -1040,43 +1046,42 @@ namespace UEExplorer.UI.Forms
             e.SuppressKeyPress = true;
         }
 
+        [DllImport( "user32" )]
+        static extern int MapVirtualKey( Keys uCode, int uMapType );
+        const int MAPVK_VK_TO_CHAR = 2;
+
         private static int HexKeyCodeToIndex( Keys keyCode )
         {
-            switch( keyCode )
+            var c = MapVirtualKey( keyCode, MAPVK_VK_TO_CHAR ) & ~(1 << 31);
+            if( (c >= '0' && c <= '9') )
             {
-                case Keys.NumPad0:
-                    return 0;
-                case Keys.NumPad1:
-                    return 1;
-                case Keys.NumPad2:
-                    return 2;
-                case Keys.NumPad3:
-                    return 3;
-                case Keys.NumPad4:
-                    return 4;
-                case Keys.NumPad5:
-                    return 5;
-                case Keys.NumPad6:
-                    return 6;
-                case Keys.NumPad7:
-                    return 7;
-                case Keys.NumPad8:
-                    return 8;
-                case Keys.NumPad9:
-                    return 9;
-                case Keys.A:
-                    return 10;
-                case Keys.B:
-                    return 11;
-                case Keys.C:
-                    return 12;
-                case Keys.D:
-                    return 13;
-                case Keys.E:
-                    return 14;
-                case Keys.F:
-                    return 15;
+                return c - '0';
             }
+
+            if( (c >= 'A' && c <= 'F') )
+            {
+                return c - 'A' + 10;    
+            }
+
+            if( (c >= 'a' && c <= 'f') )
+            {
+                return c - 'a' + 10;    
+            }
+
+            switch( c )
+            {
+                case 38: return 1;
+                case 233: return 2;
+                case 34: return 3;
+                case 39: return 4;
+                case 40: return 5;
+                case 167: return 6;
+                case 232: return 7;
+                case 33: return 8; 
+                case 231: return 9; 
+                case 224: return 0;
+            }
+
             return -1;
         }
 
