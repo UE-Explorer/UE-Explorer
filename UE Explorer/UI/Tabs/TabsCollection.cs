@@ -15,6 +15,7 @@ namespace UEExplorer.UI
         void TabClosing();
         void TabSave();
         void TabFind();
+        void TabDeselected();
     }
 
     public class TabsCollection : IDisposable
@@ -25,6 +26,7 @@ namespace UEExplorer.UI
         {
             get{ return Components.Find( tabComp => tabComp.TabItem == _TabsControl.SelectedItem ); }
         }
+        public ITabComponent                    LastSelectedComponent;
         private TabStrip                        _TabsControl;
 
         public TabsCollection( ProgramForm owner, TabStrip tabsControl )
