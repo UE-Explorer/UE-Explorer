@@ -332,6 +332,14 @@ namespace UELib.Flags
         // GAP!
         CrossLevelPassive	= 0x00001000U,
         CrossLevelActive	= 0x00002000U,
+#if BIOSHOCK
+        BIOINF_Unk1         = 0x00080000U,
+
+        // DrawScale3D, DrawScale, PrePivot
+        BIOINF_Unk2         = 0x00200000U,
+        // XWeakReferenceProperty related.
+        BIOINF_Unk3         = 0x01000000U,
+#endif
 
         // Possible flags: CrossLevel, AllowAbstract
     }

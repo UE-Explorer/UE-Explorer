@@ -22,10 +22,16 @@
 		MapProperty			= 14,
 		FixedArrayProperty	= 15,	// Fixed Array
 
+#if BIOSHOCK
+        QwordProperty,              // (UE3, Bioshock Infinite)
+        XWeakReferenceProperty,
+#endif
+
 		// Temp
-		PointerProperty		= 16,	// (UE2)
-		InterfaceProperty	= 17,	// (UE3)
-		ComponentProperty	= 18,	// (UE3)
+		PointerProperty,	        // (UE2)
+		InterfaceProperty,	        // (UE3)
+		ComponentProperty,	        // (UE3)
+
 		StructOffset		= (1 + ComponentProperty),
 
 		// Helpers for serializing hardcoded structs.
@@ -46,6 +52,6 @@
 		IntPoint			= (15 + StructOffset),
 		TwoVectors			= (16 + StructOffset),
 		//InterpCurve		= (17 + PropertyType.StructOffset)
-		//InterpCurvePoint	= (18 + PropertyType.StructOffset),
+		//InterpCurvePoint	= (18 + PropertyType.StructOffset)
 	}
 }

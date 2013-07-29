@@ -326,6 +326,12 @@ namespace UELib
                 ShadowComplex,
 
                 /// <summary>
+                /// 727/075
+                /// </summary>
+                [Build( 727, 75 )]
+                Bioshock_Infinite,
+
+                /// <summary>
                 /// 742/029
                 /// </summary>
                 [Build( 742, 29 )]
@@ -517,7 +523,11 @@ namespace UELib
                 if( stream.Version >= 584 )
                 {
                     // Additional tables, like thumbnail, and guid data.
-                    if( stream.Version >= 623 )
+                    if( stream.Version >= 623 
+#if BIOSHOCK
+                        && stream.Package.Build != GameBuild.BuildName.Bioshock_Infinite
+#endif
+                        )
                     {
                         stream.Skip( 12 );
                     }
@@ -661,6 +671,13 @@ namespace UELib
 
             if( pkg.Version >= 249 )
             {
+#if BIOSHOCK
+                if( pkg.Build == GameBuild.BuildName.Bioshock_Infinite )
+                {
+                    var unk = stream.ReadInt32();
+                    unk.ToString();
+                }
+#endif
                 // Offset to the first class(not object) in the package.
                 pkg.HeaderSize = stream.ReadUInt32();
                 if( pkg.Version >= 269 )
@@ -713,6 +730,7 @@ namespace UELib
 
                 int generationCount = stream.ReadInt32();
                 pkg.Generations = new UArray<UGenerationTableItem>( stream, generationCount );	
+                Console.WriteLine( "Deserialized {0} generations", pkg.Generations.Count );
 
                 if( pkg.Version >= 245 )
                 {
@@ -783,6 +801,7 @@ namespace UELib
                     nameEntry.Size = (int)(stream.Position - nameEntry.Offset);
                     pkg.Names.Add( nameEntry );
                 }
+                Console.WriteLine( "Deserialized {0} names", pkg.Names.Count );
             }
 
             // Read Import Table
@@ -797,6 +816,7 @@ namespace UELib
                     imp.Size = (int)(stream.Position - imp.Offset);
                     pkg.Imports.Add( imp );
                 }
+                Console.WriteLine( "Deserialized {0} imports", pkg.Imports.Count );
             }
 
             // Read Export Table
@@ -823,6 +843,7 @@ namespace UELib
                         pkg.Exports.Add( exp );
                     }
                 }
+                Console.WriteLine( "Deserialized {0} exports", pkg.Exports.Count );
             }
 
             /*if( pkg.Data.DependsOffset > 0 )
@@ -836,6 +857,7 @@ namespace UELib
                     dep.TableSize = (int)(stream.Position - dep.TableOffset);
                     pkg.DependsTableList.Add( dep );
                 }
+                Console.WriteLine( "Deserialized {0} dependencies", pkg.DependsTableList.Count );
             }*/
 
             pkg.HeaderSize = stream.Position;
