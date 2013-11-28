@@ -1144,6 +1144,7 @@ namespace UEExplorer.UI.Tabs
                                 addItem.Invoke( Resources.NodeItem_ViewReplication, "REPLICATION" );	
                             }
                             addItem.Invoke( Resources.NodeItem_ViewTokens, "TOKENS" );
+                            addItem.Invoke( "View Disassembled Tokens ", "TOKENS_DISSASEMBLE" );
                         }
 
                         if( uStruct.ScriptText != null )
@@ -1259,6 +1260,76 @@ namespace UEExplorer.UI.Tabs
         private void _OnContentItemClicked( object sender, ToolStripItemClickedEventArgs e )
         {
             PerformNodeAction( TreeView_Content.SelectedNode as IDecompilableObject, e.ClickedItem.Name );
+        }
+
+        private static string FormatTokenHeader( UStruct.UByteCodeDecompiler.Token token, bool acronymizeName = true )
+        {
+            var name = token.GetType().Name;
+            if( acronymizeName )
+            {
+                name = String.Concat( name.Substring( 0, name.Length - 5 ).Select(
+                    (c) => Char.IsUpper( c ) ? c.ToString( CultureInfo.InvariantCulture ) : String.Empty
+                ) );
+
+                if( token is UStruct.UByteCodeDecompiler.CastToken )
+                {
+                    name = "C" + name;
+                }
+            }
+            return String.Format( "{0}({1}/{2})", name, token.Size, token.StorageSize );
+        }
+
+        private static string DissasembleTokens( UStruct container, UStruct.UByteCodeDecompiler decompiler, int tokenCount )
+        {
+            var content = String.Empty;
+            for( var i = 0; i + 1 < tokenCount; ++ i )
+            {
+                var token = decompiler.NextToken;
+                var firstTokenIndex = decompiler.CurrentTokenIndex;
+                var nextTokenIndex = decompiler.CurrentTokenIndex + 1;
+                int lastTokenIndex;
+                int subTokensCount;
+
+                var value = String.Empty;
+                try
+                {
+                    value = token.Decompile();
+                }
+                catch( Exception e )
+                {
+                    value = "Exception occurred while decompiling token: " + e;
+                }
+                finally
+                {
+                    lastTokenIndex = decompiler.CurrentTokenIndex;
+                    subTokensCount = lastTokenIndex - firstTokenIndex;
+                    decompiler.CurrentTokenIndex = firstTokenIndex;
+                }
+
+                var buffer = new byte[token.StorageSize];
+                container.Package.Stream.Position = container.ExportTable.SerialOffset + container.ScriptOffset + token.StoragePosition;
+                container.Package.Stream.Read( buffer, 0, buffer.Length );
+
+                var header = FormatTokenHeader( token, false );
+                var bytes = BitConverter.ToString( buffer ).Replace( '-', ' ' );
+
+                content += String.Format( UDecompilingState.Tabs + "({5}-{6};{0:X3}/{1:X3}) [{3}]\r\n" + UDecompilingState.Tabs 
+                        + "{2}\r\n" + UDecompilingState.Tabs 
+                        + "{4}\r\n", 
+                    token.Position, token.StoragePosition, 
+                    header, bytes,
+                    value != String.Empty ? value + "\r\n" : value, firstTokenIndex, lastTokenIndex
+                );
+
+                if( subTokensCount > 0 )
+                {
+                    UDecompilingState.AddTab();
+                    content += DissasembleTokens( container, decompiler, subTokensCount + 1 );
+                    i += subTokensCount;
+                    UDecompilingState.RemoveTab();
+                }
+            }
+            return content;
         }
 
         private void PerformNodeAction( IDecompilableObject node, string action )
@@ -1469,6 +1540,29 @@ namespace UEExplorer.UI.Tabs
                         }
                         break;
                     }
+                        
+                    case "TOKENS_DISSASEMBLE":
+                    {
+                        var unStruct = node.Object as UStruct;
+                        if( unStruct != null && unStruct.ByteCodeManager != null )
+                        {                           
+                            var codeDec = unStruct.ByteCodeManager;
+                            codeDec.Deserialize();
+                            codeDec.InitDecompile();
+
+                            string content = DissasembleTokens( unStruct, codeDec, codeDec.DeserializedTokens.Count );
+                            content += "// The structure is as follows:" +
+                                       "\r\n" +
+                                       "// \t(Start-End;MemoryPosition/StoragePosition) [Bytecodes]" +
+                                       "\r\n" +
+                                       "// \t\tToken(MemorySize/MemoryPosition)" +
+                                       "\r\n" +
+                                       "// \t\tCode";
+                            SetContentTitle( unStruct.GetOuterGroup() + " - Tokens: Disassembled", false );
+                            SetContentText( unStruct, content );
+                        }
+                        break;
+                    }
 
                     case "TOKENS":
                     {
@@ -1483,17 +1577,6 @@ namespace UEExplorer.UI.Tabs
                             while( codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count )
                             {
                                 var t = codeDec.NextToken;
-                                var tokenHeader = (Func<UStruct.UByteCodeDecompiler.Token, string>)((tkn) =>
-                                {
-                                    var tokenName = tkn.GetType().Name.Substring( 0, tkn.GetType().Name.Length - 5 );
-                                    tokenName = String.Concat( tokenName.Select( (c) => Char.IsUpper( c ) ? c.ToString( CultureInfo.InvariantCulture ) : String.Empty ) );
-                                    if( tkn is UStruct.UByteCodeDecompiler.CastToken )
-                                    {
-                                        tokenName = "C" + tokenName;
-                                    }
-                                    return String.Format( "{0}({1}/{2})", tokenName, tkn.Size, tkn.StorageSize );
-                                });
-
                                 int orgIndex = codeDec.CurrentTokenIndex;
                                 string output;
                                 bool breakOut = false;
@@ -1507,14 +1590,14 @@ namespace UEExplorer.UI.Tabs
                                     breakOut = true;
                                 }
 
-                                string chain = tokenHeader( t );
+                                string chain = FormatTokenHeader( t );
                                 int inlinedTokens = codeDec.CurrentTokenIndex - orgIndex;
                                 if( inlinedTokens > 0 )
                                 {
                                     ++ orgIndex;
                                     for( int i = 0; i < inlinedTokens; ++ i )
                                     {
-                                        chain += " -> " + tokenHeader( codeDec.DeserializedTokens[orgIndex + i] );
+                                        chain += " -> " + FormatTokenHeader( codeDec.DeserializedTokens[orgIndex + i] );
                                     }
                                 }
 
