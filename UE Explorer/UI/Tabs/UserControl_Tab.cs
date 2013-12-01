@@ -52,6 +52,10 @@ namespace UEExplorer.UI.Tabs
         {
         }
 
+        public virtual void TabDeselected()
+        {
+        }
+
         /// <summary>
         /// Called when the Tab is closing.
         /// </summary>

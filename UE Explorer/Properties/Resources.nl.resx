@@ -300,6 +300,9 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
   <data name="NodeItem_ViewTokens" xml:space="preserve">
     <value>Bekijk tokens</value>
   </data>
+  <data name="NodeItem_ViewDisassembledTokens" xml:space="preserve">
+    <value>Bekijk gedemonteerde tokens</value>
+  </data>
   <data name="NodeItem_ViewScript" xml:space="preserve">
     <value>Bekijk script</value>
   </data>

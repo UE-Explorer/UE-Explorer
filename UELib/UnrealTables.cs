@@ -415,7 +415,11 @@ namespace UELib
             if( stream.Version < 220 )
                 return;
 
-            if( stream.Version < 543 )
+            if( stream.Version < 543 
+#if ALPHAPROTOCOL
+                && stream.Package.Build != UnrealPackage.GameBuild.BuildName.AlphaProtcol          
+#endif     
+            )
             {
                 int componentMapCount = stream.ReadInt32();	 
                 stream.Skip( componentMapCount * 12 );
@@ -436,7 +440,24 @@ namespace UELib
             if( stream.Version < 322 )
                 return;
 
-            // NetObjectCount
+#if BIOSHOCK
+            if( stream.Package.Build == UnrealPackage.GameBuild.BuildName.Bioshock_Infinite )
+            {
+                var unk = stream.ReadUInt32();
+                if( unk == 1 )
+                {
+                    var flags = stream.ReadUInt32();
+                    if( (flags & 1) != 0x0 )
+                    {
+                        stream.ReadUInt32();  
+                    }
+                    stream.Skip( 16 );  // guid
+                    stream.ReadUInt32();    // 01000020
+                }
+                return;
+            }
+#endif
+
             int netObjectCount = stream.ReadInt32();
             stream.Skip( netObjectCount * 4 );
             //if( netObjectCount > 0 )
@@ -447,11 +468,11 @@ namespace UELib
             //        NetObjects.Add( stream.ReadObjectIndex() );
             //    }
             //}
-            stream.Skip( 16 ); // GUID
+
+            stream.Skip( 16 );  // Package guid
             if( stream.Version > 486 )	// 475?	 486(> Stargate Worlds)
             {
-                // Depends?
-                stream.ReadInt32();
+                stream.Skip( 4 ); // Package flags
             }
         }
 

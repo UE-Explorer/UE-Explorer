@@ -109,8 +109,11 @@ namespace UEExplorer.UI.Tabs
             );
         }
 
+        private XMLSettings.State _State;
+
         public void PostInitialize()
         {  
+            _State = Program.Options.GetState( FileName ); 
             LoadPackage();
         }
 
@@ -537,6 +540,17 @@ namespace UEExplorer.UI.Tabs
                 PackageIsCompressed();
             }
             InitializeTabs();
+
+            var state = Program.Options.GetState( _UnrealPackage.FullPackageName );
+            SearchObjectTextBox.Text = state.SearchObjectValue;
+            DoSearchObjectByGroup( SearchObjectTextBox.Text );
+
+            SearchObjectTextBox.TextChanged += (e, sender) =>
+            {
+                _State.SearchObjectValue = SearchObjectTextBox.Text;
+                _State.Update();
+            };
+
             ResumeLayout();
         }
 
@@ -954,13 +968,14 @@ namespace UEExplorer.UI.Tabs
                     SetContentText( treeNode, ((IUnrealDecompilable)treeNode).Decompile() );
 
                     // Assemble a title
-                    string newTitle;
+                    string newTitle = String.Empty;
                     if( treeNode is IDecompilableObject )
                     {
                         UObject obj;
                         if( (obj = ((IDecompilableObject)treeNode).Object as UObject) != null )
                         {
                             newTitle = obj.GetOuterGroup();
+                            SetContentTitle( newTitle );
                             if( obj.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
                             {
                                 InitializeNodeError( treeNode, obj );
@@ -969,6 +984,7 @@ namespace UEExplorer.UI.Tabs
                         else
                         {
                             newTitle = treeNode.Text;
+                            SetContentTitle( newTitle, false );
                         }
                     }
                     else
@@ -981,8 +997,8 @@ namespace UEExplorer.UI.Tabs
                         {
                             newTitle = treeNode.Text;
                         }
+                        SetContentTitle( newTitle, false );
                     }
-                    Label_ObjectName.Text = newTitle;
                 }
             }
             catch( Exception except )
@@ -1096,9 +1112,15 @@ namespace UEExplorer.UI.Tabs
             viewToolsContextMenu.Show( tree, e.Location );	
         }
 
-        private static void BuildItemNodes( TreeNode performingNode, ToolStripItemCollection itemCollection, ToolStripItemClickedEventHandler itemClickEvent = null )
+        private static void BuildItemNodes( object target, ToolStripItemCollection itemCollection, ToolStripItemClickedEventHandler itemClickEvent = null )
         {
             itemCollection.Clear();
+
+            var obj = target as UObject;
+            if( obj == null && target is IDecompilableObject )
+            {
+                obj = (target as IDecompilableObject).Object as UObject;
+            }
 
             var addItem = (Action<string, string>)((title, id) =>
             {
@@ -1106,115 +1128,112 @@ namespace UEExplorer.UI.Tabs
                 item.Name = id;
             });
 
-            var decompilableNode = performingNode as IUnrealDecompilable;
-            if( decompilableNode != null ) 
+            if( target is IUnrealDecompilable )
+            {
+                addItem.Invoke( Resources.NodeItem_ViewObject, "OBJECT" );  
+            }
+
+            if( obj == null )
+            {
+                return;
+            }
+
+            if( obj is IUnrealViewable )
             { 
-                addItem.Invoke( Resources.NodeItem_ViewObject, "OBJECT" );
-                var decompilableObjectNode = decompilableNode as IDecompilableObject;
-                if( decompilableObjectNode != null )
+                if( File.Exists( Program.Options.UEModelAppPath	) )
                 {
-                    if( decompilableObjectNode.Object is IUnrealViewable )
-                    { 
-                        if( File.Exists( Program.Options.UEModelAppPath	) )
-                        {
-                            addItem.Invoke( Resources.NodeItem_OpenInUEModelViewer, "OPEN_UEMODELVIEWER" );
-        #if DEBUG
-                            addItem.Invoke( Resources.NodeItem_ExportWithUEModelViewer, "EXPORT_UEMODELVIEWER" );
-        #endif
-                        }
-        #if DEBUG
-                        addItem.Invoke( Resources.NodeItem_ViewContent, "CONTENT" );
-        #endif	
-                    }
+                    addItem( Resources.NodeItem_OpenInUEModelViewer, "OPEN_UEMODELVIEWER" );
+#if DEBUG
+                    addItem( Resources.NodeItem_ExportWithUEModelViewer, "EXPORT_UEMODELVIEWER" );
+#endif
+                }
+#if DEBUG
+                addItem( Resources.NodeItem_ViewContent, "CONTENT" );
+#endif	
+            }
 
-                    if( decompilableObjectNode.Object is UMetaData )
+            if( obj is UMetaData )
+            {
+                addItem( Resources.NodeItem_ViewUsedTags, "USED_TAGS" );	
+            }
+
+            var uStruct = (obj as UStruct); 
+            if( uStruct != null )
+            {
+                if( uStruct.ByteCodeManager != null )
+                {
+                    if( obj is UClass )
                     {
-                        addItem.Invoke( Resources.NodeItem_ViewUsedTags, "USED_TAGS" );	
+                        addItem( Resources.NodeItem_ViewReplication, "REPLICATION" );	
                     }
+                    addItem( Resources.NodeItem_ViewTokens, "TOKENS" );
+                    addItem( Resources.NodeItem_ViewDisassembledTokens, "TOKENS_DISASSEMBLE" );
+                }
 
-                    var uStruct = (decompilableObjectNode.Object as UStruct); 
-                    if( uStruct != null )
-                    {
-                        if( uStruct.ByteCodeManager != null )
-                        {
-                            if( decompilableObjectNode.Object is UClass )
-                            {
-                                addItem.Invoke( Resources.NodeItem_ViewReplication, "REPLICATION" );	
-                            }
-                            addItem.Invoke( Resources.NodeItem_ViewTokens, "TOKENS" );
-                        }
+                if( uStruct.ScriptText != null )
+                {
+                    addItem( Resources.NodeItem_ViewScript, "SCRIPT" );
+                }
 
-                        if( uStruct.ScriptText != null )
-                        {
-                            addItem.Invoke( Resources.NodeItem_ViewScript, "SCRIPT" );
-                        }
-
-                        if( uStruct.ProcessedText != null )
-                        {
-                            addItem.Invoke( Resources.NodeItem_ViewProcessedScript, "PROCESSEDSCRIPT" );
-                        }
+                if( uStruct.ProcessedText != null )
+                {
+                    addItem( Resources.NodeItem_ViewProcessedScript, "PROCESSEDSCRIPT" );
+                }
                             
-                        if( uStruct.CppText != null )
-                        {
-                            addItem.Invoke( Resources.NodeItem_ViewCPPText, "CPPSCRIPT" );
-                        }
+                if( uStruct.CppText != null )
+                {
+                    addItem( Resources.NodeItem_ViewCPPText, "CPPSCRIPT" );
+                }
 
-                        if( uStruct.Properties != null && uStruct.Properties.Any() )
-                        {
-                            addItem.Invoke( Resources.NodeItem_ViewDefaultProperties, "DEFAULTPROPERTIES" );	
-                        }
-                    }
-
-                    var myObj = decompilableObjectNode.Object as UObject;
-
-                    var bufferedObject = decompilableObjectNode.Object as IBuffered;
-                    if( bufferedObject != null && bufferedObject.GetBuffer() != null )
-                    {
-                        var bufferedItem = new ToolStripMenuItem 
-                        {
-                            Text = Resources.NodeItem_ViewBuffer,
-                            Name = "BUFFER"
-                        };
-
-                        bool shouldAddBufferItem = bufferedObject.GetBufferSize() > 0;
-
-                        var tableNode = decompilableObjectNode.Object as IContainsTable;
-                        if( tableNode != null && tableNode.Table != null )
-                        { 
-                            var tableBufferItem = bufferedItem.DropDownItems.Add( Resources.NodeItem_ViewTableBuffer );
-                            tableBufferItem.Name = "TABLEBUFFER";
-                            shouldAddBufferItem = true;
-                        }
-
-                        if( myObj != null && myObj.Default != null && myObj.Default != myObj )
-                        {
-                            var defaultBufferItem = bufferedItem.DropDownItems.Add( Resources.NodeItem_DefaultBuffer );
-                            defaultBufferItem.Name = "DEFAULTBUFFER";  
-                            shouldAddBufferItem = true;
-                        }
-
-                        if( shouldAddBufferItem )
-                        {
-                            bufferedItem.DropDownItemClicked += itemClickEvent;
-                            itemCollection.Add( bufferedItem );
-                        }
-                    }
-
-                    if( myObj != null )
-                    {
-                        if( myObj.ThrownException != null )
-                        {
-                            itemCollection.Add( new ToolStripSeparator() );
-                            addItem.Invoke( Resources.NodeItem_ViewException, "EXCEPTION" );		
-                        }
-                        itemCollection.Add( new ToolStripSeparator() );
-                        addItem.Invoke( Resources.NodeItem_ManagedProperties, "MANAGED_PROPERTIES" );
-                        #if DEBUG
-                            addItem.Invoke( "Force Deserialize", "FORCE_DESERIALIZE" );
-                        #endif	
-                    }
+                if( uStruct.Properties != null && uStruct.Properties.Any() )
+                {
+                    addItem( Resources.NodeItem_ViewDefaultProperties, "DEFAULTPROPERTIES" );	
                 }
             }
+
+            var bufferedObject = obj as IBuffered;
+            if( bufferedObject.GetBuffer() != null )
+            {
+                var bufferedItem = new ToolStripMenuItem 
+                {
+                    Text = Resources.NodeItem_ViewBuffer,
+                    Name = "BUFFER"
+                };
+
+                bool shouldAddBufferItem = bufferedObject.GetBufferSize() > 0;
+
+                var tableNode = obj as IContainsTable;
+                if( tableNode.Table != null )
+                { 
+                    var tableBufferItem = bufferedItem.DropDownItems.Add( Resources.NodeItem_ViewTableBuffer );
+                    tableBufferItem.Name = "TABLEBUFFER";
+                    shouldAddBufferItem = true;
+                }
+
+                if( obj.Default != null && obj.Default != obj )
+                {
+                    var defaultBufferItem = bufferedItem.DropDownItems.Add( Resources.NodeItem_DefaultBuffer );
+                    defaultBufferItem.Name = "DEFAULTBUFFER";  
+                    shouldAddBufferItem = true;
+                }
+
+                if( shouldAddBufferItem )
+                {
+                    bufferedItem.DropDownItemClicked += itemClickEvent;
+                    itemCollection.Add( bufferedItem );
+                }
+            }
+
+            if( obj.ThrownException != null )
+            {
+                itemCollection.Add( new ToolStripSeparator() );
+                addItem( Resources.NodeItem_ViewException, "EXCEPTION" );		
+            }
+            itemCollection.Add( new ToolStripSeparator() );
+            addItem( Resources.NodeItem_ManagedProperties, "MANAGED_PROPERTIES" );
+#if DEBUG
+            addItem( "Force Deserialize", "FORCE_DESERIALIZE" );
+#endif	
         }
 
         private void _OnImportsItemClicked( object sender, ToolStripItemClickedEventArgs e )
@@ -1235,34 +1254,102 @@ namespace UEExplorer.UI.Tabs
             if( _LastNodeContent == null )
                 return;
 
-            var decompilableObject = _LastNodeContent as IDecompilableObject;
-            if( decompilableObject == null )
-            {
-                return;
-            }
-
-            PerformNodeAction( decompilableObject, e.ClickedItem.Name );
+            PerformNodeAction( _LastNodeContent, e.ClickedItem.Name );
         }
 
         private void _OnClassesItemClicked( object sender, ToolStripItemClickedEventArgs e )
         {
-            PerformNodeAction( TreeView_Classes.SelectedNode as IDecompilableObject, e.ClickedItem.Name );	
+            PerformNodeAction( TreeView_Classes.SelectedNode, e.ClickedItem.Name );	
         }
 
         private void _OnExportsItemClicked( object sender, ToolStripItemClickedEventArgs e )
         {
-            PerformNodeAction( TreeView_Exports.SelectedNode as IDecompilableObject, e.ClickedItem.Name );
+            PerformNodeAction( TreeView_Exports.SelectedNode, e.ClickedItem.Name );
         }
 
         private void _OnContentItemClicked( object sender, ToolStripItemClickedEventArgs e )
         {
-            PerformNodeAction( TreeView_Content.SelectedNode as IDecompilableObject, e.ClickedItem.Name );
+            PerformNodeAction( TreeView_Content.SelectedNode, e.ClickedItem.Name );
         }
 
-        private void PerformNodeAction( IDecompilableObject node, string action )
+        private static string FormatTokenHeader( UStruct.UByteCodeDecompiler.Token token, bool acronymizeName = true )
         {
-            if( node == null )
+            var name = token.GetType().Name;
+            if( acronymizeName )
+            {
+                name = String.Concat( name.Substring( 0, name.Length - 5 ).Select(
+                    (c) => Char.IsUpper( c ) ? c.ToString( CultureInfo.InvariantCulture ) : String.Empty
+                ) );
+
+                if( token is UStruct.UByteCodeDecompiler.CastToken )
+                {
+                    name = "C" + name;
+                }
+            }
+            return String.Format( "{0}({1}/{2})", name, token.Size, token.StorageSize );
+        }
+
+        private static string _DisassembleTokensTemplate;
+        private static string DisassembleTokens( UStruct container, UStruct.UByteCodeDecompiler decompiler, int tokenCount )
+        {
+            var content = String.Empty;
+            for( var i = 0; i + 1 < tokenCount; ++ i )
+            {
+                var token = decompiler.NextToken;
+                var firstTokenIndex = decompiler.CurrentTokenIndex;
+                int lastTokenIndex;
+                int subTokensCount;
+
+                string value;
+                try
+                {
+                    value = token.Decompile();
+                }
+                catch( Exception e )
+                {
+                    value = "Exception occurred while decompiling token: " + e;
+                }
+                finally
+                {
+                    lastTokenIndex = decompiler.CurrentTokenIndex;
+                    subTokensCount = lastTokenIndex - firstTokenIndex;
+                    decompiler.CurrentTokenIndex = firstTokenIndex;
+                }
+
+                var buffer = new byte[token.StorageSize];
+                container.Package.Stream.Position = container.ExportTable.SerialOffset + container.ScriptOffset + token.StoragePosition;
+                container.Package.Stream.Read( buffer, 0, buffer.Length );
+
+                var header = FormatTokenHeader( token, false );
+                var bytes = BitConverter.ToString( buffer ).Replace( '-', ' ' );
+
+                content += String.Format( _DisassembleTokensTemplate.Replace( "%INDENTATION%", UDecompilingState.Tabs ), 
+                    token.Position, token.StoragePosition, 
+                    header, bytes,
+                    value != String.Empty ? value + "\r\n" : value, firstTokenIndex, lastTokenIndex
+                );
+
+                if( subTokensCount > 0 )
+                {
+                    UDecompilingState.AddTab();
+                    content += DisassembleTokens( container, decompiler, subTokensCount + 1 );
+                    i += subTokensCount;
+                    UDecompilingState.RemoveTab();
+                }
+            }
+            return content;
+        }
+
+        private void PerformNodeAction( object target, string action )
+        {
+            if( target == null )
                 return;
+
+            var obj = target as UObject;
+            if( obj == null && target is IDecompilableObject )
+            {
+                obj = (target as IDecompilableObject).Object as UObject; 
+            }
 
             try
             {
@@ -1270,14 +1357,14 @@ namespace UEExplorer.UI.Tabs
                 {
                     case "USED_TAGS":
                     {
-                        var n = node as ObjectNode;
+                        var n = target as ObjectNode;
                         if( n != null )
                         {
-                            var cnode = n.Object as UMetaData;
-                            if( cnode != null )
+                            var metaObj = n.Object as UMetaData;
+                            if( metaObj != null )
                             {
-                                Label_ObjectName.Text = ((TreeNode)node).Text;
-                                SetContentText( node as TreeNode, cnode.GetUniqueMetas() );
+                                SetContentTitle( metaObj.GetOuterGroup() );
+                                SetContentText( target as TreeNode, metaObj.GetUniqueMetas() );
                             }
                         }
                         break;
@@ -1285,7 +1372,7 @@ namespace UEExplorer.UI.Tabs
 #if DEBUG
                     case "CONTENT":
                     {
-                        var n = node as ObjectNode;
+                        var n = target as ObjectNode;
                         if( n != null )
                         {
                             var cnode = n.Object as IUnrealViewable;
@@ -1321,7 +1408,7 @@ namespace UEExplorer.UI.Tabs
                             Program.Options.UEModelAppPath, 
                             "-path=" + _UnrealPackage.PackageDirectory
                             + " " + _UnrealPackage.PackageName
-                            + " " + ((TreeNode)node).Text
+                            + " " + ((TreeNode)target).Text
                         );
                         break;
                     }
@@ -1338,7 +1425,7 @@ namespace UEExplorer.UI.Tabs
                             + " " + "-out="  + contentDir
                             + " -export"
                             + " " + _UnrealPackage.PackageName
-                            + " " + ((TreeNode)node).Text;
+                            + " " + ((TreeNode)target).Text;
                         var appInfo = new ProcessStartInfo( Program.Options.UEModelAppPath, appArguments )
                         {
                             UseShellExecute = false, 
@@ -1378,14 +1465,25 @@ namespace UEExplorer.UI.Tabs
                     }						
 
                     case "OBJECT":
-                        Label_ObjectName.Text = ((TreeNode)node).Text;
-                        SetContentText( node as TreeNode, node.Decompile() );
+                    {
+                        if( obj != null )
+                        {
+                            SetContentTitle( obj.GetOuterGroup() );
+                            SetContentText( obj, obj.Decompile() );   
+                        }
+                        else if( target is IUnrealDecompilable )
+                        {
+                            var node = target as TreeNode;
+                            SetContentTitle( node.Text );
+                            SetContentText( node, (target as IUnrealDecompilable).Decompile() );
+                        }
                         break;
+                    }
 
                     case "MANAGED_PROPERTIES":
                         using( var propDialog = new PropertiesDialog{
-                                ObjectLabel = {Text = ((TreeNode)node).Text},
-                                ObjectPropertiesGrid = {SelectedObject = node.Object}
+                                ObjectLabel = {Text = ((TreeNode)target).Text},
+                                ObjectPropertiesGrid = {SelectedObject = obj}
                             } )
                         {
                             propDialog.ShowDialog( this );
@@ -1394,75 +1492,91 @@ namespace UEExplorer.UI.Tabs
 
 #if DEBUG
                     case "FORCE_DESERIALIZE":
-                        Label_ObjectName.Text = ((TreeNode)node).Text;
+                        SetContentTitle( ((TreeNode)target).Text, false );
 
-                        ((UObject)node.Object).BeginDeserializing();
-                        ((UObject)node.Object).PostInitialize();
+                        obj.BeginDeserializing();
+                        obj.PostInitialize();
                         break;
 #endif
 
                     case "REPLICATION":
                     {
-                        var unClass = node.Object as UClass;
+                        var unClass = obj as UClass;
                         if( unClass != null )
                         {
-                            Label_ObjectName.Text = unClass.Name;
-                            SetContentText( node as TreeNode, unClass.FormatReplication() );
+                            SetContentTitle( unClass.Name, true, "Replication" );
+                            SetContentText( unClass, unClass.FormatReplication() );
                         }
                         break;
                     }
 
                     case "SCRIPT":
                     {
-                        var str = node.Object as UStruct;
+                        var str = obj as UStruct;
                         if( str != null && str.ScriptText != null )
                         {
-                            Label_ObjectName.Text = str.ScriptText.Name;
-                            SetContentText( node as TreeNode, str.ScriptText.Decompile() );
+                            SetContentTitle( str.ScriptText.GetOuterGroup() );
+                            SetContentText( str.ScriptText, str.ScriptText.Decompile() );
                         }
                         break;
                     }
 
                     case "CPPSCRIPT":
                     {
-                        var str = node.Object as UStruct;
+                        var str = obj as UStruct;
                         if( str != null && str.CppText != null )
                         {
-                            Label_ObjectName.Text = str.CppText.Name;
-                            SetContentText( node as TreeNode, str.CppText.Decompile() );
+                            SetContentTitle( str.CppText.GetOuterGroup() );
+                            SetContentText( str.CppText, str.CppText.Decompile() );
                         }
                         break;
                     }
 
                     case "PROCESSEDSCRIPT":
                     {
-                        var str = node.Object as UStruct;
+                        var str = obj as UStruct;
                         if( str != null && str.ProcessedText != null )
                         {
-                            Label_ObjectName.Text = str.ProcessedText.Name;
-                            SetContentText( node as TreeNode, str.ProcessedText.Decompile() );
+                            SetContentTitle( str.ProcessedText.GetOuterGroup() );
+                            SetContentText( str.ProcessedText, str.ProcessedText.Decompile() );
                         }
                         break;
                     }
 
                     case "DEFAULTPROPERTIES":
                     {
-                        var unStruct = node.Object as UStruct;
+                        var unStruct = obj as UStruct;
                         if( unStruct != null )
                         {
-                            Label_ObjectName.Text = unStruct.Default.Name;
-                            SetContentText( node as TreeNode, unStruct.FormatDefaultProperties() );
+                            SetContentTitle( unStruct.Default.GetOuterGroup(), true, "Default-Properties" );
+                            SetContentText( unStruct, unStruct.FormatDefaultProperties() );
+                        }
+                        break;
+                    }
+                        
+                    case "TOKENS_DISASSEMBLE":
+                    {
+                        var unStruct = obj as UStruct;
+                        if( unStruct != null && unStruct.ByteCodeManager != null )
+                        {                           
+                            var codeDec = unStruct.ByteCodeManager;
+                            codeDec.Deserialize();
+                            codeDec.InitDecompile();
+
+                            _DisassembleTokensTemplate = LoadTemplate("struct.tokens-disassembled");
+                            string content = DisassembleTokens( unStruct, codeDec, codeDec.DeserializedTokens.Count );
+                            SetContentTitle( unStruct.GetOuterGroup(), true, "Tokens-Disassembled" );
+                            SetContentText( unStruct, content );
                         }
                         break;
                     }
 
                     case "TOKENS":
                     {
-                        var unStruct = node.Object as UStruct;
+                        var unStruct = obj as UStruct;
                         if( unStruct != null && unStruct.ByteCodeManager != null )
-                        {
-                            Label_ObjectName.Text = unStruct.GetOuterGroup() + " - Tokens";
-
+                        {                   
+                            var tokensTemplate = LoadTemplate("struct.tokens");
                             var codeDec = unStruct.ByteCodeManager;
                             codeDec.Deserialize();
                             codeDec.InitDecompile();
@@ -1471,17 +1585,6 @@ namespace UEExplorer.UI.Tabs
                             while( codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count )
                             {
                                 var t = codeDec.NextToken;
-                                var tokenHeader = (Func<UStruct.UByteCodeDecompiler.Token, string>)((tkn) =>
-                                {
-                                    var tokenName = tkn.GetType().Name.Substring( 0, tkn.GetType().Name.Length - 5 );
-                                    tokenName = String.Concat( tokenName.Select( (c) => Char.IsUpper( c ) ? c.ToString( CultureInfo.InvariantCulture ) : String.Empty ) );
-                                    if( tkn is UStruct.UByteCodeDecompiler.CastToken )
-                                    {
-                                        tokenName = "C" + tokenName;
-                                    }
-                                    return String.Format( "{0}({1}/{2})", tokenName, tkn.Size, tkn.StorageSize );
-                                });
-
                                 int orgIndex = codeDec.CurrentTokenIndex;
                                 string output;
                                 bool breakOut = false;
@@ -1495,14 +1598,14 @@ namespace UEExplorer.UI.Tabs
                                     breakOut = true;
                                 }
 
-                                string chain = tokenHeader( t );
+                                string chain = FormatTokenHeader( t );
                                 int inlinedTokens = codeDec.CurrentTokenIndex - orgIndex;
                                 if( inlinedTokens > 0 )
                                 {
                                     ++ orgIndex;
                                     for( int i = 0; i < inlinedTokens; ++ i )
                                     {
-                                        chain += " -> " + tokenHeader( codeDec.DeserializedTokens[orgIndex + i] );
+                                        chain += " -> " + FormatTokenHeader( codeDec.DeserializedTokens[orgIndex + i] );
                                     }
                                 }
 
@@ -1510,7 +1613,7 @@ namespace UEExplorer.UI.Tabs
                                 _UnrealPackage.Stream.Position = unStruct.ExportTable.SerialOffset + unStruct.ScriptOffset + t.StoragePosition;
                                 _UnrealPackage.Stream.Read( buffer, 0, buffer.Length );
 
-                                content += String.Format( "({0:X3}/{1:X3}) [{3}]\r\n\t{2}\r\n\t{4}\r\n", 
+                                content += String.Format( tokensTemplate, 
                                     t.Position, t.StoragePosition, 
                                     chain, BitConverter.ToString( buffer ).Replace( '-', ' ' ),
                                     output != String.Empty ? output + "\r\n" : output
@@ -1519,21 +1622,15 @@ namespace UEExplorer.UI.Tabs
                                 if( breakOut )
                                     break;
                             }
-                            content += "// The structure is as follows:" +
-                                       "\r\n" +
-                                       "// \t(MemoryPosition/StoragePosition) [Bytecodes]" +
-                                       "\r\n" +
-                                       "// \t\tToken(MemorySize/MemoryPosition) -> ..." +
-                                       "\r\n" +
-                                       "// \t\tCode";
-                            SetContentText( node as TreeNode, content );
+                            SetContentTitle( unStruct.GetOuterGroup(), true, "Tokens" );
+                            SetContentText( unStruct, content );
                         }
                         break;
                     }
 
                     case "BUFFER":
                     {
-                        var bufferObject = node.Object as IBuffered;
+                        var bufferObject = obj as IBuffered;
                         if( bufferObject.GetBufferSize() > 0 )
                         {
                             ViewBufferFor( bufferObject );
@@ -1543,14 +1640,14 @@ namespace UEExplorer.UI.Tabs
 
                     case "TABLEBUFFER":
                     {
-                        var tableObject = node as IContainsTable ?? node.Object as IContainsTable;
+                        var tableObject = target as IContainsTable ?? obj;
                         ViewBufferFor( tableObject.Table );
                         break;
                     }
 
                     case "DEFAULTBUFFER":
                     {
-                        var unObject = node.Object as UObject;
+                        var unObject = obj as UObject;
                         if( unObject != null )
                         {
                             ViewBufferFor( unObject.Default );
@@ -1560,7 +1657,7 @@ namespace UEExplorer.UI.Tabs
 
                     case "EXCEPTION":
                     {
-                        var oNode = node as ObjectNode;
+                        var oNode = target as ObjectNode;
                         if( oNode != null )
                         {
                             SetContentText( oNode, GetExceptionMessage( ((UObject)oNode.Object) ) );
@@ -1573,6 +1670,12 @@ namespace UEExplorer.UI.Tabs
             {
                 ExceptionDialog.Show( "An exception occurred while performing: " + action, e );
             }
+        }
+
+        private static readonly string _TemplateDir = Path.Combine( Program.ConfigDir, "Templates" );
+        private static string LoadTemplate( string name )
+        {
+            return File.ReadAllText( Path.Combine( _TemplateDir, name + ".txt" ), System.Text.Encoding.ASCII );
         }
         #endregion
 
@@ -1611,20 +1714,40 @@ namespace UEExplorer.UI.Tabs
         {
             public string Text;
             public string Label;
-            public TreeNode Node;
+            public object Node;
 
             public double Y, X;
         }
         private readonly List<BufferData> _ContentBuffer = new List<BufferData>();
         private int _BufferIndex = -1;
-        private TreeNode _LastNodeContent;
+        private object _LastNodeContent;
 
-        public void SetContentText( TreeNode node, string content, bool skip = false, bool resetView = true )
+        public void SetContentTitle( string title, bool isSearchable = true, string sub = "" )
+        {
+            Label_ObjectName.Text = title;
+            if( sub != "" )
+            {
+                Label_ObjectName.Text += " -> " + sub.Replace( '-', ' ' );
+            }
+
+            if( isSearchable )
+            {
+                SearchObjectTextBox.Text = title;
+                if( sub != "" )
+                {
+                    SearchObjectTextBox.Text += ":" + sub;
+                }
+                SearchObjectTextBox.SelectAll();
+            }
+        }
+
+        public void SetContentText( object node, string content, bool skip = false, bool resetView = true )
         {
             if( _LastNodeContent != node )
             {
                 BuildItemNodes( node, ViewTools.DropDownItems );
             }
+            ViewTools.Enabled = ViewTools.DropDownItems.Count > 0 && node != null;
             _LastNodeContent = node;
 
             content = content.TrimStart( '\r', '\n' ).TrimEnd( '\r', '\n' );
@@ -1663,7 +1786,6 @@ namespace UEExplorer.UI.Tabs
                     NextButton.Enabled = false;
                 }
             }
-
             
             var bd = new BufferData{ Text = content, Node = node, Label = Label_ObjectName.Text };
             _ContentBuffer.Add( bd );
@@ -1691,9 +1813,9 @@ namespace UEExplorer.UI.Tabs
 
         private void RestoreBufferedContent( int bufferIndex )
         {
-            Label_ObjectName.Text = _ContentBuffer[bufferIndex].Label;
+            SetContentTitle( _ContentBuffer[bufferIndex].Label, false ); 
             SetContentText( _ContentBuffer[bufferIndex].Node, _ContentBuffer[bufferIndex].Text, true );
-            SelectNode( _ContentBuffer[bufferIndex].Node );   
+            SelectNode( _ContentBuffer[bufferIndex].Node as TreeNode );   
 
             TextEditorPanel.textEditor.ScrollToVerticalOffset( _ContentBuffer[bufferIndex].Y );
             TextEditorPanel.textEditor.ScrollToHorizontalOffset( _ContentBuffer[bufferIndex].X );
@@ -1733,19 +1855,19 @@ namespace UEExplorer.UI.Tabs
 
         private void SelectNode( TreeNode node )
         {
-            if(	node != null )
+            if( node == null ) 
+                return;
+
+            if( node.TreeView.Name == "TreeView_Classes" )
             {
-                if( node.TreeView.Name == "TreeView_Classes" )
-                {
-                    node.TreeView.AfterSelect -= _OnClassesNodeSelected;
-                }
-                node.TreeView.Show(); 
-                node.TreeView.Select();
-                node.TreeView.SelectedNode = node;
-                if( node.TreeView.Name == "TreeView_Classes" )
-                {
-                    node.TreeView.AfterSelect += _OnClassesNodeSelected;
-                }
+                node.TreeView.AfterSelect -= _OnClassesNodeSelected;
+            }
+            node.TreeView.Show(); 
+            node.TreeView.Select();
+            node.TreeView.SelectedNode = node;
+            if( node.TreeView.Name == "TreeView_Classes" )
+            {
+                node.TreeView.AfterSelect += _OnClassesNodeSelected;
             }
         }
 
@@ -2068,7 +2190,7 @@ namespace UEExplorer.UI.Tabs
                 var documentResult = nodeEvent.Node.Parent.Tag as TextSearchHelpers.DocumentResult;
                 var unClass = ((UClass)documentResult.Document);
 
-                Label_ObjectName.Text = String.Format( "{0}: {1}, {2}", unClass.Name, findResult.TextLine, findResult.TextColumn ); 
+                SetContentTitle( String.Format( "{0}: {1}, {2}", unClass.Name, findResult.TextLine, findResult.TextColumn ), false ); 
                 SetContentText( nodeEvent.Node, unClass.Decompile(), false, false );
 
                 TextEditorPanel.textEditor.ScrollTo( findResult.TextLine, findResult.TextColumn );
@@ -2100,6 +2222,104 @@ namespace UEExplorer.UI.Tabs
         {
             Settings.Default.PackageExplorer_SplitterDistance = splitContainer1.SplitterDistance;
             Settings.Default.Save();
+        }
+
+        private bool DoSearchObjectByGroup( string objectGroup )
+        {
+            var protocol = String.Empty;
+            var page = String.Empty;
+            if( objectGroup.Contains( ':' ) )
+            {
+                protocol = objectGroup.Substring( 0, objectGroup.IndexOf( ':' ) ).ToLower();    
+                page = objectGroup.Substring( protocol.Length + 1 ).ToLower();
+            }
+
+            var obj = _UnrealPackage.FindObjectByGroup( protocol == "" ? objectGroup : protocol );
+            if( obj != null )
+            {
+                if( page != "" )
+                {
+                    switch( page )
+                    {
+                        case "replication":
+                            if( obj is UClass )
+                            {
+                                PerformNodeAction( obj, "REPLICATION" );
+                                return true;
+                            }
+                            break;
+
+                        case "tokens":
+                            if( obj is UStruct )
+                            {
+                                PerformNodeAction( obj, "TOKENS" );
+                                return true;
+                            }
+                            break;
+
+                        case "tokens-disassembled":
+                            if( obj is UStruct )
+                            {
+                                PerformNodeAction( obj, "TOKENS_DISASSEMBLE" );
+                                return true;
+                            }
+                            break;
+
+                        case "default-properties":
+                            if( obj is UStruct )
+                            {
+                                PerformNodeAction( obj, "DEFAULTPROPERTIES" );
+                                return true;
+                            }
+                            break;
+                    }
+                }
+
+                var content = obj.ImportTable == null 
+                    ? obj.Decompile() 
+                    : String.Format( "// No decompilable data available for {0}", obj.GetOuterGroup() );
+
+                SetContentTitle( obj.GetOuterGroup() );
+                SetContentText( obj, content );
+                return true;
+            }    
+
+            switch( protocol )
+            {
+                case "about":
+                    switch( page )
+                    {
+                        case "stats":
+                            var classesCount = _ClassesList.Count;
+                            var exportsCount = _UnrealPackage.Exports.Count;
+                            var importsCount = _UnrealPackage.Imports.Count;
+                            var namesCount = _UnrealPackage.Names.Count;
+                            var output = String.Format( "Number of classes: {0}\r\n" +
+                                                        "Number of exports: {1}\r\n" +
+                                                        "Number of imports: {2}\r\n" +
+                                                        "Number of names: {3}\r\n", classesCount, exportsCount, importsCount, namesCount );
+                            SetContentTitle( String.Format( "{0} - {1}", protocol, page ), false );
+                            SetContentText( null, output, true );
+                            return true;
+                    }
+                    break;
+            }
+            return false;
+        }
+
+        private void SearchObjectTextBox_KeyPress( object sender, KeyPressEventArgs e )
+        {
+            switch( e.KeyChar )
+            {
+                case '\r':
+                    e.Handled = DoSearchObjectByGroup( SearchObjectTextBox.Text );
+                    break;
+            }
+        }
+
+        private void SearchObjectButton_Click( object sender, EventArgs e )
+        {
+            DoSearchObjectByGroup( SearchObjectTextBox.Text );
         }
     }
 }

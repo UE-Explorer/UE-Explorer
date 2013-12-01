@@ -1,15 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
-using AutoUpdaterDotNET;
 using Eliot.Utilities;
 using Microsoft.Win32;
 using Storm.TabControl;
 using UEExplorer.Properties;
 using UEExplorer.UI.Forms;
+using AutoUpdaterDotNET;
 using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 
 namespace UEExplorer.UI
@@ -283,7 +282,13 @@ namespace UEExplorer.UI
                 return;
             }
 
+            if( Tabs.LastSelectedComponent != null && Tabs.LastSelectedComponent != Tabs.SelectedComponent )
+            {
+                Tabs.LastSelectedComponent.TabDeselected();
+            }
+
             Tabs.SelectedComponent.TabSelected();
+
             var show = Tabs.SelectedComponent is UC_UClassFile; 
             menuItem12.Enabled = show;
             menuItem12.Visible = show;
@@ -291,6 +296,8 @@ namespace UEExplorer.UI
             menuItem9.Visible = show;
             menuItem2.Enabled = show;
             menuItem2.Visible = show;
+
+            Tabs.LastSelectedComponent = Tabs.SelectedComponent;
         }
 
         private void TabComponentsStrip_TabStripItemClosing( TabStripItemClosingEventArgs e )
