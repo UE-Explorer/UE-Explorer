@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UELib;
 
 namespace UEExplorer
@@ -34,5 +35,47 @@ namespace UEExplorer
         public string UEModelAppPath = String.Empty;
         public string HEXWorkshopAppPath = String.Empty;
         #endregion
+
+        [XmlRoot("State")]
+        public class State
+        {
+            [XmlElement("Id")]
+            public string Id;
+
+            [XmlElement("SearchObjectValue")]
+            public string SearchObjectValue;
+
+            public State()
+            {
+                
+            }
+
+            public State( string id )
+            {
+                Id = id;
+            }
+
+            public void Update()
+            {
+                Program.SaveConfig();
+            }
+        }
+
+        [XmlArray("States")]
+        public List<State> States;
+
+        public State GetState( string id )
+        {
+            var index = States.FindIndex( s => s.Id == id );
+            if( index != -1 )
+            {
+                return States[index];
+            }
+
+            var state = new State( id );
+            States.Add( state );
+            Program.SaveConfig();
+            return state;
+        }
     }
 }

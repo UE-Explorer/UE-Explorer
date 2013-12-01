@@ -141,9 +141,9 @@ namespace UEExplorer
         }
 
 #region Options
+        public static readonly string ConfigDir = Path.Combine( Application.StartupPath, "Config" );
         private static readonly string SettingsPath = Path.Combine( 
-            Application.StartupPath, 
-            "Config", 
+            ConfigDir, 
             "UEExplorerConfig.xml" 
         );
         public static XMLSettings Options;
