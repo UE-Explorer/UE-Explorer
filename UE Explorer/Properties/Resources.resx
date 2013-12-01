@@ -326,6 +326,9 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="NodeItem_ViewTokens" xml:space="preserve">
     <value>View Tokens</value>
   </data>
+  <data name="NodeItem_ViewDisassembledTokens" xml:space="preserve">
+    <value>View Disassembled Tokens</value>
+  </data>
   <data name="NodeItem_ViewScript" xml:space="preserve">
     <value>View Script</value>
   </data>
