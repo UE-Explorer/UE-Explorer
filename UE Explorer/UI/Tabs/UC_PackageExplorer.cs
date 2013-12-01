@@ -1167,7 +1167,7 @@ namespace UEExplorer.UI.Tabs
                         addItem( Resources.NodeItem_ViewReplication, "REPLICATION" );	
                     }
                     addItem( Resources.NodeItem_ViewTokens, "TOKENS" );
-                    addItem( "View Disassembled Tokens ", "TOKENS_DISASSEMBLE" );
+                    addItem( Resources.NodeItem_ViewDisassembledTokens, "TOKENS_DISASSEMBLE" );
                 }
 
                 if( uStruct.ScriptText != null )
