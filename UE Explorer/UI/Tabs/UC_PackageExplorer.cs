@@ -745,11 +745,12 @@ namespace UEExplorer.UI.Tabs
                 {
                     continue;
                 }
-
+  
+                var imageKey = Object.GetImageName();
                 var node = new ObjectNode( Object )
                 {
-                    ImageKey = ClassKey, 
-                    SelectedImageKey = ClassKey, 
+                    ImageKey = imageKey, 
+                    SelectedImageKey = imageKey, 
                     Text = Object.Name
                 };
                 node.Nodes.Add( "DUMMYNODE" );
@@ -766,8 +767,8 @@ namespace UEExplorer.UI.Tabs
             {
                 var node = new ObjectNode( metobj )
                 {
-                    ImageKey = ClassKey, 
-                    SelectedImageKey = ClassKey, 
+                    ImageKey = "Info", 
+                    SelectedImageKey = "Info", 
                     Text = metobj.Name
                 };
                 node.Nodes.Add( "DUMMYNODE" );
@@ -824,30 +825,23 @@ namespace UEExplorer.UI.Tabs
             InitializeObjectNode( parentImport, node );
         }
 
-        protected void InitializeObjectNode( UObjectTableItem tableObject, TreeNode node )
+        protected void InitializeObjectNode( UObjectTableItem item, TreeNode node )
         {
-            if( tableObject.Object != null )
+            if( item.Object != null )
             {
-                if( tableObject.Object.GetType().IsSubclassOf( typeof(UProperty) ) )
-                {
-                    node.ImageKey = typeof(UProperty).Name;
-                }
-                else
-                {
-                    node.ImageKey = tableObject.ClassName == "Package" ? "List" : tableObject.Object.GetType().Name;	
-                }
+                node.ImageKey = item.Object.GetImageName();	
                 node.SelectedImageKey = node.ImageKey;
 
-                if( tableObject.Object.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
+                if( item.Object.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
                 {
-                    InitializeNodeError( node, tableObject.Object );
+                    InitializeNodeError( node, item.Object );
                 }
             }
 
-            if( !_UnrealPackage.IsRegisteredClass( tableObject.ClassName ) )
+            if( !_UnrealPackage.IsRegisteredClass( item.ClassName ) )
             {
                 node.ForeColor = Color.DarkOrange;
-                node.ToolTipText = String.Format( Resources.CLASS_ISNT_SUPPORTED, tableObject.ClassName );   
+                node.ToolTipText = String.Format( Resources.CLASS_ISNT_SUPPORTED, item.ClassName );   
             }
         }
 
