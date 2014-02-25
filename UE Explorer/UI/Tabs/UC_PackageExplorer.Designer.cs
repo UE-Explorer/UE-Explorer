@@ -22,7 +22,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
             System.Windows.Forms.Panel filterPanel;
             System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.VSIcons = new System.Windows.Forms.ImageList(this.components);
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -82,6 +82,7 @@
             this.TabPage_Objects = new System.Windows.Forms.TabPage();
             this.TabControl_Objects = new System.Windows.Forms.TabControl();
             this.TabPage_Classes = new System.Windows.Forms.TabPage();
+            this._CheckBox_ToggleHierachy = new System.Windows.Forms.CheckBox();
             this._SearchIcon = new System.Windows.Forms.PictureBox();
             this.TreeView_Classes = new System.Windows.Forms.TreeView();
             this.FilterText = new System.Windows.Forms.TextBox();
@@ -576,14 +577,14 @@
             this.DataGridView_Flags.MultiSelect = false;
             this.DataGridView_Flags.Name = "DataGridView_Flags";
             this.DataGridView_Flags.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridView_Flags.RowHeadersVisible = false;
             this.DataGridView_Flags.ShowCellErrors = false;
             this.DataGridView_Flags.ShowEditingIcon = false;
@@ -808,11 +809,19 @@
             // TabPage_Classes
             // 
             this.TabPage_Classes.BackColor = System.Drawing.Color.White;
+            this.TabPage_Classes.Controls.Add(this._CheckBox_ToggleHierachy);
             this.TabPage_Classes.Controls.Add(this._SearchIcon);
             this.TabPage_Classes.Controls.Add(this.TreeView_Classes);
             this.TabPage_Classes.Controls.Add(this.FilterText);
             resources.ApplyResources(this.TabPage_Classes, "TabPage_Classes");
             this.TabPage_Classes.Name = "TabPage_Classes";
+            // 
+            // _CheckBox_ToggleHierachy
+            // 
+            resources.ApplyResources(this._CheckBox_ToggleHierachy, "_CheckBox_ToggleHierachy");
+            this._CheckBox_ToggleHierachy.ImageList = this.VSIcons;
+            this._CheckBox_ToggleHierachy.Name = "_CheckBox_ToggleHierachy";
+            this._CheckBox_ToggleHierachy.CheckedChanged += new System.EventHandler(this.ToggleClassesHierachy);
             // 
             // _SearchIcon
             // 
@@ -1338,5 +1347,6 @@
         private System.Windows.Forms.ToolStripTextBox SearchObjectTextBox;
         private System.Windows.Forms.ToolStripMenuItem ReloadButton;
         private System.Windows.Forms.ToolStripButton SearchByObjectGroupButton;
+        private System.Windows.Forms.CheckBox _CheckBox_ToggleHierachy;
 	}
 }

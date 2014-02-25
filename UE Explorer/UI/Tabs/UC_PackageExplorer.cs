@@ -2315,5 +2315,65 @@ namespace UEExplorer.UI.Tabs
         {
             DoSearchObjectByGroup( SearchObjectTextBox.Text );
         }
+
+        private void ToggleClassesHierachy( object sender, EventArgs e )
+        {
+            if( _CheckBox_ToggleHierachy.Checked )
+            {
+                _CheckBox_ToggleHierachy.Enabled = false;
+                TreeView_Classes.BeginUpdate();
+                var nodes = TreeView_Classes.Nodes;
+                for( var i = 0; i < nodes.Count; ++ i )
+                {
+                    var node = (ObjectNode)TreeView_Classes.Nodes[i];
+                    var classObject = node.Object as UClass;
+                    if( classObject == null )
+                    {
+                        continue;
+                    }
+
+                    var otherNode = node;
+                    var belongsToObject = (classObject.IsClassWithin() 
+                            && string.Compare( classObject.Super.Name, "Object", true ) == 0) 
+                        ? classObject.Within 
+                        : classObject.Super;
+                    if( FindNodeRecursive( nodes, out otherNode, belongsToObject.Name ) )
+                    {
+                        var obj = ((UObject)otherNode.Object);
+                        if( !obj.HasInitializedNodes )
+                        {
+                            // Clear DUMMYNODE
+                            otherNode.Nodes.Clear();
+                            obj.InitializeNodes( otherNode );
+                        }
+
+                        nodes.RemoveAt( i ); -- i;
+                        otherNode.Nodes.Add( node );
+                    }
+                }
+                TreeView_Classes.EndUpdate();
+            }
+        }
+
+        private bool FindNodeRecursive( TreeNodeCollection collection, out ObjectNode node, string nodeText )
+        {
+            foreach( ObjectNode otherNode in collection.OfType<ObjectNode>() )
+            {
+                if( otherNode.Text == nodeText )
+                {
+                    node = otherNode;
+                    return true;
+                }
+                else
+                {
+                    if( FindNodeRecursive( otherNode.Nodes, out node, nodeText ) )
+                    {
+                        return true;
+                    }
+                }
+            }
+            node = null;
+            return false;
+        }
     }
 }
