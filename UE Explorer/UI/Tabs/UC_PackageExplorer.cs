@@ -2437,6 +2437,9 @@ namespace UEExplorer.UI.Tabs
                 }
                 else
                 {
+                    if( classObject.Super == null )
+                        continue;
+
                     parentNodeName = ((classObject.IsClassWithin() 
                         && String.Compare( classObject.Super.Name, "Object", StringComparison.OrdinalIgnoreCase ) == 0)
                         ? classObject.Within : classObject.Super).Name;
