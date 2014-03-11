@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -773,7 +774,7 @@ namespace UEExplorer.UI.Tabs
                     SelectedImageKey = imageKey, 
                     Text = Object.Name
                 };
-                node.Nodes.Add( "DUMMYNODE" );
+                node.Nodes.Add( "DUMMYNODE", "" );
 
                 if( Object.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
                 {
@@ -791,7 +792,7 @@ namespace UEExplorer.UI.Tabs
                     SelectedImageKey = "Info", 
                     Text = metobj.Name
                 };
-                node.Nodes.Add( "DUMMYNODE" );
+                node.Nodes.Add( "DUMMYNODE", "" );
                 if( metobj.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
                 {
                     node.ForeColor = Color.Red;
@@ -1058,8 +1059,7 @@ namespace UEExplorer.UI.Tabs
                 if( node != null && !((UObject)node.Object).HasInitializedNodes )
                 {
                     TreeView_Classes.BeginUpdate();
-                    // Clear DUMMYNODE
-                    node.Nodes.Clear();
+                    node.Nodes.RemoveByKey( "DUMMYNODE" );
                     ((UObject)node.Object).InitializeNodes( node );
                     TreeView_Classes.EndUpdate();
                 }
@@ -2404,37 +2404,60 @@ namespace UEExplorer.UI.Tabs
             var nodes = TreeView_Classes.Nodes;
             for( var i = 0; i < nodes.Count; ++ i )
             {
-                var node = (ObjectNode)TreeView_Classes.Nodes[i];
+                var node = TreeView_Classes.Nodes[i] as ObjectNode;
+                if( node == null )
+                {
+                    continue;
+                }
+
                 var classObject = node.Object as UClass;
                 if( classObject == null )
                 {
                     continue;
                 }
 
-                ObjectNode otherNode;
-                var belongsToObject = (classObject.IsClassWithin() 
-                                       && String.Compare( classObject.Super.Name, "Object", StringComparison.OrdinalIgnoreCase ) == 0) 
-                    ? classObject.Within 
-                    : classObject.Super;
-                if( !FindNodeRecursive( nodes, out otherNode, belongsToObject.Name ) ) 
-                    continue;
-                var obj = ((UObject)otherNode.Object);
-                if( !obj.HasInitializedNodes )
+                string parentNodeName;
+                if( classObject.Super != null 
+                    && classObject.Super.ImportTable != null
+                    && !classObject.IsClassWithin() )
                 {
-                    // Clear DUMMYNODE
-                    otherNode.Nodes.Clear();
-                    obj.InitializeNodes( otherNode );
+                    var name = classObject.Super.GetOuterGroup();
+                    var col = nodes.Find( name, false );
+                    var groupNode = col.Length == 0 ? nodes.Add( name, name, "Diagram", "Diagram" ) : col.First();
+                    nodes.RemoveAt( i ); -- i;
+                    groupNode.Nodes.Add( node );
+                    continue;
                 }
 
+                TreeNode otherNode;
+                if( classObject.ImportTable != null )
+                {
+                    var name = classObject.GetOuterGroup();
+                    parentNodeName = name;
+                }
+                else
+                {
+                    parentNodeName = ((classObject.IsClassWithin() 
+                        && String.Compare( classObject.Super.Name, "Object", StringComparison.OrdinalIgnoreCase ) == 0)
+                        ? classObject.Within : classObject.Super).Name;
+                }
+
+                // Search a new parent for the current looped node.
+                if( !FindNodeRecursive( nodes, out otherNode, parentNodeName ) ) 
+                    continue;
+
                 nodes.RemoveAt( i ); -- i;
-                otherNode.Nodes.Add( node );
+                var classesNode = otherNode.Nodes["CLASSES"] 
+                    ?? otherNode.Nodes.Add( "CLASSES", "Classes", "UClass-Within", "UClass-Within" );
+                classesNode.Nodes.Add( node );
             }
+            //TreeView_Classes.Sort();
             TreeView_Classes.EndUpdate();
         }
 
-        private static bool FindNodeRecursive( TreeNodeCollection collection, out ObjectNode node, string nodeText )
+        private static bool FindNodeRecursive( IEnumerable collection, out TreeNode node, string nodeText )
         {
-            foreach( var otherNode in collection.OfType<ObjectNode>() )
+            foreach( var otherNode in collection.OfType<TreeNode>() )
             {
                 if( otherNode.Text == nodeText )
                 {
