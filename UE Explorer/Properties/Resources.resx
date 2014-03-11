@@ -398,4 +398,10 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="SEARCH_AS_OBJECT" xml:space="preserve">
     <value>Search as Object</value>
   </data>
+  <data name="NodeItem_ViewOuter" xml:space="preserve">
+    <value>View outer</value>
+  </data>
+  <data name="NodeItem_ViewParent" xml:space="preserve">
+    <value>View parent</value>
+  </data>
 </root>

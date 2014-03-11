@@ -1160,6 +1160,11 @@ namespace UEExplorer.UI.Tabs
                 return;
             }
 
+            if( obj.Outer != null )
+            {
+                addItem( Resources.NodeItem_ViewOuter, "VIEW_OUTER" );
+            }
+
             if( obj is IUnrealViewable )
             { 
                 if( File.Exists( Program.Options.UEModelAppPath	) )
@@ -1182,9 +1187,23 @@ namespace UEExplorer.UI.Tabs
             var uStruct = (obj as UStruct); 
             if( uStruct != null )
             {
+                if( uStruct.Super != null )
+                {
+                    addItem( Resources.NodeItem_ViewParent, "VIEW_SUPER" );
+                }
+
+                var @class = obj as UClass;
+                if( @class != null )
+                {
+                    if( @class.IsClassWithin() )
+                    {
+                        addItem( Resources.NodeItem_ViewOuter, "VIEW_WITHIN" );
+                    }
+                }
+
                 if( uStruct.ByteCodeManager != null )
                 {
-                    if( obj is UClass )
+                    if( @class != null )
                     {
                         addItem( Resources.NodeItem_ViewReplication, "REPLICATION" );	
                     }
@@ -1501,6 +1520,32 @@ namespace UEExplorer.UI.Tabs
                         }
                         break;
                     }
+
+                    case "VIEW_OUTER":
+                        if( obj != null && obj.Outer != null )
+                        {
+                            SetContentTitle( obj.Outer.GetOuterGroup() );
+                            SetContentText( obj.Outer, obj.Outer.Decompile() );   
+                        }
+                        break;
+
+                    case "VIEW_SUPER":
+                        if( obj is UStruct && ((UStruct)obj).Super != null )
+                        {
+                            var super = ((UStruct)obj).Super;
+                            SetContentTitle( super.GetOuterGroup() );
+                            SetContentText( super, super.Decompile() );   
+                        }
+                        break;
+
+                    case "VIEW_WITHIN":
+                        if( obj is UClass && ((UClass)obj).Within != null )
+                        {
+                            var within = ((UClass)obj).Within;
+                            SetContentTitle( within.GetOuterGroup() );
+                            SetContentText( within, within.Decompile() );   
+                        }
+                        break;
 
                     case "MANAGED_PROPERTIES":
                         using( var propDialog = new PropertiesDialog{

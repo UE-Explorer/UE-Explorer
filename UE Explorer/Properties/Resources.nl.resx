@@ -363,4 +363,10 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
   <data name="SEARCH_AS_OBJECT" xml:space="preserve">
     <value>Zoeken als object</value>
   </data>
+  <data name="NodeItem_ViewOuter" xml:space="preserve">
+    <value>Bekijk buitenste</value>
+  </data>
+  <data name="NodeItem_ViewParent" xml:space="preserve">
+    <value>Bekijk ouder</value>
+  </data>
 </root>

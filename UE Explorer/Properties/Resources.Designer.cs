@@ -464,6 +464,24 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View outer.
+        /// </summary>
+        internal static string NodeItem_ViewOuter {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewOuter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View parent.
+        /// </summary>
+        internal static string NodeItem_ViewParent {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Processed Script.
         /// </summary>
         internal static string NodeItem_ViewProcessedScript {
