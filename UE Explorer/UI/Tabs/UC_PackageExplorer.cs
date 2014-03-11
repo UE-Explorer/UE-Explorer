@@ -87,6 +87,8 @@ namespace UEExplorer.UI.Tabs
             if( TextEditorPanel.textEditor.TextArea.Selection.Length == 0 )
             {
                 TextEditorPanel.searchWiki.Visibility = System.Windows.Visibility.Collapsed;
+                TextEditorPanel.searchDocument.Visibility = System.Windows.Visibility.Collapsed;
+                TextEditorPanel.searchObject.Visibility = System.Windows.Visibility.Collapsed;
                 return;
             }
             var selection = GetSelection();
@@ -96,8 +98,14 @@ namespace UEExplorer.UI.Tabs
                 return;
             }
             
+            TextEditorPanel.searchDocument.Visibility = System.Windows.Visibility.Visible;
+            TextEditorPanel.searchObject.Visibility = System.Windows.Visibility.Visible;
             TextEditorPanel.searchWiki.Visibility = System.Windows.Visibility.Visible;
             TextEditorPanel.searchWiki.Header = String.Format( Resources.SEARCH_WIKI_ITEM, selection );
+
+            TextEditorPanel.searchDocument.Header = findInDocumentToolStripMenuItem.Text;
+            TextEditorPanel.searchPackage.Header = findInClassesToolStripMenuItem.Text;
+            TextEditorPanel.searchObject.Header = Resources.SEARCH_AS_OBJECT;
         }
 
         void SearchWiki_Click( object sender, System.Windows.RoutedEventArgs e )
