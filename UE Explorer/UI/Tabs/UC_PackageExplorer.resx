@@ -179,7 +179,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAK
-        LAAAAk1TRnQBSQFMAgEBLAEAAawBBgGsAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        LAAAAk1TRnQBSQFMAgEBLAEAAbQBBgG0AQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAAcADAAEBAQABCAYAATAYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1876,7 +1876,7 @@
     <value>3</value>
   </data>
   <data name="TabPage_Classes.ImageKey" xml:space="preserve">
-    <value>Library</value>
+    <value>Diagram</value>
   </data>
   <data name="TabPage_Classes.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 23</value>
@@ -2020,7 +2020,7 @@
     <value>0</value>
   </data>
   <data name="TabPage_Deps.ImageKey" xml:space="preserve">
-    <value>Diagram</value>
+    <value>Library</value>
   </data>
   <data name="TabPage_Deps.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 23</value>
