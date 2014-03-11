@@ -110,14 +110,7 @@ namespace UEExplorer.UI.Tabs
 
         void SearchWiki_Click( object sender, System.Windows.RoutedEventArgs e )
         {
-            Process.Start
-            ( 
-                String.Format
-                ( 
-                    "http://wiki.beyondunreal.com/?ns0=1&ns100=1&ns102=1&ns104=1&ns106=1&search={0}&title=Special%3ASearch&fulltext=Advanced+search&fulltext=Advanced+search",
-                    GetSelection()
-                ) 
-            );
+            Process.Start( String.Format( Resources.URL_UnrealWikiSearch, GetSelection() ) );
         }
 
         void SearchDocument_Click( object sender, System.Windows.RoutedEventArgs e )
@@ -626,17 +619,17 @@ namespace UEExplorer.UI.Tabs
             Num_ObjectIndex.Enabled = false;
             Num_NameIndex.Enabled = false;
 
-            if( _UnrealPackage.CompressedChunks != null )
+            if( _UnrealPackage.CompressedChunks == null ) 
+                return;
+
+            foreach( var chunk in _UnrealPackage.CompressedChunks )
             {
-                foreach( var chunk in _UnrealPackage.CompressedChunks )
-                {
-                    DataGridView_Chunks.Rows.Add( 
-                        chunk.UncompressedOffset, 
-                        chunk.UncompressedSize, 
-                        chunk.CompressedOffset, 
-                        chunk.CompressedSize 
+                DataGridView_Chunks.Rows.Add( 
+                    chunk.UncompressedOffset, 
+                    chunk.UncompressedSize, 
+                    chunk.CompressedOffset, 
+                    chunk.CompressedSize 
                     );
-                }
             }
         }
 
@@ -688,14 +681,14 @@ namespace UEExplorer.UI.Tabs
 
                 _ThreadingNodes[_ThreadingNodeIndex ++] = node;
 
-                if( _ThreadingNodeIndex == _UnrealPackage.Exports.Count )
-                {
-                    TreeView_Exports.BeginUpdate();
-                    TreeView_Exports.Nodes.AddRange( _ThreadingNodes );
-                    TreeView_Exports.EndUpdate();
-                    _ThreadingNodes = null;
-                    _ThreadingNodeIndex = 0;
-                }
+                if( _ThreadingNodeIndex != _UnrealPackage.Exports.Count ) 
+                    return;
+
+                TreeView_Exports.BeginUpdate();
+                TreeView_Exports.Nodes.AddRange( _ThreadingNodes );
+                TreeView_Exports.EndUpdate();
+                _ThreadingNodes = null;
+                _ThreadingNodeIndex = 0;
             }
         }
 
@@ -717,21 +710,21 @@ namespace UEExplorer.UI.Tabs
                 }
 
                 var imp = (importTable as UImportTableItem);
-                UImportNode node = new UImportNode
+                var node = new UImportNode
                 {
                     Table = imp,
                     Text = imp.ObjectName
                 };
                 InitializeObjectNode( imp, node );
                 _ThreadingNodes[_ThreadingNodeIndex ++] = node;
-                if( _ThreadingNodeIndex == _UnrealPackage.Imports.Count )
-                {
-                    TreeView_Exports.BeginUpdate();
-                    TreeView_Imports.Nodes.AddRange( _ThreadingNodes );
-                    TreeView_Exports.EndUpdate();
-                    _ThreadingNodes = null;
-                    _ThreadingNodeIndex = 0;
-                }
+                if( _ThreadingNodeIndex != _UnrealPackage.Imports.Count ) 
+                    return;
+
+                TreeView_Exports.BeginUpdate();
+                TreeView_Imports.Nodes.AddRange( _ThreadingNodes );
+                TreeView_Exports.EndUpdate();
+                _ThreadingNodes = null;
+                _ThreadingNodeIndex = 0;
             }
         }	
 
@@ -761,7 +754,6 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private const string ClassKey = "UClass";
         private void CreateClassesList()
         {
             _ClassesList.Sort( (cl, cl2) => String.Compare( cl.Name, cl2.Name, StringComparison.Ordinal ) );
@@ -817,17 +809,17 @@ namespace UEExplorer.UI.Tabs
             if( e.Action != TabControlAction.Selecting )
                 return;
 
-            if( e.TabPage == TabPage_Objects )
-            {
-                if( TreeView_Classes.Nodes.Count == 0 )
-                    CreateClassesList();
+            if( e.TabPage != TabPage_Objects ) 
+                return;
 
-                if( TreeView_Deps.Nodes.Count == 0 )
-                    CreateDependenciesList();  
+            if( TreeView_Classes.Nodes.Count == 0 )
+                CreateClassesList();
 
-                if( TreeView_Content.Nodes.Count == 0 )
-                    CreateContentList(); 
-            }
+            if( TreeView_Deps.Nodes.Count == 0 )
+                CreateDependenciesList();  
+
+            if( TreeView_Content.Nodes.Count == 0 )
+                CreateContentList();
         }
 
         private void CreateDependenciesList()
@@ -914,7 +906,7 @@ namespace UEExplorer.UI.Tabs
         {
             if( !recursive )
             {
-                ObjectNode objectNode = CreateObjectNode( item );
+                var objectNode = CreateObjectNode( item );
                 nodeContainer.Add( objectNode );
                 nodeContainer = objectNode.Nodes;
             }
@@ -985,42 +977,43 @@ namespace UEExplorer.UI.Tabs
         {
             try
             {
-                if( treeNode is IUnrealDecompilable )
-                {
-                    SetContentText( treeNode, ((IUnrealDecompilable)treeNode).Decompile() );
+                var unrealDecompilable = treeNode as IUnrealDecompilable;
+                if( unrealDecompilable == null )
+                    return;
 
-                    // Assemble a title
-                    string newTitle = String.Empty;
-                    if( treeNode is IDecompilableObject )
+                SetContentText( unrealDecompilable, unrealDecompilable.Decompile() );
+                // Assemble a title
+                string newTitle;
+                var decompilableObject = treeNode as IDecompilableObject;
+                if( decompilableObject != null )
+                {
+                    UObject obj;
+                    if( (obj = decompilableObject.Object as UObject) != null )
                     {
-                        UObject obj;
-                        if( (obj = ((IDecompilableObject)treeNode).Object as UObject) != null )
+                        newTitle = obj.GetOuterGroup();
+                        SetContentTitle( newTitle );
+                        if( obj.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
                         {
-                            newTitle = obj.GetOuterGroup();
-                            SetContentTitle( newTitle );
-                            if( obj.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
-                            {
-                                InitializeNodeError( treeNode, obj );
-                            }
-                        }
-                        else
-                        {
-                            newTitle = treeNode.Text;
-                            SetContentTitle( newTitle, false );
+                            InitializeNodeError( treeNode, obj );
                         }
                     }
                     else
                     {
-                        if( treeNode.Parent != null )
-                        {
-                            newTitle = treeNode.Parent.Text + "." + treeNode.Text;
-                        }
-                        else
-                        {
-                            newTitle = treeNode.Text;
-                        }
+                        newTitle = treeNode.Text;
                         SetContentTitle( newTitle, false );
                     }
+                }
+                else
+                {
+                    if( treeNode.Parent != null )
+                    {
+                        newTitle = treeNode.Parent.Text + "." + treeNode.Text;
+                    }
+                    else
+                    {
+                        newTitle = treeNode.Text;
+                    }
+                    SetContentTitle( newTitle, false );
                 }
             }
             catch( Exception except )
@@ -1316,16 +1309,16 @@ namespace UEExplorer.UI.Tabs
         private static string FormatTokenHeader( UStruct.UByteCodeDecompiler.Token token, bool acronymizeName = true )
         {
             var name = token.GetType().Name;
-            if( acronymizeName )
-            {
-                name = String.Concat( name.Substring( 0, name.Length - 5 ).Select(
-                    (c) => Char.IsUpper( c ) ? c.ToString( CultureInfo.InvariantCulture ) : String.Empty
+            if( !acronymizeName ) 
+                return String.Format( "{0}({1}/{2})", name, token.Size, token.StorageSize );
+
+            name = String.Concat( name.Substring( 0, name.Length - 5 ).Select(
+                c => Char.IsUpper( c ) ? c.ToString( CultureInfo.InvariantCulture ) : String.Empty
                 ) );
 
-                if( token is UStruct.UByteCodeDecompiler.CastToken )
-                {
-                    name = "C" + name;
-                }
+            if( token is UStruct.UByteCodeDecompiler.CastToken )
+            {
+                name = "C" + name;
             }
             return String.Format( "{0}({1}/{2})", name, token.Size, token.StorageSize );
         }
@@ -1417,9 +1410,10 @@ namespace UEExplorer.UI.Tabs
                         if( n != null )
                         {
                             var cnode = n.Object as IUnrealViewable;
-                            if( cnode is UTexture )
+                            var texture = cnode as UTexture;
+                            if( texture != null )
                             {
-                                var tex = ((UTexture)cnode);
+                                var tex = texture;
                                 tex.BeginDeserializing();
                                 if( tex.MipMaps == null || tex.MipMaps.Count == 0 )
                                     break;
@@ -1714,7 +1708,7 @@ namespace UEExplorer.UI.Tabs
 
                     case "DEFAULTBUFFER":
                     {
-                        var unObject = obj as UObject;
+                        var unObject = obj;
                         if( unObject != null )
                         {
                             ViewBufferFor( unObject.Default );
@@ -1762,11 +1756,11 @@ namespace UEExplorer.UI.Tabs
                 return;
             }
 
-            if( e.KeyChar == '\r' )
-            {
-                EditorUtil.FindText( TextEditorPanel, SearchBox.Text );	  
-                e.Handled = true;
-            }
+            if( e.KeyChar != '\r' ) 
+                return;
+
+            EditorUtil.FindText( TextEditorPanel, SearchBox.Text );	  
+            e.Handled = true;
         }
 
         public override void TabFind()
@@ -1797,15 +1791,15 @@ namespace UEExplorer.UI.Tabs
                 Label_ObjectName.Text += " -> " + sub.Replace( '-', ' ' );
             }
 
-            if( isSearchable )
+            if( !isSearchable ) 
+                return;
+
+            SearchObjectTextBox.Text = title;
+            if( sub != "" )
             {
-                SearchObjectTextBox.Text = title;
-                if( sub != "" )
-                {
-                    SearchObjectTextBox.Text += ":" + sub;
-                }
-                SearchObjectTextBox.SelectAll();
+                SearchObjectTextBox.Text += ":" + sub;
             }
+            SearchObjectTextBox.SelectAll();
         }
 
         public void SetContentText( object node, string content, bool skip = false, bool resetView = true )
@@ -1890,34 +1884,34 @@ namespace UEExplorer.UI.Tabs
 
         private void ToolStripButton_Backward_Click( object sender, EventArgs e )
         {
-            if( _BufferIndex - 1 > -1 )
-            {
-                FilterText.Text = String.Empty;
-                StoreViewForBuffer( _BufferIndex );
-                RestoreBufferedContent( -- _BufferIndex );
+            if( _BufferIndex - 1 <= -1 ) 
+                return;
 
-                if( _BufferIndex == 0 )
-                {
-                    PrevButton.Enabled = false;
-                }
-                NextButton.Enabled = true;
+            FilterText.Text = String.Empty;
+            StoreViewForBuffer( _BufferIndex );
+            RestoreBufferedContent( -- _BufferIndex );
+
+            if( _BufferIndex == 0 )
+            {
+                PrevButton.Enabled = false;
             }
+            NextButton.Enabled = true;
         }
 
         private void ToolStripButton_Forward_Click( object sender, EventArgs e )
         {
-            if( _BufferIndex + 1 < _ContentBuffer.Count )
-            {
-                FilterText.Text = String.Empty;
-                StoreViewForBuffer( _BufferIndex );
-                RestoreBufferedContent( ++ _BufferIndex );
+            if( _BufferIndex + 1 >= _ContentBuffer.Count ) 
+                return;
 
-                if( _BufferIndex == _ContentBuffer.Count-1 )
-                {
-                    NextButton.Enabled = false;
-                }
-                PrevButton.Enabled = true;
+            FilterText.Text = String.Empty;
+            StoreViewForBuffer( _BufferIndex );
+            RestoreBufferedContent( ++ _BufferIndex );
+
+            if( _BufferIndex == _ContentBuffer.Count-1 )
+            {
+                NextButton.Enabled = false;
             }
+            PrevButton.Enabled = true;
         }
 
         private void SelectNode( TreeNode node )
@@ -1942,11 +1936,11 @@ namespace UEExplorer.UI.Tabs
         {
             if( e.TabPage == TabPage_Tables )
             {
-                if( DataGridView_NameTable.Rows.Count == 0 )
-                {
-                    new Thread( () => AddNameNodeAsync( null ) ).Start();
-                    TabControl_General.Selected -= TabControl_General_Selected;
-                }
+                if( DataGridView_NameTable.Rows.Count != 0 ) 
+                    return;
+
+                new Thread( () => AddNameNodeAsync( null ) ).Start();
+                TabControl_General.Selected -= TabControl_General_Selected;
             }
         }
 
@@ -1954,21 +1948,21 @@ namespace UEExplorer.UI.Tabs
         {
             if( e.TabPage == TabPage_Exports )
             {
-                if( TreeView_Exports.Nodes.Count == 0 )
-                {
-                    new Thread( () => AddExportNodeAsync( null ) ).Start();
-                    TreeView_Exports.BeforeExpand += _OnExportNodeExpand; 
-                }
+                if( TreeView_Exports.Nodes.Count != 0 ) 
+                    return;
+
+                new Thread( () => AddExportNodeAsync( null ) ).Start();
+                TreeView_Exports.BeforeExpand += _OnExportNodeExpand;
                 return;
             }
 
             if( e.TabPage == TabPage_Imports )
             {
-                if( TreeView_Imports.Nodes.Count == 0 )
-                {
-                    new Thread( () => AddImportNodeAsync( null ) ).Start();
-                    TreeView_Imports.BeforeExpand += _OnImportNodeExpand; 
-                }
+                if( TreeView_Imports.Nodes.Count != 0 ) 
+                    return;
+
+                new Thread( () => AddImportNodeAsync( null ) ).Start();
+                TreeView_Imports.BeforeExpand += _OnImportNodeExpand;
             }
         }
 
@@ -1995,22 +1989,23 @@ namespace UEExplorer.UI.Tabs
         {
             for( int i = 0; i < TreeView_Classes.Nodes.Count; ++ i )
             {
-                if( TreeView_Classes.Nodes[i].Text.IndexOf( FilterText.Text, StringComparison.OrdinalIgnoreCase ) == -1 )
-                {
-                    _FilteredNodes.Add( TreeView_Classes.Nodes[i] );
-                    TreeView_Classes.Nodes[i].Remove();
-                    -- i;
-                }
+                if( TreeView_Classes.Nodes[i].Text.IndexOf( FilterText.Text, StringComparison.OrdinalIgnoreCase ) != -1 )
+                    continue;
+
+                _FilteredNodes.Add( TreeView_Classes.Nodes[i] );
+                TreeView_Classes.Nodes[i].Remove();
+                -- i;
             }
 
             for( int i = 0; i < _FilteredNodes.Count; ++ i )
             {
-                if( FilterText.Text == String.Empty || _FilteredNodes[i].Text.IndexOf( FilterText.Text, StringComparison.OrdinalIgnoreCase  ) >= 0 )
-                {
-                    TreeView_Classes.Nodes.Add( _FilteredNodes[i] );
-                    _FilteredNodes.Remove( _FilteredNodes[i] ); 
-                    -- i;
-                }	
+                if( FilterText.Text != String.Empty &&
+                    _FilteredNodes[i].Text.IndexOf( FilterText.Text, StringComparison.OrdinalIgnoreCase ) < 0 )
+                    continue;
+
+                TreeView_Classes.Nodes.Add( _FilteredNodes[i] );
+                _FilteredNodes.Remove( _FilteredNodes[i] ); 
+                -- i;
             }
 
             TreeView_Classes.Sort();
@@ -2099,7 +2094,7 @@ namespace UEExplorer.UI.Tabs
             ((UObject)exportableObject).BeginDeserializing();
 
             string extensions = String.Empty;
-            foreach( string ext in exportableObject.ExportableExtensions )
+            foreach( var ext in exportableObject.ExportableExtensions )
             {
                 extensions += string.Format( "{0}(*" + ".{0})|*.{0}", ext );
                 if( ext != exportableObject.ExportableExtensions.Last() )
@@ -2256,10 +2251,19 @@ namespace UEExplorer.UI.Tabs
                 }
 
                 var documentResult = nodeEvent.Node.Parent.Tag as TextSearchHelpers.DocumentResult;
-                var unClass = ((UClass)documentResult.Document);
-
-                SetContentTitle( String.Format( "{0}: {1}, {2}", unClass.Name, findResult.TextLine, findResult.TextColumn ), false ); 
-                SetContentText( nodeEvent.Node, unClass.Decompile(), false, false );
+                if( documentResult != null )
+                {
+                    var unClass = ((UClass)documentResult.Document);
+                    SetContentTitle( 
+                        String.Format( "{0}: {1}, {2}", 
+                            unClass.Name, 
+                            findResult.TextLine, 
+                            findResult.TextColumn 
+                        ), 
+                        false 
+                    ); 
+                    SetContentText( nodeEvent.Node, unClass.Decompile(), false, false );
+                }
 
                 TextEditorPanel.textEditor.ScrollTo( findResult.TextLine, findResult.TextColumn );
                 TextEditorPanel.textEditor.Select( findResult.TextIndex, findText.Length );
@@ -2392,58 +2396,54 @@ namespace UEExplorer.UI.Tabs
 
         private void ToggleClassesHierachy( object sender, EventArgs e )
         {
-            if( _CheckBox_ToggleHierachy.Checked )
+            if( !_CheckBox_ToggleHierachy.Checked )
+                return;
+
+            _CheckBox_ToggleHierachy.Enabled = false;
+            TreeView_Classes.BeginUpdate();
+            var nodes = TreeView_Classes.Nodes;
+            for( var i = 0; i < nodes.Count; ++ i )
             {
-                _CheckBox_ToggleHierachy.Enabled = false;
-                TreeView_Classes.BeginUpdate();
-                var nodes = TreeView_Classes.Nodes;
-                for( var i = 0; i < nodes.Count; ++ i )
+                var node = (ObjectNode)TreeView_Classes.Nodes[i];
+                var classObject = node.Object as UClass;
+                if( classObject == null )
                 {
-                    var node = (ObjectNode)TreeView_Classes.Nodes[i];
-                    var classObject = node.Object as UClass;
-                    if( classObject == null )
-                    {
-                        continue;
-                    }
-
-                    var otherNode = node;
-                    var belongsToObject = (classObject.IsClassWithin() 
-                            && string.Compare( classObject.Super.Name, "Object", true ) == 0) 
-                        ? classObject.Within 
-                        : classObject.Super;
-                    if( FindNodeRecursive( nodes, out otherNode, belongsToObject.Name ) )
-                    {
-                        var obj = ((UObject)otherNode.Object);
-                        if( !obj.HasInitializedNodes )
-                        {
-                            // Clear DUMMYNODE
-                            otherNode.Nodes.Clear();
-                            obj.InitializeNodes( otherNode );
-                        }
-
-                        nodes.RemoveAt( i ); -- i;
-                        otherNode.Nodes.Add( node );
-                    }
+                    continue;
                 }
-                TreeView_Classes.EndUpdate();
+
+                ObjectNode otherNode;
+                var belongsToObject = (classObject.IsClassWithin() 
+                                       && String.Compare( classObject.Super.Name, "Object", StringComparison.OrdinalIgnoreCase ) == 0) 
+                    ? classObject.Within 
+                    : classObject.Super;
+                if( !FindNodeRecursive( nodes, out otherNode, belongsToObject.Name ) ) 
+                    continue;
+                var obj = ((UObject)otherNode.Object);
+                if( !obj.HasInitializedNodes )
+                {
+                    // Clear DUMMYNODE
+                    otherNode.Nodes.Clear();
+                    obj.InitializeNodes( otherNode );
+                }
+
+                nodes.RemoveAt( i ); -- i;
+                otherNode.Nodes.Add( node );
             }
+            TreeView_Classes.EndUpdate();
         }
 
-        private bool FindNodeRecursive( TreeNodeCollection collection, out ObjectNode node, string nodeText )
+        private static bool FindNodeRecursive( TreeNodeCollection collection, out ObjectNode node, string nodeText )
         {
-            foreach( ObjectNode otherNode in collection.OfType<ObjectNode>() )
+            foreach( var otherNode in collection.OfType<ObjectNode>() )
             {
                 if( otherNode.Text == nodeText )
                 {
                     node = otherNode;
                     return true;
                 }
-                else
+                if( FindNodeRecursive( otherNode.Nodes, out node, nodeText ) )
                 {
-                    if( FindNodeRecursive( otherNode.Nodes, out node, nodeText ) )
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             node = null;

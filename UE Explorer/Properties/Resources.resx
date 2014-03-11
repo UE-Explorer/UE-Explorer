@@ -404,4 +404,7 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="NodeItem_ViewParent" xml:space="preserve">
     <value>View parent</value>
   </data>
+  <data name="URL_UnrealWikiSearch" xml:space="preserve">
+    <value>http://wiki.beyondunreal.com/?ns0=1&amp;ns100=1&amp;ns102=1&amp;ns104=1&amp;ns106=1&amp;search={0}&amp;title=Special%3ASearch&amp;fulltext=Advanced+search&amp;fulltext=Advanced+search</value>
+  </data>
 </root>

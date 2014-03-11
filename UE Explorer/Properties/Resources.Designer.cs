@@ -842,6 +842,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://wiki.beyondunreal.com/?ns0=1&amp;ns100=1&amp;ns102=1&amp;ns104=1&amp;ns106=1&amp;search={0}&amp;title=Special%3ASearch&amp;fulltext=Advanced+search&amp;fulltext=Advanced+search.
+        /// </summary>
+        internal static string URL_UnrealWikiSearch {
+            get {
+                return ResourceManager.GetString("URL_UnrealWikiSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version {0}.
         /// </summary>
         internal static string Version {
