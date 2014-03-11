@@ -51,6 +51,9 @@ namespace UEExplorer.UI.Tabs
                         ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance 
                     );
                     TextEditorPanel.searchWiki.Click += SearchWiki_Click;
+                    TextEditorPanel.searchDocument.Click += SearchDocument_Click;
+                    TextEditorPanel.searchPackage.Click += SearchClasses_Click;
+                    TextEditorPanel.searchObject.Click += SearchObject_Click;
                     TextEditorPanel.textEditor.ContextMenuOpening += ContextMenu_ContextMenuOpening;
                     TextEditorPanel.copy.Click += Copy_Click;
 
@@ -76,7 +79,7 @@ namespace UEExplorer.UI.Tabs
 
         string GetSelection()
         {
-            return TextEditorPanel.textEditor.TextArea.Selection.GetText( TextEditorPanel.textEditor.Document );
+            return TextEditorPanel.textEditor.TextArea.Selection.GetText();
         }
 
         void ContextMenu_ContextMenuOpening( object sender, System.Windows.Controls.ContextMenuEventArgs e )
@@ -107,6 +110,23 @@ namespace UEExplorer.UI.Tabs
                     GetSelection()
                 ) 
             );
+        }
+
+        void SearchDocument_Click( object sender, System.Windows.RoutedEventArgs e )
+        {
+            SearchBox.Text = GetSelection();
+            FindButton.PerformClick();
+        }
+
+        void SearchClasses_Click( object sender, System.Windows.RoutedEventArgs e )
+        {
+            SearchBox.Text = GetSelection();
+            findInClassesToolStripMenuItem.PerformClick();
+        }
+
+        void SearchObject_Click( object sender, System.Windows.RoutedEventArgs e )
+        {
+            DoSearchObjectByGroup( GetSelection() );
         }
 
         private XMLSettings.State _State;
@@ -2111,6 +2131,7 @@ namespace UEExplorer.UI.Tabs
             string findText;
             using( var findDialog = new FindDialog() )
             {
+                findDialog.FindInput.Text = SearchBox.Text;
                 if( findDialog.ShowDialog() != DialogResult.OK )
                 {
                     return;
