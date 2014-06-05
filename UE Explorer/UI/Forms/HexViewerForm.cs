@@ -241,7 +241,7 @@ namespace UEExplorer.UI.Forms
         private static bool ReplaceBuffer( IBuffered target, byte[] buffer )
         {
             target.GetBuffer().Dispose();
-            using( var package = UnrealPackage.DeserializePackage( target.GetBuffer().Name, FileAccess.ReadWrite ) )
+            using( var package = UnrealLoader.LoadPackage( target.GetBuffer().Name, FileAccess.ReadWrite ) )
             { 
                 package.Stream.Seek( target.GetBufferPosition(), SeekOrigin.Begin );
                 try
@@ -299,7 +299,7 @@ namespace UEExplorer.UI.Forms
                 if( MessageBox.Show( String.Format( Resources.PLEASE_SELECT_PATH, "Hex Workshop" ), Resources.NOT_AVAILABLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Question ) == DialogResult.Cancel )
                     return;
 
-                var ofd = new OpenFileDialog()
+                var ofd = new OpenFileDialog
                 {
                     Filter = "Hex Workshop(HWorks32.exe)|HWorks32.exe", 
                     FileName = Path.Combine( "%ProgramW6432%", "BreakPoint Software", "Hex Workshop v6", "HWorks32.exe" )

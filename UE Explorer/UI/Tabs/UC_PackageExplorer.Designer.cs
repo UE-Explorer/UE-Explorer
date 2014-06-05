@@ -22,7 +22,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
             System.Windows.Forms.Panel filterPanel;
             System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.VSIcons = new System.Windows.Forms.ImageList(this.components);
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -82,6 +82,7 @@
             this.TabPage_Objects = new System.Windows.Forms.TabPage();
             this.TabControl_Objects = new System.Windows.Forms.TabControl();
             this.TabPage_Classes = new System.Windows.Forms.TabPage();
+            this._CheckBox_ToggleHierachy = new System.Windows.Forms.CheckBox();
             this._SearchIcon = new System.Windows.Forms.PictureBox();
             this.TreeView_Classes = new System.Windows.Forms.TreeView();
             this.FilterText = new System.Windows.Forms.TextBox();
@@ -204,23 +205,50 @@
             // 
             this.VSIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("VSIcons.ImageStream")));
             this.VSIcons.TransparentColor = System.Drawing.Color.Fuchsia;
-            this.VSIcons.Images.SetKeyName(0, "Unknown");
-            this.VSIcons.Images.SetKeyName(1, "UClass");
+            this.VSIcons.Images.SetKeyName(0, "text-left");
+            this.VSIcons.Images.SetKeyName(1, "UConst");
             this.VSIcons.Images.SetKeyName(2, "UObject");
-            this.VSIcons.Images.SetKeyName(3, "UConst");
-            this.VSIcons.Images.SetKeyName(4, "UEnum");
-            this.VSIcons.Images.SetKeyName(5, "UStruct");
-            this.VSIcons.Images.SetKeyName(6, "UProperty");
-            this.VSIcons.Images.SetKeyName(7, "UFunction");
-            this.VSIcons.Images.SetKeyName(8, "UState");
-            this.VSIcons.Images.SetKeyName(9, "List");
-            this.VSIcons.Images.SetKeyName(10, "text");
-            this.VSIcons.Images.SetKeyName(11, "tree");
-            this.VSIcons.Images.SetKeyName(12, "object");
-            this.VSIcons.Images.SetKeyName(13, "multiple");
-            this.VSIcons.Images.SetKeyName(14, "import");
-            this.VSIcons.Images.SetKeyName(15, "export");
-            this.VSIcons.Images.SetKeyName(16, "text-left");
+            this.VSIcons.Images.SetKeyName(3, "UState");
+            this.VSIcons.Images.SetKeyName(4, "Interface");
+            this.VSIcons.Images.SetKeyName(5, "Operator");
+            this.VSIcons.Images.SetKeyName(6, "Operater-Protected");
+            this.VSIcons.Images.SetKeyName(7, "Operator-Private");
+            this.VSIcons.Images.SetKeyName(8, "TreeView");
+            this.VSIcons.Images.SetKeyName(9, "Info");
+            this.VSIcons.Images.SetKeyName(10, "Actor");
+            this.VSIcons.Images.SetKeyName(11, "OutParameter");
+            this.VSIcons.Images.SetKeyName(12, "Map");
+            this.VSIcons.Images.SetKeyName(13, "Namespace");
+            this.VSIcons.Images.SetKeyName(14, "ReturnValue");
+            this.VSIcons.Images.SetKeyName(15, "Extend");
+            this.VSIcons.Images.SetKeyName(16, "UFunction");
+            this.VSIcons.Images.SetKeyName(17, "UFunction-Protected");
+            this.VSIcons.Images.SetKeyName(18, "UFunction-Private");
+            this.VSIcons.Images.SetKeyName(19, "Library");
+            this.VSIcons.Images.SetKeyName(20, "Content");
+            this.VSIcons.Images.SetKeyName(21, "Table");
+            this.VSIcons.Images.SetKeyName(22, "UProperty");
+            this.VSIcons.Images.SetKeyName(23, "UProperty-Protected");
+            this.VSIcons.Images.SetKeyName(24, "UProperty-Private");
+            this.VSIcons.Images.SetKeyName(25, "Diagram");
+            this.VSIcons.Images.SetKeyName(26, "Chunks");
+            this.VSIcons.Images.SetKeyName(27, "UDefaultProperty");
+            this.VSIcons.Images.SetKeyName(28, "ImportCatalogPart");
+            this.VSIcons.Images.SetKeyName(29, "UEnum");
+            this.VSIcons.Images.SetKeyName(30, "UEnum-Protected");
+            this.VSIcons.Images.SetKeyName(31, "UEnum-Private");
+            this.VSIcons.Images.SetKeyName(32, "Delegate");
+            this.VSIcons.Images.SetKeyName(33, "Delegate-Protected");
+            this.VSIcons.Images.SetKeyName(34, "Delegate-Private");
+            this.VSIcons.Images.SetKeyName(35, "Event");
+            this.VSIcons.Images.SetKeyName(36, "Event-Protected");
+            this.VSIcons.Images.SetKeyName(37, "Event-Private");
+            this.VSIcons.Images.SetKeyName(38, "UStruct");
+            this.VSIcons.Images.SetKeyName(39, "UStruct-Protected");
+            this.VSIcons.Images.SetKeyName(40, "UStruct-Private");
+            this.VSIcons.Images.SetKeyName(41, "UClass");
+            this.VSIcons.Images.SetKeyName(42, "UClass-Abstract");
+            this.VSIcons.Images.SetKeyName(43, "UClass-Within");
             // 
             // checkBox8
             // 
@@ -549,14 +577,14 @@
             this.DataGridView_Flags.MultiSelect = false;
             this.DataGridView_Flags.Name = "DataGridView_Flags";
             this.DataGridView_Flags.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridView_Flags.RowHeadersVisible = false;
             this.DataGridView_Flags.ShowCellErrors = false;
             this.DataGridView_Flags.ShowEditingIcon = false;
@@ -781,11 +809,19 @@
             // TabPage_Classes
             // 
             this.TabPage_Classes.BackColor = System.Drawing.Color.White;
+            this.TabPage_Classes.Controls.Add(this._CheckBox_ToggleHierachy);
             this.TabPage_Classes.Controls.Add(this._SearchIcon);
             this.TabPage_Classes.Controls.Add(this.TreeView_Classes);
             this.TabPage_Classes.Controls.Add(this.FilterText);
             resources.ApplyResources(this.TabPage_Classes, "TabPage_Classes");
             this.TabPage_Classes.Name = "TabPage_Classes";
+            // 
+            // _CheckBox_ToggleHierachy
+            // 
+            resources.ApplyResources(this._CheckBox_ToggleHierachy, "_CheckBox_ToggleHierachy");
+            this._CheckBox_ToggleHierachy.ImageList = this.VSIcons;
+            this._CheckBox_ToggleHierachy.Name = "_CheckBox_ToggleHierachy";
+            this._CheckBox_ToggleHierachy.CheckedChanged += new System.EventHandler(this.ToggleClassesHierachy);
             // 
             // _SearchIcon
             // 
@@ -1311,5 +1347,6 @@
         private System.Windows.Forms.ToolStripTextBox SearchObjectTextBox;
         private System.Windows.Forms.ToolStripMenuItem ReloadButton;
         private System.Windows.Forms.ToolStripButton SearchByObjectGroupButton;
+        private System.Windows.Forms.CheckBox _CheckBox_ToggleHierachy;
 	}
 }

@@ -19,14 +19,28 @@ namespace UELib.Core
 
 		protected override void AddChildren( TreeNode node )
 		{
-			AddObjectListNode( node, "Constants", Constants );
-			AddObjectListNode( node, "Enumerations", Enums );
-			AddObjectListNode( node, "Structures", Structs );
+            if( ScriptText != null )
+            {
+                AddObjectNode( node, ScriptText, "UObject" );
+            }
 
-			// Not if the upper class is a function; UFunction adds locals and parameters instead
+            if( CppText != null )
+            {
+                AddObjectNode( node, CppText, "UObject" );
+            }
+
+            if( ProcessedText != null )
+            {
+                AddObjectNode( node, ProcessedText, "UObject" );
+            }
+
+			AddObjectListNode( node, "Constants", Constants, "UConst" );
+			AddObjectListNode( node, "Enumerations", Enums, "UEnum" );
+			AddObjectListNode( node, "Structures", Structs, "UStruct" );
+            // Not if the upper class is a function; UFunction adds locals and parameters instead
 			if( GetType() != typeof(UFunction) )
 			{
-				AddObjectListNode( node, "Variables", Variables );
+				AddObjectListNode( node, "Variables", Variables, "UProperty" );
 			}
 		}
 
@@ -35,7 +49,12 @@ namespace UELib.Core
 			if( Properties == null || Properties.Count <= 0 )
 				return;
 
-			var defNode = new ObjectListNode{Text = "Default Values"};
+			var defNode = new ObjectListNode
+            {
+                Text = "Default Values", 
+                ImageKey = "UDefaultProperty", 
+                SelectedImageKey = "UDefaultProperty"
+            };
 			node.Nodes.Add( defNode );
 			foreach( var def in Properties )
 			{	

@@ -19,12 +19,17 @@ namespace UELib.Core
 			AddChildren( node );
 			PostAddChildren( node );
 
-			node.ImageKey = GetType().IsSubclassOf( typeof(UProperty) ) 
-				? typeof(UProperty).Name : this is UScriptStruct 
-					? "UStruct" : GetType().Name;
+			node.ImageKey = GetImageName();
 			node.SelectedImageKey = node.ImageKey;
 			HasInitializedNodes = true;
 		}
+
+        public virtual string GetImageName()
+        {
+            return GetType().IsSubclassOf( typeof(UProperty) ) 
+				? typeof(UProperty).Name : this is UScriptStruct 
+					? "UStruct" : GetType().Name;
+        }
 
 		protected virtual void InitNodes( TreeNode node )
 		{			
@@ -48,7 +53,7 @@ namespace UELib.Core
 
 		protected static TreeNode AddSectionNode( TreeNode p, string n )
 		{
-			var nn = new TreeNode( n ){ImageKey = typeof(UObject).Name};
+			var nn = new TreeNode( n ){ImageKey = "Extend"};
 			nn.SelectedImageKey = nn.ImageKey;
 		   	p.Nodes.Add( nn );
 			return nn;
@@ -56,16 +61,24 @@ namespace UELib.Core
 
 		protected static TreeNode AddTextNode( TreeNode p, string n )
 		{
-			var nn = new TreeNode( n ){ImageKey = "Unknown"};
+			var nn = new TreeNode( n ){ImageKey = "Info"};
 			nn.SelectedImageKey = nn.ImageKey;
 			p.Nodes.Add( nn );
 			return nn;
 		}
 
-		protected static ObjectNode AddObjectNode( TreeNode parentNode, UObject unrealObject )
+		protected static ObjectNode AddObjectNode( TreeNode parentNode, UObject unrealObject, string imageName = "" )
 		{
+            if( unrealObject == null )
+                return null; 
+
 			var objN = new ObjectNode( unrealObject ){Text = unrealObject.Name};
-			unrealObject.InitializeNodes( objN );
+            unrealObject.InitializeNodes( objN );
+            if( imageName != string.Empty )
+            {
+                objN.ImageKey = imageName;
+                objN.SelectedImageKey = imageName;
+            }
 
 			if( unrealObject.DeserializationState.HasFlag( ObjectState.Errorlized ) )
 			{
@@ -76,11 +89,28 @@ namespace UELib.Core
 			return objN;
 		}
 
+        protected static ObjectNode AddSimpleObjectNode( TreeNode parentNode, UObject unrealObject, string text, string imageName = "" )
+		{
+            if( unrealObject == null )
+                return null; 
+
+			var objN = new ObjectNode( unrealObject ){Text = text + ":" + unrealObject.Name};
+            if( imageName != string.Empty )
+            {
+                objN.ImageKey = imageName;
+                objN.SelectedImageKey = imageName;
+            }
+
+			parentNode.Nodes.Add( objN );
+			return objN;
+		}
+
 		protected static ObjectListNode AddObjectListNode
 		( 
 			TreeNode parentNode, 
 			string title,
-			IEnumerable<UObject> objects 
+			IEnumerable<UObject> objects,
+            string imageName = "TreeView"
 		)
 		{
 			if( objects == null )
@@ -89,7 +119,7 @@ namespace UELib.Core
 			var uObjects = objects as List<UObject> ?? objects.ToList();
 			if( uObjects.Any() )
 			{	
-				var listNode = new ObjectListNode{Text = title};
+				var listNode = new ObjectListNode( imageName ){Text = title};
 				foreach( var obj in uObjects )
 				{
 					AddObjectNode( listNode, obj );
@@ -100,4 +130,12 @@ namespace UELib.Core
 			return null;
 		}
 	}
+
+    public partial class UPackage
+    {
+        public override string GetImageName()
+        {
+            return "Library";
+        }
+    }
 }

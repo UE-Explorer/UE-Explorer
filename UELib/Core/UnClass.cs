@@ -10,9 +10,14 @@ namespace UELib.Core
     [UnrealRegisterClass]
     public partial class UClass : UState
     {
-        public struct Dependency : IUnrealDeserializableClass
+        public struct Dependency : IUnrealSerializableClass
         {
             public int Class{ get; private set; }
+
+            public void Serialize( IUnrealStream stream )
+            {
+                // TODO: Implement code
+            }
 
             public void Deserialize( IUnrealStream stream )
             {
@@ -244,7 +249,7 @@ namespace UELib.Core
 
                             // FIXME: Found first in(V:655), Definitely not in APB and GoW 2
                             // TODO: Corrigate Version
-                            if( Package.Version > 575 && Package.Version < 678 )
+                            if( Package.Version > 575 && Package.Version < 674 )
                             {
                                 int unk2 = _Buffer.ReadInt32();
                                 Record( "??Int32", unk2 );
@@ -387,6 +392,17 @@ namespace UELib.Core
         public bool HasClassFlag( uint flag )
         {
             return (ClassFlags & flag) != 0;
+        }
+
+        public bool IsClassInterface()
+        {
+            return (Super != null && String.Compare( Super.Name, "Interface", StringComparison.OrdinalIgnoreCase ) == 0)
+                || String.Compare( Name, "Interface", StringComparison.OrdinalIgnoreCase ) == 0;
+        }
+
+        public bool IsClassWithin()
+        {
+            return Within != null && !string.Equals( Within.Name, "Object", StringComparison.OrdinalIgnoreCase );
         }
         #endregion
     }

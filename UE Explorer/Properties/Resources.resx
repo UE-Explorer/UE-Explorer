@@ -279,7 +279,7 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
     <value>Initializing UI...</value>
   </data>
   <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
-    <value>Search UnrealWiki for "{0}"</value>
+    <value>Search the UnrealWiki for "{0}"</value>
   </data>
   <data name="FIND_RESULTS_TITLE" xml:space="preserve">
     <value>Find Results {0}</value>
@@ -359,40 +359,52 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="ExportTextTitle" xml:space="preserve">
     <value>Export Text</value>
   </data>
-	<data name="NodeItem_ViewProcessedScript">
-		<value xml:space="preserve">View Processed Script</value>
-	</data>
-	<data name="NodeItem_ViewCPPText">
-		<value xml:space="preserve">View CPP Script</value>
-	</data>
-	<data name="THING_DOESNT_EXIST">
-		<value xml:space="preserve">{0} doesn't exist!</value>
-	</data>
-	<data name="UNRECOGNIZED_EXPORT_TYPE">
-		<value xml:space="preserve">Unrecognized export type {0}</value>
-	</data>
-	<data name="EXPORTING_PACKAGE">
-		<value xml:space="preserve">Exporting package {0}</value>
-	</data>
-	<data name="PACKAGE_EXPORTED_TO">
-		<value xml:space="preserve">Package successfully exported to {0}</value>
-	</data>
-	<data name="EXCEPTION_OCCURRED_WHILE_EXPORTING">
-		<value xml:space="preserve">An exception occurred while exporting {0}
+  <data name="NodeItem_ViewProcessedScript" xml:space="preserve">
+    <value>View Processed Script</value>
+  </data>
+  <data name="NodeItem_ViewCPPText" xml:space="preserve">
+    <value>View CPP Script</value>
+  </data>
+  <data name="THING_DOESNT_EXIST" xml:space="preserve">
+    <value>{0} doesn't exist!</value>
+  </data>
+  <data name="UNRECOGNIZED_EXPORT_TYPE" xml:space="preserve">
+    <value>Unrecognized export type {0}</value>
+  </data>
+  <data name="EXPORTING_PACKAGE" xml:space="preserve">
+    <value>Exporting package {0}</value>
+  </data>
+  <data name="PACKAGE_EXPORTED_TO" xml:space="preserve">
+    <value>Package successfully exported to {0}</value>
+  </data>
+  <data name="EXCEPTION_OCCURRED_WHILE_EXPORTING" xml:space="preserve">
+    <value>An exception occurred while exporting {0}
 {1}</value>
-	</data>
-	<data name="UNRECOGNIZED_COMMANDLINE_OPTION">
-		<value xml:space="preserve">Unrecognized commandline option {0}</value>
-	</data>
-	<data name="COULDNT_RELOAD_OBJECT">
-		<value xml:space="preserve">Couldn't reload due this error:
+  </data>
+  <data name="UNRECOGNIZED_COMMANDLINE_OPTION" xml:space="preserve">
+    <value>Unrecognized commandline option {0}</value>
+  </data>
+  <data name="COULDNT_RELOAD_OBJECT" xml:space="preserve">
+    <value>Couldn't reload due this error:
 
 	{0}</value>
-	</data>
-	<data name="PLEASE_SELECT_PATH">
-		<value xml:space="preserve">The path to {0} is not configured. Select the program's executable!</value>
-	</data>
-	<data name="CHECKING_FOR_UPDATES_LOG">
-		<value xml:space="preserve">Checking for updates(Current version is {0})...</value>
-	</data>
+  </data>
+  <data name="PLEASE_SELECT_PATH" xml:space="preserve">
+    <value>The path to {0} is not configured. Select the program's executable!</value>
+  </data>
+  <data name="CHECKING_FOR_UPDATES_LOG" xml:space="preserve">
+    <value>Checking for updates(Current version is {0})...</value>
+  </data>
+  <data name="SEARCH_AS_OBJECT" xml:space="preserve">
+    <value>Search as Object</value>
+  </data>
+  <data name="NodeItem_ViewOuter" xml:space="preserve">
+    <value>View outer</value>
+  </data>
+  <data name="NodeItem_ViewParent" xml:space="preserve">
+    <value>View parent</value>
+  </data>
+  <data name="URL_UnrealWikiSearch" xml:space="preserve">
+    <value>http://wiki.beyondunreal.com/?ns0=1&amp;ns100=1&amp;ns102=1&amp;ns104=1&amp;ns106=1&amp;search={0}&amp;title=Special%3ASearch&amp;fulltext=Advanced+search&amp;fulltext=Advanced+search</value>
+  </data>
 </root>

@@ -253,7 +253,7 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
     <value>UI initializeren...</value>
   </data>
   <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
-    <value>Zoek UnrealWiki voor "{0}"</value>
+    <value>In de UnrealWiki zoeken naar "{0}"</value>
   </data>
   <data name="NO_FIND_RESULTS" xml:space="preserve">
     <value>Er werden geen resultaten gevonden met deze text "{0}".</value>
@@ -324,40 +324,49 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
   <data name="NoTargetForViewBuffer" xml:space="preserve">
     <value>Geen doelwit gevonden voor "Bekijk buffer"</value>
   </data>
-	<data name="NodeItem_DefaultBuffer" xml:space="preserve">
+  <data name="NodeItem_DefaultBuffer" xml:space="preserve">
     <value>Standaard eigenschappen buffer</value>
   </data>
-	<data name="UnrealClassFilter" xml:space="preserve">
+  <data name="UnrealClassFilter" xml:space="preserve">
     <value>Unreal klass</value>
   </data>
   <data name="ExportTextTitle" xml:space="preserve">
     <value>Exporteer text</value>
   </data>
-	<data name="NodeItem_ViewProcessedScript">
-		<value xml:space="preserve">Bekijk verwerkte script</value>
-	</data>
-	<data name="NodeItem_ViewCPPText">
-		<value xml:space="preserve">Bekijk CPP script</value>
-	</data>
-	<data name="THING_DOESNT_EXIST">
-		<value xml:space="preserve">{0} bestaat niet!</value>
-	</data>
-	<data name="UNRECOGNIZED_EXPORT_TYPE">
-		<value xml:space="preserve">Niet herkende export type {0}</value>
-	</data>
-	<data name="EXCEPTION_OCCURRED_WHILE_EXPORTING">
-		<value xml:space="preserve">Een uitzondering vondt plaats tijdens het exporteren van {0}
+  <data name="NodeItem_ViewProcessedScript" xml:space="preserve">
+    <value>Bekijk verwerkte script</value>
+  </data>
+  <data name="NodeItem_ViewCPPText" xml:space="preserve">
+    <value>Bekijk CPP script</value>
+  </data>
+  <data name="THING_DOESNT_EXIST" xml:space="preserve">
+    <value>{0} bestaat niet!</value>
+  </data>
+  <data name="UNRECOGNIZED_EXPORT_TYPE" xml:space="preserve">
+    <value>Niet herkende export type {0}</value>
+  </data>
+  <data name="EXCEPTION_OCCURRED_WHILE_EXPORTING" xml:space="preserve">
+    <value>Een uitzondering vondt plaats tijdens het exporteren van {0}
 {1}</value>
-	</data>
-	<data name="UNRECOGNIZED_COMMANDLINE_OPTION">
-		<value xml:space="preserve">Niet herkende commandline optie {0}</value>
-	</data>
-	<data name="COULDNT_RELOAD_OBJECT">
-		<value xml:space="preserve">Kon niet opnieuw laden vanwege deze fout:
+  </data>
+  <data name="UNRECOGNIZED_COMMANDLINE_OPTION" xml:space="preserve">
+    <value>Niet herkende commandline optie {0}</value>
+  </data>
+  <data name="COULDNT_RELOAD_OBJECT" xml:space="preserve">
+    <value>Kon niet opnieuw laden vanwege deze fout:
 
 	{0}</value>
-	</data>
-	<data name="PLEASE_SELECT_PATH">
-		<value xml:space="preserve">Het pad naar {0} is niet geconfigureerd. Selecteer de toepassing van het programma!</value>
-	</data>
+  </data>
+  <data name="PLEASE_SELECT_PATH" xml:space="preserve">
+    <value>Het pad naar {0} is niet geconfigureerd. Selecteer de toepassing van het programma!</value>
+  </data>
+  <data name="SEARCH_AS_OBJECT" xml:space="preserve">
+    <value>Zoeken als object</value>
+  </data>
+  <data name="NodeItem_ViewOuter" xml:space="preserve">
+    <value>Bekijk buitenste</value>
+  </data>
+  <data name="NodeItem_ViewParent" xml:space="preserve">
+    <value>Bekijk ouder</value>
+  </data>
 </root>

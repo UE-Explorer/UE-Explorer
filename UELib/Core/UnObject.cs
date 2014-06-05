@@ -610,18 +610,14 @@ namespace UELib.Core
         /// <param name="varName">The struct that was read from the previous buffer position.</param>
         /// <param name="varObject">The struct's value that was read.</param>
         [System.Diagnostics.DebuggerHidden]
-        [System.Diagnostics.Conditional( "DEBUG" )]
+        [System.Diagnostics.Conditional( "DEBUG" ), System.Diagnostics.Conditional( "BINARYMETADATA" )]
         internal void Record( string varName, object varObject = null )
         {
-#if DEBUG || BINARYMETADATA
-            {
-                var size = _Buffer.Position - _Buffer.LastPosition;
-                if( size <= 0 )
-                    return;
+            var size = _Buffer.Position - _Buffer.LastPosition;
+            if( size <= 0 )
+                return;
                     
-                BinaryMetaData.AddField( varName, varObject, _Buffer.LastPosition, size );
-            }
-#endif
+            BinaryMetaData.AddField( varName, varObject, _Buffer.LastPosition, size );
 #if LOG_RECORDS
             if( varObject == null )
             {
@@ -726,5 +722,10 @@ namespace UELib.Core
         {
             return false;
         }
+    }
+
+    [UnrealRegisterClass]
+    public partial class UPackage : UObject
+    {
     }
 }

@@ -191,6 +191,12 @@ namespace UELib.Core
                 );			
             }
 
+            var metaData = DecompileMeta();
+            if( metaData != String.Empty )
+            {
+                output = metaData + "\r\n" + output;
+            }
+
             output += FormatFlags() 
                 + (ReturnProperty != null 
                     ? ReturnProperty.GetFriendlyType() + " " 
@@ -205,15 +211,16 @@ namespace UELib.Core
 
         private string FormatParms()
         {
-            string parms = "(";
+            string output = "(";
             if( Params != null && Params.Any() )
             { 
-                foreach( var parm in Params	)
+                var parameters = Params.Where( (p) => p != ReturnProperty ); 
+                foreach( var parm in parameters )
                 {
-                    parms += parm.Decompile() + (parm != Params.Last() ? ", " : String.Empty);
+                    output += parm.Decompile() + (parm != parameters.Last() ? ", " : String.Empty);
                 }
             }
-            return parms + ")";
+            return output + ")";
         }
 
         private string FormatCode()
