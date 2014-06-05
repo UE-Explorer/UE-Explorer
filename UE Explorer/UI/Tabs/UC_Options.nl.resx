@@ -145,10 +145,10 @@
     <value>Onderdruk commentaar</value>
   </data>
   <data name="SuppressComments.ToolTip" xml:space="preserve">
-    <value>Onderdrukt commentaar zoals als // End:0x00</value>
+    <value>Onderdrukt commentaar, zoals als // End:0x00</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>Invoer de pad naar UE Model Viewer om geïntegreerd ondersteuning te krijgen voor het bekijken van Meshes en/of Textures via de Inhoud tab!</value>
+    <value>Invoer het pad naar UE Model Viewer voor geïntegreerde ondersteuning te krijgen voor het bekijken van Meshes en/of Textures in de Inhoud tab!</value>
   </data>
   <data name="groupBox6.Text" xml:space="preserve">
     <value>Eigenschappen</value>
@@ -196,13 +196,13 @@
     <value>Gesimuleerde licentiehouder</value>
   </data>
   <data name="CheckBox_LicenseeMode.ToolTip" xml:space="preserve">
-    <value>Beheerd elk pakket alsof het werd gemaakt met deze versie</value>
+    <value>Beheerd elk pakket alsof het werd gemaakt met de ingestelde versie</value>
   </data>
   <data name="CheckBox_Version.Text" xml:space="preserve">
     <value>Gesimuleerde versie</value>
   </data>
   <data name="CheckBox_Version.ToolTip" xml:space="preserve">
-    <value>Beheerd elk pakket alsof het werd gemaakt met deze versie</value>
+    <value>Beheerd elk pakket alsof het werd gemaakt met de ingestelde versie</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Native tabellen</value>
