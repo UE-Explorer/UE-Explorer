@@ -537,7 +537,7 @@
       <Project>{C240217D-9B6A-46D4-892F-12C64853F8AE}</Project>
       <Name>Eliot.Utilities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UELib\Eliot.UELib.csproj">
+    <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj">
       <Project>{7E45273F-434F-42FA-8269-0E760AEB41E1}</Project>
       <Name>Eliot.UELib</Name>
     </ProjectReference>
@@ -561,7 +561,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

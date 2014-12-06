@@ -49,7 +49,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UELib\Eliot.UELib.csproj">
+    <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj">
       <Project>{7e45273f-434f-42fa-8269-0e760aeb41e1}</Project>
       <Name>Eliot.UELib</Name>
     </ProjectReference>
