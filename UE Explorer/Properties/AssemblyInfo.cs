@@ -10,7 +10,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("EliotVU")]
 [assembly: AssemblyProduct("UE Explorer")]
-[assembly: AssemblyCopyright("© 2009-2014 Eliot van Uytfanghe. All rights reserved.")]
+[assembly: AssemblyCopyright( "© 2009-2015 Eliot van Uytfanghe. All rights reserved." )]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,6 +32,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion( "1.2.7.0" )]
-[assembly: AssemblyFileVersion( "1.2.7.0" )]
+[assembly: AssemblyVersion( "1.2.7.1" )]
+[assembly: AssemblyFileVersion( "1.2.7.1" )]
 [assembly: NeutralResourcesLanguageAttribute( "en" )]
