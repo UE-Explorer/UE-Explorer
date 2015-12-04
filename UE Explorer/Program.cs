@@ -142,7 +142,7 @@ namespace UEExplorer
 
 #region Options
         public static readonly string ConfigDir = Path.Combine( Application.StartupPath, "Config" );
-        private static readonly string SettingsPath = Path.Combine( 
+        private static readonly string _SettingsPath = Path.Combine( 
             ConfigDir, 
             "UEExplorerConfig.xml" 
         );
@@ -150,9 +150,9 @@ namespace UEExplorer
 
         public static void LoadConfig()
         {
-            if( File.Exists( SettingsPath ) )
+            if( File.Exists( _SettingsPath ) )
             {
-                using( var r = new XmlTextReader( SettingsPath ) )
+                using( var r = new XmlTextReader( _SettingsPath ) )
                 {
                     var xser = new XmlSerializer( typeof(XMLSettings) );
                     Options = (XMLSettings)xser.Deserialize( r );
@@ -235,7 +235,7 @@ namespace UEExplorer
             if( Options == null )
                 Options = new XMLSettings();
 
-            using( var w = new XmlTextWriter( SettingsPath, Encoding.ASCII ) )
+            using( var w = new XmlTextWriter( _SettingsPath, Encoding.ASCII ) )
             {
                 var xser = new XmlSerializer( typeof(XMLSettings) );
                 xser.Serialize( w, Options );
