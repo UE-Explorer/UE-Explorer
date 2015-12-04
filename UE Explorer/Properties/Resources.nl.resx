@@ -127,13 +127,13 @@
     <value>Waarschuwing</value>
   </data>
   <data name="INVALID_NAME_INDEX" xml:space="preserve">
-    <value>Ongeldige naam index {0}</value>
+    <value>Ongeldig naam index {0}</value>
   </data>
   <data name="NOT_AVAILABLE" xml:space="preserve">
     <value>N/B</value>
   </data>
   <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
-    <value>Ongeldige object index {0}</value>
+    <value>Ongeldig object index {0}</value>
   </data>
   <data name="RegistryWarning" xml:space="preserve">
     <value>Dit zal jouw registery bewerken.
@@ -166,7 +166,7 @@ Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eer
     <comment>Tab title</comment>
   </data>
   <data name="CHECKFORUPDATES_FAILED_MESSAGE" xml:space="preserve">
-    <value>Zoeken naar een update is mislukt. Probeer later nog een keer opnieuw!</value>
+    <value>Het zoeken naar een update was mislukt. Probeer later nog een keer opnieuw!</value>
   </data>
   <data name="Homepage" xml:space="preserve">
     <value>Hoofdpagina</value>
@@ -181,14 +181,14 @@ Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eer
     <comment>Status description.</comment>
   </data>
   <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
-    <value>Als je op ja klikt zul je naar de update gebracht worden!
+    <value>Als je op ja klikt zal je naar de update gebracht worden!
 
 Huidige versie: {0}
 Laatste versie: {1}</value>
     <comment>Dialog description.</comment>
   </data>
   <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
-    <value>Je kan geen binair bestanden importeren met een ongelijke lengte!</value>
+    <value>Je kan geen binaire bestanden importeren die een ongelijke lengte hebben!</value>
   </data>
   <data name="SAVE_QUESTION_WARNING" xml:space="preserve">
     <value>Weet je zeker dat je dit wilt opslaan? Deze veranderingen zullen permanent zijn, maak zeker dat je een reservekopie hebt!</value>
@@ -209,15 +209,15 @@ Laatste versie: {1}</value>
     <value>Opgeslagen!</value>
   </data>
   <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
-    <value>Exporteerde alle klassen van {0} naar {1}
+    <value>Alle klassen van {0} zijn naar {1} geëxporteerd.
 
 Klik op ja als je nu naar deze map wilt gebracht worden!</value>
   </data>
   <data name="PACKAGE_IS_COMPRESSED" xml:space="preserve">
     <value>Dit pakket is gecompresseerd! Deze pakketen zijn niet ondersteund.
-Om dit de decompresseren kan je "Unreal Package Decompressor" van Gildor downloaden.
+Om dit te decompresseren moet je "Unreal Package Decompressor" van Gildor downloaden.
 
-Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.</value>
+Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.</value>
   </data>
   <data name="COMPRESSED_HOWTO" xml:space="preserve">
     <value>Om Gildor's tool te gebruiken, probeer het volgende "decompress.exe PACKAGENAME.EXT" het zou kunnen dat je -lzo zult moeten tevoegen.</value>
@@ -226,13 +226,13 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
     <value>Opmerking</value>
   </data>
   <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
-    <value>Dit pakket heeft een onbekend handtekening. Ben je zeker dat je dit pakket wilt openen? Op ja klikken kan leiden to onverwachte resultaten!</value>
+    <value>Dit pakket heeft een onbekend handtekening. Ben je zeker dat je dit pakket wilt openen? Op ja klikken, zou kunnen leiden tot onverwachte resultaten!</value>
   </data>
   <data name="PACKAGE_LOADING" xml:space="preserve">
-    <value>Pakket aant laden...</value>
+    <value>Pakket aan het laden...</value>
   </data>
   <data name="PACKAGE_METAINFO" xml:space="preserve">
-    <value>Pakket's MetaInfo</value>
+    <value>Pakkets MetaInfo</value>
   </data>
   <data name="EXPORT_AS" xml:space="preserve">
     <value>Exporteer {0} als...</value>
@@ -244,7 +244,7 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
     <value>Objecten lezen...</value>
   </data>
   <data name="IMPORTING_OBJECTS" xml:space="preserve">
-    <value>Objecten aant importeren...</value>
+    <value>Objecten aan het importeren...</value>
   </data>
   <data name="LINKING_OBJECTS" xml:space="preserve">
     <value>Objecten verbinden...</value>
@@ -286,7 +286,7 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
     <value>Openen met UE Model Viewer</value>
   </data>
   <data name="NodeItem_ExportWithUEModelViewer" xml:space="preserve">
-    <value>Exporteer met UE Model Viewer</value>
+    <value>Exporteren met UE Model Viewer</value>
   </data>
   <data name="NodeItem_ViewContent" xml:space="preserve">
     <value>Bekijk inhoud</value>
@@ -346,14 +346,14 @@ Als je op ja klikt zul je naar http://www.gildor.org/downloads gebracht worden.<
     <value>Niet herkende export type {0}</value>
   </data>
   <data name="EXCEPTION_OCCURRED_WHILE_EXPORTING" xml:space="preserve">
-    <value>Een uitzondering vondt plaats tijdens het exporteren van {0}
+    <value>Een uitzondering vondt zich plaats tijdens het exporteren van {0}
 {1}</value>
   </data>
   <data name="UNRECOGNIZED_COMMANDLINE_OPTION" xml:space="preserve">
-    <value>Niet herkende commandline optie {0}</value>
+    <value>Commandline optie {0} is niet herkenbaar!</value>
   </data>
   <data name="COULDNT_RELOAD_OBJECT" xml:space="preserve">
-    <value>Kon niet opnieuw laden vanwege deze fout:
+    <value>Het object kon niet worden herladen vanwege deze fout:
 
 	{0}</value>
   </data>
