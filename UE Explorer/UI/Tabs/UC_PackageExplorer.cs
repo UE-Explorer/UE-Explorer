@@ -1983,11 +1983,34 @@ namespace UEExplorer.UI.Tabs
             hexDialog.Show( _Form );
         }
 
+        private System.Windows.Forms.Timer _FilterTextChangedTimer = null;
         private readonly List<TreeNode> _FilteredNodes = new List<TreeNode>();
 
         private void FilterText_TextChanged( object sender, EventArgs e )
         {
-            for( int i = 0; i < TreeView_Classes.Nodes.Count; ++ i )
+            if( _FilterTextChangedTimer != null && _FilterTextChangedTimer.Enabled )
+            {
+                _FilterTextChangedTimer.Stop();
+                _FilterTextChangedTimer.Dispose();
+                _FilterTextChangedTimer = null;
+            }
+
+            if( _FilterTextChangedTimer == null )
+            {
+                _FilterTextChangedTimer = new System.Windows.Forms.Timer();
+                _FilterTextChangedTimer.Interval = 350;
+                _FilterTextChangedTimer.Tick += _FilterTextChangedTimer_Tick;
+                _FilterTextChangedTimer.Start();
+            }
+        }
+
+        private void _FilterTextChangedTimer_Tick( object sender, EventArgs e )
+        {
+            _FilterTextChangedTimer.Stop();
+            _FilterTextChangedTimer.Dispose();
+            _FilterTextChangedTimer = null;
+
+            for ( int i = 0; i < TreeView_Classes.Nodes.Count; ++ i )
             {
                 if( TreeView_Classes.Nodes[i].Text.IndexOf( FilterText.Text, StringComparison.OrdinalIgnoreCase ) != -1 )
                     continue;
