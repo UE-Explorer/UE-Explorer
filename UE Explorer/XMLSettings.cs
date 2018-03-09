@@ -66,6 +66,11 @@ namespace UEExplorer
 
         public State GetState( string id )
         {
+            if( States == null )
+            {
+                States = new List<State>();    
+            }
+
             var index = States.FindIndex( s => s.Id == id );
             if( index != -1 )
             {

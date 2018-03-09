@@ -58,7 +58,7 @@
       <Name>UE Explorer</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\UELib\Eliot.UELib.csproj">
+    <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj">
       <Project>{7E45273F-434F-42FA-8269-0E760AEB41E1}</Project>
       <Name>Eliot.UELib</Name>
       <Private>False</Private>
