@@ -1,19 +1,12 @@
-/Misc/
-/Obfuscator/
+/Eliot.Extensions.Obfuscator/
+/Eliot.Extensions.EdProtector/
+/Eliot.UE Explorer.Forms/
+/UEExplorer.UnitTests/
+
+*.psess
 /*.suo
 /*.csproj.user
 /*.sln.DotSettings.user
-/Eliot.Extensions.Obfuscator/
-/Eliot.Extensions.EdProtector/
+
 /Setup/
-/*.lnk
-/_UpgradeReport_Files/
-/_ReSharper.UE Explorer/
-/*.psess
-/*.vsp
-/todo.txt
-/Eliot.UE Explorer.Forms/
-/_NCrunch_UE Explorer/
-/*.ncrunchsolution.user
-/*.ncrunchsolution
-/UEExplorer.UnitTests/
+/.vs/
