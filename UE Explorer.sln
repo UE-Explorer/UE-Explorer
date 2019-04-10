@@ -1,17 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28809.33
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UE Explorer", "UE Explorer\UE Explorer.csproj", "{C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7E45273F-434F-42FA-8269-0E760AEB41E1} = {7E45273F-434F-42FA-8269-0E760AEB41E1}
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1} = {6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UELib", "UELib\src\Eliot.UELib.csproj", "{7E45273F-434F-42FA-8269-0E760AEB41E1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.AvalonEdit", "..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj", "{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UnrealScript.Parser", "..\Unreal Programming Environment\UPE.UnrealScript\Eliot.UnrealScript.Parser.csproj", "{FF884D57-179B-4A56-B76D-FCE950FB9F01}"
 EndProject
@@ -30,10 +27,8 @@ EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Install UE Explorer", "Setup\Setup.vdproj", "{7167B940-B5A5-4434-825A-69510441E513}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7E45273F-434F-42FA-8269-0E760AEB41E1} = {7E45273F-434F-42FA-8269-0E760AEB41E1}
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13} = {FB9E7E6B-B19F-4F37-A708-2996190CEF13}
 		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77} = {FE7B4B6E-D050-4B66-AC12-3D28E4917D77}
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3} = {E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1} = {6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}
 		{C240217D-9B6A-46D4-892F-12C64853F8AE} = {C240217D-9B6A-46D4-892F-12C64853F8AE}
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A} = {760F1D8A-0963-45DA-9E92-220E05EBAD2A}
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1} = {4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}
@@ -44,8 +39,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Utilities", "Eliot.Utilities\Eliot.Utilities.csproj", "{C240217D-9B6A-46D4-892F-12C64853F8AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Extensions.NTLGenerator", "Eliot.Extensions.NativesTableListGenerator\Eliot.Extensions.NTLGenerator.csproj", "{FE7B4B6E-D050-4B66-AC12-3D28E4917D77}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdater.NET", "..\AutoUpdater.NET\AutoUpdater.NET\AutoUpdater.NET.csproj", "{FB9E7E6B-B19F-4F37-A708-2996190CEF13}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UELib.Demo", "Eliot.UELib.Demo\Eliot.UELib.Demo.csproj", "{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}"
 EndProject
@@ -95,21 +88,6 @@ Global
 		{7E45273F-434F-42FA-8269-0E760AEB41E1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7E45273F-434F-42FA-8269-0E760AEB41E1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7E45273F-434F-42FA-8269-0E760AEB41E1}.Release|x86.ActiveCfg = Release|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Publish|Any CPU.Build.0 = Debug|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Publish|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Publish|Mixed Platforms.Build.0 = Debug|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Publish|x86.ActiveCfg = Debug|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|x86.ActiveCfg = Release|Any CPU
 		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
@@ -219,21 +197,6 @@ Global
 		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77}.Release|x86.ActiveCfg = Release|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Publish|Any CPU.ActiveCfg = Release|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Publish|Any CPU.Build.0 = Release|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Publish|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Publish|Mixed Platforms.Build.0 = Release|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Publish|x86.ActiveCfg = Release|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{FB9E7E6B-B19F-4F37-A708-2996190CEF13}.Release|x86.ActiveCfg = Release|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -254,8 +217,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateAssemblyVersion = True
-		BuildVersion_UpdateFileVersion = True
 		SolutionGuid = {C3228331-D3B2-4023-873A-8394388151F5}
+		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UpdateAssemblyVersion = True
 	EndGlobalSection
 EndGlobal
