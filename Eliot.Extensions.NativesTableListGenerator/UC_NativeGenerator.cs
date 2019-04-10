@@ -45,7 +45,7 @@ namespace Eliot.Extensions.NativesTableListGenerator
             TreeView_Packages.BeginUpdate();
             foreach( var package in packages )
             {
-                package.RegisterClass( "Function", typeof(UFunction) );
+                package.AddClassType( "Function", typeof(UFunction) );
                 package.InitializeExportObjects( UnrealPackage.InitFlags.Deserialize );
 
                 var packageNode = TreeView_Packages.Nodes.Add( package.PackageName );

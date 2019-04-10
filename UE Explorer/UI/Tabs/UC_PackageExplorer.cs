@@ -859,7 +859,7 @@ namespace UEExplorer.UI.Tabs
                 }
             }
 
-            if( !_UnrealPackage.IsRegisteredClass( item.ClassName ) )
+            if( _UnrealPackage.HasClassType( item.ClassName ) )
             {
                 node.ForeColor = Color.DarkOrange;
                 node.ToolTipText = String.Format( Resources.CLASS_ISNT_SUPPORTED, item.ClassName );   
