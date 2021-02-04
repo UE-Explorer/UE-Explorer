@@ -1382,7 +1382,7 @@ namespace UEExplorer.UI.Tabs
             var obj = target as UObject;
             if( obj == null && target is IDecompilableObject )
             {
-                obj = (target as IDecompilableObject).Object as UObject; 
+                obj = ((IDecompilableObject) target).Object as UObject; 
             }
 
             try
