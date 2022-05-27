@@ -481,21 +481,27 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Native Tables\NativesTableList_UDK-2011-08.NTL">
+    <Content Include="Extensions\Eliot.Extensions.ExecGenerator.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Native Tables\NativesTableList_UDK-2012-05.NTL">
+    </Content>
+    <Content Include="Extensions\Eliot.Extensions.NativesTableListGenerator.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Native Tables\NativesTableList_UT.NTL">
+    </Content>
+    <Content Include="Native Tables\NativesTableList_UDK-2011-08.NTL">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Native Tables\NativesTableList_UT2004.NTL">
+    </Content>
+    <Content Include="Native Tables\NativesTableList_UDK-2012-05.NTL">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Native Tables\NativesTableList_UT3.NTL">
+    </Content>
+    <Content Include="Native Tables\NativesTableList_UT.NTL">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="Native Tables\NativesTableList_UT2004.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Native Tables\NativesTableList_UT3.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -569,7 +575,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

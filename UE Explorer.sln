@@ -101,10 +101,9 @@ Global
 		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FF884D57-179B-4A56-B76D-FCE950FB9F01}.Release|x86.ActiveCfg = Release|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|Any CPU.ActiveCfg = Publish|Any CPU
+		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|Mixed Platforms.ActiveCfg = Publish|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|Mixed Platforms.Build.0 = Publish|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|x86.ActiveCfg = Publish|Any CPU
@@ -113,10 +112,9 @@ Global
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Release|x86.ActiveCfg = Release|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|Any CPU.ActiveCfg = Publish|Any CPU
+		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|Mixed Platforms.ActiveCfg = Publish|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|Mixed Platforms.Build.0 = Publish|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|x86.ActiveCfg = Publish|Any CPU
@@ -196,12 +194,10 @@ Global
 		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77}.Release|x86.ActiveCfg = Release|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Publish|Any CPU.ActiveCfg = Release|Any CPU
-		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Publish|Any CPU.Build.0 = Release|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Publish|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Publish|Mixed Platforms.Build.0 = Release|Any CPU
 		{D39B11D9-14B5-4FC2-87DB-4BB39FF651A4}.Publish|x86.ActiveCfg = Release|Any CPU
@@ -215,8 +211,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateAssemblyVersion = True
-		BuildVersion_UpdateFileVersion = True
 		SolutionGuid = {C3228331-D3B2-4023-873A-8394388151F5}
+		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UpdateAssemblyVersion = True
 	EndGlobalSection
 EndGlobal
