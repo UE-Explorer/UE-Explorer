@@ -245,9 +245,9 @@ namespace UEExplorer
 
         internal const string WEBSITE_URL = 
 #if DEBUG_WITH_LOCALHOST
-            "http://localhost/Eliot/";
+            "https://localhost/Eliot/";
 #else
-            "http://eliotvu.com/";
+            "https://eliotvu.com/";
 #endif
 
         internal const string Donate_URL = WEBSITE_URL + "donate.html";
@@ -260,6 +260,7 @@ namespace UEExplorer
         internal const string UPDATE_URL = WEBSITE_URL + "updates/ue-explorer.xml" + UPDATE_QUERY;
         internal const string UPDATE_QUERY = "?auto=1&installed_version={0}";
 
+        // TODO: Deprecate
 #region Registry	
         private const string RegistryFileFolderName = "UEExplorer.AnyUnrealFile";
 

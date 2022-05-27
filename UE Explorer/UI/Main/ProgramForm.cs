@@ -572,7 +572,7 @@ namespace UEExplorer.UI
 
         private void ReportAnIssue( object sender, EventArgs e )
         {
-            System.Diagnostics.Process.Start( "https://bitbucket.org/eliotvu/ue-explorer/issues" );
+            System.Diagnostics.Process.Start("https://github.com/UE-Explorer/UE-Explorer/issues");
         }
     }
 

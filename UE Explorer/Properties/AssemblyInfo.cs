@@ -6,11 +6,11 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("UE Explorer")]
-[assembly: AssemblyDescription( "An UnrealScript decompiler for Unreal Engine 1, 2, and 3. Supporting all Epic Games for the PC such as Unreal, UT, UT2004, UT3, and the Unreal Development Kit(UDK)." )]
+[assembly: AssemblyDescription("An UnrealScript decompiler for Unreal Engine 1, 2, and 3. Supporting all Epic Games for the PC such as Unreal, UT, UT2004, UT3, and the Unreal Development Kit(UDK).")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("EliotVU")]
 [assembly: AssemblyProduct("UE Explorer")]
-[assembly: AssemblyCopyright("© 2009-2018 Eliot van Uytfanghe. All rights reserved.")]
+[assembly: AssemblyCopyright("© 2009-2022 Eliot van Uytfanghe. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,6 +32,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion( "1.2.7.1" )]
-[assembly: AssemblyFileVersion( "1.2.7.1" )]
-[assembly: NeutralResourcesLanguageAttribute( "en" )]
+[assembly: AssemblyVersion("1.3")]
+[assembly: AssemblyFileVersion("1.3")]
+[assembly: NeutralResourcesLanguage("en")]

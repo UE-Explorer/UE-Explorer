@@ -782,7 +782,7 @@ namespace UEExplorer.UI.Tabs
                 TreeView_Classes.Nodes.Add( node );	
             }
             // HACK:Add a MetaData object to the classes tree(hack because MetaData is not an actual class)
-            var metobj = _UnrealPackage.FindObject( "MetaData", typeof( UMetaData ) );
+            var metobj = _UnrealPackage.FindObject<UMetaData>( "MetaData" );
             if( metobj != null )
             {
                 var node = new ObjectNode( metobj )
