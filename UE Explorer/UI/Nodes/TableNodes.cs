@@ -5,6 +5,7 @@ using UELib.Flags;
 
 namespace UEExplorer.UI.Nodes
 {
+    [Serializable]
     public abstract class UTableNode : TreeNode, IContainsTable, IDecompilableObject 
     {
         public UObjectTableItem Table{ get; set; }

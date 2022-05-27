@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using UEExplorer.Properties;
 using UEExplorer.UI.Forms;
 using UEExplorer.UI.Nodes;
-using UELib.Engine;
 
 namespace UEExplorer.UI.Tabs
 {
@@ -609,7 +608,7 @@ namespace UEExplorer.UI.Tabs
             }
 
             if( _UnrealPackage.Exports == null || _UnrealPackage.Exports.Count == 0 
-                || !_UnrealPackage.Exports.Any( obj => obj.OuterTable == null & obj.ClassName == "Package") )
+                || !_UnrealPackage.Exports.Any( obj => obj.OuterTable == null && obj.ClassName == "Package") )
             {
                 TabControl_Objects.Controls.Remove( TabPage_Content );   
             }
@@ -931,7 +930,7 @@ namespace UEExplorer.UI.Tabs
             TreeView_Content.BeginUpdate();
             foreach( var obj in _UnrealPackage.Exports )
             {
-                if( obj.OuterTable == null & obj.ClassName == "Package" )
+                if( obj.OuterTable == null && obj.ClassName == "Package" )
                 {
                     CreateContentNodesFor( obj, TreeView_Content.Nodes );
                 }
@@ -1403,39 +1402,7 @@ namespace UEExplorer.UI.Tabs
                         }
                         break;
                     }
-#if DEBUG
-                    case "CONTENT":
-                    {
-                        var n = target as ObjectNode;
-                        if( n != null )
-                        {
-                            var cnode = n.Object as IUnrealViewable;
-                            var texture = cnode as UTexture;
-                            if( texture != null )
-                            {
-                                var tex = texture;
-                                tex.BeginDeserializing();
-                                if( tex.MipMaps == null || tex.MipMaps.Count == 0 )
-                                    break;
 
-                                Image picture = new Bitmap( (int)tex.MipMaps[0].Width, (int)tex.MipMaps[0].Height );
-                                var painter = Graphics.FromImage( picture );
-                                painter.Clear( Color.White );
-
-                                for( int x = 0; x < tex.MipMaps[0].Width; ++ x )
-                                {
-                                    for( int y = 0; y < tex.MipMaps[0].Height; ++ y )
-                                    {
-                                        painter.FillEllipse( new SolidBrush( Color.FromArgb( tex.MipMaps[0].Pixels[x + y] ) ), x, y, 1, 1 );
-                                    }
-                                }
-                                painter.Dispose();
-                                //TexturePreview.Image = picture;
-                            }
-                        }
-                        break;
-                    }
-#endif
                     case "OPEN_UEMODELVIEWER":
                     {
                         Process.Start
@@ -1691,7 +1658,7 @@ namespace UEExplorer.UI.Tabs
 
                     case "BUFFER":
                     {
-                        var bufferObject = obj as IBuffered;
+                        var bufferObject = (IBuffered)obj;
                         if( bufferObject.GetBufferSize() > 0 )
                         {
                             ViewBufferFor( bufferObject );

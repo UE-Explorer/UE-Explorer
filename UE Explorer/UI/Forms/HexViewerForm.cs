@@ -238,10 +238,11 @@ namespace UEExplorer.UI.Forms
             _PackageExplorer.ReloadPackage();   
         }
 
-        private static bool ReplaceBuffer( IBuffered target, byte[] buffer )
+        private bool ReplaceBuffer( IBuffered target, byte[] buffer )
         {
             target.GetBuffer().Dispose();
-            using( var package = UnrealLoader.LoadPackage( target.GetBuffer().Name, FileAccess.ReadWrite ) )
+            var packageFilePath = _PackageExplorer.FileName;
+            using ( var package = UnrealLoader.LoadPackage( packageFilePath, FileAccess.ReadWrite ) )
             { 
                 package.Stream.Seek( target.GetBufferPosition(), SeekOrigin.Begin );
                 try
