@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28809.33
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UE Explorer", "UE Explorer\UE Explorer.csproj", "{C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -12,9 +12,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UELib", "UELib\src\El
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UnrealScript.Parser", "..\Unreal Programming Environment\UPE.UnrealScript\Eliot.UnrealScript.Parser.csproj", "{FF884D57-179B-4A56-B76D-FCE950FB9F01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Extensions.EdProtector", "Eliot.Extensions.EdProtector\Eliot.Extensions.EdProtector.csproj", "{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eliot.Extensions.EdProtector", "Eliot.Extensions.EdProtector\Eliot.Extensions.EdProtector.csproj", "{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Extensions.Obfuscator", "Eliot.Extensions.Obfuscator\Eliot.Extensions.Obfuscator.csproj", "{760F1D8A-0963-45DA-9E92-220E05EBAD2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eliot.Extensions.Obfuscator", "Eliot.Extensions.Obfuscator\Eliot.Extensions.Obfuscator.csproj", "{760F1D8A-0963-45DA-9E92-220E05EBAD2A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94} = {C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94}
 	EndProjectSection
@@ -103,7 +103,6 @@ Global
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|Any CPU.ActiveCfg = Publish|Any CPU
 		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|Mixed Platforms.ActiveCfg = Publish|Any CPU
@@ -116,7 +115,6 @@ Global
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|Any CPU.ActiveCfg = Publish|Any CPU
 		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|Mixed Platforms.ActiveCfg = Publish|Any CPU
@@ -217,8 +215,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C3228331-D3B2-4023-873A-8394388151F5}
-		BuildVersion_UpdateFileVersion = True
 		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_UpdateFileVersion = True
+		SolutionGuid = {C3228331-D3B2-4023-873A-8394388151F5}
 	EndGlobalSection
 EndGlobal
