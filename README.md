@@ -4,20 +4,31 @@
 
 # UE Explorer 
 
-UE Explorer is an easy-to-use browser and decompiler for Unreal Engine packages (.upk, .u).
+[UE Explorer](https://eliotvu.com/portfolio/view/21/ue-explorer) is an easy-to-use browser and decompiler for Unreal Engine packages (.upk, .u).
   
 ![app](https://user-images.githubusercontent.com/808593/170879806-00b481c0-5f09-4c3b-bb12-56870b8d264f.png)
 
 It has support for:
-* Unreal Engine 1
-* Unreal Engine 2, UE2.5
-* Unreal Engine 3
-* UE2X and UE4/5 have not been supported as of yet.
+  * Unreal Engine 1
+  * Unreal Engine 2, UE2.5
+  * Unreal Engine 3
+  * UE2X and UE4/5 have not been supported as of yet.
 
 However many games may have modified the engine to some extent.
 
 A list of games that have been confirmed to work can be viewed [here](https://github.com/EliotVU/Unreal-Library).
-
+  
+# Features
+  
+  * UnrealScript decompilation with high accurracy
+  * Package classes tree
+  * Package dependencies tree
+  * Package content tree
+  * Hex Viewer with rich defined-structures to help with debugging and/or hex-modding
+  * Specialized tokens output to help with hex-modding
+  * Code export
+  * ... TODO
+  
 # How to contribute
 
 The project is built on the .NET Framework 4.8 WinForms library using C#.
@@ -31,3 +42,9 @@ If you want to contribute to the app you can do so by doing one of the following
 This is the repository for the UI which is using UELib to do most of its Unreal related work.
 
 See the [UELib](https://github.com/EliotVU/Unreal-Library) for more.
+  
+# Credits
+  
+  * Antonio Cordero Balcazar for [UTPT](https://www.acordero.org/projects/unreal-tournament-package-tool) and documentation
+  * Intelliyole for [UnHood](https://code.google.com/p/unhood)
+  * Gildor for providing help and [UE Viewer](http://www.gildor.org/en/projects/umodel).
