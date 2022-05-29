@@ -7,8 +7,8 @@ namespace UEExplorer.UI
 {
     public interface ITabComponent
     {
-        TabsCollection Tabs{ set; }
-        TabStripItem TabItem{ get; set; }
+        TabsCollection Tabs { set; }
+        TabStripItem TabItem { get; set; }
 
         void TabInitialize();
         void TabSelected();
@@ -20,27 +20,26 @@ namespace UEExplorer.UI
 
     public class TabsCollection : IDisposable
     {
-        public ProgramForm                      Form;
-        public List<ITabComponent>              Components = new List<ITabComponent>();
-        public ITabComponent                    SelectedComponent
-        {
-            get{ return Components.Find( tabComp => tabComp.TabItem == _TabsControl.SelectedItem ); }
-        }
-        public ITabComponent                    LastSelectedComponent;
-        private TabStrip                        _TabsControl;
+        public ProgramForm Form;
+        public List<ITabComponent> Components = new List<ITabComponent>();
 
-        public TabsCollection( ProgramForm owner, TabStrip tabsControl )
+        public ITabComponent SelectedComponent
+        {
+            get { return Components.Find(tabComp => tabComp.TabItem == _TabsControl.SelectedItem); }
+        }
+
+        public ITabComponent LastSelectedComponent;
+        private TabStrip _TabsControl;
+
+        public TabsCollection(ProgramForm owner, TabStrip tabsControl)
         {
             Form = owner;
             _TabsControl = tabsControl;
         }
 
-        public ITabComponent Add( Type tabType, string tabName )
+        public ITabComponent Add(Type tabType, string tabName)
         {
-            if( Components.Any( tc => tc.TabItem.Title == tabName ) )
-            {
-                return null;
-            }
+            if (Components.Any(tc => tc.TabItem.Title == tabName)) return null;
 
             var tabItem = new TabStripItem
             {
@@ -51,27 +50,28 @@ namespace UEExplorer.UI
                 BackColor = System.Drawing.Color.White
             };
 
-            _TabsControl.AddTab( tabItem );
+            _TabsControl.AddTab(tabItem);
             _TabsControl.SelectedItem = tabItem;
             _TabsControl.Visible = _TabsControl.Items.Count > 0;
             _TabsControl.Refresh();
 
-            var tabComp = Activator.CreateInstance( tabType ) as ITabComponent;
+            var tabComp = Activator.CreateInstance(tabType) as ITabComponent;
             tabComp.TabItem = tabItem;
             tabComp.Tabs = this;
             tabComp.TabInitialize();
-            Components.Add( tabComp );
+            Components.Add(tabComp);
             return tabComp;
         }
 
-        public void Remove( ITabComponent delComponent, bool fullRemove = false )
+        public void Remove(ITabComponent delComponent, bool fullRemove = false)
         {
-            if( fullRemove )
+            if (fullRemove)
             {
-                _TabsControl.RemoveTab( delComponent.TabItem );
-                 delComponent.TabItem.Dispose();
+                _TabsControl.RemoveTab(delComponent.TabItem);
+                delComponent.TabItem.Dispose();
             }
-            Components.Remove( delComponent );
+
+            Components.Remove(delComponent);
         }
 
         public void Dispose()

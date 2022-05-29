@@ -21,56 +21,51 @@ namespace UEExplorer
     public static class Program
     {
         [STAThread]
-        static void Main( string[] args )
+        private static void Main(string[] args)
         {
             try
             {
-                foreach( var arg in args )
-                {
-                    Console.WriteLine( "Argument: " + arg );
-                }
+                foreach (string arg in args) Console.WriteLine("Argument: " + arg);
 
                 Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault( false );
+                Application.SetCompatibleTextRenderingDefault(false);
 
-                if( args.Length >= 2 && ((IList)args).Contains( "-console" ) )
+                if (args.Length >= 2 && ((IList)args).Contains("-console"))
                 {
                     var console = new UI.Main.ProgramConsole();
-                    Application.Run( console );
+                    Application.Run(console);
                     Application.Exit();
                 }
-                else if( ((IList)args).Contains( "-newwindow" ) )
+                else if (((IList)args).Contains("-newwindow"))
                 {
                     var window = new ProgramForm();
-                    Application.Run( window );
+                    Application.Run(window);
                 }
                 else
                 {
                     //Thread.CurrentThread.CurrentCulture = CultureInfo.InstalledUICulture;
                     var app = new SingleInstanceApplication();
-                    app.Run( Environment.GetCommandLineArgs() );
+                    app.Run(Environment.GetCommandLineArgs());
                 }
             }
-            catch( Exception exception )
+            catch (Exception exception)
             {
-                ExceptionDialog.Show( "Internal crash!", exception );
+                ExceptionDialog.Show("Internal crash!", exception);
             }
             finally
             {
-                LogManager.EndLogStream();   
+                LogManager.EndLogStream();
             }
         }
 
-        public static IEnumerable<string> ParseArguments( IEnumerable<string> args )
+        public static IEnumerable<string> ParseArguments(IEnumerable<string> args)
         {
             IList<string> options = new List<string>();
-            foreach( var arg in args )
+            foreach (string arg in args)
             {
-                if( arg.StartsWith( "-" ) )
-                {
-                    options.Add( arg.Substring( 1 ) );     
-                }
+                if (arg.StartsWith("-")) options.Add(arg.Substring(1));
             }
+
             return options;
         }
 
@@ -86,87 +81,87 @@ namespace UEExplorer
                 MainForm = new ProgramForm();
             }
 
-            protected override bool OnStartup( StartupEventArgs eventArgs )
+            protected override bool OnStartup(StartupEventArgs eventArgs)
             {
                 return true;
             }
 
-            protected override void OnStartupNextInstance( StartupNextInstanceEventArgs eventArgs )
+            protected override void OnStartupNextInstance(StartupNextInstanceEventArgs eventArgs)
             {
                 eventArgs.BringToForeground = true;
                 var args = eventArgs.CommandLine;
-                for( var i = 1; i < args.Count; ++ i )
+                for (var i = 1; i < args.Count; ++i)
                 {
-                    if( File.Exists( args[i] ) )
-                    {
-                        ((ProgramForm)MainForm).LoadFile( args[i] );
-                    }
+                    if (File.Exists(args[i])) ((ProgramForm)MainForm).LoadFile(args[i]);
                 }
             }
         }
 
         public static class LogManager
         {
-            private const string				LogFileName = "Log{0}.txt";
-            private static readonly string		LogFilePath = Path.Combine( Application.StartupPath, LogFileName );
-            private static FileStream			_LogStream;	
+            private const string LogFileName = "Log{0}.txt";
+            private static readonly string LogFilePath = Path.Combine(Application.StartupPath, LogFileName);
+            private static FileStream _LogStream;
 
             public static void StartLogStream()
             {
-                int failCount = 0;
-                retry:
-                var logPath = String.Format( LogFilePath, failCount > 0 ? failCount.ToString( CultureInfo.InvariantCulture ) : String.Empty );
+                var failCount = 0;
+            retry:
+                string logPath = string.Format(LogFilePath,
+                    failCount > 0 ? failCount.ToString(CultureInfo.InvariantCulture) : string.Empty);
                 try
                 {
-                    _LogStream = new FileStream( logPath, FileMode.Create, FileAccess.Write );
+                    _LogStream = new FileStream(logPath, FileMode.Create, FileAccess.Write);
                 }
-                catch( IOException )
+                catch (IOException)
                 {
-                    ++ failCount;
+                    ++failCount;
                     goto retry;
                 }
-                Debug.Assert( _LogStream != null, "Couldn't open file" + Path.GetFileName( logPath ) );
-                Console.SetOut( new StreamWriter( _LogStream ) );		
+
+                Debug.Assert(_LogStream != null, "Couldn't open file" + Path.GetFileName(logPath));
+                Console.SetOut(new StreamWriter(_LogStream));
             }
 
             public static void EndLogStream()
             {
-                if( _LogStream == null ) 
+                if (_LogStream == null)
                     return;
 
                 _LogStream.Flush();
-                _LogStream.Dispose();	
+                _LogStream.Dispose();
                 _LogStream = null;
             }
         }
 
-#region Options
-        public static readonly string ConfigDir = Path.Combine( Application.StartupPath, "Config" );
-        private static readonly string _SettingsPath = Path.Combine( 
-            ConfigDir, 
-            "UEExplorerConfig.xml" 
+        #region Options
+
+        public static readonly string ConfigDir = Path.Combine(Application.StartupPath, "Config");
+
+        private static readonly string _SettingsPath = Path.Combine(
+            ConfigDir,
+            "UEExplorerConfig.xml"
         );
+
         public static XMLSettings Options;
 
         public static void LoadConfig()
         {
-            if( File.Exists( _SettingsPath ) )
+            if (File.Exists(_SettingsPath))
             {
-                using( var r = new XmlTextReader( _SettingsPath ) )
+                using (var r = new XmlTextReader(_SettingsPath))
                 {
-                    var xser = new XmlSerializer( typeof(XMLSettings) );
-                    Options = (XMLSettings)xser.Deserialize( r );
+                    var xser = new XmlSerializer(typeof(XMLSettings));
+                    Options = (XMLSettings)xser.Deserialize(r);
                 }
             }
-            else 
-            {
+            else
                 SaveConfig();
-            }
 
             UnrealConfig.SuppressComments = Options.bSuppressComments;
-            UnrealConfig.PreBeginBracket = ParseFormatOption( Options.PreBeginBracket );
-            UnrealConfig.PreEndBracket = ParseFormatOption( Options.PreEndBracket );
-            if( Options.VariableTypes == null || Options.VariableTypes.Count == 0 )
+            UnrealConfig.PreBeginBracket = ParseFormatOption(Options.PreBeginBracket);
+            UnrealConfig.PreEndBracket = ParseFormatOption(Options.PreEndBracket);
+            if (Options.VariableTypes == null || Options.VariableTypes.Count == 0)
             {
                 Options.VariableTypes = new List<string>
                 {
@@ -181,69 +176,72 @@ namespace UEExplorer
                     "Engine.Material.Expressions:ObjectProperty",
                     "Engine.ParticleSystem.Emitters:ObjectProperty"
                 };
-
             }
+
             CopyVariableTypes();
-            UnrealConfig.Indention = ParseIndention( Options.Indention );
+            UnrealConfig.Indention = ParseIndention(Options.Indention);
         }
 
-        internal static Tuple<string, string, PropertyType> ParseVariable( string data )
+        internal static Tuple<string, string, PropertyType> ParseVariable(string data)
         {
-            retry:
-            var groupIndex = data.IndexOf( ':' );
-            if( groupIndex == -1 )
+        retry:
+            int groupIndex = data.IndexOf(':');
+            if (groupIndex == -1)
             {
-                data += ":ObjectProperty"; 
+                data += ":ObjectProperty";
                 goto retry;
             }
-            var varGroup = data.Left( groupIndex );
-            var varName = varGroup.Mid( varGroup.LastIndexOf( '.' ) + 1 );
+
+            string varGroup = data.Left(groupIndex);
+            string varName = varGroup.Mid(varGroup.LastIndexOf('.') + 1);
             PropertyType varType;
             try
             {
-                varType = (PropertyType)Enum.Parse( typeof(PropertyType), data.Substring( groupIndex + 1 ) );
+                varType = (PropertyType)Enum.Parse(typeof(PropertyType), data.Substring(groupIndex + 1));
             }
-            catch( Exception )
+            catch (Exception)
             {
                 varType = PropertyType.ObjectProperty;
             }
-            return Tuple.Create( varName, varGroup, varType );
+
+            return Tuple.Create(varName, varGroup, varType);
         }
 
         internal static void CopyVariableTypes()
         {
             UnrealConfig.VariableTypes = new Dictionary<string, Tuple<string, PropertyType>>();
-            foreach( var varType in Options.VariableTypes )
+            foreach (string varType in Options.VariableTypes)
             {
-                var varData = ParseVariable( varType );
-                UnrealConfig.VariableTypes.Add( varData.Item1, Tuple.Create( varData.Item2, varData.Item3 ) );
+                var varData = ParseVariable(varType);
+                UnrealConfig.VariableTypes.Add(varData.Item1, Tuple.Create(varData.Item2, varData.Item3));
             }
         }
 
-        internal static string ParseIndention( int indentionCount )
+        internal static string ParseIndention(int indentionCount)
         {
-            return String.Empty.PadLeft( indentionCount, ' ' );
+            return string.Empty.PadLeft(indentionCount, ' ');
         }
 
-        internal static string ParseFormatOption( string input )
+        internal static string ParseFormatOption(string input)
         {
-            return input.Replace( "%NEWLINE%", "\r\n" ).Replace( "%TABS%", "{0}" );
+            return input.Replace("%NEWLINE%", "\r\n").Replace("%TABS%", "{0}");
         }
 
         public static void SaveConfig()
         {
-            if( Options == null )
+            if (Options == null)
                 Options = new XMLSettings();
 
-            using( var w = new XmlTextWriter( _SettingsPath, Encoding.ASCII ) )
+            using (var w = new XmlTextWriter(_SettingsPath, Encoding.ASCII))
             {
-                var xser = new XmlSerializer( typeof(XMLSettings) );
-                xser.Serialize( w, Options );
+                var xser = new XmlSerializer(typeof(XMLSettings));
+                xser.Serialize(w, Options);
             }
         }
-#endregion
 
-        internal const string WEBSITE_URL = 
+        #endregion
+
+        internal const string WEBSITE_URL =
 #if DEBUG_WITH_LOCALHOST
             "https://localhost/Eliot/";
 #else
@@ -251,7 +249,9 @@ namespace UEExplorer
 #endif
 
         internal const string Donate_URL = WEBSITE_URL + "donate.html";
+
         internal const string Contact_URL = WEBSITE_URL + "contact.html";
+
         //internal const string Program_URL = WEBSITE_URL + "portfolio/view/21/ue-explorer";
         //internal const string Program_Parm_ID = "data[items][id]=21";
         //internal const string Version_URL = WEBSITE_URL +  "apps/version/";
@@ -261,142 +261,129 @@ namespace UEExplorer
         internal const string UPDATE_QUERY = "?auto=1&installed_version={0}";
 
         // TODO: Deprecate
-#region Registry	
+
+        #region Registry
+
         private const string RegistryFileFolderName = "UEExplorer.AnyUnrealFile";
 
         public static bool AreFileTypesRegistered()
         {
-            return Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( RegistryFileFolderName ) != null;
+            return Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(RegistryFileFolderName) != null;
         }
 
-        public static void ToggleRegisterFileTypes( bool undo = false )
-        {		
+        public static void ToggleRegisterFileTypes(bool undo = false)
+        {
             var extkeys = new List<Microsoft.Win32.RegistryKey>();
             var extensions = UnrealExtensions.FormatUnrealExtensionsAsList();
-            if( undo )
+            if (undo)
             {
-                Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree( RegistryFileFolderName );
-                foreach( string ext in extensions )
+                Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree(RegistryFileFolderName);
+                foreach (string ext in extensions)
                 {
-                    Microsoft.Win32.RegistryKey extkey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( ext, true );
-                    if( extkey != null )
+                    var extkey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext, true);
+                    if (extkey != null)
                     {
-                        if( (string)extkey.GetValue( String.Empty ) == RegistryFileFolderName )
-                        {
-                            Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree( ext );
-                        }
+                        if ((string)extkey.GetValue(string.Empty) == RegistryFileFolderName)
+                            Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree(ext);
                         else
-                        {
-                            extkeys.Add( extkey );
-                        }
-                    }	
+                            extkeys.Add(extkey);
+                    }
                 }
 
-                foreach( Microsoft.Win32.RegistryKey key in extkeys )
+                foreach (var key in extkeys)
                 {
-                    var reference = (string)key.GetValue( String.Empty );
-                    if( reference != null )
+                    var reference = (string)key.GetValue(string.Empty);
+                    if (reference != null)
                     {
-                        Microsoft.Win32.RegistryKey k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( reference, true );
-                        if( k != null )
-                        {
-                            ToggleFileProperties( k, true );
-                        }
+                        var k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(reference, true);
+                        if (k != null) ToggleFileProperties(k, true);
                     }
                 }
             }
             else
             {
-                foreach( string ext in extensions )
+                foreach (string ext in extensions)
                 {
-                    Microsoft.Win32.RegistryKey extkey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( ext, true );
-                    if( extkey == null )
+                    var extkey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext, true);
+                    if (extkey == null)
                     {
-                        extkey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey( ext );
-                        extkey.SetValue( String.Empty, RegistryFileFolderName, Microsoft.Win32.RegistryValueKind.String );
-                        extkey.SetValue( "Content Type", "application", Microsoft.Win32.RegistryValueKind.String );
+                        extkey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(ext);
+                        extkey.SetValue(string.Empty, RegistryFileFolderName, Microsoft.Win32.RegistryValueKind.String);
+                        extkey.SetValue("Content Type", "application", Microsoft.Win32.RegistryValueKind.String);
                     }
-                    else if( (string)(extkey.GetValue( String.Empty )) != RegistryFileFolderName )
-                    {		  
-                        extkeys.Add( extkey );
-                    }
+                    else if ((string)extkey.GetValue(string.Empty) != RegistryFileFolderName) extkeys.Add(extkey);
                 }
 
-                Microsoft.Win32.RegistryKey unrealfilekey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey( RegistryFileFolderName );
-                if( unrealfilekey != null )
+                var unrealfilekey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(RegistryFileFolderName);
+                if (unrealfilekey != null)
                 {
-                    unrealfilekey.SetValue( String.Empty, "Unreal File" );
-                    ToggleFileProperties( unrealfilekey );
+                    unrealfilekey.SetValue(string.Empty, "Unreal File");
+                    ToggleFileProperties(unrealfilekey);
                 }
 
-                foreach( Microsoft.Win32.RegistryKey key in extkeys )
+                foreach (var key in extkeys)
                 {
-                    string reference = (string)key.GetValue( String.Empty );
-                    if( reference != null )
+                    var reference = (string)key.GetValue(string.Empty);
+                    if (reference != null)
                     {
-                        Microsoft.Win32.RegistryKey k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey( reference, true );
-                        if( k != null )
-                        {
-                            ToggleFileProperties( k );
-                        }
+                        var k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(reference, true);
+                        if (k != null) ToggleFileProperties(k);
                     }
                 }
             }
         }
 
-        private static void ToggleFileProperties( Microsoft.Win32.RegistryKey key, bool undo = false )
+        private static void ToggleFileProperties(Microsoft.Win32.RegistryKey key, bool undo = false)
         {
-            if( undo )
+            if (undo)
             {
-                var xkey = key.OpenSubKey( "DefaultIcon", true );
+                var xkey = key.OpenSubKey("DefaultIcon", true);
                 // Should only add a icon reference if none was already set, so that .UT2 map files keep their original icon.
-                if( xkey != null )
+                if (xkey != null)
                 {
-                    string curkey = (string)xkey.GetValue( String.Empty );
-                    if( curkey != null )
+                    var curkey = (string)xkey.GetValue(string.Empty);
+                    if (curkey != null)
                     {
-                        string oldasc = (string)xkey.GetValue( "OldAssociation" );
-                        xkey.SetValue( "OldAssociation", curkey, Microsoft.Win32.RegistryValueKind.String );
-                        xkey.SetValue( String.Empty, oldasc ?? String.Empty, Microsoft.Win32.RegistryValueKind.String );
+                        var oldasc = (string)xkey.GetValue("OldAssociation");
+                        xkey.SetValue("OldAssociation", curkey, Microsoft.Win32.RegistryValueKind.String);
+                        xkey.SetValue(string.Empty, oldasc ?? string.Empty, Microsoft.Win32.RegistryValueKind.String);
                     }
                 }
 
-                var shellkey = key.OpenSubKey( "shell", true );
-                if( shellkey != null )
-                {
-                    shellkey.DeleteSubKeyTree( "open in " + Application.ProductName );
-                }
+                var shellkey = key.OpenSubKey("shell", true);
+                if (shellkey != null) shellkey.DeleteSubKeyTree("open in " + Application.ProductName);
             }
             else
             {
                 // Should only add a icon reference if none was already set, so that .UT2 map files keep their original icon.
-                if( key.OpenSubKey( "DefaultIcon" ) == null )
+                if (key.OpenSubKey("DefaultIcon") == null)
                 {
-                    using( var defaulticonkey = key.CreateSubKey( "DefaultIcon" ) )
+                    using (var defaulticonkey = key.CreateSubKey("DefaultIcon"))
                     {
-                        if( defaulticonkey != null )
+                        if (defaulticonkey != null)
                         {
-                            string mykey = Path.Combine( Application.StartupPath, "unrealfile.ico" );
-                            string oldassociation = (string)defaulticonkey.GetValue( String.Empty );
-                            if( oldassociation != mykey )
+                            string mykey = Path.Combine(Application.StartupPath, "unrealfile.ico");
+                            var oldassociation = (string)defaulticonkey.GetValue(string.Empty);
+                            if (oldassociation != mykey)
                             {
-                                if( oldassociation != null )
-                                {
-                                    defaulticonkey.SetValue( "OldAssociation", oldassociation, Microsoft.Win32.RegistryValueKind.String );
-                                }	
-                                defaulticonkey.SetValue( String.Empty, mykey, Microsoft.Win32.RegistryValueKind.String );
+                                if (oldassociation != null)
+                                    defaulticonkey.SetValue("OldAssociation", oldassociation,
+                                        Microsoft.Win32.RegistryValueKind.String);
+                                defaulticonkey.SetValue(string.Empty, mykey, Microsoft.Win32.RegistryValueKind.String);
                             }
                         }
                     }
                 }
 
-                var shellkey = key.CreateSubKey( "shell" );
-                var editkey = shellkey.CreateSubKey( "open in " + Application.ProductName );
-                editkey.SetValue( String.Empty, "&Open in " + Application.ProductName );
-                var cmdkey = editkey.CreateSubKey( "command" );
-                cmdkey.SetValue( String.Empty, "\"" + Application.ExecutablePath + "\" \"%1\"", Microsoft.Win32.RegistryValueKind.ExpandString );
+                var shellkey = key.CreateSubKey("shell");
+                var editkey = shellkey.CreateSubKey("open in " + Application.ProductName);
+                editkey.SetValue(string.Empty, "&Open in " + Application.ProductName);
+                var cmdkey = editkey.CreateSubKey("command");
+                cmdkey.SetValue(string.Empty, "\"" + Application.ExecutablePath + "\" \"%1\"",
+                    Microsoft.Win32.RegistryValueKind.ExpandString);
             }
         }
-#endregion
+
+        #endregion
     }
 }

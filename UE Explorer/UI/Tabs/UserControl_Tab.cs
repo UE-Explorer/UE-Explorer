@@ -5,21 +5,16 @@ using Storm.TabControl;
 
 namespace UEExplorer.UI.Tabs
 {
-    [ComVisible( false )]
+    [ComVisible(false)]
     public class UserControl_Tab : UserControl, ITabComponent
     {
-        [ComVisible( false )]
-        public TabsCollection Tabs{ protected get; set; }
+        [ComVisible(false)] public TabsCollection Tabs { protected get; set; }
 
-        [ComVisible( false )]
-        public TabStripItem TabItem{ get; set; }
+        [ComVisible(false)] public TabStripItem TabItem { get; set; }
 
         protected UserControl_Tab()
         {
-            if( LicenseManager.UsageMode != LicenseUsageMode.Designtime )
-            {
-                Dock = DockStyle.Fill;
-            }
+            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime) Dock = DockStyle.Fill;
             InitializeComponent();
         }
 
@@ -42,7 +37,7 @@ namespace UEExplorer.UI.Tabs
         /// </summary>
         protected virtual void TabCreated()
         {
-            TabItem.Controls.Add( this );
+            TabItem.Controls.Add(this);
         }
 
         /// <summary>

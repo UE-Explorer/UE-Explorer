@@ -2,29 +2,29 @@
 
 namespace UEExplorer.Development
 {
-	using UI;
+    using UI;
 
-	public interface IExtension
-	{
-		/// <summary>
-		/// Called after main form is initialized.
-		/// </summary>
-		/// <param name="form"></param>
-		void Initialize( ProgramForm form );
+    public interface IExtension
+    {
+        /// <summary>
+        /// Called after main form is initialized.
+        /// </summary>
+        /// <param name="form"></param>
+        void Initialize(ProgramForm form);
 
-		/// <summary>
-		/// Called when activated by end-user.
-		/// </summary>
-		void OnActivate( object sender, EventArgs e );
-	}
+        /// <summary>
+        /// Called when activated by end-user.
+        /// </summary>
+        void OnActivate(object sender, EventArgs e);
+    }
 
-	public class ExtensionTitleAttribute : Attribute
-	{
-		public readonly string Title;
+    public class ExtensionTitleAttribute : Attribute
+    {
+        public readonly string Title;
 
-		public ExtensionTitleAttribute( string title )
-		{
-			Title = title;
-		}
-	}
+        public ExtensionTitleAttribute(string title)
+        {
+            Title = title;
+        }
+    }
 }

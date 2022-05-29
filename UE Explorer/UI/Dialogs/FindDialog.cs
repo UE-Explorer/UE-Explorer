@@ -3,35 +3,35 @@ using System.Windows.Forms;
 
 namespace UEExplorer.UI.Dialogs
 {
-	using Tabs;
+    using Tabs;
 
-	public partial class FindDialog : Form
-	{
-		private readonly TextEditorPanel _Editor;
+    public partial class FindDialog : Form
+    {
+        private readonly TextEditorPanel _Editor;
 
-		public FindDialog()
-		{
-			InitializeComponent();	
-		}
+        public FindDialog()
+        {
+            InitializeComponent();
+        }
 
-		public FindDialog( TextEditorPanel editor )
-		{
-			_Editor = editor;
+        public FindDialog(TextEditorPanel editor)
+        {
+            _Editor = editor;
 
-			InitializeComponent();
-		}
+            InitializeComponent();
+        }
 
-		private void Find_Click( object sender, EventArgs e )
-		{
-			if( _Editor == null )
-				return;
+        private void Find_Click(object sender, EventArgs e)
+        {
+            if (_Editor == null)
+                return;
 
-			EditorUtil.FindText( _Editor, FindInput.Text );
-		}
+            EditorUtil.FindText(_Editor, FindInput.Text);
+        }
 
-		private void FindDialog_Shown( object sender, EventArgs e )
-		{
-			FindInput.Focus();
-		}
-	}
+        private void FindDialog_Shown(object sender, EventArgs e)
+        {
+            FindInput.Focus();
+        }
+    }
 }
