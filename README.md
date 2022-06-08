@@ -45,6 +45,4 @@ See the [UELib](https://github.com/EliotVU/Unreal-Library) for more.
   
 # Credits
   
-  * Antonio Cordero Balcazar for [UTPT](https://www.acordero.org/projects/unreal-tournament-package-tool) and documentation
-  * Intelliyole for [UnHood](https://code.google.com/p/unhood)
-  * Gildor for providing help and [UE Viewer](http://www.gildor.org/en/projects/umodel).
+  * [Antonio Cordero Balcazar](https://github.com/acorderob) for [UTPT](https://www.acordero.org/projects/unreal-tournament-package-tool)
