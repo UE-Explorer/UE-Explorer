@@ -1220,14 +1220,13 @@ namespace UEExplorer.UI.Tabs
         {
             string name = token.GetType().Name;
             if (!acronymizeName)
-                return string.Format("{0}({1}/{2})", name, token.Size, token.StorageSize);
+                return $"{name}({token.Size}/{token.StorageSize})";
 
             name = string.Concat(name.Substring(0, name.Length - 5).Select(
                 c => char.IsUpper(c) ? c.ToString(CultureInfo.InvariantCulture) : string.Empty
             ));
 
-            if (token is UStruct.UByteCodeDecompiler.CastToken) name = "C" + name;
-            return string.Format("{0}({1}/{2})", name, token.Size, token.StorageSize);
+            return $"{name}({token.Size}/{token.StorageSize})";
         }
 
         private static string _DisassembleTokensTemplate;
