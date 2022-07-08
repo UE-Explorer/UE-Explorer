@@ -8,7 +8,7 @@ namespace UEExplorer.UI.Tabs
 
     public class UC_UClassFile : UserControl_Tab
     {
-        public string FileName { get; set; }
+        public string FilePath { get; set; }
 
         private System.Windows.Forms.Integration.ElementHost _WpfHost;
         private TextEditorPanel _MyTextEditor1;
@@ -46,7 +46,7 @@ namespace UEExplorer.UI.Tabs
         public void PostInitialize()
         {
             _MyTextEditor1.textEditor.IsReadOnly = false;
-            _MyTextEditor1.textEditor.Load(FileName);
+            _MyTextEditor1.textEditor.Load(FilePath);
         }
 
         protected override void InitializeComponent()
@@ -94,7 +94,7 @@ namespace UEExplorer.UI.Tabs
 
         public override void TabSave()
         {
-            _MyTextEditor1.textEditor.Save(FileName);
+            _MyTextEditor1.textEditor.Save(FilePath);
         }
 
         public override void TabFind()

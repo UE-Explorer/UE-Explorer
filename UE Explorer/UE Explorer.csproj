@@ -210,6 +210,7 @@
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.1.3.50, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.1.3.50\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -239,11 +240,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.nl.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.nl.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.nl1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.nl.resx</DependentUpon>
@@ -295,7 +291,11 @@
     <Compile Include="UI\Main\ProgramConsole.Designer.cs">
       <DependentUpon>ProgramConsole.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Nodes\TableNodes.cs" />
+    <Compile Include="UI\Nodes\IWithDecompilableObject.cs" />
+    <Compile Include="UI\Nodes\ObjectImageKeySelector.cs" />
+    <Compile Include="UI\Nodes\ObjectNode.cs" />
+    <Compile Include="UI\Nodes\ObjectVisitor.cs" />
+    <Compile Include="UI\Nodes\ObjectTreeBuilder.cs" />
     <Compile Include="UI\Tabs\UC_UClassFile.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -504,6 +504,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\UELib.CompressedChunk.datasource" />
+    <None Include="Properties\DataSources\UELib.UExportTableItem.datasource" />
+    <None Include="Properties\DataSources\UELib.UGenerationTableItem.datasource" />
+    <None Include="Properties\DataSources\UELib.UImportTableItem.datasource" />
+    <None Include="Properties\DataSources\UELib.UNameTableItem.datasource" />
+    <None Include="Properties\DataSources\UELib.UnrealPackage+PackageFileSummary.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

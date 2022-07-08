@@ -261,7 +261,7 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
     <value>Package's MetaInfo</value>
   </data>
   <data name="EXPORT_AS" xml:space="preserve">
-    <value>Export {0} As...</value>
+    <value>Export As...</value>
   </data>
   <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
     <value>Constructing Objects...</value>

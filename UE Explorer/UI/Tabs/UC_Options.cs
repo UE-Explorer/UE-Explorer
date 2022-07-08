@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -20,7 +19,6 @@ namespace UEExplorer.UI.Tabs
             Program.LoadConfig();
             CheckBox_SerObj.Checked = Program.Options.InitFlags.HasFlag(UnrealPackage.InitFlags.Deserialize);
             CheckBox_LinkObj.Checked = Program.Options.InitFlags.HasFlag(UnrealPackage.InitFlags.Link);
-            CheckBox_ImpObj.Checked = Program.Options.InitFlags.HasFlag(UnrealPackage.InitFlags.Import);
 
             foreach (string filePath in GetNativeTables())
                 ComboBox_NativeTable.Items.Add(Path.GetFileNameWithoutExtension(filePath));
@@ -36,7 +34,7 @@ namespace UEExplorer.UI.Tabs
             PreEndBracket.Text = Program.Options.PreEndBracket;
 
             PathText.Text = Program.Options.UEModelAppPath;
-            PathText_TextChanged(PathText, new EventArgs());
+            PathText_TextChanged(PathText, EventArgs.Empty);
             IndentionNumeric.Value = Program.Options.Indention;
 
             foreach (string enumElement in Enum.GetNames(typeof(PropertyType)))
@@ -71,9 +69,6 @@ namespace UEExplorer.UI.Tabs
 
             if (!CheckBox_LinkObj.Checked)
                 Program.Options.InitFlags &= ~UnrealPackage.InitFlags.Link;
-
-            if (!CheckBox_ImpObj.Checked)
-                Program.Options.InitFlags &= ~UnrealPackage.InitFlags.Import;
 
             Program.Options.InitFlags |= UnrealPackage.InitFlags.Deserialize;
 

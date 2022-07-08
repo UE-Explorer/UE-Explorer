@@ -235,7 +235,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
     <value>Pakkets MetaInfo</value>
   </data>
   <data name="EXPORT_AS" xml:space="preserve">
-    <value>Exporteer {0} als...</value>
+    <value>Exporteer als...</value>
   </data>
   <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
     <value>Objecten constructeren...</value>

@@ -32,12 +32,11 @@ namespace UEExplorer
 
         public static void CreateUPKGFile(this UnrealPackage package, string exportPath)
         {
-            string[] upkgContent = new[]
-            {
+            string[] upkgContent = {
                 "[Flags]",
-                "AllowDownload=" + package.HasPackageFlag(PackageFlags.AllowDownload),
-                "ClientOptional=" + package.HasPackageFlag(PackageFlags.ClientOptional),
-                "ServerSideOnly=" + package.HasPackageFlag(PackageFlags.ServerSideOnly)
+                "AllowDownload=" + package.Summary.PackageFlags.HasFlag(PackageFlags.AllowDownload),
+                "ClientOptional=" + package.Summary.PackageFlags.HasFlag(PackageFlags.ClientOptional),
+                "ServerSideOnly=" + package.Summary.PackageFlags.HasFlag(PackageFlags.ServerSideOnly)
             };
 
             File.WriteAllLines(

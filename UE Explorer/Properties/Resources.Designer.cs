@@ -181,7 +181,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export {0} As....
+        ///   Looks up a localized string similar to Export As....
         /// </summary>
         internal static string EXPORT_AS {
             get {

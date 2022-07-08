@@ -187,14 +187,9 @@ namespace UEExplorer.UI.Forms
                 var obj = HexPanel.Target as UObject;
                 if (obj != null)
                 {
-#if DEBUG || BINARY_METADATA
-                    obj.BinaryMetaData.Fields = null;
-#endif
                     obj.BeginDeserializing();
-                    obj.PostInitialize();
 
                     _PackageExplorer.SetContentText(null, obj.Decompile(), true, false);
-
                     HexPanel.Reload();
                 }
             }
@@ -214,7 +209,7 @@ namespace UEExplorer.UI.Forms
         private bool ReplaceBuffer(IBuffered target, byte[] buffer)
         {
             target.GetBuffer().Dispose();
-            string packageFilePath = _PackageExplorer.FileName;
+            string packageFilePath = _PackageExplorer.FilePath;
             using (var package = UnrealLoader.LoadPackage(packageFilePath, FileAccess.ReadWrite))
             {
                 package.Stream.Seek(target.GetBufferPosition(), SeekOrigin.Begin);
@@ -290,7 +285,7 @@ namespace UEExplorer.UI.Forms
             }
 
             string appPath = Program.Options.HEXWorkshopAppPath;
-            string filePath = _PackageExplorer.FileName;
+            string filePath = _PackageExplorer.FilePath;
             int pos = HexPanel.Target.GetBufferPosition();
             int size = HexPanel.Target.GetBufferSize();
 

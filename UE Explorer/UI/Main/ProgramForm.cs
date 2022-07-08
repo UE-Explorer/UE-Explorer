@@ -71,7 +71,7 @@ namespace UEExplorer.UI
 
         private void _ROF_ItemClicked(object sender, EventArgs e)
         {
-            var item = sender as MenuItem;
+            var item = (MenuItem)sender;
             LoadFile(item.Tag as string);
             RefreshMRUEvent();
         }
@@ -97,34 +97,34 @@ namespace UEExplorer.UI
 
         private void InitializeExtensions()
         {
-            string extpath = Path.Combine(Application.StartupPath, "Extensions");
-            if (Directory.Exists(extpath))
+            string extensionsPath = Path.Combine(Application.StartupPath, "Extensions");
+            if (!Directory.Exists(extensionsPath))
+                return;
+            
+            string[] files = Directory.GetFiles(extensionsPath);
+            foreach (string file in files)
             {
-                string[] files = Directory.GetFiles(extpath);
-                foreach (string file in files)
+                if (Path.GetExtension(file) != ".dll")
+                    continue;
+
+                var assembly = Assembly.LoadFile(file);
+                var types = assembly.GetExportedTypes();
+                foreach (var t in types)
                 {
-                    if (Path.GetExtension(file) != ".dll")
-                        continue;
-
-                    var assembly = Assembly.LoadFile(file);
-                    var types = assembly.GetExportedTypes();
-                    foreach (var t in types)
+                    var i = t.GetInterface("IExtension");
+                    if (i != null)
                     {
-                        var i = t.GetInterface("IExtension");
-                        if (i != null)
-                        {
-                            var extensionname = "Extension";
+                        var extensionname = "Extension";
 
-                            object[] attribs = t.GetCustomAttributes(typeof(ExtensionTitleAttribute), false);
-                            if (attribs.Length > 0) extensionname = ((ExtensionTitleAttribute)attribs[0]).Title;
+                        object[] attribs = t.GetCustomAttributes(typeof(ExtensionTitleAttribute), false);
+                        if (attribs.Length > 0) extensionname = ((ExtensionTitleAttribute)attribs[0]).Title;
 
-                            var item = menuItem13.MenuItems.Add(extensionname);
-                            var ext = Activator.CreateInstance(t) as IExtension;
-                            ext.Initialize(this);
-                            item.Click += ext.OnActivate;
+                        var item = menuItem13.MenuItems.Add(extensionname);
+                        var ext = Activator.CreateInstance(t) as IExtension;
+                        ext.Initialize(this);
+                        item.Click += ext.OnActivate;
 
-                            menuItem13.Enabled = true;
-                        }
+                        menuItem13.Enabled = true;
                     }
                 }
             }
@@ -145,7 +145,7 @@ namespace UEExplorer.UI
         internal ProgramForm()
         {
             Program.LogManager.StartLogStream();
-            Text = string.Format("{0} {1}", Application.ProductName, Version);
+            Text = $"{Application.ProductName} {Version}";
 
             InitializeComponent();
             InitializeUserSettings();
@@ -162,57 +162,57 @@ namespace UEExplorer.UI
             Location = Settings.Default.WindowLocation;
         }
 
-        public void LoadFile(string fileName)
+        public void LoadFile(string filePath)
         {
             ITabComponent tabComponent = null;
 
             ProgressStatus.SaveStatus();
             ProgressStatus.SetStatus(string.Format(
                     Resources.ProgramForm_LoadFile_Loading_file,
-                    Path.GetFileName(fileName)
+                    Path.GetFileName(filePath)
                 )
             );
 
             try
             {
-                switch (Path.GetExtension(fileName))
+                switch (Path.GetExtension(filePath))
                 {
                     case ".uc":
                     case ".uci":
                         tabComponent = Tabs.Add(typeof(UC_UClassFile),
-                            Path.GetFileName(fileName)
+                            Path.GetFileName(filePath)
                         );
                         var classFile = (UC_UClassFile)tabComponent;
                         if (classFile == null) return;
 
-                        classFile.FileName = fileName;
+                        classFile.FilePath = filePath;
                         classFile.PostInitialize();
                         break;
 
                     default:
                         tabComponent = Tabs.Add(typeof(UC_PackageExplorer),
-                            Path.GetFileName(fileName)
+                            Path.GetFileName(filePath)
                         );
                         var unrealFile = (UC_PackageExplorer)tabComponent;
                         if (unrealFile == null) return;
 
-                        unrealFile.FileName = fileName;
+                        unrealFile.FilePath = filePath;
                         unrealFile.PostInitialize();
                         break;
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
                 if (tabComponent != null) Tabs.Remove(tabComponent);
                 ExceptionDialog.Show(string.Format(Resources.ProgramForm_LoadFile_Failed_loading_package,
-                        fileName), e
+                        filePath), exception
                 );
             }
             finally
             {
                 ProgressStatus.Reset();
 
-                _MRUManager.AddFile(fileName);
+                _MRUManager.AddFile(filePath);
             }
         }
 
@@ -378,11 +378,8 @@ namespace UEExplorer.UI
         private void OnCheckForUpdates(object sender, EventArgs e)
         {
             var softKey = Registry.CurrentUser.OpenSubKey("Software", true);
-            if (softKey != null)
-            {
-                var appKey = softKey.OpenSubKey(APP_KEY);
-                if (appKey != null) softKey.DeleteSubKeyTree(APP_KEY);
-            }
+            var appKey = softKey?.OpenSubKey(APP_KEY);
+            if (appKey != null) softKey.DeleteSubKeyTree(APP_KEY);
 
             CheckForUpdates();
 
@@ -523,7 +520,7 @@ namespace UEExplorer.UI
                     _MRUManager = null;
                 }
 
-                if (components != null) components.Dispose();
+                components?.Dispose();
 
                 if (Tabs != null)
                 {
