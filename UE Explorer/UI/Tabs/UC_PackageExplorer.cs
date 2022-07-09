@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading;
+using System.Text;
 using System.Windows.Forms;
 using UEExplorer.Properties;
 using UEExplorer.UI.Forms;
@@ -462,7 +462,11 @@ namespace UEExplorer.UI.Tabs
         {
             foreach (var item in _UnrealPackage.Imports
                          .Where(imp => imp != outerImp && _UnrealPackage.GetIndexTable(imp.OuterIndex) == outerImp))
-                GetDependencyOn(item, node.Nodes.Add(item.ObjectName));
+            {
+                var subNode = node.Nodes.Add(item.ObjectName);
+                subNode.Tag = item.Object;
+                GetDependencyOn(item, subNode);
+            }
 
             node.ToolTipText = outerImp.ClassName;
             InitializeImportNode(outerImp, node);
@@ -477,8 +481,8 @@ namespace UEExplorer.UI.Tabs
             // Lazy recursive, creates a base node for each export with no Outer, if a matching outer is found it will be appended to that base node upon expansion.
             foreach (var objectNode in 
                      from obj in _UnrealPackage.Exports 
-                     where obj.OuterTable == null && obj.ArchetypeTable == null 
-                     select CreateNode((UObjectTableItem)obj))
+                     where obj.Outer == null && obj.Archetype == null 
+                     select CreateNode(obj))
             {
                 InitializeObjectNode(objectNode);
                 TreeView_Content.Nodes.Add(objectNode);
@@ -540,50 +544,6 @@ namespace UEExplorer.UI.Tabs
             Tabs.Form.LoadFile(FilePath);
         }
 
-        private void OutputNodeObject(TreeNode treeNode)
-        {
-            try
-            {
-                if (!(treeNode is IUnrealDecompilable unrealDecompilable))
-                    return;
-
-                SetContentText(unrealDecompilable, unrealDecompilable.Decompile());
-                // Assemble a title
-                string newTitle;
-                if (treeNode is IWithDecompilableObject<IUnrealDecompilable> decompilableObject)
-                {
-                    UObject obj;
-                    if ((obj = decompilableObject.Object as UObject) != null)
-                    {
-                        newTitle = obj.GetOuterGroup();
-                        SetContentTitle(newTitle);
-                        if (obj.DeserializationState.HasFlag(UObject.ObjectState.Errorlized))
-                            InitializeNodeError(treeNode, obj);
-                    }
-                    else
-                    {
-                        newTitle = treeNode.Text;
-                        SetContentTitle(newTitle, false);
-                    }
-                }
-                else
-                {
-                    if (treeNode.Parent != null)
-                        newTitle = treeNode.Parent.Text + "." + treeNode.Text;
-                    else
-                        newTitle = treeNode.Text;
-                    SetContentTitle(newTitle, false);
-                }
-            }
-            catch (Exception except)
-            {
-                ExceptionDialog.Show(
-                    "An exception occurred while attempting to display content of node: " + treeNode.Text, except);
-                treeNode.ForeColor = Color.Red;
-                treeNode.ToolTipText = except.Message;
-            }
-        }
-
         private static void InitializeNodeError(TreeNode node, UObject errorObject)
         {
             node.ForeColor = Color.Red;
@@ -601,29 +561,13 @@ namespace UEExplorer.UI.Tabs
                    + "\n\nInnerStackTrace:" + errorObject.ThrownException.InnerException?.StackTrace;
         }
 
-        private void _OnExportsNodeSelected(object sender, TreeViewEventArgs e)
-        {
-            OutputNodeObject(e.Node);
-        }
-
         #region Node-ContextMenu Methods
-
-        private void TreeView_Exports_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (e.Button != MouseButtons.Right)
-                return;
-
-            ShowNodeContextMenuStrip(TreeView_Exports, e, _OnExportsItemClicked);
-        }
-
-        private bool _SuppressNodeSelect;
 
         private void TreeView_Content_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button != MouseButtons.Right) 
                 return;
             
-            _SuppressNodeSelect = true;
             ShowNodeContextMenuStrip(TreeView_Content, e, _OnContentItemClicked);
         }
 
@@ -648,71 +592,54 @@ namespace UEExplorer.UI.Tabs
             };
             viewToolsContextMenu.Show(tree, e.Location);
         }
-        
-        private const string Action_ExportAs = "EXPORT_AS";
 
         private static void BuildItemNodes(object target, ToolStripItemCollection itemCollection,
             ToolStripItemClickedEventHandler itemClickEvent = null)
         {
             itemCollection.Clear();
 
-            var addItem = (Action<string, string>)((title, id) =>
+            var addItem = (Action<string, ContentNodeAction>)((title, id) =>
             {
                 var item = itemCollection.Add(title);
-                item.Name = id;
+                item.Name = Enum.GetName(typeof(ContentNodeAction), id);
             });
-
-            if (target is IUnrealDecompilable) addItem(Resources.NodeItem_ViewObject, "OBJECT");
-
+            
             var obj = target as UObject;
             if (obj == null && target is IWithDecompilableObject<UObject> decompilableObject)
                 obj = decompilableObject.Object;
-            
             if (obj == null) return;
-            
-            if (obj is IUnrealExportable exportableObj && exportableObj.CanExport())
-            {
-                addItem(Resources.EXPORT_AS, Action_ExportAs);
-            }
 
+            if (obj is IUnrealDecompilable) addItem(Resources.NodeItem_ViewObject, ContentNodeAction.Decompile);
+            if (obj is IBinaryData) addItem(Resources.UC_PackageExplorer_BuildItemNodes_View_Binary, ContentNodeAction.Binary);
             if (obj is IUnrealViewable)
             {
                 if (File.Exists(Program.Options.UEModelAppPath))
                 {
-                    addItem(Resources.NodeItem_OpenInUEModelViewer, "OPEN_UEMODELVIEWER");
+                    addItem(Resources.NodeItem_OpenInUEModelViewer, ContentNodeAction.DecompileExternal);
 #if DEBUG
-                    addItem(Resources.NodeItem_ExportWithUEModelViewer, "EXPORT_UEMODELVIEWER");
+                    addItem(Resources.NodeItem_ExportWithUEModelViewer, ContentNodeAction.ExportExternal);
 #endif
                 }
             }
+            if (obj is IUnrealExportable exportableObj && exportableObj.CanExport())
+            {
+                addItem(Resources.EXPORT_AS, ContentNodeAction.ExportAs);
+            }
 
-            if (obj.Outer != null) addItem(Resources.NodeItem_ViewOuter, "VIEW_OUTER");
+            if (obj.Outer != null) addItem(Resources.NodeItem_ViewOuter, ContentNodeAction.DecompileOuter);
 
             if (obj is UStruct uStruct)
             {
-                if (uStruct.Super != null) addItem(Resources.NodeItem_ViewParent, "VIEW_SUPER");
-
                 var @class = obj as UClass;
-                if (@class != null)
-                {
-                    if (@class.IsClassWithin()) addItem(Resources.NodeItem_ViewOuter, "VIEW_WITHIN");
-                }
-
                 if (uStruct.ByteCodeManager != null)
                 {
-                    if (@class != null) addItem(Resources.NodeItem_ViewReplication, "REPLICATION");
-                    addItem(Resources.NodeItem_ViewTokens, "TOKENS");
-                    addItem(Resources.NodeItem_ViewDisassembledTokens, "TOKENS_DISASSEMBLE");
+                    if (@class != null) addItem(Resources.NodeItem_ViewReplication, ContentNodeAction.DecompileClassReplication);
+                    addItem(Resources.NodeItem_ViewTokens, ContentNodeAction.DecompileTokens);
+                    addItem(Resources.NodeItem_ViewDisassembledTokens, ContentNodeAction.DisassembleTokens);
                 }
 
-                if (uStruct.ScriptText != null) addItem(Resources.NodeItem_ViewScript, "SCRIPT");
-
-                if (uStruct.ProcessedText != null) addItem(Resources.NodeItem_ViewProcessedScript, "PROCESSEDSCRIPT");
-
-                if (uStruct.CppText != null) addItem(Resources.NodeItem_ViewCPPText, "CPPSCRIPT");
-
                 if (uStruct.Properties != null && uStruct.Properties.Any())
-                    addItem(Resources.NodeItem_ViewDefaultProperties, "DEFAULTPROPERTIES");
+                    addItem(Resources.NodeItem_ViewDefaultProperties, ContentNodeAction.DecompileScriptProperties);
             }
 
             var bufferedObject = obj as IBuffered;
@@ -721,7 +648,7 @@ namespace UEExplorer.UI.Tabs
                 var bufferedItem = new ToolStripMenuItem
                 {
                     Text = Resources.NodeItem_ViewBuffer,
-                    Name = "BUFFER"
+                    Name = Enum.GetName(typeof(ContentNodeAction), ContentNodeAction.ViewBuffer)
                 };
 
                 bool shouldAddBufferItem = bufferedObject.GetBufferSize() > 0;
@@ -730,14 +657,7 @@ namespace UEExplorer.UI.Tabs
                 if (tableNode.Table != null)
                 {
                     var tableBufferItem = bufferedItem.DropDownItems.Add(Resources.NodeItem_ViewTableBuffer);
-                    tableBufferItem.Name = "TABLEBUFFER";
-                    shouldAddBufferItem = true;
-                }
-
-                if (obj.Default != null && obj.Default != obj)
-                {
-                    var defaultBufferItem = bufferedItem.DropDownItems.Add(Resources.NodeItem_DefaultBuffer);
-                    defaultBufferItem.Name = "DEFAULTBUFFER";
+                    tableBufferItem.Name = Enum.GetName(typeof(ContentNodeAction), ContentNodeAction.ViewTableBuffer);
                     shouldAddBufferItem = true;
                 }
 
@@ -751,42 +671,23 @@ namespace UEExplorer.UI.Tabs
             if (obj.ThrownException != null)
             {
                 itemCollection.Add(new ToolStripSeparator());
-                addItem(Resources.NodeItem_ViewException, "EXCEPTION");
+                addItem(Resources.NodeItem_ViewException, ContentNodeAction.ViewException);
             }
-
-            itemCollection.Add(new ToolStripSeparator());
-            addItem(Resources.NodeItem_ManagedProperties, "MANAGED_PROPERTIES");
-        }
-
-        private void _OnImportsItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            PerformNodeAction(TreeView_Imports.SelectedNode, e.ClickedItem.Name);
-        }
-
-        private void TreeView_Imports_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (e.Button != MouseButtons.Right)
-                return;
-
-            ShowNodeContextMenuStrip(TreeView_Imports, e, _OnImportsItemClicked);
         }
 
         private void ViewTools_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (_LastNodeContent == null)
+            if (_CurrentContentTarget == null)
                 return;
 
-            PerformNodeAction(_LastNodeContent, e.ClickedItem.Name);
-        }
-
-        private void _OnExportsItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            PerformNodeAction(TreeView_Exports.SelectedNode, e.ClickedItem.Name);
+            Enum.TryParse(e.ClickedItem.Name, out ContentNodeAction action);
+            PerformNodeAction(_CurrentContentTarget, action);
         }
 
         private void _OnContentItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            PerformNodeAction(TreeView_Content.SelectedNode, e.ClickedItem.Name);
+            Enum.TryParse(e.ClickedItem.Name, out ContentNodeAction action);
+            PerformNodeAction(TreeView_Content.SelectedNode, action);
         }
 
         private static string FormatTokenHeader(UStruct.UByteCodeDecompiler.Token token, bool acronymizeName = true)
@@ -857,19 +758,58 @@ namespace UEExplorer.UI.Tabs
             return content;
         }
 
-        private void PerformNodeAction(object target, string action)
+        private void PerformNodeAction(object target, ContentNodeAction action, bool trackHistory = true)
         {
             if (target == null)
                 return;
 
             var obj = target as UObject;
-            if (obj == null && target is IWithDecompilableObject<UObject> decompilableObject) obj = decompilableObject.Object;
+            if (obj == null)
+            {
+                switch (target)
+                {
+                    case IWithDecompilableObject<UObject> decompilableObject:
+                        obj = decompilableObject.Object;
+                        break;
 
+                    // Redirect this node to its tag if set (i.e. Within -> Class)
+                    case TreeNode node when node.Tag is UObject _obj:
+                        obj = _obj;
+                        break;
+                    
+                    // See if we can concatenate all sub tree nodes that have decompilable content.
+                    case TreeNode node:
+                        switch (action)
+                        {
+                            case ContentNodeAction.Decompile:
+                                var s = new StringBuilder();
+                                foreach (var subNode in node.Nodes)
+                                {
+                                    if (subNode is IUnrealDecompilable decompilable)
+                                    {
+                                        s.AppendLine(decompilable.Decompile());
+                                    }
+                                }
+                                SwitchContentPanel(target, ContentNodeAction.Decompile, s.ToString());
+                                TrackNodeAction(node, target, ContentNodeAction.Decompile);
+                                return;
+                        
+                            default:
+                                return;
+                        }
+                }
+            }
+            
+            if (trackHistory)
+            {
+                TrackNodeAction(target, obj, action);
+            }
+            
             try
             {
                 switch (action)
                 {
-                    case "OPEN_UEMODELVIEWER":
+                    case ContentNodeAction.DecompileExternal:
                     {
                         Process.Start
                         (
@@ -881,7 +821,7 @@ namespace UEExplorer.UI.Tabs
                         break;
                     }
 
-                    case "EXPORT_UEMODELVIEWER":
+                    case ContentNodeAction.ExportExternal:
                     {
                         string packagePath = Application.StartupPath
                                              + "\\Exported\\"
@@ -918,12 +858,7 @@ namespace UEExplorer.UI.Tabs
                         {
                             MessageBox.Show
                             (
-                                string.Format
-                                (
-                                    "The object was not exported.\r\n\r\nArguments:{0}\r\n\r\nLog:{1}",
-                                    appArguments,
-                                    log
-                                ),
+                                $"The object was not exported.\r\n\r\nArguments:{appArguments}\r\n\r\nLog:{log}",
                                 Application.ProductName
                             );
                         }
@@ -931,125 +866,42 @@ namespace UEExplorer.UI.Tabs
                         break;
                     }
 
-                    case "OBJECT":
+                    case ContentNodeAction.Decompile:
+                        SwitchContentPanel(obj, ContentNodeAction.Decompile);
+                        break;
+
+                    case ContentNodeAction.Binary:
+                        SwitchContentPanel(obj, action);
+                        break;
+
+                    case ContentNodeAction.DecompileOuter:
+                        Debug.Assert(obj.Outer != null, "obj.Outer != null");
+                        SwitchContentPanel(obj.Outer, ContentNodeAction.Decompile);
+                        break;
+
+                    case ContentNodeAction.DecompileClassReplication:
                     {
-                        if (obj != null)
+                        if (obj is UClass replicationClass)
                         {
-                            SetContentTitle(obj.GetOuterGroup());
-                            SetContentText(obj, obj.Decompile());
-                        }
-                        else if (target is IUnrealDecompilable)
-                        {
-                            var node = target as TreeNode;
-                            SetContentTitle(node.Text);
-                            SetContentText(node, (target as IUnrealDecompilable).Decompile());
+                            string text = replicationClass.FormatReplication();
+                            SwitchContentPanel(replicationClass, ContentNodeAction.Decompile, text);
                         }
 
                         break;
                     }
 
-                    case "VIEW_OUTER":
-                        if (obj != null && obj.Outer != null)
-                        {
-                            SetContentTitle(obj.Outer.GetOuterGroup());
-                            SetContentText(obj.Outer, obj.Outer.Decompile());
-                        }
-
-                        break;
-
-                    case "VIEW_SUPER":
-                        if (obj is UStruct && ((UStruct)obj).Super != null)
-                        {
-                            var super = ((UStruct)obj).Super;
-                            SetContentTitle(super.GetOuterGroup());
-                            SetContentText(super, super.Decompile());
-                        }
-
-                        break;
-
-                    case "VIEW_WITHIN":
-                        if (obj is UClass && ((UClass)obj).Within != null)
-                        {
-                            var within = ((UClass)obj).Within;
-                            SetContentTitle(within.GetOuterGroup());
-                            SetContentText(within, within.Decompile());
-                        }
-
-                        break;
-
-                    case "MANAGED_PROPERTIES":
-                        using (var propDialog = new PropertiesDialog
-                               {
-                                   ObjectLabel = { Text = ((TreeNode)target).Text },
-                                   ObjectPropertiesGrid = { SelectedObject = obj }
-                               })
-                        {
-                            propDialog.ShowDialog(this);
-                        }
-
-                        break;
-
-                    case "REPLICATION":
+                    case ContentNodeAction.DecompileScriptProperties:
                     {
-                        var unClass = obj as UClass;
-                        if (unClass != null)
+                        if (obj is UStruct unStruct)
                         {
-                            SetContentTitle(unClass.Name, true, "Replication");
-                            SetContentText(unClass, unClass.FormatReplication());
+                            string text = obj.Default is UStruct ? unStruct.FormatDefaultProperties() : null;
+                            SwitchContentPanel(obj.Default, ContentNodeAction.Decompile, text);
                         }
 
                         break;
                     }
 
-                    case "SCRIPT":
-                    {
-                        var str = obj as UStruct;
-                        if (str != null && str.ScriptText != null)
-                        {
-                            SetContentTitle(str.ScriptText.GetOuterGroup());
-                            SetContentText(str.ScriptText, str.ScriptText.Decompile());
-                        }
-
-                        break;
-                    }
-
-                    case "CPPSCRIPT":
-                    {
-                        var str = obj as UStruct;
-                        if (str != null && str.CppText != null)
-                        {
-                            SetContentTitle(str.CppText.GetOuterGroup());
-                            SetContentText(str.CppText, str.CppText.Decompile());
-                        }
-
-                        break;
-                    }
-
-                    case "PROCESSEDSCRIPT":
-                    {
-                        var str = obj as UStruct;
-                        if (str != null && str.ProcessedText != null)
-                        {
-                            SetContentTitle(str.ProcessedText.GetOuterGroup());
-                            SetContentText(str.ProcessedText, str.ProcessedText.Decompile());
-                        }
-
-                        break;
-                    }
-
-                    case "DEFAULTPROPERTIES":
-                    {
-                        var unStruct = obj as UStruct;
-                        if (unStruct != null)
-                        {
-                            SetContentTitle(unStruct.Default.GetOuterGroup(), true, "Default-Properties");
-                            SetContentText(unStruct, unStruct.FormatDefaultProperties());
-                        }
-
-                        break;
-                    }
-
-                    case "TOKENS_DISASSEMBLE":
+                    case ContentNodeAction.DisassembleTokens:
                     {
                         var unStruct = obj as UStruct;
                         if (unStruct?.ByteCodeManager != null)
@@ -1059,15 +911,14 @@ namespace UEExplorer.UI.Tabs
                             codeDec.InitDecompile();
 
                             _DisassembleTokensTemplate = LoadTemplate("struct.tokens-disassembled");
-                            string content = DisassembleTokens(unStruct, codeDec, codeDec.DeserializedTokens.Count);
-                            SetContentTitle(unStruct.GetOuterGroup(), true, "Tokens-Disassembled");
-                            SetContentText(unStruct, content);
+                            string text = DisassembleTokens(unStruct, codeDec, codeDec.DeserializedTokens.Count);
+                            SwitchContentPanel(obj.Default, ContentNodeAction.Decompile, text);
                         }
 
                         break;
                     }
 
-                    case "TOKENS":
+                    case ContentNodeAction.DecompileTokens:
                     {
                         var unStruct = obj as UStruct;
                         if (unStruct?.ByteCodeManager != null)
@@ -1077,7 +928,7 @@ namespace UEExplorer.UI.Tabs
                             codeDec.Deserialize();
                             codeDec.InitDecompile();
 
-                            var content = string.Empty;
+                            var text = string.Empty;
                             while (codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count)
                             {
                                 var t = codeDec.NextToken;
@@ -1108,7 +959,7 @@ namespace UEExplorer.UI.Tabs
                                                                  unStruct.ScriptOffset + t.StoragePosition;
                                 _UnrealPackage.Stream.Read(buffer, 0, buffer.Length);
 
-                                content += string.Format(tokensTemplate,
+                                text += string.Format(tokensTemplate,
                                     t.Position, t.StoragePosition,
                                     chain, BitConverter.ToString(buffer).Replace('-', ' '),
                                     output != string.Empty ? output + "\r\n" : output
@@ -1118,14 +969,13 @@ namespace UEExplorer.UI.Tabs
                                     break;
                             }
 
-                            SetContentTitle(unStruct.GetOuterGroup(), true, "Tokens");
-                            SetContentText(unStruct, content);
+                            SwitchContentPanel(obj.Default, ContentNodeAction.Decompile, text);
                         }
-
+                        
                         break;
                     }
 
-                    case "BUFFER":
+                    case ContentNodeAction.ViewBuffer:
                     {
                         var bufferObject = (IBuffered)obj;
                         Debug.Assert(bufferObject != null, nameof(bufferObject) + " != null");
@@ -1133,7 +983,7 @@ namespace UEExplorer.UI.Tabs
                         break;
                     }
 
-                    case "TABLEBUFFER":
+                    case ContentNodeAction.ViewTableBuffer:
                     {
                         var tableObject = target as IContainsTable ?? obj;
                         Debug.Assert(tableObject != null, nameof(tableObject) + " != null");
@@ -1141,20 +991,13 @@ namespace UEExplorer.UI.Tabs
                         break;
                     }
 
-                    case "DEFAULTBUFFER":
+                    case ContentNodeAction.ViewException:
                     {
-                        var unObject = obj;
-                        if (unObject != null) ViewBufferFor(unObject.Default);
+                        if (target is ObjectNode oNode) SetContentText(oNode, GetExceptionMessage(oNode.Object));
                         break;
                     }
 
-                    case "EXCEPTION":
-                    {
-                        if (target is ObjectNode oNode) SetContentText(oNode, GetExceptionMessage((UObject)oNode.Object));
-                        break;
-                    }
-
-                    case Action_ExportAs:
+                    case ContentNodeAction.ExportAs:
                     {
                         if (obj is IUnrealExportable exportableObject)
                         {
@@ -1167,7 +1010,7 @@ namespace UEExplorer.UI.Tabs
                                 if (ext != exportableObject.ExportableExtensions.Last()) fileExtensions += "|";
                             }
 
-                            var fileName = obj.Name;
+                            string fileName = obj.Name;
                             var dialog = new SaveFileDialog { Filter = fileExtensions, FileName = fileName };
                             if (dialog.ShowDialog() != DialogResult.OK)
                                 return;
@@ -1190,11 +1033,54 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
+        private void SwitchContentPanel(object target, ContentNodeAction action, [CanBeNull] string contentText = null)
+        {
+            Debug.Assert(target != null, nameof(target) + " != null");
+            _CurrentContentTarget = target;
+                        
+            TextContentPanel.Visible = false;
+            BinaryDataPanel.Visible = false;
+            
+            BuildItemNodes(target, ViewTools.DropDownItems);
+            ViewTools.Enabled = ViewTools.DropDownItems.Count > 0;
+            
+
+            switch (action)
+            {
+                case ContentNodeAction.Decompile:
+                    TextContentPanel.Visible = true;
+                    if (contentText != null)
+                    {
+                        SetContentTitle(target.ToString());
+                        SetContentText(target, contentText);
+                    }
+                    else if (target is UObject obj)
+                    {
+                        SetContentTitle(obj.GetOuterGroup());
+                        SetContentText(obj, obj.Decompile());
+                    }
+                    break;
+
+                case ContentNodeAction.Binary:
+                    Debug.Assert(target is IBinaryData);
+                    BinaryDataPanel.Visible = true;
+                    if (target is IBinaryData binaryDataObject)
+                    {
+                        SetContentTitle(binaryDataObject.GetBufferId(true));
+                        BinaryDataFieldsPanel.BinaryFieldBindingSource.DataSource = binaryDataObject.BinaryMetaData?.Fields;
+                    }
+                    break;
+                
+                default:
+                    throw new NotImplementedException($"Invalid action {action}");
+            }
+        }
+
         private static readonly string _TemplateDir = Path.Combine(Program.ConfigDir, "Templates");
 
         private static string LoadTemplate(string name)
         {
-            return File.ReadAllText(Path.Combine(_TemplateDir, name + ".txt"), System.Text.Encoding.ASCII);
+            return File.ReadAllText(Path.Combine(_TemplateDir, name + ".txt"), Encoding.ASCII);
         }
 
         #endregion
@@ -1224,18 +1110,21 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private struct BufferData
+        private struct ContentHistoryData
         {
-            public string Text;
-            public string Label;
-            public object Node;
+            public object SelectedNode;
+            public object Target;
+            public ContentNodeAction Action;
 
             public double Y, X;
+            
+            public int SelectStart;
+            public int SelectLength;
         }
 
-        private readonly List<BufferData> _ContentBuffer = new List<BufferData>();
-        private int _BufferIndex = -1;
-        private object _LastNodeContent;
+        private readonly List<ContentHistoryData> _ContentHistory = new List<ContentHistoryData>();
+        private int _CurrentHistoryIndex = -1;
+        private object _CurrentContentTarget;
 
         public void SetContentTitle(string title, bool isSearchable = true, string sub = "")
         {
@@ -1250,12 +1139,8 @@ namespace UEExplorer.UI.Tabs
             SearchObjectTextBox.SelectAll();
         }
 
-        public void SetContentText(object node, string content, bool skip = false, bool resetView = true)
+        public void SetContentText(object node, string content, bool resetView = true)
         {
-            if (_LastNodeContent != node) BuildItemNodes(node, ViewTools.DropDownItems);
-            ViewTools.Enabled = ViewTools.DropDownItems.Count > 0 && node != null;
-            _LastNodeContent = node;
-
             content = content.TrimStart('\r', '\n').TrimEnd('\r', '\n');
             if (content.Length > 0)
             {
@@ -1268,82 +1153,110 @@ namespace UEExplorer.UI.Tabs
 
             TextEditorPanel.textEditor.Text = content;
             if (resetView) TextEditorPanel.textEditor.ScrollToHome();
+        }
 
-            if (skip)
-                return;
-
-            if (_ContentBuffer.Count > 0)
+        private void TrackNodeAction(object node, object target, ContentNodeAction action)
+        {
+            switch (action)
+            {
+                case ContentNodeAction.ExportAs:
+                case ContentNodeAction.ExportExternal:
+                case ContentNodeAction.DecompileExternal:
+                case ContentNodeAction.ViewBuffer:
+                case ContentNodeAction.ViewTableBuffer:
+                    return;
+            }
+            
+            if (_ContentHistory.Count > 0)
             {
                 // No need to buffer the same content
-                if (_BufferIndex > -1 && _BufferIndex < _ContentBuffer.Count &&
-                    _ContentBuffer[_BufferIndex].Node == node) return;
-
-                StoreViewForBuffer(_BufferIndex);
-                // Clean all above buffers when a new node was user-selected
-                if (_ContentBuffer.Count - 1 - _BufferIndex > 0)
+                var last = _ContentHistory.Last();
+                if (last.Target == target && last.Action == action)
                 {
-                    _ContentBuffer.RemoveRange(_BufferIndex, _ContentBuffer.Count - _BufferIndex);
-                    _BufferIndex = _ContentBuffer.Count - 1;
+                    return;
+                }
+
+                // Preserve the text editor state of the last action.
+                UpdateContentHistoryData(_CurrentHistoryIndex);
+                
+                // Clean all above buffers when a new node was user-selected
+                if (_ContentHistory.Count - 1 - _CurrentHistoryIndex > 0)
+                {
+                    _ContentHistory.RemoveRange(_CurrentHistoryIndex, _ContentHistory.Count - _CurrentHistoryIndex);
+                    _CurrentHistoryIndex = _ContentHistory.Count - 1;
                     NextButton.Enabled = false;
                 }
             }
 
-            var bd = new BufferData { Text = content, Node = node, Label = Label_ObjectName.Text };
-            _ContentBuffer.Add(bd);
+            var data = new ContentHistoryData
+            {
+                SelectedNode = node, 
+                Target = target, 
+                Action = action
+            };
+            _ContentHistory.Add(data);
 
             // Maximum 10 can be buffered; remove last one
-            if (_ContentBuffer.Count > 10)
-                _ContentBuffer.RemoveRange(0, 1);
-            else ++_BufferIndex;
+            if (_ContentHistory.Count > 10)
+                _ContentHistory.RemoveRange(0, 1);
+            else ++_CurrentHistoryIndex;
 
-            if (_BufferIndex > 0) PrevButton.Enabled = true;
+            if (_CurrentHistoryIndex > 0) PrevButton.Enabled = true;
         }
 
-        private void StoreViewForBuffer(int bufferIndex)
+        private void UpdateContentHistoryData(int historyIndex)
         {
-            var content = _ContentBuffer[bufferIndex];
+            var content = _ContentHistory[historyIndex];
             content.X = TextEditorPanel.textEditor.HorizontalOffset;
             content.Y = TextEditorPanel.textEditor.VerticalOffset;
-            _ContentBuffer[bufferIndex] = content;
+            content.SelectStart = TextEditorPanel.textEditor.SelectionStart;
+            content.SelectLength = TextEditorPanel.textEditor.SelectionLength;
+            _ContentHistory[historyIndex] = content;
         }
 
-        private void RestoreBufferedContent(int bufferIndex)
+        private void RestoreContentHistoryData(int historyIndex)
         {
-            SetContentTitle(_ContentBuffer[bufferIndex].Label, false);
-            SetContentText(_ContentBuffer[bufferIndex].Node, _ContentBuffer[bufferIndex].Text, true);
-            SelectNode(_ContentBuffer[bufferIndex].Node as TreeNode);
+            var data = _ContentHistory[historyIndex];
+            _CurrentContentTarget = data.Target;
+            PerformNodeAction(data.Target, data.Action, false);
+            
+            if (data.SelectedNode is TreeNode selectedNode)
+            {
+                RestoreSelectedNode(selectedNode);
+            }
 
-            TextEditorPanel.textEditor.ScrollToVerticalOffset(_ContentBuffer[bufferIndex].Y);
-            TextEditorPanel.textEditor.ScrollToHorizontalOffset(_ContentBuffer[bufferIndex].X);
+            TextEditorPanel.textEditor.ScrollToVerticalOffset(data.Y);
+            TextEditorPanel.textEditor.ScrollToHorizontalOffset(data.X);
+            TextEditorPanel.textEditor.Select(data.SelectStart, data.SelectLength);
         }
 
         private void ToolStripButton_Backward_Click(object sender, EventArgs e)
         {
-            if (_BufferIndex - 1 <= -1)
+            if (_CurrentHistoryIndex - 1 <= -1)
                 return;
 
             FilterText.Text = string.Empty;
-            StoreViewForBuffer(_BufferIndex);
-            RestoreBufferedContent(--_BufferIndex);
+            UpdateContentHistoryData(_CurrentHistoryIndex);
+            RestoreContentHistoryData(--_CurrentHistoryIndex);
 
-            if (_BufferIndex == 0) PrevButton.Enabled = false;
+            if (_CurrentHistoryIndex == 0) PrevButton.Enabled = false;
             NextButton.Enabled = true;
         }
 
         private void ToolStripButton_Forward_Click(object sender, EventArgs e)
         {
-            if (_BufferIndex + 1 >= _ContentBuffer.Count)
+            if (_CurrentHistoryIndex + 1 >= _ContentHistory.Count)
                 return;
 
             FilterText.Text = string.Empty;
-            StoreViewForBuffer(_BufferIndex);
-            RestoreBufferedContent(++_BufferIndex);
+            UpdateContentHistoryData(_CurrentHistoryIndex);
+            RestoreContentHistoryData(++_CurrentHistoryIndex);
 
-            if (_BufferIndex == _ContentBuffer.Count - 1) NextButton.Enabled = false;
+            if (_CurrentHistoryIndex == _ContentHistory.Count - 1) NextButton.Enabled = false;
             PrevButton.Enabled = true;
         }
 
-        private void SelectNode(TreeNode node)
+        private void RestoreSelectedNode(TreeNode node)
         {
             if (node == null)
                 return;
@@ -1370,7 +1283,7 @@ namespace UEExplorer.UI.Tabs
             hexDialog.Show(_Form);
         }
 
-        private System.Windows.Forms.Timer _FilterTextChangedTimer = null;
+        private Timer _FilterTextChangedTimer = null;
         private readonly List<TreeNode> _FilteredNodes = new List<TreeNode>();
 
         private void FilterText_TextChanged(object sender, EventArgs e)
@@ -1385,7 +1298,7 @@ namespace UEExplorer.UI.Tabs
             if (_FilterTextChangedTimer != null) 
                 return;
             
-            _FilterTextChangedTimer = new System.Windows.Forms.Timer();
+            _FilterTextChangedTimer = new Timer();
             _FilterTextChangedTimer.Interval = 350;
             _FilterTextChangedTimer.Tick += _FilterTextChangedTimer_Tick;
             _FilterTextChangedTimer.Start();
@@ -1428,12 +1341,7 @@ namespace UEExplorer.UI.Tabs
 
         private void Panel4_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(_BorderPen, 0, 0, panel4.Width - 1, panel4.Height - 1);
-        }
-
-        private void Panel1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawRectangle(_BorderPen, 0, 0, panel1.Width - 1, panel1.Height - 1);
+            e.Graphics.DrawRectangle(_BorderPen, 0, 0, e.ClipRectangle.Width - 1, e.ClipRectangle.Height - 1);
         }
 
         private void ToolStripSeparator1_Paint(object sender, PaintEventArgs e)
@@ -1483,14 +1391,7 @@ namespace UEExplorer.UI.Tabs
 
         private void TreeView_Content_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            // Selection shouldn't view object, for example on contextmenu selection.
-            if (_SuppressNodeSelect)
-            {
-                _SuppressNodeSelect = false;
-                return;
-            }
-
-            PerformNodeAction(e.Node, "OBJECT");
+            PerformNodeAction(e.Node, ContentNodeAction.Decompile);
         }
 
         private int _FindCount;
@@ -1498,6 +1399,8 @@ namespace UEExplorer.UI.Tabs
 
         private void FindInClassesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
+            
             string findText;
             using (var findDialog = new FindDialog())
             {
@@ -1564,11 +1467,8 @@ namespace UEExplorer.UI.Tabs
                 if (nodeEvent.Node.Parent.Tag is TextSearchHelpers.DocumentResult documentResult)
                 {
                     var unClass = (UClass)documentResult.Document;
-                    SetContentTitle(
-                        $"{unClass.Name}: {findResult.TextLine}, {findResult.TextColumn}",
-                        false
-                    );
-                    SetContentText(nodeEvent.Node, unClass.Decompile(), false, false);
+                    PerformNodeAction(unClass, ContentNodeAction.Decompile);
+                    TrackNodeAction(nodeEvent.Node, unClass, ContentNodeAction.Decompile);
                 }
 
                 TextEditorPanel.textEditor.ScrollTo(findResult.TextLine, findResult.TextColumn);
@@ -1609,6 +1509,7 @@ namespace UEExplorer.UI.Tabs
                 page = objectGroup.Substring(protocol.Length + 1).ToLower();
             }
 
+            Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
             var obj = _UnrealPackage.FindObjectByGroup(protocol == "" ? objectGroup : protocol);
             if (obj == null) 
                 return false;
@@ -1620,7 +1521,8 @@ namespace UEExplorer.UI.Tabs
                     case "replication":
                         if (obj is UClass)
                         {
-                            PerformNodeAction(obj, "REPLICATION");
+                            PerformNodeAction(obj, ContentNodeAction.DecompileClassReplication);
+                            TrackNodeAction(null, obj, ContentNodeAction.DecompileClassReplication);
                             return true;
                         }
 
@@ -1629,7 +1531,8 @@ namespace UEExplorer.UI.Tabs
                     case "tokens":
                         if (obj is UStruct)
                         {
-                            PerformNodeAction(obj, "TOKENS");
+                            PerformNodeAction(obj, ContentNodeAction.DecompileTokens);
+                            TrackNodeAction(null, obj, ContentNodeAction.DecompileTokens);
                             return true;
                         }
 
@@ -1638,7 +1541,8 @@ namespace UEExplorer.UI.Tabs
                     case "tokens-disassembled":
                         if (obj is UStruct)
                         {
-                            PerformNodeAction(obj, "TOKENS_DISASSEMBLE");
+                            PerformNodeAction(obj, ContentNodeAction.DisassembleTokens);
+                            TrackNodeAction(null, obj, ContentNodeAction.DisassembleTokens);
                             return true;
                         }
 
@@ -1647,7 +1551,8 @@ namespace UEExplorer.UI.Tabs
                     case "default-properties":
                         if (obj is UStruct)
                         {
-                            PerformNodeAction(obj, "DEFAULTPROPERTIES");
+                            PerformNodeAction(obj, ContentNodeAction.DecompileScriptProperties);
+                            TrackNodeAction(null, obj, ContentNodeAction.DecompileScriptProperties);
                             return true;
                         }
 
@@ -1655,12 +1560,7 @@ namespace UEExplorer.UI.Tabs
                 }
             }
 
-            string content = obj.ImportTable == null
-                ? obj.Decompile()
-                : string.Format("// No decompilable data available for {0}", obj.GetOuterGroup());
-
-            SetContentTitle(obj.GetOuterGroup());
-            SetContentText(obj, content);
+            SwitchContentPanel(obj, ContentNodeAction.Decompile);
             return true;
 
         }
@@ -1699,8 +1599,8 @@ namespace UEExplorer.UI.Tabs
                     var tableItem = expandingObjectNode.Object.Table;
                     foreach (var objectNode in
                              from obj in _UnrealPackage.Exports
-                             where obj.OuterTable == tableItem || obj.ArchetypeTable == tableItem
-                             select CreateNode((UObjectTableItem)obj))
+                             where obj.Outer == tableItem || obj.Archetype == tableItem
+                             select CreateNode(obj))
                     {
                         InitializeObjectNode(objectNode);
                         expandingObjectNode.Nodes.Add(objectNode);
@@ -1717,7 +1617,11 @@ namespace UEExplorer.UI.Tabs
                         {
                             foreach (var importItem in _UnrealPackage.Imports.Where(table =>
                                          table.OuterIndex == 0 && table.ClassName == "Package"))
-                                GetDependencyOn(importItem, e.Node.Nodes.Add(importItem.ObjectName));
+                            {
+                                var node = e.Node.Nodes.Add(importItem.ObjectName);
+                                node.Tag = importItem.Object;
+                                GetDependencyOn(importItem, node);
+                            }
                         }
                     }
 

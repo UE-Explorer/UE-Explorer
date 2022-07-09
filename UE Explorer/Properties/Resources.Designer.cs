@@ -796,6 +796,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View Binary Fields.
+        /// </summary>
+        internal static string UC_PackageExplorer_BuildItemNodes_View_Binary {
+            get {
+                return ResourceManager.GetString("UC_PackageExplorer_BuildItemNodes_View_Binary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to go the folder with the exported content?.
         /// </summary>
         internal static string UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER {

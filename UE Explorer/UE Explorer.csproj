@@ -296,6 +296,13 @@
     <Compile Include="UI\Nodes\ObjectNode.cs" />
     <Compile Include="UI\Nodes\ObjectVisitor.cs" />
     <Compile Include="UI\Nodes\ObjectTreeBuilder.cs" />
+    <Compile Include="UI\Panels\BinaryDataFieldsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Panels\BinaryDataFieldsPanel.Designer.cs">
+      <DependentUpon>BinaryDataFieldsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ContentNodeAction.cs" />
     <Compile Include="UI\Tabs\UC_UClassFile.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -426,6 +433,9 @@
     <EmbeddedResource Include="UI\Main\ProgramForm.nl.resx">
       <DependentUpon>ProgramForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Panels\BinaryDataFieldsPanel.resx">
+      <DependentUpon>BinaryDataFieldsPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_Default.resx">
       <DependentUpon>UC_Default.cs</DependentUpon>
     </EmbeddedResource>
@@ -504,6 +514,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\UELib.BinaryMetaData+BinaryField.datasource" />
     <None Include="Properties\DataSources\UELib.CompressedChunk.datasource" />
     <None Include="Properties\DataSources\UELib.UExportTableItem.datasource" />
     <None Include="Properties\DataSources\UELib.UGenerationTableItem.datasource" />
@@ -588,6 +599,7 @@
     </Content>
     <None Include="Resources\search.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

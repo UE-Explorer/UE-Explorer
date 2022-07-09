@@ -87,6 +87,7 @@ namespace UEExplorer.UI.Nodes
                             var attr = property.GetCustomAttribute<System.ComponentModel.DisplayNameAttribute>();
                             var memberNode = new TreeNode(attr != null ? attr.DisplayName : property.Name);
                             memberNode.Nodes.Add(new ObjectNode(value));
+                            memberNode.Tag = value;
                             subNodes.Add(memberNode);
                         }
 

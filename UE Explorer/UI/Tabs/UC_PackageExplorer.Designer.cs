@@ -52,10 +52,26 @@
             this.uNameTableItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TabPage_Imports = new System.Windows.Forms.TabPage();
             this.importsDataGridView = new System.Windows.Forms.DataGridView();
+            this.packageNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.classNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.objectNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.outerIndexDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.outerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uImportTableItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TreeView_Imports = new System.Windows.Forms.TreeView();
             this.TabPage_Exports = new System.Windows.Forms.TabPage();
             this.exportsDataGridView = new System.Windows.Forms.DataGridView();
+            this.classIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.classDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.superIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.superDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.templateIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.templateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.archetypeIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.archetypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.objectNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.outerIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.outerDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uExportTableItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TreeView_Exports = new System.Windows.Forms.TreeView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -72,10 +88,7 @@
             this.viewBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReloadButton = new System.Windows.Forms.ToolStripMenuItem();
             this.Panel_Content = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.WPFHost = new System.Windows.Forms.Integration.ElementHost();
-            this.TextEditorPanel = new UEExplorer.UI.Tabs.TextEditorPanel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.Header = new System.Windows.Forms.Panel();
             this.ToolStrip_Content = new System.Windows.Forms.ToolStrip();
             this.PrevButton = new System.Windows.Forms.ToolStripButton();
             this.NextButton = new System.Windows.Forms.ToolStripButton();
@@ -87,25 +100,14 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.Label_ObjectName = new System.Windows.Forms.ToolStripLabel();
             this.ViewTools = new System.Windows.Forms.ToolStripDropDownButton();
+            this.BinaryDataPanel = new System.Windows.Forms.Panel();
+            this.BinaryDataFieldsPanel = new UEExplorer.UI.Panels.BinaryDataFieldsPanel();
+            this.TextContentPanel = new System.Windows.Forms.Panel();
+            this.WPFHost = new System.Windows.Forms.Integration.ElementHost();
+            this.TextEditorPanel = new UEExplorer.UI.Tabs.TextEditorPanel();
             this.packageFileSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.packageNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.classNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.objectNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.outerIndexDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.outerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.classIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.classDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.superIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.superDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.templateIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.templateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.archetypeIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.archetypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.objectNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.outerIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.outerDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             exportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -135,9 +137,10 @@
             this.panel2.SuspendLayout();
             this.ToolStrip_Main.SuspendLayout();
             this.Panel_Content.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.Header.SuspendLayout();
             this.ToolStrip_Content.SuspendLayout();
+            this.BinaryDataPanel.SuspendLayout();
+            this.TextContentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.packageFileSummaryBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -239,7 +242,7 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.TabControl_General);
             this.panel1.Name = "panel1";
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel4_Paint);
             // 
             // TabControl_General
             // 
@@ -272,6 +275,7 @@
             this.TreeView_Content.HideSelection = false;
             this.TreeView_Content.ImageList = this.VSIcons;
             this.TreeView_Content.Name = "TreeView_Content";
+            this.TreeView_Content.ShowNodeToolTips = true;
             this.TreeView_Content.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView_Content_BeforeExpand);
             this.TreeView_Content.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_Content_AfterSelect);
             this.TreeView_Content.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Content_NodeMouseClick);
@@ -470,6 +474,41 @@
             this.importsDataGridView.ReadOnly = true;
             this.importsDataGridView.RowHeadersVisible = false;
             // 
+            // packageNameDataGridViewTextBoxColumn
+            // 
+            this.packageNameDataGridViewTextBoxColumn.DataPropertyName = "PackageName";
+            resources.ApplyResources(this.packageNameDataGridViewTextBoxColumn, "packageNameDataGridViewTextBoxColumn");
+            this.packageNameDataGridViewTextBoxColumn.Name = "packageNameDataGridViewTextBoxColumn";
+            this.packageNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // classNameDataGridViewTextBoxColumn
+            // 
+            this.classNameDataGridViewTextBoxColumn.DataPropertyName = "ClassName";
+            resources.ApplyResources(this.classNameDataGridViewTextBoxColumn, "classNameDataGridViewTextBoxColumn");
+            this.classNameDataGridViewTextBoxColumn.Name = "classNameDataGridViewTextBoxColumn";
+            this.classNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // objectNameDataGridViewTextBoxColumn1
+            // 
+            this.objectNameDataGridViewTextBoxColumn1.DataPropertyName = "ObjectName";
+            resources.ApplyResources(this.objectNameDataGridViewTextBoxColumn1, "objectNameDataGridViewTextBoxColumn1");
+            this.objectNameDataGridViewTextBoxColumn1.Name = "objectNameDataGridViewTextBoxColumn1";
+            this.objectNameDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // outerIndexDataGridViewTextBoxColumn1
+            // 
+            this.outerIndexDataGridViewTextBoxColumn1.DataPropertyName = "OuterIndex";
+            resources.ApplyResources(this.outerIndexDataGridViewTextBoxColumn1, "outerIndexDataGridViewTextBoxColumn1");
+            this.outerIndexDataGridViewTextBoxColumn1.Name = "outerIndexDataGridViewTextBoxColumn1";
+            this.outerIndexDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // outerDataGridViewTextBoxColumn
+            // 
+            this.outerDataGridViewTextBoxColumn.DataPropertyName = "Outer";
+            resources.ApplyResources(this.outerDataGridViewTextBoxColumn, "outerDataGridViewTextBoxColumn");
+            this.outerDataGridViewTextBoxColumn.Name = "outerDataGridViewTextBoxColumn";
+            this.outerDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // uImportTableItemBindingSource
             // 
             this.uImportTableItemBindingSource.DataSource = typeof(UELib.UImportTableItem);
@@ -482,7 +521,6 @@
             this.TreeView_Imports.ImageList = this.VSIcons;
             this.TreeView_Imports.Name = "TreeView_Imports";
             this.TreeView_Imports.ShowNodeToolTips = true;
-            this.TreeView_Imports.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Imports_NodeMouseClick);
             // 
             // TabPage_Exports
             // 
@@ -518,6 +556,83 @@
             this.exportsDataGridView.ReadOnly = true;
             this.exportsDataGridView.RowHeadersVisible = false;
             // 
+            // classIndexDataGridViewTextBoxColumn
+            // 
+            this.classIndexDataGridViewTextBoxColumn.DataPropertyName = "ClassIndex";
+            resources.ApplyResources(this.classIndexDataGridViewTextBoxColumn, "classIndexDataGridViewTextBoxColumn");
+            this.classIndexDataGridViewTextBoxColumn.Name = "classIndexDataGridViewTextBoxColumn";
+            this.classIndexDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // classDataGridViewTextBoxColumn
+            // 
+            this.classDataGridViewTextBoxColumn.DataPropertyName = "Class";
+            resources.ApplyResources(this.classDataGridViewTextBoxColumn, "classDataGridViewTextBoxColumn");
+            this.classDataGridViewTextBoxColumn.Name = "classDataGridViewTextBoxColumn";
+            this.classDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // superIndexDataGridViewTextBoxColumn
+            // 
+            this.superIndexDataGridViewTextBoxColumn.DataPropertyName = "SuperIndex";
+            resources.ApplyResources(this.superIndexDataGridViewTextBoxColumn, "superIndexDataGridViewTextBoxColumn");
+            this.superIndexDataGridViewTextBoxColumn.Name = "superIndexDataGridViewTextBoxColumn";
+            this.superIndexDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // superDataGridViewTextBoxColumn
+            // 
+            this.superDataGridViewTextBoxColumn.DataPropertyName = "Super";
+            resources.ApplyResources(this.superDataGridViewTextBoxColumn, "superDataGridViewTextBoxColumn");
+            this.superDataGridViewTextBoxColumn.Name = "superDataGridViewTextBoxColumn";
+            this.superDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // templateIndexDataGridViewTextBoxColumn
+            // 
+            this.templateIndexDataGridViewTextBoxColumn.DataPropertyName = "TemplateIndex";
+            resources.ApplyResources(this.templateIndexDataGridViewTextBoxColumn, "templateIndexDataGridViewTextBoxColumn");
+            this.templateIndexDataGridViewTextBoxColumn.Name = "templateIndexDataGridViewTextBoxColumn";
+            this.templateIndexDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // templateDataGridViewTextBoxColumn
+            // 
+            this.templateDataGridViewTextBoxColumn.DataPropertyName = "Template";
+            resources.ApplyResources(this.templateDataGridViewTextBoxColumn, "templateDataGridViewTextBoxColumn");
+            this.templateDataGridViewTextBoxColumn.Name = "templateDataGridViewTextBoxColumn";
+            this.templateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // archetypeIndexDataGridViewTextBoxColumn
+            // 
+            this.archetypeIndexDataGridViewTextBoxColumn.DataPropertyName = "ArchetypeIndex";
+            resources.ApplyResources(this.archetypeIndexDataGridViewTextBoxColumn, "archetypeIndexDataGridViewTextBoxColumn");
+            this.archetypeIndexDataGridViewTextBoxColumn.Name = "archetypeIndexDataGridViewTextBoxColumn";
+            this.archetypeIndexDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // archetypeDataGridViewTextBoxColumn
+            // 
+            this.archetypeDataGridViewTextBoxColumn.DataPropertyName = "Archetype";
+            resources.ApplyResources(this.archetypeDataGridViewTextBoxColumn, "archetypeDataGridViewTextBoxColumn");
+            this.archetypeDataGridViewTextBoxColumn.Name = "archetypeDataGridViewTextBoxColumn";
+            this.archetypeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // objectNameDataGridViewTextBoxColumn
+            // 
+            this.objectNameDataGridViewTextBoxColumn.DataPropertyName = "ObjectName";
+            resources.ApplyResources(this.objectNameDataGridViewTextBoxColumn, "objectNameDataGridViewTextBoxColumn");
+            this.objectNameDataGridViewTextBoxColumn.Name = "objectNameDataGridViewTextBoxColumn";
+            this.objectNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // outerIndexDataGridViewTextBoxColumn
+            // 
+            this.outerIndexDataGridViewTextBoxColumn.DataPropertyName = "OuterIndex";
+            resources.ApplyResources(this.outerIndexDataGridViewTextBoxColumn, "outerIndexDataGridViewTextBoxColumn");
+            this.outerIndexDataGridViewTextBoxColumn.Name = "outerIndexDataGridViewTextBoxColumn";
+            this.outerIndexDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // outerDataGridViewTextBoxColumn1
+            // 
+            this.outerDataGridViewTextBoxColumn1.DataPropertyName = "Outer";
+            resources.ApplyResources(this.outerDataGridViewTextBoxColumn1, "outerDataGridViewTextBoxColumn1");
+            this.outerDataGridViewTextBoxColumn1.Name = "outerDataGridViewTextBoxColumn1";
+            this.outerDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
             // uExportTableItemBindingSource
             // 
             this.uExportTableItemBindingSource.DataSource = typeof(UELib.UExportTableItem);
@@ -530,8 +645,6 @@
             this.TreeView_Exports.ImageList = this.VSIcons;
             this.TreeView_Exports.Name = "TreeView_Exports";
             this.TreeView_Exports.ShowNodeToolTips = true;
-            this.TreeView_Exports.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this._OnExportsNodeSelected);
-            this.TreeView_Exports.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Exports_NodeMouseClick);
             // 
             // panel2
             // 
@@ -637,30 +750,18 @@
             // 
             // Panel_Content
             // 
-            this.Panel_Content.Controls.Add(this.panel4);
-            this.Panel_Content.Controls.Add(this.panel3);
+            this.Panel_Content.Controls.Add(this.Header);
+            this.Panel_Content.Controls.Add(this.BinaryDataPanel);
+            this.Panel_Content.Controls.Add(this.TextContentPanel);
             resources.ApplyResources(this.Panel_Content, "Panel_Content");
             this.Panel_Content.Name = "Panel_Content";
             // 
-            // panel4
+            // Header
             // 
-            resources.ApplyResources(this.panel4, "panel4");
-            this.panel4.Controls.Add(this.WPFHost);
-            this.panel4.Name = "panel4";
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel4_Paint);
-            // 
-            // WPFHost
-            // 
-            resources.ApplyResources(this.WPFHost, "WPFHost");
-            this.WPFHost.Name = "WPFHost";
-            this.WPFHost.Child = this.TextEditorPanel;
-            // 
-            // panel3
-            // 
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-            this.panel3.Controls.Add(this.ToolStrip_Content);
-            this.panel3.Name = "panel3";
+            resources.ApplyResources(this.Header, "Header");
+            this.Header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            this.Header.Controls.Add(this.ToolStrip_Content);
+            this.Header.Name = "Header";
             // 
             // ToolStrip_Content
             // 
@@ -761,6 +862,31 @@
             this.ViewTools.Name = "ViewTools";
             this.ViewTools.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ViewTools_DropDownItemClicked);
             // 
+            // BinaryDataPanel
+            // 
+            resources.ApplyResources(this.BinaryDataPanel, "BinaryDataPanel");
+            this.BinaryDataPanel.Controls.Add(this.BinaryDataFieldsPanel);
+            this.BinaryDataPanel.Name = "BinaryDataPanel";
+            this.BinaryDataPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel4_Paint);
+            // 
+            // BinaryDataFieldsPanel
+            // 
+            resources.ApplyResources(this.BinaryDataFieldsPanel, "BinaryDataFieldsPanel");
+            this.BinaryDataFieldsPanel.Name = "BinaryDataFieldsPanel";
+            // 
+            // TextContentPanel
+            // 
+            resources.ApplyResources(this.TextContentPanel, "TextContentPanel");
+            this.TextContentPanel.Controls.Add(this.WPFHost);
+            this.TextContentPanel.Name = "TextContentPanel";
+            this.TextContentPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel4_Paint);
+            // 
+            // WPFHost
+            // 
+            resources.ApplyResources(this.WPFHost, "WPFHost");
+            this.WPFHost.Name = "WPFHost";
+            this.WPFHost.Child = this.TextEditorPanel;
+            // 
             // packageFileSummaryBindingSource
             // 
             this.packageFileSummaryBindingSource.DataSource = typeof(UELib.UnrealPackage.PackageFileSummary);
@@ -775,118 +901,6 @@
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
             this.toolStripButton1.Name = "toolStripButton1";
-            // 
-            // packageNameDataGridViewTextBoxColumn
-            // 
-            this.packageNameDataGridViewTextBoxColumn.DataPropertyName = "PackageName";
-            resources.ApplyResources(this.packageNameDataGridViewTextBoxColumn, "packageNameDataGridViewTextBoxColumn");
-            this.packageNameDataGridViewTextBoxColumn.Name = "packageNameDataGridViewTextBoxColumn";
-            this.packageNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // classNameDataGridViewTextBoxColumn
-            // 
-            this.classNameDataGridViewTextBoxColumn.DataPropertyName = "ClassName";
-            resources.ApplyResources(this.classNameDataGridViewTextBoxColumn, "classNameDataGridViewTextBoxColumn");
-            this.classNameDataGridViewTextBoxColumn.Name = "classNameDataGridViewTextBoxColumn";
-            this.classNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // objectNameDataGridViewTextBoxColumn1
-            // 
-            this.objectNameDataGridViewTextBoxColumn1.DataPropertyName = "ObjectName";
-            resources.ApplyResources(this.objectNameDataGridViewTextBoxColumn1, "objectNameDataGridViewTextBoxColumn1");
-            this.objectNameDataGridViewTextBoxColumn1.Name = "objectNameDataGridViewTextBoxColumn1";
-            this.objectNameDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // outerIndexDataGridViewTextBoxColumn1
-            // 
-            this.outerIndexDataGridViewTextBoxColumn1.DataPropertyName = "OuterIndex";
-            resources.ApplyResources(this.outerIndexDataGridViewTextBoxColumn1, "outerIndexDataGridViewTextBoxColumn1");
-            this.outerIndexDataGridViewTextBoxColumn1.Name = "outerIndexDataGridViewTextBoxColumn1";
-            this.outerIndexDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // outerDataGridViewTextBoxColumn
-            // 
-            this.outerDataGridViewTextBoxColumn.DataPropertyName = "Outer";
-            resources.ApplyResources(this.outerDataGridViewTextBoxColumn, "outerDataGridViewTextBoxColumn");
-            this.outerDataGridViewTextBoxColumn.Name = "outerDataGridViewTextBoxColumn";
-            this.outerDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // classIndexDataGridViewTextBoxColumn
-            // 
-            this.classIndexDataGridViewTextBoxColumn.DataPropertyName = "ClassIndex";
-            resources.ApplyResources(this.classIndexDataGridViewTextBoxColumn, "classIndexDataGridViewTextBoxColumn");
-            this.classIndexDataGridViewTextBoxColumn.Name = "classIndexDataGridViewTextBoxColumn";
-            this.classIndexDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // classDataGridViewTextBoxColumn
-            // 
-            this.classDataGridViewTextBoxColumn.DataPropertyName = "Class";
-            resources.ApplyResources(this.classDataGridViewTextBoxColumn, "classDataGridViewTextBoxColumn");
-            this.classDataGridViewTextBoxColumn.Name = "classDataGridViewTextBoxColumn";
-            this.classDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // superIndexDataGridViewTextBoxColumn
-            // 
-            this.superIndexDataGridViewTextBoxColumn.DataPropertyName = "SuperIndex";
-            resources.ApplyResources(this.superIndexDataGridViewTextBoxColumn, "superIndexDataGridViewTextBoxColumn");
-            this.superIndexDataGridViewTextBoxColumn.Name = "superIndexDataGridViewTextBoxColumn";
-            this.superIndexDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // superDataGridViewTextBoxColumn
-            // 
-            this.superDataGridViewTextBoxColumn.DataPropertyName = "Super";
-            resources.ApplyResources(this.superDataGridViewTextBoxColumn, "superDataGridViewTextBoxColumn");
-            this.superDataGridViewTextBoxColumn.Name = "superDataGridViewTextBoxColumn";
-            this.superDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // templateIndexDataGridViewTextBoxColumn
-            // 
-            this.templateIndexDataGridViewTextBoxColumn.DataPropertyName = "TemplateIndex";
-            resources.ApplyResources(this.templateIndexDataGridViewTextBoxColumn, "templateIndexDataGridViewTextBoxColumn");
-            this.templateIndexDataGridViewTextBoxColumn.Name = "templateIndexDataGridViewTextBoxColumn";
-            this.templateIndexDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // templateDataGridViewTextBoxColumn
-            // 
-            this.templateDataGridViewTextBoxColumn.DataPropertyName = "Template";
-            resources.ApplyResources(this.templateDataGridViewTextBoxColumn, "templateDataGridViewTextBoxColumn");
-            this.templateDataGridViewTextBoxColumn.Name = "templateDataGridViewTextBoxColumn";
-            this.templateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // archetypeIndexDataGridViewTextBoxColumn
-            // 
-            this.archetypeIndexDataGridViewTextBoxColumn.DataPropertyName = "ArchetypeIndex";
-            resources.ApplyResources(this.archetypeIndexDataGridViewTextBoxColumn, "archetypeIndexDataGridViewTextBoxColumn");
-            this.archetypeIndexDataGridViewTextBoxColumn.Name = "archetypeIndexDataGridViewTextBoxColumn";
-            this.archetypeIndexDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // archetypeDataGridViewTextBoxColumn
-            // 
-            this.archetypeDataGridViewTextBoxColumn.DataPropertyName = "Archetype";
-            resources.ApplyResources(this.archetypeDataGridViewTextBoxColumn, "archetypeDataGridViewTextBoxColumn");
-            this.archetypeDataGridViewTextBoxColumn.Name = "archetypeDataGridViewTextBoxColumn";
-            this.archetypeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // objectNameDataGridViewTextBoxColumn
-            // 
-            this.objectNameDataGridViewTextBoxColumn.DataPropertyName = "ObjectName";
-            resources.ApplyResources(this.objectNameDataGridViewTextBoxColumn, "objectNameDataGridViewTextBoxColumn");
-            this.objectNameDataGridViewTextBoxColumn.Name = "objectNameDataGridViewTextBoxColumn";
-            this.objectNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // outerIndexDataGridViewTextBoxColumn
-            // 
-            this.outerIndexDataGridViewTextBoxColumn.DataPropertyName = "OuterIndex";
-            resources.ApplyResources(this.outerIndexDataGridViewTextBoxColumn, "outerIndexDataGridViewTextBoxColumn");
-            this.outerIndexDataGridViewTextBoxColumn.Name = "outerIndexDataGridViewTextBoxColumn";
-            this.outerIndexDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // outerDataGridViewTextBoxColumn1
-            // 
-            this.outerDataGridViewTextBoxColumn1.DataPropertyName = "Outer";
-            resources.ApplyResources(this.outerDataGridViewTextBoxColumn1, "outerDataGridViewTextBoxColumn1");
-            this.outerDataGridViewTextBoxColumn1.Name = "outerDataGridViewTextBoxColumn1";
-            this.outerDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // UC_PackageExplorer
             // 
@@ -926,10 +940,11 @@
             this.ToolStrip_Main.ResumeLayout(false);
             this.ToolStrip_Main.PerformLayout();
             this.Panel_Content.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.Header.ResumeLayout(false);
             this.ToolStrip_Content.ResumeLayout(false);
             this.ToolStrip_Content.PerformLayout();
+            this.BinaryDataPanel.ResumeLayout(false);
+            this.TextContentPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.packageFileSummaryBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -951,9 +966,9 @@
 		private System.Windows.Forms.ToolStripMenuItem viewBufferToolStripMenuItem;
 		private System.Windows.Forms.ToolStripTextBox SearchBox;
 		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.Panel panel3;
+		private System.Windows.Forms.Panel Header;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Panel panel4;
+		private System.Windows.Forms.Panel TextContentPanel;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -1040,5 +1055,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn objectNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn outerIndexDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn outerDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.Panel BinaryDataPanel;
+        private Panels.BinaryDataFieldsPanel BinaryDataFieldsPanel;
     }
 }
