@@ -2,6 +2,11 @@
 {
     public enum ContentNodeAction
     {
+        /// <summary>
+        /// Will use one of the below actions depending on the node's case.
+        /// </summary>
+        Auto,
+        
         Decompile,
         DecompileExternal,
 
