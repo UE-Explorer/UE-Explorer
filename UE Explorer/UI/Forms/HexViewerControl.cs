@@ -248,11 +248,11 @@ namespace UEExplorer.UI.Forms
                         (
                             new HexMetaInfo.BytesMetaInfo
                             {
-                                Position = (int)binaryField.Position,
+                                Position = (int)binaryField.Offset,
                                 Size = (int)binaryField.Size,
                                 Type = "Generated",
                                 Color = Color.FromArgb(0x88, red, green, blue),
-                                Name = binaryField.Name,
+                                Name = binaryField.Field,
                                 Tag = binaryField
                             }
                         );
