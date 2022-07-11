@@ -177,18 +177,6 @@ namespace UEExplorer.UI
             {
                 switch (Path.GetExtension(filePath))
                 {
-                    case ".uc":
-                    case ".uci":
-                        tabComponent = Tabs.Add(typeof(UC_UClassFile),
-                            Path.GetFileName(filePath)
-                        );
-                        var classFile = (UC_UClassFile)tabComponent;
-                        if (classFile == null) return;
-
-                        classFile.FilePath = filePath;
-                        classFile.PostInitialize();
-                        break;
-
                     default:
                         tabComponent = Tabs.Add(typeof(UC_PackageExplorer),
                             Path.GetFileName(filePath)
@@ -231,7 +219,7 @@ namespace UEExplorer.UI
             using (var ofd = new OpenFileDialog
                    {
                        DefaultExt = "u",
-                       Filter = UnrealExtensions.FormatUnrealExtensionsAsFilter().Replace("*.u;", "*.u;*.uc;*.uci;"),
+                       Filter = UnrealExtensions.FormatUnrealExtensionsAsFilter(),
                        FilterIndex = 1,
                        Title = Resources.Open_File,
                        Multiselect = true
@@ -265,15 +253,6 @@ namespace UEExplorer.UI
                 Tabs.LastSelectedComponent.TabDeselected();
 
             Tabs.SelectedComponent.TabSelected();
-
-            bool show = Tabs.SelectedComponent is UC_UClassFile;
-            menuItem12.Enabled = show;
-            menuItem12.Visible = show;
-            menuItem9.Enabled = show;
-            menuItem9.Visible = show;
-            menuItem2.Enabled = show;
-            menuItem2.Visible = show;
-
             Tabs.LastSelectedComponent = Tabs.SelectedComponent;
         }
 
@@ -335,10 +314,7 @@ namespace UEExplorer.UI
 
         private void UEExplorer_Form_DragDrop(object sender, DragEventArgs e)
         {
-            string allowedExtensions = UnrealExtensions.FormatUnrealExtensionsAsFilter().Replace(
-                "*.u;",
-                "*.u;*.uc;*.uci;"
-            );
+            string allowedExtensions = UnrealExtensions.FormatUnrealExtensionsAsFilter();
 
             if (!e.Data.GetDataPresent(DataFormats.FileDrop))
                 return;
