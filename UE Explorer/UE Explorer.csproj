@@ -220,7 +220,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Drawing" />
@@ -233,7 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Development\IExtension.cs" />
-    <Compile Include="EditorUtil.cs" />
+    <Compile Include="UI\EditorUtil.cs" />
     <Compile Include="ExportHelpers.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -298,17 +297,20 @@
     <Compile Include="UI\Nodes\ObjectVisitor.cs" />
     <Compile Include="UI\Nodes\ObjectTreeBuilder.cs" />
     <Compile Include="UI\Panels\BinaryDataFieldsPanel.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Panels\BinaryDataFieldsPanel.Designer.cs">
       <DependentUpon>BinaryDataFieldsPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ContentNodeAction.cs" />
-    <Compile Include="UI\Tabs\UC_UClassFile.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="UI\Panels\TextEditorPanel.cs">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Tabs\TextEditorPanel.xaml.cs">
-      <DependentUpon>TextEditorPanel.xaml</DependentUpon>
+    <Compile Include="UI\Panels\TextEditorPanel.Designer.cs">
+      <DependentUpon>TextEditorPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Panels\TextEditorControl.xaml.cs">
+      <DependentUpon>TextEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Tabs\UC_Default.cs">
       <SubType>UserControl</SubType>
@@ -436,6 +438,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Panels\BinaryDataFieldsPanel.resx">
       <DependentUpon>BinaryDataFieldsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Panels\TextEditorPanel.resx">
+      <DependentUpon>TextEditorPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_Default.resx">
       <DependentUpon>UC_Default.cs</DependentUpon>
@@ -572,7 +577,7 @@
     <None Include="UI\Main\ProgramLogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="UI\Tabs\TextEditorPanel.xaml">
+    <Page Include="UI\Panels\TextEditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

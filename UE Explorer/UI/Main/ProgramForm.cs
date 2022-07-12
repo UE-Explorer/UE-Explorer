@@ -328,12 +328,12 @@ namespace UEExplorer.UI
 
         private void SaveFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Tabs.SelectedComponent != null) Tabs.SelectedComponent.TabSave();
+            Tabs.SelectedComponent?.TabSave();
         }
 
         private void FindToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Tabs.SelectedComponent != null) Tabs.SelectedComponent.TabFind();
+            Tabs.SelectedComponent?.TabFind();
         }
 
         #endregion

@@ -188,7 +188,7 @@ namespace UEExplorer.UI.Forms
                 {
                     obj.BeginDeserializing();
 
-                    _PackageExplorer.SetContentText(null, obj.Decompile(), false);
+                    _PackageExplorer.SetContentText(obj.Decompile(), false);
                     HexPanel.Reload();
                 }
             }

@@ -20,10 +20,11 @@ namespace UEExplorer.UI.Nodes
         public ObjectNode(UObject objectRef)
         {
             Object = objectRef;
+            Tag = objectRef;
 
             Text = (int)objectRef < 0
-                ? $"{objectRef.GetOuterGroup()}({(int)objectRef})"
-                : $"{objectRef.Name}({(int)objectRef})";
+                ? $"{objectRef.GetOuterGroup()}"
+                : $"{objectRef.Name}";
 
             string imageKey = objectRef.Accept(_objectImageKeySelector);
             ImageKey = imageKey;

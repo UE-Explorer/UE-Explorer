@@ -217,7 +217,7 @@ namespace UEExplorer.UI.Forms
 
             HexScrollBar.Minimum = 0;
             HexScrollBar.Maximum = (int)Math.Max(totalLines, 0);
-            //HexScrollBar.Visible = totalLines > 0 && totalLines > visibleLines;
+            HexScrollBar.Visible = totalLines > 0 && totalLines > visibleLines;
         }
 
         /// <summary>

@@ -63,7 +63,7 @@
             this.binaryDataGridView.ReadOnly = true;
             this.binaryDataGridView.RowHeadersVisible = false;
             this.binaryDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            this.binaryDataGridView.Size = new System.Drawing.Size(657, 573);
+            this.binaryDataGridView.Size = new System.Drawing.Size(200, 100);
             this.binaryDataGridView.TabIndex = 0;
             // 
             // offsetDataGridViewTextBoxColumn
@@ -114,11 +114,7 @@
             // 
             // BinaryDataFieldsPanel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.binaryDataGridView);
-            this.Name = "BinaryDataFieldsPanel";
-            this.Size = new System.Drawing.Size(657, 573);
             ((System.ComponentModel.ISupportInitialize)(this.binaryDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BinaryFieldBindingSource)).EndInit();
             this.ResumeLayout(false);

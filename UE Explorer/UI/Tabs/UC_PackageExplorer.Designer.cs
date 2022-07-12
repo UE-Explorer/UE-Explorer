@@ -76,8 +76,6 @@
             this.TreeView_Exports = new System.Windows.Forms.TreeView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ToolStrip_Main = new System.Windows.Forms.ToolStrip();
-            this.SearchByObjectGroupButton = new System.Windows.Forms.ToolStripButton();
-            this.SearchObjectTextBox = new System.Windows.Forms.ToolStripTextBox();
             this._Tools_StripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,24 +88,22 @@
             this.Panel_Content = new System.Windows.Forms.Panel();
             this.Header = new System.Windows.Forms.Panel();
             this.ToolStrip_Content = new System.Windows.Forms.ToolStrip();
-            this.PrevButton = new System.Windows.Forms.ToolStripButton();
-            this.NextButton = new System.Windows.Forms.ToolStripButton();
             this.ExportButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.SearchBox = new System.Windows.Forms.ToolStripTextBox();
             this.FindButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.Label_ObjectName = new System.Windows.Forms.ToolStripLabel();
             this.ViewTools = new System.Windows.Forms.ToolStripDropDownButton();
             this.BinaryDataPanel = new System.Windows.Forms.Panel();
-            this.BinaryDataFieldsPanel = new UEExplorer.UI.Panels.BinaryDataFieldsPanel();
+            this.binaryDataFieldsPanel = new UEExplorer.UI.Panels.BinaryDataFieldsPanel();
             this.TextContentPanel = new System.Windows.Forms.Panel();
-            this.WPFHost = new System.Windows.Forms.Integration.ElementHost();
-            this.TextEditorPanel = new UEExplorer.UI.Tabs.TextEditorPanel();
+            this.textEditorPanel = new UEExplorer.UI.Panels.TextEditorPanel();
             this.packageFileSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.Label_ObjectName = new System.Windows.Forms.ToolStripTextBox();
+            this.NextButton = new System.Windows.Forms.ToolStripButton();
+            this.PrevButton = new System.Windows.Forms.ToolStripButton();
             exportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -265,6 +261,7 @@
             // FilterText
             // 
             resources.ApplyResources(this.FilterText, "FilterText");
+            this.FilterText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.FilterText.Name = "FilterText";
             this.FilterText.TextChanged += new System.EventHandler(this.FilterText_TextChanged);
             // 
@@ -655,35 +652,20 @@
             // 
             // ToolStrip_Main
             // 
-            this.ToolStrip_Main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.ToolStrip_Main.BackColor = System.Drawing.SystemColors.MenuBar;
             resources.ApplyResources(this.ToolStrip_Main, "ToolStrip_Main");
             this.ToolStrip_Main.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ToolStrip_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SearchByObjectGroupButton,
-            this.SearchObjectTextBox,
+            this.PrevButton,
+            this.NextButton,
             this._Tools_StripDropDownButton});
             this.ToolStrip_Main.Name = "ToolStrip_Main";
             this.ToolStrip_Main.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.ToolStrip_Main.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStrip_Content_Paint);
             // 
-            // SearchByObjectGroupButton
-            // 
-            this.SearchByObjectGroupButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.SearchByObjectGroupButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SearchByObjectGroupButton.Image = global::UEExplorer.Properties.Resources.search;
-            resources.ApplyResources(this.SearchByObjectGroupButton, "SearchByObjectGroupButton");
-            this.SearchByObjectGroupButton.Name = "SearchByObjectGroupButton";
-            this.SearchByObjectGroupButton.Click += new System.EventHandler(this.SearchObjectButton_Click);
-            // 
-            // SearchObjectTextBox
-            // 
-            this.SearchObjectTextBox.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            resources.ApplyResources(this.SearchObjectTextBox, "SearchObjectTextBox");
-            this.SearchObjectTextBox.Name = "SearchObjectTextBox";
-            this.SearchObjectTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchObjectTextBox_KeyPress);
-            // 
             // _Tools_StripDropDownButton
             // 
+            this._Tools_StripDropDownButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this._Tools_StripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this._Tools_StripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             exportingToolStripMenuItem,
@@ -766,38 +748,19 @@
             // ToolStrip_Content
             // 
             resources.ApplyResources(this.ToolStrip_Content, "ToolStrip_Content");
-            this.ToolStrip_Content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.ToolStrip_Content.BackColor = System.Drawing.SystemColors.MenuBar;
             this.ToolStrip_Content.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ToolStrip_Content.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.PrevButton,
-            this.NextButton,
             this.ExportButton,
             this.toolStripSeparator1,
             this.SearchBox,
             this.FindButton,
-            this.toolStripSeparator4,
             this.toolStripSeparator3,
             this.Label_ObjectName,
             this.ViewTools});
             this.ToolStrip_Content.Name = "ToolStrip_Content";
             this.ToolStrip_Content.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.ToolStrip_Content.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStrip_Content_Paint);
-            // 
-            // PrevButton
-            // 
-            this.PrevButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.PrevButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.PrevButton, "PrevButton");
-            this.PrevButton.Name = "PrevButton";
-            this.PrevButton.Click += new System.EventHandler(this.ToolStripButton_Backward_Click);
-            // 
-            // NextButton
-            // 
-            this.NextButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.NextButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.NextButton, "NextButton");
-            this.NextButton.Name = "NextButton";
-            this.NextButton.Click += new System.EventHandler(this.ToolStripButton_Forward_Click);
             // 
             // ExportButton
             // 
@@ -831,15 +794,6 @@
             this.FindButton.Padding = new System.Windows.Forms.Padding(3);
             this.FindButton.Click += new System.EventHandler(this.ToolStripButton_Find_Click);
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
-            this.toolStripSeparator4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.toolStripSeparator4.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStripSeparator1_Paint);
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
@@ -847,16 +801,9 @@
             resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             this.toolStripSeparator3.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStripSeparator1_Paint);
             // 
-            // Label_ObjectName
-            // 
-            this.Label_ObjectName.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.Label_ObjectName.BackColor = System.Drawing.Color.Transparent;
-            this.Label_ObjectName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.Label_ObjectName.Name = "Label_ObjectName";
-            resources.ApplyResources(this.Label_ObjectName, "Label_ObjectName");
-            // 
             // ViewTools
             // 
+            this.ViewTools.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.ViewTools.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.ViewTools, "ViewTools");
             this.ViewTools.Name = "ViewTools";
@@ -865,27 +812,26 @@
             // BinaryDataPanel
             // 
             resources.ApplyResources(this.BinaryDataPanel, "BinaryDataPanel");
-            this.BinaryDataPanel.Controls.Add(this.BinaryDataFieldsPanel);
+            this.BinaryDataPanel.Controls.Add(this.binaryDataFieldsPanel);
             this.BinaryDataPanel.Name = "BinaryDataPanel";
             this.BinaryDataPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel4_Paint);
             // 
-            // BinaryDataFieldsPanel
+            // binaryDataFieldsPanel
             // 
-            resources.ApplyResources(this.BinaryDataFieldsPanel, "BinaryDataFieldsPanel");
-            this.BinaryDataFieldsPanel.Name = "BinaryDataFieldsPanel";
+            resources.ApplyResources(this.binaryDataFieldsPanel, "binaryDataFieldsPanel");
+            this.binaryDataFieldsPanel.Name = "binaryDataFieldsPanel";
             // 
             // TextContentPanel
             // 
             resources.ApplyResources(this.TextContentPanel, "TextContentPanel");
-            this.TextContentPanel.Controls.Add(this.WPFHost);
+            this.TextContentPanel.Controls.Add(this.textEditorPanel);
             this.TextContentPanel.Name = "TextContentPanel";
             this.TextContentPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel4_Paint);
             // 
-            // WPFHost
+            // textEditorPanel
             // 
-            resources.ApplyResources(this.WPFHost, "WPFHost");
-            this.WPFHost.Name = "WPFHost";
-            this.WPFHost.Child = this.TextEditorPanel;
+            resources.ApplyResources(this.textEditorPanel, "textEditorPanel");
+            this.textEditorPanel.Name = "textEditorPanel";
             // 
             // packageFileSummaryBindingSource
             // 
@@ -901,6 +847,31 @@
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
             this.toolStripButton1.Name = "toolStripButton1";
+            // 
+            // Label_ObjectName
+            // 
+            this.Label_ObjectName.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.Label_ObjectName.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.Label_ObjectName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.Label_ObjectName, "Label_ObjectName");
+            this.Label_ObjectName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label_ObjectName.Name = "Label_ObjectName";
+            this.Label_ObjectName.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label_ObjectName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchObjectTextBox_KeyPress);
+            // 
+            // NextButton
+            // 
+            this.NextButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.NextButton, "NextButton");
+            this.NextButton.Name = "NextButton";
+            this.NextButton.Click += new System.EventHandler(this.ToolStripButton_Forward_Click);
+            // 
+            // PrevButton
+            // 
+            this.PrevButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.PrevButton, "PrevButton");
+            this.PrevButton.Name = "PrevButton";
+            this.PrevButton.Click += new System.EventHandler(this.ToolStripButton_Backward_Click);
             // 
             // UC_PackageExplorer
             // 
@@ -959,10 +930,6 @@
 		public System.Windows.Forms.ToolStripMenuItem exportDecompiledClassesToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem exportScriptClassesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripButton FindButton;
-		private System.Windows.Forms.ToolStripButton NextButton;
-		private System.Windows.Forms.ToolStripButton PrevButton;
-		private System.Windows.Forms.Integration.ElementHost WPFHost;
-		private TextEditorPanel TextEditorPanel;
 		private System.Windows.Forms.ToolStripMenuItem viewBufferToolStripMenuItem;
 		private System.Windows.Forms.ToolStripTextBox SearchBox;
 		private System.Windows.Forms.Panel panel2;
@@ -970,14 +937,12 @@
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Panel TextContentPanel;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
 		private System.Windows.Forms.Label label3;
 		public System.Windows.Forms.ToolStripDropDownButton ViewTools;
 		private System.Windows.Forms.ToolStrip ToolStrip_Content;
 		private System.Windows.Forms.ImageList VSIcons;
-		private System.Windows.Forms.ToolStripLabel Label_ObjectName;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem findInClassesToolStripMenuItem;
@@ -985,9 +950,7 @@
 		private System.Windows.Forms.ToolStripMenuItem findInDocumentToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem findNextToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ToolStripTextBox SearchObjectTextBox;
         private System.Windows.Forms.ToolStripMenuItem ReloadButton;
-        private System.Windows.Forms.ToolStripButton SearchByObjectGroupButton;
         private System.Windows.Forms.BindingSource packageFileSummaryBindingSource;
         private System.Windows.Forms.BindingSource uGenerationTableItemBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn exportsCountDataGridViewTextBoxColumn;
@@ -1056,6 +1019,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn outerIndexDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn outerDataGridViewTextBoxColumn1;
         private System.Windows.Forms.Panel BinaryDataPanel;
-        private Panels.BinaryDataFieldsPanel BinaryDataFieldsPanel;
+        private Panels.BinaryDataFieldsPanel binaryDataFieldsPanel;
+        private Panels.TextEditorPanel textEditorPanel;
+        private System.Windows.Forms.ToolStripTextBox Label_ObjectName;
+        private System.Windows.Forms.ToolStripButton NextButton;
+        private System.Windows.Forms.ToolStripButton PrevButton;
     }
 }
