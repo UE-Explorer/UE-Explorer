@@ -33,10 +33,28 @@ namespace UEExplorer.UI.Nodes
             if (value == null) return null;
 
             var attr = info.GetCustomAttribute<DisplayNameAttribute>();
-            var node = new TreeNode(attr != null ? attr.DisplayName : info.Name)
+            string displayName = attr != null ? attr.DisplayName : info.Name;
+            
+            var uObject = value as UObject;
+            string text = uObject != null
+                ? $"{displayName}: {uObject.GetOuterGroup()}" 
+                : displayName;
+
+            string imageKey = uObject != null 
+                ? uObject.Accept(_ObjectImageKeySelector)
+                : "Content";
+
+            var node = new TreeNode(text)
             {
-                Tag = value
+                Tag = value,
+                ImageKey = imageKey,
+                SelectedImageKey = imageKey
             };
+
+            if ((int)uObject > 0)
+            {
+                node.Nodes.Add(DummyNodeKey, "Expandable");
+            }
             return node;
         }
 
@@ -122,9 +140,7 @@ namespace UEExplorer.UI.Nodes
 
         public static string GetTreeNodeText(UObject obj)
         {
-            return (int)obj < 0
-                ? $"{obj.GetOuterGroup()}"
-                : $"{obj.Name}";
+            return obj.GetOuterGroup();
         }
 
         public static string GetTreeNodeText(UObjectTableItem item)

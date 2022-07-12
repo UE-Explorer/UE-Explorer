@@ -95,7 +95,6 @@ namespace UEExplorer.UI.Nodes
                             var memberNode = ObjectTreeFactory.CreateNode(property, visitable);
                             if (memberNode != null)
                             {
-                                memberNode.Nodes.Add(ObjectTreeFactory.CreateNode((UObject)memberNode.Tag));
                                 subNodes.Add(memberNode);
                             }
                         }

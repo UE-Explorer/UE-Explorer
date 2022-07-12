@@ -474,6 +474,8 @@ namespace UEExplorer.UI.Tabs
             // Lazy recursive, creates a base node for each export with no Outer, if a matching outer is found it will be appended to that base node upon expansion.
             foreach (var objectNode in 
                      from exp in _UnrealPackage.Exports
+                     // Filter out deleted exports
+                     where exp.ObjectName != "None"
                      where filterText == null 
                          ? exp.Outer == null 
                          : exp.ObjectName.ToString().IndexOf(filterText, StringComparison.InvariantCultureIgnoreCase) != -1
