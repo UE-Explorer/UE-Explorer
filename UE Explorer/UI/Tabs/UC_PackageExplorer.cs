@@ -183,51 +183,64 @@ namespace UEExplorer.UI.Tabs
         private void TreeView_Content_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
             // Already lazy-loaded.
-            if (!e.Node.Nodes.ContainsKey(ObjectNode.DummyNodeKey))
+            if (!e.Node.Nodes.ContainsKey(ObjectTreeFactory.DummyNodeKey))
             {
                 return;
             }
 
             TreeView_Content.BeginUpdate();
-            e.Node.Nodes.RemoveByKey(ObjectNode.DummyNodeKey);
+            e.Node.Nodes.RemoveByKey(ObjectTreeFactory.DummyNodeKey);
 
-            switch (e.Node)
+            var node = e.Node;
+            switch (e.Node.Tag)
             {
-                case ObjectNode expandingObjectNode when expandingObjectNode.Object != null:
+                case UObjectTableItem item:
                 {
-                    ExpandObjectNode(expandingObjectNode);
-                    var tableItem = expandingObjectNode.Object.Table;
+                    var subNodes = item.Object?.Accept(_ObjectTreeBuilder);
+                    if (subNodes != null) node.Nodes.AddRange(subNodes);
+
                     foreach (var objectNode in
-                             from obj in _UnrealPackage.Exports
-                             where obj.Outer == tableItem
-                             select CreateNode(obj))
+                             from exp in item.Owner.Exports
+                             where exp.Outer == item
+                             select ObjectTreeFactory.CreateNode(exp))
                     {
-                        InitializeObjectNode(objectNode);
-                        expandingObjectNode.Nodes.Add(objectNode);
+                        node.Nodes.Add(objectNode);
                     }
 
                     break;
                 }
 
-                default:
+                case UObject uObject:
                 {
-                    if ((string)e.Node.Tag == "Dependencies")
+                    var subNodes = uObject.Accept(_ObjectTreeBuilder);
+                    if (subNodes != null) node.Nodes.AddRange(subNodes);
+                    
+                    var item = uObject.Table;
+                    foreach (var objectNode in
+                             from exp in item.Owner.Exports
+                             where exp.Outer == item
+                             select ObjectTreeFactory.CreateNode(exp))
                     {
-                        if (_UnrealPackage.Imports != null)
+                        node.Nodes.Add(objectNode);
+                    }
+
+                    break;
+                }
+
+                case "Dependencies":
+                    if (_UnrealPackage.Imports != null)
+                    {
+                        foreach (var imp in _UnrealPackage.Imports.Where(item =>
+                                     item.OuterIndex == 0 && item.ClassName == "Package"))
                         {
-                            foreach (var importItem in _UnrealPackage.Imports.Where(table =>
-                                         table.OuterIndex == 0 && table.ClassName == "Package"))
-                            {
-                                var node = e.Node.Nodes.Add(GetTreeNodeText(importItem));
-                                node.Tag = importItem.Object;
-                                GetDependencyOn(importItem, node);
-                            }
+                            var objectNode = ObjectTreeFactory.CreateNode(imp);
+                            node.Nodes.Add(objectNode);
+                            GetDependencyOn(imp, objectNode);
                         }
                     }
-
                     break;
-                }
             }
+
             TreeView_Content.EndUpdate();
         }
         
@@ -415,37 +428,7 @@ namespace UEExplorer.UI.Tabs
         }
 
         private ObjectTreeBuilder _ObjectTreeBuilder = new ObjectTreeBuilder();
-        private ObjectImageKeySelector _ObjectImageKeySelector = new ObjectImageKeySelector();
         
-        protected void InitializeImportNode(UImportTableItem item, TreeNode node)
-        {
-            if (item.ClassName == "Class")
-            {
-                node.ForeColor = Color.DarkCyan;
-            }
-            
-            if (item.Object != null)
-            {
-                if (item.Object.DeserializationState.HasFlag(UObject.ObjectState.Errorlized))
-                {
-                    InitializeNodeError(node, item.Object);
-                }
-            }
-
-            if (!(item.Object is IAcceptable acceptableObj))
-                return;
-            
-            string imageKey = acceptableObj.Accept(_ObjectImageKeySelector);
-            node.ImageKey = imageKey;
-            node.SelectedImageKey = imageKey;
-        }
-
-        private ObjectNode CreateNode(UObjectTableItem item)
-        {
-            var node = new ObjectNode(item.Object);
-            return node;
-        }
-
         private void InitializeDependenciesTree(string filterText = null)
         {
             var dependenciesNode = new TreeNode("Dependencies")
@@ -454,7 +437,7 @@ namespace UEExplorer.UI.Tabs
                 ImageKey = "Diagram",
                 SelectedImageKey = "Diagram"
             };
-            dependenciesNode.Nodes.Add(ObjectNode.DummyNodeKey, "Expandable");
+            dependenciesNode.Nodes.Add(ObjectTreeFactory.DummyNodeKey, "Expandable");
             AddToRootPackage(dependenciesNode);
         }
 
@@ -469,21 +452,16 @@ namespace UEExplorer.UI.Tabs
 
         private void GetDependencyOn(UImportTableItem outerImp, TreeNode node)
         {
-            foreach (var item in _UnrealPackage.Imports
-                         .Where(imp => imp != outerImp && imp.Outer == outerImp))
+            foreach (var imp in 
+                    from imp in outerImp.Owner.Imports
+                    where imp != outerImp && imp.Outer == outerImp
+                    select imp)
             {
-                var subNode = node.Nodes.Add(GetTreeNodeText(item));
-                subNode.Tag = item.Object;
-                GetDependencyOn(item, subNode);
+
+                var objectNode = ObjectTreeFactory.CreateNode(imp);
+                node.Nodes.Add(objectNode);
+                GetDependencyOn(imp, objectNode);
             }
-
-            node.ToolTipText = outerImp.ClassName;
-            InitializeImportNode(outerImp, node);
-        }
-
-        private string GetTreeNodeText(UImportTableItem item)
-        {
-            return $"{item.ObjectName}: {item.ClassName}";
         }
 
         private void InitializeContentTree(string filterText = null)
@@ -495,34 +473,16 @@ namespace UEExplorer.UI.Tabs
 
             // Lazy recursive, creates a base node for each export with no Outer, if a matching outer is found it will be appended to that base node upon expansion.
             foreach (var objectNode in 
-                     from obj in _UnrealPackage.Exports 
+                     from exp in _UnrealPackage.Exports
                      where filterText == null 
-                         ? obj.Outer == null 
-                         : obj.ObjectName.ToString().IndexOf(filterText, StringComparison.InvariantCultureIgnoreCase) != -1
-                     select CreateNode(obj))
+                         ? exp.Outer == null 
+                         : exp.ObjectName.ToString().IndexOf(filterText, StringComparison.InvariantCultureIgnoreCase) != -1
+                     select ObjectTreeFactory.CreateNode(exp))
             {
-                InitializeObjectNode(objectNode);
                 AddToRootPackage(objectNode);
             }
 
             TreeView_Content.EndUpdate();
-        }
-
-        private void InitializeObjectNode(ObjectNode node)
-        {
-            var obj = node.Object;
-            if (obj == null)
-                return;
-            
-            if (obj.DeserializationState.HasFlag(UObject.ObjectState.Errorlized))
-            {
-                InitializeNodeError(node, obj);
-            }
-
-            if (obj.Class == null)
-            {
-                node.ForeColor = Color.DarkCyan;
-            }
         }
 
         private void RebuildContentTree(string filterText)
@@ -534,12 +494,6 @@ namespace UEExplorer.UI.Tabs
             InitializeContentTree(filterText);
             
             TreeView_Content.EndUpdate();
-        }
-
-        private void ExpandObjectNode(ObjectNode node)
-        {
-            var subNodes = node.Object?.Accept(_ObjectTreeBuilder);
-            if (subNodes != null) node.Nodes.AddRange(subNodes);
         }
 
         private void _OnExportClassesClick(object sender, EventArgs e)
@@ -571,12 +525,6 @@ namespace UEExplorer.UI.Tabs
         {
             Tabs.Remove(this, true);
             Tabs.Form.LoadFile(FilePath);
-        }
-
-        private static void InitializeNodeError(TreeNode node, UObject errorObject)
-        {
-            node.ForeColor = Color.Red;
-            node.ToolTipText = GetExceptionMessage(errorObject);
         }
 
         private static string GetExceptionMessage(UObject errorObject)
@@ -638,14 +586,13 @@ namespace UEExplorer.UI.Tabs
             object tag;
             switch (target)
             {
-                // Target has a decompilable Object? Maybe we can replace this with a TreeNode tag instead.
-                case IWithDecompilableObject<UObject> decompilableObject:
-                    tag = decompilableObject.Object;
-                    break;
-                
                 // See if we can work with the TreeNode's tag?
                 case TreeNode treeNode:
                     tag = treeNode.Tag;
+                    if (tag is UObjectTableItem item && item.Object != null)
+                    {
+                        tag = item.Object;
+                    }
                     break;
                 
                 // Maybe just an UObject
@@ -832,15 +779,15 @@ namespace UEExplorer.UI.Tabs
             object tag;
             switch (target)
             {
-                case IWithDecompilableObject<UObject> decompilableObject:
-                    tag = decompilableObject.Object;
-                    break;
-
                 // Redirect this node to its tag if set (i.e. Within -> Class)
                 case TreeNode node:
                     tag = node.Tag;
+                    if (tag is UObjectTableItem item && item.Object != null)
+                    {
+                        tag = item.Object;
+                    }
                     // See if we can concatenate all sub tree nodes that have decompilable content.
-                    if (tag == null)
+                    else if (tag == null)
                     {
                         switch (action)
                         {
@@ -1243,7 +1190,11 @@ namespace UEExplorer.UI.Tabs
                     NextButton.Enabled = false;
                 }
             }
-
+            
+            // Maximum 10 can be buffered; remove last one
+            if (_ContentHistory.Count + 1 > 15)
+                _ContentHistory.RemoveRange(0, 1);
+            
             var data = new ContentHistoryData
             {
                 SelectedNode = node, 
@@ -1251,11 +1202,7 @@ namespace UEExplorer.UI.Tabs
                 Action = action
             };
             _ContentHistory.Add(data);
-
-            // Maximum 10 can be buffered; remove last one
-            if (_ContentHistory.Count > 10)
-                _ContentHistory.RemoveRange(0, 1);
-            else ++_CurrentHistoryIndex;
+            _CurrentHistoryIndex = _ContentHistory.Count - 1;
 
             if (_CurrentHistoryIndex > 0) PrevButton.Enabled = true;
         }
@@ -1288,10 +1235,8 @@ namespace UEExplorer.UI.Tabs
 
         private void ToolStripButton_Backward_Click(object sender, EventArgs e)
         {
-            if (_CurrentHistoryIndex - 1 <= -1)
-                return;
-
-            FilterText.Text = string.Empty;
+            Debug.Assert(_CurrentHistoryIndex - 1 >= 0);
+            
             UpdateContentHistoryData(_CurrentHistoryIndex);
             RestoreContentHistoryData(--_CurrentHistoryIndex);
 
@@ -1301,10 +1246,8 @@ namespace UEExplorer.UI.Tabs
 
         private void ToolStripButton_Forward_Click(object sender, EventArgs e)
         {
-            if (_CurrentHistoryIndex + 1 >= _ContentHistory.Count)
-                return;
-
-            FilterText.Text = string.Empty;
+            Debug.Assert(_CurrentHistoryIndex + 1 < _ContentHistory.Count);
+            
             UpdateContentHistoryData(_CurrentHistoryIndex);
             RestoreContentHistoryData(++_CurrentHistoryIndex);
 
@@ -1318,7 +1261,6 @@ namespace UEExplorer.UI.Tabs
                 return;
 
             node.TreeView.Show();
-            node.TreeView.Select();
             node.TreeView.SelectedNode = node;
         }
 
@@ -1340,7 +1282,6 @@ namespace UEExplorer.UI.Tabs
         }
 
         private Timer _FilterTextChangedTimer = null;
-        private readonly List<TreeNode> _FilteredNodes = new List<TreeNode>();
 
         private void FilterText_TextChanged(object sender, EventArgs e)
         {
@@ -1396,6 +1337,11 @@ namespace UEExplorer.UI.Tabs
 
         private void TreeView_Content_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            // Assuming this was triggered by assigning SelectNode
+            if (e.Action == TreeViewAction.Unknown)
+            {
+                return;
+            }
             PerformNodeAction(e.Node, ContentNodeAction.Auto);
         }
 
@@ -1466,6 +1412,12 @@ namespace UEExplorer.UI.Tabs
 
             treeResults.AfterSelect += (nodeSender, nodeEvent) =>
             {
+                // Assuming this was triggered by assigning SelectNode
+                if (nodeEvent.Action == TreeViewAction.Unknown)
+                {
+                    return;
+                }
+                
                 if (!(nodeEvent.Node.Tag is TextSearchHelpers.FindResult findResult)) return;
 
                 if (nodeEvent.Node.Parent.Tag is TextSearchHelpers.DocumentResult documentResult)
@@ -1529,7 +1481,6 @@ namespace UEExplorer.UI.Tabs
                 return false;
             
             PerformNodeAction(obj, ContentNodeAction.Auto);
-            TrackNodeAction(null, obj, ContentNodeAction.Auto);
             return true;
         }
 

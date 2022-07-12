@@ -41,32 +41,27 @@ namespace UEExplorer.UI.Nodes
                                 var value = (UArray<UObject>)field.GetValue(visitable);
                                 if (value == null) continue;
 
-                                var attr = field.GetCustomAttribute<System.ComponentModel.DisplayNameAttribute>();
-                                var memberNode = new TreeNode(attr != null ? attr.DisplayName : field.Name);
+                                var memberNode = ObjectTreeFactory.CreateNode(field);
                                 foreach (var obj in value)
                                 {
-                                    memberNode.Nodes.Add(new ObjectNode(obj));
+                                    memberNode.Nodes.Add(ObjectTreeFactory.CreateNode(obj));
                                 }
-
                                 subNodes.Add(memberNode);
                             }
                             else if (type.IsSubclassOf(typeof(UObject)))
                             {
-                                var value = (UObject)field.GetValue(visitable);
-                                if (value == null) continue;
-                                var attr = field.GetCustomAttribute<System.ComponentModel.DisplayNameAttribute>();
-                                var memberNode = new TreeNode(attr != null ? attr.DisplayName : field.Name)
+                                var memberNode = ObjectTreeFactory.CreateNode(field, visitable);
+                                if (memberNode != null)
                                 {
-                                    Tag = value
-                                };
-                                memberNode.Nodes.Add(new ObjectNode(value));
-                                subNodes.Add(memberNode);
+                                    memberNode.Nodes.Add(ObjectTreeFactory.CreateNode((UObject)memberNode.Tag));
+                                    subNodes.Add(memberNode);
+                                }
                             }
                             else
                             {
-                                var value = field.GetValue(visitable);
+                                object value = field.GetValue(visitable);
                                 var attr = field.GetCustomAttribute<System.ComponentModel.DisplayNameAttribute>();
-                                var name = attr != null ? attr.DisplayName : field.Name;
+                                string name = attr != null ? attr.DisplayName : field.Name;
                                 var text = $"{name}: {value}";
                                 var memberNode = new TreeNode(text)
                                 {
@@ -87,26 +82,22 @@ namespace UEExplorer.UI.Nodes
                             var value = (UArray<UObject>)property.GetValue(visitable);
                             if (value == null) continue;
 
-                            var attr = property.GetCustomAttribute<System.ComponentModel.DisplayNameAttribute>();
-                            var memberNode = new TreeNode(attr != null ? attr.DisplayName : property.Name);
+                            var memberNode = ObjectTreeFactory.CreateNode(property);
                             foreach (var obj in value)
                             {
-                                memberNode.Nodes.Add(new ObjectNode(obj));
+                                memberNode.Nodes.Add(ObjectTreeFactory.CreateNode(obj));
                             }
 
                             subNodes.Add(memberNode);
                         }
                         else if (type.IsSubclassOf(typeof(UObject)))
                         {
-                            var value = (UObject)property.GetValue(visitable);
-                            if (value == null) continue;
-                            var attr = property.GetCustomAttribute<System.ComponentModel.DisplayNameAttribute>();
-                            var memberNode = new TreeNode(attr != null ? attr.DisplayName : property.Name)
+                            var memberNode = ObjectTreeFactory.CreateNode(property, visitable);
+                            if (memberNode != null)
                             {
-                                Tag = value
-                            };
-                            memberNode.Nodes.Add(new ObjectNode(value));
-                            subNodes.Add(memberNode);
+                                memberNode.Nodes.Add(ObjectTreeFactory.CreateNode((UObject)memberNode.Tag));
+                                subNodes.Add(memberNode);
+                            }
                         }
                         //else if (type.GetInterface(nameof(IBinaryData)) != null)
                         //{

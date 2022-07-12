@@ -291,9 +291,8 @@
     <Compile Include="UI\Main\ProgramConsole.Designer.cs">
       <DependentUpon>ProgramConsole.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Nodes\IWithDecompilableObject.cs" />
     <Compile Include="UI\Nodes\ObjectImageKeySelector.cs" />
-    <Compile Include="UI\Nodes\ObjectNode.cs" />
+    <Compile Include="UI\Nodes\ObjectTreeFactory.cs" />
     <Compile Include="UI\Nodes\ObjectVisitor.cs" />
     <Compile Include="UI\Nodes\ObjectTreeBuilder.cs" />
     <Compile Include="UI\Panels\BinaryDataFieldsPanel.cs">

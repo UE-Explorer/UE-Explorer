@@ -16,7 +16,7 @@ namespace UEExplorer.UI.Nodes
         {
             return uObject.GetType().IsSubclassOf(typeof(UProperty)) 
                 ? nameof(UProperty) 
-                : "Content";
+                : "UObject";
         }
 
         public override string Visit(UProperty uProperty)
