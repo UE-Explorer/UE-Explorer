@@ -1,4 +1,4 @@
-﻿namespace UEExplorer.UI.Panels
+﻿namespace UEExplorer.UI.ActionPanels
 {
     partial class BinaryDataFieldsPanel
     {

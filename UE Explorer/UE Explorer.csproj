@@ -295,13 +295,21 @@
     <Compile Include="UI\Nodes\ObjectTreeFactory.cs" />
     <Compile Include="UI\Nodes\ObjectVisitor.cs" />
     <Compile Include="UI\Nodes\ObjectTreeBuilder.cs" />
-    <Compile Include="UI\Panels\BinaryDataFieldsPanel.cs">
+    <Compile Include="UI\ActionPanels\BinaryDataFieldsPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Panels\BinaryDataFieldsPanel.Designer.cs">
+    <Compile Include="UI\ActionPanels\BinaryDataFieldsPanel.Designer.cs">
       <DependentUpon>BinaryDataFieldsPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ContentNodeAction.cs" />
+    <Compile Include="UI\ActionPanels\DecompileOutputPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\ActionPanels\DecompileOutputPanel.Designer.cs">
+      <DependentUpon>DecompileOutputPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\IActionPanel.cs" />
+    <Compile Include="UI\IObjectHandler.cs" />
     <Compile Include="UI\Panels\TextEditorPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -311,6 +319,7 @@
     <Compile Include="UI\Panels\TextEditorControl.xaml.cs">
       <DependentUpon>TextEditorControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Tabs\ActionState.cs" />
     <Compile Include="UI\Tabs\UC_Default.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -435,8 +444,11 @@
     <EmbeddedResource Include="UI\Main\ProgramForm.nl.resx">
       <DependentUpon>ProgramForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Panels\BinaryDataFieldsPanel.resx">
+    <EmbeddedResource Include="UI\ActionPanels\BinaryDataFieldsPanel.resx">
       <DependentUpon>BinaryDataFieldsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ActionPanels\DecompileOutputPanel.resx">
+      <DependentUpon>DecompileOutputPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Panels\TextEditorPanel.resx">
       <DependentUpon>TextEditorPanel.cs</DependentUpon>
@@ -605,7 +617,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

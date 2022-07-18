@@ -1,7 +1,7 @@
 ﻿using System;
 using ICSharpCode.AvalonEdit;
 
-namespace UEExplorer
+namespace UEExplorer.UI
 {
     public static class EditorUtil
     {
