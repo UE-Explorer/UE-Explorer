@@ -61,6 +61,24 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Binary.
+        /// </summary>
+        internal static string BinaryPage_BinaryPage_Binary_Title {
+            get {
+                return ResourceManager.GetString("BinaryPage_BinaryPage_Binary_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BinaryData: {0}.
+        /// </summary>
+        internal static string BinaryPage_SetNewObjectTarget_BinaryData___0_ {
+            get {
+                return ResourceManager.GetString("BinaryPage_SetNewObjectTarget_BinaryData___0_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot import binary files with an unequal length!.
         /// </summary>
         internal static string CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH {
@@ -131,6 +149,24 @@ namespace UEExplorer.Properties {
         internal static string COULDNT_SAVE_EXCEPTION {
             get {
                 return ResourceManager.GetString("COULDNT_SAVE_EXCEPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decompiler.
+        /// </summary>
+        internal static string DecompilerPage_DecompilerPage_Decompile_Title {
+            get {
+                return ResourceManager.GetString("DecompilerPage_DecompilerPage_Decompile_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decompile: {0}.
+        /// </summary>
+        internal static string DecompilerPage_SetNewObjectTarget_Decompile___0_ {
+            get {
+                return ResourceManager.GetString("DecompilerPage_SetNewObjectTarget_Decompile___0_", resourceCulture);
             }
         }
         
@@ -581,6 +617,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OpenfileDialog {
+            get {
+                object obj = ResourceManager.GetObject("OpenfileDialog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Options.
         /// </summary>
         internal static string Options {
@@ -637,6 +683,15 @@ namespace UEExplorer.Properties {
         internal static string PACKAGE_UNKNOWN_SIGNATURE {
             get {
                 return ResourceManager.GetString("PACKAGE_UNKNOWN_SIGNATURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Package Explorer.
+        /// </summary>
+        internal static string PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title {
+            get {
+                return ResourceManager.GetString("PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title", resourceCulture);
             }
         }
         
