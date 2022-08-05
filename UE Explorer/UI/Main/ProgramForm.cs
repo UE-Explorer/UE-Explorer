@@ -27,17 +27,12 @@ namespace UEExplorer.UI
         {
             ProgressStatus.Status = ProgressLabel;
             ProgressStatus.Loading = LoadingProgress;
-
-            foreach (string filePath in UC_Options.GetNativeTables())
-                SelectedNativeTable.DropDown.Items.Add(Path.GetFileNameWithoutExtension(filePath));
-
+            
             SelectedNativeTable.Text = Program.Options.NTLPath;
             Platform.Text = Program.Options.Platform;
-
 #if DEBUG
             _CacheExtractorItem.Enabled = true;
 #endif
-
             MRUManager.SetStoragePath(Application.StartupPath);
             _MRUManager = MRUManager.Load();
             _MRUManager.RefreshEvent += RefreshMRUEvent;
@@ -78,6 +73,11 @@ namespace UEExplorer.UI
 
         private void SelectedNativeTable_DropDownOpening(object sender, EventArgs e)
         {
+            // Rebuild it, to reflect the changes made to the current directory of NTL files.
+            SelectedNativeTable.DropDown.Items.Clear();
+            foreach (string filePath in UC_Options.GetNativeTables())
+                SelectedNativeTable.DropDown.Items.Add(Path.GetFileNameWithoutExtension(filePath));
+            
             // In case it got changed!
             SelectedNativeTable.Text = Program.Options.NTLPath;
         }
