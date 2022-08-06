@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using Krypton.Navigator;
 using UEExplorer.Properties;
 using UEExplorer.UI.ActionPanels;
 using UEExplorer.UI.Tabs;
@@ -14,18 +13,27 @@ namespace UEExplorer.UI.Pages
         {
             Text = Resources.BinaryPage_BinaryPage_Binary_Title;
             TextTitle = Resources.BinaryPage_BinaryPage_Binary_Title;
-            Flags &= (int)~(KryptonPageFlags.DockingAllowClose);
             
             _Panel = new BinaryDataFieldsPanel();
+            _Panel.Name = "Panel";
             _Panel.Dock = DockStyle.Fill;
             Controls.Add(_Panel);
         }
 
-        public override void SetNewObjectTarget(object target, ContentNodeAction action)
+        public override void SetNewObjectTarget(object target, ContentNodeAction action, bool isPending)
         {
-            string path = ObjectPathBuilder.GetPath((dynamic)target);
-            TextTitle = string.Format(Resources.BinaryPage_SetNewObjectTarget_BinaryData___0_, path);
-            
+            if (target == null)
+            {
+                TextTitle = Resources.BinaryPage_BinaryPage_Binary_Title;
+            }
+            else
+            {
+                string path = ObjectPathBuilder.GetPath((dynamic)target);
+                TextTitle = string.Format(Resources.BinaryPage_SetNewObjectTarget_BinaryData___0_, path);
+                Text = TextTitle;
+            }
+
+            _Panel.HasPendingUpdate = isPending;
             _Panel.Object = target;
         }
     }

@@ -1,32 +1,37 @@
 ﻿using System;
-using System.Windows.Forms;
 using UEExplorer.UI.Tabs;
 using UELib;
 
 namespace UEExplorer.UI.ActionPanels
 {
-    public partial class DecompileOutputPanel : Panel, IActionPanel<object>
+    public partial class DecompileOutputPanel : ActionPanel, IActionPanel<object>
     {
         public ContentNodeAction Action { get; } = ContentNodeAction.Decompile;
 
-        private object _Object;
-
-        public object Object
-        {
-            get => _Object;
-            set
-            {
-                _Object = value;
-                UpdateOutput(value);
-            }
-        }
-        
         public DecompileOutputPanel()
         {
             InitializeComponent();
+
+            TextEditorPanel.TextEditorControl.SearchDocument.Click += (sender, args) =>
+            {
+                string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
+                EditorUtil.FindText(TextEditorPanel.TextEditorControl.TextEditor, selectedText);
+            };
+            
+            TextEditorPanel.TextEditorControl.SearchPackage.Click += (sender, args) =>
+            {
+                string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
+                GetMain().OnSearchInClasses(selectedText);
+            };
+
+            TextEditorPanel.TextEditorControl.SearchObject.Click += (sender, args) =>
+            {
+                string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
+                GetMain().OnSearchObjectByPath(selectedText.Trim());
+            };
         }
         
-        private void UpdateOutput(object target)
+        protected override void UpdateOutput(object target)
         {
             if (target == null)
             {

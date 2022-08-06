@@ -13,6 +13,7 @@ namespace UEExplorer.UI.ActionPanels
     public partial class PackageExplorerPanel : UserControl
     {
         private readonly ObjectTreeBuilder _ObjectTreeBuilder = new ObjectTreeBuilder();
+        private readonly ObjectActionsBuilder _ActionsBuilder = new ObjectActionsBuilder();
 
         public PackageExplorerPanel()
         {
@@ -196,20 +197,19 @@ namespace UEExplorer.UI.ActionPanels
             TreeViewPackages.EndUpdate();
         }
 
-        private void TreeViewPackages_AfterSelect(object sender, TreeViewEventArgs e)
+        // Hacky
+        private UC_PackageExplorer GetMain()
         {
-            // Hacky
             for (var c = Parent; c != null; c = c.Parent)
             {
-                if (!(c is UC_PackageExplorer packageExplorer)) continue;
-                packageExplorer.OnObjectNodeSelected(e);
-                break;
+                if ((c is UC_PackageExplorer packageExplorer)) return packageExplorer;
             }
+            throw new NotSupportedException();
         }
 
-        private void objectContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void TreeViewPackages_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
+            GetMain().OnObjectNodeAction(e.Node, ContentNodeAction.Auto);
         }
 
         private Timer _FilterTextChangedTimer;
@@ -240,6 +240,54 @@ namespace UEExplorer.UI.ActionPanels
 
             string query = toolStripTextBoxFilter.Text.Trim();
             FilterRootPackagesTree(query.Length == 0 ? null : query);
+        }
+        
+        private void objectContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var actions = _ActionsBuilder
+                .Visit(TreeViewPackages.SelectedNode);
+
+            objectContextMenu.Items.Clear();
+            foreach ((string text, ContentNodeAction action) in actions)
+            {
+                var node = objectContextMenu.Items.Add(text);
+                node.Tag = action;
+            }
+        }
+        
+        private void objectContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            var action = (ContentNodeAction)e.ClickedItem.Tag;
+            GetMain().OnObjectNodeAction(TreeViewPackages.SelectedNode, action);
+        }
+        
+            //var main = GetMain();
+            //object tag = main.PickBestTarget(TreeViewPackages.SelectedNode, ContentNodeAction.Auto);
+            //var action = main.PickBestContentNodeAction(tag, ContentNodeAction.Auto);
+            //main.InsertNewContentPanel(tag, action);
+        
+        private void TreeViewPackages_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+                return;
+
+            TreeViewPackages.SelectedNode = e.Node;
+        }
+
+        private void toolStripMenuItemView_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            var target = TreeViewPackages.SelectedNode;
+            GetMain().OnObjectNodeAction(target, ContentNodeAction.Auto);
+        }
+
+        private void toolStripMenuItemReload_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            // We should reload the package in place, but legacy code prevents us from making this easy, let's fallback.
+            var target = TreeViewPackages.SelectedNode;
+            if (target.Tag is UnrealPackage package)
+            {
+                GetMain().ReloadPackage();
+            }
         }
     }
 }

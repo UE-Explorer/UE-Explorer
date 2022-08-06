@@ -12,6 +12,7 @@ using Krypton.Docking;
 using UEExplorer.Properties;
 using UEExplorer.UI.ActionPanels;
 using UEExplorer.UI.Forms;
+using UEExplorer.UI.Nodes;
 using UEExplorer.UI.Pages;
 using UELib.Annotations;
 
@@ -42,23 +43,58 @@ namespace UEExplorer.UI.Tabs
             //if (File.Exists(DockingPath)) kryptonDockingManagerMain.LoadConfigFromFile(DockingPath);
 
             kryptonDockingManagerMain.ManageControl("Nav", packageStripContainer.ContentPanel);
-            _PackageExplorerPage = new PackageExplorerPage();
-            _PackageExplorerPage.ClearFlags(KryptonPageFlags.DockingAllowClose | KryptonPageFlags.DockingAllowDocked);
+            _PackageExplorerPage = CreatePackageExplorerPage();
+            
             kryptonDockingManagerMain.AddDockspace(
                 "Nav",
                 DockingEdge.Left,
                 new KryptonPage[] { _PackageExplorerPage });
+
+            var defaultDecompilerPage = CreateDecompilerPage(null);
+            defaultDecompilerPage.IsDefault = true;
             
             var workSpace = kryptonDockingManagerMain.ManageWorkspace("Workspace", kryptonDockableWorkspaceMain);
-            kryptonDockingManagerMain.AddToWorkspace("Workspace", new KryptonPage[] { new KryptonPage() });
-            kryptonDockingManagerMain.ManageControl("View", packageStripContainer.ContentPanel, workSpace);
+            kryptonDockingManagerMain.AddToWorkspace("Workspace", new KryptonPage[] { defaultDecompilerPage });
+
+            var defaultBinaryPage = CreateBinaryPage(null);
+            defaultBinaryPage.IsDefault = true;
+            
+            var c = kryptonDockingManagerMain.ManageControl("View", packageStripContainer.ContentPanel);
             kryptonDockingManagerMain.AddDockspace(
-                "View", 
-                DockingEdge.Right, 
-                new KryptonPage[] { new DecompilerPage(), }, 
-                new KryptonPage[] { new BinaryPage() });
+                "View",
+                DockingEdge.Bottom,
+                new KryptonPage[] { CreateBinaryPage(null) });
         }
-        
+
+        private PackageExplorerPage CreatePackageExplorerPage()
+        {
+            var page = new PackageExplorerPage();
+            page.ClearFlags(KryptonPageFlags.DockingAllowClose | KryptonPageFlags.DockingAllowFloating | KryptonPageFlags.DockingAllowWorkspace);
+            return page;
+        }
+
+        private DecompilerPage CreateDecompilerPage(object target, bool isDefault = true)
+        {
+            var page = new DecompilerPage
+            {
+                IsDefault = isDefault
+            };
+            page.ClearFlags(KryptonPageFlags.DockingAllowAutoHidden);
+            page.SetNewObjectTarget(target, ContentNodeAction.Decompile, false);
+            return page;
+        }
+
+        private BinaryPage CreateBinaryPage(object target, bool isDefault = true)
+        {
+            var page = new BinaryPage
+            {
+                IsDefault = isDefault
+            };
+            //page.ClearFlags(KryptonPageFlags.DockingAllowAutoHidden);
+            page.SetNewObjectTarget(target, ContentNodeAction.Decompile, false);
+            return page;
+        }
+
         public void PostInitialize()
         {
             try
@@ -312,7 +348,7 @@ namespace UEExplorer.UI.Tabs
             var state = Program.Options.GetState(_UnrealPackage.FullPackageName);
             if (state.SearchObjectValue != null)
             {
-                DoSearchObjectByGroup(state.SearchObjectValue);
+                PerformActionByObjectPath(state.SearchObjectValue);
             }
 
             ResumeLayout();
@@ -370,147 +406,7 @@ namespace UEExplorer.UI.Tabs
 
         #region Node-ContextMenu Methods
 
-        private static void ShowNodeContextMenuStrip(TreeView tree, TreeNodeMouseClickEventArgs e,
-            ToolStripItemClickedEventHandler itemClicked)
-        {
-            tree.SelectedNode = e.Node;
-
-            var viewToolsContextMenu = new ContextMenuStrip();
-            BuildItemNodes(e.Node, viewToolsContextMenu.Items, itemClicked);
-            if (viewToolsContextMenu.Items.Count == 0)
-            {
-                viewToolsContextMenu.Dispose();
-                return;
-            }
-
-            viewToolsContextMenu.ItemClicked += itemClicked;
-            viewToolsContextMenu.Show(tree, e.Location);
-        }
-
-        /// <param name="target">Can either be an UObject or TreeNode.</param>
-        private static void BuildItemNodes(object target, ToolStripItemCollection itemCollection,
-            ToolStripItemClickedEventHandler itemClickEvent = null)
-        {
-            itemCollection.Clear();
-
-            var addItem = (Action<string, ContentNodeAction>)((title, id) =>
-            {
-                var item = itemCollection.Add(title);
-                item.Name = Enum.GetName(typeof(ContentNodeAction), id);
-            });
-            
-            // Can be null!
-            object tag;
-            switch (target)
-            {
-                // See if we can work with the TreeNode's tag?
-                case TreeNode treeNode:
-                    tag = treeNode.Tag;
-                    if (tag is UObjectTableItem item && item.Object != null)
-                    {
-                        tag = item.Object;
-                    }
-                    break;
-                
-                // Maybe just an UObject
-                default:
-                    tag = target;
-                    break;
-            }
-
-            // Not a workable target?
-            if (tag == null)
-            {
-                return;
-            }
-
-            if (tag is IUnrealDecompilable) addItem(Resources.NodeItem_ViewObject, ContentNodeAction.Decompile);
-            if (tag is IBinaryData binaryDataObject && binaryDataObject.BinaryMetaData != null)
-            {
-                addItem(Resources.UC_PackageExplorer_BuildItemNodes_View_Binary, ContentNodeAction.Binary);
-            }
-            if (tag is IUnrealViewable)
-            {
-                if (File.Exists(Program.Options.UEModelAppPath))
-                {
-                    addItem(Resources.NodeItem_OpenInUEModelViewer, ContentNodeAction.DecompileExternal);
-#if DEBUG
-                    addItem(Resources.NodeItem_ExportWithUEModelViewer, ContentNodeAction.ExportExternal);
-#endif
-                }
-            }
-            
-            if (tag is IUnrealExportable exportableObj && exportableObj.CanExport())
-            {
-                addItem(Resources.EXPORT_AS, ContentNodeAction.ExportAs);
-            }
-
-            if (tag is IBuffered bufferedObject && bufferedObject.GetBuffer() != null)
-            {
-                var bufferedItem = new ToolStripMenuItem
-                {
-                    Text = Resources.NodeItem_ViewBuffer,
-                    Name = Enum.GetName(typeof(ContentNodeAction), ContentNodeAction.ViewBuffer)
-                };
-
-                bool shouldAddBufferItem = bufferedObject.GetBufferSize() > 0;
-
-                var tableNode = tag as IContainsTable;
-                if (tableNode?.Table != null)
-                {
-                    var tableBufferItem = bufferedItem.DropDownItems.Add(Resources.NodeItem_ViewTableBuffer);
-                    tableBufferItem.Name = Enum.GetName(typeof(ContentNodeAction), ContentNodeAction.ViewTableBuffer);
-                    shouldAddBufferItem = true;
-                }
-
-                if (shouldAddBufferItem)
-                {
-                    bufferedItem.DropDownItemClicked += itemClickEvent;
-                    itemCollection.Add(bufferedItem);
-                }
-            }
-            
-            // === UObject tools
-
-            UObject obj;
-            if (tag is UObject uObject)
-            {
-                obj = uObject;
-            }
-            else
-            {
-                return;
-            }
-            
-            if (obj.Outer != null) addItem(Resources.NodeItem_ViewOuter, ContentNodeAction.DecompileOuter);
-
-            if (obj is UStruct uStruct)
-            {
-                var @class = obj as UClass;
-                if (uStruct.ByteCodeManager != null)
-                {
-                    if (@class != null) addItem(Resources.NodeItem_ViewReplication, ContentNodeAction.DecompileClassReplication);
-                    addItem(Resources.NodeItem_ViewTokens, ContentNodeAction.DecompileTokens);
-                    addItem(Resources.NodeItem_ViewDisassembledTokens, ContentNodeAction.DisassembleTokens);
-                }
-
-                if (uStruct.Properties != null && uStruct.Properties.Any())
-                    addItem(Resources.NodeItem_ViewDefaultProperties, ContentNodeAction.DecompileScriptProperties);
-            }
-
-            if (obj.ThrownException != null)
-            {
-                itemCollection.Add(new ToolStripSeparator());
-                addItem(Resources.NodeItem_ViewException, ContentNodeAction.ViewException);
-            }
-        }
-        
-        private void ViewTools_DropDownOpened(object sender, EventArgs e)
-        {
-            if (CurrentContentTarget == null) return;
-
-            BuildItemNodes(CurrentContentTarget, ViewTools.DropDownItems);
-        }
+        private ObjectActionsBuilder _ActionsBuilder = new ObjectActionsBuilder();
         
         private void ViewTools_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -589,10 +485,10 @@ namespace UEExplorer.UI.Tabs
             return content;
         }
 
-        private void PerformNodeAction(object target, ContentNodeAction action, bool trackHistory = true)
+        public object PickBestTarget(object target, ContentNodeAction action)
         {
             if (target == null)
-                return;
+                return null;
 
             object tag;
             switch (target)
@@ -604,54 +500,64 @@ namespace UEExplorer.UI.Tabs
                     {
                         tag = item.Object;
                     }
-                    // See if we can concatenate all sub tree nodes that have decompilable content.
-                    else if (tag == null)
-                    {
-                        switch (action)
-                        {
-                            case ContentNodeAction.Decompile:
-                                var s = new StringBuilder();
-                                foreach (object subNode in node.Nodes)
-                                {
-                                    if (subNode is IUnrealDecompilable decompilable)
-                                    {
-                                        s.AppendLine(decompilable.Decompile());
-                                    }
-                                }
-                                UpdateContentPanel(target, ContentNodeAction.Decompile, s.ToString());
-                                if (trackHistory) TrackNodeAction(node, target, ContentNodeAction.Decompile);
-                                return;
-                        
-                            default:
-                                return;
-                        }
-                    }
                     break;
-                
+
                 // Probably an UObject
                 default:
                     tag = target;
                     break;
             }
+            return tag;
+        }
 
-            UObject obj = null;
+        public ContentNodeAction PickBestContentNodeAction(object tag, ContentNodeAction action)
+        {
             switch (tag)
             {
-                case UObject uObject:
-                    if (action == ContentNodeAction.Auto) action = ContentNodeAction.Decompile;
-                    obj = uObject;
+                case IUnrealDecompilable _:
+                    if (action == ContentNodeAction.Auto) return ContentNodeAction.Decompile;
                     break;
 
                 case IBinaryData _:
-                    if (action == ContentNodeAction.Auto) action = ContentNodeAction.Binary;
+                    if (action == ContentNodeAction.Auto) return ContentNodeAction.Binary;
                     break;
             }
-            
+
+            return action;
+        }
+
+        private void PerformNodeAction(object target, ContentNodeAction action, bool trackHistory = true)
+        {
+            object tag = PickBestTarget(target, action);
+            if (tag == null && target is TreeNode node)
+            {
+                switch (action)
+                {
+                    case ContentNodeAction.Decompile:
+                        var s = new StringBuilder();
+                        foreach (object subNode in node.Nodes)
+                        {
+                            if (subNode is IUnrealDecompilable decompilable)
+                            {
+                                s.AppendLine(decompilable.Decompile());
+                            }
+                        }
+                        UpdateContentPanel(target, ContentNodeAction.Decompile, s.ToString());
+                        if (trackHistory) TrackNodeAction(node, target, ContentNodeAction.Decompile);
+                        return;
+                
+                    default:
+                        return;
+                }
+            }
+
+            action = PickBestContentNodeAction(tag, action);
             if (trackHistory)
             {
                 TrackNodeAction(target, tag, action);
             }
             
+            var obj = tag as UObject;
             try
             {
                 switch (action)
@@ -882,16 +788,6 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private T CreatePanel<T>(object target) where T : Panel, IObjectHandler<object>, new()
-        {
-            return new T
-            {
-                Object = target,
-                Dock = DockStyle.Fill,
-                Name = "Object"
-            };
-        }
-
         [CanBeNull]
         private KryptonPage GetObjectPage()
         {
@@ -901,7 +797,7 @@ namespace UEExplorer.UI.Tabs
         [CanBeNull]
         private IActionPanel<object> GetObjectPanel()
         {
-            var objectPanel = GetObjectPage()?.Controls["Object"];
+            var objectPanel = GetObjectPage()?.Controls["Panel"].Controls["ObjectPage"];
             return (IActionPanel<object>)objectPanel;
         }
 
@@ -912,8 +808,10 @@ namespace UEExplorer.UI.Tabs
             CurrentContentTarget = target;
 
             string path = ObjectPathBuilder.GetPath((dynamic)target);
+            ProgressStatus.SetStatus(path);
             SetActiveObjectPath(path);
             SwitchContentPanel(target, action);
+            ProgressStatus.ResetStatus();
 
             bool withEditorTools = action == ContentNodeAction.Decompile;
             textEditorToolstrip.Enabled = withEditorTools;
@@ -924,52 +822,69 @@ namespace UEExplorer.UI.Tabs
             //EditorFindTextBox.Enabled = withEditorTools;
         }
 
+        public void InsertNewContentPanel(object target, ContentNodeAction action)
+        {
+            InsertContentPanel(target, action, false);
+        }
+
+        private void InsertContentPanel(object target, ContentNodeAction action, bool isDefault)
+        {
+            KryptonPage page;
+            switch (action)
+            {
+                case ContentNodeAction.Decompile:
+                    page = CreateDecompilerPage(target, isDefault);
+                    break;
+
+                case ContentNodeAction.Binary:
+                    page = CreateBinaryPage(target, isDefault);
+                    break;
+
+                default:
+                    throw new NotSupportedException();
+            }
+
+            kryptonDockingManagerMain.AddToWorkspace("Workspace", new[] { page });
+        }
+
         private void SwitchContentPanel(object target, ContentNodeAction action)
         {
-            foreach (var page in kryptonDockingManagerMain.PagesDocked.OfType<ObjectBoundPage>())
+            List<ObjectBoundPage> pages;
+            switch (action)
             {
-                page.SetNewObjectTarget(target, action);
+                // For decompilation we want to only auto update default workspace pages.
+                case ContentNodeAction.Decompile:
+                    pages = kryptonDockingManagerMain.PagesWorkspace
+                        .OfType<ObjectBoundPage>()
+                        .Where(p => p.IsDefault)
+                        .ToList();
+                    SwitchContentPanel(target, ContentNodeAction.Binary);
+                    break;
+                
+                case ContentNodeAction.Binary:
+                    pages = kryptonDockingManagerMain.Pages
+                        .OfType<ObjectBoundPage>()
+                        .Where(p => p.IsDefault)
+                        .ToList();
+
+                    break;
+                
+                default:
+                    throw new NotSupportedException();
             }
             
-            //ObjectActionManager.TriggerObjectTargetChanged(this, new ObjectTargetEventArgs(target, action));
-            
-            //var objectPage = GetObjectPage();
-            //if (objectPage == null) return;
-            
-            //var objectPanel = objectPage.Controls["Object"];
-            //if (objectPanel is IActionPanel<object> panel)
-            //{
-            //    if (panel.Action == action)
-            //    {
-            //        panel.Object = target;
-            //        return;
-            //    }
-
-            //    objectPage.Controls.RemoveByKey("Object");
-            //    objectPanel.Dispose();
-            //}
-
-            //switch (action)
-            //{
-            //    case ContentNodeAction.Decompile:
-            //    {
-            //        var decompilePanel = CreatePanel<DecompileOutputPanel>(target);
-            //        decompilePanel.TextEditorPanel.TextEditorControl.SearchDocument.Click += SearchDocument_Click;
-            //        decompilePanel.TextEditorPanel.TextEditorControl.SearchPackage.Click += SearchClasses_Click;
-            //        decompilePanel.TextEditorPanel.TextEditorControl.SearchObject.Click += SearchObject_Click;
-            //        panel = decompilePanel;
-            //        break;
-            //    }
-
-            //    case ContentNodeAction.Binary:
-            //        panel = CreatePanel<BinaryDataFieldsPanel>(target);
-            //        break;
-
-            //    default:
-            //        throw new NotImplementedException();
-            //}
-
-            //objectPage.Controls.Add((Control)panel);
+            if (pages.Any())
+            {
+                foreach (var page in pages)
+                {
+                    bool isPending = !kryptonDockingManagerMain.IsPageShowing(page);
+                    page.SetNewObjectTarget(target, action, isPending);
+                }
+            }
+            else
+            {
+                InsertContentPanel(target, action, true);
+            }
         }
 
         private void SearchDocument_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -988,15 +903,6 @@ namespace UEExplorer.UI.Tabs
             
             EditorFindTextBox.Text = panel.TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
             findInClassesToolStripMenuItem.PerformClick();
-        }
-
-        private void SearchObject_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            var panel = (DecompileOutputPanel)GetObjectPanel();
-            Debug.Assert(panel != null);
-
-            string path = panel.TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
-            DoSearchObjectByGroup(path);
         }
 
         private static readonly string _TemplateDir = Path.Combine(Program.ConfigDir, "Templates");
@@ -1023,11 +929,7 @@ namespace UEExplorer.UI.Tabs
         public object CurrentContentTarget
         {
             get => _CurrentContentTarget;
-            set
-            {
-                ViewTools.Enabled = value != null;
-                _CurrentContentTarget = value;
-            }
+            set => _CurrentContentTarget = value;
         }
 
         private void SetActiveObjectPath(string path)
@@ -1138,11 +1040,6 @@ namespace UEExplorer.UI.Tabs
             node.TreeView.SelectedNode = node;
         }
 
-        private void ViewBufferToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ViewBufferFor(_UnrealPackage);
-        }
-
         private void ViewBufferFor(IBuffered target)
         {
             if (target == null)
@@ -1160,29 +1057,30 @@ namespace UEExplorer.UI.Tabs
             ReloadPackage();
         }
 
-        private int _FindCount;
-        private TabPage _FindTab;
+        private KryptonPage CreateFindPage(string text)
+        {
+            var page = new KryptonPage()
+            {
+                TextTitle = text
+            };
+            return page;
+        }
 
-        private void FindInClassesToolStripMenuItem_Click(object sender, EventArgs e)
+        // TODO: Rework with docking
+        private void PerformFindInClasses(string searchText)
         {
             Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
             
-            string findText;
-            using (var findDialog = new FindDialog())
-            {
-                findDialog.FindInput.Text = EditorFindTextBox.Text;
-                if (findDialog.ShowDialog() != DialogResult.OK) return;
-                findText = findDialog.FindInput.Text;
-            }
-
             ProgressStatus.SaveStatus();
             ProgressStatus.SetStatus(Resources.SEARCHING_CLASSES_STATUS);
 
             var documentResults = new List<TextSearchHelpers.DocumentResult>();
-            foreach (var content in _UnrealPackage.Objects.OfType<UClass>())
+            foreach (var content in _UnrealPackage.Objects
+                         .OfType<UClass>()
+                         .Where(c => c.ExportTable != null))
             {
                 string findContent = content.Decompile();
-                var findResults = TextSearchHelpers.FindText(findContent, findText);
+                var findResults = TextSearchHelpers.FindText(findContent, searchText);
                 if (!findResults.Any()) continue;
 
                 var document = new TextSearchHelpers.DocumentResult
@@ -1197,27 +1095,32 @@ namespace UEExplorer.UI.Tabs
 
             if (documentResults.Count == 0)
             {
-                MessageBox.Show(string.Format(Resources.NO_FIND_RESULTS, findText));
+                MessageBox.Show(string.Format(Resources.NO_FIND_RESULTS, searchText));
                 return;
             }
 
-            if (_FindTab != null) TabControl_General.TabPages.Remove(_FindTab);
+            var findPage = CreateFindPage(string.Format(Resources.FIND_RESULTS_TITLE, searchText));
+            kryptonDockingManagerMain.AddDockspace("Nav", DockingEdge.Left, new KryptonPage[] { findPage });
 
-            _FindTab = new TabPage
+            var treeResults = new TreeView
             {
-                Text = string.Format(Resources.FIND_RESULTS_TITLE, ++_FindCount)
+                Dock = DockStyle.Fill,
             };
+            findPage.Controls.Add(treeResults);
 
-            var treeResults = new TreeView { Dock = DockStyle.Fill };
-            _FindTab.Controls.Add(treeResults);
-            TabControl_General.TabPages.Add(_FindTab);
+            kryptonDockingManagerMain.ShowPage(findPage);
 
-            TabControl_General.SelectTab(_FindTab);
-
+            var imageKeySelector = new ObjectImageKeySelector();
             foreach (var documentResult in documentResults)
             {
-                var documentNode = treeResults.Nodes.Add(((UClass)documentResult.Document).Name);
+                var @class = (UClass)documentResult.Document;
+                string imageKey = @class.Accept(imageKeySelector);
+
+                string text = ObjectPathBuilder.GetPath(@class);
+                var documentNode = treeResults.Nodes.Add(text);
                 documentNode.Tag = documentResult;
+                documentNode.ImageKey = imageKey;
+                documentNode.SelectedImageKey = imageKey;
                 foreach (var result in documentResult.Results)
                 {
                     var resultNode = documentNode.Nodes.Add(result.ToString());
@@ -1232,21 +1135,36 @@ namespace UEExplorer.UI.Tabs
                 {
                     return;
                 }
-                
+
                 if (!(nodeEvent.Node.Tag is TextSearchHelpers.FindResult findResult)) return;
 
                 if (nodeEvent.Node.Parent.Tag is TextSearchHelpers.DocumentResult documentResult)
                 {
                     var unClass = (UClass)documentResult.Document;
                     PerformNodeAction(unClass, ContentNodeAction.Decompile);
-                    TrackNodeAction(nodeEvent.Node, unClass, ContentNodeAction.Decompile);
 
-                    var panel = (DecompileOutputPanel)GetObjectPanel();
-                    Debug.Assert(panel != null);
-                    panel.TextEditorPanel.TextEditorControl.TextEditor.ScrollTo(findResult.TextLine, findResult.TextColumn);
-                    panel.TextEditorPanel.TextEditorControl.TextEditor.Select(findResult.TextIndex, findText.Length);
+                    // FIXME: what a mess...
+                    //var panel = (DecompileOutputPanel)GetObjectPanel();
+                    //Debug.Assert(panel != null);
+                    //panel.TextEditorPanel.TextEditorControl.TextEditor.ScrollTo(findResult.TextLine, findResult.TextColumn);
+                    //panel.TextEditorPanel.TextEditorControl.TextEditor.Select(findResult.TextIndex, searchText.Length);
                 }
             };
+        }
+
+        private void FindInClassesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
+            
+            string findText;
+            using (var findDialog = new FindDialog())
+            {
+                findDialog.FindInput.Text = EditorFindTextBox.Text;
+                if (findDialog.ShowDialog() != DialogResult.OK) return;
+                findText = findDialog.FindInput.Text;
+            }
+
+            PerformFindInClasses(findText);
         }
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
@@ -1301,7 +1219,7 @@ namespace UEExplorer.UI.Tabs
             panel.TextEditorPanel.TextEditorControl.TextEditor.Copy();
         }
 
-        private bool DoSearchObjectByGroup(string objectGroup)
+        private bool PerformActionByObjectPath(string objectGroup)
         {
             Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
             
@@ -1318,19 +1236,24 @@ namespace UEExplorer.UI.Tabs
             switch (e.KeyChar)
             {
                 case '\r':
-                    e.Handled = DoSearchObjectByGroup(ActiveObjectPath.Text);
+                    e.Handled = PerformActionByObjectPath(ActiveObjectPath.Text);
                     break;
             }
         }
 
-        public void OnObjectNodeSelected(TreeViewEventArgs e)
+        public void OnObjectNodeAction(object target, ContentNodeAction action)
         {
-            // Assuming this was triggered by assigning SelectNode
-            if (e.Action == TreeViewAction.Unknown)
-            {
-                return;
-            }
-            PerformNodeAction(e.Node, ContentNodeAction.Auto);
+            PerformNodeAction(target, action);
+        }
+
+        public void OnSearchObjectByPath(string path)
+        {
+            PerformActionByObjectPath(path);
+        }
+
+        public void OnSearchInClasses(string searchText)
+        {
+            PerformFindInClasses(searchText);
         }
     }
 }

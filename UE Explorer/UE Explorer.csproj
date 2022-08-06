@@ -246,12 +246,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Development\IExtension.cs" />
+    <Compile Include="Properties\Resources.nl1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.nl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ActionPanels\ActionPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\ActionPanels\PackageExplorerPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\ActionPanels\PackageExplorerPanel.Designer.cs">
       <DependentUpon>PackageExplorerPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Nodes\ObjectActionsBuilder.cs" />
     <Compile Include="UI\ObjectActionManager.cs" />
     <Compile Include="UI\Pages\BinaryPage.cs" />
     <Compile Include="UI\EditorUtil.cs" />
@@ -600,6 +609,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\OpenfileDialog.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\Open.png" />
     <Content Include="unrealfile.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -648,7 +659,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

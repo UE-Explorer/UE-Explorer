@@ -1,4 +1,6 @@
-﻿namespace UEExplorer.UI.ActionPanels
+﻿using System.Windows.Forms;
+
+namespace UEExplorer.UI.ActionPanels
 {
     partial class PackageExplorerPanel
     {
@@ -30,33 +32,67 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PackageExplorerPanel));
-            this.TreeViewPackages = new Krypton.Toolkit.KryptonTreeView();
+            this.TreeViewPackages = new System.Windows.Forms.TreeView();
+            this.objectContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemView = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemReload = new System.Windows.Forms.ToolStripMenuItem();
             this.VSIcons = new System.Windows.Forms.ImageList(this.components);
-            this.objectContextMenu = new Krypton.Toolkit.KryptonContextMenu();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripTextBoxFilter = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripMenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBoxFilter = new System.Windows.Forms.ToolStripTextBox();
+            this.objectContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TreeViewPackages
             // 
+            this.TreeViewPackages.AllowDrop = true;
             this.TreeViewPackages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TreeViewPackages.ContextMenuStrip = this.objectContextMenu;
+            this.TreeViewPackages.FullRowSelect = true;
             this.TreeViewPackages.HideSelection = false;
             this.TreeViewPackages.ImageIndex = 0;
             this.TreeViewPackages.ImageList = this.VSIcons;
-            this.TreeViewPackages.KryptonContextMenu = this.objectContextMenu;
             this.TreeViewPackages.Location = new System.Drawing.Point(0, 30);
             this.TreeViewPackages.Name = "TreeViewPackages";
-            this.TreeViewPackages.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.TreeViewPackages.SelectedImageIndex = 0;
             this.TreeViewPackages.ShowNodeToolTips = true;
             this.TreeViewPackages.Size = new System.Drawing.Size(502, 432);
             this.TreeViewPackages.TabIndex = 21;
-            this.TreeViewPackages.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewPackages_AfterSelect);
             this.TreeViewPackages.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewPackages_BeforeExpand);
+            this.TreeViewPackages.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewPackages_AfterSelect);
+            this.TreeViewPackages.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewPackages_NodeMouseClick);
+            // 
+            // objectContextMenu
+            // 
+            this.objectContextMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.objectContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemView,
+            this.toolStripMenuItemReload});
+            this.objectContextMenu.Name = "objectContextMenu";
+            this.objectContextMenu.Size = new System.Drawing.Size(181, 70);
+            this.objectContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.objectContextMenu_Opening);
+            this.objectContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.objectContextMenu_ItemClicked);
+            // 
+            // toolStripMenuItemView
+            // 
+            this.toolStripMenuItemView.Image = global::UEExplorer.Properties.Resources.Open;
+            this.toolStripMenuItemView.Name = "toolStripMenuItemView";
+            this.toolStripMenuItemView.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemView.Text = "View";
+            this.toolStripMenuItemView.Visible = false;
+            this.toolStripMenuItemView.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMenuItemView_DropDownItemClicked);
+            // 
+            // toolStripMenuItemReload
+            // 
+            this.toolStripMenuItemReload.Image = global::UEExplorer.Properties.Resources.Refresh;
+            this.toolStripMenuItemReload.Name = "toolStripMenuItemReload";
+            this.toolStripMenuItemReload.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemReload.Text = "Reload";
+            this.toolStripMenuItemReload.Visible = false;
+            this.toolStripMenuItemReload.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMenuItemReload_DropDownItemClicked);
             // 
             // VSIcons
             // 
@@ -107,10 +143,6 @@
             this.VSIcons.Images.SetKeyName(42, "UClass-Abstract");
             this.VSIcons.Images.SetKeyName(43, "UClass-Within");
             // 
-            // objectContextMenu
-            // 
-            this.objectContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.objectContextMenu_Opening);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -124,12 +156,6 @@
             this.menuStrip1.TabIndex = 22;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // toolStripTextBoxFilter
-            // 
-            this.toolStripTextBoxFilter.Name = "toolStripTextBoxFilter";
-            this.toolStripTextBoxFilter.Size = new System.Drawing.Size(100, 23);
-            this.toolStripTextBoxFilter.TextChanged += new System.EventHandler(this.toolStripTextBoxFilter_TextChanged);
-            // 
             // toolStripMenuItemOpen
             // 
             this.toolStripMenuItemOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -137,12 +163,20 @@
             this.toolStripMenuItemOpen.Name = "toolStripMenuItemOpen";
             this.toolStripMenuItemOpen.Size = new System.Drawing.Size(28, 23);
             // 
+            // toolStripTextBoxFilter
+            // 
+            this.toolStripTextBoxFilter.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextBoxFilter.Name = "toolStripTextBoxFilter";
+            this.toolStripTextBoxFilter.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBoxFilter.TextChanged += new System.EventHandler(this.toolStripTextBoxFilter_TextChanged);
+            // 
             // PackageExplorerPanel
             // 
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.TreeViewPackages);
             this.Name = "PackageExplorerPanel";
             this.Size = new System.Drawing.Size(502, 462);
+            this.objectContextMenu.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -152,11 +186,13 @@
 
         #endregion
 
-        private Krypton.Toolkit.KryptonTreeView TreeViewPackages;
+        private TreeView TreeViewPackages;
         private System.Windows.Forms.ImageList VSIcons;
-        private Krypton.Toolkit.KryptonContextMenu objectContextMenu;
+        private ContextMenuStrip objectContextMenu;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxFilter;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpen;
+        private ToolStripMenuItem toolStripMenuItemReload;
+        private ToolStripMenuItem toolStripMenuItemView;
     }
 }

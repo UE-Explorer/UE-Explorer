@@ -262,7 +262,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
     <value>Klassen worden doorzocht..</value>
   </data>
   <data name="FIND_RESULTS_TITLE" xml:space="preserve">
-    <value>Zoek resultaten {0}</value>
+    <value>Zoek resultaten "{0}"</value>
   </data>
   <data name="HexView_COULDNT_ACQUIRE_VALUE" xml:space="preserve">
     <value>Kon de waarde niet ophalen</value>
@@ -282,7 +282,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   <data name="NodeItem_ViewObject" xml:space="preserve">
     <value>Bekijk object</value>
   </data>
-<data name="UC_PackageExplorer_BuildItemNodes_View_Binary" xml:space="preserve">
+  <data name="UC_PackageExplorer_BuildItemNodes_View_Binary" xml:space="preserve">
     <value>Bekijk binair velden</value>
   </data>
   <data name="NodeItem_OpenInUEModelViewer" xml:space="preserve">

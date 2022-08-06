@@ -313,7 +313,7 @@
     <value>3, 0</value>
   </data>
   <data name="textEditorToolstrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 25</value>
+    <value>229, 25</value>
   </data>
   <data name="textEditorToolstrip.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -335,24 +335,6 @@
   </metadata>
   <data name="packageToolStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
-  </data>
-  <data name="ReloadButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA68AAAOvAGVvHJJAAABP0lE
-        QVQ4T62SvUoEQRCEOzIy8CdQ1HcQRBTBn8xMEOHgdHvWwIcw1UBRQxFEfQNj8XZmDy4zFUwMBeFQUTEQ
-        BSOtmStPWG6d5D5odqq2u5iZXekOxm6Jcd/tUnfHN39UznvE5INUJWi2jLDHEFLE5DMIvhe1S3QKGLeC
-        4Saekx0DPJqNh92ldpEOqdaHMPQUhj1lAR4f4nvXG310gNptmCdU/k72uOqM2kPsZJMKqLuWpDZHFUft
-        NOqKCqj7kLWLfqo4lUYvAl6ogLGfspENUMXxAca+UwFjb3AHC1RxwhFw7DbG7SLkjCqOcUfo36ECVTeC
-        1DdJsyk65SS1CQw/4zMO0yGaJQh5+DekNdyUxK3SKZBaDTtRe4r1fPj3/dcx+Sy8Y5z7tXz4l+RyDI0H
-        qFuc9StUa70vaX2UXd1C5AeCGIPIaqSW/AAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="ReloadButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
-  <data name="ReloadButton.ToolTipText" xml:space="preserve">
-    <value>Reload</value>
   </data>
   <data name="PrevButton.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -404,44 +386,11 @@
   <data name="ActiveObjectPath.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 25</value>
   </data>
-  <data name="ViewTools.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ViewTools.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="ViewTools.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="ViewTools.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="ViewTools.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
-  <data name="ViewTools.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 22</value>
-  </data>
-  <data name="ViewTools.Text" xml:space="preserve">
-    <value>View</value>
-  </data>
   <data name="packageToolStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 25</value>
   </data>
   <data name="packageToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 25</value>
+    <value>377, 25</value>
   </data>
   <data name="packageToolStrip.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -573,7 +522,7 @@
     <value>0, 0</value>
   </data>
   <data name="DataGridView_GenerationsTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="DataGridView_GenerationsTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -594,10 +543,10 @@
     <value>TreeView</value>
   </data>
   <data name="TabPage_Generations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 21</value>
+    <value>4, 20</value>
   </data>
   <data name="TabPage_Generations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="TabPage_Generations.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -642,7 +591,7 @@
     <value>0, 0</value>
   </data>
   <data name="DataGridView_Chunks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="DataGridView_Chunks.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -663,10 +612,10 @@
     <value>Chunks</value>
   </data>
   <data name="TabPage_Chunks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 21</value>
+    <value>4, 20</value>
   </data>
   <data name="TabPage_Chunks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="TabPage_Chunks.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -702,7 +651,7 @@
     <value>0, 0</value>
   </data>
   <data name="nameDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="nameDataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -723,10 +672,10 @@
     <value>text-left</value>
   </data>
   <data name="TabPage_Names.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 21</value>
+    <value>4, 20</value>
   </data>
   <data name="TabPage_Names.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="TabPage_Names.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -777,7 +726,7 @@
     <value>0, 0</value>
   </data>
   <data name="importsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="importsDataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -801,7 +750,7 @@
     <value>0, 0</value>
   </data>
   <data name="TreeView_Imports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="TreeView_Imports.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -822,10 +771,10 @@
     <value>ImportCatalogPart</value>
   </data>
   <data name="TabPage_Imports.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 21</value>
+    <value>4, 20</value>
   </data>
   <data name="TabPage_Imports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="TabPage_Imports.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -906,7 +855,7 @@
     <value>0, 0</value>
   </data>
   <data name="exportsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="exportsDataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -930,7 +879,7 @@
     <value>0, 0</value>
   </data>
   <data name="TreeView_Exports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="TreeView_Exports.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -951,10 +900,10 @@
     <value>Content</value>
   </data>
   <data name="TabPage_Exports.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 21</value>
+    <value>4, 20</value>
   </data>
   <data name="TabPage_Exports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 437</value>
+    <value>919, 438</value>
   </data>
   <data name="TabPage_Exports.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1205,12 +1154,6 @@
   <data name="&gt;&gt;findNextToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ReloadButton.Name" xml:space="preserve">
-    <value>ReloadButton</value>
-  </data>
-  <data name="&gt;&gt;ReloadButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;PrevButton.Name" xml:space="preserve">
     <value>PrevButton</value>
   </data>
@@ -1228,12 +1171,6 @@
   </data>
   <data name="&gt;&gt;ActiveObjectPath.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ViewTools.Name" xml:space="preserve">
-    <value>ViewTools</value>
-  </data>
-  <data name="&gt;&gt;ViewTools.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;exportScriptClassesToolStripMenuItem.Name" xml:space="preserve">
     <value>exportScriptClassesToolStripMenuItem</value>

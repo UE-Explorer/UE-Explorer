@@ -30,11 +30,9 @@
             this.EditorFindTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.findNextToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.packageToolStrip = new System.Windows.Forms.ToolStrip();
-            this.ReloadButton = new System.Windows.Forms.ToolStripButton();
             this.PrevButton = new System.Windows.Forms.ToolStripButton();
             this.NextButton = new System.Windows.Forms.ToolStripButton();
             this.ActiveObjectPath = new System.Windows.Forms.ToolStripTextBox();
-            this.ViewTools = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportScriptClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Panel_Main = new System.Windows.Forms.Panel();
             this.ToolStrip_Main = new System.Windows.Forms.ToolStrip();
@@ -227,20 +225,11 @@
             this.packageToolStrip.AllowItemReorder = true;
             resources.ApplyResources(this.packageToolStrip, "packageToolStrip");
             this.packageToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ReloadButton,
             this.PrevButton,
             this.NextButton,
-            this.ActiveObjectPath,
-            this.ViewTools});
+            this.ActiveObjectPath});
             this.packageToolStrip.Name = "packageToolStrip";
             this.packageToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            // 
-            // ReloadButton
-            // 
-            this.ReloadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.ReloadButton, "ReloadButton");
-            this.ReloadButton.Name = "ReloadButton";
-            this.ReloadButton.Click += new System.EventHandler(this.ReloadPackage_Click);
             // 
             // PrevButton
             // 
@@ -264,14 +253,6 @@
             this.ActiveObjectPath.Name = "ActiveObjectPath";
             this.ActiveObjectPath.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ActiveObjectPath.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchObjectTextBox_KeyPress);
-            // 
-            // ViewTools
-            // 
-            this.ViewTools.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.ViewTools.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.ViewTools, "ViewTools");
-            this.ViewTools.Name = "ViewTools";
-            this.ViewTools.DropDownOpened += new System.EventHandler(this.ViewTools_DropDownOpened);
             // 
             // exportScriptClassesToolStripMenuItem
             // 
@@ -866,13 +847,11 @@
         private System.Windows.Forms.ToolStripButton PrevButton;
         private System.Windows.Forms.ToolStripButton NextButton;
         private System.Windows.Forms.ToolStripTextBox ActiveObjectPath;
-        public System.Windows.Forms.ToolStripDropDownButton ViewTools;
         private System.Windows.Forms.ToolStrip textEditorToolstrip;
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripButton copyToolStripButton;
         private System.Windows.Forms.ToolStripTextBox EditorFindTextBox;
-        private System.Windows.Forms.ToolStripButton ReloadButton;
         private System.Windows.Forms.ToolStripButton findNextToolStripMenuItem;
         private Krypton.Docking.KryptonDockableWorkspace kryptonDockableWorkspaceMain;
         private Krypton.Docking.KryptonDockingManager kryptonDockingManagerMain;

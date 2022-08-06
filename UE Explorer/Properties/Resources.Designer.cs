@@ -255,7 +255,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find Results {0}.
+        ///   Looks up a localized string similar to Find Results &quot;{0}&quot;.
         /// </summary>
         internal static string FIND_RESULTS_TITLE {
             get {
@@ -608,6 +608,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Open {
+            get {
+                object obj = ResourceManager.GetObject("Open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open File.
         /// </summary>
         internal static string Open_File {
@@ -746,6 +756,16 @@ namespace UEExplorer.Properties {
         internal static string ProgramForm_Unreal_Natives_Table_Generator {
             get {
                 return ResourceManager.GetString("ProgramForm_Unreal_Natives_Table_Generator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Refresh {
+            get {
+                object obj = ResourceManager.GetObject("Refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
