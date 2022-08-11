@@ -115,6 +115,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Close {
+            get {
+                object obj = ResourceManager.GetObject("Close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To use Gildor&apos;s tool, try &quot;decompress.exe PACKAGENAME.EXT&quot; you may have to specify -lzo..
         /// </summary>
         internal static string COMPRESSED_HOWTO {
@@ -260,6 +270,15 @@ namespace UEExplorer.Properties {
         internal static string FIND_RESULTS_TITLE {
             get {
                 return ResourceManager.GetString("FIND_RESULTS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zoeken &quot;{0}&quot;.
+        /// </summary>
+        internal static string FindResultsPage_TextTitle___0__ {
+            get {
+                return ResourceManager.GetString("FindResultsPage_TextTitle___0__", resourceCulture);
             }
         }
         
@@ -545,7 +564,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Table Buffer.
+        ///   Looks up a localized string similar to View Table Buffer.
         /// </summary>
         internal static string NodeItem_ViewTableBuffer {
             get {
@@ -702,6 +721,16 @@ namespace UEExplorer.Properties {
         internal static string PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title {
             get {
                 return ResourceManager.GetString("PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pin {
+            get {
+                object obj = ResourceManager.GetObject("Pin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

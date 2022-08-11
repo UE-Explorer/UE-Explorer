@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using UEExplorer.UI.Tabs;
 
 namespace UEExplorer.UI.ActionPanels
 {
@@ -21,15 +20,6 @@ namespace UEExplorer.UI.ActionPanels
                 }
                 UpdateOutput(value);
             }
-        }
-        
-        protected UC_PackageExplorer GetMain()
-        {
-            for (var c = Parent; c != null; c = c.Parent)
-            {
-                if ((c is UC_PackageExplorer packageExplorer)) return packageExplorer;
-            }
-            throw new NotSupportedException();
         }
 
         protected virtual void UpdateOutput(object target)

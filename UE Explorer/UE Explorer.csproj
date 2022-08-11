@@ -342,8 +342,15 @@
     <Compile Include="UI\IActionPanel.cs" />
     <Compile Include="UI\IObjectHandler.cs" />
     <Compile Include="UI\Pages\DecompilerPage.cs" />
+    <Compile Include="UI\Pages\FindResultsPage.cs" />
     <Compile Include="UI\Pages\ObjectBoundPage.cs" />
     <Compile Include="UI\Pages\PackageExplorerPage.cs" />
+    <Compile Include="UI\Panels\FindResultsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Panels\FindResultsPanel.Designer.cs">
+      <DependentUpon>FindResultsPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Panels\TextEditorPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -489,6 +496,9 @@
     <EmbeddedResource Include="UI\ActionPanels\DecompileOutputPanel.resx">
       <DependentUpon>DecompileOutputPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Panels\FindResultsPanel.resx">
+      <DependentUpon>FindResultsPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Panels\TextEditorPanel.resx">
       <DependentUpon>TextEditorPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -567,6 +577,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TextSearchHelpers.DocumentResult.datasource" />
     <None Include="Properties\DataSources\UELib.BinaryMetaData+BinaryField.datasource" />
     <None Include="Properties\DataSources\UELib.CompressedChunk.datasource" />
     <None Include="Properties\DataSources\UELib.UExportTableItem.datasource" />
@@ -611,6 +622,8 @@
     <None Include="Resources\OpenfileDialog.png" />
     <None Include="Resources\Refresh.png" />
     <None Include="Resources\Open.png" />
+    <None Include="Resources\Pin.png" />
+    <None Include="Resources\Close.png" />
     <Content Include="unrealfile.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -7,19 +7,20 @@ namespace UEExplorer
         public class FindResult
         {
             public int TextIndex;
-            public int TextLine;
-            public int TextColumn;
+            public int TextLength;
+            public int TextLine { get; set; }
+            public int TextColumn { get; set; }
 
             public override string ToString()
             {
-                return string.Format("({0}, {1})", TextLine, TextColumn);
+                return $"({TextLine}, {TextColumn})";
             }
         };
 
         public class DocumentResult
         {
-            public object Document;
-            public List<FindResult> Results;
+            public object Document { get; set; }
+            public List<FindResult> Results { get; set; }
 
             public override string ToString()
             {
@@ -54,6 +55,7 @@ namespace UEExplorer
                             var result = new FindResult
                             {
                                 TextIndex = startIndex - keyword.Length,
+                                TextLength = keyword.Length,
                                 TextLine = currentLine,
                                 TextColumn = currentColumn
                             };

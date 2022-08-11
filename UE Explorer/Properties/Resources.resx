@@ -120,16 +120,20 @@
   <data name="NodeItem_ExportWithUEModelViewer" xml:space="preserve">
     <value>Export with UE Model Viewer</value>
   </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-    <comment>Dialog title</comment>
+  <data name="DecompilerPage_DecompilerPage_Decompile_Title" xml:space="preserve">
+    <value>Decompiler</value>
   </data>
   <data name="PLEASE_SELECT_PATH" xml:space="preserve">
     <value>The path to {0} is not configured. Select the program's executable!</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\UI\Main\ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
+    <value>Clicking yes will bring you to the page with the latest version!
+Your version: {0}
+Latest version: {1}</value>
+    <comment>Dialog description.</comment>
+  </data>
+  <data name="ExportTextTitle" xml:space="preserve">
+    <value>Export Text</value>
   </data>
   <data name="UnrealClassFilter" xml:space="preserve">
     <value>Unreal Class</value>
@@ -140,6 +144,7 @@
   <data name="LINKING_OBJECTS" xml:space="preserve">
     <value>Linking Objects...</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -159,21 +164,12 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
   <data name="PACKAGE_EXPORTED_TO" xml:space="preserve">
     <value>Package successfully exported to {0}</value>
   </data>
-  <data name="ExceptionDialog_FAIL" xml:space="preserve">
-    <value>Failed to send this report. Please try again later!</value>
-  </data>
-  <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
-    <value>Clicking yes will bring you to the page with the latest version!
-Your version: {0}
-Latest version: {1}</value>
-    <comment>Dialog description.</comment>
-  </data>
-  <data name="NodeItem_ViewCPPText" xml:space="preserve">
-    <value>View CPP Script</value>
-  </data>
   <data name="NEW_VERSION_AVAILABLE_TITLE" xml:space="preserve">
     <value>A new version is available!</value>
     <comment>Dialog title.</comment>
+  </data>
+  <data name="NodeItem_ViewCPPText" xml:space="preserve">
+    <value>View CPP Script</value>
   </data>
   <data name="DESERIALIZING_OBJECTS" xml:space="preserve">
     <value>Deserializing Objects...</value>
@@ -197,8 +193,14 @@ Latest version: {1}</value>
   <data name="NAME_IS" xml:space="preserve">
     <value>Name is {0}</value>
   </data>
+  <data name="Pin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="COULDNT_SAVE_EXCEPTION" xml:space="preserve">
     <value>Couldn't save the file because of the following exception: {0}</value>
+  </data>
+  <data name="FindResultsPage_TextTitle___0__" xml:space="preserve">
+    <value>Zoeken "{0}"</value>
   </data>
   <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
     <value>Exported all package classes of {0} to {1}
@@ -251,8 +253,8 @@ Click Yes if you want to go to the output directory!</value>
   <data name="NO_FIND_RESULTS" xml:space="preserve">
     <value>Found no results with the specified text "{0}".</value>
   </data>
-  <data name="ExportTextTitle" xml:space="preserve">
-    <value>Export Text</value>
+  <data name="NodeItem_ViewProcessedScript" xml:space="preserve">
+    <value>View Processed Script</value>
   </data>
   <data name="BinaryPage_BinaryPage_Binary_Title" xml:space="preserve">
     <value>Binary</value>
@@ -274,7 +276,7 @@ Click Yes if you want to go to the output directory!</value>
     <comment>Status description.</comment>
   </data>
   <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
-    <value>Table Buffer</value>
+    <value>View Table Buffer</value>
   </data>
   <data name="BinaryPage_SetNewObjectTarget_BinaryData___0_" xml:space="preserve">
     <value>BinaryData: {0}</value>
@@ -294,12 +296,17 @@ Click Yes if you want to go to the output directory!</value>
   <data name="SUCCESS" xml:space="preserve">
     <value>Successful</value>
   </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>Homepage</value>
-    <comment>Tab title</comment>
+  <data name="Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExceptionDialog_FAIL" xml:space="preserve">
+    <value>Failed to send this report. Please try again later!</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version {0}</value>
+  </data>
+  <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\UI\Main\ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NodeItem_ManagedProperties" xml:space="preserve">
     <value>Managed Properties</value>
@@ -380,9 +387,6 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
     <value>Do you want to go the folder with the exported content?</value>
   </data>
-  <data name="DecompilerPage_DecompilerPage_Decompile_Title" xml:space="preserve">
-    <value>Decompiler</value>
-  </data>
   <data name="FIND_RESULTS_TITLE" xml:space="preserve">
     <value>Find Results "{0}"</value>
   </data>
@@ -407,6 +411,10 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="SEARCH_AS_OBJECT" xml:space="preserve">
     <value>Search as Object</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+    <comment>Dialog title</comment>
+  </data>
   <data name="NoTargetForViewBuffer" xml:space="preserve">
     <value>No target found for "View Buffer"</value>
   </data>
@@ -428,10 +436,11 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="OBJECT_IS" xml:space="preserve">
     <value>Object is {0}</value>
   </data>
-  <data name="NodeItem_ViewProcessedScript" xml:space="preserve">
-    <value>View Processed Script</value>
+  <data name="Homepage" xml:space="preserve">
+    <value>Homepage</value>
+    <comment>Tab title</comment>
   </data>
-  <data name="Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

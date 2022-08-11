@@ -130,17 +130,5 @@ namespace UEExplorer.Properties {
                 this["HexPanel_SplitterDistance"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("121")]
-        public int PackageExplorer_SplitterDistance {
-            get {
-                return ((int)(this["PackageExplorer_SplitterDistance"]));
-            }
-            set {
-                this["PackageExplorer_SplitterDistance"] = value;
-            }
-        }
     }
 }

@@ -165,7 +165,7 @@
     <value>False</value>
   </data>
   <data name="ProgressLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>645, 17</value>
+    <value>778, 17</value>
   </data>
   <data name="ProgressLabel.Text" xml:space="preserve">
     <value>Ready</value>
@@ -486,6 +486,15 @@
   <data name="&gt;&gt;HomepageButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="kryptonManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>493, 20</value>
+  </metadata>
+  <metadata name="kryptonPalette.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>635, 20</value>
+  </metadata>
+  <metadata name="kryptonPalette.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>635, 20</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2263,6 +2272,18 @@
   </data>
   <data name="&gt;&gt;menuItem5.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;kryptonManager.Name" xml:space="preserve">
+    <value>kryptonManager</value>
+  </data>
+  <data name="&gt;&gt;kryptonManager.Type" xml:space="preserve">
+    <value>Krypton.Toolkit.KryptonManager, Krypton.Toolkit, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;kryptonPalette.Name" xml:space="preserve">
+    <value>kryptonPalette</value>
+  </data>
+  <data name="&gt;&gt;kryptonPalette.Type" xml:space="preserve">
+    <value>Krypton.Toolkit.KryptonPalette, Krypton.Toolkit, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ProgramForm</value>

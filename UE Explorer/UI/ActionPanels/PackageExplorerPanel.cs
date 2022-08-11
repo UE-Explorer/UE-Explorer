@@ -197,19 +197,10 @@ namespace UEExplorer.UI.ActionPanels
             TreeViewPackages.EndUpdate();
         }
 
-        // Hacky
-        private UC_PackageExplorer GetMain()
-        {
-            for (var c = Parent; c != null; c = c.Parent)
-            {
-                if ((c is UC_PackageExplorer packageExplorer)) return packageExplorer;
-            }
-            throw new NotSupportedException();
-        }
-
         private void TreeViewPackages_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            GetMain().OnObjectNodeAction(e.Node, ContentNodeAction.Auto);
+            if (e.Action == TreeViewAction.Unknown) return;
+            UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(e.Node, ContentNodeAction.Auto);
         }
 
         private Timer _FilterTextChangedTimer;
@@ -248,7 +239,7 @@ namespace UEExplorer.UI.ActionPanels
                 .Visit(TreeViewPackages.SelectedNode);
 
             objectContextMenu.Items.Clear();
-            foreach ((string text, ContentNodeAction action) in actions)
+            foreach ((string text, var action) in actions)
             {
                 var node = objectContextMenu.Items.Add(text);
                 node.Tag = action;
@@ -258,13 +249,8 @@ namespace UEExplorer.UI.ActionPanels
         private void objectContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             var action = (ContentNodeAction)e.ClickedItem.Tag;
-            GetMain().OnObjectNodeAction(TreeViewPackages.SelectedNode, action);
+            UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(TreeViewPackages.SelectedNode, action);
         }
-        
-            //var main = GetMain();
-            //object tag = main.PickBestTarget(TreeViewPackages.SelectedNode, ContentNodeAction.Auto);
-            //var action = main.PickBestContentNodeAction(tag, ContentNodeAction.Auto);
-            //main.InsertNewContentPanel(tag, action);
         
         private void TreeViewPackages_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -277,7 +263,7 @@ namespace UEExplorer.UI.ActionPanels
         private void toolStripMenuItemView_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             var target = TreeViewPackages.SelectedNode;
-            GetMain().OnObjectNodeAction(target, ContentNodeAction.Auto);
+            UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(target, ContentNodeAction.Auto);
         }
 
         private void toolStripMenuItemReload_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -286,7 +272,7 @@ namespace UEExplorer.UI.ActionPanels
             var target = TreeViewPackages.SelectedNode;
             if (target.Tag is UnrealPackage package)
             {
-                GetMain().ReloadPackage();
+                UC_PackageExplorer.Traverse(Parent).ReloadPackage();
             }
         }
     }

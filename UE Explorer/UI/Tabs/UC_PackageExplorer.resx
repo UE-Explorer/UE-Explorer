@@ -117,37 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="exportingToolStripMenuItem.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="exportDecompiledClassesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="exportDecompiledClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
-  </data>
-  <data name="exportDecompiledClassesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export &amp;Classes</value>
-  </data>
-  <data name="exportScriptClassesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="exportScriptClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
-  </data>
-  <data name="exportScriptClassesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export &amp;Scripts</value>
-  </data>
-  <data name="exportingToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="exportingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
-  </data>
-  <data name="exportingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ex&amp;porting</value>
-  </data>
   <data name="&gt;&gt;packageStripContainer.BottomToolStripPanel.Name" xml:space="preserve">
     <value>packageStripContainer.BottomToolStripPanel</value>
   </data>
@@ -164,11 +133,12 @@
   <data name="kryptonDockableWorkspaceMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="kryptonDockableWorkspaceMain.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="kryptonDockableWorkspaceMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>935, 438</value>
+    <value>927, 430</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="kryptonDockableWorkspaceMain.SplitterWidth" type="System.Int32, mscorlib">
@@ -190,7 +160,7 @@
     <value>0</value>
   </data>
   <data name="packageStripContainer.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>935, 438</value>
+    <value>927, 430</value>
   </data>
   <data name="&gt;&gt;packageStripContainer.ContentPanel.Name" xml:space="preserve">
     <value>packageStripContainer.ContentPanel</value>
@@ -220,7 +190,7 @@
     <value>1</value>
   </data>
   <data name="packageStripContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>4, 4</value>
   </data>
   <data name="&gt;&gt;packageStripContainer.RightToolStripPanel.Name" xml:space="preserve">
     <value>packageStripContainer.RightToolStripPanel</value>
@@ -235,7 +205,7 @@
     <value>2</value>
   </data>
   <data name="packageStripContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>935, 488</value>
+    <value>927, 480</value>
   </data>
   <data name="packageStripContainer.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -244,33 +214,13 @@
     <value>toolStripContainer1</value>
   </data>
   <metadata name="textEditorToolstrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>395, 95</value>
+    <value>695, 75</value>
   </metadata>
   <data name="textEditorToolstrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="textEditorToolstrip.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="saveToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAARNJREFUOE9joA6I3nWfIXbXf/x45xqG0FVsUB1oAKQgerskGCOzYfzY3XJAehPY
-        EKyAkAFgGmzIf6gONIBuADpGlsMKkBXhxTvXysnJCSoqKk5UUFBoVVFRYUczYOcGIPsoBgaJR20RFNNx
-        EgdqPg/Ei4D4BNCQdFQDwIqRbYTimB1dMjIyQiDN8vLyk4FYE6j5OpAOIGwA0GZJNXsRoIYzQDwdqEkD
-        SINc0QXRDAK4DABqBmoQwK8ZBLAZELtbGIfmTqguJIAtJcbttANqWgzUtAYY8lpA9iWg5iaoDsJAWVlZ
-        BajpNxB/AhpyHai5ESpFHABqmgPU9B9owAsgOxUqTDwAal4JxA1aWlo8UCFaAAYGABuEzBhRV2h9AAAA
-        AElFTkSuQmCC
-</value>
-  </data>
-  <data name="saveToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
-  <data name="saveToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Save</value>
-  </data>
-  <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
   </data>
   <data name="copyToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -285,6 +235,9 @@
   </data>
   <data name="copyToolStripButton.Text" xml:space="preserve">
     <value>&amp;Copy</value>
+  </data>
+  <data name="EditorFindTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="EditorFindTextBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -313,7 +266,7 @@
     <value>3, 0</value>
   </data>
   <data name="textEditorToolstrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 25</value>
+    <value>200, 25</value>
   </data>
   <data name="textEditorToolstrip.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -380,6 +333,9 @@
   <data name="ActiveObjectPath.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="ActiveObjectPath.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="ActiveObjectPath.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
@@ -390,7 +346,7 @@
     <value>3, 25</value>
   </data>
   <data name="packageToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 25</value>
+    <value>346, 25</value>
   </data>
   <data name="packageToolStrip.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -431,78 +387,6 @@
   <data name="&gt;&gt;packageStripContainer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="ToolStrip_Main.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>319, 17</value>
-  </metadata>
-  <data name="ToolStrip_Main.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="ToolStrip_Main.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 6</value>
-  </data>
-  <data name="findInDocumentToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="findInDocumentToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+F</value>
-  </data>
-  <data name="findInDocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 22</value>
-  </data>
-  <data name="findInDocumentToolStripMenuItem.Text" xml:space="preserve">
-    <value>Find in Document</value>
-  </data>
-  <data name="findInClassesToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="findInClassesToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+Shift+F</value>
-  </data>
-  <data name="findInClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 22</value>
-  </data>
-  <data name="findInClassesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Find in Classes...</value>
-  </data>
-  <data name="toolStripMenuItem1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
-  </data>
-  <data name="toolStripMenuItem1.Text" xml:space="preserve">
-    <value>Find</value>
-  </data>
-  <data name="_Tools_StripDropDownButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 25</value>
-  </data>
-  <data name="_Tools_StripDropDownButton.Text" xml:space="preserve">
-    <value>&amp;Tools</value>
-  </data>
-  <data name="ToolStrip_Main.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="ToolStrip_Main.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 28</value>
-  </data>
-  <data name="ToolStrip_Main.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Main.Name" xml:space="preserve">
-    <value>ToolStrip_Main</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Main.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Main.Parent" xml:space="preserve">
-    <value>Panel_Main</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip_Main.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="exportCountDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>ExportCount</value>
   </data>
@@ -513,7 +397,7 @@
     <value>NetObjectCount</value>
   </data>
   <metadata name="uGenerationTableItemBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>900, 36</value>
   </metadata>
   <data name="DataGridView_GenerationsTable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -522,7 +406,7 @@
     <value>0, 0</value>
   </data>
   <data name="DataGridView_GenerationsTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 438</value>
+    <value>911, 430</value>
   </data>
   <data name="DataGridView_GenerationsTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -546,7 +430,7 @@
     <value>4, 20</value>
   </data>
   <data name="TabPage_Generations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 438</value>
+    <value>911, 430</value>
   </data>
   <data name="TabPage_Generations.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -582,7 +466,7 @@
     <value>CompressedSize</value>
   </data>
   <metadata name="compressedChunkBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>269, 56</value>
+    <value>1152, 36</value>
   </metadata>
   <data name="DataGridView_Chunks.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -642,7 +526,7 @@
     <value>Flags</value>
   </data>
   <metadata name="uNameTableItemBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>728, 56</value>
+    <value>245, 75</value>
   </metadata>
   <data name="nameDataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -717,7 +601,7 @@
     <value>Outer</value>
   </data>
   <metadata name="uImportTableItemBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>500, 56</value>
+    <value>17, 75</value>
   </metadata>
   <data name="importsDataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -846,7 +730,7 @@
     <value>Outer</value>
   </data>
   <metadata name="uExportTableItemBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 95</value>
+    <value>469, 75</value>
   </metadata>
   <data name="exportsDataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -936,7 +820,7 @@
     <value>3, 2</value>
   </data>
   <data name="TabControl_Tables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>927, 462</value>
+    <value>919, 454</value>
   </data>
   <data name="TabControl_Tables.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -960,7 +844,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage_Tables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>927, 462</value>
+    <value>919, 454</value>
   </data>
   <data name="TabPage_Tables.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -990,7 +874,7 @@
     <value>0, 0</value>
   </data>
   <data name="TabControl_General.Size" type="System.Drawing.Size, System.Drawing">
-    <value>935, 488</value>
+    <value>927, 480</value>
   </data>
   <data name="TabControl_General.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1005,16 +889,16 @@
     <value>Panel_Main</value>
   </data>
   <data name="&gt;&gt;TabControl_General.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="Panel_Main.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="Panel_Main.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>4, 4</value>
   </data>
   <data name="Panel_Main.Size" type="System.Drawing.Size, System.Drawing">
-    <value>935, 488</value>
+    <value>927, 480</value>
   </data>
   <data name="Panel_Main.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1100,6 +984,60 @@
   <data name="&gt;&gt;kryptonPage4.Type" xml:space="preserve">
     <value>Krypton.Navigator.KryptonPage, Krypton.Navigator, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="kryptonPage1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>150, 50</value>
+  </data>
+  <data name="kryptonPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 100</value>
+  </data>
+  <data name="kryptonPage1.Text" xml:space="preserve">
+    <value>kryptonPage1</value>
+  </data>
+  <data name="kryptonPage1.ToolTipTitle" xml:space="preserve">
+    <value>Page ToolTip</value>
+  </data>
+  <data name="&gt;&gt;kryptonPage1.Name" xml:space="preserve">
+    <value>kryptonPage1</value>
+  </data>
+  <data name="&gt;&gt;kryptonPage1.Type" xml:space="preserve">
+    <value>Krypton.Navigator.KryptonPage, Krypton.Navigator, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="kryptonPage5.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>150, 50</value>
+  </data>
+  <data name="kryptonPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 100</value>
+  </data>
+  <data name="kryptonPage5.Text" xml:space="preserve">
+    <value>kryptonPage5</value>
+  </data>
+  <data name="kryptonPage5.ToolTipTitle" xml:space="preserve">
+    <value>Page ToolTip</value>
+  </data>
+  <data name="&gt;&gt;kryptonPage5.Name" xml:space="preserve">
+    <value>kryptonPage5</value>
+  </data>
+  <data name="&gt;&gt;kryptonPage5.Type" xml:space="preserve">
+    <value>Krypton.Navigator.KryptonPage, Krypton.Navigator, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="kryptonPage6.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>150, 50</value>
+  </data>
+  <data name="kryptonPage6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 123</value>
+  </data>
+  <data name="kryptonPage6.Text" xml:space="preserve">
+    <value>kryptonPage6</value>
+  </data>
+  <data name="kryptonPage6.ToolTipTitle" xml:space="preserve">
+    <value>Page ToolTip</value>
+  </data>
+  <data name="&gt;&gt;kryptonPage6.Name" xml:space="preserve">
+    <value>kryptonPage6</value>
+  </data>
+  <data name="&gt;&gt;kryptonPage6.Type" xml:space="preserve">
+    <value>Krypton.Navigator.KryptonPage, Krypton.Navigator, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1109,32 +1047,11 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>935, 488</value>
-  </data>
-  <data name="&gt;&gt;exportingToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportingToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;exportingToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;exportDecompiledClassesToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportDecompiledClassesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;exportDecompiledClassesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;saveToolStripButton.Name" xml:space="preserve">
-    <value>saveToolStripButton</value>
-  </data>
-  <data name="&gt;&gt;saveToolStripButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator.Name" xml:space="preserve">
-    <value>toolStripSeparator</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;copyToolStripButton.Name" xml:space="preserve">
     <value>copyToolStripButton</value>
@@ -1171,42 +1088,6 @@
   </data>
   <data name="&gt;&gt;ActiveObjectPath.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;exportScriptClassesToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportScriptClassesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;exportScriptClassesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_Tools_StripDropDownButton.Name" xml:space="preserve">
-    <value>_Tools_StripDropDownButton</value>
-  </data>
-  <data name="&gt;&gt;_Tools_StripDropDownButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
-    <value>toolStripSeparator2</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
-    <value>toolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;findInDocumentToolStripMenuItem.Name" xml:space="preserve">
-    <value>findInDocumentToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;findInDocumentToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;findInClassesToolStripMenuItem.Name" xml:space="preserve">
-    <value>findInClassesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;findInClassesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;exportCountDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>exportCountDataGridViewTextBoxColumn</value>
@@ -1405,6 +1286,12 @@
   </data>
   <data name="&gt;&gt;kryptonDockingManagerMain.Type" xml:space="preserve">
     <value>Krypton.Docking.KryptonDockingManager, Krypton.Docking, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;kryptonWorkspaceSequence1.Name" xml:space="preserve">
+    <value>kryptonWorkspaceSequence1</value>
+  </data>
+  <data name="&gt;&gt;kryptonWorkspaceSequence1.Type" xml:space="preserve">
+    <value>Krypton.Workspace.KryptonWorkspaceSequence, Krypton.Workspace, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>UC_PackageExplorer</value>

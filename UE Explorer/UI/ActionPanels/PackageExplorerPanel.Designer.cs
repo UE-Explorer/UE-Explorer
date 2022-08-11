@@ -50,16 +50,17 @@ namespace UEExplorer.UI.ActionPanels
             this.TreeViewPackages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TreeViewPackages.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TreeViewPackages.ContextMenuStrip = this.objectContextMenu;
             this.TreeViewPackages.FullRowSelect = true;
             this.TreeViewPackages.HideSelection = false;
             this.TreeViewPackages.ImageIndex = 0;
             this.TreeViewPackages.ImageList = this.VSIcons;
-            this.TreeViewPackages.Location = new System.Drawing.Point(0, 30);
+            this.TreeViewPackages.Location = new System.Drawing.Point(0, 26);
             this.TreeViewPackages.Name = "TreeViewPackages";
             this.TreeViewPackages.SelectedImageIndex = 0;
             this.TreeViewPackages.ShowNodeToolTips = true;
-            this.TreeViewPackages.Size = new System.Drawing.Size(502, 432);
+            this.TreeViewPackages.Size = new System.Drawing.Size(502, 436);
             this.TreeViewPackages.TabIndex = 21;
             this.TreeViewPackages.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewPackages_BeforeExpand);
             this.TreeViewPackages.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewPackages_AfterSelect);
@@ -72,7 +73,7 @@ namespace UEExplorer.UI.ActionPanels
             this.toolStripMenuItemView,
             this.toolStripMenuItemReload});
             this.objectContextMenu.Name = "objectContextMenu";
-            this.objectContextMenu.Size = new System.Drawing.Size(181, 70);
+            this.objectContextMenu.Size = new System.Drawing.Size(111, 48);
             this.objectContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.objectContextMenu_Opening);
             this.objectContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.objectContextMenu_ItemClicked);
             // 
@@ -80,7 +81,7 @@ namespace UEExplorer.UI.ActionPanels
             // 
             this.toolStripMenuItemView.Image = global::UEExplorer.Properties.Resources.Open;
             this.toolStripMenuItemView.Name = "toolStripMenuItemView";
-            this.toolStripMenuItemView.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemView.Size = new System.Drawing.Size(110, 22);
             this.toolStripMenuItemView.Text = "View";
             this.toolStripMenuItemView.Visible = false;
             this.toolStripMenuItemView.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMenuItemView_DropDownItemClicked);
@@ -89,7 +90,7 @@ namespace UEExplorer.UI.ActionPanels
             // 
             this.toolStripMenuItemReload.Image = global::UEExplorer.Properties.Resources.Refresh;
             this.toolStripMenuItemReload.Name = "toolStripMenuItemReload";
-            this.toolStripMenuItemReload.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemReload.Size = new System.Drawing.Size(110, 22);
             this.toolStripMenuItemReload.Text = "Reload";
             this.toolStripMenuItemReload.Visible = false;
             this.toolStripMenuItemReload.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMenuItemReload_DropDownItemClicked);

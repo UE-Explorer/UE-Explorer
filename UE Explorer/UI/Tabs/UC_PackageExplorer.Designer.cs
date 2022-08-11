@@ -18,14 +18,10 @@
 		protected override void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
-            this.exportDecompiledClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packageStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.kryptonDockableWorkspaceMain = new Krypton.Docking.KryptonDockableWorkspace();
             this.textEditorToolstrip = new System.Windows.Forms.ToolStrip();
-            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.EditorFindTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.findNextToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
@@ -33,14 +29,7 @@
             this.PrevButton = new System.Windows.Forms.ToolStripButton();
             this.NextButton = new System.Windows.Forms.ToolStripButton();
             this.ActiveObjectPath = new System.Windows.Forms.ToolStripTextBox();
-            this.exportScriptClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Panel_Main = new System.Windows.Forms.Panel();
-            this.ToolStrip_Main = new System.Windows.Forms.ToolStrip();
-            this._Tools_StripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.findInDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findInClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TabControl_General = new System.Windows.Forms.TabControl();
             this.TabPage_Tables = new System.Windows.Forms.TabPage();
             this.TabControl_Tables = new System.Windows.Forms.TabControl();
@@ -92,7 +81,10 @@
             this.kryptonDockingManagerMain = new Krypton.Docking.KryptonDockingManager();
             this.kryptonPage2 = new Krypton.Navigator.KryptonPage();
             this.kryptonPage4 = new Krypton.Navigator.KryptonPage();
-            exportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kryptonPage1 = new Krypton.Navigator.KryptonPage();
+            this.kryptonPage5 = new Krypton.Navigator.KryptonPage();
+            this.kryptonPage6 = new Krypton.Navigator.KryptonPage();
+            this.kryptonWorkspaceSequence1 = new Krypton.Workspace.KryptonWorkspaceSequence();
             this.packageStripContainer.ContentPanel.SuspendLayout();
             this.packageStripContainer.TopToolStripPanel.SuspendLayout();
             this.packageStripContainer.SuspendLayout();
@@ -100,7 +92,6 @@
             this.textEditorToolstrip.SuspendLayout();
             this.packageToolStrip.SuspendLayout();
             this.Panel_Main.SuspendLayout();
-            this.ToolStrip_Main.SuspendLayout();
             this.TabControl_General.SuspendLayout();
             this.TabPage_Tables.SuspendLayout();
             this.TabControl_Tables.SuspendLayout();
@@ -122,23 +113,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.packageFileSummaryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage6)).BeginInit();
             this.SuspendLayout();
-            // 
-            // exportingToolStripMenuItem
-            // 
-            exportingToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            exportingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportDecompiledClassesToolStripMenuItem,
-            this.exportScriptClassesToolStripMenuItem});
-            resources.ApplyResources(exportingToolStripMenuItem, "exportingToolStripMenuItem");
-            exportingToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            exportingToolStripMenuItem.Name = "exportingToolStripMenuItem";
-            // 
-            // exportDecompiledClassesToolStripMenuItem
-            // 
-            resources.ApplyResources(this.exportDecompiledClassesToolStripMenuItem, "exportDecompiledClassesToolStripMenuItem");
-            this.exportDecompiledClassesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.exportDecompiledClassesToolStripMenuItem.Name = "exportDecompiledClassesToolStripMenuItem";
             // 
             // packageStripContainer
             // 
@@ -165,11 +143,9 @@
             this.kryptonDockableWorkspaceMain.ContainerBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
             resources.ApplyResources(this.kryptonDockableWorkspaceMain, "kryptonDockableWorkspaceMain");
             this.kryptonDockableWorkspaceMain.Name = "kryptonDockableWorkspaceMain";
-            this.kryptonDockableWorkspaceMain.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             // 
             // 
             // 
-            this.kryptonDockableWorkspaceMain.Root.StarSize = "20*,80*";
             this.kryptonDockableWorkspaceMain.Root.UniqueName = "4d261f73ae8a4564b6d37aefef894f8a";
             this.kryptonDockableWorkspaceMain.Root.WorkspaceControl = this.kryptonDockableWorkspaceMain;
             this.kryptonDockableWorkspaceMain.SeparatorStyle = Krypton.Toolkit.SeparatorStyle.HighProfile;
@@ -181,25 +157,11 @@
             this.textEditorToolstrip.AllowItemReorder = true;
             resources.ApplyResources(this.textEditorToolstrip, "textEditorToolstrip");
             this.textEditorToolstrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripButton,
-            this.toolStripSeparator,
             this.copyToolStripButton,
             this.EditorFindTextBox,
             this.findNextToolStripMenuItem});
             this.textEditorToolstrip.Name = "textEditorToolstrip";
             this.textEditorToolstrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            // 
-            // saveToolStripButton
-            // 
-            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.saveToolStripButton, "saveToolStripButton");
-            this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            resources.ApplyResources(this.toolStripSeparator, "toolStripSeparator");
             // 
             // copyToolStripButton
             // 
@@ -210,8 +172,8 @@
             // 
             // EditorFindTextBox
             // 
-            this.EditorFindTextBox.Name = "EditorFindTextBox";
             resources.ApplyResources(this.EditorFindTextBox, "EditorFindTextBox");
+            this.EditorFindTextBox.Name = "EditorFindTextBox";
             this.EditorFindTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditorFindTextBox_KeyPress);
             // 
             // findNextToolStripMenuItem
@@ -254,64 +216,11 @@
             this.ActiveObjectPath.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ActiveObjectPath.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchObjectTextBox_KeyPress);
             // 
-            // exportScriptClassesToolStripMenuItem
-            // 
-            resources.ApplyResources(this.exportScriptClassesToolStripMenuItem, "exportScriptClassesToolStripMenuItem");
-            this.exportScriptClassesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.exportScriptClassesToolStripMenuItem.Name = "exportScriptClassesToolStripMenuItem";
-            // 
             // Panel_Main
             // 
-            this.Panel_Main.Controls.Add(this.ToolStrip_Main);
             this.Panel_Main.Controls.Add(this.TabControl_General);
             resources.ApplyResources(this.Panel_Main, "Panel_Main");
             this.Panel_Main.Name = "Panel_Main";
-            // 
-            // ToolStrip_Main
-            // 
-            resources.ApplyResources(this.ToolStrip_Main, "ToolStrip_Main");
-            this.ToolStrip_Main.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.ToolStrip_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._Tools_StripDropDownButton});
-            this.ToolStrip_Main.Name = "ToolStrip_Main";
-            // 
-            // _Tools_StripDropDownButton
-            // 
-            this._Tools_StripDropDownButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this._Tools_StripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this._Tools_StripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            exportingToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.toolStripMenuItem1});
-            this._Tools_StripDropDownButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this._Tools_StripDropDownButton.Name = "_Tools_StripDropDownButton";
-            this._Tools_StripDropDownButton.Padding = new System.Windows.Forms.Padding(3);
-            resources.ApplyResources(this._Tools_StripDropDownButton, "_Tools_StripDropDownButton");
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.findInDocumentToolStripMenuItem,
-            this.findInClassesToolStripMenuItem});
-            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            // 
-            // findInDocumentToolStripMenuItem
-            // 
-            resources.ApplyResources(this.findInDocumentToolStripMenuItem, "findInDocumentToolStripMenuItem");
-            this.findInDocumentToolStripMenuItem.Name = "findInDocumentToolStripMenuItem";
-            this.findInDocumentToolStripMenuItem.Click += new System.EventHandler(this.FindInDocumentToolStripMenuItem_Click);
-            // 
-            // findInClassesToolStripMenuItem
-            // 
-            resources.ApplyResources(this.findInClassesToolStripMenuItem, "findInClassesToolStripMenuItem");
-            this.findInClassesToolStripMenuItem.Name = "findInClassesToolStripMenuItem";
-            this.findInClassesToolStripMenuItem.Click += new System.EventHandler(this.FindInClassesToolStripMenuItem_Click);
             // 
             // TabControl_General
             // 
@@ -719,6 +628,38 @@
             this.kryptonPage4.Name = "kryptonPage4";
             this.kryptonPage4.UniqueName = "47549a94a3624ac9ac2da8569297d817";
             // 
+            // kryptonPage1
+            // 
+            this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage1.Flags = 65534;
+            this.kryptonPage1.LastVisibleSet = true;
+            resources.ApplyResources(this.kryptonPage1, "kryptonPage1");
+            this.kryptonPage1.Name = "kryptonPage1";
+            this.kryptonPage1.UniqueName = "76f8f762a0804b988fb145d4229fbd09";
+            // 
+            // kryptonPage5
+            // 
+            this.kryptonPage5.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage5.Flags = 65534;
+            this.kryptonPage5.LastVisibleSet = true;
+            resources.ApplyResources(this.kryptonPage5, "kryptonPage5");
+            this.kryptonPage5.Name = "kryptonPage5";
+            this.kryptonPage5.UniqueName = "ead514722d0245339b9bb6e1f22b4812";
+            // 
+            // kryptonPage6
+            // 
+            this.kryptonPage6.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage6.Flags = 65534;
+            this.kryptonPage6.LastVisibleSet = true;
+            resources.ApplyResources(this.kryptonPage6, "kryptonPage6");
+            this.kryptonPage6.Name = "kryptonPage6";
+            this.kryptonPage6.UniqueName = "3c1f10898ae444798edf4d6af56c6a35";
+            // 
+            // kryptonWorkspaceSequence1
+            // 
+            this.kryptonWorkspaceSequence1.UniqueName = "acee924747424e13b6bf72a4df70f46f";
+            this.kryptonWorkspaceSequence1.WorkspaceControl = null;
+            // 
             // UC_PackageExplorer
             // 
             resources.ApplyResources(this, "$this");
@@ -738,9 +679,6 @@
             this.packageToolStrip.ResumeLayout(false);
             this.packageToolStrip.PerformLayout();
             this.Panel_Main.ResumeLayout(false);
-            this.Panel_Main.PerformLayout();
-            this.ToolStrip_Main.ResumeLayout(false);
-            this.ToolStrip_Main.PerformLayout();
             this.TabControl_General.ResumeLayout(false);
             this.TabPage_Tables.ResumeLayout(false);
             this.TabControl_Tables.ResumeLayout(false);
@@ -762,22 +700,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.packageFileSummaryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage6)).EndInit();
             this.ResumeLayout(false);
 
 		}
 
 		#endregion
 		private System.Windows.Forms.Panel Panel_Main;
-		private System.Windows.Forms.ToolStrip ToolStrip_Main;
-		private System.Windows.Forms.ToolStripDropDownButton _Tools_StripDropDownButton;
-		public System.Windows.Forms.ToolStripMenuItem exportDecompiledClassesToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem exportScriptClassesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-		private System.Windows.Forms.ToolStripMenuItem findInClassesToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem findInDocumentToolStripMenuItem;
         private System.Windows.Forms.BindingSource packageFileSummaryBindingSource;
         private System.Windows.Forms.BindingSource uGenerationTableItemBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn exportsCountDataGridViewTextBoxColumn;
@@ -848,8 +781,6 @@
         private System.Windows.Forms.ToolStripButton NextButton;
         private System.Windows.Forms.ToolStripTextBox ActiveObjectPath;
         private System.Windows.Forms.ToolStrip textEditorToolstrip;
-        private System.Windows.Forms.ToolStripButton saveToolStripButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripButton copyToolStripButton;
         private System.Windows.Forms.ToolStripTextBox EditorFindTextBox;
         private System.Windows.Forms.ToolStripButton findNextToolStripMenuItem;
@@ -857,5 +788,9 @@
         private Krypton.Docking.KryptonDockingManager kryptonDockingManagerMain;
         private Krypton.Navigator.KryptonPage kryptonPage2;
         private Krypton.Navigator.KryptonPage kryptonPage4;
+        private Krypton.Navigator.KryptonPage kryptonPage1;
+        private Krypton.Navigator.KryptonPage kryptonPage5;
+        private Krypton.Navigator.KryptonPage kryptonPage6;
+        private Krypton.Workspace.KryptonWorkspaceSequence kryptonWorkspaceSequence1;
     }
 }

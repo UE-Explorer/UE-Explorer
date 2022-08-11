@@ -1,14 +1,10 @@
-﻿using System;
-using System.Windows.Forms;
-using UEExplorer.UI.Tabs;
+﻿using UEExplorer.UI.Tabs;
 using UELib;
 
 namespace UEExplorer.UI.ActionPanels
 {
     public partial class BinaryDataFieldsPanel : ActionPanel, IActionPanel<object>
     {
-        public ContentNodeAction Action { get; } = ContentNodeAction.Binary;
-
         public BinaryDataFieldsPanel()
         {
             InitializeComponent();
@@ -27,7 +23,8 @@ namespace UEExplorer.UI.ActionPanels
                     break;
 
                 default:
-                    throw new NotSupportedException($"{Object} is not a supported type");
+                    BinaryFieldBindingSource.DataSource = null;
+                    break;
             }
         }
 

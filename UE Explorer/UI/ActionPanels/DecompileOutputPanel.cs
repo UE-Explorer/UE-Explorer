@@ -1,13 +1,10 @@
-﻿using System;
-using UEExplorer.UI.Tabs;
+﻿using UEExplorer.UI.Tabs;
 using UELib;
 
 namespace UEExplorer.UI.ActionPanels
 {
     public partial class DecompileOutputPanel : ActionPanel, IActionPanel<object>
     {
-        public ContentNodeAction Action { get; } = ContentNodeAction.Decompile;
-
         public DecompileOutputPanel()
         {
             InitializeComponent();
@@ -21,13 +18,13 @@ namespace UEExplorer.UI.ActionPanels
             TextEditorPanel.TextEditorControl.SearchPackage.Click += (sender, args) =>
             {
                 string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
-                GetMain().OnSearchInClasses(selectedText);
+                UC_PackageExplorer.Traverse(Parent).EmitSearchInClasses(selectedText);
             };
 
             TextEditorPanel.TextEditorControl.SearchObject.Click += (sender, args) =>
             {
                 string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
-                GetMain().OnSearchObjectByPath(selectedText.Trim());
+                UC_PackageExplorer.Traverse(Parent).EmitSearchObjectByPath(selectedText.Trim());
             };
         }
         
@@ -53,7 +50,8 @@ namespace UEExplorer.UI.ActionPanels
                 }
                 
                 default:
-                    throw new NotSupportedException($"{target} is not a supported type");
+                    TextEditorPanel.SetText("");
+                    break;
             }
         }
 

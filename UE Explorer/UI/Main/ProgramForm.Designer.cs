@@ -62,6 +62,8 @@
             this.tabStripItem3 = new Storm.TabControl.TabStripItem();
             this.OpenHome = new System.Windows.Forms.Button();
             this.HomepageButton = new System.Windows.Forms.Button();
+            this.kryptonManager = new Krypton.Toolkit.KryptonManager(this.components);
+            this.kryptonPalette = new Krypton.Toolkit.KryptonPalette(this.components);
             menuItem26 = new System.Windows.Forms.MenuItem();
             this.UEStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).BeginInit();
@@ -393,6 +395,20 @@
             this.HomepageButton.UseVisualStyleBackColor = true;
             this.HomepageButton.Click += new System.EventHandler(this.OpenHome_Click);
             // 
+            // kryptonManager
+            // 
+            this.kryptonManager.GlobalPalette = this.kryptonPalette;
+            this.kryptonManager.GlobalPaletteMode = Krypton.Toolkit.PaletteModeManager.Custom;
+            // 
+            // kryptonPalette
+            // 
+            this.kryptonPalette.BasePaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            this.kryptonPalette.BaseRenderMode = Krypton.Toolkit.RendererMode.Standard;
+            this.kryptonPalette.ButtonSpecs.FormClose.Image = global::UEExplorer.Properties.Resources.Close;
+            this.kryptonPalette.ButtonSpecs.PinHorizontal.Image = global::UEExplorer.Properties.Resources.Pin;
+            this.kryptonPalette.ButtonSpecs.PinVertical.Image = global::UEExplorer.Properties.Resources.Pin;
+            this.kryptonPalette.TabStyles.TabCommon.StateNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            // 
             // ProgramForm
             // 
             this.AllowDrop = true;
@@ -467,6 +483,8 @@
         private System.Windows.Forms.MenuItem SocialMenuItem;
         private System.Windows.Forms.MainMenu mainMenu1;
         private System.Windows.Forms.MenuItem menuItem15;
+        private Krypton.Toolkit.KryptonManager kryptonManager;
+        private Krypton.Toolkit.KryptonPalette kryptonPalette;
 
 
         // OnClick events!

@@ -5,7 +5,7 @@ using UEExplorer.UI.ActionPanels;
 
 namespace UEExplorer.UI.Pages
 {
-    internal sealed class PackageExplorerPage : KryptonPage
+    public sealed class PackageExplorerPage : KryptonPage
     {
         public PackageExplorerPanel PackageExplorerPanel { get; }
 

@@ -64,6 +64,8 @@ namespace UEExplorer.UI.Nodes
             {
                 addItem(Resources.EXPORT_AS, ContentNodeAction.ExportAs);
             }
+            
+            
 
             if (tag is IBuffered bufferedObject && bufferedObject.GetBuffer() != null)
             {

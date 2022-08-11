@@ -20,7 +20,7 @@ namespace UEExplorer.UI.Pages
             Controls.Add(_Panel);
         }
         
-        public override void SetNewObjectTarget(object target, ContentNodeAction action, bool isPending)
+        public override void OnObjectTarget(object target, ContentNodeAction action, bool isPending)
         {
             if (target == null)
             {
@@ -35,6 +35,17 @@ namespace UEExplorer.UI.Pages
 
             _Panel.HasPendingUpdate = isPending;
             _Panel.Object = target;
+        }
+
+        public override void OnFind(TextSearchHelpers.FindResult findResult)
+        {
+            _Panel.TextEditorPanel.TextEditorControl.TextEditor.ScrollTo(findResult.TextLine, findResult.TextColumn);
+            _Panel.TextEditorPanel.TextEditorControl.TextEditor.Select(findResult.TextIndex, findResult.TextLength);
+        }
+
+        public override void OnFind(string text)
+        {
+            EditorUtil.FindText(_Panel.TextEditorPanel.TextEditorControl.TextEditor, text);
         }
     }
 }
