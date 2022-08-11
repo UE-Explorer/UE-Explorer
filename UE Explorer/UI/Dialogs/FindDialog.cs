@@ -3,11 +3,6 @@ using System.Windows.Forms;
 
 namespace UEExplorer.UI.Dialogs
 {
-    public class FindEventArgs : EventArgs
-    {
-        public string FindText;
-    }
-
     public partial class FindDialog : Form
     {
         public event EventHandler<FindEventArgs> FindNext;
@@ -26,5 +21,10 @@ namespace UEExplorer.UI.Dialogs
         {
             FindInput.Focus();
         }
+    }
+
+    public class FindEventArgs : EventArgs
+    {
+        public string FindText;
     }
 }

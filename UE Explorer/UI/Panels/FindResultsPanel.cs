@@ -31,7 +31,7 @@ namespace UEExplorer.UI.Panels
                 foreach (var result in documentResult.Results)
                 {
                     var resultNode = documentNode.Nodes.Add(result.ToString());
-                    resultNode.Tag = documentResult.Document;
+                    resultNode.Tag = result;
                 }
             }
             treeViewFindResults.EndUpdate();

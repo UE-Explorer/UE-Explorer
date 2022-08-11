@@ -125,6 +125,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Code {
+            get {
+                object obj = ResourceManager.GetObject("Code", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To use Gildor&apos;s tool, try &quot;decompress.exe PACKAGENAME.EXT&quot; you may have to specify -lzo..
         /// </summary>
         internal static string COMPRESSED_HOWTO {
@@ -236,7 +246,17 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exported all package classes of {0} to {1}
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExportData {
+            get {
+                object obj = ResourceManager.GetObject("ExportData", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exported all packages content to {0}.
         ///
         ///Click Yes if you want to go to the output directory!.
         /// </summary>
@@ -256,6 +276,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExportScript {
+            get {
+                object obj = ResourceManager.GetObject("ExportScript", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export Text.
         /// </summary>
         internal static string ExportTextTitle {
@@ -270,6 +300,36 @@ namespace UEExplorer.Properties {
         internal static string FIND_RESULTS_TITLE {
             get {
                 return ResourceManager.GetString("FIND_RESULTS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FindDown {
+            get {
+                object obj = ResourceManager.GetObject("FindDown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FindInFile {
+            get {
+                object obj = ResourceManager.GetObject("FindInFile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FindNext {
+            get {
+                object obj = ResourceManager.GetObject("FindNext", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

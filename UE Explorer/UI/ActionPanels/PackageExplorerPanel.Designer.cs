@@ -40,6 +40,12 @@ namespace UEExplorer.UI.ActionPanels
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBoxFilter = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.findInDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findInClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportClassesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objectContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -149,7 +155,8 @@ namespace UEExplorer.UI.ActionPanels
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemOpen,
-            this.toolStripTextBoxFilter});
+            this.toolStripTextBoxFilter,
+            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -160,6 +167,7 @@ namespace UEExplorer.UI.ActionPanels
             // toolStripMenuItemOpen
             // 
             this.toolStripMenuItemOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripMenuItemOpen.Enabled = false;
             this.toolStripMenuItemOpen.Image = global::UEExplorer.Properties.Resources.OpenfileDialog;
             this.toolStripMenuItemOpen.Name = "toolStripMenuItemOpen";
             this.toolStripMenuItemOpen.Size = new System.Drawing.Size(28, 23);
@@ -170,6 +178,66 @@ namespace UEExplorer.UI.ActionPanels
             this.toolStripTextBoxFilter.Name = "toolStripTextBoxFilter";
             this.toolStripTextBoxFilter.Size = new System.Drawing.Size(100, 23);
             this.toolStripTextBoxFilter.TextChanged += new System.EventHandler(this.toolStripTextBoxFilter_TextChanged);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findInDocumentToolStripMenuItem,
+            this.findInClassesToolStripMenuItem,
+            this.exportClassesToolStripMenuItem});
+            this.toolStripMenuItem1.Image = global::UEExplorer.Properties.Resources.Code;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(79, 23);
+            this.toolStripMenuItem1.Text = "Package";
+            this.toolStripMenuItem1.DropDownOpening += new System.EventHandler(this.toolStripMenuItem1_DropDownOpening);
+            // 
+            // findInDocumentToolStripMenuItem
+            // 
+            this.findInDocumentToolStripMenuItem.Image = global::UEExplorer.Properties.Resources.FindDown;
+            this.findInDocumentToolStripMenuItem.Name = "findInDocumentToolStripMenuItem";
+            this.findInDocumentToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.findInDocumentToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.findInDocumentToolStripMenuItem.Text = "Find in Document";
+            this.findInDocumentToolStripMenuItem.Click += new System.EventHandler(this.findInDocumentToolStripMenuItem_Click);
+            // 
+            // findInClassesToolStripMenuItem
+            // 
+            this.findInClassesToolStripMenuItem.Image = global::UEExplorer.Properties.Resources.FindInFile;
+            this.findInClassesToolStripMenuItem.Name = "findInClassesToolStripMenuItem";
+            this.findInClassesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.F)));
+            this.findInClassesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.findInClassesToolStripMenuItem.Text = "Find in Classes";
+            this.findInClassesToolStripMenuItem.Click += new System.EventHandler(this.findInClassesToolStripMenuItem_Click);
+            // 
+            // exportClassesToolStripMenuItem
+            // 
+            this.exportClassesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportClassesToolStripMenuItem1,
+            this.exportScriptsToolStripMenuItem});
+            this.exportClassesToolStripMenuItem.Image = global::UEExplorer.Properties.Resources.ExportData;
+            this.exportClassesToolStripMenuItem.Name = "exportClassesToolStripMenuItem";
+            this.exportClassesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.exportClassesToolStripMenuItem.Text = "Export";
+            // 
+            // exportClassesToolStripMenuItem1
+            // 
+            this.exportClassesToolStripMenuItem1.Image = global::UEExplorer.Properties.Resources.ExportScript;
+            this.exportClassesToolStripMenuItem1.Name = "exportClassesToolStripMenuItem1";
+            this.exportClassesToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.exportClassesToolStripMenuItem1.Size = new System.Drawing.Size(288, 22);
+            this.exportClassesToolStripMenuItem1.Text = "Export Decompiled Classes";
+            this.exportClassesToolStripMenuItem1.Click += new System.EventHandler(this.exportClassesToolStripMenuItem1_Click);
+            // 
+            // exportScriptsToolStripMenuItem
+            // 
+            this.exportScriptsToolStripMenuItem.Image = global::UEExplorer.Properties.Resources.ExportScript;
+            this.exportScriptsToolStripMenuItem.Name = "exportScriptsToolStripMenuItem";
+            this.exportScriptsToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.exportScriptsToolStripMenuItem.Text = "Export Decompiled ScriptTexts";
+            this.exportScriptsToolStripMenuItem.Click += new System.EventHandler(this.exportScriptsToolStripMenuItem_Click);
             // 
             // PackageExplorerPanel
             // 
@@ -195,5 +263,11 @@ namespace UEExplorer.UI.ActionPanels
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpen;
         private ToolStripMenuItem toolStripMenuItemReload;
         private ToolStripMenuItem toolStripMenuItemView;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem findInClassesToolStripMenuItem;
+        private ToolStripMenuItem exportClassesToolStripMenuItem;
+        private ToolStripMenuItem exportClassesToolStripMenuItem1;
+        private ToolStripMenuItem exportScriptsToolStripMenuItem;
+        private ToolStripMenuItem findInDocumentToolStripMenuItem;
     }
 }

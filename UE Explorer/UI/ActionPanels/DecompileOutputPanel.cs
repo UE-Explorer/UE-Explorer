@@ -1,5 +1,6 @@
 ﻿using UEExplorer.UI.Tabs;
 using UELib;
+using UELib.Core;
 
 namespace UEExplorer.UI.ActionPanels
 {
@@ -9,16 +10,16 @@ namespace UEExplorer.UI.ActionPanels
         {
             InitializeComponent();
 
-            TextEditorPanel.TextEditorControl.SearchDocument.Click += (sender, args) =>
+            TextEditorPanel.TextEditorControl.SearchInDocument.Click += (sender, args) =>
             {
                 string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
                 EditorUtil.FindText(TextEditorPanel.TextEditorControl.TextEditor, selectedText);
             };
             
-            TextEditorPanel.TextEditorControl.SearchPackage.Click += (sender, args) =>
+            TextEditorPanel.TextEditorControl.SearchInClasses.Click += (sender, args) =>
             {
                 string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
-                UC_PackageExplorer.Traverse(Parent).EmitSearchInClasses(selectedText);
+                UC_PackageExplorer.Traverse(Parent).EmitSearch<UClass>(selectedText);
             };
 
             TextEditorPanel.TextEditorControl.SearchObject.Click += (sender, args) =>

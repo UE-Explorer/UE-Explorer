@@ -624,6 +624,12 @@
     <None Include="Resources\Open.png" />
     <None Include="Resources\Pin.png" />
     <None Include="Resources\Close.png" />
+    <None Include="Resources\FindInFile.png" />
+    <None Include="Resources\ExportScript.png" />
+    <None Include="Resources\ExportData.png" />
+    <None Include="Resources\Code.png" />
+    <None Include="Resources\FindDown.png" />
+    <None Include="Resources\FindNext.png" />
     <Content Include="unrealfile.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -672,7 +678,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -209,7 +209,7 @@ Laatste versie: {1}</value>
     <value>Opgeslagen!</value>
   </data>
   <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
-    <value>Alle klassen van {0} zijn naar {1} geëxporteerd.
+    <value>Alle inhoud werd geëxporteerd naar {0}.
 
 Klik op ja als je nu naar deze map wilt gebracht worden!</value>
   </data>

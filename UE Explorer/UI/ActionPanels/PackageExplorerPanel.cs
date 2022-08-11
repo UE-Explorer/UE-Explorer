@@ -7,9 +7,12 @@ using UEExplorer.UI.Nodes;
 using UEExplorer.UI.Tabs;
 using UELib;
 using UELib.Core;
+using UEExplorer.UI.Dialogs;
+using UEExplorer.Properties;
 
 namespace UEExplorer.UI.ActionPanels
 {
+    // TODO: Implement a PackageManager (Controller?) to hold an available list of linkers.
     public partial class PackageExplorerPanel : UserControl
     {
         private readonly ObjectTreeBuilder _ObjectTreeBuilder = new ObjectTreeBuilder();
@@ -47,13 +50,7 @@ namespace UEExplorer.UI.ActionPanels
         
         private void FilterRootPackagesTree(string filterText)
         {
-            var linkers = new List<UnrealPackage>();
-            foreach (TreeNode node in TreeViewPackages.Nodes)
-            {
-                var linker = (UnrealPackage)node.Tag;
-                Debug.Assert(linker != null);
-                linkers.Add(linker);
-            }
+            var linkers = GetLinkers().ToList();
 
             TreeViewPackages.Nodes.Clear();
             foreach (var linker in linkers)
@@ -274,6 +271,75 @@ namespace UEExplorer.UI.ActionPanels
             {
                 UC_PackageExplorer.Traverse(Parent).ReloadPackage();
             }
+        }
+        
+        private void findInDocumentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string findText;
+            using (var findDialog = new FindDialog())
+            {
+                findDialog.FindInput.Text = Clipboard.GetText();
+                if (findDialog.ShowDialog() != DialogResult.OK) return;
+                findText = findDialog.FindInput.Text;
+            }
+            
+            UC_PackageExplorer.Traverse(Parent).EmitFind(findText);
+        }
+
+        private void findInClassesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string findText;
+            using (var findDialog = new FindDialog())
+            {
+                findDialog.FindInput.Text = Clipboard.GetText();
+                if (findDialog.ShowDialog() != DialogResult.OK) return;
+                findText = findDialog.FindInput.Text;
+            }
+
+            UC_PackageExplorer.Traverse(Parent).PerformSearchIn<UClass>(findText);
+        }
+        
+        private void exportScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportPackageObjects<UTextBuffer>();
+        }
+
+        private void exportClassesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ExportPackageObjects<UClass>();
+        }
+
+        private void ExportPackageObjects<T>()
+        {
+            var exportPaths = GetLinkers().Select(linker => linker.ExportPackageObjects<T>());
+            if (!exportPaths.Any())
+            {
+                return;
+            }
+            
+            var dialogResult = MessageBox.Show(
+                string.Format(Resources.EXPORTED_ALL_PACKAGE_CLASSES, ExportHelpers.PackageExportPath),
+                Application.ProductName,
+                MessageBoxButtons.YesNo
+            );
+            if (dialogResult == DialogResult.Yes) Process.Start(ExportHelpers.PackageExportPath);
+        }
+
+        private IEnumerable<UnrealPackage> GetLinkers()
+        {
+            return TreeViewPackages.Nodes.OfType<TreeNode>().Select(node => (UnrealPackage)node.Tag);
+        }
+
+        private void toolStripMenuItem1_DropDownOpening(object sender, EventArgs e)
+        {
+            var linkers = GetLinkers().ToList();
+            
+            bool hasAnyClasses = linkers.Any(linker => linker.Exports.Any(exp => exp.ClassIndex == 0));
+            exportClassesToolStripMenuItem.Enabled = hasAnyClasses;
+            findInClassesToolStripMenuItem.Enabled = hasAnyClasses;
+
+            bool hasAnyScripts = linkers.Any(linker => linker.Exports.Any(exp => exp.Class?.ObjectName == "TextBuffer"));
+            exportScriptsToolStripMenuItem.Enabled = hasAnyScripts;
         }
     }
 }

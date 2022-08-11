@@ -7,7 +7,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Krypton.Navigator;
 using Krypton.Docking;
@@ -39,9 +38,9 @@ namespace UEExplorer.UI.Tabs
         {
             kryptonDockingManagerMain.ManageFloating("Floating", ParentForm);
 
-            var navControl = kryptonDockingManagerMain.ManageControl("Nav", packageStripContainer.ContentPanel);
+            var navControl = kryptonDockingManagerMain.ManageControl("Nav", dockingPanel);
             var workSpace = kryptonDockingManagerMain.ManageWorkspace("Workspace", kryptonDockableWorkspaceMain);
-            var viewControl = kryptonDockingManagerMain.ManageControl("View", packageStripContainer.ContentPanel);
+            var viewControl = kryptonDockingManagerMain.ManageControl("View", dockingPanel);
 
             if (File.Exists(Program.DockingConfigPath)) kryptonDockingManagerMain.LoadConfigFromFile(Program.DockingConfigPath);
             
@@ -191,28 +190,11 @@ namespace UEExplorer.UI.Tabs
         
         private void LinkPackageData(UnrealPackage linker)
         {
-            uNameTableItemBindingSource.DataSource = linker.Names;
-            uImportTableItemBindingSource.DataSource = linker.Imports;
-            uExportTableItemBindingSource.DataSource = linker.Exports;
+            // ??? Move tables to their own dock page.
         }
 
         private void LinkSummaryData(ref UnrealPackage.PackageFileSummary summary)
         {
-            uGenerationTableItemBindingSource.DataSource = summary.Generations;
-            compressedChunkBindingSource.DataSource = summary.CompressedChunks;
-
-            if (!IsPackageCompressed())
-            {
-                TabPage_Chunks.Enabled = false;
-                TabControl_Tables.Controls.Remove(TabPage_Chunks);
-            }
-
-            if (summary.Generations == null || summary.Generations.Count == 0)
-            {
-                TabPage_Generations.Enabled = false;
-                TabControl_Tables.Controls.Remove(TabPage_Generations);
-            }
-
             if (summary.ImportCount != 0)
             {
                 _PackageExplorerPage.PackageExplorerPanel.CreatePackageDependenciesNode(_UnrealPackage);
@@ -340,31 +322,6 @@ namespace UEExplorer.UI.Tabs
             {
                 PerformActionByObjectPath(state.SearchObjectValue);
             }
-        }
-
-        private void _OnExportClassesClick(object sender, EventArgs e)
-        {
-            DoExportPackageClasses();
-        }
-
-        private void _OnExportScriptsClick(object sender, EventArgs e)
-        {
-            DoExportPackageClasses(true);
-        }
-
-        private void DoExportPackageClasses(bool exportScripts = false)
-        {
-            string exportPath = _UnrealPackage.ExportPackageClasses(exportScripts);
-            var dialogResult = MessageBox.Show(
-                string.Format(
-                    Resources.EXPORTED_ALL_PACKAGE_CLASSES,
-                    _UnrealPackage.PackageName,
-                    exportPath
-                ),
-                Application.ProductName,
-                MessageBoxButtons.YesNo
-            );
-            if (dialogResult == DialogResult.Yes) Process.Start(exportPath);
         }
 
         internal void ReloadPackage()
@@ -794,11 +751,9 @@ namespace UEExplorer.UI.Tabs
             ProgressStatus.ResetStatus();
 
             bool withEditorTools = action == ContentNodeAction.Decompile;
-            textEditorToolstrip.Enabled = withEditorTools;
-
-            //copyToolStripButton.Enabled = withEditorTools;
-            //findNextToolStripMenuItem.Enabled = withEditorTools;
-            //EditorFindTextBox.Enabled = withEditorTools;
+            copyToolStripButton.Enabled = withEditorTools;
+            EditorFindTextBox.Enabled = withEditorTools;
+            findNextToolStripMenuItem.Enabled = withEditorTools;
         }
 
         public void InsertNewContentPanel(object target, ContentNodeAction action)
@@ -1028,7 +983,7 @@ namespace UEExplorer.UI.Tabs
             return page;
         }
 
-        private async void PerformFindInClasses(string searchText)
+        public async void PerformSearchIn<T>(string searchText) where T : UObject
         {
             Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
             
@@ -1037,7 +992,7 @@ namespace UEExplorer.UI.Tabs
             kryptonDockingManagerMain.ShowPage(findPage);
 
             var contents = _UnrealPackage.Objects
-                .OfType<UClass>()
+                .OfType<T>()
                 .Where(c => c.ExportTable != null)
                 .ToList<IUnrealDecompilable>();
             
@@ -1052,22 +1007,7 @@ namespace UEExplorer.UI.Tabs
                 ProgressStatus.Reset();
             }
         }
-
-        private void FindInClassesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
-            
-            string findText;
-            using (var findDialog = new FindDialog())
-            {
-                findDialog.FindInput.Text = EditorFindTextBox.Text;
-                if (findDialog.ShowDialog() != DialogResult.OK) return;
-                findText = findDialog.FindInput.Text;
-            }
-
-            PerformFindInClasses(findText);
-        }
-
+        
         private void FindInDocumentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditorFindTextBox.Focus();
@@ -1082,7 +1022,7 @@ namespace UEExplorer.UI.Tabs
             e.Handled = true;
         }
 
-        private void FindNextToolStripMenuItem_Click(object sender, EventArgs e)
+        private void findNextToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             EmitFind(EditorFindTextBox.Text);
         }
@@ -1090,12 +1030,9 @@ namespace UEExplorer.UI.Tabs
         private void copyToolStripButton_Click(object sender, EventArgs e)
         {
             // FIXME:
-            //var panel = (DecompileOutputPanel)GetObjectPanel();
-            //Debug.Assert(panel != null);
-            
-            //panel.TextEditorPanel.TextEditorControl.TextEditor.Copy();
         }
 
+        // TODO: Re-implement in a package agnostic way (Blocked till UELib 2.0)
         private bool PerformActionByObjectPath(string objectGroup)
         {
             Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
@@ -1137,11 +1074,13 @@ namespace UEExplorer.UI.Tabs
             PerformActionByObjectPath(path);
         }
 
-        public void EmitSearchInClasses(string searchText)
+        public void EmitSearch<T>(string searchText) where T : UObject
         {
-            PerformFindInClasses(searchText);
+            PerformSearchIn<T>(searchText);
         }
 
+        // FIXME: Find a better way to propagate commands down the docked pages.
+        
         public void EmitFind(string text)
         {
             var pages = kryptonDockingManagerMain.PagesWorkspace
@@ -1165,6 +1104,15 @@ namespace UEExplorer.UI.Tabs
             foreach (var page in pages)
             {
                 page.OnFind(findResult);
+            }
+        }
+
+        private void kryptonDockingManagerMain_PageFloatingRequest(object sender, CancelUniqueNameEventArgs e)
+        {
+            var page = kryptonDockingManagerMain.PageForUniqueName(e.UniqueName);
+            if (page is ObjectBoundPage objectBoundPage && objectBoundPage.IsDefault)
+            {
+                objectBoundPage.IsDefault = false;
             }
         }
     }
