@@ -210,6 +210,18 @@
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.1.3.50, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.1.3.50\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
+    <Reference Include="Krypton.Docking, Version=65.22.6.152, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Krypton.Docking.65.22.6.152\lib\net48\Krypton.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton.Navigator, Version=65.22.6.152, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Krypton.Navigator.65.22.6.152\lib\net48\Krypton.Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton.Toolkit, Version=65.22.6.152, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Krypton.Toolkit.65.22.6.152\lib\net48\Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton.Workspace, Version=65.22.6.152, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Krypton.Workspace.65.22.6.152\lib\net48\Krypton.Workspace.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
@@ -218,8 +230,10 @@
       <HintPath>libs\Storm.TabControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Drawing" />
@@ -232,6 +246,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Development\IExtension.cs" />
+    <Compile Include="Properties\Resources.nl1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.nl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ActionPanels\ActionPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\ActionPanels\PackageExplorerPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ActionPanels\PackageExplorerPanel.Designer.cs">
+      <DependentUpon>PackageExplorerPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Nodes\ObjectActionsBuilder.cs" />
+    <Compile Include="UI\ObjectActionManager.cs" />
+    <Compile Include="UI\Pages\BinaryPage.cs" />
     <Compile Include="UI\EditorUtil.cs" />
     <Compile Include="ExportHelpers.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -310,6 +341,16 @@
     </Compile>
     <Compile Include="UI\IActionPanel.cs" />
     <Compile Include="UI\IObjectHandler.cs" />
+    <Compile Include="UI\Pages\DecompilerPage.cs" />
+    <Compile Include="UI\Pages\FindResultsPage.cs" />
+    <Compile Include="UI\Pages\ObjectBoundPage.cs" />
+    <Compile Include="UI\Pages\PackageExplorerPage.cs" />
+    <Compile Include="UI\Panels\FindResultsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Panels\FindResultsPanel.Designer.cs">
+      <DependentUpon>FindResultsPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Panels\TextEditorPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -320,6 +361,7 @@
       <DependentUpon>TextEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Tabs\ActionState.cs" />
+    <Compile Include="UI\Tabs\ObjectPathBuilder.cs" />
     <Compile Include="UI\Tabs\UC_Default.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -392,6 +434,10 @@
       <LastGenOutput>Resources.nl1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ActionPanels\PackageExplorerPanel.resx">
+      <DependentUpon>PackageExplorerPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\AboutDialog.nl.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -449,6 +495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ActionPanels\DecompileOutputPanel.resx">
       <DependentUpon>DecompileOutputPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Panels\FindResultsPanel.resx">
+      <DependentUpon>FindResultsPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Panels\TextEditorPanel.resx">
       <DependentUpon>TextEditorPanel.cs</DependentUpon>
@@ -527,7 +576,18 @@
     <Content Include="Native Tables\NativesTableList_UT3.NTL">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Native Tables\NativesTableList_Brother_Bear.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Native Tables\NativesTableList_DukeNukemForever2011.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Native Tables\NativesTableList_Lemony Snicket%27s A Series of Unfortunate Events.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Native Tables\NativesTableList_X-COM_Enforcer.NTL" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TextSearchHelpers.DocumentResult.datasource" />
     <None Include="Properties\DataSources\UELib.BinaryMetaData+BinaryField.datasource" />
     <None Include="Properties\DataSources\UELib.CompressedChunk.datasource" />
     <None Include="Properties\DataSources\UELib.UExportTableItem.datasource" />
@@ -569,6 +629,17 @@
     <Content Include="Config\Templates\struct.tokens-disassembled.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\OpenfileDialog.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\Open.png" />
+    <None Include="Resources\Pin.png" />
+    <None Include="Resources\Close.png" />
+    <None Include="Resources\FindInFile.png" />
+    <None Include="Resources\ExportScript.png" />
+    <None Include="Resources\ExportData.png" />
+    <None Include="Resources\Code.png" />
+    <None Include="Resources\FindDown.png" />
+    <None Include="Resources\FindNext.png" />
     <Content Include="unrealfile.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

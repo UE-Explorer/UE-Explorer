@@ -209,7 +209,7 @@ Laatste versie: {1}</value>
     <value>Opgeslagen!</value>
   </data>
   <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
-    <value>Alle klassen van {0} zijn naar {1} geëxporteerd.
+    <value>Alle inhoud werd geëxporteerd naar {0}.
 
 Klik op ja als je nu naar deze map wilt gebracht worden!</value>
   </data>
@@ -262,7 +262,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
     <value>Klassen worden doorzocht..</value>
   </data>
   <data name="FIND_RESULTS_TITLE" xml:space="preserve">
-    <value>Zoek resultaten {0}</value>
+    <value>Zoek resultaten "{0}"</value>
   </data>
   <data name="HexView_COULDNT_ACQUIRE_VALUE" xml:space="preserve">
     <value>Kon de waarde niet ophalen</value>
@@ -282,7 +282,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   <data name="NodeItem_ViewObject" xml:space="preserve">
     <value>Bekijk object</value>
   </data>
-<data name="UC_PackageExplorer_BuildItemNodes_View_Binary" xml:space="preserve">
+  <data name="UC_PackageExplorer_BuildItemNodes_View_Binary" xml:space="preserve">
     <value>Bekijk binair velden</value>
   </data>
   <data name="NodeItem_OpenInUEModelViewer" xml:space="preserve">
@@ -322,7 +322,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
     <value>Beheerde eigenschappen</value>
   </data>
   <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
-    <value>Tabel buffer</value>
+    <value>Bekijk tabel buffer</value>
   </data>
   <data name="NoTargetForViewBuffer" xml:space="preserve">
     <value>Geen doelwit gevonden voor "Bekijk buffer"</value>
@@ -371,5 +371,8 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   </data>
   <data name="NodeItem_ViewParent" xml:space="preserve">
     <value>Bekijk ouder</value>
+  </data>
+  <data name="FindResultsPage_TextTitle___0__" xml:space="preserve">
+    <value>Find "{0}"</value>
   </data>
 </root>

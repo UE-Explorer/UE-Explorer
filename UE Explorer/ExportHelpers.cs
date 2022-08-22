@@ -45,30 +45,28 @@ namespace UEExplorer
             );
         }
 
-        public static string ExportPackageClasses(this UnrealPackage package, bool exportScripts = false)
+        public static string ExportPackageObjects<T>(this UnrealPackage package)
         {
             Program.LoadConfig();
             string exportPath = package.InitializeExportDirectory();
             package.NTLPackage = new NativesTablePackage();
             package.NTLPackage.LoadPackage(Path.Combine(Application.StartupPath, "Native Tables",
                 Program.Options.NTLPath));
-            foreach (UClass uClass in package.Objects.Where(o => o is UClass && o.ExportTable != null))
+            foreach (var obj in package.Objects.Where(o => o is T && o.ExportTable != null))
             {
                 try
                 {
-                    string exportContent = exportScripts && uClass.ScriptText != null
-                        ? uClass.ScriptText.Decompile()
-                        : uClass.Decompile();
+                    string exportContent = obj.Decompile();
 
                     File.WriteAllText(
-                        Path.Combine(exportPath, uClass.Name) + UnrealExtensions.UnrealCodeExt,
+                        Path.Combine(exportPath, obj.Name) + UnrealExtensions.UnrealCodeExt,
                         exportContent,
                         Encoding.ASCII
                     );
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Couldn't decompile object " + uClass + "\r\n" + e);
+                    Console.Error.WriteLine("Couldn't decompile object " + obj + "\r\n" + e);
                 }
             }
 

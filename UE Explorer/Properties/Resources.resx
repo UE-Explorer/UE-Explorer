@@ -117,86 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NAME_IS" xml:space="preserve">
-    <value>Name is {0}</value>
+  <data name="NodeItem_ExportWithUEModelViewer" xml:space="preserve">
+    <value>Export with UE Model Viewer</value>
   </data>
-  <data name="OBJECT_IS" xml:space="preserve">
-    <value>Object is {0}</value>
-  </data>
-  <data name="Open_File" xml:space="preserve">
-    <value>Open File</value>
-  </data>
-  <data name="Warning" xml:space="preserve">
-    <value>Warning</value>
-  </data>
-  <data name="INVALID_NAME_INDEX" xml:space="preserve">
-    <value>Invalid Name index {0}</value>
-  </data>
-  <data name="NOT_AVAILABLE" xml:space="preserve">
-    <value>N/A</value>
-  </data>
-  <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
-    <value>Invalid Object index {0}</value>
+  <data name="DecompilerPage_DecompilerPage_Decompile_Title" xml:space="preserve">
+    <value>Decompiler</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\UI\Main\ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FindInFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FindInFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RegistryWarning" xml:space="preserve">
-    <value>Enabling this will edit your registry file. 
-If you happen to move the "UE Explorer" folder, uninstall or update it, then please disable this before doing so!</value>
-  </data>
-  <data name="NO_OBJECT_WAS_FOUND" xml:space="preserve">
-    <value>No Object was found.</value>
-  </data>
-  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
-    <value>Do you want to go the folder with the exported content?</value>
-  </data>
-  <data name="NEW_VERSION_AVAILABLE_TITLE" xml:space="preserve">
-    <value>A new version is available!</value>
-    <comment>Dialog title.</comment>
-  </data>
-  <data name="ProgramForm_Check_for_Updates_Status" xml:space="preserve">
-    <value>Checking for updates...</value>
-    <comment>Status</comment>
-  </data>
-  <data name="NO_NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
-    <value>You have the latest version of {0}</value>
-    <comment>Dialog description</comment>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-    <comment>Dialog title</comment>
-  </data>
-  <data name="Options" xml:space="preserve">
-    <value>Options</value>
-    <comment>Tab title</comment>
-  </data>
-  <data name="CHECKFORUPDATES_FAILED_MESSAGE" xml:space="preserve">
-    <value>Failed to request the latest version. Please try again later!</value>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>Homepage</value>
-    <comment>Tab title</comment>
-  </data>
-  <data name="ProgramForm_Unreal_Natives_Table_Generator" xml:space="preserve">
-    <value>Unreal Natives Table Generator</value>
-    <comment>Tab title</comment>
-  </data>
-  <data name="ProgramForm_Cache_Extractor" xml:space="preserve">
-    <value>Cache Extractor</value>
-    <comment>Tab title</comment>
-  </data>
-  <data name="ProgramForm_LoadFile_Failed_loading_package" xml:space="preserve">
-    <value>Failed loading package: {0}</value>
-    <comment>Exception description.</comment>
-  </data>
-  <data name="ProgramForm_LoadFile_Loading_file" xml:space="preserve">
-    <value>Loading file {0}...</value>
-    <comment>Status description.</comment>
+  <data name="PLEASE_SELECT_PATH" xml:space="preserve">
+    <value>The path to {0} is not configured. Select the program's executable!</value>
   </data>
   <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
     <value>Clicking yes will bring you to the page with the latest version!
@@ -204,37 +136,209 @@ Your version: {0}
 Latest version: {1}</value>
     <comment>Dialog description.</comment>
   </data>
-  <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
-    <value>You cannot import binary files with an unequal length!</value>
+  <data name="UnrealClassFilter" xml:space="preserve">
+    <value>Unreal Class</value>
   </data>
-  <data name="SAVE_QUESTION_WARNING" xml:space="preserve">
-    <value>Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!</value>
+  <data name="NodeItem_ViewDefaultProperties" xml:space="preserve">
+    <value>View DefaultProperties</value>
   </data>
-  <data name="SAVE_QUESTION" xml:space="preserve">
-    <value>Save?</value>
+  <data name="COMPRESSED_HOWTO" xml:space="preserve">
+    <value>To use Gildor's tool, try "decompress.exe PACKAGENAME.EXT" you may have to specify -lzo.</value>
   </data>
-  <data name="COULDNT_SAVE_EXCEPTION" xml:space="preserve">
-    <value>Couldn't save the file because of the following exception: {0}</value>
+  <data name="LINKING_OBJECTS" xml:space="preserve">
+    <value>Linking Objects...</value>
   </data>
-  <data name="ExceptionDialog_THANKS" xml:space="preserve">
-    <value>Thanks for reporting this exception occurrance!</value>
+  <data name="Refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ExceptionDialog_FAIL" xml:space="preserve">
-    <value>Failed to send this report. Please try again later!</value>
-  </data>
-  <data name="SUCCESS" xml:space="preserve">
-    <value>Successful</value>
-  </data>
-  <data name="SAVE_SUCCESS" xml:space="preserve">
-    <value>Successfully saved!</value>
+  <data name="NodeItem_ViewParent" xml:space="preserve">
+    <value>View parent</value>
   </data>
   <data name="SAVED" xml:space="preserve">
     <value>Saved!</value>
   </data>
+  <data name="URL_UnrealWikiSearch" xml:space="preserve">
+    <value>http://wiki.beyondunreal.com/?ns0=1&amp;ns100=1&amp;ns102=1&amp;ns104=1&amp;ns106=1&amp;search={0}&amp;title=Special%3ASearch&amp;fulltext=Advanced+search&amp;fulltext=Advanced+search</value>
+  </data>
+  <data name="RegistryWarning" xml:space="preserve">
+    <value>Enabling this will edit your registry file. 
+If you happen to move the "UE Explorer" folder, uninstall or update it, then please disable this before doing so!</value>
+  </data>
+  <data name="PACKAGE_EXPORTED_TO" xml:space="preserve">
+    <value>Package successfully exported to {0}</value>
+  </data>
+  <data name="ExceptionDialog_FAIL" xml:space="preserve">
+    <value>Failed to send this report. Please try again later!</value>
+  </data>
+  <data name="NodeItem_ViewCPPText" xml:space="preserve">
+    <value>View CPP Script</value>
+  </data>
+  <data name="NEW_VERSION_AVAILABLE_TITLE" xml:space="preserve">
+    <value>A new version is available!</value>
+    <comment>Dialog title.</comment>
+  </data>
+  <data name="DESERIALIZING_OBJECTS" xml:space="preserve">
+    <value>Deserializing Objects...</value>
+  </data>
+  <data name="CLASS_ISNT_SUPPORTED" xml:space="preserve">
+    <value>Class {0} isn't supported</value>
+  </data>
+  <data name="PACKAGE_LOADING" xml:space="preserve">
+    <value>Loading Package...</value>
+  </data>
+  <data name="ExportData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExportData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="THING_DOESNT_EXIST" xml:space="preserve">
+    <value>{0} doesn't exist!</value>
+  </data>
+  <data name="ProgramForm_Check_for_Updates_Status" xml:space="preserve">
+    <value>Checking for updates...</value>
+    <comment>Status</comment>
+  </data>
+  <data name="SAVE_QUESTION_WARNING" xml:space="preserve">
+    <value>Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!</value>
+  </data>
+  <data name="NAME_IS" xml:space="preserve">
+    <value>Name is {0}</value>
+  </data>
+  <data name="Pin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="COULDNT_SAVE_EXCEPTION" xml:space="preserve">
+    <value>Couldn't save the file because of the following exception: {0}</value>
+  </data>
+  <data name="FindResultsPage_TextTitle___0__" xml:space="preserve">
+    <value>Zoeken "{0}"</value>
+  </data>
   <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
-    <value>Exported all package classes of {0} to {1}
+    <value>Exported all packages content to {0}.
 
 Click Yes if you want to go to the output directory!</value>
+  </data>
+  <data name="HexView_COULDNT_ACQUIRE_VALUE" xml:space="preserve">
+    <value>Couldn't acquire value</value>
+  </data>
+  <data name="DecompilerPage_SetNewObjectTarget_Decompile___0_" xml:space="preserve">
+    <value>Decompile: {0}</value>
+  </data>
+  <data name="CHECKFORUPDATES_FAILED_MESSAGE" xml:space="preserve">
+    <value>Failed to request the latest version. Please try again later!</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="Open_File" xml:space="preserve">
+    <value>Open File</value>
+  </data>
+  <data name="NodeItem_ViewException" xml:space="preserve">
+    <value>View Exception</value>
+  </data>
+  <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
+    <value>Invalid Object index {0}</value>
+  </data>
+  <data name="ProgramForm_LoadFile_Failed_loading_package" xml:space="preserve">
+    <value>Failed loading package: {0}</value>
+    <comment>Exception description.</comment>
+  </data>
+  <data name="EXCEPTION_OCCURRED_WHILE_EXPORTING" xml:space="preserve">
+    <value>An exception occurred while exporting {0}
+{1}</value>
+  </data>
+  <data name="ProgramForm_Unreal_Natives_Table_Generator" xml:space="preserve">
+    <value>Unreal Natives Table Generator</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="NodeItem_OpenInUEModelViewer" xml:space="preserve">
+    <value>Open in UE Model Viewer</value>
+  </data>
+  <data name="OpenfileDialog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OpenfileDialog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NO_FIND_RESULTS" xml:space="preserve">
+    <value>Found no results with the specified text "{0}".</value>
+  </data>
+  <data name="FindDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FindDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExportTextTitle" xml:space="preserve">
+    <value>Export Text</value>
+  </data>
+  <data name="BinaryPage_BinaryPage_Binary_Title" xml:space="preserve">
+    <value>Binary</value>
+  </data>
+  <data name="UC_PackageExplorer_BuildItemNodes_View_Binary" xml:space="preserve">
+    <value>View Binary Fields</value>
+  </data>
+  <data name="CHECKING_FOR_UPDATES_LOG" xml:space="preserve">
+    <value>Checking for updates(Current version is {0})...</value>
+  </data>
+  <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\UI\Main\ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="ProgramForm_LoadFile_Loading_file" xml:space="preserve">
+    <value>Loading file {0}...</value>
+    <comment>Status description.</comment>
+  </data>
+  <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
+    <value>View Table Buffer</value>
+  </data>
+  <data name="BinaryPage_SetNewObjectTarget_BinaryData___0_" xml:space="preserve">
+    <value>BinaryData: {0}</value>
+  </data>
+  <data name="NodeItem_ViewDisassembledTokens" xml:space="preserve">
+    <value>View Disassembled Tokens</value>
+  </data>
+  <data name="SAVE_QUESTION" xml:space="preserve">
+    <value>Save?</value>
+  </data>
+  <data name="NO_OBJECT_WAS_FOUND" xml:space="preserve">
+    <value>No Object was found.</value>
+  </data>
+  <data name="NOTICE_TITLE" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="SUCCESS" xml:space="preserve">
+    <value>Successful</value>
+  </data>
+  <data name="Homepage" xml:space="preserve">
+    <value>Homepage</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="NodeItem_ManagedProperties" xml:space="preserve">
+    <value>Managed Properties</value>
+  </data>
+  <data name="Code" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Code.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="INITIALIZING_UI" xml:space="preserve">
+    <value>Initializing UI...</value>
+  </data>
+  <data name="NodeItem_ViewScript" xml:space="preserve">
+    <value>View Script</value>
+  </data>
+  <data name="NO_NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
+    <value>You have the latest version of {0}</value>
+    <comment>Dialog description</comment>
+  </data>
+  <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
+    <value>Constructing Objects...</value>
+  </data>
+  <data name="SEARCHING_CLASSES_STATUS" xml:space="preserve">
+    <value>Searching classes...</value>
+  </data>
+  <data name="NodeItem_ViewOuter" xml:space="preserve">
+    <value>View outer</value>
   </data>
   <data name="PACKAGE_IS_COMPRESSED" xml:space="preserve">
     <value>This package is compressed! Compressed packages are not supported.
@@ -243,130 +347,65 @@ Please consider decompressing the package using "Unreal Package Decompressor" fr
 
 You can download the tool from http://www.gildor.org/downloads or press OK to go there now.</value>
   </data>
-  <data name="COMPRESSED_HOWTO" xml:space="preserve">
-    <value>To use Gildor's tool, try "decompress.exe PACKAGENAME.EXT" you may have to specify -lzo.</value>
+  <data name="NodeItem_ViewTokens" xml:space="preserve">
+    <value>View Tokens</value>
   </data>
-  <data name="NOTICE_TITLE" xml:space="preserve">
-    <value>Notice</value>
+  <data name="NOT_AVAILABLE" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="INVALID_NAME_INDEX" xml:space="preserve">
+    <value>Invalid Name index {0}</value>
+  </data>
+  <data name="ExportScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExportScript.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
     <value>This package has an unknown signature.
 
 Are you sure you want to try to deserialize this package? Clicking Yes might lead to unexpected results!</value>
   </data>
-  <data name="PACKAGE_LOADING" xml:space="preserve">
-    <value>Loading Package...</value>
+  <data name="ProgramForm_Cache_Extractor" xml:space="preserve">
+    <value>Cache Extractor</value>
+    <comment>Tab title</comment>
   </data>
-  <data name="PACKAGE_METAINFO" xml:space="preserve">
-    <value>Package's MetaInfo</value>
-  </data>
-  <data name="EXPORT_AS" xml:space="preserve">
-    <value>Export As...</value>
-  </data>
-  <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
-    <value>Constructing Objects...</value>
-  </data>
-  <data name="DESERIALIZING_OBJECTS" xml:space="preserve">
-    <value>Deserializing Objects...</value>
-  </data>
-  <data name="IMPORTING_OBJECTS" xml:space="preserve">
-    <value>Importing Objects...</value>
-  </data>
-  <data name="LINKING_OBJECTS" xml:space="preserve">
-    <value>Linking Objects...</value>
-  </data>
-  <data name="INITIALIZING_UI" xml:space="preserve">
-    <value>Initializing UI...</value>
-  </data>
-  <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
-    <value>Search the UnrealWiki for "{0}"</value>
-  </data>
-  <data name="FIND_RESULTS_TITLE" xml:space="preserve">
-    <value>Find Results {0}</value>
-  </data>
-  <data name="SEARCHING_CLASSES_STATUS" xml:space="preserve">
-    <value>Searching classes...</value>
-  </data>
-  <data name="NO_FIND_RESULTS" xml:space="preserve">
-    <value>Found no results with the specified text "{0}".</value>
-  </data>
-  <data name="HexView_Position" xml:space="preserve">
-    <value>Position: {0} + {1} ; 0x{2:x8}</value>
-  </data>
-  <data name="HexView_COULDNT_ACQUIRE_VALUE" xml:space="preserve">
-    <value>Couldn't acquire value</value>
-  </data>
-  <data name="HexView_Offset" xml:space="preserve">
-    <value>Offset</value>
-  </data>
-  <data name="Version" xml:space="preserve">
-    <value>Version {0}</value>
-  </data>
-  <data name="CLASS_ISNT_SUPPORTED" xml:space="preserve">
-    <value>Class {0} isn't supported</value>
-  </data>
-  <data name="NodeItem_ViewObject" xml:space="preserve">
-    <value>View Object</value>
-  </data>
-  <data name="NodeItem_OpenInUEModelViewer" xml:space="preserve">
-    <value>Open in UE Model Viewer</value>
-  </data>
-  <data name="NodeItem_ExportWithUEModelViewer" xml:space="preserve">
-    <value>Export with UE Model Viewer</value>
-  </data>
-  <data name="NodeItem_ViewContent" xml:space="preserve">
-    <value>View Content</value>
-  </data>
-  <data name="NodeItem_ViewUsedTags" xml:space="preserve">
-    <value>View Used Tags</value>
-  </data>
-  <data name="NodeItem_ViewReplication" xml:space="preserve">
-    <value>View Replication</value>
-  </data>
-  <data name="NodeItem_ViewTokens" xml:space="preserve">
-    <value>View Tokens</value>
-  </data>
-  <data name="NodeItem_ViewDisassembledTokens" xml:space="preserve">
-    <value>View Disassembled Tokens</value>
-  </data>
-  <data name="NodeItem_ViewScript" xml:space="preserve">
-    <value>View Script</value>
-  </data>
-  <data name="NodeItem_ViewDefaultProperties" xml:space="preserve">
-    <value>View DefaultProperties</value>
+  <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NodeItem_ViewBuffer" xml:space="preserve">
     <value>View Buffer</value>
   </data>
-  <data name="NodeItem_ViewException" xml:space="preserve">
-    <value>View Exception</value>
+  <data name="NodeItem_ViewObject" xml:space="preserve">
+    <value>View Object</value>
   </data>
-  <data name="NodeItem_ManagedProperties" xml:space="preserve">
-    <value>Managed Properties</value>
-  </data>
-  <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
-    <value>Table Buffer</value>
-  </data>
-  <data name="NoTargetForViewBuffer" xml:space="preserve">
-    <value>No target found for "View Buffer"</value>
+  <data name="ExceptionDialog_THANKS" xml:space="preserve">
+    <value>Thanks for reporting this exception occurrance!</value>
   </data>
   <data name="NodeItem_DefaultBuffer" xml:space="preserve">
     <value>DefaultProperties Buffer</value>
   </data>
-  <data name="UnrealClassFilter" xml:space="preserve">
-    <value>Unreal Class</value>
+  <data name="UNRECOGNIZED_COMMANDLINE_OPTION" xml:space="preserve">
+    <value>Unrecognized commandline option {0}</value>
   </data>
-  <data name="ExportTextTitle" xml:space="preserve">
-    <value>Export Text</value>
+  <data name="PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title" xml:space="preserve">
+    <value>Package Explorer</value>
   </data>
-  <data name="NodeItem_ViewProcessedScript" xml:space="preserve">
-    <value>View Processed Script</value>
+  <data name="HexView_Offset" xml:space="preserve">
+    <value>Offset</value>
   </data>
-  <data name="NodeItem_ViewCPPText" xml:space="preserve">
-    <value>View CPP Script</value>
+  <data name="HexView_Position" xml:space="preserve">
+    <value>Position: {0} + {1} ; 0x{2:x8}</value>
   </data>
-  <data name="THING_DOESNT_EXIST" xml:space="preserve">
-    <value>{0} doesn't exist!</value>
+  <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
+    <value>Do you want to go the folder with the exported content?</value>
+  </data>
+  <data name="FIND_RESULTS_TITLE" xml:space="preserve">
+    <value>Find Results "{0}"</value>
+  </data>
+  <data name="SAVE_SUCCESS" xml:space="preserve">
+    <value>Successfully saved!</value>
+  </data>
+  <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
+    <value>Search the UnrealWiki for "{0}"</value>
   </data>
   <data name="UNRECOGNIZED_EXPORT_TYPE" xml:space="preserve">
     <value>Unrecognized export type {0}</value>
@@ -374,40 +413,52 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="EXPORTING_PACKAGE" xml:space="preserve">
     <value>Exporting package {0}</value>
   </data>
-  <data name="PACKAGE_EXPORTED_TO" xml:space="preserve">
-    <value>Package successfully exported to {0}</value>
+  <data name="NodeItem_ViewContent" xml:space="preserve">
+    <value>View Content</value>
   </data>
-  <data name="EXCEPTION_OCCURRED_WHILE_EXPORTING" xml:space="preserve">
-    <value>An exception occurred while exporting {0}
-{1}</value>
+  <data name="PACKAGE_METAINFO" xml:space="preserve">
+    <value>Package's MetaInfo</value>
   </data>
-  <data name="UNRECOGNIZED_COMMANDLINE_OPTION" xml:space="preserve">
-    <value>Unrecognized commandline option {0}</value>
+  <data name="IMPORTING_OBJECTS" xml:space="preserve">
+    <value>Importing Objects...</value>
+  </data>
+  <data name="SEARCH_AS_OBJECT" xml:space="preserve">
+    <value>Search as Object</value>
+  </data>
+  <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
+    <value>You cannot import binary files with an unequal length!</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+    <comment>Dialog title</comment>
+  </data>
+  <data name="NoTargetForViewBuffer" xml:space="preserve">
+    <value>No target found for "View Buffer"</value>
   </data>
   <data name="COULDNT_RELOAD_OBJECT" xml:space="preserve">
     <value>Couldn't reload due this error:
 
 	{0}</value>
   </data>
-  <data name="PLEASE_SELECT_PATH" xml:space="preserve">
-    <value>The path to {0} is not configured. Select the program's executable!</value>
+  <data name="NodeItem_ViewUsedTags" xml:space="preserve">
+    <value>View Used Tags</value>
   </data>
-  <data name="CHECKING_FOR_UPDATES_LOG" xml:space="preserve">
-    <value>Checking for updates(Current version is {0})...</value>
+  <data name="EXPORT_AS" xml:space="preserve">
+    <value>Export As...</value>
   </data>
-  <data name="SEARCH_AS_OBJECT" xml:space="preserve">
-    <value>Search as Object</value>
+  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NodeItem_ViewOuter" xml:space="preserve">
-    <value>View outer</value>
+  <data name="NodeItem_ViewReplication" xml:space="preserve">
+    <value>View Replication</value>
   </data>
-  <data name="NodeItem_ViewParent" xml:space="preserve">
-    <value>View parent</value>
+  <data name="OBJECT_IS" xml:space="preserve">
+    <value>Object is {0}</value>
   </data>
-  <data name="URL_UnrealWikiSearch" xml:space="preserve">
-    <value>http://wiki.beyondunreal.com/?ns0=1&amp;ns100=1&amp;ns102=1&amp;ns104=1&amp;ns106=1&amp;search={0}&amp;title=Special%3ASearch&amp;fulltext=Advanced+search&amp;fulltext=Advanced+search</value>
+  <data name="NodeItem_ViewProcessedScript" xml:space="preserve">
+    <value>View Processed Script</value>
   </data>
-  <data name="UC_PackageExplorer_BuildItemNodes_View_Binary" xml:space="preserve">
-    <value>View Binary Fields</value>
+  <data name="FindNext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FindNext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

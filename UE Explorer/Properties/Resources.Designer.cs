@@ -61,6 +61,24 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Binary.
+        /// </summary>
+        internal static string BinaryPage_BinaryPage_Binary_Title {
+            get {
+                return ResourceManager.GetString("BinaryPage_BinaryPage_Binary_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BinaryData: {0}.
+        /// </summary>
+        internal static string BinaryPage_SetNewObjectTarget_BinaryData___0_ {
+            get {
+                return ResourceManager.GetString("BinaryPage_SetNewObjectTarget_BinaryData___0_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot import binary files with an unequal length!.
         /// </summary>
         internal static string CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH {
@@ -93,6 +111,26 @@ namespace UEExplorer.Properties {
         internal static string CLASS_ISNT_SUPPORTED {
             get {
                 return ResourceManager.GetString("CLASS_ISNT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Close {
+            get {
+                object obj = ResourceManager.GetObject("Close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Code {
+            get {
+                object obj = ResourceManager.GetObject("Code", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -131,6 +169,24 @@ namespace UEExplorer.Properties {
         internal static string COULDNT_SAVE_EXCEPTION {
             get {
                 return ResourceManager.GetString("COULDNT_SAVE_EXCEPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decompiler.
+        /// </summary>
+        internal static string DecompilerPage_DecompilerPage_Decompile_Title {
+            get {
+                return ResourceManager.GetString("DecompilerPage_DecompilerPage_Decompile_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decompile: {0}.
+        /// </summary>
+        internal static string DecompilerPage_SetNewObjectTarget_Decompile___0_ {
+            get {
+                return ResourceManager.GetString("DecompilerPage_SetNewObjectTarget_Decompile___0_", resourceCulture);
             }
         }
         
@@ -190,7 +246,17 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exported all package classes of {0} to {1}
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExportData {
+            get {
+                object obj = ResourceManager.GetObject("ExportData", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exported all packages content to {0}.
         ///
         ///Click Yes if you want to go to the output directory!.
         /// </summary>
@@ -210,6 +276,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExportScript {
+            get {
+                object obj = ResourceManager.GetObject("ExportScript", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export Text.
         /// </summary>
         internal static string ExportTextTitle {
@@ -219,11 +295,50 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find Results {0}.
+        ///   Looks up a localized string similar to Find Results &quot;{0}&quot;.
         /// </summary>
         internal static string FIND_RESULTS_TITLE {
             get {
                 return ResourceManager.GetString("FIND_RESULTS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FindDown {
+            get {
+                object obj = ResourceManager.GetObject("FindDown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FindInFile {
+            get {
+                object obj = ResourceManager.GetObject("FindInFile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FindNext {
+            get {
+                object obj = ResourceManager.GetObject("FindNext", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zoeken &quot;{0}&quot;.
+        /// </summary>
+        internal static string FindResultsPage_TextTitle___0__ {
+            get {
+                return ResourceManager.GetString("FindResultsPage_TextTitle___0__", resourceCulture);
             }
         }
         
@@ -509,7 +624,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Table Buffer.
+        ///   Looks up a localized string similar to View Table Buffer.
         /// </summary>
         internal static string NodeItem_ViewTableBuffer {
             get {
@@ -572,11 +687,31 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Open {
+            get {
+                object obj = ResourceManager.GetObject("Open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open File.
         /// </summary>
         internal static string Open_File {
             get {
                 return ResourceManager.GetString("Open_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OpenfileDialog {
+            get {
+                object obj = ResourceManager.GetObject("OpenfileDialog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -641,6 +776,25 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Package Explorer.
+        /// </summary>
+        internal static string PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title {
+            get {
+                return ResourceManager.GetString("PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pin {
+            get {
+                object obj = ResourceManager.GetObject("Pin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The path to {0} is not configured. Select the program&apos;s executable!.
         /// </summary>
         internal static string PLEASE_SELECT_PATH {
@@ -691,6 +845,16 @@ namespace UEExplorer.Properties {
         internal static string ProgramForm_Unreal_Natives_Table_Generator {
             get {
                 return ResourceManager.GetString("ProgramForm_Unreal_Natives_Table_Generator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Refresh {
+            get {
+                object obj = ResourceManager.GetObject("Refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

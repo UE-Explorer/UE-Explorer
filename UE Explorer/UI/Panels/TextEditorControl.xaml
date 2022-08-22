@@ -11,8 +11,8 @@
         <avalonedit:TextEditor.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="Copy" Click="Copy_Click" />
-                <MenuItem Header="Search in document" Name="SearchDocument" x:FieldModifier="public" />
-                <MenuItem Header="Search in classes" Name="SearchPackage" x:FieldModifier="public" />
+                <MenuItem Header="Search in document" Name="SearchInDocument" x:FieldModifier="public" />
+                <MenuItem Header="Search in classes" Name="SearchInClasses" x:FieldModifier="public" />
                 <MenuItem Header="Search as object" Name="SearchObject" x:FieldModifier="public" />
                 <MenuItem Header="Search UnrealWiki" Name="SearchWiki" Click="SearchWiki_Click" />
             </ContextMenu>

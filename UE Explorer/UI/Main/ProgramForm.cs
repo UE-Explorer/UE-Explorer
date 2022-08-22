@@ -120,7 +120,7 @@ namespace UEExplorer.UI
                         if (attribs.Length > 0) extensionname = ((ExtensionTitleAttribute)attribs[0]).Title;
 
                         var item = menuItem13.MenuItems.Add(extensionname);
-                        var ext = Activator.CreateInstance(t) as IExtension;
+                        var ext = (IExtension)Activator.CreateInstance(t);
                         ext.Initialize(this);
                         item.Click += ext.OnActivate;
 

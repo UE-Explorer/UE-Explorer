@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
@@ -135,6 +136,20 @@ namespace UEExplorer.UI.Nodes
                 node.ForeColor = Color.DarkCyan;
             }
 
+            return node;
+        }
+
+        public static TreeNode CreateNode([NotNull] UnrealPackage linker)
+        {
+            // TODO: Displace in UELib 2.0 using an ObjectNode referring the UnrealPackage.RootPackage object.
+            var node = new TreeNode(linker.PackageName)
+            {
+                Name = linker.PackageName,
+                ImageKey = "Namespace",
+                SelectedImageKey = "Namespace",
+                Tag = linker,
+                ToolTipText = linker.FullPackageName
+            };
             return node;
         }
 

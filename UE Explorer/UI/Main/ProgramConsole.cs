@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using UEExplorer.Properties;
 using UELib;
+using UELib.Core;
 
 namespace UEExplorer.UI.Main
 {
@@ -85,7 +86,9 @@ namespace UEExplorer.UI.Main
                             Console.WriteLine(Resources.EXPORTING_PACKAGE, filePath);
                             using (var package = UnrealLoader.LoadFullPackage(filePath))
                             {
-                                string exportPath = package.ExportPackageClasses(shouldExportScripts);
+                                string exportPath = shouldExportScripts
+                                    ? package.ExportPackageObjects<UTextBuffer>()
+                                    : package.ExportPackageObjects<UClass>();
                                 Console.WriteLine(Resources.PACKAGE_EXPORTED_TO, exportPath);
                             }
                         }

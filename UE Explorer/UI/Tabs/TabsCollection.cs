@@ -55,7 +55,7 @@ namespace UEExplorer.UI
             _TabsControl.Visible = _TabsControl.Items.Count > 0;
             _TabsControl.Refresh();
 
-            var tabComp = Activator.CreateInstance(tabType) as ITabComponent;
+            var tabComp = (ITabComponent)Activator.CreateInstance(tabType);
             tabComp.TabItem = tabItem;
             tabComp.Tabs = this;
             tabComp.TabInitialize();

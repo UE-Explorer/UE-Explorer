@@ -30,7 +30,7 @@ namespace UEExplorer.UI.Panels
             if (TextEditor.TextArea.Selection.Length == 0)
             {
                 SearchWiki.Visibility = System.Windows.Visibility.Collapsed;
-                SearchDocument.Visibility = System.Windows.Visibility.Collapsed;
+                SearchInDocument.Visibility = System.Windows.Visibility.Collapsed;
                 SearchObject.Visibility = System.Windows.Visibility.Collapsed;
                 return;
             }
@@ -42,7 +42,7 @@ namespace UEExplorer.UI.Panels
                 return;
             }
 
-            SearchDocument.Visibility = System.Windows.Visibility.Visible;
+            SearchInDocument.Visibility = System.Windows.Visibility.Visible;
             SearchObject.Visibility = System.Windows.Visibility.Visible;
             SearchWiki.Visibility = System.Windows.Visibility.Visible;
             SearchWiki.Header = string.Format(Properties.Resources.SEARCH_WIKI_ITEM, selection);

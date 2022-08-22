@@ -142,6 +142,7 @@ namespace UEExplorer
             ConfigDir,
             "UEExplorerConfig.xml"
         );
+        public static readonly string DockingConfigPath = Path.Combine(Application.StartupPath, "Docking.xml");
 
         public static XMLSettings Options;
 
