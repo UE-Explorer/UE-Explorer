@@ -576,6 +576,16 @@
     <Content Include="Native Tables\NativesTableList_UT3.NTL">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Native Tables\NativesTableList_Brother_Bear.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Native Tables\NativesTableList_DukeNukemForever2011.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Native Tables\NativesTableList_Lemony Snicket%27s A Series of Unfortunate Events.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Native Tables\NativesTableList_X-COM_Enforcer.NTL" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TextSearchHelpers.DocumentResult.datasource" />
     <None Include="Properties\DataSources\UELib.BinaryMetaData+BinaryField.datasource" />
