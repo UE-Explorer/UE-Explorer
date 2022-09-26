@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Eliot.Utilities
+﻿namespace Eliot.Utilities
 {
 	/// <summary>
 	/// 
@@ -39,27 +37,6 @@ namespace Eliot.Utilities
 		{
 			return s.Substring( 0, s.Length - index );
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="s"></param>
-		/// <param name="i"></param>
-		/// <returns></returns>
-		public static char FromInt( this Char s, int i )
-		{
-			return (Char)i;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="s"></param>
-		/// <returns></returns>
-		public static int FromChar( this Char s )
-		{
-			return s;
-		}	
 	}
 }
 

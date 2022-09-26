@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DrawingExtensions.cs" />
     <Compile Include="MRUManager.cs" />
     <Compile Include="Net\WebRequestExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

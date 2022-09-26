@@ -18,7 +18,6 @@ namespace UEExplorer.UI.Forms
     using UELib;
     using UStruct = UELib.Core.UStruct;
 
-    // TODO: REFACTOR, and rewrite all of it to be more concise, less duplicational.
     public partial class HexViewerControl : UserControl
     {
         public byte[] Buffer { get; set; }
@@ -231,68 +230,61 @@ namespace UEExplorer.UI.Forms
 
         private void InitializeMetaInfoFields()
         {
-#if DEBUG || BINARYMETADATA
-            try
+            if (Target is IBinaryData binaryTarget && binaryTarget.BinaryMetaData != null)
             {
-                var binaryTarget = Target as IBinaryData;
-                if (binaryTarget != null && binaryTarget.BinaryMetaData != null)
+                foreach (var binaryField in binaryTarget.BinaryMetaData.Fields)
                 {
-                    var randomizer1 = new Random(binaryTarget.BinaryMetaData.Fields.Count);
-                    foreach (var binaryField in binaryTarget.BinaryMetaData.Fields)
-                    {
-                        int red = randomizer1.Next(0x8F) | 70;
-                        int green = randomizer1.Next(0x8F) | 70;
-                        int blue = randomizer1.Next(0x8F) | 70;
-
-                        _Structure.MetaInfoList.Add
-                        (
-                            new HexMetaInfo.BytesMetaInfo
-                            {
-                                Position = (int)binaryField.Offset,
-                                Size = (int)binaryField.Size,
-                                Type = "Generated",
-                                Color = Color.FromArgb(0x88, red, green, blue),
-                                Name = binaryField.Field,
-                                Tag = binaryField
-                            }
-                        );
-                    }
+                    int colorHash = binaryField.Field.GetHashCode()
+                                     ^ (int)binaryField.Size
+                                     ^ (binaryField.Value?.GetType().GetHashCode() ?? 1);
+                    _Structure.MetaInfoList.Add
+                    (
+                        new HexMetaInfo.BytesMetaInfo
+                        {
+                            Position = (int)binaryField.Offset,
+                            Size = (int)binaryField.Size,
+                            Type = "Generated",
+                            Color = NormalizeArgbToColor(colorHash),
+                            Name = binaryField.Field,
+                            Tag = binaryField
+                        }
+                    );
                 }
             }
-            catch (Exception e)
-            {
-                ExceptionDialog.Show("Initializing binary fields", e);
-            }
-#endif
-            if (!(Target is UStruct))
+
+            if (!(Target is UStruct unStruct))
                 return;
 
-            var unStruct = Target as UStruct;
-            if (unStruct.ByteCodeManager == null || unStruct.ByteCodeManager.DeserializedTokens == null ||
+            if (unStruct.ByteCodeManager?.DeserializedTokens == null ||
                 unStruct.ByteCodeManager.DeserializedTokens.Count <= 0)
                 return;
 
-            var randomizer2 = new Random(unStruct.ByteCodeManager.DeserializedTokens.Count);
             foreach (var token in unStruct.ByteCodeManager.DeserializedTokens)
             {
-                int red = randomizer2.Next(byte.MaxValue);
-                int green = randomizer2.Next(byte.MaxValue);
-                int blue = randomizer2.Next(byte.MaxValue);
-
                 _Structure.MetaInfoList.Add
                 (
                     new HexMetaInfo.BytesMetaInfo
                     {
-                        Position = (int)token.StoragePosition + (int)unStruct.ScriptOffset,
+                        Position = token.StoragePosition + (int)unStruct.ScriptOffset,
                         Size = 1,
                         HoverSize = token.StorageSize,
                         Type = "Generated",
-                        Color = Color.FromArgb(byte.MaxValue, red, green, blue),
+                        Color = NormalizeArgbToColor(token.GetHashCode()),
                         Name = token.GetType().Name,
                         Tag = token
                     }
                 );
             }
+        }
+
+        private Color NormalizeArgbToColor(int argb)
+        {
+            const float min = 68f;
+            const float max = 255 - min;
+            var r = (int)(((argb >> 16) & byte.MaxValue) / 255f * max + min);
+            var g = (int)(((argb >> 8) & byte.MaxValue) / 255f * max + min);
+            var b = (int)((argb & byte.MaxValue) / 255f * max + min);
+            return Color.FromArgb(60, r , g, b);
         }
 
         private readonly string _ConfigPath =
@@ -307,12 +299,14 @@ namespace UEExplorer.UI.Forms
         private readonly SolidBrush _BorderBrush = new SolidBrush(Color.FromArgb(237, 237, 237));
         private readonly SolidBrush _UnderlineBrush = new SolidBrush(Color.FromArgb(0x55EDEDED));
         private readonly SolidBrush _EvenBrush = new SolidBrush(Color.FromArgb(80, 80, 80));
+        private readonly SolidBrush _EvenLitBrush = new SolidBrush(Color.FromArgb(112, 32, 32));
         private readonly SolidBrush _OddBrush = new SolidBrush(Color.FromArgb(150, 150, 150));
+        private readonly SolidBrush _OddLitBrush = new SolidBrush(Color.FromArgb(182, 102, 102));
         private readonly SolidBrush _OffsetBrush = new SolidBrush(Color.FromArgb(160, 160, 160));
         private readonly SolidBrush _SelectedBrush = new SolidBrush(Color.FromArgb(unchecked((int)0x880000FF)));
         private readonly SolidBrush _HoveredBrush = new SolidBrush(Color.FromArgb(unchecked((int)0x880088FF)));
-        private readonly SolidBrush _HoveredFieldBrush = new SolidBrush(Color.FromArgb(unchecked((int)0x88000000)));
-
+        private readonly Pen _BorderHoverPen = new Pen(Color.FromArgb(unchecked((int)0x88000000)));
+        
         private void HexLinePanel_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(new Pen(_BorderBrush), 0f, 0f, HexLinePanel.Width - 1, HexLinePanel.Height - 1);
@@ -330,13 +324,13 @@ namespace UEExplorer.UI.Forms
             float byteColumnOffset = _DrawByte ? 74 : 0;
             float asciiColumnOffset = byteColumnOffset == 0 ? 74 : byteColumnOffset + ColumnWidth + ColumnMargin;
 
-            Brush brush = new SolidBrush(ForeColor);
+            Brush foreTextBrush = new SolidBrush(ForeColor);
 
             string text = Resources.HexView_Offset;
             var textLength = e.Graphics.MeasureString(text, HexLinePanel.Font,
                 new PointF(0, 0), StringFormat.GenericTypographic
             );
-            e.Graphics.DrawString(text, HexLinePanel.Font, brush,
+            e.Graphics.DrawString(text, HexLinePanel.Font, foreTextBrush,
                 2,
                 textLength.Height * 0.5f,
                 StringFormat.GenericTypographic
@@ -351,7 +345,6 @@ namespace UEExplorer.UI.Forms
                 float x = byteColumnOffset;
                 float y = 0;
 
-                //e.Graphics.FillRectangle( new SolidBrush( Color.FromArgb(44, 44, 44) ), x, y, ColumnSize, _LineSpacing );
                 e.Graphics.DrawLine(new Pen(_UnderlineBrush),
                     x, y + CellHeight + HexLinePanel.Font.Height * .5f,
                     x + ColumnWidth, y + CellHeight + HexLinePanel.Font.Height * .5f
@@ -361,7 +354,7 @@ namespace UEExplorer.UI.Forms
                 {
                     var textBrush = SelectedOffset % CellCount == i ? _SelectedBrush
                         : HoveredOffset % CellCount == i ? _HoveredBrush
-                        : (float)i / 4.0F / 1.00 % 2.00 < 1.00 ? _EvenBrush : _OffsetBrush;
+                        : i / 4.0F / 1.00 % 2.00 < 1.00 ? _EvenBrush : _OffsetBrush;
                     string c = "0" + _Hexadecimal[i].ToString(CultureInfo.InvariantCulture);
                     var cs = e.Graphics.MeasureString(c, HexLinePanel.Font, PointF.Empty,
                         StringFormat.GenericTypographic);
@@ -379,7 +372,6 @@ namespace UEExplorer.UI.Forms
                 float x = asciiColumnOffset;
                 float y = 0;
 
-                //e.Graphics.FillRectangle( new SolidBrush( Color.FromArgb(44, 44, 44) ), x, y, ColumnSize, _LineSpacing );
                 e.Graphics.DrawLine(new Pen(_UnderlineBrush),
                     x, y + CellHeight + HexLinePanel.Font.Height * .5f, x + CellCount * asciiWidth,
                     y + CellHeight + HexLinePanel.Font.Height * .5f
@@ -409,6 +401,7 @@ namespace UEExplorer.UI.Forms
                 if (lineOffsetY >= HexLinePanel.ClientSize.Height) break;
 
                 var textBrush = line % 2 == 0 ? _EvenBrush : _OddBrush;
+                var litTextBrush = line % 2 == 0 ? _EvenLitBrush : _OddLitBrush;
 
                 bool lineIsSelected = offset <= SelectedOffset && offset + CellCount > SelectedOffset;
                 bool lineIsHovered = offset <= HoveredOffset && offset + CellCount > HoveredOffset;
@@ -434,132 +427,120 @@ namespace UEExplorer.UI.Forms
                     );
                 }
 
-                string lineText = string.Format("{0:x8}", offset).PadLeft(8, '0').ToUpper();
+                string lineText = $"{offset:x8}".PadLeft(8, '0').ToUpper();
                 e.Graphics.DrawString(lineText, HexLinePanel.Font, lineBrush, 0, lineOffsetY);
 
                 if (_DrawByte)
                 {
-                    var hoveredMetaItem = _Structure.MetaInfoList.Find((t) => t.Tag is UStruct.UByteCodeDecompiler.Token
-                                                                              && t.Position == HoveredOffset
-                    );
-
-                    var selectedMetaItem = _Structure.MetaInfoList.Find((t) =>
-                        t.Tag is UStruct.UByteCodeDecompiler.Token
-                        && t.Position == SelectedOffset
-                    );
-
+                    var metaRectBrush = new SolidBrush(Color.CadetBlue);
                     for (var hexByte = 0; hexByte < CellCount; ++hexByte)
                     {
                         int byteOffset = offset + hexByte;
-                        if (byteOffset < Buffer.Length)
+                        if (byteOffset >= Buffer.Length) continue;
+                        
+                        var cellBrush = hexByte % 4 == 0
+                            ? litTextBrush
+                            : textBrush;
+                        var hexText = $"{Buffer[byteOffset]:X2}";
+
+                        var y1 = (int)lineOffsetY;
+                        var y2 = (int)(lineOffsetY + extraLineOffset);
+                        var x1 = (int)(byteColumnOffset + hexByte * CellWidth);
+                        var x2 = (int)(byteColumnOffset + (hexByte + 1) * CellWidth);
+
+                        foreach (var meta in _Structure.MetaInfoList)
                         {
-                            var drawbrush = hexByte % 4 == 0
-                                ? new SolidBrush(Color.FromArgb(textBrush.Color.ToArgb() - 0x303030 + 0x500000))
-                                : textBrush;
-                            string drawntext = string.Format("{0:x2}", Buffer[byteOffset]).ToUpper();
+                            if (byteOffset < meta.Position) continue;
+                                
+                            int drawSize = meta.HoverSize > 0 && (meta.Position == HoveredOffset || meta.Position == SelectedOffset)
+                                ? meta.HoverSize 
+                                : meta.Size;
+                            if (byteOffset >= meta.Position + drawSize) continue;
 
-                            var y1 = (int)lineOffsetY;
-                            var y2 = (int)(lineOffsetY + extraLineOffset);
-                            var x1 = (int)(byteColumnOffset + hexByte * CellWidth);
-                            var x2 = (int)(byteColumnOffset + (hexByte + 1) * CellWidth);
-
-                            foreach (var s in _Structure.MetaInfoList)
+                            float cellHeight = extraLineOffset;
+                            var cellRectangleY = (float)y1;
+                            if (meta.Tag is UStruct.UByteCodeDecompiler.Token)
                             {
-                                int drawSize = hoveredMetaItem == s || selectedMetaItem == s
-                                    ? s.HoverSize > 0 ? s.HoverSize : s.Size
-                                    : s.Size;
-                                if (byteOffset < s.Position || byteOffset >= s.Position + drawSize)
-                                    continue;
-
-                                float cellHeight = extraLineOffset;
-                                var cellRectangleY = (float)y1;
-                                var p = new Pen(new SolidBrush(s.Color));
-                                if (s.Tag is UStruct.UByteCodeDecompiler.Token)
-                                {
-                                    cellHeight *= 0.5F;
-                                    cellRectangleY = y1 + (y2 - y1) * 0.5F - cellHeight * 0.5F;
-                                }
-
-                                var rectBrush = new SolidBrush(Color.FromArgb(60, s.Color.R, s.Color.G, s.Color.B));
-                                e.Graphics.FillRectangle(rectBrush, x1, cellRectangleY, CellWidth, cellHeight);
-                                if (HoveredOffset >= s.Position && HoveredOffset < s.Position + drawSize)
-                                {
-                                    var borderPen = new Pen(_HoveredFieldBrush);
-                                    e.Graphics.DrawLine(borderPen, x1, y1, x2, y1); // Top	
-                                    e.Graphics.DrawLine(borderPen, x1, y2, x2, y2); // Bottom
-
-                                    if (byteOffset == s.Position)
-                                        e.Graphics.DrawLine(borderPen, x1, y1, x1, y2); // Left
-
-                                    if (byteOffset == s.Position + drawSize - 1)
-                                        e.Graphics.DrawLine(borderPen, x2, y1, x2, y2); // Right
-                                }
-
-                                drawbrush = new SolidBrush(drawbrush.Color.Darken(30F));
+                                cellHeight *= 0.5F;
+                                cellRectangleY = y1 + (y2 - y1) * 0.5F - cellHeight * 0.5F;
                             }
 
-                            // Render edit carret.
-                            if (byteOffset == _ActiveOffset)
+                            metaRectBrush.Color = meta.Color;
+                            e.Graphics.FillRectangle(metaRectBrush, x1, cellRectangleY, CellWidth, cellHeight);
+                            if (HoveredOffset >= meta.Position && HoveredOffset < meta.Position + drawSize)
                             {
-                                e.Graphics.FillRectangle(drawbrush, new Rectangle(
-                                    x1, y1,
-                                    (int)CellWidth, (int)CellHeight
-                                ));
-                                //if( (DateTime.Now - _CarretStartTime).TotalMilliseconds % 600 < 500 )
-                                //{
-                                float nibbleWidth = (x2 - x1) * 0.5F;
-                                switch (_ActiveNibbleIndex)
-                                {
-                                    case 0:
-                                        e.Graphics.DrawLine(new Pen(
-                                                new SolidBrush(Color.FromArgb(unchecked((int)0xEE000000))),
-                                                nibbleWidth
-                                            ),
-                                            x1 + 1 + nibbleWidth * 0.5F, y1, x1 + 1 + nibbleWidth * 0.5F, y2
-                                        );
-                                        break;
+                                e.Graphics.DrawLine(_BorderHoverPen, x1, y1, x2, y1); // Top	
+                                e.Graphics.DrawLine(_BorderHoverPen, x1, y2, x2, y2); // Bottom
 
-                                    case 1:
-                                        e.Graphics.DrawLine(new Pen(
-                                                new SolidBrush(Color.FromArgb(unchecked((int)0xEE000000))),
-                                                nibbleWidth
-                                            ),
-                                            x1 + nibbleWidth + nibbleWidth * 0.5F, y1,
-                                            x1 + nibbleWidth + nibbleWidth * 0.5F, y2
-                                        );
-                                        break;
-                                }
+                                if (byteOffset == meta.Position)
+                                    e.Graphics.DrawLine(_BorderHoverPen, x1, y1, x1, y2); // Left
 
-                                drawbrush = new SolidBrush(Color.White);
-                                //}
+                                if (byteOffset == meta.Position + drawSize - 1)
+                                    e.Graphics.DrawLine(_BorderHoverPen, x2, y1, x2, y2); // Right
+                            }
+                        }
+
+                        // Render edit carret.
+                        if (byteOffset == _ActiveOffset)
+                        {
+                            e.Graphics.FillRectangle(cellBrush, new Rectangle(
+                                x1, y1,
+                                (int)CellWidth, (int)CellHeight
+                            ));
+                            //if( (DateTime.Now - _CarretStartTime).TotalMilliseconds % 600 < 500 )
+                            //{
+                            float nibbleWidth = (x2 - x1) * 0.5F;
+                            switch (_ActiveNibbleIndex)
+                            {
+                                case 0:
+                                    e.Graphics.DrawLine(new Pen(
+                                            new SolidBrush(Color.FromArgb(unchecked((int)0xEE000000))),
+                                            nibbleWidth
+                                        ),
+                                        x1 + 1 + nibbleWidth * 0.5F, y1, x1 + 1 + nibbleWidth * 0.5F, y2
+                                    );
+                                    break;
+
+                                case 1:
+                                    e.Graphics.DrawLine(new Pen(
+                                            new SolidBrush(Color.FromArgb(unchecked((int)0xEE000000))),
+                                            nibbleWidth
+                                        ),
+                                        x1 + nibbleWidth + nibbleWidth * 0.5F, y1,
+                                        x1 + nibbleWidth + nibbleWidth * 0.5F, y2
+                                    );
+                                    break;
                             }
 
-                            e.Graphics.DrawString(drawntext, HexLinePanel.Font, drawbrush,
-                                byteColumnOffset + hexByte * CellWidth, lineOffsetY
-                            );
+                            cellBrush = new SolidBrush(Color.White);
+                            //}
+                        }
 
-                            if (byteOffset == SelectedOffset)
-                            {
-                                // Draw the selection.
-                                var drawPen = new Pen(_SelectedBrush);
-                                e.Graphics.DrawRectangle(drawPen, new Rectangle(
-                                    (int)(byteColumnOffset + hexByte * CellWidth),
-                                    (int)lineOffsetY,
-                                    (int)CellWidth,
-                                    (int)CellHeight
-                                ));
-                            }
+                        e.Graphics.DrawString(hexText, HexLinePanel.Font, cellBrush,
+                            byteColumnOffset + hexByte * CellWidth, lineOffsetY
+                        );
 
-                            if (byteOffset == HoveredOffset)
-                            {
-                                var drawPen = new Pen(_HoveredBrush);
-                                e.Graphics.DrawRectangle(drawPen, new Rectangle(
-                                    (int)(byteColumnOffset + hexByte * CellWidth),
-                                    (int)lineOffsetY,
-                                    (int)CellWidth,
-                                    (int)CellHeight
-                                ));
-                            }
+                        if (byteOffset == SelectedOffset)
+                        {
+                            // Draw the selection.
+                            var drawPen = new Pen(_SelectedBrush);
+                            e.Graphics.DrawRectangle(drawPen, new Rectangle(
+                                (int)(byteColumnOffset + hexByte * CellWidth),
+                                (int)lineOffsetY,
+                                (int)CellWidth,
+                                (int)CellHeight
+                            ));
+                        }
+
+                        if (byteOffset == HoveredOffset)
+                        {
+                            var drawPen = new Pen(_HoveredBrush);
+                            e.Graphics.DrawRectangle(drawPen, new Rectangle(
+                                (int)(byteColumnOffset + hexByte * CellWidth),
+                                (int)lineOffsetY,
+                                (int)CellWidth,
+                                (int)CellHeight
+                            ));
                         }
                     }
                 }
@@ -569,60 +550,59 @@ namespace UEExplorer.UI.Forms
                     for (var hexByte = 0; hexByte < CellCount; ++hexByte)
                     {
                         int byteOffset = offset + hexByte;
-                        if (byteOffset < Buffer.Length)
+                        if (byteOffset >= Buffer.Length) continue;
+                        
+                        var cellBrush = hexByte % 4 == 0
+                            ? litTextBrush
+                            : textBrush;
+                        if (byteOffset == SelectedOffset)
                         {
-                            var drawbrush = hexByte % 4 == 0
-                                ? new SolidBrush(Color.FromArgb(textBrush.Color.ToArgb() - 0x303030 + 0x500000))
-                                : textBrush;
-                            if (byteOffset == SelectedOffset)
-                            {
-                                // Draw the selection.
-                                var drawPen = new Pen(_SelectedBrush);
-                                e.Graphics.DrawRectangle(drawPen, new Rectangle(
-                                    (int)(asciiColumnOffset + hexByte * asciiWidth),
-                                    (int)lineOffsetY,
-                                    (int)CellWidth,
-                                    (int)CellHeight
-                                ));
-                            }
-
-                            if (byteOffset == HoveredOffset)
-                            {
-                                var drawPen = new Pen(_HoveredBrush);
-                                e.Graphics.DrawRectangle(drawPen, new Rectangle(
-                                    (int)(asciiColumnOffset + hexByte * asciiWidth),
-                                    (int)lineOffsetY,
-                                    (int)CellWidth,
-                                    (int)CellHeight
-                                ));
-                            }
-
-                            string drawnChar;
-                            switch (Buffer[byteOffset])
-                            {
-                                case 0x09:
-                                    drawnChar = "\\t";
-                                    break;
-
-                                case 0x0A:
-                                    drawnChar = "\\n";
-                                    break;
-
-                                case 0x0D:
-                                    drawnChar = "\\r";
-                                    break;
-
-                                default:
-                                    drawnChar = FilterByte(Buffer[byteOffset]).ToString(CultureInfo.InvariantCulture);
-                                    break;
-                            }
-
-                            e.Graphics.DrawString(
-                                drawnChar, HexLinePanel.Font, drawbrush,
-                                asciiColumnOffset + hexByte * asciiWidth,
-                                lineOffsetY
-                            );
+                            // Draw the selection.
+                            var drawPen = new Pen(_SelectedBrush);
+                            e.Graphics.DrawRectangle(drawPen, new Rectangle(
+                                (int)(asciiColumnOffset + hexByte * asciiWidth),
+                                (int)lineOffsetY,
+                                (int)CellWidth,
+                                (int)CellHeight
+                            ));
                         }
+
+                        if (byteOffset == HoveredOffset)
+                        {
+                            var drawPen = new Pen(_HoveredBrush);
+                            e.Graphics.DrawRectangle(drawPen, new Rectangle(
+                                (int)(asciiColumnOffset + hexByte * asciiWidth),
+                                (int)lineOffsetY,
+                                (int)CellWidth,
+                                (int)CellHeight
+                            ));
+                        }
+
+                        string drawnChar;
+                        switch (Buffer[byteOffset])
+                        {
+                            case 0x09:
+                                drawnChar = "\\t";
+                                break;
+
+                            case 0x0A:
+                                drawnChar = "\\n";
+                                break;
+
+                            case 0x0D:
+                                drawnChar = "\\r";
+                                break;
+
+                            default:
+                                drawnChar = FilterByte(Buffer[byteOffset]).ToString(CultureInfo.InvariantCulture);
+                                break;
+                        }
+
+                        e.Graphics.DrawString(
+                            drawnChar, HexLinePanel.Font, cellBrush,
+                            asciiColumnOffset + hexByte * asciiWidth,
+                            lineOffsetY
+                        );
                     }
                 }
 
@@ -982,7 +962,7 @@ namespace UEExplorer.UI.Forms
 
         private void OnBufferModifiedEvent()
         {
-            if (BufferModifiedEvent != null) BufferModifiedEvent.Invoke();
+            BufferModifiedEvent?.Invoke();
         }
 
         private bool _LastKeyWasLeft, _LastKeyWasRight;
