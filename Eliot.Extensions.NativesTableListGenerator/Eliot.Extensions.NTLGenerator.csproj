@@ -48,9 +48,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UC_NativeGenerator.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="UC_NativeGenerator.cs" />
     <Compile Include="UC_NativeGenerator.Designer.cs">
       <DependentUpon>UC_NativeGenerator.cs</DependentUpon>
     </Compile>
