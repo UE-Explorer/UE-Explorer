@@ -4,7 +4,7 @@ using UELib;
 
 namespace UEExplorer
 {
-    [System.Reflection.ObfuscationAttribute(Exclude = true)]
+    [System.Reflection.Obfuscation(Exclude = true)]
     public class XMLSettings
     {
         #region Unreal Packages Decompiler Related Members

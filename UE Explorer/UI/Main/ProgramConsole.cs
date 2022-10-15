@@ -105,7 +105,10 @@ namespace UEExplorer.UI.Main
                         break;
                 }
 
-                if (closeWhenDone) Close();
+                if (closeWhenDone)
+                {
+                    Close();
+                }
             }
         }
     }
@@ -113,20 +116,22 @@ namespace UEExplorer.UI.Main
     public class ConsoleWriter : TextWriter
     {
         private readonly RichTextBox _Output;
-        private readonly Encoding _Encoding = Encoding.ASCII;
         private string _LastWrite = string.Empty;
-        public override Encoding Encoding => _Encoding;
 
         public ConsoleWriter(RichTextBox output)
         {
             _Output = output;
         }
 
+        public override Encoding Encoding { get; } = Encoding.ASCII;
+
         public override void Write(string value)
         {
             string trimmedValue = value.Trim();
             if (trimmedValue == NewLine && _LastWrite == NewLine)
+            {
                 return;
+            }
 
             base.Write(value);
             _Output.Text += value;
@@ -137,7 +142,9 @@ namespace UEExplorer.UI.Main
         {
             string trimmedValue = value.Trim();
             if (trimmedValue == NewLine && _LastWrite == NewLine)
+            {
                 return;
+            }
 
             base.WriteLine(value);
             _Output.Text += NewLine + value;

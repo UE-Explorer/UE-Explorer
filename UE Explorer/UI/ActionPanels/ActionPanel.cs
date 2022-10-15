@@ -5,8 +5,8 @@ namespace UEExplorer.UI.ActionPanels
 {
     public class ActionPanel : Panel
     {
-        public bool HasPendingUpdate;
         private object _Object;
+        public bool HasPendingUpdate;
 
         public object Object
         {
@@ -18,6 +18,7 @@ namespace UEExplorer.UI.ActionPanels
                 {
                     return;
                 }
+
                 UpdateOutput(value);
             }
         }

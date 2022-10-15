@@ -38,7 +38,7 @@ namespace UEExplorer.UI.Nodes
             
             var uObject = value as UObject;
             string text = uObject != null
-                ? $"{displayName}: {uObject.GetOuterGroup()}" 
+                ? $"{displayName}: {uObject.GetPath()}" 
                 : displayName;
 
             string imageKey = uObject != null 
@@ -155,7 +155,7 @@ namespace UEExplorer.UI.Nodes
 
         public static string GetTreeNodeText(UObject obj)
         {
-            return obj.GetOuterGroup();
+            return obj.GetPath();
         }
 
         public static string GetTreeNodeText(UObjectTableItem item)

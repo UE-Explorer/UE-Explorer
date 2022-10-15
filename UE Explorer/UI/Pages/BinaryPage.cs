@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using UEExplorer.Properties;
 using UEExplorer.UI.ActionPanels;
-using UEExplorer.UI.Tabs;
 
 namespace UEExplorer.UI.Pages
 {
@@ -13,7 +12,7 @@ namespace UEExplorer.UI.Pages
         {
             Text = Resources.BinaryPage_BinaryPage_Binary_Title;
             TextTitle = Resources.BinaryPage_BinaryPage_Binary_Title;
-            
+
             _Panel = new BinaryDataFieldsPanel();
             _Panel.Name = "Panel";
             _Panel.Dock = DockStyle.Fill;

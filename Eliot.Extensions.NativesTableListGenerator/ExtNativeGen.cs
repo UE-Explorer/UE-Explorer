@@ -2,12 +2,12 @@
 using UEExplorer.Development;
 using UEExplorer.UI.Main;
 
-namespace Eliot.Extensions.ExecGenerator
+namespace Eliot.Extensions.NativesTableListGenerator
 {
-    [ExtensionTitle("Exec Generator")]
-    public class ExtExecGen : IExtension
+    [ExtensionTitle("NTL Generator")]
+    public class ExtNativeGen : IExtension
     {
-        private ProgramForm _Owner;
+        private ProgramForm _Form;
 
         /// <summary>
         ///     Called after UEExplorer_Form is initialized.
@@ -15,7 +15,7 @@ namespace Eliot.Extensions.ExecGenerator
         /// <param name="form"></param>
         public void Initialize(ProgramForm form)
         {
-            _Owner = form;
+            _Form = form;
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Eliot.Extensions.ExecGenerator
         /// </summary>
         public void OnActivate(object sender, EventArgs e)
         {
-            _Owner.Tabs.Add(typeof(UC_ExecGenerator), "Unreal Exec Commands Generator");
+            _Form.Tabs.Add(typeof(UC_NativeGenerator), "Natives Table List Generator");
         }
     }
 }

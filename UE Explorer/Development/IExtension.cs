@@ -1,9 +1,9 @@
 ﻿using System;
+using UEExplorer.UI.Main;
+using UELib.Annotations;
 
 namespace UEExplorer.Development
 {
-    using UI;
-
     public interface IExtension
     {
         /// <summary>
@@ -18,6 +18,7 @@ namespace UEExplorer.Development
         void OnActivate(object sender, EventArgs e);
     }
 
+    [MeansImplicitUse]
     public class ExtensionTitleAttribute : Attribute
     {
         public readonly string Title;

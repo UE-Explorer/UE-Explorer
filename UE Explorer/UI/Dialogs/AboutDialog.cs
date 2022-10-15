@@ -1,23 +1,37 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
-using System.IO;
 using Eliot.Utilities.Net;
 using UEExplorer.Properties;
+using UEExplorer.UI.Main;
 
 namespace UEExplorer.UI.Dialogs
 {
     public partial class AboutDialog : Form
     {
+        private const string DONATORS_URL = "https://eliotvu.com/files/donators.txt";
+
         public AboutDialog()
         {
             InitializeComponent();
-            Text += " " + Application.ProductName;
+        }
+
+        private string AssemblyCopyright
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly()
+                    .GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+                return attributes.Length == 0 ? "" : ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+            }
         }
 
         private void AboutForm_Load(object sender, EventArgs e)
         {
+            Text += $" {Application.ProductName}";
             label4.Text = Application.ProductName;
             VersionLabel.Text = string.Format(Resources.Version, ProgramForm.Version);
             CopyrightLabel.Text = AssemblyCopyright;
@@ -28,8 +42,6 @@ namespace UEExplorer.UI.Dialogs
         {
             InitializeDonators();
         }
-
-        private const string DONATORS_URL = "http://eliotvu.com/files/donators.txt";
 
         private void InitializeDonators()
         {
@@ -51,19 +63,9 @@ namespace UEExplorer.UI.Dialogs
             DonateLink.Text = Program.Donate_URL;
         }
 
-        private string AssemblyCopyright
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly()
-                    .GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                return attributes.Length == 0 ? "" : ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
-            }
-        }
-
         private void LicenseLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("file:///" + Path.Combine(Application.StartupPath, "license.html"));
+            Process.Start("file:///" + Path.Combine(Application.StartupPath, "license.html"));
         }
     }
 }

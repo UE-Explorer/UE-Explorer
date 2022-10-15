@@ -126,35 +126,11 @@
   <metadata name="UEStatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>126, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="UEStatusStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 578</value>
-  </data>
-  <data name="UEStatusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>900, 22</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="UEStatusStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="UEStatusStrip.Text" xml:space="preserve">
-    <value>statusStrip1</value>
-  </data>
-  <data name="&gt;&gt;UEStatusStrip.Name" xml:space="preserve">
-    <value>UEStatusStrip</value>
-  </data>
-  <data name="&gt;&gt;UEStatusStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;UEStatusStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;UEStatusStrip.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="LoadingProgress.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="LoadingProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 16</value>
   </data>
@@ -185,6 +161,18 @@
   <data name="SelectedNativeTable.Text" xml:space="preserve">
     <value>NTL</value>
   </data>
+  <data name="pCToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 22</value>
+  </data>
+  <data name="pCToolStripMenuItem.Text" xml:space="preserve">
+    <value>PC</value>
+  </data>
+  <data name="consoleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 22</value>
+  </data>
+  <data name="consoleToolStripMenuItem.Text" xml:space="preserve">
+    <value>Console</value>
+  </data>
   <data name="Platform.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -209,17 +197,29 @@
   <data name="Platform.Text" xml:space="preserve">
     <value>Platform</value>
   </data>
-  <data name="pCToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 22</value>
+  <data name="UEStatusStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 578</value>
   </data>
-  <data name="pCToolStripMenuItem.Text" xml:space="preserve">
-    <value>PC</value>
+  <data name="UEStatusStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>900, 22</value>
   </data>
-  <data name="consoleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 22</value>
+  <data name="UEStatusStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="consoleToolStripMenuItem.Text" xml:space="preserve">
-    <value>Console</value>
+  <data name="UEStatusStrip.Text" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="&gt;&gt;UEStatusStrip.Name" xml:space="preserve">
+    <value>UEStatusStrip</value>
+  </data>
+  <data name="&gt;&gt;UEStatusStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;UEStatusStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;UEStatusStrip.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TabComponentsStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -288,9 +288,6 @@
   <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>376, 20</value>
   </metadata>
-  <data name="menuItem1.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
   <data name="menuItem8.Shortcut" type="System.Windows.Forms.Shortcut, System.Windows.Forms">
     <value>CtrlO</value>
   </data>
@@ -333,14 +330,14 @@
   <data name="menuItem10.Text" xml:space="preserve">
     <value>E&amp;xit</value>
   </data>
+  <data name="menuItem1.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
   <data name="menuItem2.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="menuItem2.Text" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="menuItem2.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="menuItem22.Text" xml:space="preserve">
+    <value />
   </data>
   <data name="menuItem21.Shortcut" type="System.Windows.Forms.Shortcut, System.Windows.Forms">
     <value>CtrlF</value>
@@ -348,11 +345,11 @@
   <data name="menuItem21.Text" xml:space="preserve">
     <value>Find</value>
   </data>
-  <data name="menuItem22.Text" xml:space="preserve">
-    <value />
+  <data name="menuItem2.Text" xml:space="preserve">
+    <value>Edit</value>
   </data>
-  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Tools</value>
+  <data name="menuItem2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="menuItem13.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -381,11 +378,11 @@
   <data name="menuItem20.Text" xml:space="preserve">
     <value>Registry Features Enabled</value>
   </data>
+  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Tools</value>
+  </data>
   <data name="menuItem7.Text" xml:space="preserve">
     <value>&amp;Options</value>
-  </data>
-  <data name="menuItem3.Text" xml:space="preserve">
-    <value>&amp;Help</value>
   </data>
   <data name="menuItem15.Text" xml:space="preserve">
     <value>&gt; Report an issue</value>
@@ -413,6 +410,9 @@
   </data>
   <data name="menuItem5.Text" xml:space="preserve">
     <value>&amp;About...</value>
+  </data>
+  <data name="menuItem3.Text" xml:space="preserve">
+    <value>&amp;Help</value>
   </data>
   <data name="tabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>927, 519</value>
@@ -488,9 +488,6 @@
   </data>
   <metadata name="kryptonManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>493, 20</value>
-  </metadata>
-  <metadata name="kryptonPalette.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>635, 20</value>
   </metadata>
   <metadata name="kryptonPalette.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>635, 20</value>
@@ -2050,6 +2047,9 @@
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>Manual</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>{0} {1}</value>
   </data>
   <data name="&gt;&gt;menuItem26.Name" xml:space="preserve">
     <value>menuItem26</value>

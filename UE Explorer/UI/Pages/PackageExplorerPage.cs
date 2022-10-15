@@ -1,5 +1,5 @@
-﻿using Krypton.Navigator;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using Krypton.Navigator;
 using UEExplorer.Properties;
 using UEExplorer.UI.ActionPanels;
 
@@ -7,8 +7,6 @@ namespace UEExplorer.UI.Pages
 {
     public sealed class PackageExplorerPage : KryptonPage
     {
-        public PackageExplorerPanel PackageExplorerPanel { get; }
-
         public PackageExplorerPage()
         {
             Text = Resources.PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title;
@@ -17,5 +15,7 @@ namespace UEExplorer.UI.Pages
             PackageExplorerPanel.Dock = DockStyle.Fill;
             Controls.Add(PackageExplorerPanel);
         }
+
+        public PackageExplorerPanel PackageExplorerPanel { get; }
     }
 }

@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using UEExplorer.Properties;
 using UELib;
-using System.Drawing;
 using UELib.Types;
 
 namespace UEExplorer.UI.Tabs
 {
     public partial class UC_Options : UserControl_Tab
     {
+        public UC_Options()
+        {
+            InitializeComponent();
+        }
+
         /// <summary>
-        /// Called when the Tab is added to the chain.
+        ///     Called when the Tab is added to the chain.
         /// </summary>
         protected override void TabCreated()
         {
@@ -21,7 +26,9 @@ namespace UEExplorer.UI.Tabs
             CheckBox_LinkObj.Checked = Program.Options.InitFlags.HasFlag(UnrealPackage.InitFlags.Link);
 
             foreach (string filePath in GetNativeTables())
+            {
                 ComboBox_NativeTable.Items.Add(Path.GetFileNameWithoutExtension(filePath));
+            }
 
             ComboBox_NativeTable.SelectedIndex = ComboBox_NativeTable.Items.IndexOf(Program.Options.NTLPath);
 
@@ -40,13 +47,17 @@ namespace UEExplorer.UI.Tabs
             foreach (string enumElement in Enum.GetNames(typeof(PropertyType)))
             {
                 if (enumElement == "StructOffset")
+                {
                     continue;
+                }
 
                 VariableType.Items.Add(enumElement);
             }
 
             foreach (string pair in Program.Options.VariableTypes)
+            {
                 VariableTypesTree.Nodes.Add(new TreeNode(pair) { Tag = pair });
+            }
 
             base.TabCreated();
 
@@ -68,12 +79,16 @@ namespace UEExplorer.UI.Tabs
             Program.Options.InitFlags = UnrealPackage.InitFlags.All;
 
             if (!CheckBox_LinkObj.Checked)
+            {
                 Program.Options.InitFlags &= ~UnrealPackage.InitFlags.Link;
+            }
 
             Program.Options.InitFlags |= UnrealPackage.InitFlags.Deserialize;
 
             if (!CheckBox_SerObj.Checked)
+            {
                 Program.Options.InitFlags &= ~UnrealPackage.InitFlags.Deserialize;
+            }
 
             Program.Options.InitFlags |= UnrealPackage.InitFlags.RegisterClasses;
 
@@ -96,7 +111,11 @@ namespace UEExplorer.UI.Tabs
             UnrealConfig.Indention = Program.ParseIndention(Program.Options.Indention);
 
             Program.Options.VariableTypes.Clear();
-            foreach (TreeNode node in VariableTypesTree.Nodes) Program.Options.VariableTypes.Add((string)node.Tag);
+            foreach (TreeNode node in VariableTypesTree.Nodes)
+            {
+                Program.Options.VariableTypes.Add((string)node.Tag);
+            }
+
             Program.CopyVariableTypes();
 
             Program.SaveConfig();
@@ -117,7 +136,10 @@ namespace UEExplorer.UI.Tabs
                 Filter = "UE Model View (umodel.exe)|umodel.exe"
             };
 
-            if (dialog.ShowDialog() == DialogResult.OK) PathText.Text = dialog.FileName;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                PathText.Text = dialog.FileName;
+            }
         }
 
         private void PathText_TextChanged(object sender, EventArgs e)
@@ -164,7 +186,9 @@ namespace UEExplorer.UI.Tabs
         private void DeleteArrayType_Click(object sender, EventArgs e)
         {
             if (VariableTypesTree.SelectedNode == null)
+            {
                 return;
+            }
 
             VariableTypesTree.Nodes.Remove(VariableTypesTree.SelectedNode);
 

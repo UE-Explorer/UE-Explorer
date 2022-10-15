@@ -1,13 +1,7 @@
 ﻿namespace Eliot.Utilities
 {
-	/// <summary>
-	/// 
-	/// </summary>
 	public static class StringExtensions
 	{
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="s"></param>
 		/// <param name="index"></param>
 		/// <returns>Left side from index.</returns>
@@ -16,9 +10,6 @@
 			return s.Substring( 0, index );
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="s"></param>
 		/// <param name="index"></param>
 		/// <returns>Mid side from index.</returns>
@@ -27,9 +18,6 @@
 			return s.Substring( index, s.Length - index );
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="s"></param>
 		/// <param name="index"></param>
 		/// <returns></returns>

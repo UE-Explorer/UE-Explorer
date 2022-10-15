@@ -5,12 +5,12 @@ namespace UEExplorer.UI.Dialogs
 {
     public partial class FindDialog : Form
     {
-        public event EventHandler<FindEventArgs> FindNext;
-
         public FindDialog()
         {
             InitializeComponent();
         }
+
+        public event EventHandler<FindEventArgs> FindNext;
 
         private void Find_Click(object sender, EventArgs e)
         {

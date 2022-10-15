@@ -10,6 +10,17 @@ namespace UEExplorer.UI.ActionPanels
             InitializeComponent();
         }
 
+        public void RestoreState(ref ActionState state)
+        {
+            // ??
+        }
+
+        public void StoreState(ref ActionState state)
+        {
+            state.X = binaryDataGridView.HorizontalScrollingOffset;
+            state.Y = binaryDataGridView.VerticalScrollingOffset;
+        }
+
         protected override void UpdateOutput(object target)
         {
             switch (target)
@@ -26,17 +37,6 @@ namespace UEExplorer.UI.ActionPanels
                     BinaryFieldBindingSource.DataSource = null;
                     break;
             }
-        }
-
-        public void RestoreState(ref ActionState state)
-        {
-            // ??
-        }
-
-        public void StoreState(ref ActionState state)
-        {
-            state.X = binaryDataGridView.HorizontalScrollingOffset;
-            state.Y = binaryDataGridView.VerticalScrollingOffset;
         }
     }
 }

@@ -4,22 +4,22 @@ using UELib.Flags;
 
 namespace UEExplorer.UI.Nodes
 {
-    public class ObjectImageKeySelector : ObjectVisitor<string>
+    public sealed class ObjectImageKeySelector : ObjectVisitor<string>
     {
         public override string Visit(IAcceptable visitor)
         {
-            string key = base.Visit(visitor);
+            string key = Visit((dynamic)visitor);
             return key ?? visitor.GetType().Name;
         }
 
-        public override string Visit(UObject uObject)
+        public string Visit(UObject uObject)
         {
             return uObject.GetType().IsSubclassOf(typeof(UProperty)) 
                 ? nameof(UProperty) 
                 : "UObject";
         }
 
-        public override string Visit(UProperty uProperty)
+        public string Visit(UProperty uProperty)
         {
             if (uProperty.HasPropertyFlag(PropertyFlagsLO.ReturnParm)) return "ReturnValue";
 
@@ -31,12 +31,12 @@ namespace UEExplorer.UI.Nodes
             return key;
         }
 
-        public override string Visit(UScriptStruct uScriptStruct)
+        public string Visit(UScriptStruct uScriptStruct)
         {
             return nameof(UStruct);
         }
 
-        public override string Visit(UFunction uFunction)
+        public string Visit(UFunction uFunction)
         {
             string key;
             if (uFunction.HasFunctionFlag(FunctionFlags.Event))
@@ -54,17 +54,17 @@ namespace UEExplorer.UI.Nodes
             return key;
         }
 
-        public override string Visit(UPackage uPackage)
+        public string Visit(UPackage uPackage)
         {
             return "Namespace";
         }
 
-        public override string Visit(UTextBuffer uTextBuffer)
+        public string Visit(UTextBuffer uTextBuffer)
         {
             return "text-left";
         }
 
-        public override string Visit(UClass uClass)
+        public string Visit(UClass uClass)
         {
             if (uClass.IsClassInterface()) return "Interface";
 

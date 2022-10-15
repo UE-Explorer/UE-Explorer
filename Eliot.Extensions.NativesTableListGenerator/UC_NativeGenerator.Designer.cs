@@ -26,7 +26,7 @@
 		/// Required method for Designer support - do not modify 
 		/// the contents of this method with the code editor.
 		/// </summary>
-		protected override void InitializeComponent()
+		private void InitializeComponent()
 		{
             System.Windows.Forms.Label label1;
             System.Windows.Forms.GroupBox groupBox1;

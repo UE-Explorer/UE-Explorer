@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace UEExplorer.UI.Panels
 {
@@ -14,37 +16,36 @@ namespace UEExplorer.UI.Panels
             return TextEditor.TextArea.Selection.GetText();
         }
 
-        private void Copy_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Copy_Click(object sender, RoutedEventArgs e)
         {
             TextEditor.Copy();
         }
 
-        private void SearchWiki_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void SearchWiki_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(string.Format(Properties.Resources.URL_UnrealWikiSearch, GetSelection()));
-
         }
 
-        private void TextEditor_ContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
+        private void TextEditor_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
             if (TextEditor.TextArea.Selection.Length == 0)
             {
-                SearchWiki.Visibility = System.Windows.Visibility.Collapsed;
-                SearchInDocument.Visibility = System.Windows.Visibility.Collapsed;
-                SearchObject.Visibility = System.Windows.Visibility.Collapsed;
+                SearchWiki.Visibility = Visibility.Collapsed;
+                SearchInDocument.Visibility = Visibility.Collapsed;
+                SearchObject.Visibility = Visibility.Collapsed;
                 return;
             }
 
             string selection = GetSelection();
             if (selection.IndexOf('\n') != -1)
             {
-                SearchWiki.Visibility = System.Windows.Visibility.Collapsed;
+                SearchWiki.Visibility = Visibility.Collapsed;
                 return;
             }
 
-            SearchInDocument.Visibility = System.Windows.Visibility.Visible;
-            SearchObject.Visibility = System.Windows.Visibility.Visible;
-            SearchWiki.Visibility = System.Windows.Visibility.Visible;
+            SearchInDocument.Visibility = Visibility.Visible;
+            SearchObject.Visibility = Visibility.Visible;
+            SearchWiki.Visibility = Visibility.Visible;
             SearchWiki.Header = string.Format(Properties.Resources.SEARCH_WIKI_ITEM, selection);
         }
     }

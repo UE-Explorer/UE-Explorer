@@ -44,6 +44,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eliot.UELib.Benchmark", "UE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UELib.CLI", "UELib\CLI\Eliot.UELib.CLI.csproj", "{01B07425-0B35-4DAB-9555-D61261A0F161}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2FC7A596-2539-4EED-B013-4F5D552FE2A1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -216,6 +221,7 @@ Global
 		{F0D312F0-7FD1-4C97-A9B5-AA723E72B01B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F0D312F0-7FD1-4C97-A9B5-AA723E72B01B}.Release|x86.ActiveCfg = Release|Any CPU
 		{F0D312F0-7FD1-4C97-A9B5-AA723E72B01B}.Release|x86.Build.0 = Release|Any CPU
+		{01B07425-0B35-4DAB-9555-D61261A0F161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{01B07425-0B35-4DAB-9555-D61261A0F161}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01B07425-0B35-4DAB-9555-D61261A0F161}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{01B07425-0B35-4DAB-9555-D61261A0F161}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU

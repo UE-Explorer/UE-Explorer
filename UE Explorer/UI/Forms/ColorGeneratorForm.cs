@@ -15,7 +15,11 @@ namespace UEExplorer.UI.Forms
         private void PickColorCodeButton_Click(object sender, EventArgs e)
         {
             var result = ColorDialog.ShowDialog();
-            if (result != DialogResult.OK) return;
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+
             ColoredTextInput.Text = ColoredTextInput.Text.Insert(
                 ColoredTextInput.SelectionStart,
                 XMLFormatCheckBox.Checked
@@ -27,14 +31,12 @@ namespace UEExplorer.UI.Forms
         private void PickHTMLColorButton_Click(object sender, EventArgs e)
         {
             var result = ColorDialog.ShowDialog();
-            if (result != DialogResult.OK) return;
-            HTMLColorText.Text = ColorCode.ToHEX(ColorDialog.Color);
-        }
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
 
-        private struct ColoredText
-        {
-            public string Text;
-            public Color Color;
+            HTMLColorText.Text = ColorCode.ToHEX(ColorDialog.Color);
         }
 
         private void ColoredTextPreview_Paint(object sender, PaintEventArgs e)
@@ -56,7 +58,9 @@ namespace UEExplorer.UI.Forms
             for (var i = 0; i < s.Length; ++i)
             {
                 if (s[i] != ColorCode.ColorTag || i + 3 >= s.Length)
+                {
                     continue;
+                }
 
                 var textColor = new ColoredText
                 {
@@ -67,7 +71,9 @@ namespace UEExplorer.UI.Forms
                 for (var j = 0; j < textColor.Text.Length; ++j)
                 {
                     if (textColor.Text[j] != ColorCode.ColorTag)
+                    {
                         continue;
+                    }
 
                     textColor.Text = textColor.Text.Remove(j);
                     break;
@@ -81,7 +87,10 @@ namespace UEExplorer.UI.Forms
             string remainingText = null;
             for (var i = 0; i < ColoredTextInput.Text.Length; ++i)
             {
-                if (ColoredTextInput.Text[i] == ColorCode.ColorTag) break;
+                if (ColoredTextInput.Text[i] == ColorCode.ColorTag)
+                {
+                    break;
+                }
 
                 remainingText = ColoredTextInput.Text.Substring(0, i + 1);
             }
@@ -126,6 +135,12 @@ namespace UEExplorer.UI.Forms
         private void ColoredTextPreview_SizeChanged(object sender, EventArgs e)
         {
             ColoredTextPreview.Refresh();
+        }
+
+        private struct ColoredText
+        {
+            public string Text;
+            public Color Color;
         }
     }
 }

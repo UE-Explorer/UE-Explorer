@@ -6,25 +6,20 @@ using Storm.TabControl;
 namespace UEExplorer.UI.Tabs
 {
     [ComVisible(false)]
-    public class UserControl_Tab : UserControl, ITabComponent
+    public abstract class UserControl_Tab : UserControl, ITabComponent
     {
-        [ComVisible(false)] public TabsCollection Tabs { protected get; set; }
-
-        [ComVisible(false)] public TabStripItem TabItem { get; set; }
-
         protected UserControl_Tab()
         {
-            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime) Dock = DockStyle.Fill;
-            InitializeComponent();
+            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            {
+                Dock = DockStyle.Fill;
+            }
         }
 
-        protected virtual void InitializeComponent()
-        {
-        }
+        public TabsCollection Tabs { protected get; set; }
 
-        /// <summary>
-        /// Called after the tab was constructed.
-        /// </summary>
+        public TabStripItem TabItem { get; set; }
+
         // Not done in the constructor, because of some null references, neither won't use constructor params.
         public virtual void TabInitialize()
         {
@@ -32,17 +27,6 @@ namespace UEExplorer.UI.Tabs
             TabSelected();
         }
 
-        /// <summary>
-        /// Called when the Tab is added to the chain.
-        /// </summary>
-        protected virtual void TabCreated()
-        {
-            TabItem.Controls.Add(this);
-        }
-
-        /// <summary>
-        /// Called when the Tab is selected.
-        /// </summary>
         public virtual void TabSelected()
         {
         }
@@ -51,9 +35,6 @@ namespace UEExplorer.UI.Tabs
         {
         }
 
-        /// <summary>
-        /// Called when the Tab is closing.
-        /// </summary>
         public virtual void TabClosing()
         {
         }
@@ -64,6 +45,11 @@ namespace UEExplorer.UI.Tabs
 
         public virtual void TabFind()
         {
+        }
+
+        protected virtual void TabCreated()
+        {
+            TabItem.Controls.Add(this);
         }
     }
 }

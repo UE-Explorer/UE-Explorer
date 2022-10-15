@@ -1,28 +1,17 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace UEExplorer.UI.Tabs
 {
-    [System.Runtime.InteropServices.ComVisible(false)]
+    [ComVisible(false)]
     public partial class UC_ModExplorer : UserControl_Tab
     {
         public string FileName { get; set; }
 
-        protected override void TabCreated()
+        public UC_ModExplorer()
         {
-            /*UPackageStream s = new UPackageStream( FileName, FileMode.Open, FileAccess.Read );
-            byte[] buffer = new byte[(int)s.Length];
-            s.Read( buffer, 0, (int)s.Length );
-            buffer.Reverse();
-            UObjectStream stream = new UObjectStream( s, buffer );
-
-            UnrealMod mod = new UnrealMod();
-            mod.Serialize( stream );
-            foreach( UnrealMod.FileTable ft in mod.FileTableList )
-            {
-                listView1.Items.Add( ft.FileName );
-            }*/
-            base.TabCreated();
+            InitializeComponent();
         }
 
         private void ToolStripButton1_Click(object sender, EventArgs e)

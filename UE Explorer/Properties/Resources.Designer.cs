@@ -370,6 +370,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} - {1}.
+        /// </summary>
+        internal static string HexViewerForm_Title {
+            get {
+                return ResourceManager.GetString("HexViewerForm_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Homepage.
         /// </summary>
         internal static string Homepage {

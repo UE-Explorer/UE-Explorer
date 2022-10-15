@@ -1,33 +1,57 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using Eliot.Utilities;
 using Microsoft.Win32;
 using Storm.TabControl;
+using UEExplorer.Development;
 using UEExplorer.Properties;
+using UEExplorer.UI.Dialogs;
 using UEExplorer.UI.Forms;
-using AutoUpdaterDotNET;
+using UEExplorer.UI.Tabs;
+using UELib;
 using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 
-namespace UEExplorer.UI
+namespace UEExplorer.UI.Main
 {
-    using Development;
-    using Dialogs;
-    using Tabs;
-    using UELib;
-
     public partial class ProgramForm : Form
     {
-        public TabsCollection Tabs;
+        private const string APP_KEY = "EliotVU";
         private MRUManager _MRUManager;
+        public TabsCollection Tabs;
+
+        internal ProgramForm()
+        {
+            InitializeComponent();
+
+            WindowState = Settings.Default.WindowState;
+            Size = Settings.Default.WindowSize;
+            Location = Settings.Default.WindowLocation;
+        }
+
+        public static string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+        private void ProgramForm_Load(object sender, EventArgs e)
+        {
+            Program.LogManager.StartLogStream();
+
+            Text = $"{Application.ProductName} {Version}";
+            ;
+            InitializeConfig();
+            InitializeUI();
+
+            Tabs = new TabsCollection(this, TabComponentsStrip);
+        }
 
         private void InitializeUI()
         {
             ProgressStatus.Status = ProgressLabel;
             ProgressStatus.Loading = LoadingProgress;
-            
+
             SelectedNativeTable.Text = Program.Options.NTLPath;
             Platform.Text = Program.Options.Platform;
 #if DEBUG
@@ -53,18 +77,17 @@ namespace UEExplorer.UI
 
                 var item = _ROF.MenuItems.Add
                 (
-                    _MRUManager.Files.Count - i + " " + Path.GetFileName(_MRUManager.Files[i]) + " -> " +
-                    Path.GetDirectoryName(_MRUManager.Files[i])
+                    $"{_MRUManager.Files.Count - i} {Path.GetFileName(_MRUManager.Files[i])} -> {Path.GetDirectoryName(_MRUManager.Files[i])}"
                 );
                 item.Tag = _MRUManager.Files[i];
-                item.Click += _ROF_ItemClicked;
+                item.Click += ROF_ItemClicked;
             }
 
             _ROF.Enabled = _ROF.MenuItems.Count > 0;
             _MRUManager.Save();
         }
 
-        private void _ROF_ItemClicked(object sender, EventArgs e)
+        private void ROF_ItemClicked(object sender, EventArgs e)
         {
             var item = (MenuItem)sender;
             LoadFile(item.Tag as string);
@@ -76,8 +99,10 @@ namespace UEExplorer.UI
             // Rebuild it, to reflect the changes made to the current directory of NTL files.
             SelectedNativeTable.DropDown.Items.Clear();
             foreach (string filePath in UC_Options.GetNativeTables())
+            {
                 SelectedNativeTable.DropDown.Items.Add(Path.GetFileNameWithoutExtension(filePath));
-            
+            }
+
             // In case it got changed!
             SelectedNativeTable.Text = Program.Options.NTLPath;
         }
@@ -99,33 +124,42 @@ namespace UEExplorer.UI
         {
             string extensionsPath = Path.Combine(Application.StartupPath, "Extensions");
             if (!Directory.Exists(extensionsPath))
+            {
                 return;
-            
+            }
+
             string[] files = Directory.GetFiles(extensionsPath);
             foreach (string file in files)
             {
                 if (Path.GetExtension(file) != ".dll")
+                {
                     continue;
+                }
 
                 var assembly = Assembly.LoadFile(file);
                 var types = assembly.GetExportedTypes();
                 foreach (var t in types)
                 {
                     var i = t.GetInterface("IExtension");
-                    if (i != null)
+                    if (i == null)
                     {
-                        var extensionname = "Extension";
-
-                        object[] attribs = t.GetCustomAttributes(typeof(ExtensionTitleAttribute), false);
-                        if (attribs.Length > 0) extensionname = ((ExtensionTitleAttribute)attribs[0]).Title;
-
-                        var item = menuItem13.MenuItems.Add(extensionname);
-                        var ext = (IExtension)Activator.CreateInstance(t);
-                        ext.Initialize(this);
-                        item.Click += ext.OnActivate;
-
-                        menuItem13.Enabled = true;
+                        continue;
                     }
+
+                    var ext = (IExtension)Activator.CreateInstance(t);
+                    ext.Initialize(this);
+
+                    var extensionTitleAttribute = t
+                        .GetCustomAttribute<ExtensionTitleAttribute>(false);
+                    if (extensionTitleAttribute == null)
+                    {
+                        throw new NotSupportedException("Missing ExtensionTitleAttribute on extension class");
+                    }
+
+                    string extensionName = extensionTitleAttribute.Title;
+                    var item = menuItem13.MenuItems.Add(extensionName);
+                    item.Click += ext.OnActivate;
+                    menuItem13.Enabled = true;
                 }
             }
         }
@@ -135,31 +169,11 @@ namespace UEExplorer.UI
             menuItem20.Checked = Program.AreFileTypesRegistered();
 
             if (menuItem13.Enabled)
+            {
                 return;
+            }
 
             InitializeExtensions();
-        }
-
-        public static string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-        internal ProgramForm()
-        {
-            Program.LogManager.StartLogStream();
-            Text = $"{Application.ProductName} {Version}";
-
-            InitializeComponent();
-            InitializeUserSettings();
-            InitializeConfig();
-            InitializeUI();
-
-            Tabs = new TabsCollection(this, TabComponentsStrip);
-        }
-
-        private void InitializeUserSettings()
-        {
-            WindowState = Settings.Default.WindowState;
-            Size = Settings.Default.WindowSize;
-            Location = Settings.Default.WindowLocation;
         }
 
         public void LoadFile(string filePath)
@@ -182,7 +196,10 @@ namespace UEExplorer.UI
                             Path.GetFileName(filePath)
                         );
                         var unrealFile = (UC_PackageExplorer)tabComponent;
-                        if (unrealFile == null) return;
+                        if (unrealFile == null)
+                        {
+                            return;
+                        }
 
                         unrealFile.FilePath = filePath;
                         unrealFile.PostInitialize();
@@ -191,7 +208,11 @@ namespace UEExplorer.UI
             }
             catch (Exception exception)
             {
-                if (tabComponent != null) Tabs.Remove(tabComponent);
+                if (tabComponent != null)
+                {
+                    Tabs.Remove(tabComponent);
+                }
+
                 ExceptionDialog.Show(string.Format(Resources.ProgramForm_LoadFile_Failed_loading_package,
                         filePath), exception
                 );
@@ -202,6 +223,121 @@ namespace UEExplorer.UI
 
                 _MRUManager.AddFile(filePath);
             }
+        }
+
+        private void DonateToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start(Program.Donate_URL);
+        }
+
+        private void CheckForUpdates()
+        {
+            Console.WriteLine(Resources.CHECKING_FOR_UPDATES_LOG, Version);
+            AutoUpdater.Start(string.Format(Program.UPDATE_URL, Version));
+        }
+
+        private void OnCheckForUpdates(object sender, EventArgs e)
+        {
+            var softKey = Registry.CurrentUser.OpenSubKey("Software", true);
+            var appKey = softKey?.OpenSubKey(APP_KEY);
+            if (appKey != null)
+            {
+                softKey.DeleteSubKeyTree(APP_KEY);
+            }
+
+            CheckForUpdates();
+        }
+
+        private void MenuItem7_Click(object sender, EventArgs e)
+        {
+            Tabs.Add(typeof(UC_Options), Resources.Options);
+        }
+
+        private void MenuItem24_Click(object sender, EventArgs e)
+        {
+            Process.Start(Program.Forum_URL);
+        }
+
+        private void MenuItem26_Click(object sender, EventArgs e)
+        {
+            Process.Start(Program.WEBSITE_URL);
+        }
+
+        private void Platform_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Platform.Text = e.ClickedItem.Text;
+            Program.Options.Platform = Platform.Text;
+            Program.SaveConfig();
+        }
+
+        private void MenuItem4_Click(object sender, EventArgs e)
+        {
+            Process.Start(Program.Contact_URL);
+        }
+
+        private void OpenHome_Click(object sender, EventArgs e)
+        {
+            Tabs.Add(typeof(UC_Default), Resources.Homepage);
+        }
+
+        private void SocialMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.facebook.com/UE.Explorer");
+        }
+
+        private void OnClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.LogManager.EndLogStream();
+        }
+
+        private void OnClosing(object sender, FormClosingEventArgs e)
+        {
+            if (WindowState != FormWindowState.Normal)
+            {
+                Settings.Default.WindowLocation = RestoreBounds.Location;
+                Settings.Default.WindowSize = RestoreBounds.Size;
+            }
+            else
+            {
+                Settings.Default.WindowLocation = Location;
+                Settings.Default.WindowSize = ClientSize;
+            }
+
+            Settings.Default.WindowState =
+                WindowState == FormWindowState.Minimized ? FormWindowState.Normal : WindowState;
+            Settings.Default.Save();
+        }
+
+        /// <summary>
+        ///     Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ProgressStatus.Dispose();
+                if (_MRUManager != null)
+                {
+                    _MRUManager.RefreshEvent -= RefreshMRUEvent;
+                    _MRUManager = null;
+                }
+
+                components?.Dispose();
+
+                if (Tabs != null)
+                {
+                    Tabs.Dispose();
+                    Tabs = null;
+                }
+            }
+
+            base.Dispose(disposing);
+        }
+
+        private void ReportAnIssue(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/UE-Explorer/UE-Explorer/issues");
         }
 
         #region Events
@@ -226,9 +362,14 @@ namespace UEExplorer.UI
                    })
             {
                 if (ofd.ShowDialog(this) != DialogResult.OK)
+                {
                     return;
+                }
 
-                foreach (string fileName in ofd.FileNames) LoadFile(fileName);
+                foreach (string fileName in ofd.FileNames)
+                {
+                    LoadFile(fileName);
+                }
             }
         }
 
@@ -247,10 +388,15 @@ namespace UEExplorer.UI
         private void TabComponentsStrip_TabStripItemSelectionChanged(TabStripItemChangedEventArgs e)
         {
             // This delegate is called when UE is still none on startup
-            if (Tabs.SelectedComponent == null || e.ChangeType == TabStripItemChangeTypes.Removed) return;
+            if (Tabs.SelectedComponent == null || e.ChangeType == TabStripItemChangeTypes.Removed)
+            {
+                return;
+            }
 
             if (Tabs.LastSelectedComponent != null && Tabs.LastSelectedComponent != Tabs.SelectedComponent)
+            {
                 Tabs.LastSelectedComponent.TabDeselected();
+            }
 
             Tabs.SelectedComponent.TabSelected();
             Tabs.LastSelectedComponent = Tabs.SelectedComponent;
@@ -286,7 +432,10 @@ namespace UEExplorer.UI
             string[] args = Environment.GetCommandLineArgs();
             for (var i = 1; i < args.Length; ++i)
             {
-                if (File.Exists(args[i])) LoadFile(args[i]);
+                if (File.Exists(args[i]))
+                {
+                    LoadFile(args[i]);
+                }
             }
         }
 
@@ -317,12 +466,17 @@ namespace UEExplorer.UI
             string allowedExtensions = UnrealExtensions.FormatUnrealExtensionsAsFilter();
 
             if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
                 return;
+            }
 
             var files = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string filePath in files)
             {
-                if (allowedExtensions.Contains(Path.GetExtension(filePath))) LoadFile(filePath);
+                if (allowedExtensions.Contains(Path.GetExtension(filePath)))
+                {
+                    LoadFile(filePath);
+                }
             }
         }
 
@@ -337,181 +491,6 @@ namespace UEExplorer.UI
         }
 
         #endregion
-
-        private void DonateToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(Program.Donate_URL);
-        }
-
-        private void CheckForUpdates()
-        {
-            Console.WriteLine(Resources.CHECKING_FOR_UPDATES_LOG, Version);
-            AutoUpdater.Start(string.Format(Program.UPDATE_URL, Version));
-        }
-
-        private const string APP_KEY = "EliotVU";
-
-        private void OnCheckForUpdates(object sender, EventArgs e)
-        {
-            var softKey = Registry.CurrentUser.OpenSubKey("Software", true);
-            var appKey = softKey?.OpenSubKey(APP_KEY);
-            if (appKey != null) softKey.DeleteSubKeyTree(APP_KEY);
-
-            CheckForUpdates();
-
-            //ProgressStatus.SaveStatus();
-            //ProgressStatus.SetStatus( Resources.ProgramForm_Check_for_Updates_Status );
-
-            //using( var web = new WebClient() )
-            //{
-            //    web.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-            //    web.UploadStringCompleted += ( stringSender, stringEvent ) =>
-            //    {
-            //        try
-            //        {
-            //            var result = stringEvent.Result.Trim();
-            //            if( result != Version )
-            //            {
-            //                if( MessageBox.Show(
-            //                    String.Format
-            //                    (
-            //                        Resources.NEW_VERSION_AVAILABLE_MESSAGE,
-            //                        Version,
-            //                        result
-            //                    ),
-            //                    Resources.NEW_VERSION_AVAILABLE_TITLE,
-            //                    MessageBoxButtons.YesNo ) == DialogResult.Yes )
-            //                {
-            //                    System.Diagnostics.Process.Start( Program.Program_URL );
-            //                }
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show
-            //                (
-            //                    String.Format
-            //                    (
-            //                        Resources.NO_NEW_VERSION_AVAILABLE_MESSAGE,
-            //                        Application.ProductName
-            //                    )
-            //                );
-            //            }
-            //        }
-            //        catch( Exception exc )
-            //        {
-            //            MessageBox.Show
-            //            (
-            //                String.Format
-            //                (
-            //                    Resources.CHECKFORUPDATES_FAILED_MESSAGE
-            //                    + "\r\n\r\n{0}",
-            //                    exc
-            //                ),
-            //            Resources.Error,
-            //                MessageBoxButtons.OK,
-            //                MessageBoxIcon.Error
-            //            );
-            //        }
-            //        finally
-            //        {
-            //            ProgressStatus.ResetStatus();
-            //        }
-            //    };
-            //    web.UploadStringAsync( new Uri( Program.Version_URL ), "Post", Program.Program_Parm_ID );
-            //}
-        }
-
-        private void MenuItem7_Click(object sender, EventArgs e)
-        {
-            Tabs.Add(typeof(UC_Options), Resources.Options);
-        }
-
-        private void MenuItem24_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(Program.Forum_URL);
-        }
-
-        private void MenuItem26_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(Program.WEBSITE_URL);
-        }
-
-        private void Platform_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            Platform.Text = e.ClickedItem.Text;
-            Program.Options.Platform = Platform.Text;
-            Program.SaveConfig();
-        }
-
-        private void MenuItem4_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(Program.Contact_URL);
-        }
-
-        private void OpenHome_Click(object sender, EventArgs e)
-        {
-            Tabs.Add(typeof(UC_Default), Resources.Homepage);
-        }
-
-        private void SocialMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://www.facebook.com/UE.Explorer");
-        }
-
-        private void OnClosed(object sender, FormClosedEventArgs e)
-        {
-            Program.LogManager.EndLogStream();
-        }
-
-        private void OnClosing(object sender, FormClosingEventArgs e)
-        {
-            if (WindowState != FormWindowState.Normal)
-            {
-                Settings.Default.WindowLocation = RestoreBounds.Location;
-                Settings.Default.WindowSize = RestoreBounds.Size;
-            }
-            else
-            {
-                Settings.Default.WindowLocation = Location;
-                Settings.Default.WindowSize = ClientSize;
-            }
-
-            Settings.Default.WindowState =
-                WindowState == FormWindowState.Minimized ? FormWindowState.Normal : WindowState;
-            Settings.Default.Save();
-        }
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                ProgressStatus.Dispose();
-                if (_MRUManager != null)
-                {
-                    _MRUManager.RefreshEvent -= RefreshMRUEvent;
-                    _MRUManager = null;
-                }
-
-                components?.Dispose();
-
-                if (Tabs != null)
-                {
-                    Tabs.Dispose();
-                    Tabs = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
-
-        private void ReportAnIssue(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/UE-Explorer/UE-Explorer/issues");
-        }
     }
 
     public static class ProgressStatus

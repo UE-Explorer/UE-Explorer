@@ -5,6 +5,11 @@ namespace UEExplorer.UI.Tabs
 {
     public partial class UC_Default : UserControl_Tab
     {
+        public UC_Default()
+        {
+            InitializeComponent();
+        }
+        
         /// <summary>
         /// Called when the Tab is added to the chain.
         /// </summary>

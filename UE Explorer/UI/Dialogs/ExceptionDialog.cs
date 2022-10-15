@@ -30,7 +30,10 @@ namespace UEExplorer.UI.Dialogs
                     string.Empty
                 );
                 exceptionDialog.ExceptionError.Text = error;
-                if (exceptionDialog.ShowDialog() == DialogResult.OK) exceptionDialog.SendReport();
+                if (exceptionDialog.ShowDialog() == DialogResult.OK)
+                {
+                    exceptionDialog.SendReport();
+                }
             }
         }
 

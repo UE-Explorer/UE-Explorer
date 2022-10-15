@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using Krypton.Toolkit;
 using UEExplorer.UI.Nodes;
 using UEExplorer.UI.Tabs;
 using UELib.Core;
@@ -34,6 +33,7 @@ namespace UEExplorer.UI.Panels
                     resultNode.Tag = result;
                 }
             }
+
             treeViewFindResults.EndUpdate();
         }
 
@@ -44,7 +44,7 @@ namespace UEExplorer.UI.Panels
             {
                 return;
             }
-            
+
             if (e.Node.Tag is TextSearchHelpers.FindResult findResult)
             {
                 object document = ((TextSearchHelpers.DocumentResult)e.Node.Parent.Tag).Document;

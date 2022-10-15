@@ -1,4 +1,4 @@
-﻿namespace UEExplorer.UI
+﻿namespace UEExplorer.UI.Main
 {
     partial class ProgramForm
     {
@@ -414,17 +414,20 @@
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
             this.BackgroundImage = global::UEExplorer.Properties.Resources.UE_ProgramLogo;
             this.Controls.Add(this.HomepageButton);
             this.Controls.Add(this.TabComponentsStrip);
             this.Controls.Add(this.UEStatusStrip);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::UEExplorer.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("WindowState", global::UEExplorer.Properties.Settings.Default, "WindowState", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DoubleBuffered = true;
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.Location = global::UEExplorer.Properties.Settings.Default.WindowLocation;
             this.Menu = this.mainMenu1;
             this.Name = "ProgramForm";
+            this.WindowState = global::UEExplorer.Properties.Settings.Default.WindowState;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClosed);
+            this.Load += new System.EventHandler(this.ProgramForm_Load);
             this.Shown += new System.EventHandler(this.Unreal_Explorer_Form_Shown);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragEnter);

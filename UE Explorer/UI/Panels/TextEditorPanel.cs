@@ -1,5 +1,8 @@
 ﻿using System.IO;
 using System.Windows.Forms;
+using System.Xml;
+using ICSharpCode.AvalonEdit.Highlighting;
+using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
 namespace UEExplorer.UI.Panels
 {
@@ -17,9 +20,9 @@ namespace UEExplorer.UI.Panels
             if (File.Exists(syntaxXSHDFilePath))
             {
                 TextEditorControl.TextEditor.SyntaxHighlighting =
-                    ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load(
-                        new System.Xml.XmlTextReader(syntaxXSHDFilePath),
-                        ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance
+                    HighlightingLoader.Load(
+                        new XmlTextReader(syntaxXSHDFilePath),
+                        HighlightingManager.Instance
                     );
             }
 
@@ -32,7 +35,10 @@ namespace UEExplorer.UI.Panels
         public void SetText(string text, bool resetView = true)
         {
             TextEditorControl.TextEditor.Text = text;
-            if (resetView) TextEditorControl.TextEditor.ScrollToHome();
+            if (resetView)
+            {
+                TextEditorControl.TextEditor.ScrollToHome();
+            }
         }
     }
 }

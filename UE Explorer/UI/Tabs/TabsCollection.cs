@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Storm.TabControl;
+using UEExplorer.UI.Main;
 
-namespace UEExplorer.UI
+namespace UEExplorer.UI.Tabs
 {
     public interface ITabComponent
     {
@@ -20,16 +22,11 @@ namespace UEExplorer.UI
 
     public class TabsCollection : IDisposable
     {
-        public ProgramForm Form;
+        private TabStrip _TabsControl;
         public List<ITabComponent> Components = new List<ITabComponent>();
-
-        public ITabComponent SelectedComponent
-        {
-            get { return Components.Find(tabComp => tabComp.TabItem == _TabsControl.SelectedItem); }
-        }
+        public ProgramForm Form;
 
         public ITabComponent LastSelectedComponent;
-        private TabStrip _TabsControl;
 
         public TabsCollection(ProgramForm owner, TabStrip tabsControl)
         {
@@ -37,9 +34,22 @@ namespace UEExplorer.UI
             _TabsControl = tabsControl;
         }
 
+        public ITabComponent SelectedComponent =>
+            Components.Find(tabComp => tabComp.TabItem == _TabsControl.SelectedItem);
+
+        public void Dispose()
+        {
+            Form = null;
+            _TabsControl = null;
+            Components = null;
+        }
+
         public ITabComponent Add(Type tabType, string tabName)
         {
-            if (Components.Any(tc => tc.TabItem.Title == tabName)) return null;
+            if (Components.Any(tc => tc.TabItem.Title == tabName))
+            {
+                return null;
+            }
 
             var tabItem = new TabStripItem
             {
@@ -47,7 +57,7 @@ namespace UEExplorer.UI
                 TabStripParent = _TabsControl,
                 TabIndex = 0,
                 Title = tabName,
-                BackColor = System.Drawing.Color.White
+                BackColor = Color.White
             };
 
             _TabsControl.AddTab(tabItem);
@@ -72,13 +82,6 @@ namespace UEExplorer.UI
             }
 
             Components.Remove(delComponent);
-        }
-
-        public void Dispose()
-        {
-            Form = null;
-            _TabsControl = null;
-            Components = null;
         }
     }
 }

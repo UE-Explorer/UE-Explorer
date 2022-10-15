@@ -26,7 +26,7 @@
 		/// Required method for Designer support - do not modify 
 		/// the contents of this method with the code editor.
 		/// </summary>
-		protected override void InitializeComponent()
+		private void InitializeComponent()
 		{
 			System.Windows.Forms.TableLayoutPanel TabLayout;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( UC_ModExplorer ) );

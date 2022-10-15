@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using UEExplorer.Properties;
 using UEExplorer.UI.ActionPanels;
-using UEExplorer.UI.Tabs;
 
 namespace UEExplorer.UI.Pages
 {
@@ -19,7 +18,7 @@ namespace UEExplorer.UI.Pages
             _Panel.Dock = DockStyle.Fill;
             Controls.Add(_Panel);
         }
-        
+
         public override void OnObjectTarget(object target, ContentNodeAction action, bool isPending)
         {
             if (target == null)

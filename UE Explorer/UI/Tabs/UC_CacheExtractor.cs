@@ -1,21 +1,29 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.IO;
-using UEExplorer.UI.Tabs;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using UELib.Cache;
 
-namespace UEExplorer
+namespace UEExplorer.UI.Tabs
 {
     // TODO: Save cache entries.
-    [System.Runtime.InteropServices.ComVisible(false)]
+    [ComVisible(false)]
     public partial class UC_CacheExtractor : UserControl_Tab
     {
         private UnrealCache _CurCache;
 
         public UC_CacheExtractor()
         {
+            InitializeComponent();
+        }
+
+        private void UC_CacheExtractor_Load(object sender, EventArgs e)
+        {
             _CacheData.DataSource = null;
-            if (Directory.Exists(Program.Options.InitialCachePath)) LoadCache(Program.Options.InitialCachePath);
+            if (Directory.Exists(Program.Options.InitialCachePath))
+            {
+                LoadCache(Program.Options.InitialCachePath);
+            }
         }
 
         private void Button_SelectDir_Click(object sender, EventArgs e)
@@ -54,19 +62,26 @@ namespace UEExplorer
 
         private void ExtractToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (_CacheData.SelectedRows.Count == 0) return;
-
-            if (CacheFolderDialog.ShowDialog(this) == DialogResult.OK)
+            if (_CacheData.SelectedRows.Count == 0)
             {
-                for (var i = 0; i < _CacheData.SelectedRows.Count; ++i)
+                return;
+            }
+
+            if (CacheFolderDialog.ShowDialog(this) != DialogResult.OK)
+            {
+                return;
+            }
+
+            for (var i = 0; i < _CacheData.SelectedRows.Count; ++i)
+            {
+                var r = (DataGridViewRowEx)_CacheData.SelectedRows[i];
+                if (!_CurCache.ExtractCacheEntry(r.CacheIndex, CacheFolderDialog.SelectedPath))
                 {
-                    var r = (DataGridViewRowEx)_CacheData.SelectedRows[i];
-                    if (_CurCache.ExtractCacheEntry(r.CacheIndex, CacheFolderDialog.SelectedPath))
-                    {
-                        RemoveRow(r.Index);
-                        UpdateAllCacheIndex(r.CacheIndex);
-                    }
+                    continue;
                 }
+
+                RemoveRow(r.Index);
+                UpdateAllCacheIndex(r.CacheIndex);
             }
         }
 
@@ -75,11 +90,13 @@ namespace UEExplorer
             for (var i = 0; i < _CacheData.SelectedRows.Count; ++i)
             {
                 var r = (DataGridViewRowEx)_CacheData.SelectedRows[i];
-                if (_CurCache.DeleteCacheEntry(r.CacheIndex))
+                if (!_CurCache.DeleteCacheEntry(r.CacheIndex))
                 {
-                    RemoveRow(r.Index);
-                    UpdateAllCacheIndex(r.CacheIndex);
+                    continue;
                 }
+
+                RemoveRow(r.Index);
+                UpdateAllCacheIndex(r.CacheIndex);
             }
         }
 
@@ -88,11 +105,13 @@ namespace UEExplorer
             for (var i = 0; i < _CacheData.SelectedRows.Count; ++i)
             {
                 var r = (DataGridViewRowEx)_CacheData.SelectedRows[i];
-                if (_CurCache.RemoveCacheEntry(r.CacheIndex))
+                if (!_CurCache.RemoveCacheEntry(r.CacheIndex))
                 {
-                    RemoveRow(r.Index);
-                    UpdateAllCacheIndex(r.CacheIndex);
+                    continue;
                 }
+
+                RemoveRow(r.Index);
+                UpdateAllCacheIndex(r.CacheIndex);
             }
         }
 
@@ -107,7 +126,10 @@ namespace UEExplorer
             for (var i = 0; i < _CacheData.Rows.Count; ++i)
             {
                 var r = (DataGridViewRowEx)_CacheData.Rows[i];
-                if (removedIndex < r.CacheIndex) --r.CacheIndex;
+                if (removedIndex < r.CacheIndex)
+                {
+                    --r.CacheIndex;
+                }
             }
         }
 
@@ -116,11 +138,13 @@ namespace UEExplorer
             for (var i = 0; i < _CacheData.Rows.Count; ++i)
             {
                 var filename = (string)_CacheData.Rows[i].Cells[2].Value;
-                if (!File.Exists(Path.Combine(Program.Options.InitialCachePath, filename + ".uxx")))
+                if (File.Exists(Path.Combine(Program.Options.InitialCachePath, filename + ".uxx")))
                 {
-                    RemoveRow(i);
-                    --i;
+                    continue;
                 }
+
+                RemoveRow(i);
+                --i;
             }
         }
     }

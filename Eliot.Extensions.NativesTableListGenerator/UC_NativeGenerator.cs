@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using UEExplorer.UI.Tabs;
 using UELib;
 using UELib.Core;
-using UEExplorer.Development;
-using UEExplorer.UI;
 
 namespace Eliot.Extensions.NativesTableListGenerator
 {
-    [System.Runtime.InteropServices.ComVisible(false)]
+    [ComVisible(false)]
     public partial class UC_NativeGenerator : UserControl_Tab
     {
         private readonly NativesTablePackage _NTLPackage = new NativesTablePackage();
 
         public UC_NativeGenerator()
         {
+            InitializeComponent();
+
             _NTLPackage.NativeTableList = new List<NativeTableItem>();
         }
 
@@ -64,8 +65,9 @@ namespace Eliot.Extensions.NativesTableListGenerator
                     itemNode.Nodes.Add("ByteToken:" + item.ByteToken);
                     itemNode.Nodes.Add("OperPrecedence:" + item.OperPrecedence);
                 }
+
                 TreeView_Packages.EndUpdate();
-                
+
                 package.Dispose();
             }
         }
@@ -81,29 +83,6 @@ namespace Eliot.Extensions.NativesTableListGenerator
                     "NativesTableList_" + FileNameTextBox.Text
                 )
             );
-        }
-    }
-
-    [ExtensionTitle("NTL Generator")]
-    public class ExtNativeGen : IExtension
-    {
-        private ProgramForm _Form;
-
-        /// <summary>
-        /// Called after UEExplorer_Form is initialized.
-        /// </summary>
-        /// <param name="form"></param>
-        public void Initialize(ProgramForm form)
-        {
-            _Form = form;
-        }
-
-        /// <summary>
-        /// Called when activated by end-user.
-        /// </summary>
-        public void OnActivate(object sender, EventArgs e)
-        {
-            _Form.Tabs.Add(typeof(UC_NativeGenerator), "Natives Table List Generator");
         }
     }
 }

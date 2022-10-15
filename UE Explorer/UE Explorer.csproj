@@ -230,10 +230,8 @@
       <HintPath>libs\Storm.TabControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Design" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Drawing" />
@@ -246,11 +244,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Development\IExtension.cs" />
-    <Compile Include="Properties\Resources.nl1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.nl.resx</DependentUpon>
-    </Compile>
     <Compile Include="UI\ActionPanels\ActionPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -262,6 +255,7 @@
     </Compile>
     <Compile Include="UI\Nodes\ObjectActionsBuilder.cs" />
     <Compile Include="UI\ObjectActionManager.cs" />
+    <Compile Include="UI\ObjectTargetEventArgs.cs" />
     <Compile Include="UI\Pages\BinaryPage.cs" />
     <Compile Include="UI\EditorUtil.cs" />
     <Compile Include="ExportHelpers.cs" />
@@ -684,7 +678,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

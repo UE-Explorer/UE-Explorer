@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using UELib;
-using UELib.Core;
 using UELib.Flags;
 
 namespace UEExplorer
@@ -22,7 +21,10 @@ namespace UEExplorer
             if (Directory.Exists(exportPath))
             {
                 string[] files = Directory.GetFiles(exportPath);
-                foreach (string file in files) File.Delete(exportPath + file);
+                foreach (string file in files)
+                {
+                    File.Delete(exportPath + file);
+                }
             }
 
             string classPath = Path.Combine(exportPath, ClassesDir);
@@ -32,7 +34,8 @@ namespace UEExplorer
 
         public static void CreateUPKGFile(this UnrealPackage package, string exportPath)
         {
-            string[] upkgContent = {
+            string[] upkgContent =
+            {
                 "[Flags]",
                 "AllowDownload=" + package.Summary.PackageFlags.HasFlag(PackageFlags.AllowDownload),
                 "ClientOptional=" + package.Summary.PackageFlags.HasFlag(PackageFlags.ClientOptional),
@@ -66,7 +69,7 @@ namespace UEExplorer
                 }
                 catch (Exception e)
                 {
-                    Console.Error.WriteLine("Couldn't decompile object " + obj + "\r\n" + e);
+                    Console.Error.WriteLine($"Couldn't decompile object {obj}\r\n{e}");
                 }
             }
 

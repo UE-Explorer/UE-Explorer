@@ -13,11 +13,10 @@ using UEExplorer.UI.Dialogs;
 using UELib;
 using UELib.Types;
 using Eliot.Utilities;
+using UEExplorer.UI.Main;
 
 namespace UEExplorer
 {
-    using UI;
-
     public static class Program
     {
         [STAThread]
@@ -25,14 +24,14 @@ namespace UEExplorer
         {
             try
             {
-                foreach (string arg in args) Console.WriteLine("Argument: " + arg);
+                foreach (string arg in args) Console.WriteLine($"Argument: {arg}");
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
                 if (args.Length >= 2 && ((IList)args).Contains("-console"))
                 {
-                    var console = new UI.Main.ProgramConsole();
+                    var console = new ProgramConsole();
                     Application.Run(console);
                     Application.Exit();
                 }

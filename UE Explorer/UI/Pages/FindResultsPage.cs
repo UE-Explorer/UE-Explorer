@@ -1,8 +1,8 @@
-﻿using Krypton.Navigator;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Krypton.Navigator;
 using UEExplorer.Properties;
 using UEExplorer.UI.Panels;
 using UELib;
@@ -11,14 +11,14 @@ namespace UEExplorer.UI.Pages
 {
     public class FindResultsPage : KryptonPage
     {
-        public FindResultsPanel FindResultsPanel { get; }
-
         public FindResultsPage()
         {
             FindResultsPanel = new FindResultsPanel();
             FindResultsPanel.Dock = DockStyle.Fill;
             Controls.Add(FindResultsPanel);
         }
+
+        public FindResultsPanel FindResultsPanel { get; }
 
         public async Task PerformSearch(List<IUnrealDecompilable> contents, string searchText)
         {
@@ -31,7 +31,10 @@ namespace UEExplorer.UI.Pages
                 {
                     string textContent = content.Decompile();
                     var findResults = TextSearchHelpers.FindText(textContent, searchText);
-                    if (!findResults.Any()) continue;
+                    if (!findResults.Any())
+                    {
+                        continue;
+                    }
 
                     var document = new TextSearchHelpers.DocumentResult
                     {
@@ -40,7 +43,6 @@ namespace UEExplorer.UI.Pages
                     };
                     documentResults.Add(document);
                 }
-
             });
             FindResultsPanel.BuildTreeFromDocumentResults(documentResults);
         }

@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using Krypton.Navigator;
 using Krypton.Docking;
 using UEExplorer.Properties;
 using UEExplorer.UI.Forms;
+using UEExplorer.UI.Main;
 using UEExplorer.UI.Pages;
 using UELib.Annotations;
 
@@ -21,7 +23,7 @@ namespace UEExplorer.UI.Tabs
     using UELib;
     using UELib.Core;
 
-    [System.Runtime.InteropServices.ComVisible(false)]
+    [ComVisible(false)]
     public partial class UC_PackageExplorer : UserControl_Tab
     {
         public string FilePath { get; set; }
@@ -31,8 +33,12 @@ namespace UEExplorer.UI.Tabs
         /// </summary>
         [CanBeNull] private UnrealPackage _UnrealPackage;
 
-
         private PackageExplorerPage _PackageExplorerPage;
+
+        public UC_PackageExplorer()
+        {
+            InitializeComponent();
+        }
 
         private void UC_PackageExplorer_Load(object sender, EventArgs e)
         {
@@ -42,8 +48,9 @@ namespace UEExplorer.UI.Tabs
             var workSpace = kryptonDockingManagerMain.ManageWorkspace("Workspace", kryptonDockableWorkspaceMain);
             var viewControl = kryptonDockingManagerMain.ManageControl("View", dockingPanel);
 
-            if (File.Exists(Program.DockingConfigPath)) kryptonDockingManagerMain.LoadConfigFromFile(Program.DockingConfigPath);
-            
+            if (File.Exists(Program.DockingConfigPath))
+                kryptonDockingManagerMain.LoadConfigFromFile(Program.DockingConfigPath);
+
             _PackageExplorerPage = CreatePackageExplorerPage();
             var expSpace = kryptonDockingManagerMain.AddDockspace(
                 "Nav",
@@ -66,8 +73,8 @@ namespace UEExplorer.UI.Tabs
         private PackageExplorerPage CreatePackageExplorerPage()
         {
             var page = new PackageExplorerPage();
-            page.ClearFlags(KryptonPageFlags.DockingAllowClose | 
-                            KryptonPageFlags.DockingAllowFloating | 
+            page.ClearFlags(KryptonPageFlags.DockingAllowClose |
+                            KryptonPageFlags.DockingAllowFloating |
                             KryptonPageFlags.DockingAllowWorkspace);
             return page;
         }
@@ -111,7 +118,7 @@ namespace UEExplorer.UI.Tabs
             if (Program.Options.bForceLicenseeMode)
                 UnrealPackage.OverrideLicenseeVersion = Program.Options.LicenseeMode;
 
-            if (Program.Options.bForceVersion) 
+            if (Program.Options.bForceVersion)
                 UnrealPackage.OverrideVersion = Program.Options.Version;
 
             UnrealConfig.SuppressSignature = false;
@@ -120,7 +127,7 @@ namespace UEExplorer.UI.Tabs
                 typeof(UnrealConfig.CookedPlatform),
                 Tabs.Form.Platform.Text, true
             );
-            
+
             // Open the file.
         reload:
             ProgressStatus.SetStatus(Resources.PACKAGE_LOADING);
@@ -177,6 +184,7 @@ namespace UEExplorer.UI.Tabs
                     _UnrealPackage.NTLPackage = new NativesTablePackage();
                     _UnrealPackage.NTLPackage.LoadPackage(ntlFilePath);
                 }
+
                 InitializePackageObjects();
             }
         }
@@ -187,7 +195,7 @@ namespace UEExplorer.UI.Tabs
             var rootPackageNode = _PackageExplorerPage.PackageExplorerPanel.CreateRootPackageNode(_UnrealPackage);
             _PackageExplorerPage.PackageExplorerPanel.AddRootPackageNode(rootPackageNode);
         }
-        
+
         private void LinkPackageData(UnrealPackage linker)
         {
             // ??? Move tables to their own dock page.
@@ -204,13 +212,13 @@ namespace UEExplorer.UI.Tabs
         private void InitializePackageObjects()
         {
             Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
-            if (_UnrealPackage.Names == null || 
-                _UnrealPackage.Exports == null || 
+            if (_UnrealPackage.Names == null ||
+                _UnrealPackage.Exports == null ||
                 _UnrealPackage.Imports == null)
             {
                 throw new UnrealException($"Invalid data for package {FilePath}");
             }
-            
+
             ProgressStatus.ResetValue();
             int max = Program.Options.InitFlags.HasFlag(UnrealPackage.InitFlags.Construct)
                 ? _UnrealPackage.Exports.Count + _UnrealPackage.Imports.Count
@@ -252,9 +260,8 @@ namespace UEExplorer.UI.Tabs
 
         private void LinkPackageObjects()
         {
-
         }
-        
+
         private bool IsPackageCompressed()
         {
             return _UnrealPackage.Summary.CompressedChunks != null &&
@@ -276,13 +283,13 @@ namespace UEExplorer.UI.Tabs
         protected override void Dispose(bool disposing)
         {
             Debug.WriteLine("Disposing UC_PackageExplorer " + disposing);
-            
+
             if (_UnrealPackage != null)
             {
                 _UnrealPackage.Dispose();
                 _UnrealPackage = null;
             }
-            
+
             kryptonDockingManagerMain.SaveConfigToFile(Path.Combine(Application.StartupPath, "Docking.xml"));
 
             base.Dispose(disposing);
@@ -435,6 +442,7 @@ namespace UEExplorer.UI.Tabs
                     {
                         tag = item.Object;
                     }
+
                     break;
 
                 // Probably an UObject
@@ -442,6 +450,7 @@ namespace UEExplorer.UI.Tabs
                     tag = target;
                     break;
             }
+
             return tag;
         }
 
@@ -480,7 +489,7 @@ namespace UEExplorer.UI.Tabs
                     //    UpdateContentPanel(target, ContentNodeAction.Decompile);
                     //    if (trackHistory) TrackNodeAction(node, target, ContentNodeAction.Decompile);
                     //    return;
-                
+
                     default:
                         return;
                 }
@@ -491,7 +500,7 @@ namespace UEExplorer.UI.Tabs
             {
                 TrackNodeAction(target, tag, action);
             }
-            
+
             var obj = tag as UObject;
             try
             {
@@ -661,7 +670,7 @@ namespace UEExplorer.UI.Tabs
 
                             UpdateContentPanel(unStruct.Default, ContentNodeAction.Decompile);
                         }
-                        
+
                         break;
                     }
 
@@ -794,7 +803,7 @@ namespace UEExplorer.UI.Tabs
                         .ToList();
                     SwitchContentPanel(target, ContentNodeAction.Binary);
                     break;
-                
+
                 case ContentNodeAction.Binary:
                     pages = kryptonDockingManagerMain.Pages
                         .OfType<ObjectBoundPage>()
@@ -802,11 +811,11 @@ namespace UEExplorer.UI.Tabs
                         .ToList();
 
                     break;
-                
+
                 default:
                     throw new NotSupportedException();
             }
-            
+
             if (pages.Any())
             {
                 foreach (var page in pages)
@@ -834,10 +843,7 @@ namespace UEExplorer.UI.Tabs
         {
             using (var findDialog = new FindDialog())
             {
-                findDialog.FindNext += (sender, e) =>
-                {
-                    EmitFind(e.FindText);
-                };
+                findDialog.FindNext += (sender, e) => { EmitFind(e.FindText); };
                 findDialog.ShowDialog();
             }
         }
@@ -846,6 +852,7 @@ namespace UEExplorer.UI.Tabs
         private int _CurrentHistoryIndex = -1;
 
         private object _CurrentContentTarget;
+
         public object CurrentContentTarget
         {
             get => _CurrentContentTarget;
@@ -868,7 +875,7 @@ namespace UEExplorer.UI.Tabs
                 case ContentNodeAction.ViewTableBuffer:
                     return;
             }
-            
+
             if (_ContentHistory.Count > 0)
             {
                 // No need to buffer the same content
@@ -880,7 +887,7 @@ namespace UEExplorer.UI.Tabs
 
                 // Preserve the text editor state of the last action.
                 UpdateContentHistoryData(_CurrentHistoryIndex);
-                
+
                 // Clean all above buffers when a new node was user-selected
                 if (_ContentHistory.Count - 1 - _CurrentHistoryIndex > 0)
                 {
@@ -889,15 +896,15 @@ namespace UEExplorer.UI.Tabs
                     NextButton.Enabled = false;
                 }
             }
-            
+
             // Maximum 10 can be buffered; remove last one
             if (_ContentHistory.Count + 1 > 15)
                 _ContentHistory.RemoveRange(0, 1);
-            
+
             var data = new ActionState
             {
-                SelectedNode = node, 
-                Target = target, 
+                SelectedNode = node,
+                Target = target,
                 Action = action
             };
             _ContentHistory.Add(data);
@@ -919,7 +926,7 @@ namespace UEExplorer.UI.Tabs
             var data = _ContentHistory[historyIndex];
             CurrentContentTarget = data.Target;
             PerformNodeAction(data.Target, data.Action, false);
-            
+
             if (data.SelectedNode is TreeNode selectedNode)
             {
                 RestoreSelectedNode(selectedNode);
@@ -932,7 +939,7 @@ namespace UEExplorer.UI.Tabs
         private void ToolStripButton_Backward_Click(object sender, EventArgs e)
         {
             Debug.Assert(_CurrentHistoryIndex - 1 >= 0);
-            
+
             UpdateContentHistoryData(_CurrentHistoryIndex);
             RestoreContentHistoryData(--_CurrentHistoryIndex);
 
@@ -943,7 +950,7 @@ namespace UEExplorer.UI.Tabs
         private void ToolStripButton_Forward_Click(object sender, EventArgs e)
         {
             Debug.Assert(_CurrentHistoryIndex + 1 < _ContentHistory.Count);
-            
+
             UpdateContentHistoryData(_CurrentHistoryIndex);
             RestoreContentHistoryData(++_CurrentHistoryIndex);
 
@@ -986,7 +993,7 @@ namespace UEExplorer.UI.Tabs
         public async void PerformSearchIn<T>(string searchText) where T : UObject
         {
             Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
-            
+
             var findPage = CreateFindPage();
             kryptonDockingManagerMain.AddDockspace("Nav", DockingEdge.Left, new KryptonPage[] { findPage });
             kryptonDockingManagerMain.ShowPage(findPage);
@@ -995,7 +1002,7 @@ namespace UEExplorer.UI.Tabs
                 .OfType<T>()
                 .Where(c => c.ExportTable != null)
                 .ToList<IUnrealDecompilable>();
-            
+
             ProgressStatus.SaveStatus();
             ProgressStatus.SetStatus(Resources.SEARCHING_CLASSES_STATUS);
             try
@@ -1007,7 +1014,7 @@ namespace UEExplorer.UI.Tabs
                 ProgressStatus.Reset();
             }
         }
-        
+
         private void FindInDocumentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditorFindTextBox.Focus();
@@ -1036,11 +1043,11 @@ namespace UEExplorer.UI.Tabs
         private bool PerformActionByObjectPath(string objectGroup)
         {
             Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
-            
+
             var obj = _UnrealPackage.FindObjectByGroup(objectGroup);
-            if (obj == null) 
+            if (obj == null)
                 return false;
-            
+
             PerformNodeAction(obj, ContentNodeAction.Auto);
             return true;
         }
@@ -1054,16 +1061,17 @@ namespace UEExplorer.UI.Tabs
                     break;
             }
         }
-        
+
         internal static UC_PackageExplorer Traverse(Control parent)
         {
             for (var c = parent; c != null; c = c.Parent)
             {
-                if ((c is UC_PackageExplorer packageExplorer)) return packageExplorer;
+                if (c is UC_PackageExplorer packageExplorer) return packageExplorer;
             }
+
             throw new NotSupportedException();
         }
-        
+
         public void EmitObjectNodeAction(object target, ContentNodeAction action)
         {
             PerformNodeAction(target, action);
@@ -1080,7 +1088,7 @@ namespace UEExplorer.UI.Tabs
         }
 
         // FIXME: Find a better way to propagate commands down the docked pages.
-        
+
         public void EmitFind(string text)
         {
             var pages = kryptonDockingManagerMain.PagesWorkspace

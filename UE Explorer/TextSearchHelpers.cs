@@ -4,30 +4,6 @@ namespace UEExplorer
 {
     public static class TextSearchHelpers
     {
-        public class FindResult
-        {
-            public int TextIndex;
-            public int TextLength;
-            public int TextLine { get; set; }
-            public int TextColumn { get; set; }
-
-            public override string ToString()
-            {
-                return $"({TextLine}, {TextColumn})";
-            }
-        };
-
-        public class DocumentResult
-        {
-            public object Document { get; set; }
-            public List<FindResult> Results { get; set; }
-
-            public override string ToString()
-            {
-                return Document.ToString();
-            }
-        };
-
         public static List<FindResult> FindText(string text, string keyword)
         {
             keyword = keyword.ToLower();
@@ -73,6 +49,30 @@ namespace UEExplorer
             }
 
             return results;
+        }
+
+        public class FindResult
+        {
+            public int TextIndex;
+            public int TextLength;
+            public int TextLine { get; set; }
+            public int TextColumn { get; set; }
+
+            public override string ToString()
+            {
+                return $"({TextLine}, {TextColumn})";
+            }
+        }
+
+        public class DocumentResult
+        {
+            public object Document { get; set; }
+            public List<FindResult> Results { get; set; }
+
+            public override string ToString()
+            {
+                return Document.ToString();
+            }
         }
     }
 }

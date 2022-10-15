@@ -685,7 +685,7 @@ namespace UEExplorer.UI.Forms
             {
                 var obj = Target.GetBuffer()
                     .ParseObject(UnrealReader.ReadIndexFromBuffer(bufferSelection, Target.GetBuffer()));
-                DissambledObject.Text = obj == null ? Resources.NOT_AVAILABLE : obj.GetOuterGroup();
+                DissambledObject.Text = obj == null ? Resources.NOT_AVAILABLE : obj.GetPath();
             }
             catch
             {

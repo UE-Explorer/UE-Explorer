@@ -15,7 +15,7 @@ namespace UEExplorer.UI.ActionPanels
                 string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
                 EditorUtil.FindText(TextEditorPanel.TextEditorControl.TextEditor, selectedText);
             };
-            
+
             TextEditorPanel.TextEditorControl.SearchInClasses.Click += (sender, args) =>
             {
                 string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
@@ -28,7 +28,22 @@ namespace UEExplorer.UI.ActionPanels
                 UC_PackageExplorer.Traverse(Parent).EmitSearchObjectByPath(selectedText.Trim());
             };
         }
-        
+
+        public void RestoreState(ref ActionState state)
+        {
+            TextEditorPanel.TextEditorControl.TextEditor.ScrollToVerticalOffset(state.Y);
+            TextEditorPanel.TextEditorControl.TextEditor.ScrollToHorizontalOffset(state.X);
+            TextEditorPanel.TextEditorControl.TextEditor.Select(state.SelectStart, state.SelectLength);
+        }
+
+        public void StoreState(ref ActionState state)
+        {
+            state.X = TextEditorPanel.TextEditorControl.TextEditor.HorizontalOffset;
+            state.Y = TextEditorPanel.TextEditorControl.TextEditor.VerticalOffset;
+            state.SelectStart = TextEditorPanel.TextEditorControl.TextEditor.SelectionStart;
+            state.SelectLength = TextEditorPanel.TextEditorControl.TextEditor.SelectionLength;
+        }
+
         protected override void UpdateOutput(object target)
         {
             if (target == null)
@@ -49,26 +64,11 @@ namespace UEExplorer.UI.ActionPanels
                     TextEditorPanel.SetText(s);
                     break;
                 }
-                
+
                 default:
                     TextEditorPanel.SetText("");
                     break;
             }
-        }
-
-        public void RestoreState(ref ActionState state)
-        {
-            TextEditorPanel.TextEditorControl.TextEditor.ScrollToVerticalOffset(state.Y);
-            TextEditorPanel.TextEditorControl.TextEditor.ScrollToHorizontalOffset(state.X);
-            TextEditorPanel.TextEditorControl.TextEditor.Select(state.SelectStart, state.SelectLength);
-        }   
-
-        public void StoreState(ref ActionState state)
-        {
-            state.X = TextEditorPanel.TextEditorControl.TextEditor.HorizontalOffset;
-            state.Y = TextEditorPanel.TextEditorControl.TextEditor.VerticalOffset;
-            state.SelectStart = TextEditorPanel.TextEditorControl.TextEditor.SelectionStart;
-            state.SelectLength = TextEditorPanel.TextEditorControl.TextEditor.SelectionLength;
         }
     }
 }

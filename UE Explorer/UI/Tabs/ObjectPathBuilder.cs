@@ -3,7 +3,7 @@ using UELib.Core;
 
 namespace UEExplorer.UI.Tabs
 {
-    public class ObjectPathBuilder
+    public static class ObjectPathBuilder
     {
         public static string GetPath(object obj)
         {
@@ -12,7 +12,7 @@ namespace UEExplorer.UI.Tabs
 
         public static string GetPath(UObject obj)
         {
-            return obj.GetOuterGroup();
+            return obj.GetPath();
         }
 
         public static string GetPath(IBinaryData obj)
