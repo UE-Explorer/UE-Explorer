@@ -1,7 +1,7 @@
 ﻿using UELib;
 using UELib.Core;
 
-namespace UEExplorer.UI.Tabs
+namespace UEExplorer.UI
 {
     public static class ObjectPathBuilder
     {

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
@@ -38,7 +37,7 @@ namespace UEExplorer.UI.Nodes
             
             var uObject = value as UObject;
             string text = uObject != null
-                ? $"{displayName}: {uObject.GetPath()}" 
+                ? $"{displayName}: {ObjectPathBuilder.GetPath(uObject)}" 
                 : displayName;
 
             string imageKey = uObject != null 
@@ -141,21 +140,47 @@ namespace UEExplorer.UI.Nodes
 
         public static TreeNode CreateNode([NotNull] UnrealPackage linker)
         {
+            string imageKey = _ObjectImageKeySelector.Visit(linker);
             // TODO: Displace in UELib 2.0 using an ObjectNode referring the UnrealPackage.RootPackage object.
             var node = new TreeNode(linker.PackageName)
             {
                 Name = linker.PackageName,
-                ImageKey = "Namespace",
-                SelectedImageKey = "Namespace",
+                ImageKey = imageKey,
+                SelectedImageKey = imageKey,
                 Tag = linker,
-                ToolTipText = linker.FullPackageName
             };
             return node;
+        }
+        
+        public static string GetTreeNodeToolTipText(TreeNode node)
+        {
+            switch (node.Tag)
+            {
+                case UnrealPackage linker:
+                    return GetTreeNodeToolTipText(linker);
+
+                case UObjectTableItem item:
+                    return GetTreeNodeToolTipText(item);
+            }
+            return string.Empty;
+        }
+
+        public static string GetTreeNodeToolTipText(UObjectTableItem item)
+        {
+            return $"Path: {item.Object?.GetReferencePath()}\r\n" +
+                   $"Index: {(int)item}";
+        }
+
+        public static string GetTreeNodeToolTipText(UnrealPackage linker)
+        {
+            return $"Path: {linker.FullPackageName}\r\n" +
+                   $"Version: {linker.Version}/{linker.LicenseeVersion.ToString().PadLeft(3, '0')}\r\n" +
+                   $"Build: {linker.Build}";
         }
 
         public static string GetTreeNodeText(UObject obj)
         {
-            return obj.GetPath();
+            return ObjectPathBuilder.GetPath(obj);
         }
 
         public static string GetTreeNodeText(UObjectTableItem item)

@@ -1,5 +1,6 @@
 ﻿using UELib;
 using UELib.Core;
+using UELib.Engine;
 using UELib.Flags;
 
 namespace UEExplorer.UI.Nodes
@@ -9,68 +10,76 @@ namespace UEExplorer.UI.Nodes
         public override string Visit(IAcceptable visitor)
         {
             string key = Visit((dynamic)visitor);
-            return key ?? visitor.GetType().Name;
+            return key ?? "Content";
         }
 
-        public string Visit(UObject uObject)
+        public string Visit(UnrealPackage linker)
         {
-            return uObject.GetType().IsSubclassOf(typeof(UProperty)) 
-                ? nameof(UProperty) 
-                : "UObject";
+            return "UnrealPackageFile";
         }
 
-        public string Visit(UProperty uProperty)
+        public string Visit(UObject obj)
         {
-            if (uProperty.HasPropertyFlag(PropertyFlagsLO.ReturnParm)) return "ReturnValue";
+            return obj.GetType().Name;
+        }
+
+        public string Visit(UProperty obj)
+        {
+            if (obj.HasPropertyFlag(PropertyFlagsLO.ReturnParm)) return "ReturnValue";
 
             const string key = nameof(UProperty);
-            if (uProperty.IsProtected()) return $"{key}-Protected";
+            if (obj.IsProtected()) return $"{key}-Protected";
 
-            if (uProperty.IsPrivate()) return $"{key}-Private";
+            if (obj.IsPrivate()) return $"{key}-Private";
 
             return key;
         }
 
-        public string Visit(UScriptStruct uScriptStruct)
+        public string Visit(UScriptStruct obj)
         {
             return nameof(UStruct);
         }
 
-        public string Visit(UFunction uFunction)
+        public string Visit(UFunction obj)
         {
             string key;
-            if (uFunction.HasFunctionFlag(FunctionFlags.Event))
+            if (obj.HasFunctionFlag(FunctionFlags.Event))
                 key = "Event";
-            else if (uFunction.HasFunctionFlag(FunctionFlags.Delegate))
+            else if (obj.HasFunctionFlag(FunctionFlags.Delegate))
                 key = "Delegate";
-            else if (uFunction.HasFunctionFlag(FunctionFlags.Operator))
+            else if (obj.HasFunctionFlag(FunctionFlags.Operator))
                 key = "Operator";
             else key = nameof(UFunction);
 
-            if (uFunction.IsProtected()) return $"{key}-Protected";
+            if (obj.IsProtected()) return $"{key}-Protected";
 
-            if (uFunction.IsPrivate()) return $"{key}-Private";
+            if (obj.IsPrivate()) return $"{key}-Private";
 
             return key;
         }
 
-        public string Visit(UPackage uPackage)
+        public string Visit(UClass obj)
         {
-            return "Namespace";
-        }
+            if (obj.IsClassInterface()) return "Interface";
 
-        public string Visit(UTextBuffer uTextBuffer)
-        {
-            return "text-left";
-        }
-
-        public string Visit(UClass uClass)
-        {
-            if (uClass.IsClassInterface()) return "Interface";
-
-            if (uClass.IsClassWithin()) return "UClass-Within";
+            if (obj.IsClassWithin()) return "UClass-Within";
 
             return nameof(UClass);
+        }
+
+        public string Visit(USound obj)
+        {
+            return nameof(USound);
+        }
+
+        public string Visit(UFont obj)
+        {
+            return nameof(UFont);
+        }
+
+        public string Visit(AActor obj)
+        {
+            return nameof(AActor);
         }
     }
 }

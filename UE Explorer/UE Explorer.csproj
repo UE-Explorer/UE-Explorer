@@ -355,7 +355,7 @@
       <DependentUpon>TextEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Tabs\ActionState.cs" />
-    <Compile Include="UI\Tabs\ObjectPathBuilder.cs" />
+    <Compile Include="UI\ObjectPathBuilder.cs" />
     <Compile Include="UI\Tabs\UC_Default.cs">
       <SubType>UserControl</SubType>
     </Compile>

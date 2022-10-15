@@ -248,7 +248,13 @@ namespace UEExplorer.UI.ActionPanels
             var action = (ContentNodeAction)e.ClickedItem.Tag;
             UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(TreeViewPackages.SelectedNode, action);
         }
-        
+
+        private void TreeViewPackages_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
+        {
+            string newToolTipText = ObjectTreeFactory.GetTreeNodeToolTipText(e.Node);
+            e.Node.ToolTipText = newToolTipText;
+        }
+
         private void TreeViewPackages_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button != MouseButtons.Right)
