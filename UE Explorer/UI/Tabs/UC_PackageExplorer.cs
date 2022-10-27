@@ -761,6 +761,9 @@ namespace UEExplorer.UI.Tabs
                             return null;
                     }
 
+                case ContextActionKind.Play:
+                    return CreateTrackingPage<WavePlayerPage>(isTracking);
+
                 case ContextActionKind.Decompile:
                     return CreateTrackingPage<DecompilerPage>(isTracking);
 
