@@ -184,9 +184,9 @@ namespace UEExplorer.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Decompile: {0}.
         /// </summary>
-        internal static string DecompilerPage_SetNewObjectTarget_Decompile___0_ {
+        internal static string DecompilerPage_OnObjectTarget_Decompile___0_ {
             get {
-                return ResourceManager.GetString("DecompilerPage_SetNewObjectTarget_Decompile___0_", resourceCulture);
+                return ResourceManager.GetString("DecompilerPage_OnObjectTarget_Decompile___0_", resourceCulture);
             }
         }
         
@@ -233,15 +233,6 @@ namespace UEExplorer.Properties {
         internal static string ExceptionDialog_THANKS {
             get {
                 return ResourceManager.GetString("ExceptionDialog_THANKS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Export As....
-        /// </summary>
-        internal static string EXPORT_AS {
-            get {
-                return ResourceManager.GetString("EXPORT_AS", resourceCulture);
             }
         }
         
@@ -415,15 +406,6 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid Object index {0}.
-        /// </summary>
-        internal static string INVALID_OBJECT_INDEX {
-            get {
-                return ResourceManager.GetString("INVALID_OBJECT_INDEX", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Linking Objects....
         /// </summary>
         internal static string LINKING_OBJECTS {
@@ -489,11 +471,20 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DefaultProperties Buffer.
+        ///   Looks up a localized string similar to Decompile.
         /// </summary>
-        internal static string NodeItem_DefaultBuffer {
+        internal static string NodeItem_Decompile {
             get {
-                return ResourceManager.GetString("NodeItem_DefaultBuffer", resourceCulture);
+                return ResourceManager.GetString("NodeItem_Decompile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export As....
+        /// </summary>
+        internal static string NodeItem_ExportAs {
+            get {
+                return ResourceManager.GetString("NodeItem_ExportAs", resourceCulture);
             }
         }
         
@@ -507,15 +498,6 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Managed Properties.
-        /// </summary>
-        internal static string NodeItem_ManagedProperties {
-            get {
-                return ResourceManager.GetString("NodeItem_ManagedProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Open in UE Model Viewer.
         /// </summary>
         internal static string NodeItem_OpenInUEModelViewer {
@@ -525,7 +507,25 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Buffer.
+        ///   Looks up a localized string similar to Afspelen.
+        /// </summary>
+        internal static string NodeItem_Play {
+            get {
+                return ResourceManager.GetString("NodeItem_Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Binary Fields.
+        /// </summary>
+        internal static string NodeItem_ViewBinaryFields {
+            get {
+                return ResourceManager.GetString("NodeItem_ViewBinaryFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Buffer....
         /// </summary>
         internal static string NodeItem_ViewBuffer {
             get {
@@ -534,7 +534,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Content.
+        ///   Looks up a localized string similar to View Content....
         /// </summary>
         internal static string NodeItem_ViewContent {
             get {
@@ -543,25 +543,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View CPP Script.
-        /// </summary>
-        internal static string NodeItem_ViewCPPText {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewCPPText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View DefaultProperties.
-        /// </summary>
-        internal static string NodeItem_ViewDefaultProperties {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewDefaultProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Disassembled Tokens.
+        ///   Looks up a localized string similar to Decompile Disassembled Tokens.
         /// </summary>
         internal static string NodeItem_ViewDisassembledTokens {
             get {
@@ -570,29 +552,11 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Exception.
+        ///   Looks up a localized string similar to Display Exception.
         /// </summary>
         internal static string NodeItem_ViewException {
             get {
                 return ResourceManager.GetString("NodeItem_ViewException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Object.
-        /// </summary>
-        internal static string NodeItem_ViewObject {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewObject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View outer.
-        /// </summary>
-        internal static string NodeItem_ViewOuter {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewOuter", resourceCulture);
             }
         }
         
@@ -606,34 +570,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Processed Script.
-        /// </summary>
-        internal static string NodeItem_ViewProcessedScript {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewProcessedScript", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Replication.
-        /// </summary>
-        internal static string NodeItem_ViewReplication {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewReplication", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Script.
-        /// </summary>
-        internal static string NodeItem_ViewScript {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewScript", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Table Buffer.
+        ///   Looks up a localized string similar to Open Table Buffer....
         /// </summary>
         internal static string NodeItem_ViewTableBuffer {
             get {
@@ -642,20 +579,11 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Tokens.
+        ///   Looks up a localized string similar to Decompile Tokens.
         /// </summary>
         internal static string NodeItem_ViewTokens {
             get {
                 return ResourceManager.GetString("NodeItem_ViewTokens", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Used Tags.
-        /// </summary>
-        internal static string NodeItem_ViewUsedTags {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewUsedTags", resourceCulture);
             }
         }
         
@@ -969,15 +897,6 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Binary Fields.
-        /// </summary>
-        internal static string UC_PackageExplorer_BuildItemNodes_View_Binary {
-            get {
-                return ResourceManager.GetString("UC_PackageExplorer_BuildItemNodes_View_Binary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Do you want to go the folder with the exported content?.
         /// </summary>
         internal static string UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER {
@@ -1047,6 +966,24 @@ namespace UEExplorer.Properties {
         internal static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wave: {0}.
+        /// </summary>
+        internal static string WavePlayerPage_OnObjectTarget_WavePlayer___0_ {
+            get {
+                return ResourceManager.GetString("WavePlayerPage_OnObjectTarget_WavePlayer___0_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wave Player.
+        /// </summary>
+        internal static string WavePlayerPage_WavePlayerPage_WavePlayer_Title {
+            get {
+                return ResourceManager.GetString("WavePlayerPage_WavePlayerPage_WavePlayer_Title", resourceCulture);
             }
         }
     }

@@ -23,7 +23,7 @@ namespace Eliot.Extensions.NativesTableListGenerator
         /// </summary>
         public void OnActivate(object sender, EventArgs e)
         {
-            _Form.Tabs.Add(typeof(UC_NativeGenerator), "Natives Table List Generator");
+            _Form.Tabs.InsertTab(typeof(UC_NativeGenerator), "Natives Table List Generator");
         }
     }
 }

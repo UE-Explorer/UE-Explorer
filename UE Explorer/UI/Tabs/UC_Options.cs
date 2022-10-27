@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using UEExplorer.Properties;
 using UELib;
@@ -9,6 +10,7 @@ using UELib.Types;
 
 namespace UEExplorer.UI.Tabs
 {
+    [ComVisible(false)]
     public partial class UC_Options : UserControl_Tab
     {
         public UC_Options()
@@ -16,10 +18,7 @@ namespace UEExplorer.UI.Tabs
             InitializeComponent();
         }
 
-        /// <summary>
-        ///     Called when the Tab is added to the chain.
-        /// </summary>
-        protected override void TabCreated()
+        private void UC_Options_Load(object sender, EventArgs e)
         {
             Program.LoadConfig();
             CheckBox_SerObj.Checked = Program.Options.InitFlags.HasFlag(UnrealPackage.InitFlags.Deserialize);
@@ -58,8 +57,6 @@ namespace UEExplorer.UI.Tabs
             {
                 VariableTypesTree.Nodes.Add(new TreeNode(pair) { Tag = pair });
             }
-
-            base.TabCreated();
 
             PreBeginBracket.TextChanged += PreBeginBracket_TextChanged;
             PreEndBracket.TextChanged += PreEndBracket_TextChanged;

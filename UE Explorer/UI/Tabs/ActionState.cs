@@ -4,7 +4,7 @@
     {
         public object SelectedNode;
         public object Target;
-        public ContentNodeAction Action;
+        public ContextActionKind ActionKind;
 
         public double Y, X;
             

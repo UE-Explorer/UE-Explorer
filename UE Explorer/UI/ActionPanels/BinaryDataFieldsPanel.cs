@@ -1,4 +1,5 @@
-﻿using UEExplorer.UI.Tabs;
+﻿using System.Threading.Tasks;
+using UEExplorer.UI.Tabs;
 using UELib;
 
 namespace UEExplorer.UI.ActionPanels
@@ -27,7 +28,7 @@ namespace UEExplorer.UI.ActionPanels
             {
                 case null:
                     BinaryFieldBindingSource.DataSource = null;
-                    return;
+                    break;
 
                 case IBinaryData binaryDataObject:
                     BinaryFieldBindingSource.DataSource = binaryDataObject.BinaryMetaData?.Fields;

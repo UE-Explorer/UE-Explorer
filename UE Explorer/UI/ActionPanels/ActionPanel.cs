@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UEExplorer.UI.ActionPanels
 {
-    public class ActionPanel : Panel
+    public class ActionPanel : UserControl
     {
         private object _Object;
         public bool HasPendingUpdate;
@@ -23,7 +24,7 @@ namespace UEExplorer.UI.ActionPanels
             }
         }
 
-        protected virtual void UpdateOutput(object target)
+        protected virtual async void UpdateOutput(object target)
         {
             throw new NotImplementedException();
         }

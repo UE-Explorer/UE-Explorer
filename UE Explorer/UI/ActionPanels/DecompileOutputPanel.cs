@@ -1,4 +1,6 @@
-﻿using UEExplorer.UI.Tabs;
+﻿using System.Threading.Tasks;
+using UEExplorer.UI.Panels;
+using UEExplorer.UI.Tabs;
 using UELib;
 using UELib.Core;
 
@@ -6,45 +8,49 @@ namespace UEExplorer.UI.ActionPanels
 {
     public partial class DecompileOutputPanel : ActionPanel, IActionPanel<object>
     {
+        public TextEditorControl EditorControl { get; }
+
         public DecompileOutputPanel()
         {
             InitializeComponent();
 
-            TextEditorPanel.TextEditorControl.SearchInDocument.Click += (sender, args) =>
+            EditorControl = TextEditorPanel.TextEditorControl;
+
+            EditorControl.SearchInDocument.Click += (sender, args) =>
             {
-                string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
-                EditorUtil.FindText(TextEditorPanel.TextEditorControl.TextEditor, selectedText);
+                string selectedText = EditorControl.TextEditor.TextArea.Selection.GetText();
+                EditorUtil.FindText(EditorControl.TextEditor, selectedText);
             };
 
-            TextEditorPanel.TextEditorControl.SearchInClasses.Click += (sender, args) =>
+            EditorControl.SearchInClasses.Click += (sender, args) =>
             {
-                string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
+                string selectedText = EditorControl.TextEditor.TextArea.Selection.GetText();
                 UC_PackageExplorer.Traverse(Parent).EmitSearch<UClass>(selectedText);
             };
 
-            TextEditorPanel.TextEditorControl.SearchObject.Click += (sender, args) =>
+            EditorControl.SearchObject.Click += (sender, args) =>
             {
-                string selectedText = TextEditorPanel.TextEditorControl.TextEditor.TextArea.Selection.GetText();
+                string selectedText = EditorControl.TextEditor.TextArea.Selection.GetText();
                 UC_PackageExplorer.Traverse(Parent).EmitSearchObjectByPath(selectedText.Trim());
             };
         }
 
         public void RestoreState(ref ActionState state)
         {
-            TextEditorPanel.TextEditorControl.TextEditor.ScrollToVerticalOffset(state.Y);
-            TextEditorPanel.TextEditorControl.TextEditor.ScrollToHorizontalOffset(state.X);
-            TextEditorPanel.TextEditorControl.TextEditor.Select(state.SelectStart, state.SelectLength);
+            EditorControl.TextEditor.ScrollToVerticalOffset(state.Y);
+            EditorControl.TextEditor.ScrollToHorizontalOffset(state.X);
+            EditorControl.TextEditor.Select(state.SelectStart, state.SelectLength);
         }
 
         public void StoreState(ref ActionState state)
         {
-            state.X = TextEditorPanel.TextEditorControl.TextEditor.HorizontalOffset;
-            state.Y = TextEditorPanel.TextEditorControl.TextEditor.VerticalOffset;
-            state.SelectStart = TextEditorPanel.TextEditorControl.TextEditor.SelectionStart;
-            state.SelectLength = TextEditorPanel.TextEditorControl.TextEditor.SelectionLength;
+            state.X = EditorControl.TextEditor.HorizontalOffset;
+            state.Y = EditorControl.TextEditor.VerticalOffset;
+            state.SelectStart = EditorControl.TextEditor.SelectionStart;
+            state.SelectLength = EditorControl.TextEditor.SelectionLength;
         }
 
-        protected override void UpdateOutput(object target)
+        protected override async void UpdateOutput(object target)
         {
             if (target == null)
             {
@@ -55,9 +61,11 @@ namespace UEExplorer.UI.ActionPanels
             switch (target)
             {
                 case IUnrealDecompilable decompilable:
-                    string content = decompilable.Decompile();
+                {
+                    string content = await Task.Run(() => decompilable.Decompile());
                     TextEditorPanel.SetText(content);
                     break;
+                }
 
                 case string s:
                 {

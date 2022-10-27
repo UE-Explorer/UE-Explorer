@@ -11,6 +11,7 @@ using System.Text;
 using System.Windows.Forms;
 using Krypton.Navigator;
 using Krypton.Docking;
+using Storm.TabControl;
 using UEExplorer.Properties;
 using UEExplorer.UI.Forms;
 using UEExplorer.UI.Main;
@@ -33,11 +34,20 @@ namespace UEExplorer.UI.Tabs
         /// </summary>
         [CanBeNull] private UnrealPackage _UnrealPackage;
 
+        private KryptonDockingWorkspace _Workspace;
         private PackageExplorerPage _PackageExplorerPage;
 
-        public UC_PackageExplorer()
+        public UC_PackageExplorer(string filepath)
         {
+            FilePath = filepath;
+
             InitializeComponent();
+
+            contextService.ContextChanged += ContextServiceOnContextChanged;
+        }
+
+        private void ContextServiceOnContextChanged(object sender, ContextChangedEventArgs e)
+        {
         }
 
         private void UC_PackageExplorer_Load(object sender, EventArgs e)
@@ -45,7 +55,7 @@ namespace UEExplorer.UI.Tabs
             kryptonDockingManagerMain.ManageFloating("Floating", ParentForm);
 
             var navControl = kryptonDockingManagerMain.ManageControl("Nav", dockingPanel);
-            var workSpace = kryptonDockingManagerMain.ManageWorkspace("Workspace", kryptonDockableWorkspaceMain);
+            _Workspace = kryptonDockingManagerMain.ManageWorkspace("Workspace", kryptonDockableWorkspaceMain);
             var viewControl = kryptonDockingManagerMain.ManageControl("View", dockingPanel);
 
             if (File.Exists(Program.DockingConfigPath))
@@ -58,54 +68,32 @@ namespace UEExplorer.UI.Tabs
                 new KryptonPage[] { _PackageExplorerPage });
             expSpace.DockspaceControl.Size = new Size(340, 0);
 
-            var defaultDecompilerPage = CreateDecompilerPage(null);
-            defaultDecompilerPage.IsDefault = true;
-            kryptonDockingManagerMain.AddToWorkspace("Workspace", new KryptonPage[] { defaultDecompilerPage });
-
-            var defaultBinaryPage = CreateBinaryPage(null);
-            defaultBinaryPage.IsDefault = true;
-            kryptonDockingManagerMain.AddAutoHiddenGroup(
-                "View",
-                DockingEdge.Bottom,
-                new KryptonPage[] { CreateBinaryPage(null) });
+            InitializeFromFile(FilePath);
         }
 
         private PackageExplorerPage CreatePackageExplorerPage()
         {
-            var page = new PackageExplorerPage();
+            var page = new PackageExplorerPage(contextService);
             page.ClearFlags(KryptonPageFlags.DockingAllowClose |
                             KryptonPageFlags.DockingAllowFloating |
                             KryptonPageFlags.DockingAllowWorkspace);
             return page;
         }
 
-        private DecompilerPage CreateDecompilerPage(object target, bool isDefault = true)
+        private T CreateTrackingPage<T>(bool isTracking)
+            where T : TrackingPage
         {
-            var page = new DecompilerPage
-            {
-                IsDefault = isDefault
-            };
+            var page = (T)Activator.CreateInstance(typeof(T), contextService);
+            page.IsTracking = isTracking;
             page.ClearFlags(KryptonPageFlags.DockingAllowAutoHidden);
-            page.OnObjectTarget(target, ContentNodeAction.Decompile, false);
             return page;
         }
 
-        private BinaryPage CreateBinaryPage(object target, bool isDefault = true)
-        {
-            var page = new BinaryPage
-            {
-                IsDefault = isDefault
-            };
-            //page.ClearFlags(KryptonPageFlags.DockingAllowAutoHidden);
-            page.OnObjectTarget(target, ContentNodeAction.Decompile, false);
-            return page;
-        }
-
-        public void PostInitialize()
+        private void InitializeFromFile(string filePath)
         {
             try
             {
-                LoadPackageData();
+                LoadPackageData(filePath);
             }
             catch (Exception exception)
             {
@@ -113,7 +101,7 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private void LoadPackageData()
+        private void LoadPackageData(string filePath)
         {
             if (Program.Options.bForceLicenseeMode)
                 UnrealPackage.OverrideLicenseeVersion = Program.Options.LicenseeMode;
@@ -125,14 +113,15 @@ namespace UEExplorer.UI.Tabs
             UnrealConfig.Platform = (UnrealConfig.CookedPlatform)Enum.Parse
             (
                 typeof(UnrealConfig.CookedPlatform),
-                Tabs.Form.Platform.Text, true
+                ((ProgramForm)ParentForm).Platform.Text, true
             );
 
             // Open the file.
         reload:
+            var shouldDeserialize = true;
             ProgressStatus.SetStatus(Resources.PACKAGE_LOADING);
             // Note: We cannot dispose neither the stream nor package, because we require the stream to be hot so that we can lazily-deserialize objects.
-            var stream = new UPackageStream(FilePath, FileMode.Open, FileAccess.Read);
+            var stream = new UPackageStream(filePath, FileMode.Open, FileAccess.Read);
             try
             {
                 _UnrealPackage = new UnrealPackage(stream);
@@ -144,20 +133,23 @@ namespace UEExplorer.UI.Tabs
 
                 if (MessageBox.Show(Resources.PACKAGE_UNKNOWN_SIGNATURE,
                         Resources.Warning,
-                        MessageBoxButtons.YesNo) == DialogResult.No)
+                        MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    Tabs.Remove(this, true);
-                    return;
+                    UnrealConfig.SuppressSignature = true;
+                    goto reload;
                 }
 
-                UnrealConfig.SuppressSignature = true;
-                goto reload;
+                shouldDeserialize = false;
             }
 
             Contract.Assert(_UnrealPackage != null, "Package is null");
             PreInitializeContentTree(_UnrealPackage);
 
-            _UnrealPackage.Deserialize(stream);
+            if (shouldDeserialize)
+            {
+                _UnrealPackage.Deserialize(stream);
+            }
+
             LinkPackageData(_UnrealPackage);
             LinkSummaryData(ref _UnrealPackage.Summary);
             if (IsPackageCompressed())
@@ -192,7 +184,7 @@ namespace UEExplorer.UI.Tabs
         // Pre-initialize, this package has not been serialized yet, but we can initialize pre-assumed nodes here.
         private void PreInitializeContentTree(UnrealPackage linker)
         {
-            var rootPackageNode = _PackageExplorerPage.PackageExplorerPanel.CreateRootPackageNode(_UnrealPackage);
+            var rootPackageNode = _PackageExplorerPage.PackageExplorerPanel.CreateRootPackageNode(linker);
             _PackageExplorerPage.PackageExplorerPanel.AddRootPackageNode(rootPackageNode);
         }
 
@@ -216,7 +208,7 @@ namespace UEExplorer.UI.Tabs
                 _UnrealPackage.Exports == null ||
                 _UnrealPackage.Imports == null)
             {
-                throw new UnrealException($"Invalid data for package {FilePath}");
+                throw new UnrealException($"Invalid data for package {_UnrealPackage}");
             }
 
             ProgressStatus.ResetValue();
@@ -236,25 +228,25 @@ namespace UEExplorer.UI.Tabs
             Refresh();
             try
             {
-                _UnrealPackage.NotifyPackageEvent += _OnNotifyPackageEvent;
-                _UnrealPackage.NotifyObjectAdded += _OnNotifyObjectAdded;
+                _UnrealPackage.NotifyPackageEvent += OnNotifyPackageEvent;
+                _UnrealPackage.NotifyObjectAdded += OnNotifyObjectAdded;
                 _UnrealPackage.InitializePackage(Program.Options.InitFlags);
                 LinkPackageObjects();
             }
             catch (Exception exception)
             {
-                throw new UnrealException($"Couldn't initialize package {FilePath}", exception);
+                throw new UnrealException($"Couldn't initialize package {_UnrealPackage}", exception);
             }
             finally
             {
-                _UnrealPackage.NotifyObjectAdded -= _OnNotifyObjectAdded;
-                _UnrealPackage.NotifyPackageEvent -= _OnNotifyPackageEvent;
+                _UnrealPackage.NotifyObjectAdded -= OnNotifyObjectAdded;
+                _UnrealPackage.NotifyPackageEvent -= OnNotifyPackageEvent;
             }
 
             InitializeContentTree();
         }
 
-        private void _OnNotifyObjectAdded(object sender, ObjectEventArgs e)
+        private void OnNotifyObjectAdded(object sender, ObjectEventArgs e)
         {
         }
 
@@ -268,14 +260,6 @@ namespace UEExplorer.UI.Tabs
                    _UnrealPackage.Summary.CompressedChunks.Any();
         }
 
-        public override void TabClosing()
-        {
-            base.TabClosing();
-
-            ProgressStatus.ResetStatus();
-            ProgressStatus.ResetValue();
-        }
-
         /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
@@ -284,18 +268,21 @@ namespace UEExplorer.UI.Tabs
         {
             Debug.WriteLine("Disposing UC_PackageExplorer " + disposing);
 
+            ProgressStatus.ResetStatus();
+            ProgressStatus.ResetValue();
+
+            kryptonDockingManagerMain.SaveConfigToFile(Program.DockingConfigPath);
+
             if (_UnrealPackage != null)
             {
                 _UnrealPackage.Dispose();
                 _UnrealPackage = null;
             }
 
-            kryptonDockingManagerMain.SaveConfigToFile(Path.Combine(Application.StartupPath, "Docking.xml"));
-
             base.Dispose(disposing);
         }
 
-        private void _OnNotifyPackageEvent(object sender, UnrealPackage.PackageEventArgs e)
+        private void OnNotifyPackageEvent(object sender, UnrealPackage.PackageEventArgs e)
         {
             switch (e.EventId)
             {
@@ -331,10 +318,13 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
+        // TODO: Deprecate
         internal void ReloadPackage()
         {
-            Tabs.Remove(this, true);
-            Tabs.Form.LoadFile(FilePath);
+            string filePath = _UnrealPackage.FullPackageName;
+
+            ((ProgramForm)ParentForm).Tabs.CloseTab((TabStripItem)Parent);
+            ((ProgramForm)ParentForm).LoadFile(filePath);
         }
 
         private static string GetExceptionMessage(UObject errorObject)
@@ -349,15 +339,6 @@ namespace UEExplorer.UI.Tabs
         }
 
         #region Node-ContextMenu Methods
-
-        private void ViewTools_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            if (CurrentContentTarget == null)
-                return;
-
-            Enum.TryParse(e.ClickedItem.Name, out ContentNodeAction action);
-            PerformNodeAction(CurrentContentTarget, action);
-        }
 
         private static string FormatTokenHeader(UStruct.UByteCodeDecompiler.Token token, bool acronymizeName = true)
         {
@@ -427,7 +408,7 @@ namespace UEExplorer.UI.Tabs
             return content;
         }
 
-        public object PickBestTarget(object target, ContentNodeAction action)
+        public object PickBestTarget(object target, ContextActionKind actionKind)
         {
             if (target == null)
                 return null;
@@ -454,28 +435,34 @@ namespace UEExplorer.UI.Tabs
             return tag;
         }
 
-        public ContentNodeAction PickBestContentNodeAction(object tag, ContentNodeAction action)
+        public ContextActionKind PickBestContentNodeAction(object tag, ContextActionKind actionKind)
         {
-            switch (tag)
+            if (actionKind != ContextActionKind.Auto)
             {
-                case IUnrealDecompilable _:
-                    if (action == ContentNodeAction.Auto) return ContentNodeAction.Decompile;
-                    break;
-
-                case IBinaryData _:
-                    if (action == ContentNodeAction.Auto) return ContentNodeAction.Binary;
-                    break;
+                return actionKind;
             }
 
-            return action;
+            switch (tag)
+            {
+                case USound _:
+                    return ContextActionKind.Play;
+
+                case IUnrealDecompilable _:
+                    return ContextActionKind.Decompile;
+
+                case IBinaryData _:
+                    return ContextActionKind.Binary;
+            }
+
+            return actionKind;
         }
 
-        private void PerformNodeAction(object target, ContentNodeAction action, bool trackHistory = true)
+        private void PerformNodeAction(object target, ContextActionKind actionKind, bool trackHistory = true)
         {
-            object tag = PickBestTarget(target, action);
+            object tag = PickBestTarget(target, actionKind);
             if (tag == null && target is TreeNode node)
             {
-                switch (action)
+                switch (actionKind)
                 {
                     //case ContentNodeAction.Decompile:
                     //    var s = new StringBuilder();
@@ -495,112 +482,35 @@ namespace UEExplorer.UI.Tabs
                 }
             }
 
-            action = PickBestContentNodeAction(tag, action);
+            //action = PickBestContentNodeAction(tag, action);
             if (trackHistory)
             {
-                TrackNodeAction(target, tag, action);
+                TrackNodeAction(target, tag, actionKind);
             }
 
             var obj = tag as UObject;
+            if (obj != null)
+            {
+                // Ensure that we are about to perform an action on a deserialized object!
+                if (obj.DeserializationState == 0)
+                {
+                    obj.BeginDeserializing();
+                }
+            }
+
+            Debug.Assert(tag != null, nameof(tag) + " != null");
             try
             {
-                switch (action)
+                switch (actionKind)
                 {
-                    case ContentNodeAction.DecompileExternal:
-                    {
-                        Process.Start
-                        (
-                            Program.Options.UEModelAppPath,
-                            "-path=" + _UnrealPackage.PackageDirectory
-                                     + " " + _UnrealPackage.PackageName
-                                     + " " + ((TreeNode)target).Text
-                        );
-                        break;
-                    }
-
-                    case ContentNodeAction.ExportExternal:
-                    {
-                        string packagePath = Application.StartupPath
-                                             + "\\Exported\\"
-                                             + _UnrealPackage.PackageName;
-
-                        string contentDir = packagePath + "\\Content";
-                        Directory.CreateDirectory(contentDir);
-                        string appArguments = "-path=" + _UnrealPackage.PackageDirectory
-                                                       + " " + "-out=" + contentDir
-                                                       + " -export"
-                                                       + " " + _UnrealPackage.PackageName
-                                                       + " " + ((TreeNode)target).Text;
-                        var appInfo = new ProcessStartInfo(Program.Options.UEModelAppPath, appArguments)
-                        {
-                            UseShellExecute = false,
-                            RedirectStandardOutput = true,
-                            CreateNoWindow = false
-                        };
-                        var app = Process.Start(appInfo);
-                        var log = string.Empty;
-                        app.OutputDataReceived += (sender, e) => log += e.Data;
-                        //app.WaitForExit();
-
-                        if (Directory.GetFiles(contentDir).Length > 0)
-                        {
-                            if (MessageBox.Show(
-                                    Resources.UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER,
-                                    Application.ProductName,
-                                    MessageBoxButtons.YesNo
-                                ) == DialogResult.Yes)
-                                Process.Start(contentDir);
-                        }
-                        else
-                        {
-                            MessageBox.Show
-                            (
-                                $"The object was not exported.\r\n\r\nArguments:{appArguments}\r\n\r\nLog:{log}",
-                                Application.ProductName
-                            );
-                        }
-
-                        break;
-                    }
-
-                    case ContentNodeAction.Decompile:
-                        UpdateContentPanel(tag, ContentNodeAction.Decompile);
+                    case ContextActionKind.Auto:
+                    case ContextActionKind.Play:
+                    case ContextActionKind.Decompile:
+                    case ContextActionKind.Binary:
+                        UpdateContext(tag, actionKind);
                         break;
 
-                    case ContentNodeAction.Binary:
-                        UpdateContentPanel(tag, action);
-                        break;
-
-                    case ContentNodeAction.DecompileOuter:
-                        Debug.Assert(obj != null);
-                        Debug.Assert(obj.Outer != null, "obj.Outer != null");
-                        UpdateContentPanel(obj.Outer, ContentNodeAction.Decompile);
-                        break;
-
-                    // FIXME: Deprecate special decompile actions? Or perhaps open these in a new workspace page.
-                    case ContentNodeAction.DecompileClassReplication:
-                    {
-                        if (tag is UClass replicationClass)
-                        {
-                            string text = replicationClass.FormatReplication();
-                            UpdateContentPanel(replicationClass, ContentNodeAction.Decompile);
-                        }
-
-                        break;
-                    }
-
-                    case ContentNodeAction.DecompileScriptProperties:
-                    {
-                        if (tag is UStruct unStruct)
-                        {
-                            string text = unStruct.Default is UStruct ? unStruct.FormatDefaultProperties() : null;
-                            UpdateContentPanel(unStruct.Default, ContentNodeAction.Decompile);
-                        }
-
-                        break;
-                    }
-
-                    case ContentNodeAction.DisassembleTokens:
+                    case ContextActionKind.DisassembleTokens:
                     {
                         var unStruct = tag as UStruct;
                         if (unStruct?.ByteCodeManager != null)
@@ -611,13 +521,13 @@ namespace UEExplorer.UI.Tabs
 
                             _DisassembleTokensTemplate = LoadTemplate("struct.tokens-disassembled");
                             string text = DisassembleTokens(unStruct, codeDec, codeDec.DeserializedTokens.Count);
-                            UpdateContentPanel(unStruct.Default, ContentNodeAction.Decompile);
+                            UpdateContext(unStruct.Default, ContextActionKind.Decompile);
                         }
 
                         break;
                     }
 
-                    case ContentNodeAction.DecompileTokens:
+                    case ContextActionKind.DecompileTokens:
                     {
                         var unStruct = tag as UStruct;
                         if (unStruct?.ByteCodeManager != null)
@@ -668,13 +578,13 @@ namespace UEExplorer.UI.Tabs
                                     break;
                             }
 
-                            UpdateContentPanel(unStruct.Default, ContentNodeAction.Decompile);
+                            UpdateContext(unStruct.Default, ContextActionKind.Decompile);
                         }
 
                         break;
                     }
 
-                    case ContentNodeAction.ViewBuffer:
+                    case ContextActionKind.ViewBuffer:
                     {
                         var bufferObject = (IBuffered)tag;
                         Debug.Assert(bufferObject != null, nameof(bufferObject) + " != null");
@@ -682,7 +592,7 @@ namespace UEExplorer.UI.Tabs
                         break;
                     }
 
-                    case ContentNodeAction.ViewTableBuffer:
+                    case ContextActionKind.ViewTableBuffer:
                     {
                         var tableObject = (IContainsTable)tag;
                         Debug.Assert(tableObject != null);
@@ -690,15 +600,15 @@ namespace UEExplorer.UI.Tabs
                         break;
                     }
 
-                    case ContentNodeAction.ViewException:
+                    case ContextActionKind.ViewException:
                     {
                         Debug.Assert(obj != null);
-                        var text = GetExceptionMessage(obj);
-                        UpdateContentPanel(obj, ContentNodeAction.Decompile);
+                        string text = GetExceptionMessage(obj);
+                        UpdateContext(obj, ContextActionKind.Decompile);
                         break;
                     }
 
-                    case ContentNodeAction.ExportAs:
+                    case ContextActionKind.ExportAs:
                     {
                         var exportableObject = (IUnrealExportable)tag;
                         Debug.Assert(exportableObject != null);
@@ -726,18 +636,77 @@ namespace UEExplorer.UI.Tabs
 
                         break;
                     }
+
+                    case ContextActionKind.DecompileExternal:
+                    {
+                        Process.Start
+                        (
+                            Program.Options.UEModelAppPath,
+                            "-path=" + _UnrealPackage.PackageDirectory
+                                     + " " + _UnrealPackage.PackageName
+                                     + " " + ((TreeNode)target).Text
+                        );
+                        break;
+                    }
+
+                    case ContextActionKind.ExportExternal:
+                    {
+                        string packagePath = Application.StartupPath
+                                             + "\\Exported\\"
+                                             + _UnrealPackage.PackageName;
+
+                        string contentDir = packagePath + "\\Content";
+                        Directory.CreateDirectory(contentDir);
+                        string appArguments = "-path=" + _UnrealPackage.PackageDirectory
+                                                       + " " + "-out=" + contentDir
+                                                       + " -export"
+                                                       + " " + _UnrealPackage.PackageName
+                                                       + " " + ((TreeNode)target).Text;
+                        var appInfo = new ProcessStartInfo(Program.Options.UEModelAppPath, appArguments)
+                        {
+                            UseShellExecute = false,
+                            RedirectStandardOutput = true,
+                            CreateNoWindow = false
+                        };
+                        var app = Process.Start(appInfo);
+                        var log = string.Empty;
+                        app.OutputDataReceived += (sender, e) => log += e.Data;
+                        //app.WaitForExit();
+
+                        if (Directory.GetFiles(contentDir).Length > 0)
+                        {
+                            if (MessageBox.Show(
+                                    Resources.UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER,
+                                    ProductName,
+                                    MessageBoxButtons.YesNo
+                                ) == DialogResult.Yes)
+                                Process.Start(contentDir);
+                        }
+                        else
+                        {
+                            MessageBox.Show
+                            (
+                                $"The object was not exported.\r\n\r\nArguments:{appArguments}\r\n\r\nLog:{log}",
+                                ProductName
+                            );
+                        }
+
+                        break;
+                    }
                 }
             }
             catch (Exception e)
             {
-                ExceptionDialog.Show("An exception occurred while performing: " + action, e);
+                ExceptionDialog.Show("An exception occurred while performing: " + actionKind, e);
             }
         }
 
         [CanBeNull]
         private KryptonPage GetObjectPage()
         {
-            return kryptonDockableWorkspaceMain.AllPages().FirstOrDefault(p => p.Name == "ObjectPage");
+            return kryptonDockableWorkspaceMain
+                .AllPages()
+                .FirstOrDefault(p => p.Name == "ObjectPage");
         }
 
         [CanBeNull]
@@ -747,87 +716,84 @@ namespace UEExplorer.UI.Tabs
             return (IActionPanel<object>)objectPanel;
         }
 
-        private void UpdateContentPanel([NotNull] object target, ContentNodeAction action)
+        private ContextInfo UpdateContext([NotNull] object target, ContextActionKind actionKind)
         {
             Debug.Assert(target != null, nameof(target) + " != null");
 
-            CurrentContentTarget = target;
+            var context = new ContextInfo(actionKind, target);
 
+            // TODO: Separate this into its own Control
             string path = ObjectPathBuilder.GetPath((dynamic)target);
             ProgressStatus.SetStatus(path);
             SetActiveObjectPath(path);
-            SwitchContentPanel(target, action);
+            // Give all current pages a chance to react to context changes. This has to happen before we create any new pages.
+            var contextEvent = new ContextChangedEventArgs(context);
+            contextService.OnContextChanged(contextEvent);
+            // Insert default pages, if we don't have any active pages for this action kind.
+            InsertDefaultPages(context);
             ProgressStatus.ResetStatus();
 
-            bool withEditorTools = action == ContentNodeAction.Decompile;
+            // TODO: Bind this to the current active shown page
+            bool withEditorTools = actionKind == ContextActionKind.Decompile;
             copyToolStripButton.Enabled = withEditorTools;
             EditorFindTextBox.Enabled = withEditorTools;
             findNextToolStripMenuItem.Enabled = withEditorTools;
+
+            return context;
         }
 
-        public void InsertNewContentPanel(object target, ContentNodeAction action)
+        [CanBeNull]
+        private TrackingPage CreatePageByAction(object target, ContextActionKind actionKind,
+            bool isTracking)
         {
-            InsertContentPanel(target, action, false);
-        }
-
-        private void InsertContentPanel(object target, ContentNodeAction action, bool isDefault)
-        {
-            KryptonPage page;
-            switch (action)
+            switch (actionKind)
             {
-                case ContentNodeAction.Decompile:
-                    page = CreateDecompilerPage(target, isDefault);
-                    break;
+                case ContextActionKind.Auto:
+                    switch (target)
+                    {
+                        case IUnrealDecompilable _:
+                            return CreateTrackingPage<DecompilerPage>(true);
 
-                case ContentNodeAction.Binary:
-                    page = CreateBinaryPage(target, isDefault);
-                    break;
+                        case IBinaryData _:
+                            return CreateTrackingPage<BinaryPage>(true);
+
+                        default:
+                            return null;
+                    }
+
+                case ContextActionKind.Decompile:
+                    return CreateTrackingPage<DecompilerPage>(isTracking);
+
+                case ContextActionKind.Binary:
+                    return CreateTrackingPage<BinaryPage>(isTracking);
 
                 default:
-                    throw new NotSupportedException();
+                    return null;
             }
-
-            kryptonDockingManagerMain.AddToWorkspace("Workspace", new[] { page });
         }
 
-        private void SwitchContentPanel(object target, ContentNodeAction action)
+        private void InsertDefaultPages([NotNull] ContextInfo context)
         {
-            List<ObjectBoundPage> pages;
-            switch (action)
+            if (context.ActionKindKind == ContextActionKind.Auto)
             {
-                // For decompilation we want to only auto update default workspace pages.
-                case ContentNodeAction.Decompile:
-                    pages = kryptonDockingManagerMain.PagesWorkspace
-                        .OfType<ObjectBoundPage>()
-                        .Where(p => p.IsDefault)
-                        .ToList();
-                    SwitchContentPanel(target, ContentNodeAction.Binary);
-                    break;
+                bool hasAny = kryptonDockingManagerMain.PagesWorkspace
+                    .OfType<TrackingPage>()
+                    .Any(p => p.IsTracking && p.CanAccept(context));
 
-                case ContentNodeAction.Binary:
-                    pages = kryptonDockingManagerMain.Pages
-                        .OfType<ObjectBoundPage>()
-                        .Where(p => p.IsDefault)
-                        .ToList();
-
-                    break;
-
-                default:
-                    throw new NotSupportedException();
-            }
-
-            if (pages.Any())
-            {
-                foreach (var page in pages)
+                if (hasAny)
                 {
-                    bool isPending = !kryptonDockingManagerMain.IsPageShowing(page);
-                    page.OnObjectTarget(target, action, isPending);
+                    return;
                 }
             }
-            else
-            {
-                InsertContentPanel(target, action, true);
-            }
+
+            var isTracking = context.ActionKindKind == ContextActionKind.Auto;
+            var page = CreatePageByAction(context.Target, context.ActionKindKind, isTracking);
+            if (page == null) return;
+
+            _Workspace.Append(page);
+            _Workspace.SelectPage(page.UniqueName);
+
+            page.Accept(context);
         }
 
         private static readonly string _TemplateDir = Path.Combine(Program.ConfigDir, "Templates");
@@ -851,28 +817,20 @@ namespace UEExplorer.UI.Tabs
         private readonly List<ActionState> _ContentHistory = new List<ActionState>();
         private int _CurrentHistoryIndex = -1;
 
-        private object _CurrentContentTarget;
-
-        public object CurrentContentTarget
-        {
-            get => _CurrentContentTarget;
-            set => _CurrentContentTarget = value;
-        }
-
         private void SetActiveObjectPath(string path)
         {
             ActiveObjectPath.Text = path;
         }
 
-        private void TrackNodeAction(object node, object target, ContentNodeAction action)
+        private void TrackNodeAction(object node, object target, ContextActionKind actionKind)
         {
-            switch (action)
+            switch (actionKind)
             {
-                case ContentNodeAction.ExportAs:
-                case ContentNodeAction.ExportExternal:
-                case ContentNodeAction.DecompileExternal:
-                case ContentNodeAction.ViewBuffer:
-                case ContentNodeAction.ViewTableBuffer:
+                case ContextActionKind.ExportAs:
+                case ContextActionKind.ExportExternal:
+                case ContextActionKind.DecompileExternal:
+                case ContextActionKind.ViewBuffer:
+                case ContextActionKind.ViewTableBuffer:
                     return;
             }
 
@@ -880,7 +838,7 @@ namespace UEExplorer.UI.Tabs
             {
                 // No need to buffer the same content
                 var last = _ContentHistory.Last();
-                if (last.Target == target && last.Action == action)
+                if (last.Target == target && last.ActionKind == actionKind)
                 {
                     return;
                 }
@@ -905,7 +863,7 @@ namespace UEExplorer.UI.Tabs
             {
                 SelectedNode = node,
                 Target = target,
-                Action = action
+                ActionKind = actionKind
             };
             _ContentHistory.Add(data);
             _CurrentHistoryIndex = _ContentHistory.Count - 1;
@@ -924,8 +882,7 @@ namespace UEExplorer.UI.Tabs
         private void RestoreContentHistoryData(int historyIndex)
         {
             var data = _ContentHistory[historyIndex];
-            CurrentContentTarget = data.Target;
-            PerformNodeAction(data.Target, data.Action, false);
+            PerformNodeAction(data.Target, data.ActionKind, false);
 
             if (data.SelectedNode is TreeNode selectedNode)
             {
@@ -976,7 +933,7 @@ namespace UEExplorer.UI.Tabs
             }
 
             var hexDialog = new HexViewerForm(target, this);
-            hexDialog.Show(Tabs.Form);
+            hexDialog.Show(ParentForm);
         }
 
         private void ReloadPackage_Click(object sender, EventArgs e)
@@ -1048,7 +1005,7 @@ namespace UEExplorer.UI.Tabs
             if (obj == null)
                 return false;
 
-            PerformNodeAction(obj, ContentNodeAction.Auto);
+            PerformNodeAction(obj, ContextActionKind.Auto);
             return true;
         }
 
@@ -1072,9 +1029,9 @@ namespace UEExplorer.UI.Tabs
             throw new NotSupportedException();
         }
 
-        public void EmitObjectNodeAction(object target, ContentNodeAction action)
+        public void EmitObjectNodeAction(object target, ContextActionKind actionKind)
         {
-            PerformNodeAction(target, action);
+            PerformNodeAction(target, actionKind);
         }
 
         public void EmitSearchObjectByPath(string path)
@@ -1092,8 +1049,8 @@ namespace UEExplorer.UI.Tabs
         public void EmitFind(string text)
         {
             var pages = kryptonDockingManagerMain.PagesWorkspace
-                .OfType<ObjectBoundPage>()
-                .Where(p => p.IsDefault)
+                .OfType<TrackingPage>()
+                .Where(p => p.IsTracking)
                 .ToList();
 
             foreach (var page in pages)
@@ -1105,8 +1062,8 @@ namespace UEExplorer.UI.Tabs
         public void EmitFind(TextSearchHelpers.FindResult findResult)
         {
             var pages = kryptonDockingManagerMain.PagesWorkspace
-                .OfType<ObjectBoundPage>()
-                .Where(p => p.IsDefault)
+                .OfType<TrackingPage>()
+                .Where(p => p.IsTracking)
                 .ToList();
 
             foreach (var page in pages)
@@ -1118,9 +1075,18 @@ namespace UEExplorer.UI.Tabs
         private void kryptonDockingManagerMain_PageFloatingRequest(object sender, CancelUniqueNameEventArgs e)
         {
             var page = kryptonDockingManagerMain.PageForUniqueName(e.UniqueName);
-            if (page is ObjectBoundPage objectBoundPage && objectBoundPage.IsDefault)
+            if (page is TrackingPage trackingPage && trackingPage.IsTracking)
             {
-                objectBoundPage.IsDefault = false;
+                trackingPage.IsTracking = false;
+            }
+        }
+
+        private void kryptonDockingManagerMain_PageCloseRequest(object sender, CloseRequestEventArgs e)
+        {
+            var page = kryptonDockingManagerMain.PageForUniqueName(e.UniqueName);
+            if (page is TrackingPage trackingPage)
+            {
+                page.Dispose();
             }
         }
     }

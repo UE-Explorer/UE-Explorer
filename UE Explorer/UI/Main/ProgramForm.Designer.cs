@@ -26,7 +26,6 @@
             this.pCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TabComponentsStrip = new Storm.TabControl.TabStrip();
-            this.tabStripItem2 = new Storm.TabControl.TabStripItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
@@ -58,8 +57,6 @@
             this.SocialMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem27 = new System.Windows.Forms.MenuItem();
             this.menuItem5 = new System.Windows.Forms.MenuItem();
-            this.tabStripItem1 = new Storm.TabControl.TabStripItem();
-            this.tabStripItem3 = new Storm.TabControl.TabStripItem();
             this.OpenHome = new System.Windows.Forms.Button();
             this.HomepageButton = new System.Windows.Forms.Button();
             this.kryptonManager = new Krypton.Toolkit.KryptonManager(this.components);
@@ -144,21 +141,10 @@
             this.TabComponentsStrip.SelectedColorEnd = System.Drawing.Color.White;
             this.TabComponentsStrip.SelectedColorStart = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
             this.TabComponentsStrip.SelectedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.TabComponentsStrip.SelectedItem = this.tabStripItem2;
             this.TabComponentsStrip.TabStripItemClosing += new Storm.TabControl.TabStripItemClosingHandler(this.TabComponentsStrip_TabStripItemClosing);
-            this.TabComponentsStrip.TabStripItemSelectionChanged += new Storm.TabControl.TabStripItemChangedHandler(this.TabComponentsStrip_TabStripItemSelectionChanged);
             this.TabComponentsStrip.TabStripItemClosed += new System.EventHandler(this.TabComponentsStrip_TabStripItemClosed);
-            this.TabComponentsStrip.DragDrop += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragDrop);
-            this.TabComponentsStrip.DragEnter += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragEnter);
-            // 
-            // tabStripItem2
-            // 
-            this.tabStripItem2.IsDrawn = true;
-            this.tabStripItem2.Name = "tabStripItem2";
-            this.tabStripItem2.Selected = true;
-            resources.ApplyResources(this.tabStripItem2, "tabStripItem2");
-            this.tabStripItem2.TabStripParent = this.TabComponentsStrip;
-            this.tabStripItem2.Title = "TabStrip Page 1";
+            this.TabComponentsStrip.DragDrop += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragDrop);
+            this.TabComponentsStrip.DragEnter += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragEnter);
             // 
             // pictureBox1
             // 
@@ -366,22 +352,6 @@
             resources.ApplyResources(this.menuItem5, "menuItem5");
             this.menuItem5.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
-            // tabStripItem1
-            // 
-            this.tabStripItem1.IsDrawn = true;
-            this.tabStripItem1.Name = "tabStripItem1";
-            resources.ApplyResources(this.tabStripItem1, "tabStripItem1");
-            this.tabStripItem1.TabStripParent = this.TabComponentsStrip;
-            this.tabStripItem1.Title = "TabStrip Page 1";
-            // 
-            // tabStripItem3
-            // 
-            this.tabStripItem3.IsDrawn = true;
-            this.tabStripItem3.Name = "tabStripItem3";
-            resources.ApplyResources(this.tabStripItem3, "tabStripItem3");
-            this.tabStripItem3.TabStripParent = this.TabComponentsStrip;
-            this.tabStripItem3.Title = "TabStrip Page 2";
-            // 
             // OpenHome
             // 
             resources.ApplyResources(this.OpenHome, "OpenHome");
@@ -418,19 +388,16 @@
             this.Controls.Add(this.HomepageButton);
             this.Controls.Add(this.TabComponentsStrip);
             this.Controls.Add(this.UEStatusStrip);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::UEExplorer.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.DataBindings.Add(new System.Windows.Forms.Binding("WindowState", global::UEExplorer.Properties.Settings.Default, "WindowState", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DoubleBuffered = true;
-            this.Location = global::UEExplorer.Properties.Settings.Default.WindowLocation;
             this.Menu = this.mainMenu1;
             this.Name = "ProgramForm";
-            this.WindowState = global::UEExplorer.Properties.Settings.Default.WindowState;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClosed);
             this.Load += new System.EventHandler(this.ProgramForm_Load);
-            this.Shown += new System.EventHandler(this.Unreal_Explorer_Form_Shown);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragEnter);
+            this.Shown += new System.EventHandler(this.ProgramForm_Shown);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragEnter);
+            this.DragOver += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragOver);
             this.UEStatusStrip.ResumeLayout(false);
             this.UEStatusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).EndInit();
@@ -474,9 +441,6 @@
         private System.Windows.Forms.ToolStripMenuItem pCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
         internal System.Windows.Forms.ToolStripDropDownButton Platform;
-        private Storm.TabControl.TabStripItem tabStripItem1;
-        private Storm.TabControl.TabStripItem tabStripItem2;
-        private Storm.TabControl.TabStripItem tabStripItem3;
         private System.Windows.Forms.MenuItem menuItem6;
         private System.Windows.Forms.MenuItem _ROF;
         private System.Windows.Forms.MenuItem menuItem4;

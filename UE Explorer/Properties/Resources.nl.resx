@@ -126,14 +126,8 @@
   <data name="Warning" xml:space="preserve">
     <value>Waarschuwing</value>
   </data>
-  <data name="INVALID_NAME_INDEX" xml:space="preserve">
-    <value>Ongeldig naam index {0}</value>
-  </data>
   <data name="NOT_AVAILABLE" xml:space="preserve">
     <value>N/B</value>
-  </data>
-  <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
-    <value>Ongeldig object index {0}</value>
   </data>
   <data name="RegistryWarning" xml:space="preserve">
     <value>Dit zal jouw registery bewerken.
@@ -234,7 +228,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   <data name="PACKAGE_METAINFO" xml:space="preserve">
     <value>Pakkets MetaInfo</value>
   </data>
-  <data name="EXPORT_AS" xml:space="preserve">
+  <data name="NodeItem_ExportAs" xml:space="preserve">
     <value>Exporteer als...</value>
   </data>
   <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
@@ -279,11 +273,11 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   <data name="CLASS_ISNT_SUPPORTED" xml:space="preserve">
     <value>Klass {0} is niet ondersteund</value>
   </data>
-  <data name="NodeItem_ViewObject" xml:space="preserve">
-    <value>Bekijk object</value>
+  <data name="NodeItem_Decompile" xml:space="preserve">
+    <value>Decompileren</value>
   </data>
-  <data name="UC_PackageExplorer_BuildItemNodes_View_Binary" xml:space="preserve">
-    <value>Bekijk binair velden</value>
+  <data name="NodeItem_ViewBinaryFields" xml:space="preserve">
+    <value>Binaire velden tonen</value>
   </data>
   <data name="NodeItem_OpenInUEModelViewer" xml:space="preserve">
     <value>Openen met UE Model Viewer</value>
@@ -292,55 +286,31 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
     <value>Exporteren met UE Model Viewer</value>
   </data>
   <data name="NodeItem_ViewContent" xml:space="preserve">
-    <value>Bekijk inhoud</value>
-  </data>
-  <data name="NodeItem_ViewUsedTags" xml:space="preserve">
-    <value>Bekijk gebruikte tags</value>
-  </data>
-  <data name="NodeItem_ViewReplication" xml:space="preserve">
-    <value>Bekijk replicatie</value>
+    <value>Inhoud bekijken...</value>
   </data>
   <data name="NodeItem_ViewTokens" xml:space="preserve">
-    <value>Bekijk tokens</value>
+    <value>Tokens decompileren</value>
   </data>
   <data name="NodeItem_ViewDisassembledTokens" xml:space="preserve">
-    <value>Bekijk gedemonteerde tokens</value>
-  </data>
-  <data name="NodeItem_ViewScript" xml:space="preserve">
-    <value>Bekijk script</value>
-  </data>
-  <data name="NodeItem_ViewDefaultProperties" xml:space="preserve">
-    <value>Bekijk standaard eigenschappen</value>
+    <value>Tokens afgezonderd decompileren</value>
   </data>
   <data name="NodeItem_ViewBuffer" xml:space="preserve">
-    <value>Bekijk buffer</value>
+    <value>Buffer openen...</value>
   </data>
   <data name="NodeItem_ViewException" xml:space="preserve">
-    <value>Bekijk uitzondering</value>
-  </data>
-  <data name="NodeItem_ManagedProperties" xml:space="preserve">
-    <value>Beheerde eigenschappen</value>
+    <value>Uitzondering weergeven</value>
   </data>
   <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
-    <value>Bekijk tabel buffer</value>
+    <value>Table buffer openen...</value>
   </data>
   <data name="NoTargetForViewBuffer" xml:space="preserve">
     <value>Geen doelwit gevonden voor "Bekijk buffer"</value>
-  </data>
-  <data name="NodeItem_DefaultBuffer" xml:space="preserve">
-    <value>Standaard eigenschappen buffer</value>
   </data>
   <data name="UnrealClassFilter" xml:space="preserve">
     <value>Unreal klass</value>
   </data>
   <data name="ExportTextTitle" xml:space="preserve">
     <value>Exporteer text</value>
-  </data>
-  <data name="NodeItem_ViewProcessedScript" xml:space="preserve">
-    <value>Bekijk verwerkte script</value>
-  </data>
-  <data name="NodeItem_ViewCPPText" xml:space="preserve">
-    <value>Bekijk CPP script</value>
   </data>
   <data name="THING_DOESNT_EXIST" xml:space="preserve">
     <value>{0} bestaat niet!</value>
@@ -366,13 +336,16 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   <data name="SEARCH_AS_OBJECT" xml:space="preserve">
     <value>Zoeken als object</value>
   </data>
-  <data name="NodeItem_ViewOuter" xml:space="preserve">
-    <value>Bekijk buitenste</value>
-  </data>
-  <data name="NodeItem_ViewParent" xml:space="preserve">
-    <value>Bekijk ouder</value>
-  </data>
   <data name="FindResultsPage_TextTitle___0__" xml:space="preserve">
     <value>Find "{0}"</value>
+  </data>
+  <data name="NodeItem_Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="DecompilerPage_OnObjectTarget_Decompile___0_" xml:space="preserve">
+    <value>Decompilatie: {0}</value>
+  </data>
+  <data name="DecompilerPage_DecompilerPage_Decompile_Title" xml:space="preserve">
+    <value>Décompilateur</value>
   </data>
 </root>

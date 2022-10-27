@@ -37,6 +37,7 @@
             this.dockingMenu = new System.Windows.Forms.MenuStrip();
             this.packageToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dockingPanel = new System.Windows.Forms.Panel();
+            this.contextService = new UEExplorer.UI.ContextProvider();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspaceMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage4)).BeginInit();
@@ -123,6 +124,7 @@
             // 
             // kryptonDockingManagerMain
             // 
+            this.kryptonDockingManagerMain.PageCloseRequest += new System.EventHandler<Krypton.Docking.CloseRequestEventArgs>(this.kryptonDockingManagerMain_PageCloseRequest);
             this.kryptonDockingManagerMain.PageFloatingRequest += new System.EventHandler<Krypton.Docking.CancelUniqueNameEventArgs>(this.kryptonDockingManagerMain_PageFloatingRequest);
             // 
             // kryptonPage2
@@ -224,24 +226,6 @@
 		#endregion
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
 		private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn exportsCountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn namesCountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn netObjectsCountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn indexDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn offsetDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sizeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn superTableDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn superNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn archetypeTableDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn archetypeNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn objectTableDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn classTableDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn outerTableDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn outerNameDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn objectTableDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn classTableDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn outerTableDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn outerNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolStripMenuItem PrevButton;
         private System.Windows.Forms.ToolStripMenuItem NextButton;
         private System.Windows.Forms.ToolStripTextBox ActiveObjectPath;
@@ -259,5 +243,6 @@
         private System.Windows.Forms.MenuStrip dockingMenu;
         private System.Windows.Forms.ToolStripMenuItem packageToolToolStripMenuItem;
         private System.Windows.Forms.Panel dockingPanel;
+        private ContextProvider contextService;
     }
 }

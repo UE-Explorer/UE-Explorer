@@ -432,11 +432,14 @@
   <data name="&gt;&gt;dockingPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="contextService.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>974, 36</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>58</value>
+    <value>110</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -507,10 +510,16 @@
   <data name="&gt;&gt;packageToolToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;contextService.Name" xml:space="preserve">
+    <value>contextService</value>
+  </data>
+  <data name="&gt;&gt;contextService.Type" xml:space="preserve">
+    <value>UEExplorer.UI.ContextProvider, UE Explorer, Version=1.4.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>UC_PackageExplorer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>UEExplorer.UI.Tabs.UserControl_Tab, UE Explorer, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>UEExplorer.UI.Tabs.UserControl_Tab, UE Explorer, Version=1.4.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

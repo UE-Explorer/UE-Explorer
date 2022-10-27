@@ -49,6 +49,8 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -245,7 +247,7 @@
   <ItemGroup>
     <Compile Include="Development\IExtension.cs" />
     <Compile Include="UI\ActionPanels\ActionPanel.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\ActionPanels\PackageExplorerPanel.cs">
       <SubType>UserControl</SubType>
@@ -253,9 +255,9 @@
     <Compile Include="UI\ActionPanels\PackageExplorerPanel.Designer.cs">
       <DependentUpon>PackageExplorerPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ContextChangedEventArgs.cs" />
     <Compile Include="UI\Nodes\ObjectActionsBuilder.cs" />
-    <Compile Include="UI\ObjectActionManager.cs" />
-    <Compile Include="UI\ObjectTargetEventArgs.cs" />
+    <Compile Include="UI\StreamLocationFactory.cs" />
     <Compile Include="UI\Pages\BinaryPage.cs" />
     <Compile Include="UI\EditorUtil.cs" />
     <Compile Include="ExportHelpers.cs" />
@@ -321,14 +323,14 @@
     <Compile Include="UI\Nodes\ObjectVisitor.cs" />
     <Compile Include="UI\Nodes\ObjectTreeBuilder.cs" />
     <Compile Include="UI\ActionPanels\BinaryDataFieldsPanel.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\ActionPanels\BinaryDataFieldsPanel.Designer.cs">
       <DependentUpon>BinaryDataFieldsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ContentNodeAction.cs" />
+    <Compile Include="UI\ContextActionKind.cs" />
     <Compile Include="UI\ActionPanels\DecompileOutputPanel.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\ActionPanels\DecompileOutputPanel.Designer.cs">
       <DependentUpon>DecompileOutputPanel.cs</DependentUpon>
@@ -337,7 +339,7 @@
     <Compile Include="UI\IObjectHandler.cs" />
     <Compile Include="UI\Pages\DecompilerPage.cs" />
     <Compile Include="UI\Pages\FindResultsPage.cs" />
-    <Compile Include="UI\Pages\ObjectBoundPage.cs" />
+    <Compile Include="UI\Pages\TrackingPage.cs" />
     <Compile Include="UI\Pages\PackageExplorerPage.cs" />
     <Compile Include="UI\Panels\FindResultsPanel.cs">
       <SubType>UserControl</SubType>
@@ -356,6 +358,7 @@
     </Compile>
     <Compile Include="UI\Tabs\ActionState.cs" />
     <Compile Include="UI\ObjectPathBuilder.cs" />
+    <Compile Include="UI\ContextProvider.cs" />
     <Compile Include="UI\Tabs\UC_Default.cs">
       <SubType>UserControl</SubType>
     </Compile>

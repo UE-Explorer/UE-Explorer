@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace UEExplorer.UI.Tabs
 {
+    [ComVisible(false)]
     public partial class UC_Default : UserControl_Tab
     {
         public UC_Default()
@@ -10,12 +12,8 @@ namespace UEExplorer.UI.Tabs
             InitializeComponent();
         }
         
-        /// <summary>
-        /// Called when the Tab is added to the chain.
-        /// </summary>
-        protected override void TabCreated()
+        private void UC_Default_Load(object sender, EventArgs e)
         {
-            base.TabCreated();
             DefaultPage.BeginInvoke((Action)(() =>
                 DefaultPage.Navigate(Program.APPS_URL + "?version=" + Application.ProductVersion)));
         }

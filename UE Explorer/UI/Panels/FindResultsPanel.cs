@@ -48,7 +48,7 @@ namespace UEExplorer.UI.Panels
             if (e.Node.Tag is TextSearchHelpers.FindResult findResult)
             {
                 object document = ((TextSearchHelpers.DocumentResult)e.Node.Parent.Tag).Document;
-                UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(document, ContentNodeAction.Decompile);
+                UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(document, ContextActionKind.Decompile);
                 UC_PackageExplorer.Traverse(Parent).EmitFind(findResult);
             }
         }

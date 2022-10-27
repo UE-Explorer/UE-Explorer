@@ -1,87 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
+using System.Windows.Forms;
 using Storm.TabControl;
-using UEExplorer.UI.Main;
 
 namespace UEExplorer.UI.Tabs
 {
+    // TODO: Deprecate
     public interface ITabComponent
     {
-        TabsCollection Tabs { set; }
-        TabStripItem TabItem { get; set; }
-
-        void TabInitialize();
-        void TabSelected();
-        void TabClosing();
         void TabSave();
         void TabFind();
-        void TabDeselected();
     }
 
+    // TODO: Deprecate
     public class TabsCollection : IDisposable
     {
-        private TabStrip _TabsControl;
-        public List<ITabComponent> Components = new List<ITabComponent>();
-        public ProgramForm Form;
+        private TabStrip _TabStrip;
 
-        public ITabComponent LastSelectedComponent;
-
-        public TabsCollection(ProgramForm owner, TabStrip tabsControl)
+        public TabsCollection(TabStrip tabStrip)
         {
-            Form = owner;
-            _TabsControl = tabsControl;
+            _TabStrip = tabStrip;
         }
 
-        public ITabComponent SelectedComponent =>
-            Components.Find(tabComp => tabComp.TabItem == _TabsControl.SelectedItem);
+        public ITabComponent SelectedComponent => (ITabComponent)_TabStrip.SelectedItem?.Controls[0];
 
         public void Dispose()
         {
-            Form = null;
-            _TabsControl = null;
-            Components = null;
+            _TabStrip = null;
         }
 
-        public ITabComponent Add(Type tabType, string tabName)
+        public void InsertTab(Type componentType, string caption)
         {
-            if (Components.Any(tc => tc.TabItem.Title == tabName))
-            {
-                return null;
-            }
+            Debug.Assert(componentType.IsSubclassOf(typeof(Control)));
 
-            var tabItem = new TabStripItem
+            var tabComp = (Control)Activator.CreateInstance(componentType);
+            AddTab(tabComp, caption);
+        }
+
+        public void AddTab(Control component, string caption)
+        {
+            _TabStrip.Visible = true;
+
+            var tabItem = new TabStripItem(caption, null)
             {
-                Selected = true,
-                TabStripParent = _TabsControl,
-                TabIndex = 0,
-                Title = tabName,
                 BackColor = Color.White
             };
 
-            _TabsControl.AddTab(tabItem);
-            _TabsControl.SelectedItem = tabItem;
-            _TabsControl.Visible = _TabsControl.Items.Count > 0;
-            _TabsControl.Refresh();
+            _TabStrip.AddTab(tabItem, true);
 
-            var tabComp = (ITabComponent)Activator.CreateInstance(tabType);
-            tabComp.TabItem = tabItem;
-            tabComp.Tabs = this;
-            tabComp.TabInitialize();
-            Components.Add(tabComp);
-            return tabComp;
+            // We have to add this last for properly layout rendering.
+            tabItem.Controls.Add(component);
         }
 
-        public void Remove(ITabComponent delComponent, bool fullRemove = false)
+        // FIXME: Closes more than tab :S
+        public void CloseTab(TabStripItem itemToRemove)
         {
-            if (fullRemove)
-            {
-                _TabsControl.RemoveTab(delComponent.TabItem);
-                delComponent.TabItem.Dispose();
-            }
-
-            Components.Remove(delComponent);
+            _TabStrip.RemoveTab(itemToRemove);
         }
     }
 }

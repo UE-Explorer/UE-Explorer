@@ -1,23 +1,23 @@
 ﻿namespace UEExplorer.UI
 {
-    public enum ContentNodeAction
+    public enum ContextActionKind
     {
         /// <summary>
         /// Will use one of the below actions depending on the node's case.
         /// </summary>
         Auto,
         
+        Location,
+        
         Decompile,
         DecompileExternal,
+        
+        Play,
 
         Binary,
         
         ExportAs,
         ExportExternal,
-        
-        DecompileOuter,
-        DecompileScriptProperties,
-        DecompileClassReplication,
         
         DecompileTokens,
         DisassembleTokens,

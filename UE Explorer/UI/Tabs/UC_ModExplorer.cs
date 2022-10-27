@@ -5,14 +5,14 @@ using System.Windows.Forms;
 namespace UEExplorer.UI.Tabs
 {
     [ComVisible(false)]
-    public partial class UC_ModExplorer : UserControl_Tab
+    public partial class UC_ModExplorer
     {
-        public string FileName { get; set; }
-
         public UC_ModExplorer()
         {
             InitializeComponent();
         }
+
+        public string FileName { get; set; }
 
         private void ToolStripButton1_Click(object sender, EventArgs e)
         {

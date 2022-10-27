@@ -18,9 +18,13 @@ namespace UEExplorer.UI.ActionPanels
         private readonly ObjectTreeBuilder _ObjectTreeBuilder = new ObjectTreeBuilder();
         private readonly ObjectActionsBuilder _ActionsBuilder = new ObjectActionsBuilder();
 
-        public PackageExplorerPanel()
+        public PackageExplorerPanel(ContextProvider contextProvider)
         {
             InitializeComponent();
+        }
+
+        private void PackageExplorerPanel_Load(object sender, EventArgs e)
+        {
         }
 
         public void AddRootPackageNode(TreeNode node)
@@ -197,7 +201,7 @@ namespace UEExplorer.UI.ActionPanels
         private void TreeViewPackages_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Action == TreeViewAction.Unknown) return;
-            UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(e.Node, ContentNodeAction.Auto);
+            UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(e.Node, ContextActionKind.Auto);
         }
 
         private Timer _FilterTextChangedTimer;
@@ -245,7 +249,7 @@ namespace UEExplorer.UI.ActionPanels
         
         private void objectContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            var action = (ContentNodeAction)e.ClickedItem.Tag;
+            var action = (ContextActionKind)e.ClickedItem.Tag;
             UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(TreeViewPackages.SelectedNode, action);
         }
 
@@ -266,7 +270,7 @@ namespace UEExplorer.UI.ActionPanels
         private void toolStripMenuItemView_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             var target = TreeViewPackages.SelectedNode;
-            UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(target, ContentNodeAction.Auto);
+            UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(target, ContextActionKind.Auto);
         }
 
         private void toolStripMenuItemReload_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)

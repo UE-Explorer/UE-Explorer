@@ -248,6 +248,7 @@ namespace UEExplorer.UI.ActionPanels
             this.Controls.Add(this.TreeViewPackages);
             this.Name = "PackageExplorerPanel";
             this.Size = new System.Drawing.Size(502, 462);
+            this.Load += new System.EventHandler(this.PackageExplorerPanel_Load);
             this.objectContextMenu.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

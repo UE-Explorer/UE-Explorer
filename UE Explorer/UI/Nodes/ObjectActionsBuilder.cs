@@ -7,13 +7,13 @@ using UELib;
 
 namespace UEExplorer.UI.Nodes
 {
-    public sealed class ObjectActionsBuilder : ObjectVisitor<List<(string, ContentNodeAction)>>
+    public sealed class ObjectActionsBuilder : ObjectVisitor<List<(string, ContextActionKind)>>
     {
-        public override List<(string, ContentNodeAction)> Visit(object obj)
+        public override List<(string, ContextActionKind)> Visit(object obj)
         {
-            var actions = new List<(string, ContentNodeAction)>();
+            var actions = new List<(string, ContextActionKind)>();
 
-            void AddItem(string text, ContentNodeAction action)
+            void AddItem(string text, ContextActionKind action)
             {
                 actions.Add((text, action));
             }
@@ -44,38 +44,42 @@ namespace UEExplorer.UI.Nodes
                 return actions;
             }
 
-            if (tag is IUnrealDecompilable) AddItem(Resources.NodeItem_ViewObject, ContentNodeAction.Decompile);
+            if (tag is USound)
+            {
+                AddItem(Resources.NodeItem_Play, ContextActionKind.Play);
+            }
+
+            if (tag is IUnrealDecompilable) AddItem(Resources.NodeItem_Decompile, ContextActionKind.Decompile);
             if (tag is IBinaryData binaryDataObject && binaryDataObject.BinaryMetaData != null)
             {
-                AddItem(Resources.UC_PackageExplorer_BuildItemNodes_View_Binary, ContentNodeAction.Binary);
+                AddItem(Resources.NodeItem_ViewBinaryFields, ContextActionKind.Binary);
             }
 
             if (tag is IUnrealViewable)
             {
                 if (File.Exists(Program.Options.UEModelAppPath))
                 {
-                    AddItem(Resources.NodeItem_OpenInUEModelViewer, ContentNodeAction.DecompileExternal);
+                    AddItem(Resources.NodeItem_OpenInUEModelViewer, ContextActionKind.DecompileExternal);
 #if DEBUG
-                    AddItem(Resources.NodeItem_ExportWithUEModelViewer, ContentNodeAction.ExportExternal);
+                    AddItem(Resources.NodeItem_ExportWithUEModelViewer, ContextActionKind.ExportExternal);
 #endif
                 }
             }
 
             if (tag is IUnrealExportable exportableObj && exportableObj.CanExport())
             {
-                AddItem(Resources.EXPORT_AS, ContentNodeAction.ExportAs);
+                AddItem(Resources.NodeItem_ExportAs, ContextActionKind.ExportAs);
             }
-
 
             if (tag is IBuffered bufferedObject && bufferedObject.GetBuffer() != null)
             {
-                AddItem(Resources.NodeItem_ViewBuffer, ContentNodeAction.ViewBuffer);
+                AddItem(Resources.NodeItem_ViewBuffer, ContextActionKind.ViewBuffer);
             }
 
             var tableNode = tag as IContainsTable;
             if (tableNode?.Table != null)
             {
-                AddItem(Resources.NodeItem_ViewTableBuffer, ContentNodeAction.ViewTableBuffer);
+                AddItem(Resources.NodeItem_ViewTableBuffer, ContextActionKind.ViewTableBuffer);
             }
 
             // === UObject tools
@@ -85,20 +89,18 @@ namespace UEExplorer.UI.Nodes
                 return actions;
             }
 
-            if (uObject.Outer != null) AddItem(Resources.NodeItem_ViewOuter, ContentNodeAction.DecompileOuter);
-
             if (uObject is UStruct uStruct)
             {
                 if (uStruct.ByteCodeManager != null)
                 {
-                    AddItem(Resources.NodeItem_ViewTokens, ContentNodeAction.DecompileTokens);
-                    AddItem(Resources.NodeItem_ViewDisassembledTokens, ContentNodeAction.DisassembleTokens);
+                    AddItem(Resources.NodeItem_ViewTokens, ContextActionKind.DecompileTokens);
+                    AddItem(Resources.NodeItem_ViewDisassembledTokens, ContextActionKind.DisassembleTokens);
                 }
             }
 
             if (uObject.ThrownException != null)
             {
-                AddItem(Resources.NodeItem_ViewException, ContentNodeAction.ViewException);
+                AddItem(Resources.NodeItem_ViewException, ContextActionKind.ViewException);
             }
 
             return actions;

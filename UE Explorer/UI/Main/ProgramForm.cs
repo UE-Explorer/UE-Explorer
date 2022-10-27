@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
@@ -40,11 +39,20 @@ namespace UEExplorer.UI.Main
             Program.LogManager.StartLogStream();
 
             Text = $"{Application.ProductName} {Version}";
-            ;
+
             InitializeConfig();
             InitializeUI();
 
-            Tabs = new TabsCollection(this, TabComponentsStrip);
+            Tabs = new TabsCollection(TabComponentsStrip);
+            Tabs.InsertTab(typeof(UC_Default), Resources.Homepage);
+            string[] args = Environment.GetCommandLineArgs();
+            for (var i = 1; i < args.Length; ++i)
+            {
+                if (File.Exists(args[i]))
+                {
+                    LoadFile(args[i]);
+                }
+            }
         }
 
         private void InitializeUI()
@@ -80,39 +88,16 @@ namespace UEExplorer.UI.Main
                     $"{_MRUManager.Files.Count - i} {Path.GetFileName(_MRUManager.Files[i])} -> {Path.GetDirectoryName(_MRUManager.Files[i])}"
                 );
                 item.Tag = _MRUManager.Files[i];
-                item.Click += ROF_ItemClicked;
+                item.Click += (sender, e) =>
+                {
+                    var item1 = (MenuItem)sender;
+                    LoadFile(item1.Tag as string);
+                    RefreshMRUEvent();
+                };
             }
 
             _ROF.Enabled = _ROF.MenuItems.Count > 0;
             _MRUManager.Save();
-        }
-
-        private void ROF_ItemClicked(object sender, EventArgs e)
-        {
-            var item = (MenuItem)sender;
-            LoadFile(item.Tag as string);
-            RefreshMRUEvent();
-        }
-
-        private void SelectedNativeTable_DropDownOpening(object sender, EventArgs e)
-        {
-            // Rebuild it, to reflect the changes made to the current directory of NTL files.
-            SelectedNativeTable.DropDown.Items.Clear();
-            foreach (string filePath in UC_Options.GetNativeTables())
-            {
-                SelectedNativeTable.DropDown.Items.Add(Path.GetFileNameWithoutExtension(filePath));
-            }
-
-            // In case it got changed!
-            SelectedNativeTable.Text = Program.Options.NTLPath;
-        }
-
-        private void SelectedNativeTable_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            SelectedNativeTable.Text = e.ClickedItem.Text;
-
-            Program.Options.NTLPath = SelectedNativeTable.Text;
-            Program.SaveConfig();
         }
 
         private void InitializeConfig()
@@ -164,6 +149,27 @@ namespace UEExplorer.UI.Main
             }
         }
 
+        private void SelectedNativeTable_DropDownOpening(object sender, EventArgs e)
+        {
+            // Rebuild it, to reflect the changes made to the current directory of NTL files.
+            SelectedNativeTable.DropDown.Items.Clear();
+            foreach (string filePath in UC_Options.GetNativeTables())
+            {
+                SelectedNativeTable.DropDown.Items.Add(Path.GetFileNameWithoutExtension(filePath));
+            }
+
+            // In case it got changed!
+            SelectedNativeTable.Text = Program.Options.NTLPath;
+        }
+
+        private void SelectedNativeTable_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            SelectedNativeTable.Text = e.ClickedItem.Text;
+
+            Program.Options.NTLPath = SelectedNativeTable.Text;
+            Program.SaveConfig();
+        }
+
         private void ToolsToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             menuItem20.Checked = Program.AreFileTypesRegistered();
@@ -178,8 +184,6 @@ namespace UEExplorer.UI.Main
 
         public void LoadFile(string filePath)
         {
-            ITabComponent tabComponent = null;
-
             ProgressStatus.SaveStatus();
             ProgressStatus.SetStatus(string.Format(
                     Resources.ProgramForm_LoadFile_Loading_file,
@@ -189,30 +193,17 @@ namespace UEExplorer.UI.Main
 
             try
             {
+                _MRUManager.AddFile(filePath);
                 switch (Path.GetExtension(filePath))
                 {
                     default:
-                        tabComponent = Tabs.Add(typeof(UC_PackageExplorer),
-                            Path.GetFileName(filePath)
-                        );
-                        var unrealFile = (UC_PackageExplorer)tabComponent;
-                        if (unrealFile == null)
-                        {
-                            return;
-                        }
-
-                        unrealFile.FilePath = filePath;
-                        unrealFile.PostInitialize();
+                        var packageExplorer = new UC_PackageExplorer(filePath);
+                        Tabs.AddTab(packageExplorer, Path.GetFileName(filePath));
                         break;
                 }
             }
             catch (Exception exception)
             {
-                if (tabComponent != null)
-                {
-                    Tabs.Remove(tabComponent);
-                }
-
                 ExceptionDialog.Show(string.Format(Resources.ProgramForm_LoadFile_Failed_loading_package,
                         filePath), exception
                 );
@@ -220,8 +211,6 @@ namespace UEExplorer.UI.Main
             finally
             {
                 ProgressStatus.Reset();
-
-                _MRUManager.AddFile(filePath);
             }
         }
 
@@ -250,7 +239,7 @@ namespace UEExplorer.UI.Main
 
         private void MenuItem7_Click(object sender, EventArgs e)
         {
-            Tabs.Add(typeof(UC_Options), Resources.Options);
+            Tabs.InsertTab(typeof(UC_Options), Resources.Options);
         }
 
         private void MenuItem24_Click(object sender, EventArgs e)
@@ -277,7 +266,7 @@ namespace UEExplorer.UI.Main
 
         private void OpenHome_Click(object sender, EventArgs e)
         {
-            Tabs.Add(typeof(UC_Default), Resources.Homepage);
+            Tabs.InsertTab(typeof(UC_Default), Resources.Homepage);
         }
 
         private void SocialMenuItem_Click(object sender, EventArgs e)
@@ -340,8 +329,6 @@ namespace UEExplorer.UI.Main
             Process.Start("https://github.com/UE-Explorer/UE-Explorer/issues");
         }
 
-        #region Events
-
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var about = new AboutDialog())
@@ -382,34 +369,12 @@ namespace UEExplorer.UI.Main
 
         private void UnrealCacheExtractorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Tabs.Add(typeof(UC_CacheExtractor), Resources.ProgramForm_Cache_Extractor);
-        }
-
-        private void TabComponentsStrip_TabStripItemSelectionChanged(TabStripItemChangedEventArgs e)
-        {
-            // This delegate is called when UE is still none on startup
-            if (Tabs.SelectedComponent == null || e.ChangeType == TabStripItemChangeTypes.Removed)
-            {
-                return;
-            }
-
-            if (Tabs.LastSelectedComponent != null && Tabs.LastSelectedComponent != Tabs.SelectedComponent)
-            {
-                Tabs.LastSelectedComponent.TabDeselected();
-            }
-
-            Tabs.SelectedComponent.TabSelected();
-            Tabs.LastSelectedComponent = Tabs.SelectedComponent;
+            Tabs.InsertTab(typeof(UC_CacheExtractor), Resources.ProgramForm_Cache_Extractor);
         }
 
         private void TabComponentsStrip_TabStripItemClosing(TabStripItemClosingEventArgs e)
         {
-            foreach (var tc in Tabs.Components.Where(tab => tab.TabItem == e.Item))
-            {
-                tc.TabClosing();
-                Tabs.Remove(tc);
-                break;
-            }
+            e.Item.Dispose();
         }
 
         private void TabComponentsStrip_TabStripItemClosed(object sender, EventArgs e)
@@ -423,20 +388,9 @@ namespace UEExplorer.UI.Main
             Application.Exit();
         }
 
-        private void Unreal_Explorer_Form_Shown(object sender, EventArgs e)
+        private void ProgramForm_Shown(object sender, EventArgs e)
         {
             CheckForUpdates();
-            Refresh();
-
-            Tabs.Add(typeof(UC_Default), Resources.Homepage);
-            string[] args = Environment.GetCommandLineArgs();
-            for (var i = 1; i < args.Length; ++i)
-            {
-                if (File.Exists(args[i]))
-                {
-                    LoadFile(args[i]);
-                }
-            }
         }
 
         private void ToggleUEExplorerFileIconsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -454,14 +408,21 @@ namespace UEExplorer.UI.Main
             Program.ToggleRegisterFileTypes(menuItem20.Checked);
         }
 
-        private void UEExplorer_Form_DragEnter(object sender, DragEventArgs e)
+        private void ProgramForm_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop)
-                ? DragDropEffects.Move
+                ? DragDropEffects.Link
                 : DragDropEffects.None;
         }
 
-        private void UEExplorer_Form_DragDrop(object sender, DragEventArgs e)
+        private void ProgramForm_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop)
+                ? DragDropEffects.Link
+                : DragDropEffects.None;
+        }
+
+        private void ProgramForm_DragDrop(object sender, DragEventArgs e)
         {
             string allowedExtensions = UnrealExtensions.FormatUnrealExtensionsAsFilter();
 
@@ -489,8 +450,6 @@ namespace UEExplorer.UI.Main
         {
             Tabs.SelectedComponent?.TabFind();
         }
-
-        #endregion
     }
 
     public static class ProgressStatus

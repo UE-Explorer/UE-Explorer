@@ -139,9 +139,6 @@ Latest version: {1}</value>
   <data name="UnrealClassFilter" xml:space="preserve">
     <value>Unreal Class</value>
   </data>
-  <data name="NodeItem_ViewDefaultProperties" xml:space="preserve">
-    <value>View DefaultProperties</value>
-  </data>
   <data name="COMPRESSED_HOWTO" xml:space="preserve">
     <value>To use Gildor's tool, try "decompress.exe PACKAGENAME.EXT" you may have to specify -lzo.</value>
   </data>
@@ -169,9 +166,6 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
   </data>
   <data name="ExceptionDialog_FAIL" xml:space="preserve">
     <value>Failed to send this report. Please try again later!</value>
-  </data>
-  <data name="NodeItem_ViewCPPText" xml:space="preserve">
-    <value>View CPP Script</value>
   </data>
   <data name="NEW_VERSION_AVAILABLE_TITLE" xml:space="preserve">
     <value>A new version is available!</value>
@@ -219,7 +213,7 @@ Click Yes if you want to go to the output directory!</value>
   <data name="HexView_COULDNT_ACQUIRE_VALUE" xml:space="preserve">
     <value>Couldn't acquire value</value>
   </data>
-  <data name="DecompilerPage_SetNewObjectTarget_Decompile___0_" xml:space="preserve">
+  <data name="DecompilerPage_OnObjectTarget_Decompile___0_" xml:space="preserve">
     <value>Decompile: {0}</value>
   </data>
   <data name="CHECKFORUPDATES_FAILED_MESSAGE" xml:space="preserve">
@@ -233,10 +227,7 @@ Click Yes if you want to go to the output directory!</value>
     <value>Open File</value>
   </data>
   <data name="NodeItem_ViewException" xml:space="preserve">
-    <value>View Exception</value>
-  </data>
-  <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
-    <value>Invalid Object index {0}</value>
+    <value>Display Exception</value>
   </data>
   <data name="ProgramForm_LoadFile_Failed_loading_package" xml:space="preserve">
     <value>Failed loading package: {0}</value>
@@ -268,8 +259,8 @@ Click Yes if you want to go to the output directory!</value>
   <data name="BinaryPage_BinaryPage_Binary_Title" xml:space="preserve">
     <value>Binary</value>
   </data>
-  <data name="UC_PackageExplorer_BuildItemNodes_View_Binary" xml:space="preserve">
-    <value>View Binary Fields</value>
+  <data name="NodeItem_ViewBinaryFields" xml:space="preserve">
+    <value>Show Binary Fields</value>
   </data>
   <data name="CHECKING_FOR_UPDATES_LOG" xml:space="preserve">
     <value>Checking for updates(Current version is {0})...</value>
@@ -285,13 +276,13 @@ Click Yes if you want to go to the output directory!</value>
     <comment>Status description.</comment>
   </data>
   <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
-    <value>View Table Buffer</value>
+    <value>Open Table Buffer...</value>
   </data>
   <data name="BinaryPage_SetNewObjectTarget_BinaryData___0_" xml:space="preserve">
     <value>BinaryData: {0}</value>
   </data>
   <data name="NodeItem_ViewDisassembledTokens" xml:space="preserve">
-    <value>View Disassembled Tokens</value>
+    <value>Decompile Disassembled Tokens</value>
   </data>
   <data name="SAVE_QUESTION" xml:space="preserve">
     <value>Save?</value>
@@ -315,17 +306,11 @@ Click Yes if you want to go to the output directory!</value>
   <data name="Version" xml:space="preserve">
     <value>Version {0}</value>
   </data>
-  <data name="NodeItem_ManagedProperties" xml:space="preserve">
-    <value>Managed Properties</value>
-  </data>
   <data name="Code" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Code.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="INITIALIZING_UI" xml:space="preserve">
     <value>Initializing UI...</value>
-  </data>
-  <data name="NodeItem_ViewScript" xml:space="preserve">
-    <value>View Script</value>
   </data>
   <data name="NO_NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
     <value>You have the latest version of {0}</value>
@@ -337,9 +322,6 @@ Click Yes if you want to go to the output directory!</value>
   <data name="SEARCHING_CLASSES_STATUS" xml:space="preserve">
     <value>Searching classes...</value>
   </data>
-  <data name="NodeItem_ViewOuter" xml:space="preserve">
-    <value>View outer</value>
-  </data>
   <data name="PACKAGE_IS_COMPRESSED" xml:space="preserve">
     <value>This package is compressed! Compressed packages are not supported.
 
@@ -348,7 +330,7 @@ Please consider decompressing the package using "Unreal Package Decompressor" fr
 You can download the tool from http://www.gildor.org/downloads or press OK to go there now.</value>
   </data>
   <data name="NodeItem_ViewTokens" xml:space="preserve">
-    <value>View Tokens</value>
+    <value>Decompile Tokens</value>
   </data>
   <data name="NOT_AVAILABLE" xml:space="preserve">
     <value>N/A</value>
@@ -372,16 +354,13 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
     <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NodeItem_ViewBuffer" xml:space="preserve">
-    <value>View Buffer</value>
+    <value>Open Buffer...</value>
   </data>
-  <data name="NodeItem_ViewObject" xml:space="preserve">
-    <value>View Object</value>
+  <data name="NodeItem_Decompile" xml:space="preserve">
+    <value>Decompile</value>
   </data>
   <data name="ExceptionDialog_THANKS" xml:space="preserve">
     <value>Thanks for reporting this exception occurrance!</value>
-  </data>
-  <data name="NodeItem_DefaultBuffer" xml:space="preserve">
-    <value>DefaultProperties Buffer</value>
   </data>
   <data name="UNRECOGNIZED_COMMANDLINE_OPTION" xml:space="preserve">
     <value>Unrecognized commandline option {0}</value>
@@ -414,7 +393,7 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
     <value>Exporting package {0}</value>
   </data>
   <data name="NodeItem_ViewContent" xml:space="preserve">
-    <value>View Content</value>
+    <value>View Content...</value>
   </data>
   <data name="PACKAGE_METAINFO" xml:space="preserve">
     <value>Package's MetaInfo</value>
@@ -440,28 +419,28 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
 
 	{0}</value>
   </data>
-  <data name="NodeItem_ViewUsedTags" xml:space="preserve">
-    <value>View Used Tags</value>
-  </data>
-  <data name="EXPORT_AS" xml:space="preserve">
+  <data name="NodeItem_ExportAs" xml:space="preserve">
     <value>Export As...</value>
   </data>
   <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NodeItem_ViewReplication" xml:space="preserve">
-    <value>View Replication</value>
-  </data>
   <data name="OBJECT_IS" xml:space="preserve">
     <value>Object is {0}</value>
-  </data>
-  <data name="NodeItem_ViewProcessedScript" xml:space="preserve">
-    <value>View Processed Script</value>
   </data>
   <data name="FindNext" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FindNext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="HexViewerForm_Title" xml:space="preserve">
     <value>{0} - {1}</value>
+  </data>
+  <data name="WavePlayerPage_OnObjectTarget_WavePlayer___0_" xml:space="preserve">
+    <value>Wave: {0}</value>
+  </data>
+  <data name="WavePlayerPage_WavePlayerPage_WavePlayer_Title" xml:space="preserve">
+    <value>Wave Player</value>
+  </data>
+  <data name="NodeItem_Play" xml:space="preserve">
+    <value>Afspelen</value>
   </data>
 </root>
