@@ -325,7 +325,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zoeken &quot;{0}&quot;.
+        ///   Looks up a localized string similar to Find &quot;{0}&quot;.
         /// </summary>
         internal static string FindResultsPage_TextTitle___0__ {
             get {
@@ -379,47 +379,11 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importing Objects....
-        /// </summary>
-        internal static string IMPORTING_OBJECTS {
-            get {
-                return ResourceManager.GetString("IMPORTING_OBJECTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Initializing UI....
-        /// </summary>
-        internal static string INITIALIZING_UI {
-            get {
-                return ResourceManager.GetString("INITIALIZING_UI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid Name index {0}.
-        /// </summary>
-        internal static string INVALID_NAME_INDEX {
-            get {
-                return ResourceManager.GetString("INVALID_NAME_INDEX", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Linking Objects....
         /// </summary>
         internal static string LINKING_OBJECTS {
             get {
                 return ResourceManager.GetString("LINKING_OBJECTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name is {0}.
-        /// </summary>
-        internal static string NAME_IS {
-            get {
-                return ResourceManager.GetString("NAME_IS", resourceCulture);
             }
         }
         
@@ -516,6 +480,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        internal static string NodeItem_View {
+            get {
+                return ResourceManager.GetString("NodeItem_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Binary Fields.
         /// </summary>
         internal static string NodeItem_ViewBinaryFields {
@@ -557,15 +530,6 @@ namespace UEExplorer.Properties {
         internal static string NodeItem_ViewException {
             get {
                 return ResourceManager.GetString("NodeItem_ViewException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View parent.
-        /// </summary>
-        internal static string NodeItem_ViewParent {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewParent", resourceCulture);
             }
         }
         

@@ -4,6 +4,7 @@ using System.IO;
 using UEExplorer.Properties;
 using UELib.Core;
 using UELib;
+using UELib.Engine;
 
 namespace UEExplorer.UI.Nodes
 {
@@ -46,7 +47,11 @@ namespace UEExplorer.UI.Nodes
 
             if (tag is USound)
             {
-                AddItem(Resources.NodeItem_Play, ContextActionKind.Play);
+                AddItem(Resources.NodeItem_Play, ContextActionKind.Open);
+            }
+            else if (tag is UPalette || tag is UTexture)
+            {
+                AddItem(Resources.NodeItem_View, ContextActionKind.Open);
             }
 
             if (tag is IUnrealDecompilable) AddItem(Resources.NodeItem_Decompile, ContextActionKind.Decompile);

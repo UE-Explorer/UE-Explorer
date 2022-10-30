@@ -12,7 +12,7 @@
         Decompile,
         DecompileExternal,
         
-        Play,
+        Open,
 
         Binary,
         

@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NAME_IS" xml:space="preserve">
-    <value>Naam is {0}</value>
-  </data>
   <data name="Open_File" xml:space="preserve">
     <value>Openen</value>
   </data>
@@ -175,9 +172,9 @@ Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eer
     <comment>Status description.</comment>
   </data>
   <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
-    <value>Als je op ja klikt zal je naar de update gebracht worden!
+    <value>Op ja klikken zal je naar de pagina met de laatste versie brengen.
 
-Huidige versie: {0}
+Geïnstalleerde versie: {0}
 Laatste versie: {1}</value>
     <comment>Dialog description.</comment>
   </data>
@@ -237,14 +234,8 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   <data name="DESERIALIZING_OBJECTS" xml:space="preserve">
     <value>Objecten lezen...</value>
   </data>
-  <data name="IMPORTING_OBJECTS" xml:space="preserve">
-    <value>Objecten aan het importeren...</value>
-  </data>
   <data name="LINKING_OBJECTS" xml:space="preserve">
-    <value>Objecten verbinden...</value>
-  </data>
-  <data name="INITIALIZING_UI" xml:space="preserve">
-    <value>UI initializeren...</value>
+    <value>Objecten koppelen...</value>
   </data>
   <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
     <value>In de UnrealWiki zoeken naar "{0}"</value>
@@ -310,7 +301,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
     <value>Unreal klass</value>
   </data>
   <data name="ExportTextTitle" xml:space="preserve">
-    <value>Exporteer text</value>
+    <value>Text exporteren</value>
   </data>
   <data name="THING_DOESNT_EXIST" xml:space="preserve">
     <value>{0} bestaat niet!</value>
@@ -337,7 +328,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
     <value>Zoeken als object</value>
   </data>
   <data name="FindResultsPage_TextTitle___0__" xml:space="preserve">
-    <value>Find "{0}"</value>
+    <value>Zoeken "{0}"</value>
   </data>
   <data name="NodeItem_Play" xml:space="preserve">
     <value>Play</value>
@@ -347,5 +338,23 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   </data>
   <data name="DecompilerPage_DecompilerPage_Decompile_Title" xml:space="preserve">
     <value>Décompilateur</value>
+  </data>
+  <data name="NodeItem_View" xml:space="preserve">
+    <value>Bekijken</value>
+  </data>
+  <data name="PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title" xml:space="preserve">
+    <value>Pakket Verkenner</value>
+  </data>
+  <data name="WavePlayerPage_WavePlayerPage_WavePlayer_Title" xml:space="preserve">
+    <value>Golf Afspeler</value>
+  </data>
+  <data name="BinaryPage_BinaryPage_Binary_Title" xml:space="preserve">
+    <value>Binair</value>
+  </data>
+  <data name="BinaryPage_SetNewObjectTarget_BinaryData___0_" xml:space="preserve">
+    <value>Binaire gegevens: {0}</value>
+  </data>
+  <data name="WavePlayerPage_OnObjectTarget_WavePlayer___0_" xml:space="preserve">
+    <value>Golf: {0}</value>
   </data>
 </root>
