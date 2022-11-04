@@ -85,6 +85,7 @@
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
@@ -115,10 +116,13 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="Vortice.Vulkan, Version=1.5.21.0, Culture=neutral, PublicKeyToken=5431ec61a7e925da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vortice.Vulkan.1.5.21\lib\netstandard2.0\Vortice.Vulkan.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Audio\WavePlayerComponent.cs" />
-    <Compile Include="Components\Graphics\VertexRendererComponent.cs" />
+    <Compile Include="Components\Graphics\WorldComponent.cs" />
     <Compile Include="Extensions\Drawing\ImagingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -130,6 +134,10 @@
     <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj">
       <Project>{7E45273F-434F-42FA-8269-0E760AEB41E1}</Project>
       <Name>Eliot.UELib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UEExplorer.Graphics.Framework\UEExplorer.Graphics.Framework.csproj">
+      <Project>{62E30312-1C7B-46F9-8861-6B2D696CE0C4}</Project>
+      <Name>UEExplorer.Graphics.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
