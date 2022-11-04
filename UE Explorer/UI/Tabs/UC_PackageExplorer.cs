@@ -17,6 +17,7 @@ using UEExplorer.UI.Forms;
 using UEExplorer.UI.Main;
 using UEExplorer.UI.Pages;
 using UELib.Annotations;
+using UELib.Engine;
 
 namespace UEExplorer.UI.Tabs
 {
@@ -444,8 +445,10 @@ namespace UEExplorer.UI.Tabs
 
             switch (tag)
             {
+                case UPalette _:
+                case UTexture _:
                 case USound _:
-                    return ContextActionKind.Play;
+                    return ContextActionKind.Open;
 
                 case IUnrealDecompilable _:
                     return ContextActionKind.Decompile;
@@ -504,7 +507,7 @@ namespace UEExplorer.UI.Tabs
                 switch (actionKind)
                 {
                     case ContextActionKind.Auto:
-                    case ContextActionKind.Play:
+                    case ContextActionKind.Open:
                     case ContextActionKind.Decompile:
                     case ContextActionKind.Binary:
                         UpdateContext(tag, actionKind);
@@ -761,6 +764,7 @@ namespace UEExplorer.UI.Tabs
                             return null;
                     }
 
+                case ContextActionKind.Open:
                 case ContextActionKind.Decompile:
                     return CreateTrackingPage<DecompilerPage>(isTracking);
 
