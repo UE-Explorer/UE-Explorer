@@ -49,7 +49,7 @@ namespace UEExplorer.UI.Nodes
             {
                 AddItem(Resources.NodeItem_Play, ContextActionKind.Open);
             }
-            else if (tag is UPalette || tag is UTexture)
+            else if (tag is UPalette || tag is UTexture || tag is UPolys)
             {
                 AddItem(Resources.NodeItem_View, ContextActionKind.Open);
             }

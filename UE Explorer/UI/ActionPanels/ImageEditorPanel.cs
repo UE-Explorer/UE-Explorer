@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using UEExplorer.Render.Extensions.Drawing;
 using UEExplorer.UI.Tabs;
 using UELib.Core;
@@ -78,7 +78,7 @@ namespace UEExplorer.UI.ActionPanels
                         // Nothing to render
                         break;
                     }
-                    
+
                     UTexture.MipMap mip = uTexture.Mips[0];
                     PixelFormat pixelFormat = uTexture.Format.ToPixelFormat();
                     if (uTexture.Format == UBitmapMaterial.TextureFormat.P8)
@@ -98,18 +98,15 @@ namespace UEExplorer.UI.ActionPanels
 
                     break;
                 }
+
+                case UPolys uPolys:
+                    viewportPanel.SetRenderTarget((dynamic)Object);
+                    break;
             }
         }
 
-        private void renderPanel_Paint(object sender, PaintEventArgs e)
+        private void ImageEditorPanel_Load(object sender, EventArgs e)
         {
-            if (_Image == null)
-            {
-                return;
-            }
-
-            e.Graphics.Clear(Color.Black);
-            e.Graphics.DrawImage(_Image, renderPanel.Bounds);
         }
     }
 }

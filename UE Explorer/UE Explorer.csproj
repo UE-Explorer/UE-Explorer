@@ -280,6 +280,12 @@
     <Compile Include="UI\ActionPanels\ImageEditorPanel.Designer.cs">
       <DependentUpon>ImageEditorPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ActionPanels\ViewportPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ActionPanels\ViewportPanel.Designer.cs">
+      <DependentUpon>ViewportPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ActionPanels\WavePlayerPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -472,6 +478,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ActionPanels\ImageEditorPanel.resx">
       <DependentUpon>ImageEditorPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ActionPanels\ViewportPanel.resx">
+      <DependentUpon>ViewportPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ActionPanels\WavePlayerPanel.resx">
       <DependentUpon>WavePlayerPanel.cs</DependentUpon>

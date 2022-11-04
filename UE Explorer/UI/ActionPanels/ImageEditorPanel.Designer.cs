@@ -32,7 +32,7 @@ namespace UEExplorer.UI.ActionPanels
         {
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.renderPanel = new System.Windows.Forms.Panel();
+            this.viewportPanel = new UEExplorer.UI.ActionPanels.ViewportPanel();
             this.SuspendLayout();
             // 
             // dataGridViewTextBoxColumn1
@@ -49,20 +49,22 @@ namespace UEExplorer.UI.ActionPanels
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.Width = 164;
             // 
-            // renderPanel
+            // viewportPanel
             // 
-            this.renderPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.renderPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.renderPanel.Location = new System.Drawing.Point(0, 0);
-            this.renderPanel.Name = "renderPanel";
-            this.renderPanel.Size = new System.Drawing.Size(150, 150);
-            this.renderPanel.TabIndex = 0;
-            this.renderPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.renderPanel_Paint);
+            this.viewportPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.viewportPanel.Location = new System.Drawing.Point(8, 8);
+            this.viewportPanel.Name = "viewportPanel";
+            this.viewportPanel.Size = new System.Drawing.Size(135, 135);
+            this.viewportPanel.TabIndex = 0;
             // 
             // ImageEditorPanel
             // 
-            this.Controls.Add(this.renderPanel);
+            this.Controls.Add(this.viewportPanel);
             this.Name = "ImageEditorPanel";
+            this.Padding = new System.Windows.Forms.Padding(4);
+            this.Load += new System.EventHandler(this.ImageEditorPanel_Load);
             this.ResumeLayout(false);
 
         }
@@ -70,6 +72,6 @@ namespace UEExplorer.UI.ActionPanels
         #endregion
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.Panel renderPanel;
+        private ViewportPanel viewportPanel;
     }
 }

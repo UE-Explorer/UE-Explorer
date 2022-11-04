@@ -56,7 +56,8 @@ namespace UEExplorer.UI.Pages
         {
             return IsTracking && (
                 context.Target is UPalette ||
-                context.Target is UTexture
+                context.Target is UTexture ||
+                context.Target is UPolys
             );
         }
 

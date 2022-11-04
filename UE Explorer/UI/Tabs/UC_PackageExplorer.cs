@@ -447,6 +447,7 @@ namespace UEExplorer.UI.Tabs
             {
                 case UPalette _:
                 case UTexture _:
+                case UPolys _:
                 case USound _:
                     return ContextActionKind.Open;
 
@@ -771,8 +772,9 @@ namespace UEExplorer.UI.Tabs
                         case USound _:
                             return CreateTrackingPage<WavePlayerPage>(isTracking);
 
-                        case UTexture _:
                         case UPalette _:
+                        case UTexture _:
+                        case UPolys _:
                             return CreateTrackingPage<ImageEditorPage>(isTracking);
                     }
 
