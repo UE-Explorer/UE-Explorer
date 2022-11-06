@@ -175,6 +175,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Development\IExtension.cs" />
+    <Compile Include="Properties\UserHistory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>UserHistory.settings</DependentUpon>
+    </Compile>
     <Compile Include="UI\ActionPanels\ActionPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -276,9 +281,7 @@
     <Compile Include="UI\Panels\FindResultsPanel.Designer.cs">
       <DependentUpon>FindResultsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Panels\TextEditorPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="UI\Panels\TextEditorPanel.cs" />
     <Compile Include="UI\Panels\TextEditorPanel.Designer.cs">
       <DependentUpon>TextEditorPanel.cs</DependentUpon>
     </Compile>
@@ -518,6 +521,10 @@
     <None Include="Properties\DataSources\UELib.UImportTableItem.datasource" />
     <None Include="Properties\DataSources\UELib.UNameTableItem.datasource" />
     <None Include="Properties\DataSources\UELib.UnrealPackage+PackageFileSummary.datasource" />
+    <None Include="Properties\UserHistory.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>UserHistory.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

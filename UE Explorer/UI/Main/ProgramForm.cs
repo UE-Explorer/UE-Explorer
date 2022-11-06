@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
-using Eliot.Utilities;
+using Krypton.Toolkit;
 using Microsoft.Win32;
 using Storm.TabControl;
 using UEExplorer.Development;
@@ -17,10 +17,9 @@ using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 
 namespace UEExplorer.UI.Main
 {
-    public partial class ProgramForm : Form
+    public partial class ProgramForm : KryptonForm
     {
-        private const string APP_KEY = "EliotVU";
-        private MRUManager _MRUManager;
+        private const string Appkey = "EliotVU";
         public TabsCollection Tabs;
 
         internal ProgramForm()
@@ -46,7 +45,7 @@ namespace UEExplorer.UI.Main
             Tabs = new TabsCollection(TabComponentsStrip);
             Tabs.InsertTab(typeof(UC_Default), Resources.Homepage);
             string[] args = Environment.GetCommandLineArgs();
-            for (var i = 1; i < args.Length; ++i)
+            for (int i = 1; i < args.Length; ++i)
             {
                 if (File.Exists(args[i]))
                 {
@@ -57,53 +56,32 @@ namespace UEExplorer.UI.Main
 
         private void InitializeUI()
         {
-            ProgressStatus.Status = ProgressLabel;
-            ProgressStatus.Loading = LoadingProgress;
+            ProgressStatus.Status = progressStatusLabel;
+            ProgressStatus.Loading = loadingProgressBar;
 
-            SelectedNativeTable.Text = Program.Options.NTLPath;
+            nativeTableDropDownButton.Text = Program.Options.NTLPath;
             Platform.Text = Program.Options.Platform;
 #if DEBUG
-            _CacheExtractorItem.Enabled = true;
+            cacheExtractorMenuItem.Enabled = true;
 #endif
-            MRUManager.SetStoragePath(Application.StartupPath);
-            _MRUManager = MRUManager.Load();
-            _MRUManager.RefreshEvent += RefreshMRUEvent;
-            RefreshMRUEvent();
         }
 
-        private void RefreshMRUEvent()
+        private void PushRecentOpenedFile(string filePath)
         {
-            _ROF.MenuItems.Clear();
-            for (int i = _MRUManager.Files.Count - 1; i >= 0; --i)
+            var filePaths = UserHistory.Default.RecentFiles;
+            // If we have one already, we'd like to move it to the most recent.
+            filePaths.Remove(filePath);
+            filePaths.Insert(0, filePath);
+            if (filePaths.Count > 15)
             {
-                if (!File.Exists(_MRUManager.Files[i]))
-                {
-                    _MRUManager.Files.RemoveAt(i);
-                    --i;
-                    continue;
-                }
-
-                var item = _ROF.MenuItems.Add
-                (
-                    $"{_MRUManager.Files.Count - i} {Path.GetFileName(_MRUManager.Files[i])} -> {Path.GetDirectoryName(_MRUManager.Files[i])}"
-                );
-                item.Tag = _MRUManager.Files[i];
-                item.Click += (sender, e) =>
-                {
-                    var item1 = (MenuItem)sender;
-                    LoadFile(item1.Tag as string);
-                    RefreshMRUEvent();
-                };
+                filePaths.RemoveAt(0);
             }
 
-            _ROF.Enabled = _ROF.MenuItems.Count > 0;
-            _MRUManager.Save();
+            mostRecentMenuItem.Enabled = true;
+            UserHistory.Default.Save();
         }
 
-        private void InitializeConfig()
-        {
-            Program.LoadConfig();
-        }
+        private void InitializeConfig() => Program.LoadConfig();
 
         private void InitializeExtensions()
         {
@@ -142,7 +120,7 @@ namespace UEExplorer.UI.Main
                     }
 
                     string extensionName = extensionTitleAttribute.Title;
-                    var item = menuItem13.MenuItems.Add(extensionName);
+                    var item = menuItem13.DropDownItems.Add(extensionName);
                     item.Click += ext.OnActivate;
                     menuItem13.Enabled = true;
                 }
@@ -152,21 +130,21 @@ namespace UEExplorer.UI.Main
         private void SelectedNativeTable_DropDownOpening(object sender, EventArgs e)
         {
             // Rebuild it, to reflect the changes made to the current directory of NTL files.
-            SelectedNativeTable.DropDown.Items.Clear();
+            nativeTableDropDownButton.DropDown.Items.Clear();
             foreach (string filePath in UC_Options.GetNativeTables())
             {
-                SelectedNativeTable.DropDown.Items.Add(Path.GetFileNameWithoutExtension(filePath));
+                nativeTableDropDownButton.DropDown.Items.Add(Path.GetFileNameWithoutExtension(filePath));
             }
 
             // In case it got changed!
-            SelectedNativeTable.Text = Program.Options.NTLPath;
+            nativeTableDropDownButton.Text = Program.Options.NTLPath;
         }
 
         private void SelectedNativeTable_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            SelectedNativeTable.Text = e.ClickedItem.Text;
+            nativeTableDropDownButton.Text = e.ClickedItem.Text;
 
-            Program.Options.NTLPath = SelectedNativeTable.Text;
+            Program.Options.NTLPath = nativeTableDropDownButton.Text;
             Program.SaveConfig();
         }
 
@@ -193,7 +171,7 @@ namespace UEExplorer.UI.Main
 
             try
             {
-                _MRUManager.AddFile(filePath);
+                PushRecentOpenedFile(filePath);
                 switch (Path.GetExtension(filePath))
                 {
                     default:
@@ -214,10 +192,7 @@ namespace UEExplorer.UI.Main
             }
         }
 
-        private void DonateToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Process.Start(Program.Donate_URL);
-        }
+        private void DonateToolStripMenuItem1_Click(object sender, EventArgs e) => Process.Start(Program.Donate_URL);
 
         private void CheckForUpdates()
         {
@@ -228,29 +203,21 @@ namespace UEExplorer.UI.Main
         private void OnCheckForUpdates(object sender, EventArgs e)
         {
             var softKey = Registry.CurrentUser.OpenSubKey("Software", true);
-            var appKey = softKey?.OpenSubKey(APP_KEY);
+            var appKey = softKey?.OpenSubKey(Appkey);
             if (appKey != null)
             {
-                softKey.DeleteSubKeyTree(APP_KEY);
+                softKey.DeleteSubKeyTree(Appkey);
             }
 
             CheckForUpdates();
         }
 
-        private void MenuItem7_Click(object sender, EventArgs e)
-        {
+        private void MenuItem7_Click(object sender, EventArgs e) =>
             Tabs.InsertTab(typeof(UC_Options), Resources.Options);
-        }
 
-        private void MenuItem24_Click(object sender, EventArgs e)
-        {
-            Process.Start(Program.Forum_URL);
-        }
+        private void MenuItem24_Click(object sender, EventArgs e) => Process.Start(Program.Forum_URL);
 
-        private void MenuItem26_Click(object sender, EventArgs e)
-        {
-            Process.Start(Program.WEBSITE_URL);
-        }
+        private void MenuItem26_Click(object sender, EventArgs e) => Process.Start(Program.WEBSITE_URL);
 
         private void Platform_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -259,25 +226,15 @@ namespace UEExplorer.UI.Main
             Program.SaveConfig();
         }
 
-        private void MenuItem4_Click(object sender, EventArgs e)
-        {
-            Process.Start(Program.Contact_URL);
-        }
+        private void MenuItem4_Click(object sender, EventArgs e) => Process.Start(Program.Contact_URL);
 
-        private void OpenHome_Click(object sender, EventArgs e)
-        {
+        private void OpenHome_Click(object sender, EventArgs e) =>
             Tabs.InsertTab(typeof(UC_Default), Resources.Homepage);
-        }
 
-        private void SocialMenuItem_Click(object sender, EventArgs e)
-        {
+        private void SocialMenuItem_Click(object sender, EventArgs e) =>
             Process.Start("https://www.facebook.com/UE.Explorer");
-        }
 
-        private void OnClosed(object sender, FormClosedEventArgs e)
-        {
-            Program.LogManager.EndLogStream();
-        }
+        private void OnClosed(object sender, FormClosedEventArgs e) => Program.LogManager.EndLogStream();
 
         private void OnClosing(object sender, FormClosingEventArgs e)
         {
@@ -306,12 +263,6 @@ namespace UEExplorer.UI.Main
             if (disposing)
             {
                 ProgressStatus.Dispose();
-                if (_MRUManager != null)
-                {
-                    _MRUManager.RefreshEvent -= RefreshMRUEvent;
-                    _MRUManager = null;
-                }
-
                 components?.Dispose();
 
                 if (Tabs != null)
@@ -324,10 +275,8 @@ namespace UEExplorer.UI.Main
             base.Dispose(disposing);
         }
 
-        private void ReportAnIssue(object sender, EventArgs e)
-        {
+        private void ReportAnIssue(object sender, EventArgs e) =>
             Process.Start("https://github.com/UE-Explorer/UE-Explorer/issues");
-        }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -367,31 +316,14 @@ namespace UEExplorer.UI.Main
             cgf.Show();
         }
 
-        private void UnrealCacheExtractorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void UnrealCacheExtractorToolStripMenuItem_Click(object sender, EventArgs e) =>
             Tabs.InsertTab(typeof(UC_CacheExtractor), Resources.ProgramForm_Cache_Extractor);
-        }
 
-        private void TabComponentsStrip_TabStripItemClosing(TabStripItemClosingEventArgs e)
-        {
-            e.Item.Dispose();
-        }
+        private void TabComponentsStrip_TabStripItemClosing(TabStripItemClosingEventArgs e) => e.Item.Dispose();
 
-        private void TabComponentsStrip_TabStripItemClosed(object sender, EventArgs e)
-        {
-            TabComponentsStrip.Visible = TabComponentsStrip.Items.Count > 0;
-            HomepageButton.Visible = !TabComponentsStrip.Visible;
-        }
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e) => Application.Exit();
 
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void ProgramForm_Shown(object sender, EventArgs e)
-        {
-            CheckForUpdates();
-        }
+        private void ProgramForm_Shown(object sender, EventArgs e) => CheckForUpdates();
 
         private void ToggleUEExplorerFileIconsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -408,19 +340,15 @@ namespace UEExplorer.UI.Main
             Program.ToggleRegisterFileTypes(menuItem20.Checked);
         }
 
-        private void ProgramForm_DragOver(object sender, DragEventArgs e)
-        {
+        private void ProgramForm_DragOver(object sender, DragEventArgs e) =>
             e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop)
                 ? DragDropEffects.Link
                 : DragDropEffects.None;
-        }
 
-        private void ProgramForm_DragEnter(object sender, DragEventArgs e)
-        {
+        private void ProgramForm_DragEnter(object sender, DragEventArgs e) =>
             e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop)
                 ? DragDropEffects.Link
                 : DragDropEffects.None;
-        }
 
         private void ProgramForm_DragDrop(object sender, DragEventArgs e)
         {
@@ -431,7 +359,7 @@ namespace UEExplorer.UI.Main
                 return;
             }
 
-            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string filePath in files)
             {
                 if (allowedExtensions.Contains(Path.GetExtension(filePath)))
@@ -441,14 +369,48 @@ namespace UEExplorer.UI.Main
             }
         }
 
-        private void SaveFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveFileToolStripMenuItem_Click(object sender, EventArgs e) => Tabs.SelectedComponent?.TabSave();
+
+        private void FindToolStripMenuItem_Click(object sender, EventArgs e) => Tabs.SelectedComponent?.TabFind();
+
+        private void fileMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            Tabs.SelectedComponent?.TabSave();
+            var filePaths = UserHistory.Default.RecentFiles;
+            mostRecentMenuItem.Enabled = filePaths.Count > 0;
+            if (mostRecentMenuItem.Enabled)
+            {
+                mostRecentMenuItem.DropDownItems.Add("PLACEHOLDER");
+            }
         }
 
-        private void FindToolStripMenuItem_Click(object sender, EventArgs e)
+        private void mostRecentMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            Tabs.SelectedComponent?.TabFind();
+            var filePaths = UserHistory.Default.RecentFiles;
+
+            // Rebuild all items
+            mostRecentMenuItem.DropDownItems.Clear();
+            for (int i = filePaths.Count - 1; i >= 0; --i)
+            {
+                var item = mostRecentMenuItem.DropDownItems.Add
+                (
+                    $"{filePaths.Count - i} {Path.GetFileName(filePaths[i])} ({Path.GetDirectoryName(filePaths[i])})"
+                );
+                item.Tag = filePaths[i];
+            }
+        }
+
+        private void mostRecentMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            string filePath = e.ClickedItem.Tag as string;
+            if (!File.Exists(filePath))
+            {
+                var filePaths = UserHistory.Default.RecentFiles;
+                filePaths.Remove(filePath);
+                return;
+            }
+
+            // Unshift to the top
+            LoadFile(filePath);
         }
     }
 
@@ -486,20 +448,11 @@ namespace UEExplorer.UI.Main
             ResetValue();
         }
 
-        public static void ResetStatus()
-        {
-            SetStatus(_SavedStatus);
-        }
+        public static void ResetStatus() => SetStatus(_SavedStatus);
 
-        public static void SaveStatus()
-        {
-            _SavedStatus = Status.Text;
-        }
+        public static void SaveStatus() => _SavedStatus = Status.Text;
 
-        public static void IncrementValue()
-        {
-            ++Loading.Value;
-        }
+        public static void IncrementValue() => ++Loading.Value;
 
         public static void ResetValue()
         {
@@ -507,14 +460,8 @@ namespace UEExplorer.UI.Main
             Loading.Value = 0;
         }
 
-        public static int GetProgress()
-        {
-            return Loading.Value;
-        }
+        public static int GetProgress() => Loading.Value;
 
-        public static void SetMaxProgress(int max)
-        {
-            Loading.Maximum = max;
-        }
+        public static void SetMaxProgress(int max) => Loading.Maximum = max;
     }
 }
