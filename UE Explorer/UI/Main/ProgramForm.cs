@@ -44,12 +44,14 @@ namespace UEExplorer.UI.Main
 
             Tabs = new TabsCollection(TabComponentsStrip);
             Tabs.InsertTab(typeof(UC_Default), Resources.Homepage);
+            
             string[] args = Environment.GetCommandLineArgs();
             for (int i = 1; i < args.Length; ++i)
             {
                 if (File.Exists(args[i]))
                 {
-                    LoadFile(args[i]);
+                    string filePath = args[i];
+                    BeginInvoke((MethodInvoker)(() => LoadFile(filePath)));
                 }
             }
         }
@@ -302,9 +304,9 @@ namespace UEExplorer.UI.Main
                     return;
                 }
 
-                foreach (string fileName in ofd.FileNames)
+                foreach (string filePath in ofd.FileNames)
                 {
-                    LoadFile(fileName);
+                    BeginInvoke((MethodInvoker)(() => LoadFile(filePath)));
                 }
             }
         }
@@ -364,7 +366,7 @@ namespace UEExplorer.UI.Main
             {
                 if (allowedExtensions.Contains(Path.GetExtension(filePath)))
                 {
-                    LoadFile(filePath);
+                    BeginInvoke((MethodInvoker)(() => LoadFile(filePath)));
                 }
             }
         }
@@ -409,8 +411,7 @@ namespace UEExplorer.UI.Main
                 return;
             }
 
-            // Unshift to the top
-            LoadFile(filePath);
+            BeginInvoke((MethodInvoker)(() => LoadFile(filePath)));
         }
     }
 
