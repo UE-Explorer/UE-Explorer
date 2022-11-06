@@ -800,11 +800,10 @@ namespace UEExplorer.UI.Tabs
             page.Accept(context);
         }
 
-        private static readonly string _TemplateDir = Path.Combine(Program.ConfigDir, "Templates");
 
         private static string LoadTemplate(string name)
         {
-            return File.ReadAllText(Path.Combine(_TemplateDir, name + ".txt"), Encoding.ASCII);
+            return File.ReadAllText(Path.Combine(Program.s_templateDir, name + ".txt"), Encoding.ASCII);
         }
 
         #endregion

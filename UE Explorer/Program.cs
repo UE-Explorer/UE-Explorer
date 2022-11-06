@@ -68,7 +68,7 @@ namespace UEExplorer
             return options;
         }
 
-        public class SingleInstanceApplication : WindowsFormsApplicationBase
+        private class SingleInstanceApplication : WindowsFormsApplicationBase
         {
             public SingleInstanceApplication()
             {
@@ -89,7 +89,7 @@ namespace UEExplorer
             {
                 eventArgs.BringToForeground = true;
                 var args = eventArgs.CommandLine;
-                for (var i = 1; i < args.Count; ++i)
+                for (int i = 1; i < args.Count; ++i)
                 {
                     if (File.Exists(args[i])) ((ProgramForm)MainForm).LoadFile(args[i]);
                 }
@@ -99,12 +99,15 @@ namespace UEExplorer
         public static class LogManager
         {
             private const string LogFileName = "Log{0}.txt";
-            private static readonly string LogFilePath = Path.Combine(Application.StartupPath, LogFileName);
+
+            private static readonly string LogFilePath =
+                Path.Combine(s_appDataDir, LogFileName);
+
             private static FileStream _LogStream;
 
             public static void StartLogStream()
             {
-                var failCount = 0;
+                int failCount = 0;
             retry:
                 string logPath = string.Format(LogFilePath,
                     failCount > 0 ? failCount.ToString(CultureInfo.InvariantCulture) : string.Empty);
@@ -135,21 +138,20 @@ namespace UEExplorer
 
         #region Options
 
-        public static readonly string ConfigDir = Path.Combine(Application.StartupPath, "Config");
+        private static readonly string s_appDataDir = Application.UserAppDataPath;
+        private static readonly string s_settingsPath = Path.Combine(s_appDataDir, "UEExplorerConfig.xml");
+        public static readonly string DockingConfigPath = Path.Combine(s_appDataDir, "Docking.xml");
 
-        private static readonly string _SettingsPath = Path.Combine(
-            ConfigDir,
-            "UEExplorerConfig.xml"
-        );
-        public static readonly string DockingConfigPath = Path.Combine(Application.StartupPath, "Docking.xml");
+        private static readonly string s_appFilesDir = Application.StartupPath;
+        internal static readonly string s_templateDir = Path.Combine(s_appFilesDir, "Templates");
 
         public static XMLSettings Options;
 
         public static void LoadConfig()
         {
-            if (File.Exists(_SettingsPath))
+            if (File.Exists(s_settingsPath))
             {
-                using (var r = new XmlTextReader(_SettingsPath))
+                using (var r = new XmlTextReader(s_settingsPath))
                 {
                     var xser = new XmlSerializer(typeof(XMLSettings));
                     Options = (XMLSettings)xser.Deserialize(r);
@@ -232,7 +234,7 @@ namespace UEExplorer
             if (Options == null)
                 Options = new XMLSettings();
 
-            using (var w = new XmlTextWriter(_SettingsPath, Encoding.ASCII))
+            using (var w = new XmlTextWriter(s_settingsPath, Encoding.ASCII))
             {
                 var xser = new XmlSerializer(typeof(XMLSettings));
                 xser.Serialize(w, Options);
