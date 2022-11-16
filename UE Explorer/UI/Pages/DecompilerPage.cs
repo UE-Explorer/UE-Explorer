@@ -31,7 +31,7 @@ namespace UEExplorer.UI.Pages
                     _Panel.Object,
                     StreamLocationFactory.Create(_Panel.Object));
                 var contextChangedEvent = new ContextChangedEventArgs(context);
-                contextService.OnContextChanged(contextChangedEvent);
+                contextService.OnContextChanged(this, contextChangedEvent);
             };
         }
 
@@ -47,7 +47,7 @@ namespace UEExplorer.UI.Pages
 
         private void ContextServiceOnContextChanged(object sender, ContextChangedEventArgs e)
         {
-            if (!CanAccept(e.Context) || e.Context.ActionKindKind == ContextActionKind.Location)
+            if (!CanAccept(e.Context) || e.Context.ActionKind == ContextActionKind.Location)
             {
                 return;
             }

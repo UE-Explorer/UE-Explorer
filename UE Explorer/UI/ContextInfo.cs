@@ -2,20 +2,20 @@
 {
     public class ContextInfo
     {
-        public readonly ContextActionKind ActionKindKind;
+        public readonly ContextActionKind ActionKind;
         public readonly object Target;
         public readonly ProgramLocation Location;
 
-        public ContextInfo(ContextActionKind actionKindKind, object target)
+        public ContextInfo(ContextActionKind actionKind, object target)
         {
-            ActionKindKind = actionKindKind;
+            ActionKind = actionKind;
             Target = target;
             Location = new ProgramLocation(new StreamLocation(null, -1));
         }
 
-        public ContextInfo(ContextActionKind actionKindKind, object target, StreamLocation location)
+        public ContextInfo(ContextActionKind actionKind, object target, StreamLocation location)
         {
-            ActionKindKind = actionKindKind;
+            ActionKind = actionKind;
             Target = target;
             Location = new ProgramLocation(location);
         }

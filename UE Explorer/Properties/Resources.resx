@@ -431,4 +431,7 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="NodeItem_View" xml:space="preserve">
     <value>View</value>
   </data>
+  <data name="GildorDownloadsWebUrl" xml:space="preserve">
+    <value>https://www.gildor.org/downloads</value>
+  </data>
 </root>

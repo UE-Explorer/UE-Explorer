@@ -22,7 +22,7 @@ namespace UEExplorer.UI.Panels
                 var @class = (UClass)documentResult.Document;
                 string imageKey = @class.Accept(imageKeySelector);
 
-                var text = $"{ObjectPathBuilder.GetPath(@class)} ({documentResult.Results.Count})";
+                string text = $"{ObjectPathBuilder.GetPath(@class)} ({documentResult.Results.Count})";
                 var documentNode = treeViewFindResults.Nodes.Add(text);
                 documentNode.Tag = documentResult;
                 documentNode.ImageKey = imageKey;
@@ -48,7 +48,7 @@ namespace UEExplorer.UI.Panels
             if (e.Node.Tag is TextSearchHelpers.FindResult findResult)
             {
                 object document = ((TextSearchHelpers.DocumentResult)e.Node.Parent.Tag).Document;
-                UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(document, ContextActionKind.Decompile);
+                UC_PackageExplorer.Traverse(Parent).EmitObjectNodeAction(document, ContextActionKind.Auto);
                 UC_PackageExplorer.Traverse(Parent).EmitFind(findResult);
             }
         }

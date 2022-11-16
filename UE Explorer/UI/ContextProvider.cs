@@ -35,10 +35,10 @@ namespace UEExplorer.UI
 
         public event ContextChangedEventHandler ContextChanged;
 
-        public void OnContextChanged(ContextChangedEventArgs e)
+        public void OnContextChanged(object sender, ContextChangedEventArgs e)
         {
             ActiveContext = e.Context;
-            ContextChanged?.Invoke(this, e);
+            ContextChanged?.Invoke(sender, e);
         }
     }
 }

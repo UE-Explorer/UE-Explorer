@@ -334,6 +334,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://www.gildor.org/downloads.
+        /// </summary>
+        internal static string GildorDownloadsWebUrl {
+            get {
+                return ResourceManager.GetString("GildorDownloadsWebUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t acquire value.
         /// </summary>
         internal static string HexView_COULDNT_ACQUIRE_VALUE {
@@ -389,7 +398,7 @@ namespace UEExplorer.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Clicking yes will bring you to the page with the latest version!
-        ///Your version: {0}
+        ///Installed version: {0}
         ///Latest version: {1}.
         /// </summary>
         internal static string NEW_VERSION_AVAILABLE_MESSAGE {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -11,7 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using Krypton.Navigator;
 using Krypton.Docking;
-using Storm.TabControl;
+using UEExplorer.Framework;
 using UEExplorer.Properties;
 using UEExplorer.UI.Forms;
 using UEExplorer.UI.Main;
@@ -30,11 +29,6 @@ namespace UEExplorer.UI.Tabs
     {
         public string FilePath { get; set; }
 
-        /// <summary>
-        /// Null if the user cancels the exception popup.
-        /// </summary>
-        [CanBeNull] private UnrealPackage _UnrealPackage;
-
         private KryptonDockingWorkspace _Workspace;
         private PackageExplorerPage _PackageExplorerPage;
 
@@ -45,10 +39,10 @@ namespace UEExplorer.UI.Tabs
             InitializeComponent();
 
             contextService.ContextChanged += ContextServiceOnContextChanged;
-        }
 
-        private void ContextServiceOnContextChanged(object sender, ContextChangedEventArgs e)
-        {
+            packageManager.PackageRegistered += PackageManagerOnPackageRegistered;
+            packageManager.PackageLoaded += PackageManagerOnPackageLoaded;
+            packageManager.PackageInitialized += PackageManagerOnPackageInitialized;
         }
 
         private void UC_PackageExplorer_Load(object sender, EventArgs e)
@@ -69,12 +63,113 @@ namespace UEExplorer.UI.Tabs
                 new KryptonPage[] { _PackageExplorerPage });
             expSpace.DockspaceControl.Size = new Size(340, 0);
 
-            InitializeFromFile(FilePath);
+            BeginInvoke((MethodInvoker)(() => packageManager.RegisterPackage(FilePath)));
+        }
+
+        private void ContextServiceOnContextChanged(object sender, ContextChangedEventArgs e)
+        {
+            if (sender == this) return;
+            
+            PerformNodeAction(e.Context.Target, e.Context.ActionKind);
+        }
+
+        private void PackageManagerOnPackageRegistered(object sender, PackageEventArgs e)
+        {
+            ProgressStatus.SetStatus(Resources.PACKAGE_LOADING);
+            
+            var packageReference = e.Package;
+            Debug.Assert(packageReference.Linker == null, "packageReference.Linker == null");
+
+            UnrealConfig.SuppressSignature = false;
+            bool isUnrealFileExtension = UnrealLoader.IsUnrealFileExtension(packageReference.FilePath);
+            if (!isUnrealFileExtension)
+            {
+                if (MessageBox.Show(Resources.PACKAGE_UNKNOWN_SIGNATURE,
+                        Resources.Warning,
+                        MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    UnrealConfig.SuppressSignature = true;
+                }
+            }
+            
+            if (Program.Options.bForceLicenseeMode)
+                UnrealPackage.OverrideLicenseeVersion = Program.Options.LicenseeMode;
+
+            if (Program.Options.bForceVersion)
+                UnrealPackage.OverrideVersion = Program.Options.Version;
+
+            UnrealConfig.Platform = (UnrealConfig.CookedPlatform)Enum.Parse
+            (
+                typeof(UnrealConfig.CookedPlatform),
+                ((ProgramForm)ParentForm).Platform.Text, true
+            );
+
+            BeginInvoke((MethodInvoker)(() => packageManager.LoadPackage(packageReference)));
+        }
+        
+        private void PackageManagerOnPackageLoaded(object sender, PackageEventArgs e)
+        {
+            var packageReference = e.Package;
+            Debug.Assert(packageReference.Linker != null, "packageReference.Linker != null");
+
+            if (IsPackageCompressed(packageReference.Linker))
+            {
+                if (MessageBox.Show(Resources.PACKAGE_IS_COMPRESSED,
+                        Resources.NOTICE_TITLE,
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    Process.Start(Resources.GildorDownloadsWebUrl);
+                    MessageBox.Show(Resources.COMPRESSED_HOWTO,
+                        Resources.NOTICE_TITLE,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                }
+
+                // Don't initialize this package.
+                return;
+            }
+
+            string ntlFilePath = Path.Combine(Application.StartupPath, "Native Tables", Program.Options.NTLPath);
+            if (File.Exists(ntlFilePath + NativesTablePackage.Extension))
+            {
+                packageReference.Linker.NTLPackage = new NativesTablePackage();
+                packageReference.Linker.NTLPackage.LoadPackage(ntlFilePath);
+            }
+
+            BeginInvoke((MethodInvoker)(() => packageManager.InitializePackage(packageReference)));
+        }
+
+        private void PackageManagerOnPackageInitialized(object sender, PackageEventArgs e)
+        {
+            var packageReference = e.Package;
+            Debug.Assert(packageReference.Linker != null, "packageReference.Linker != null");
+
+            ProgressStatus.SetMaxProgress(packageReference.Linker.Exports.Count*2);
+            packageReference.Linker.NotifyPackageEvent += OnNotifyPackageEvent;
+
+            try
+            {
+                packageReference.Linker.InitializePackage(
+                    UnrealPackage.InitFlags.Deserialize |
+                    UnrealPackage.InitFlags.Link);
+
+            }
+            catch (Exception ex)
+            {
+                throw new UnrealException($"Couldn't initialize package \"{packageReference.FilePath}\"", ex);
+            }
+            finally
+            {
+                packageReference.Linker.NotifyPackageEvent -= OnNotifyPackageEvent;
+                ProgressStatus.Reset();
+            }
         }
 
         private PackageExplorerPage CreatePackageExplorerPage()
         {
-            var page = new PackageExplorerPage(contextService);
+            var page = new PackageExplorerPage(contextService, packageManager);
             page.ClearFlags(KryptonPageFlags.DockingAllowClose |
                             KryptonPageFlags.DockingAllowFloating |
                             KryptonPageFlags.DockingAllowWorkspace);
@@ -90,175 +185,10 @@ namespace UEExplorer.UI.Tabs
             return page;
         }
 
-        private void InitializeFromFile(string filePath)
+        private bool IsPackageCompressed(UnrealPackage linker)
         {
-            try
-            {
-                LoadPackageData(filePath);
-            }
-            catch (Exception exception)
-            {
-                throw new UnrealException("Couldn't load or initialize package", exception);
-            }
-        }
-
-        private void LoadPackageData(string filePath)
-        {
-            if (Program.Options.bForceLicenseeMode)
-                UnrealPackage.OverrideLicenseeVersion = Program.Options.LicenseeMode;
-
-            if (Program.Options.bForceVersion)
-                UnrealPackage.OverrideVersion = Program.Options.Version;
-
-            UnrealConfig.SuppressSignature = false;
-            UnrealConfig.Platform = (UnrealConfig.CookedPlatform)Enum.Parse
-            (
-                typeof(UnrealConfig.CookedPlatform),
-                ((ProgramForm)ParentForm).Platform.Text, true
-            );
-
-            // Open the file.
-        reload:
-            var shouldDeserialize = true;
-            ProgressStatus.SetStatus(Resources.PACKAGE_LOADING);
-            // Note: We cannot dispose neither the stream nor package, because we require the stream to be hot so that we can lazily-deserialize objects.
-            var stream = new UPackageStream(filePath, FileMode.Open, FileAccess.Read);
-            try
-            {
-                _UnrealPackage = new UnrealPackage(stream);
-                UnrealConfig.SuppressSignature = false;
-            }
-            catch (FileLoadException)
-            {
-                _UnrealPackage?.Dispose();
-
-                if (MessageBox.Show(Resources.PACKAGE_UNKNOWN_SIGNATURE,
-                        Resources.Warning,
-                        MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    UnrealConfig.SuppressSignature = true;
-                    goto reload;
-                }
-
-                shouldDeserialize = false;
-            }
-
-            Contract.Assert(_UnrealPackage != null, "Package is null");
-            PreInitializeContentTree(_UnrealPackage);
-
-            if (shouldDeserialize)
-            {
-                _UnrealPackage.Deserialize(stream);
-            }
-
-            LinkPackageData(_UnrealPackage);
-            LinkSummaryData(ref _UnrealPackage.Summary);
-            if (IsPackageCompressed())
-            {
-                if (MessageBox.Show(Resources.PACKAGE_IS_COMPRESSED,
-                        Resources.NOTICE_TITLE,
-                        MessageBoxButtons.OKCancel,
-                        MessageBoxIcon.Question) == DialogResult.OK)
-                {
-                    Process.Start("https://www.gildor.org/downloads");
-                    MessageBox.Show(Resources.COMPRESSED_HOWTO,
-                        Resources.NOTICE_TITLE,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
-                }
-            }
-
-            if (!IsPackageCompressed())
-            {
-                string ntlFilePath = Path.Combine(Application.StartupPath, "Native Tables", Program.Options.NTLPath);
-                if (File.Exists(ntlFilePath + NativesTablePackage.Extension))
-                {
-                    _UnrealPackage.NTLPackage = new NativesTablePackage();
-                    _UnrealPackage.NTLPackage.LoadPackage(ntlFilePath);
-                }
-
-                InitializePackageObjects();
-            }
-        }
-
-        // Pre-initialize, this package has not been serialized yet, but we can initialize pre-assumed nodes here.
-        private void PreInitializeContentTree(UnrealPackage linker)
-        {
-            var rootPackageNode = _PackageExplorerPage.PackageExplorerPanel.CreateRootPackageNode(linker);
-            _PackageExplorerPage.PackageExplorerPanel.AddRootPackageNode(rootPackageNode);
-        }
-
-        private void LinkPackageData(UnrealPackage linker)
-        {
-            // ??? Move tables to their own dock page.
-        }
-
-        private void LinkSummaryData(ref UnrealPackage.PackageFileSummary summary)
-        {
-            if (summary.ImportCount != 0)
-            {
-                _PackageExplorerPage.PackageExplorerPanel.CreatePackageDependenciesNode(_UnrealPackage);
-            }
-        }
-
-        private void InitializePackageObjects()
-        {
-            Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
-            if (_UnrealPackage.Names == null ||
-                _UnrealPackage.Exports == null ||
-                _UnrealPackage.Imports == null)
-            {
-                throw new UnrealException($"Invalid data for package {_UnrealPackage}");
-            }
-
-            ProgressStatus.ResetValue();
-            int max = Program.Options.InitFlags.HasFlag(UnrealPackage.InitFlags.Construct)
-                ? _UnrealPackage.Exports.Count + _UnrealPackage.Imports.Count
-                : 0;
-
-            if (Program.Options.InitFlags.HasFlag(UnrealPackage.InitFlags.Deserialize))
-                max += _UnrealPackage.Exports.Count;
-
-            if (Program.Options.InitFlags.HasFlag(UnrealPackage.InitFlags.Link))
-                max += _UnrealPackage.Exports.Count;
-
-            ProgressStatus.SetMaxProgress(max);
-            ProgressStatus.Loading.Visible = true;
-
-            Refresh();
-            try
-            {
-                _UnrealPackage.NotifyPackageEvent += OnNotifyPackageEvent;
-                _UnrealPackage.NotifyObjectAdded += OnNotifyObjectAdded;
-                _UnrealPackage.InitializePackage(Program.Options.InitFlags);
-                LinkPackageObjects();
-            }
-            catch (Exception exception)
-            {
-                throw new UnrealException($"Couldn't initialize package {_UnrealPackage}", exception);
-            }
-            finally
-            {
-                _UnrealPackage.NotifyObjectAdded -= OnNotifyObjectAdded;
-                _UnrealPackage.NotifyPackageEvent -= OnNotifyPackageEvent;
-            }
-
-            InitializeContentTree();
-        }
-
-        private void OnNotifyObjectAdded(object sender, ObjectEventArgs e)
-        {
-        }
-
-        private void LinkPackageObjects()
-        {
-        }
-
-        private bool IsPackageCompressed()
-        {
-            return _UnrealPackage.Summary.CompressedChunks != null &&
-                   _UnrealPackage.Summary.CompressedChunks.Any();
+            return linker.Summary.CompressedChunks != null &&
+                   linker.Summary.CompressedChunks.Any();
         }
 
         /// <summary> 
@@ -269,36 +199,22 @@ namespace UEExplorer.UI.Tabs
         {
             Debug.WriteLine("Disposing UC_PackageExplorer " + disposing);
 
-            ProgressStatus.ResetStatus();
-            ProgressStatus.ResetValue();
-
             kryptonDockingManagerMain.SaveConfigToFile(Program.DockingConfigPath);
-
-            if (_UnrealPackage != null)
-            {
-                _UnrealPackage.Dispose();
-                _UnrealPackage = null;
-            }
+            kryptonDockingManagerMain.Pages.ToList().ForEach(p => p.Dispose());
 
             base.Dispose(disposing);
         }
 
         private void OnNotifyPackageEvent(object sender, UnrealPackage.PackageEventArgs e)
         {
+            UpdateStatus(e);
+            //BeginInvoke((MethodInvoker)(() => UpdateStatus(e)));
+        }
+
+        private void UpdateStatus(UnrealPackage.PackageEventArgs e)
+        {
             switch (e.EventId)
             {
-                case UnrealPackage.PackageEventArgs.Id.Construct:
-                    ProgressStatus.SetStatus(Resources.CONSTRUCTING_OBJECTS);
-                    break;
-
-                case UnrealPackage.PackageEventArgs.Id.Deserialize:
-                    ProgressStatus.SetStatus(Resources.DESERIALIZING_OBJECTS);
-                    break;
-
-                case UnrealPackage.PackageEventArgs.Id.Link:
-                    ProgressStatus.SetStatus(Resources.LINKING_OBJECTS);
-                    break;
-
                 case UnrealPackage.PackageEventArgs.Id.Object:
                     ProgressStatus.IncrementValue();
                     break;
@@ -307,25 +223,12 @@ namespace UEExplorer.UI.Tabs
 
         private void InitializeContentTree()
         {
-            Debug.Assert(_UnrealPackage != null);
-            Debug.Assert(_UnrealPackage.Exports != null);
-
-            _PackageExplorerPage.PackageExplorerPanel.BuildRootPackageTree(_UnrealPackage);
-
-            var state = Program.Options.GetState(_UnrealPackage.FullPackageName);
-            if (state.SearchObjectValue != null)
-            {
-                PerformActionByObjectPath(state.SearchObjectValue);
-            }
-        }
-
-        // TODO: Deprecate
-        internal void ReloadPackage()
-        {
-            string filePath = _UnrealPackage.FullPackageName;
-
-            ((ProgramForm)ParentForm).Tabs.CloseTab((TabStripItem)Parent);
-            ((ProgramForm)ParentForm).LoadFile(filePath);
+            // FIXME:
+            //var state = Program.Options.GetState(_UnrealPackage.FullPackageName);
+            //if (state.SearchObjectValue != null)
+            //{
+            //    PerformActionByObjectPath(state.SearchObjectValue);
+            //}
         }
 
         private static string GetExceptionMessage(UObject errorObject)
@@ -567,9 +470,8 @@ namespace UEExplorer.UI.Tabs
                                 }
 
                                 var buffer = new byte[t.StorageSize];
-                                _UnrealPackage.Stream.Position = unStruct.ExportTable.SerialOffset +
-                                                                 unStruct.ScriptOffset + t.StoragePosition;
-                                _UnrealPackage.Stream.Read(buffer, 0, buffer.Length);
+                                unStruct.Buffer.Position = unStruct.ScriptOffset + t.StoragePosition;
+                                unStruct.Buffer.Read(buffer, 0, buffer.Length);
 
                                 text += string.Format(tokensTemplate,
                                     t.Position, t.StoragePosition,
@@ -642,11 +544,13 @@ namespace UEExplorer.UI.Tabs
 
                     case ContextActionKind.DecompileExternal:
                     {
+                        Debug.Assert(obj != null, nameof(obj) + " != null");
+                        var linker = obj.Package;
                         Process.Start
                         (
                             Program.Options.UEModelAppPath,
-                            "-path=" + _UnrealPackage.PackageDirectory
-                                     + " " + _UnrealPackage.PackageName
+                            "-path=" + linker.PackageDirectory
+                                     + " " + linker.PackageName
                                      + " " + ((TreeNode)target).Text
                         );
                         break;
@@ -654,16 +558,19 @@ namespace UEExplorer.UI.Tabs
 
                     case ContextActionKind.ExportExternal:
                     {
+                        Debug.Assert(obj != null, nameof(obj) + " != null");
+                        var linker = obj.Package;
+                        
                         string packagePath = Application.StartupPath
                                              + "\\Exported\\"
-                                             + _UnrealPackage.PackageName;
+                                             + linker.PackageName;
 
                         string contentDir = packagePath + "\\Content";
                         Directory.CreateDirectory(contentDir);
-                        string appArguments = "-path=" + _UnrealPackage.PackageDirectory
+                        string appArguments = "-path=" + linker.PackageDirectory
                                                        + " " + "-out=" + contentDir
                                                        + " -export"
-                                                       + " " + _UnrealPackage.PackageName
+                                                       + " " + linker.PackageName
                                                        + " " + ((TreeNode)target).Text;
                         var appInfo = new ProcessStartInfo(Program.Options.UEModelAppPath, appArguments)
                         {
@@ -731,7 +638,7 @@ namespace UEExplorer.UI.Tabs
             SetActiveObjectPath(path);
             // Give all current pages a chance to react to context changes. This has to happen before we create any new pages.
             var contextEvent = new ContextChangedEventArgs(context);
-            contextService.OnContextChanged(contextEvent);
+            contextService.OnContextChanged(this, contextEvent);
             // Insert default pages, if we don't have any active pages for this action kind.
             InsertDefaultPages(context);
             ProgressStatus.ResetStatus();
@@ -778,7 +685,7 @@ namespace UEExplorer.UI.Tabs
 
         private void InsertDefaultPages([NotNull] ContextInfo context)
         {
-            if (context.ActionKindKind == ContextActionKind.Auto)
+            if (context.ActionKind == ContextActionKind.Auto)
             {
                 bool hasAny = kryptonDockingManagerMain.PagesWorkspace
                     .OfType<TrackingPage>()
@@ -790,8 +697,8 @@ namespace UEExplorer.UI.Tabs
                 }
             }
 
-            var isTracking = context.ActionKindKind == ContextActionKind.Auto;
-            var page = CreatePageByAction(context.Target, context.ActionKindKind, isTracking);
+            bool isTracking = context.ActionKind == ContextActionKind.Auto;
+            var page = CreatePageByAction(context.Target, context.ActionKind, isTracking);
             if (page == null) return;
 
             _Workspace.Append(page);
@@ -939,29 +846,35 @@ namespace UEExplorer.UI.Tabs
             hexDialog.Show(ParentForm);
         }
 
-        private void ReloadPackage_Click(object sender, EventArgs e)
-        {
-            ReloadPackage();
-        }
-
         private FindResultsPage CreateFindPage()
         {
             var page = new FindResultsPage();
             return page;
         }
 
+        public IEnumerable<IUnrealDecompilable> GetContents<T>(UnrealPackage linker)
+            where T : UObject
+        {
+            return linker.Objects
+                .OfType<T>()
+                .Where(c => c.ExportTable != null)
+                .ToList<IUnrealDecompilable>();
+        }
+
         public async void PerformSearchIn<T>(string searchText) where T : UObject
         {
-            Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
-
             var findPage = CreateFindPage();
             kryptonDockingManagerMain.AddDockspace("Nav", DockingEdge.Left, new KryptonPage[] { findPage });
             kryptonDockingManagerMain.ShowPage(findPage);
 
-            var contents = _UnrealPackage.Objects
-                .OfType<T>()
-                .Where(c => c.ExportTable != null)
-                .ToList<IUnrealDecompilable>();
+            IEnumerable<IUnrealDecompilable> contents = new List<IUnrealDecompilable>();
+            foreach (var packageReference in packageManager.EnumeratePackages())
+            {
+                if (packageReference.Linker == null) continue;
+
+                var next = GetContents<T>(packageReference.Linker);
+                contents = contents.Concat(next);
+            }
 
             ProgressStatus.SaveStatus();
             ProgressStatus.SetStatus(Resources.SEARCHING_CLASSES_STATUS);
@@ -1000,11 +913,9 @@ namespace UEExplorer.UI.Tabs
         }
 
         // TODO: Re-implement in a package agnostic way (Blocked till UELib 2.0)
-        private bool PerformActionByObjectPath(string objectGroup)
+        private bool PerformActionByObjectPath(UnrealPackage linker, string objectGroup)
         {
-            Debug.Assert(_UnrealPackage != null, nameof(_UnrealPackage) + " != null");
-
-            var obj = _UnrealPackage.FindObjectByGroup(objectGroup);
+            var obj = linker.FindObjectByGroup(objectGroup);
             if (obj == null)
                 return false;
 
@@ -1017,7 +928,16 @@ namespace UEExplorer.UI.Tabs
             switch (e.KeyChar)
             {
                 case '\r':
-                    e.Handled = PerformActionByObjectPath(ActiveObjectPath.Text);
+                    foreach (var packageReference in packageManager.EnumeratePackages())
+                    {
+                        if (packageReference.Linker == null) continue;
+                        
+                        if (PerformActionByObjectPath(packageReference.Linker, ActiveObjectPath.Text))
+                        {
+                            e.Handled = true;
+                            break;
+                        }
+                    }
                     break;
             }
         }
@@ -1039,7 +959,15 @@ namespace UEExplorer.UI.Tabs
 
         public void EmitSearchObjectByPath(string path)
         {
-            PerformActionByObjectPath(path);
+            foreach (var packageReference in packageManager.EnumeratePackages())
+            {
+                if (packageReference.Linker == null) continue;
+
+                if (PerformActionByObjectPath(packageReference.Linker, path))
+                {
+                    break;
+                }
+            }
         }
 
         public void EmitSearch<T>(string searchText) where T : UObject

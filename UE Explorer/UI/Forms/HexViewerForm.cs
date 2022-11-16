@@ -255,7 +255,7 @@ namespace UEExplorer.UI.Forms
         private void ReloadPackage()
         {
             Close();
-            _PackageExplorer.ReloadPackage();
+            //_PackageExplorer.ReloadPackage();
         }
 
         private bool ReplaceBuffer(IBuffered target, byte[] buffer)

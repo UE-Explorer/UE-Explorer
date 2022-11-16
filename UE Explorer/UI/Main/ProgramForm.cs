@@ -441,8 +441,11 @@ namespace UEExplorer.UI.Main
 
         public static void SetStatus(string status)
         {
-            Status.Text = status;
-            Status.Owner.Refresh();
+            if (Status != null)
+            {
+                Status.Text = status;
+                Status.Invalidate();
+            }
         }
 
         public static void Reset()
@@ -461,10 +464,16 @@ namespace UEExplorer.UI.Main
         {
             Loading.Visible = false;
             Loading.Value = 0;
+            Loading.Invalidate();
         }
 
         public static int GetProgress() => Loading.Value;
 
-        public static void SetMaxProgress(int max) => Loading.Maximum = max;
+        public static void SetMaxProgress(int max)
+        {
+            Loading.Visible = true;
+            Loading.Maximum = max;
+            Loading.Invalidate();
+        }
     }
 }

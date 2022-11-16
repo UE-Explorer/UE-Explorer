@@ -1,4 +1,5 @@
-﻿using UELib;
+﻿using UEExplorer.Framework;
+using UELib;
 using UELib.Core;
 using UELib.Engine;
 using UELib.Flags;
@@ -12,6 +13,8 @@ namespace UEExplorer.UI.Nodes
             string key = Visit((dynamic)visitor);
             return key ?? "Content";
         }
+
+        public string Visit(PackageReference packageReference) => "UnrealPackageFile";
 
         public string Visit(UnrealPackage linker)
         {

@@ -20,7 +20,7 @@ namespace UEExplorer.UI.Pages
 
         public FindResultsPanel FindResultsPanel { get; }
 
-        public async Task PerformSearch(List<IUnrealDecompilable> contents, string searchText)
+        public async Task PerformSearch(IEnumerable<IUnrealDecompilable> contents, string searchText)
         {
             UpdateText(searchText);
 

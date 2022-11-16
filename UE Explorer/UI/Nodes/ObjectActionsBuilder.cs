@@ -1,6 +1,8 @@
 ﻿using System.Windows.Forms;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using UEExplorer.Framework;
 using UEExplorer.Properties;
 using UELib.Core;
 using UELib;
@@ -45,13 +47,21 @@ namespace UEExplorer.UI.Nodes
                 return actions;
             }
 
-            if (tag is USound)
+            switch (tag)
             {
-                AddItem(Resources.NodeItem_Play, ContextActionKind.Open);
-            }
-            else if (tag is UPalette || tag is UTexture)
-            {
-                AddItem(Resources.NodeItem_View, ContextActionKind.Open);
+                case PackageReference packageReference:
+                    AddItem(packageReference.IsActive() ? "Unload Package" : "Load Package",
+                        ContextActionKind.Action);
+                    break;
+
+                case USound _:
+                    AddItem(Resources.NodeItem_Play, ContextActionKind.Open);
+                    break;
+
+                case UPalette _:
+                case UTexture _:
+                    AddItem(Resources.NodeItem_View, ContextActionKind.Open);
+                    break;
             }
 
             if (tag is IUnrealDecompilable) AddItem(Resources.NodeItem_Decompile, ContextActionKind.Decompile);

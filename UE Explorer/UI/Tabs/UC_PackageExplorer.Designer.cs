@@ -1,4 +1,6 @@
-﻿namespace UEExplorer.UI.Tabs
+﻿using UEExplorer.Framework;
+
+namespace UEExplorer.UI.Tabs
 {
 	partial class UC_PackageExplorer
 	{
@@ -38,6 +40,7 @@
             this.packageToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dockingPanel = new System.Windows.Forms.Panel();
             this.contextService = new UEExplorer.UI.ContextProvider();
+            this.packageManager = new PackageManager();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspaceMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage4)).BeginInit();
@@ -244,5 +247,6 @@
         private System.Windows.Forms.ToolStripMenuItem packageToolToolStripMenuItem;
         private System.Windows.Forms.Panel dockingPanel;
         private ContextProvider contextService;
+        private PackageManager packageManager;
     }
 }
