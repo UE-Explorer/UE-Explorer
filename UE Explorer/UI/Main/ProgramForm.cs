@@ -73,7 +73,7 @@ namespace UEExplorer.UI.Main
             var filePaths = UserHistory.Default.RecentFiles;
             // If we have one already, we'd like to move it to the most recent.
             filePaths.Remove(filePath);
-            filePaths.Insert(0, filePath);
+            filePaths.Add(filePath);
             if (filePaths.Count > 15)
             {
                 filePaths.RemoveAt(0);
@@ -393,6 +393,8 @@ namespace UEExplorer.UI.Main
             mostRecentMenuItem.DropDownItems.Clear();
             for (int i = filePaths.Count - 1; i >= 0; --i)
             {
+                if (filePaths[i] == string.Empty) continue;
+                
                 var item = mostRecentMenuItem.DropDownItems.Add
                 (
                     $"{filePaths.Count - i} {Path.GetFileName(filePaths[i])} ({Path.GetDirectoryName(filePaths[i])})"
