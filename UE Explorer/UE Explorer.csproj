@@ -581,6 +581,10 @@
       <Name>Eliot.Utilities</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
+    <ProjectReference Include="..\UEExplorer.Framework\UEExplorer.Framework.csproj">
+      <Project>{66b17c8e-bf5d-456e-bf2e-c8bfa186d32b}</Project>
+      <Name>UEExplorer.Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj">
       <Project>{7E45273F-434F-42FA-8269-0E760AEB41E1}</Project>
       <Name>Eliot.UELib</Name>
