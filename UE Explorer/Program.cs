@@ -243,24 +243,25 @@ namespace UEExplorer
 
         #endregion
 
-        internal const string WEBSITE_URL =
+        internal const string WebsiteUrl =
 #if DEBUG_WITH_LOCALHOST
             "https://localhost/Eliot/";
 #else
             "https://eliotvu.com/";
 #endif
 
-        internal const string Donate_URL = WEBSITE_URL + "donate.html";
+        internal const string DonateUrl = WebsiteUrl + "donate.html";
 
-        internal const string Contact_URL = WEBSITE_URL + "contact.html";
+        internal const string ContactUrl = WebsiteUrl + "contact.html";
 
         //internal const string Program_URL = WEBSITE_URL + "portfolio/view/21/ue-explorer";
         //internal const string Program_Parm_ID = "data[items][id]=21";
         //internal const string Version_URL = WEBSITE_URL +  "apps/version/";
-        internal const string Forum_URL = WEBSITE_URL + "forum/";
-        internal const string APPS_URL = WEBSITE_URL + "apps/ue_explorer/";
-        internal const string UPDATE_URL = WEBSITE_URL + "updates/ue-explorer.xml" + UPDATE_QUERY;
-        internal const string UPDATE_QUERY = "?auto=1&installed_version={0}";
+        internal const string ForumUrl = WebsiteUrl + "forum/";
+        internal const string StartUrl = WebsiteUrl + "apps/ue_explorer/";
+        internal const string UpdateUrl = WebsiteUrl + "updates/ue-explorer.xml" + UpdateQuery;
+        private const string UpdateQuery = "?auto=1&installed_version={0}";
+        internal const string SubmitReportUrl = WebsiteUrl + "report/send/";
 
         // TODO: Deprecate
 

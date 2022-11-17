@@ -86,7 +86,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;DEBUG_WITH_LOCALHOST</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <Optimize>false</Optimize>
     <DebugType>full</DebugType>
@@ -156,6 +156,12 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1418.22, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1418.22\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1418.22, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1418.22\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Storm.TabControl">
@@ -192,6 +198,13 @@
     </Compile>
     <Compile Include="UI\ContextInfo.cs" />
     <Compile Include="UI\Nodes\ObjectActionsBuilder.cs" />
+    <Compile Include="UI\Pages\StartPage.cs" />
+    <Compile Include="UI\Panels\WebViewPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Panels\WebViewPanel.Designer.cs">
+      <DependentUpon>WebViewPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\StreamLocationFactory.cs" />
     <Compile Include="UI\Pages\BinaryPage.cs" />
     <Compile Include="UI\EditorUtil.cs" />
@@ -292,12 +305,6 @@
     <Compile Include="UI\Tabs\ActionState.cs" />
     <Compile Include="UI\ObjectPathBuilder.cs" />
     <Compile Include="UI\ContextProvider.cs" />
-    <Compile Include="UI\Tabs\UC_Default.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Tabs\UC_Default.Designer.cs">
-      <DependentUpon>UC_Default.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Tabs\UC_Options.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -432,8 +439,8 @@
     <EmbeddedResource Include="UI\Panels\TextEditorPanel.resx">
       <DependentUpon>TextEditorPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Tabs\UC_Default.resx">
-      <DependentUpon>UC_Default.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Panels\WebViewPanel.resx">
+      <DependentUpon>WebViewPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_Options.nl.resx">
       <DependentUpon>UC_Options.cs</DependentUpon>
@@ -633,7 +640,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -653,6 +660,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1418.22\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1418.22\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.targets" Condition="Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.targets')" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1418.22\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1418.22\build\Microsoft.Web.WebView2.targets')" />
 </Project>

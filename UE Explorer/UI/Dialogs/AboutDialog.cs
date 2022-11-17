@@ -12,7 +12,7 @@ namespace UEExplorer.UI.Dialogs
 {
     public partial class AboutDialog : Form
     {
-        private const string DONATORS_URL = "https://eliotvu.com/files/donators.txt";
+        private const string DonatorsUrl = "https://eliotvu.com/files/donators.txt";
 
         public AboutDialog()
         {
@@ -35,7 +35,7 @@ namespace UEExplorer.UI.Dialogs
             label4.Text = Application.ProductName;
             VersionLabel.Text = string.Format(Resources.Version, ProgramForm.Version);
             CopyrightLabel.Text = AssemblyCopyright;
-            LinkLabel.Text = Program.WEBSITE_URL;
+            LinkLabel.Text = Program.WebsiteUrl;
         }
 
         private void AboutForm_Shown(object sender, EventArgs e)
@@ -47,10 +47,7 @@ namespace UEExplorer.UI.Dialogs
         {
             Refresh();
 
-            //var web = new WebClient();
-            //web.DownloadFileAsync( )
-
-            using (var buffer = new StreamReader(WebRequest.Create(DONATORS_URL).Get()))
+            using (var buffer = new StreamReader(WebRequest.Create(DonatorsUrl).Get()))
             {
                 buffer.BaseStream.Position = 0;
                 DonatorsSet.ReadXml(buffer);
@@ -60,12 +57,12 @@ namespace UEExplorer.UI.Dialogs
             DonatorsGrid.DataSource = DonatorsSet;
             DonatorsGrid.DataMember = "Donators";
 
-            DonateLink.Text = Program.Donate_URL;
+            DonateLink.Text = Program.DonateUrl;
         }
 
         private void LicenseLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("file:///" + Path.Combine(Application.StartupPath, "license.html"));
+            Process.Start($"file:///{Path.Combine(Application.StartupPath, "license.html")}");
         }
     }
 }

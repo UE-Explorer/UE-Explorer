@@ -43,16 +43,17 @@ namespace UEExplorer.UI.Main
             InitializeUI();
 
             Tabs = new TabsCollection(TabComponentsStrip);
-            Tabs.InsertTab(typeof(UC_Default), Resources.Homepage);
             
             string[] args = Environment.GetCommandLineArgs();
             for (int i = 1; i < args.Length; ++i)
             {
-                if (File.Exists(args[i]))
+                if (!File.Exists(args[i]))
                 {
-                    string filePath = args[i];
-                    BeginInvoke((MethodInvoker)(() => LoadFile(filePath)));
+                    continue;
                 }
+
+                string filePath = args[i];
+                BeginInvoke((MethodInvoker)(() => LoadFile(filePath)));
             }
         }
 
@@ -194,12 +195,12 @@ namespace UEExplorer.UI.Main
             }
         }
 
-        private void DonateToolStripMenuItem1_Click(object sender, EventArgs e) => Process.Start(Program.Donate_URL);
+        private void DonateToolStripMenuItem1_Click(object sender, EventArgs e) => Process.Start(Program.DonateUrl);
 
         private void CheckForUpdates()
         {
             Console.WriteLine(Resources.CHECKING_FOR_UPDATES_LOG, Version);
-            AutoUpdater.Start(string.Format(Program.UPDATE_URL, Version));
+            AutoUpdater.Start(string.Format(Program.UpdateUrl, Version));
         }
 
         private void OnCheckForUpdates(object sender, EventArgs e)
@@ -217,9 +218,9 @@ namespace UEExplorer.UI.Main
         private void MenuItem7_Click(object sender, EventArgs e) =>
             Tabs.InsertTab(typeof(UC_Options), Resources.Options);
 
-        private void MenuItem24_Click(object sender, EventArgs e) => Process.Start(Program.Forum_URL);
+        private void MenuItem24_Click(object sender, EventArgs e) => Process.Start(Program.ForumUrl);
 
-        private void MenuItem26_Click(object sender, EventArgs e) => Process.Start(Program.WEBSITE_URL);
+        private void MenuItem26_Click(object sender, EventArgs e) => Process.Start(Program.WebsiteUrl);
 
         private void Platform_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -228,13 +229,10 @@ namespace UEExplorer.UI.Main
             Program.SaveConfig();
         }
 
-        private void MenuItem4_Click(object sender, EventArgs e) => Process.Start(Program.Contact_URL);
-
-        private void OpenHome_Click(object sender, EventArgs e) =>
-            Tabs.InsertTab(typeof(UC_Default), Resources.Homepage);
+        private void MenuItem4_Click(object sender, EventArgs e) => Process.Start(Program.ContactUrl);
 
         private void SocialMenuItem_Click(object sender, EventArgs e) =>
-            Process.Start("https://www.facebook.com/UE.Explorer");
+            Process.Start(Resources.UEExplorerFacebookUrl);
 
         private void OnClosed(object sender, FormClosedEventArgs e) => Program.LogManager.EndLogStream();
 
@@ -278,7 +276,7 @@ namespace UEExplorer.UI.Main
         }
 
         private void ReportAnIssue(object sender, EventArgs e) =>
-            Process.Start("https://github.com/UE-Explorer/UE-Explorer/issues");
+            Process.Start(Resources.UEExplorerIssuesUrl);
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -466,8 +464,6 @@ namespace UEExplorer.UI.Main
             Loading.Value = 0;
             Loading.Invalidate();
         }
-
-        public static int GetProgress() => Loading.Value;
 
         public static void SetMaxProgress(int max)
         {

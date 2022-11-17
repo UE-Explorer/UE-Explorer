@@ -434,4 +434,14 @@ Are you sure you want to try to deserialize this package? Clicking Yes might lea
   <data name="GildorDownloadsWebUrl" xml:space="preserve">
     <value>https://www.gildor.org/downloads</value>
   </data>
+  <data name="UEExplorerFacebookUrl" xml:space="preserve">
+    <value>https://www.facebook.com/UE.Explorer</value>
+  </data>
+  <data name="UEExplorerIssuesUrl" xml:space="preserve">
+    <value>https://github.com/UE-Explorer/UE-Explorer/issues</value>
+  </data>
+  <data name="ExceptionText" xml:space="preserve">
+    <value>Thrown by: {0}
+{1}{2}</value>
+  </data>
 </root>

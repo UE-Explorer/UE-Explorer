@@ -237,6 +237,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thrown by:{0}
+        ///{1}{2}.
+        /// </summary>
+        internal static string ExceptionText {
+            get {
+                return ResourceManager.GetString("ExceptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ExportData {
@@ -885,6 +895,24 @@ namespace UEExplorer.Properties {
             get {
                 object obj = ResourceManager.GetObject("UE_ProgramLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.facebook.com/UE.Explorer.
+        /// </summary>
+        internal static string UEExplorerFacebookUrl {
+            get {
+                return ResourceManager.GetString("UEExplorerFacebookUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/UE-Explorer/UE-Explorer/issues.
+        /// </summary>
+        internal static string UEExplorerIssuesUrl {
+            get {
+                return ResourceManager.GetString("UEExplorerIssuesUrl", resourceCulture);
             }
         }
         

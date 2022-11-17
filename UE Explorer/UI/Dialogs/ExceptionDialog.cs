@@ -18,17 +18,11 @@ namespace UEExplorer.UI.Dialogs
         {
             using (var exceptionDialog = new ExceptionDialog())
             {
-                exceptionDialog.ExceptionStack.Text = string.Format("Thrown by:{0}\r\n{1}{2}",
-                    exception.TargetSite.Name, exception.StackTrace, exception.InnerException
-                );
-                exceptionDialog.ExceptionStack.Text = exceptionDialog.ExceptionStack.Text.Replace(
-                    @"C:\Users\Eliot\Documents\Visual Studio 2010\Projects\",
-                    string.Empty
-                );
-                exceptionDialog.ExceptionMessage.Text = exception.Message.Replace(
-                    @"C:\Users\Eliot\Documents\Visual Studio 2010\Projects\",
-                    string.Empty
-                );
+                exceptionDialog.ExceptionStack.Text =
+                    string.Format(Resources.ExceptionText,
+                        exception.TargetSite.Name,
+                        exception.StackTrace,
+                        exception.InnerException);
                 exceptionDialog.ExceptionError.Text = error;
                 if (exceptionDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -41,33 +35,37 @@ namespace UEExplorer.UI.Dialogs
         {
             using (var sendDialog = new SendDialog())
             {
-                if (sendDialog.ShowDialog() == DialogResult.OK)
+                if (sendDialog.ShowDialog() != DialogResult.OK)
                 {
-                    string logData = " exception:\r\n<code>"
-                                     + ExceptionMessage.Text + "</code>\r\n\r\nStack:\r\n<code>"
-                                     + ExceptionStack.Text;
+                    return;
+                }
 
-                    string postData = "data[reports][log]=" + HttpUtility.UrlEncode(logData)
-                                                            + "&data[reports][title]=" +
-                                                            HttpUtility.UrlEncode(ExceptionError.Text)
-                                                            + "&data[reports][description]=" +
-                                                            HttpUtility.UrlEncode(sendDialog.InfoText.Text)
-                                                            + "&data[reports][reporter_email]=" +
-                                                            HttpUtility.UrlEncode(sendDialog.Email.Text);
+                string logData = " exception:\r\n<code>"
+                                 + ExceptionMessage.Text + "</code>\r\n\r\nStack:\r\n<code>"
+                                 + ExceptionStack.Text;
 
-                    try
-                    {
-                        WebRequest.Create(Program.WEBSITE_URL + "report/send/").Post(postData);
-                        MessageBox.Show(Resources.ExceptionDialog_THANKS,
-                            Resources.SUCCESS, MessageBoxButtons.OK, MessageBoxIcon.Information
-                        );
-                    }
-                    catch
-                    {
-                        MessageBox.Show(Resources.ExceptionDialog_FAIL,
-                            Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error
-                        );
-                    }
+                string postData = "data[reports][log]=" + HttpUtility.UrlEncode(logData)
+                                                        + "&data[reports][title]=" +
+                                                        HttpUtility.UrlEncode(ExceptionError.Text)
+                                                        + "&data[reports][description]=" +
+                                                        HttpUtility.UrlEncode(sendDialog.InfoText.Text)
+                                                        + "&data[reports][reporter_email]=" +
+                                                        HttpUtility.UrlEncode(sendDialog.Email.Text);
+
+                try
+                {
+                    WebRequest
+                        .Create(Program.SubmitReportUrl)
+                        .Post(postData);
+                    MessageBox.Show(Resources.ExceptionDialog_THANKS,
+                        Resources.SUCCESS, MessageBoxButtons.OK, MessageBoxIcon.Information
+                    );
+                }
+                catch
+                {
+                    MessageBox.Show(Resources.ExceptionDialog_FAIL,
+                        Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error
+                    );
                 }
             }
         }

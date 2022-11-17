@@ -63,6 +63,8 @@ namespace UEExplorer.UI.Tabs
                 new KryptonPage[] { _PackageExplorerPage });
             expSpace.DockspaceControl.Size = new Size(340, 0);
 
+            _Workspace.Append(CreateStartPage());
+
             BeginInvoke((MethodInvoker)(() => packageManager.RegisterPackage(FilePath)));
         }
 
@@ -173,6 +175,12 @@ namespace UEExplorer.UI.Tabs
             page.ClearFlags(KryptonPageFlags.DockingAllowClose |
                             KryptonPageFlags.DockingAllowFloating |
                             KryptonPageFlags.DockingAllowWorkspace);
+            return page;
+        }
+
+        private StartPage CreateStartPage()
+        {
+            var page = new StartPage();
             return page;
         }
 

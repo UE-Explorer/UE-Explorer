@@ -59,7 +59,6 @@ namespace UEExplorer.UI.Main
             this.SocialMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.separator7 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.openHomeButton = new System.Windows.Forms.Button();
             this.kryptonManager = new Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonPalette = new Krypton.Toolkit.KryptonPalette(this.components);
             this.containerPanel = new Krypton.Toolkit.KryptonPanel();
@@ -362,12 +361,6 @@ namespace UEExplorer.UI.Main
             resources.ApplyResources(this.menuItem5, "menuItem5");
             this.menuItem5.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
-            // openHomeButton
-            // 
-            resources.ApplyResources(this.openHomeButton, "openHomeButton");
-            this.openHomeButton.Name = "openHomeButton";
-            this.openHomeButton.Click += new System.EventHandler(this.OpenHome_Click);
-            // 
             // kryptonManager
             // 
             this.kryptonManager.GlobalPalette = this.kryptonPalette;
@@ -482,7 +475,6 @@ namespace UEExplorer.UI.Main
         private System.Windows.Forms.ToolStripMenuItem menuItem6;
         private System.Windows.Forms.ToolStripMenuItem mostRecentMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItem4;
-        private System.Windows.Forms.Button openHomeButton;
         private Storm.TabControl.TabStrip TabComponentsStrip;
         private System.Windows.Forms.ToolStripMenuItem SocialMenuItem;
         private System.Windows.Forms.MenuStrip mainMenuStrip;
