@@ -14,6 +14,9 @@ using UELib;
 using UELib.Types;
 using Eliot.Utilities;
 using UEExplorer.UI.Main;
+using AutoUpdaterDotNET;
+using UEExplorer.Properties;
+using System.Reflection;
 
 namespace UEExplorer
 {
@@ -24,6 +27,8 @@ namespace UEExplorer
         {
             try
             {
+                LogManager.StartLogStream();
+
                 foreach (string arg in args) Console.WriteLine($"Argument: {arg}");
 
                 Application.EnableVisualStyles();
@@ -91,7 +96,7 @@ namespace UEExplorer
                 var args = eventArgs.CommandLine;
                 for (int i = 1; i < args.Count; ++i)
                 {
-                    if (File.Exists(args[i])) ((ProgramForm)MainForm).LoadFile(args[i]);
+                    if (File.Exists(args[i])) ((ProgramForm)MainForm).LoadFromFile(args[i]);
                 }
             }
         }
@@ -259,7 +264,7 @@ namespace UEExplorer
         //internal const string Version_URL = WEBSITE_URL +  "apps/version/";
         internal const string ForumUrl = WebsiteUrl + "forum/";
         internal const string StartUrl = WebsiteUrl + "apps/ue_explorer/";
-        internal const string UpdateUrl = WebsiteUrl + "updates/ue-explorer.xml" + UpdateQuery;
+        private const string UpdateUrl = WebsiteUrl + "updates/ue-explorer.xml" + UpdateQuery;
         private const string UpdateQuery = "?auto=1&installed_version={0}";
         internal const string SubmitReportUrl = WebsiteUrl + "report/send/";
 
@@ -388,5 +393,12 @@ namespace UEExplorer
         }
 
         #endregion
+
+        internal static void CheckForUpdates()
+        {
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Console.WriteLine(Resources.CHECKING_FOR_UPDATES_LOG, version);
+            AutoUpdater.Start(string.Format(UpdateUrl, version));
+        }
     }
 }

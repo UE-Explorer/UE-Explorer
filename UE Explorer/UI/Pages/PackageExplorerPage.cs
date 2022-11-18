@@ -10,6 +10,8 @@ namespace UEExplorer.UI.Pages
     {
         public PackageExplorerPage(ContextProvider contextService, PackageManager packageManager)
         {
+            UniqueName = "PackageExplorer";
+            
             Text = Resources.PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title;
             TextTitle = Resources.PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title;
             PackageExplorerPanel = new PackageExplorerPanel(contextService, packageManager);

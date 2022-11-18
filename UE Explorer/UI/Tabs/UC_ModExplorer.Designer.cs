@@ -1,6 +1,6 @@
 ﻿namespace UEExplorer.UI.Tabs
 {
-	partial class UC_ModExplorer : UserControl_Tab
+	partial class UC_ModExplorer
 	{
 		/// <summary> 
 		/// Required designer variable.

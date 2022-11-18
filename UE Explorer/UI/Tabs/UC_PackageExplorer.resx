@@ -125,6 +125,33 @@
   <data name="kryptonDockableWorkspaceMain.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 2</value>
   </data>
+  <data name="kryptonWorkspaceCell1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>280, 0</value>
+  </data>
+  <data name="&gt;&gt;kryptonWorkspaceCell1.Name" xml:space="preserve">
+    <value>kryptonWorkspaceCell1</value>
+  </data>
+  <data name="&gt;&gt;kryptonWorkspaceCell1.Type" xml:space="preserve">
+    <value>Krypton.Workspace.KryptonWorkspaceCell, Krypton.Workspace, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;kryptonWorkspaceCell1.Parent" xml:space="preserve">
+    <value>kryptonDockableWorkspaceMain</value>
+  </data>
+  <data name="&gt;&gt;kryptonWorkspaceCell1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;kryptonWorkspaceCell2.Name" xml:space="preserve">
+    <value>kryptonWorkspaceCell2</value>
+  </data>
+  <data name="&gt;&gt;kryptonWorkspaceCell2.Type" xml:space="preserve">
+    <value>Krypton.Workspace.KryptonWorkspaceCell, Krypton.Workspace, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;kryptonWorkspaceCell2.Parent" xml:space="preserve">
+    <value>kryptonDockableWorkspaceMain</value>
+  </data>
+  <data name="&gt;&gt;kryptonWorkspaceCell2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="kryptonDockableWorkspaceMain.Size" type="System.Drawing.Size, System.Drawing">
     <value>931, 448</value>
   </data>
@@ -274,101 +301,14 @@
     <value>toolStripButton1</value>
   </data>
   <metadata name="kryptonDockingManagerMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>547, 36</value>
+    <value>32, 37</value>
   </metadata>
-  <data name="kryptonPage2.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 50</value>
-  </data>
-  <data name="kryptonPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 100</value>
-  </data>
-  <data name="kryptonPage2.Text" xml:space="preserve">
-    <value>kryptonPage2</value>
-  </data>
-  <data name="kryptonPage2.ToolTipTitle" xml:space="preserve">
-    <value>Page ToolTip</value>
-  </data>
-  <data name="&gt;&gt;kryptonPage2.Name" xml:space="preserve">
-    <value>kryptonPage2</value>
-  </data>
-  <data name="&gt;&gt;kryptonPage2.Type" xml:space="preserve">
-    <value>Krypton.Navigator.KryptonPage, Krypton.Navigator, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="kryptonPage4.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 50</value>
-  </data>
-  <data name="kryptonPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 100</value>
-  </data>
-  <data name="kryptonPage4.Text" xml:space="preserve">
-    <value>kryptonPage4</value>
-  </data>
-  <data name="kryptonPage4.ToolTipTitle" xml:space="preserve">
-    <value>Page ToolTip</value>
-  </data>
-  <data name="&gt;&gt;kryptonPage4.Name" xml:space="preserve">
-    <value>kryptonPage4</value>
-  </data>
-  <data name="&gt;&gt;kryptonPage4.Type" xml:space="preserve">
-    <value>Krypton.Navigator.KryptonPage, Krypton.Navigator, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="kryptonPage1.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 50</value>
-  </data>
-  <data name="kryptonPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 100</value>
-  </data>
-  <data name="kryptonPage1.Text" xml:space="preserve">
-    <value>kryptonPage1</value>
-  </data>
-  <data name="kryptonPage1.ToolTipTitle" xml:space="preserve">
-    <value>Page ToolTip</value>
-  </data>
-  <data name="&gt;&gt;kryptonPage1.Name" xml:space="preserve">
-    <value>kryptonPage1</value>
-  </data>
-  <data name="&gt;&gt;kryptonPage1.Type" xml:space="preserve">
-    <value>Krypton.Navigator.KryptonPage, Krypton.Navigator, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="kryptonPage5.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 50</value>
-  </data>
-  <data name="kryptonPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 100</value>
-  </data>
-  <data name="kryptonPage5.Text" xml:space="preserve">
-    <value>kryptonPage5</value>
-  </data>
-  <data name="kryptonPage5.ToolTipTitle" xml:space="preserve">
-    <value>Page ToolTip</value>
-  </data>
-  <data name="&gt;&gt;kryptonPage5.Name" xml:space="preserve">
-    <value>kryptonPage5</value>
-  </data>
-  <data name="&gt;&gt;kryptonPage5.Type" xml:space="preserve">
-    <value>Krypton.Navigator.KryptonPage, Krypton.Navigator, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="kryptonPage6.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 50</value>
-  </data>
-  <data name="kryptonPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 123</value>
-  </data>
-  <data name="kryptonPage6.Text" xml:space="preserve">
-    <value>kryptonPage6</value>
-  </data>
-  <data name="kryptonPage6.ToolTipTitle" xml:space="preserve">
-    <value>Page ToolTip</value>
-  </data>
-  <data name="&gt;&gt;kryptonPage6.Name" xml:space="preserve">
-    <value>kryptonPage6</value>
-  </data>
-  <data name="&gt;&gt;kryptonPage6.Type" xml:space="preserve">
-    <value>Krypton.Navigator.KryptonPage, Krypton.Navigator, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <metadata name="dockingMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>847, 36</value>
+    <value>231, 37</value>
   </metadata>
+  <data name="dockingMenu.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12world</value>
+  </data>
   <data name="dockingMenu.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 4</value>
   </data>
@@ -380,9 +320,6 @@
   </data>
   <data name="dockingMenu.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="dockingMenu.Text" xml:space="preserve">
-    <value>menuStrip1</value>
   </data>
   <data name="&gt;&gt;dockingMenu.Name" xml:space="preserve">
     <value>dockingMenu</value>
@@ -433,10 +370,10 @@
     <value>1</value>
   </data>
   <metadata name="contextService.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>974, 36</value>
+    <value>344, 44</value>
   </metadata>
   <metadata name="packageManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1104, 36</value>
+    <value>463, 46</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -523,12 +460,12 @@
     <value>packageManager</value>
   </data>
   <data name="&gt;&gt;packageManager.Type" xml:space="preserve">
-    <value>UEExplorer.UI.PackageManager, UE Explorer, Version=1.4.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>UEExplorer.Framework.PackageManager, UEExplorer.Framework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>UC_PackageExplorer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>UEExplorer.UI.Tabs.UserControl_Tab, UE Explorer, Version=1.4.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

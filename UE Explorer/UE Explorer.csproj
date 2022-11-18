@@ -164,9 +164,6 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Storm.TabControl">
-      <HintPath>libs\Storm.TabControl.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -305,21 +302,17 @@
     <Compile Include="UI\Tabs\ActionState.cs" />
     <Compile Include="UI\ObjectPathBuilder.cs" />
     <Compile Include="UI\ContextProvider.cs" />
-    <Compile Include="UI\Tabs\UC_Options.cs">
+    <Compile Include="UI\Panels\SettingsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Tabs\UC_Options.Designer.cs">
-      <DependentUpon>UC_Options.cs</DependentUpon>
+    <Compile Include="UI\Panels\SettingsPanel.Designer.cs">
+      <DependentUpon>SettingsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Tabs\TabsCollection.cs" />
     <Compile Include="UI\Tabs\UC_ModExplorer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Tabs\UC_ModExplorer.Designer.cs">
       <DependentUpon>UC_ModExplorer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Tabs\UserControl_Tab.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Forms\HexViewerForm.cs">
       <SubType>Form</SubType>
@@ -384,9 +377,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\FindDialog.nl.resx">
       <DependentUpon>FindDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\FindDialog.resx">
       <DependentUpon>FindDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\PropertiesDialog.nl.resx">
       <DependentUpon>PropertiesDialog.cs</DependentUpon>
@@ -442,12 +437,12 @@
     <EmbeddedResource Include="UI\Panels\WebViewPanel.resx">
       <DependentUpon>WebViewPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Tabs\UC_Options.nl.resx">
-      <DependentUpon>UC_Options.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Panels\SettingsPanel.nl.resx">
+      <DependentUpon>SettingsPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Tabs\UC_Options.resx">
-      <DependentUpon>UC_Options.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Panels\SettingsPanel.resx">
+      <DependentUpon>SettingsPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\UC_ModExplorer.resx">
@@ -578,6 +573,13 @@
     <None Include="Resources\Code.png" />
     <None Include="Resources\FindDown.png" />
     <None Include="Resources\FindNext.png" />
+    <None Include="Resources\Backwards.png" />
+    <None Include="Resources\Forwards.png" />
+    <None Include="Resources\Package.png" />
+    <None Include="Resources\Save.png" />
+    <None Include="Resources\InfoTipInline.11.11.png" />
+    <None Include="Resources\AboutBox.png" />
+    <None Include="Resources\Settings.png" />
     <Content Include="unrealfile.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

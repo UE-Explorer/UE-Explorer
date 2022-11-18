@@ -1,41 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using Krypton.Navigator;
 using Krypton.Docking;
+using Krypton.Navigator;
 using UEExplorer.Framework;
 using UEExplorer.Properties;
+using UEExplorer.UI.Dialogs;
 using UEExplorer.UI.Forms;
 using UEExplorer.UI.Main;
 using UEExplorer.UI.Pages;
+using UELib;
 using UELib.Annotations;
+using UELib.Core;
 using UELib.Engine;
 
 namespace UEExplorer.UI.Tabs
 {
-    using Dialogs;
-    using UELib;
-    using UELib.Core;
-
-    [ComVisible(false)]
-    public partial class UC_PackageExplorer : UserControl_Tab
+    public partial class UC_PackageExplorer : UserControl
     {
-        public string FilePath { get; set; }
+        private readonly List<ActionState> _ContentHistory = new List<ActionState>();
+        private int _CurrentHistoryIndex = -1;
+        private KryptonDockingWorkspace _DocumentsWorkspace;
+        private KryptonDockingSpace _ExplorerSpace;
 
-        private KryptonDockingWorkspace _Workspace;
-        private PackageExplorerPage _PackageExplorerPage;
+        private KryptonDockingControl _NavSpace;
+        private KryptonDockingControl _ViewSpace;
 
-        public UC_PackageExplorer(string filepath)
+        public UC_PackageExplorer()
         {
-            FilePath = filepath;
-
             InitializeComponent();
 
             contextService.ContextChanged += ContextServiceOnContextChanged;
@@ -45,40 +43,39 @@ namespace UEExplorer.UI.Tabs
             packageManager.PackageInitialized += PackageManagerOnPackageInitialized;
         }
 
+        public string FilePath { get; set; }
+
         private void UC_PackageExplorer_Load(object sender, EventArgs e)
         {
-            kryptonDockingManagerMain.ManageFloating("Floating", ParentForm);
+            //kryptonDockingManagerMain.ManageFloating("Floating", ParentForm);
 
-            var navControl = kryptonDockingManagerMain.ManageControl("Nav", dockingPanel);
-            _Workspace = kryptonDockingManagerMain.ManageWorkspace("Workspace", kryptonDockableWorkspaceMain);
-            var viewControl = kryptonDockingManagerMain.ManageControl("View", dockingPanel);
+            _NavSpace = kryptonDockingManagerMain.ManageControl("Nav", dockingPanel);
+            _DocumentsWorkspace = kryptonDockingManagerMain.ManageWorkspace("Workspace", "Docs", kryptonDockableWorkspaceMain);
+            _ViewSpace = kryptonDockingManagerMain.ManageControl("View", dockingPanel);
 
-            if (File.Exists(Program.DockingConfigPath))
-                kryptonDockingManagerMain.LoadConfigFromFile(Program.DockingConfigPath);
-
-            _PackageExplorerPage = CreatePackageExplorerPage();
-            var expSpace = kryptonDockingManagerMain.AddDockspace(
-                "Nav",
-                DockingEdge.Left,
-                new KryptonPage[] { _PackageExplorerPage });
-            expSpace.DockspaceControl.Size = new Size(340, 0);
-
-            _Workspace.Append(CreateStartPage());
-
-            BeginInvoke((MethodInvoker)(() => packageManager.RegisterPackage(FilePath)));
+            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            {
+                if (File.Exists(Program.DockingConfigPath))
+                {
+                    kryptonDockingManagerMain.LoadConfigFromFile(Program.DockingConfigPath);
+                }
+            }
         }
 
         private void ContextServiceOnContextChanged(object sender, ContextChangedEventArgs e)
         {
-            if (sender == this) return;
-            
+            if (sender == this)
+            {
+                return;
+            }
+
             PerformNodeAction(e.Context.Target, e.Context.ActionKind);
         }
 
         private void PackageManagerOnPackageRegistered(object sender, PackageEventArgs e)
         {
             ProgressStatus.SetStatus(Resources.PACKAGE_LOADING);
-            
+
             var packageReference = e.Package;
             Debug.Assert(packageReference.Linker == null, "packageReference.Linker == null");
 
@@ -93,12 +90,16 @@ namespace UEExplorer.UI.Tabs
                     UnrealConfig.SuppressSignature = true;
                 }
             }
-            
+
             if (Program.Options.bForceLicenseeMode)
+            {
                 UnrealPackage.OverrideLicenseeVersion = Program.Options.LicenseeMode;
+            }
 
             if (Program.Options.bForceVersion)
+            {
                 UnrealPackage.OverrideVersion = Program.Options.Version;
+            }
 
             UnrealConfig.Platform = (UnrealConfig.CookedPlatform)Enum.Parse
             (
@@ -108,13 +109,13 @@ namespace UEExplorer.UI.Tabs
 
             BeginInvoke((MethodInvoker)(() => packageManager.LoadPackage(packageReference)));
         }
-        
+
         private void PackageManagerOnPackageLoaded(object sender, PackageEventArgs e)
         {
             var packageReference = e.Package;
             Debug.Assert(packageReference.Linker != null, "packageReference.Linker != null");
 
-            if (IsPackageCompressed(packageReference.Linker))
+            if (HasCompressedChunks(packageReference.Linker))
             {
                 if (MessageBox.Show(Resources.PACKAGE_IS_COMPRESSED,
                         Resources.NOTICE_TITLE,
@@ -148,7 +149,7 @@ namespace UEExplorer.UI.Tabs
             var packageReference = e.Package;
             Debug.Assert(packageReference.Linker != null, "packageReference.Linker != null");
 
-            ProgressStatus.SetMaxProgress(packageReference.Linker.Exports.Count*2);
+            ProgressStatus.SetMaxProgress(packageReference.Linker.Exports.Count * 2);
             packageReference.Linker.NotifyPackageEvent += OnNotifyPackageEvent;
 
             try
@@ -156,7 +157,6 @@ namespace UEExplorer.UI.Tabs
                 packageReference.Linker.InitializePackage(
                     UnrealPackage.InitFlags.Deserialize |
                     UnrealPackage.InitFlags.Link);
-
             }
             catch (Exception ex)
             {
@@ -169,21 +169,6 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private PackageExplorerPage CreatePackageExplorerPage()
-        {
-            var page = new PackageExplorerPage(contextService, packageManager);
-            page.ClearFlags(KryptonPageFlags.DockingAllowClose |
-                            KryptonPageFlags.DockingAllowFloating |
-                            KryptonPageFlags.DockingAllowWorkspace);
-            return page;
-        }
-
-        private StartPage CreateStartPage()
-        {
-            var page = new StartPage();
-            return page;
-        }
-
         private T CreateTrackingPage<T>(bool isTracking)
             where T : TrackingPage
         {
@@ -193,14 +178,12 @@ namespace UEExplorer.UI.Tabs
             return page;
         }
 
-        private bool IsPackageCompressed(UnrealPackage linker)
-        {
-            return linker.Summary.CompressedChunks != null &&
-                   linker.Summary.CompressedChunks.Any();
-        }
+        private static bool HasCompressedChunks(UnrealPackage linker) =>
+            linker.Summary.CompressedChunks != null &&
+            linker.Summary.CompressedChunks.Any();
 
-        /// <summary> 
-        /// Clean up any resources being used.
+        /// <summary>
+        ///     Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -213,12 +196,9 @@ namespace UEExplorer.UI.Tabs
             base.Dispose(disposing);
         }
 
-        private void OnNotifyPackageEvent(object sender, UnrealPackage.PackageEventArgs e)
-        {
-            UpdateStatus(e);
-            //BeginInvoke((MethodInvoker)(() => UpdateStatus(e)));
-        }
+        private void OnNotifyPackageEvent(object sender, UnrealPackage.PackageEventArgs e) => UpdateStatus(e);
 
+        //BeginInvoke((MethodInvoker)(() => UpdateStatus(e)));
         private void UpdateStatus(UnrealPackage.PackageEventArgs e)
         {
             switch (e.EventId)
@@ -229,25 +209,372 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private void InitializeContentTree()
+        private static string GetExceptionMessage(UObject errorObject) =>
+            "Deserialization failed by the following exception:"
+            + "\n\n" + errorObject.ThrownException.Message
+            + "\n\n" + errorObject.ThrownException.InnerException?.Message
+            + "\n\n" + "Occurred on position:"
+            + errorObject.ExceptionPosition + "/" + errorObject.ExportTable.SerialSize
+            + "\n\nStackTrace:" + errorObject.ThrownException.StackTrace
+            + "\n\nInnerStackTrace:" + errorObject.ThrownException.InnerException?.StackTrace;
+
+        public void TabFind()
         {
-            // FIXME:
-            //var state = Program.Options.GetState(_UnrealPackage.FullPackageName);
-            //if (state.SearchObjectValue != null)
-            //{
-            //    PerformActionByObjectPath(state.SearchObjectValue);
-            //}
+            using (var findDialog = new FindDialog())
+            {
+                findDialog.FindNext += (sender, e) => { EmitFind(e.FindText); };
+                findDialog.ShowDialog();
+            }
         }
 
-        private static string GetExceptionMessage(UObject errorObject)
+        private void SetActiveObjectPath(string path) => ActiveObjectPath.Text = path;
+
+        private void TrackNodeAction(object node, object target, ContextActionKind actionKind)
         {
-            return "Deserialization failed by the following exception:"
-                   + "\n\n" + errorObject.ThrownException.Message
-                   + "\n\n" + errorObject.ThrownException.InnerException?.Message
-                   + "\n\n" + "Occurred on position:"
-                   + errorObject.ExceptionPosition + "/" + errorObject.ExportTable.SerialSize
-                   + "\n\nStackTrace:" + errorObject.ThrownException.StackTrace
-                   + "\n\nInnerStackTrace:" + errorObject.ThrownException.InnerException?.StackTrace;
+            switch (actionKind)
+            {
+                case ContextActionKind.ExportAs:
+                case ContextActionKind.ExportExternal:
+                case ContextActionKind.DecompileExternal:
+                case ContextActionKind.ViewBuffer:
+                case ContextActionKind.ViewTableBuffer:
+                    return;
+            }
+
+            if (_ContentHistory.Count > 0)
+            {
+                // No need to buffer the same content
+                var last = _ContentHistory.Last();
+                if (last.Target == target && last.ActionKind == actionKind)
+                {
+                    return;
+                }
+
+                // Preserve the text editor state of the last action.
+                UpdateContentHistoryData(_CurrentHistoryIndex);
+
+                // Clean all above buffers when a new node was user-selected
+                if (_ContentHistory.Count - 1 - _CurrentHistoryIndex > 0)
+                {
+                    _ContentHistory.RemoveRange(_CurrentHistoryIndex, _ContentHistory.Count - _CurrentHistoryIndex);
+                    _CurrentHistoryIndex = _ContentHistory.Count - 1;
+                    NextButton.Enabled = false;
+                }
+            }
+
+            // Maximum 10 can be buffered; remove last one
+            if (_ContentHistory.Count + 1 > 15)
+            {
+                _ContentHistory.RemoveRange(0, 1);
+            }
+
+            var data = new ActionState { SelectedNode = node, Target = target, ActionKind = actionKind };
+            _ContentHistory.Add(data);
+            _CurrentHistoryIndex = _ContentHistory.Count - 1;
+
+            if (_CurrentHistoryIndex > 0)
+            {
+                PrevButton.Enabled = true;
+            }
+        }
+
+        private void UpdateContentHistoryData(int historyIndex)
+        {
+            var data = _ContentHistory[historyIndex];
+            var panel = GetObjectPanel();
+            panel?.StoreState(ref data);
+            _ContentHistory[historyIndex] = data;
+        }
+
+        private void RestoreContentHistoryData(int historyIndex)
+        {
+            var data = _ContentHistory[historyIndex];
+            PerformNodeAction(data.Target, data.ActionKind, false);
+
+            if (data.SelectedNode is TreeNode selectedNode)
+            {
+                RestoreSelectedNode(selectedNode);
+            }
+
+            var panel = GetObjectPanel();
+            panel?.RestoreState(ref data);
+        }
+
+        internal void ToolStripButton_Backward_Click(object sender, EventArgs e)
+        {
+            Debug.Assert(_CurrentHistoryIndex - 1 >= 0);
+
+            UpdateContentHistoryData(_CurrentHistoryIndex);
+            RestoreContentHistoryData(--_CurrentHistoryIndex);
+
+            if (_CurrentHistoryIndex == 0)
+            {
+                PrevButton.Enabled = false;
+            }
+
+            NextButton.Enabled = true;
+        }
+
+        internal void ToolStripButton_Forward_Click(object sender, EventArgs e)
+        {
+            Debug.Assert(_CurrentHistoryIndex + 1 < _ContentHistory.Count);
+
+            UpdateContentHistoryData(_CurrentHistoryIndex);
+            RestoreContentHistoryData(++_CurrentHistoryIndex);
+
+            if (_CurrentHistoryIndex == _ContentHistory.Count - 1)
+            {
+                NextButton.Enabled = false;
+            }
+
+            PrevButton.Enabled = true;
+        }
+
+        private void RestoreSelectedNode(TreeNode node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            node.TreeView.Show();
+            node.TreeView.SelectedNode = node;
+        }
+
+        private void ViewBufferFor(IBuffered target)
+        {
+            if (target == null)
+            {
+                MessageBox.Show(Resources.NoTargetForViewBuffer);
+                return;
+            }
+
+            var hexDialog = new HexViewerForm(target, this);
+            hexDialog.Show(ParentForm);
+        }
+
+        public IEnumerable<IUnrealDecompilable> GetContents<T>(UnrealPackage linker)
+            where T : UObject =>
+            linker.Objects
+                .OfType<T>()
+                .Where(c => c.ExportTable != null)
+                .ToList<IUnrealDecompilable>();
+
+        public async void PerformSearchIn<T>(string searchText) where T : UObject
+        {
+            var findPage = new FindResultsPage();
+            AddNav(findPage);
+            kryptonDockingManagerMain.ShowPage(findPage);
+
+            IEnumerable<IUnrealDecompilable> contents = new List<IUnrealDecompilable>();
+            foreach (var packageReference in packageManager.EnumeratePackages())
+            {
+                if (packageReference.Linker == null)
+                {
+                    continue;
+                }
+
+                var next = GetContents<T>(packageReference.Linker);
+                contents = contents.Concat(next);
+            }
+
+            ProgressStatus.SaveStatus();
+            ProgressStatus.SetStatus(Resources.SEARCHING_CLASSES_STATUS);
+            try
+            {
+                await findPage.PerformSearch(contents, searchText);
+            }
+            finally
+            {
+                ProgressStatus.Reset();
+            }
+        }
+
+        private void EditorFindTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\r')
+            {
+                return;
+            }
+
+            EmitFind(EditorFindTextBox.Text);
+            e.Handled = true;
+        }
+
+        private void findNextToolStripMenuItem_Click_1(object sender, EventArgs e) => EmitFind(EditorFindTextBox.Text);
+
+        private void copyToolStripButton_Click(object sender, EventArgs e)
+        {
+            // FIXME:
+        }
+
+        // TODO: Re-implement in a package agnostic way (Blocked till UELib 2.0)
+        private bool PerformActionByObjectPath(UnrealPackage linker, string objectGroup)
+        {
+            var obj = linker.FindObjectByGroup(objectGroup);
+            if (obj == null)
+            {
+                return false;
+            }
+
+            PerformNodeAction(obj, ContextActionKind.Auto);
+            return true;
+        }
+
+        private void SearchObjectTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case '\r':
+                    foreach (var packageReference in packageManager.EnumeratePackages())
+                    {
+                        if (packageReference.Linker == null)
+                        {
+                            continue;
+                        }
+
+                        if (PerformActionByObjectPath(packageReference.Linker, ActiveObjectPath.Text))
+                        {
+                            e.Handled = true;
+                            break;
+                        }
+                    }
+
+                    break;
+            }
+        }
+
+        internal static UC_PackageExplorer Traverse(Control parent)
+        {
+            for (var c = parent; c != null; c = c.Parent)
+            {
+                if (c is UC_PackageExplorer packageExplorer)
+                {
+                    return packageExplorer;
+                }
+            }
+
+            throw new NotSupportedException();
+        }
+
+        public void EmitObjectNodeAction(object target, ContextActionKind actionKind) =>
+            PerformNodeAction(target, actionKind);
+
+        public void EmitSearchObjectByPath(string path)
+        {
+            foreach (var packageReference in packageManager.EnumeratePackages())
+            {
+                if (packageReference.Linker == null)
+                {
+                    continue;
+                }
+
+                if (PerformActionByObjectPath(packageReference.Linker, path))
+                {
+                    break;
+                }
+            }
+        }
+
+        public void EmitSearch<T>(string searchText) where T : UObject => PerformSearchIn<T>(searchText);
+
+        // FIXME: Find a better way to propagate commands down the docked pages.
+
+        public void EmitFind(string text)
+        {
+            var pages = kryptonDockingManagerMain.PagesWorkspace
+                .OfType<TrackingPage>()
+                .Where(p => p.IsTracking)
+                .ToList();
+
+            foreach (var page in pages)
+            {
+                page.OnFind(text);
+            }
+        }
+
+        public void EmitFind(TextSearchHelpers.FindResult findResult)
+        {
+            var pages = kryptonDockingManagerMain.PagesWorkspace
+                .OfType<TrackingPage>()
+                .Where(p => p.IsTracking)
+                .ToList();
+
+            foreach (var page in pages)
+            {
+                page.OnFind(findResult);
+            }
+        }
+
+        private void kryptonDockingManagerMain_PageFloatingRequest(object sender, CancelUniqueNameEventArgs e)
+        {
+            var page = kryptonDockingManagerMain.PageForUniqueName(e.UniqueName);
+            if (page is TrackingPage trackingPage && trackingPage.IsTracking)
+            {
+                trackingPage.IsTracking = false;
+            }
+        }
+
+        private void kryptonDockingManagerMain_PageCloseRequest(object sender, CloseRequestEventArgs e)
+        {
+            var page = kryptonDockingManagerMain.PageForUniqueName(e.UniqueName);
+            if (page is TrackingPage trackingPage)
+            {
+                page.Dispose();
+            }
+        }
+
+        private void kryptonDockableWorkspaceMain_ActivePageChanged(object sender, Krypton.Workspace.ActivePageChangedEventArgs e)
+        {
+            bool withEditorTools = false;
+            
+            var page = e.NewPage;
+            switch (page)
+            {
+                case DecompilerPage _:
+                    withEditorTools = true;
+                    break;
+            }
+            
+            copyToolStripButton.Enabled = withEditorTools;
+            EditorFindTextBox.Enabled = withEditorTools;
+            findNextToolStripMenuItem.Enabled = withEditorTools;
+        }
+
+        public bool HasPage(string uniqueName) =>
+            kryptonDockingManagerMain.ContainsPage(uniqueName);
+
+        public void AddNav(KryptonPage page, DockingEdge edge = DockingEdge.Left) =>
+            kryptonDockingManagerMain.AddDockspace("Nav", edge,
+                new[] { page });
+
+        public void AddDocument(KryptonPage page)
+        {
+            _DocumentsWorkspace.Append(page);
+            _DocumentsWorkspace.SelectPage(page.UniqueName);
+        }
+
+        public void AddDocument<T>(string title, string uniqueName)
+            where T : Control, new()
+        {
+            var page = new KryptonPage(title, uniqueName);
+
+            var control = new T();
+            page.Controls.Add(control);
+
+            _DocumentsWorkspace.Append(page);
+        }
+
+        public void AddPackage(string filePath) =>
+            BeginInvoke((MethodInvoker)(() => packageManager.RegisterPackage(filePath)));
+
+        public void AddPackageExplorer()
+        {
+            var page = new PackageExplorerPage(contextService, packageManager);
+            page.ClearFlags(KryptonPageFlags.DockingAllowFloating |
+                            KryptonPageFlags.DockingAllowWorkspace);
+
+            AddNav(page);
         }
 
         #region Node-ContextMenu Methods
@@ -256,7 +583,9 @@ namespace UEExplorer.UI.Tabs
         {
             string name = token.GetType().Name;
             if (!acronymizeName)
+            {
                 return $"{name}({token.Size}/{token.StorageSize})";
+            }
 
             name = string.Concat(name.Substring(0, name.Length - 5).Select(
                 c => char.IsUpper(c) ? c.ToString(CultureInfo.InvariantCulture) : string.Empty
@@ -270,8 +599,8 @@ namespace UEExplorer.UI.Tabs
         private static string DisassembleTokens(UStruct container, UStruct.UByteCodeDecompiler decompiler,
             int tokenCount)
         {
-            var content = string.Empty;
-            for (var i = 0; i + 1 < tokenCount; ++i)
+            string content = string.Empty;
+            for (int i = 0; i + 1 < tokenCount; ++i)
             {
                 var token = decompiler.NextToken;
                 int firstTokenIndex = decompiler.CurrentTokenIndex;
@@ -294,7 +623,7 @@ namespace UEExplorer.UI.Tabs
                     decompiler.CurrentTokenIndex = firstTokenIndex;
                 }
 
-                var buffer = new byte[token.StorageSize];
+                byte[] buffer = new byte[token.StorageSize];
                 container.Package.Stream.Position = container.ExportTable.SerialOffset + container.ScriptOffset +
                                                     token.StoragePosition;
                 container.Package.Stream.Read(buffer, 0, buffer.Length);
@@ -320,10 +649,12 @@ namespace UEExplorer.UI.Tabs
             return content;
         }
 
-        public object PickBestTarget(object target, ContextActionKind actionKind)
+        private object PickBestTarget(object target, ContextActionKind actionKind)
         {
             if (target == null)
+            {
                 return null;
+            }
 
             object tag;
             switch (target)
@@ -374,26 +705,9 @@ namespace UEExplorer.UI.Tabs
         private void PerformNodeAction(object target, ContextActionKind actionKind, bool trackHistory = true)
         {
             object tag = PickBestTarget(target, actionKind);
-            if (tag == null && target is TreeNode node)
+            if (tag == null && target is TreeNode)
             {
-                switch (actionKind)
-                {
-                    //case ContentNodeAction.Decompile:
-                    //    var s = new StringBuilder();
-                    //    foreach (object subNode in node.Nodes)
-                    //    {
-                    //        if (subNode is IUnrealDecompilable decompilable)
-                    //        {
-                    //            s.AppendLine(decompilable.Decompile());
-                    //        }
-                    //    }
-                    //    UpdateContentPanel(target, ContentNodeAction.Decompile);
-                    //    if (trackHistory) TrackNodeAction(node, target, ContentNodeAction.Decompile);
-                    //    return;
-
-                    default:
-                        return;
-                }
+                return;
             }
 
             //action = PickBestContentNodeAction(tag, action);
@@ -425,192 +739,206 @@ namespace UEExplorer.UI.Tabs
                         break;
 
                     case ContextActionKind.DisassembleTokens:
-                    {
-                        var unStruct = tag as UStruct;
-                        if (unStruct?.ByteCodeManager != null)
                         {
-                            var codeDec = unStruct.ByteCodeManager;
-                            codeDec.Deserialize();
-                            codeDec.InitDecompile();
-
-                            _DisassembleTokensTemplate = LoadTemplate("struct.tokens-disassembled");
-                            string text = DisassembleTokens(unStruct, codeDec, codeDec.DeserializedTokens.Count);
-                            UpdateContext(unStruct.Default, ContextActionKind.Decompile);
-                        }
-
-                        break;
-                    }
-
-                    case ContextActionKind.DecompileTokens:
-                    {
-                        var unStruct = tag as UStruct;
-                        if (unStruct?.ByteCodeManager != null)
-                        {
-                            string tokensTemplate = LoadTemplate("struct.tokens");
-                            var codeDec = unStruct.ByteCodeManager;
-                            codeDec.Deserialize();
-                            codeDec.InitDecompile();
-
-                            var text = string.Empty;
-                            while (codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count)
+                            var unStruct = tag as UStruct;
+                            if (unStruct?.ByteCodeManager != null)
                             {
-                                var t = codeDec.NextToken;
-                                int orgIndex = codeDec.CurrentTokenIndex;
-                                string output;
-                                var breakOut = false;
-                                try
-                                {
-                                    output = t.Decompile();
-                                }
-                                catch
-                                {
-                                    output = "Exception occurred while decompiling token: " + t.GetType().Name;
-                                    breakOut = true;
-                                }
+                                var codeDec = unStruct.ByteCodeManager;
+                                codeDec.Deserialize();
+                                codeDec.InitDecompile();
 
-                                string chain = FormatTokenHeader(t);
-                                int inlinedTokens = codeDec.CurrentTokenIndex - orgIndex;
-                                if (inlinedTokens > 0)
-                                {
-                                    ++orgIndex;
-                                    for (var i = 0; i < inlinedTokens; ++i)
-                                        chain += " -> " + FormatTokenHeader(codeDec.DeserializedTokens[orgIndex + i]);
-                                }
-
-                                var buffer = new byte[t.StorageSize];
-                                unStruct.Buffer.Position = unStruct.ScriptOffset + t.StoragePosition;
-                                unStruct.Buffer.Read(buffer, 0, buffer.Length);
-
-                                text += string.Format(tokensTemplate,
-                                    t.Position, t.StoragePosition,
-                                    chain, BitConverter.ToString(buffer).Replace('-', ' '),
-                                    output != string.Empty ? output + "\r\n" : output
-                                );
-
-                                if (breakOut)
-                                    break;
+                                _DisassembleTokensTemplate = LoadTemplate("struct.tokens-disassembled");
+                                string text = DisassembleTokens(unStruct, codeDec, codeDec.DeserializedTokens.Count);
+                                UpdateContext(unStruct.Default, ContextActionKind.Decompile);
                             }
 
-                            UpdateContext(unStruct.Default, ContextActionKind.Decompile);
+                            break;
                         }
 
-                        break;
-                    }
+                    case ContextActionKind.DecompileTokens:
+                        {
+                            var unStruct = tag as UStruct;
+                            if (unStruct?.ByteCodeManager != null)
+                            {
+                                string tokensTemplate = LoadTemplate("struct.tokens");
+                                var codeDec = unStruct.ByteCodeManager;
+                                codeDec.Deserialize();
+                                codeDec.InitDecompile();
+
+                                string text = string.Empty;
+                                while (codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count)
+                                {
+                                    var t = codeDec.NextToken;
+                                    int orgIndex = codeDec.CurrentTokenIndex;
+                                    string output;
+                                    bool breakOut = false;
+                                    try
+                                    {
+                                        output = t.Decompile();
+                                    }
+                                    catch
+                                    {
+                                        output = "Exception occurred while decompiling token: " + t.GetType().Name;
+                                        breakOut = true;
+                                    }
+
+                                    string chain = FormatTokenHeader(t);
+                                    int inlinedTokens = codeDec.CurrentTokenIndex - orgIndex;
+                                    if (inlinedTokens > 0)
+                                    {
+                                        ++orgIndex;
+                                        for (int i = 0; i < inlinedTokens; ++i)
+                                        {
+                                            chain += " -> " +
+                                                     FormatTokenHeader(codeDec.DeserializedTokens[orgIndex + i]);
+                                        }
+                                    }
+
+                                    byte[] buffer = new byte[t.StorageSize];
+                                    unStruct.Buffer.Position = unStruct.ScriptOffset + t.StoragePosition;
+                                    unStruct.Buffer.Read(buffer, 0, buffer.Length);
+
+                                    text += string.Format(tokensTemplate,
+                                        t.Position, t.StoragePosition,
+                                        chain, BitConverter.ToString(buffer).Replace('-', ' '),
+                                        output != string.Empty ? output + "\r\n" : output
+                                    );
+
+                                    if (breakOut)
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                UpdateContext(unStruct.Default, ContextActionKind.Decompile);
+                            }
+
+                            break;
+                        }
 
                     case ContextActionKind.ViewBuffer:
-                    {
-                        var bufferObject = (IBuffered)tag;
-                        Debug.Assert(bufferObject != null, nameof(bufferObject) + " != null");
-                        if (bufferObject.GetBufferSize() > 0) ViewBufferFor(bufferObject);
-                        break;
-                    }
+                        {
+                            var bufferObject = (IBuffered)tag;
+                            Debug.Assert(bufferObject != null, nameof(bufferObject) + " != null");
+                            if (bufferObject.GetBufferSize() > 0)
+                            {
+                                ViewBufferFor(bufferObject);
+                            }
+
+                            break;
+                        }
 
                     case ContextActionKind.ViewTableBuffer:
-                    {
-                        var tableObject = (IContainsTable)tag;
-                        Debug.Assert(tableObject != null);
-                        ViewBufferFor(tableObject.Table);
-                        break;
-                    }
+                        {
+                            var tableObject = (IContainsTable)tag;
+                            Debug.Assert(tableObject != null);
+                            ViewBufferFor(tableObject.Table);
+                            break;
+                        }
 
                     case ContextActionKind.ViewException:
-                    {
-                        Debug.Assert(obj != null);
-                        string text = GetExceptionMessage(obj);
-                        UpdateContext(obj, ContextActionKind.Decompile);
-                        break;
-                    }
+                        {
+                            Debug.Assert(obj != null);
+                            string text = GetExceptionMessage(obj);
+                            UpdateContext(obj, ContextActionKind.Decompile);
+                            break;
+                        }
 
                     case ContextActionKind.ExportAs:
-                    {
-                        var exportableObject = (IUnrealExportable)tag;
-                        Debug.Assert(exportableObject != null);
-
-                        obj?.BeginDeserializing();
-
-                        var fileExtensions = string.Empty;
-                        foreach (string ext in exportableObject.ExportableExtensions)
                         {
-                            fileExtensions += $"{ext}(*" + $".{ext})|*.{ext}";
-                            if (ext != exportableObject.ExportableExtensions.Last()) fileExtensions += "|";
+                            var exportableObject = (IUnrealExportable)tag;
+                            Debug.Assert(exportableObject != null);
+
+                            obj?.BeginDeserializing();
+
+                            string fileExtensions = string.Empty;
+                            foreach (string ext in exportableObject.ExportableExtensions)
+                            {
+                                fileExtensions += $"{ext}(*" + $".{ext})|*.{ext}";
+                                if (ext != exportableObject.ExportableExtensions.Last())
+                                {
+                                    fileExtensions += "|";
+                                }
+                            }
+
+                            string fileName = tag.ToString();
+                            var dialog = new SaveFileDialog { Filter = fileExtensions, FileName = fileName };
+                            if (dialog.ShowDialog() != DialogResult.OK)
+                            {
+                                return;
+                            }
+
+                            using (var stream = new FileStream(dialog.FileName, FileMode.Create, FileAccess.Write))
+                            {
+                                exportableObject.SerializeExport(
+                                    exportableObject.ExportableExtensions.ElementAt(dialog.FilterIndex - 1), stream);
+                                stream.Flush();
+                            }
+
+                            break;
                         }
-
-                        var fileName = tag.ToString();
-                        var dialog = new SaveFileDialog { Filter = fileExtensions, FileName = fileName };
-                        if (dialog.ShowDialog() != DialogResult.OK)
-                            return;
-
-                        using (var stream = new FileStream(dialog.FileName, FileMode.Create, FileAccess.Write))
-                        {
-                            exportableObject.SerializeExport(
-                                exportableObject.ExportableExtensions.ElementAt(dialog.FilterIndex - 1), stream);
-                            stream.Flush();
-                        }
-
-                        break;
-                    }
 
                     case ContextActionKind.DecompileExternal:
-                    {
-                        Debug.Assert(obj != null, nameof(obj) + " != null");
-                        var linker = obj.Package;
-                        Process.Start
-                        (
-                            Program.Options.UEModelAppPath,
-                            "-path=" + linker.PackageDirectory
-                                     + " " + linker.PackageName
-                                     + " " + ((TreeNode)target).Text
-                        );
-                        break;
-                    }
+                        {
+                            Debug.Assert(obj != null, nameof(obj) + " != null");
+                            var linker = obj.Package;
+                            Process.Start
+                            (
+                                Program.Options.UEModelAppPath,
+                                "-path=" + linker.PackageDirectory
+                                         + " " + linker.PackageName
+                                         + " " + ((TreeNode)target).Text
+                            );
+                            break;
+                        }
 
                     case ContextActionKind.ExportExternal:
-                    {
-                        Debug.Assert(obj != null, nameof(obj) + " != null");
-                        var linker = obj.Package;
-                        
-                        string packagePath = Application.StartupPath
-                                             + "\\Exported\\"
-                                             + linker.PackageName;
-
-                        string contentDir = packagePath + "\\Content";
-                        Directory.CreateDirectory(contentDir);
-                        string appArguments = "-path=" + linker.PackageDirectory
-                                                       + " " + "-out=" + contentDir
-                                                       + " -export"
-                                                       + " " + linker.PackageName
-                                                       + " " + ((TreeNode)target).Text;
-                        var appInfo = new ProcessStartInfo(Program.Options.UEModelAppPath, appArguments)
                         {
-                            UseShellExecute = false,
-                            RedirectStandardOutput = true,
-                            CreateNoWindow = false
-                        };
-                        var app = Process.Start(appInfo);
-                        var log = string.Empty;
-                        app.OutputDataReceived += (sender, e) => log += e.Data;
-                        //app.WaitForExit();
+                            Debug.Assert(obj != null, nameof(obj) + " != null");
+                            var linker = obj.Package;
 
-                        if (Directory.GetFiles(contentDir).Length > 0)
-                        {
-                            if (MessageBox.Show(
-                                    Resources.UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER,
-                                    ProductName,
-                                    MessageBoxButtons.YesNo
-                                ) == DialogResult.Yes)
-                                Process.Start(contentDir);
+                            string packagePath = Application.StartupPath
+                                                 + "\\Exported\\"
+                                                 + linker.PackageName;
+
+                            string contentDir = packagePath + "\\Content";
+                            Directory.CreateDirectory(contentDir);
+                            string appArguments = "-path=" + linker.PackageDirectory
+                                                           + " " + "-out=" + contentDir
+                                                           + " -export"
+                                                           + " " + linker.PackageName
+                                                           + " " + ((TreeNode)target).Text;
+                            var appInfo = new ProcessStartInfo(Program.Options.UEModelAppPath, appArguments)
+                            {
+                                UseShellExecute = false, RedirectStandardOutput = true, CreateNoWindow = false
+                            };
+                            var app = Process.Start(appInfo);
+                            string log = string.Empty;
+                            app.OutputDataReceived += (sender, e) => log += e.Data;
+                            //app.WaitForExit();
+
+                            if (Directory.GetFiles(contentDir).Length > 0)
+                            {
+                                if (MessageBox.Show(
+                                        Resources.UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER,
+                                        ProductName,
+                                        MessageBoxButtons.YesNo
+                                    ) == DialogResult.Yes)
+                                {
+                                    Process.Start(contentDir);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show
+                                (
+                                    $"The object was not exported.\r\n\r\nArguments:{appArguments}\r\n\r\nLog:{log}",
+                                    ProductName
+                                );
+                            }
+
+                            break;
                         }
-                        else
-                        {
-                            MessageBox.Show
-                            (
-                                $"The object was not exported.\r\n\r\nArguments:{appArguments}\r\n\r\nLog:{log}",
-                                ProductName
-                            );
-                        }
-
-                        break;
-                    }
                 }
             }
             catch (Exception e)
@@ -620,12 +948,10 @@ namespace UEExplorer.UI.Tabs
         }
 
         [CanBeNull]
-        private KryptonPage GetObjectPage()
-        {
-            return kryptonDockableWorkspaceMain
+        private KryptonPage GetObjectPage() =>
+            kryptonDockableWorkspaceMain
                 .AllPages()
                 .FirstOrDefault(p => p.Name == "ObjectPage");
-        }
 
         [CanBeNull]
         private IActionPanel<object> GetObjectPanel()
@@ -650,12 +976,6 @@ namespace UEExplorer.UI.Tabs
             // Insert default pages, if we don't have any active pages for this action kind.
             InsertDefaultPages(context);
             ProgressStatus.ResetStatus();
-
-            // TODO: Bind this to the current active shown page
-            bool withEditorTools = actionKind == ContextActionKind.Decompile;
-            copyToolStripButton.Enabled = withEditorTools;
-            EditorFindTextBox.Enabled = withEditorTools;
-            findNextToolStripMenuItem.Enabled = withEditorTools;
 
             return context;
         }
@@ -707,326 +1027,18 @@ namespace UEExplorer.UI.Tabs
 
             bool isTracking = context.ActionKind == ContextActionKind.Auto;
             var page = CreatePageByAction(context.Target, context.ActionKind, isTracking);
-            if (page == null) return;
+            if (page == null)
+            {
+                return;
+            }
 
-            _Workspace.Append(page);
-            _Workspace.SelectPage(page.UniqueName);
-
+            AddDocument(page);
             page.Accept(context);
         }
 
-
-        private static string LoadTemplate(string name)
-        {
-            return File.ReadAllText(Path.Combine(Program.s_templateDir, name + ".txt"), Encoding.ASCII);
-        }
+        private static string LoadTemplate(string name) =>
+            File.ReadAllText(Path.Combine(Program.s_templateDir, name + ".txt"), Encoding.ASCII);
 
         #endregion
-
-        public override void TabFind()
-        {
-            using (var findDialog = new FindDialog())
-            {
-                findDialog.FindNext += (sender, e) => { EmitFind(e.FindText); };
-                findDialog.ShowDialog();
-            }
-        }
-
-        private readonly List<ActionState> _ContentHistory = new List<ActionState>();
-        private int _CurrentHistoryIndex = -1;
-
-        private void SetActiveObjectPath(string path)
-        {
-            ActiveObjectPath.Text = path;
-        }
-
-        private void TrackNodeAction(object node, object target, ContextActionKind actionKind)
-        {
-            switch (actionKind)
-            {
-                case ContextActionKind.ExportAs:
-                case ContextActionKind.ExportExternal:
-                case ContextActionKind.DecompileExternal:
-                case ContextActionKind.ViewBuffer:
-                case ContextActionKind.ViewTableBuffer:
-                    return;
-            }
-
-            if (_ContentHistory.Count > 0)
-            {
-                // No need to buffer the same content
-                var last = _ContentHistory.Last();
-                if (last.Target == target && last.ActionKind == actionKind)
-                {
-                    return;
-                }
-
-                // Preserve the text editor state of the last action.
-                UpdateContentHistoryData(_CurrentHistoryIndex);
-
-                // Clean all above buffers when a new node was user-selected
-                if (_ContentHistory.Count - 1 - _CurrentHistoryIndex > 0)
-                {
-                    _ContentHistory.RemoveRange(_CurrentHistoryIndex, _ContentHistory.Count - _CurrentHistoryIndex);
-                    _CurrentHistoryIndex = _ContentHistory.Count - 1;
-                    NextButton.Enabled = false;
-                }
-            }
-
-            // Maximum 10 can be buffered; remove last one
-            if (_ContentHistory.Count + 1 > 15)
-                _ContentHistory.RemoveRange(0, 1);
-
-            var data = new ActionState
-            {
-                SelectedNode = node,
-                Target = target,
-                ActionKind = actionKind
-            };
-            _ContentHistory.Add(data);
-            _CurrentHistoryIndex = _ContentHistory.Count - 1;
-
-            if (_CurrentHistoryIndex > 0) PrevButton.Enabled = true;
-        }
-
-        private void UpdateContentHistoryData(int historyIndex)
-        {
-            var data = _ContentHistory[historyIndex];
-            var panel = GetObjectPanel();
-            panel?.StoreState(ref data);
-            _ContentHistory[historyIndex] = data;
-        }
-
-        private void RestoreContentHistoryData(int historyIndex)
-        {
-            var data = _ContentHistory[historyIndex];
-            PerformNodeAction(data.Target, data.ActionKind, false);
-
-            if (data.SelectedNode is TreeNode selectedNode)
-            {
-                RestoreSelectedNode(selectedNode);
-            }
-
-            var panel = GetObjectPanel();
-            panel?.RestoreState(ref data);
-        }
-
-        private void ToolStripButton_Backward_Click(object sender, EventArgs e)
-        {
-            Debug.Assert(_CurrentHistoryIndex - 1 >= 0);
-
-            UpdateContentHistoryData(_CurrentHistoryIndex);
-            RestoreContentHistoryData(--_CurrentHistoryIndex);
-
-            if (_CurrentHistoryIndex == 0) PrevButton.Enabled = false;
-            NextButton.Enabled = true;
-        }
-
-        private void ToolStripButton_Forward_Click(object sender, EventArgs e)
-        {
-            Debug.Assert(_CurrentHistoryIndex + 1 < _ContentHistory.Count);
-
-            UpdateContentHistoryData(_CurrentHistoryIndex);
-            RestoreContentHistoryData(++_CurrentHistoryIndex);
-
-            if (_CurrentHistoryIndex == _ContentHistory.Count - 1) NextButton.Enabled = false;
-            PrevButton.Enabled = true;
-        }
-
-        private void RestoreSelectedNode(TreeNode node)
-        {
-            if (node == null)
-                return;
-
-            node.TreeView.Show();
-            node.TreeView.SelectedNode = node;
-        }
-
-        private void ViewBufferFor(IBuffered target)
-        {
-            if (target == null)
-            {
-                MessageBox.Show(Resources.NoTargetForViewBuffer);
-                return;
-            }
-
-            var hexDialog = new HexViewerForm(target, this);
-            hexDialog.Show(ParentForm);
-        }
-
-        private FindResultsPage CreateFindPage()
-        {
-            var page = new FindResultsPage();
-            return page;
-        }
-
-        public IEnumerable<IUnrealDecompilable> GetContents<T>(UnrealPackage linker)
-            where T : UObject
-        {
-            return linker.Objects
-                .OfType<T>()
-                .Where(c => c.ExportTable != null)
-                .ToList<IUnrealDecompilable>();
-        }
-
-        public async void PerformSearchIn<T>(string searchText) where T : UObject
-        {
-            var findPage = CreateFindPage();
-            kryptonDockingManagerMain.AddDockspace("Nav", DockingEdge.Left, new KryptonPage[] { findPage });
-            kryptonDockingManagerMain.ShowPage(findPage);
-
-            IEnumerable<IUnrealDecompilable> contents = new List<IUnrealDecompilable>();
-            foreach (var packageReference in packageManager.EnumeratePackages())
-            {
-                if (packageReference.Linker == null) continue;
-
-                var next = GetContents<T>(packageReference.Linker);
-                contents = contents.Concat(next);
-            }
-
-            ProgressStatus.SaveStatus();
-            ProgressStatus.SetStatus(Resources.SEARCHING_CLASSES_STATUS);
-            try
-            {
-                await findPage.PerformSearch(contents, searchText);
-            }
-            finally
-            {
-                ProgressStatus.Reset();
-            }
-        }
-
-        private void FindInDocumentToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EditorFindTextBox.Focus();
-        }
-
-        private void EditorFindTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar != '\r')
-                return;
-
-            EmitFind(EditorFindTextBox.Text);
-            e.Handled = true;
-        }
-
-        private void findNextToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            EmitFind(EditorFindTextBox.Text);
-        }
-
-        private void copyToolStripButton_Click(object sender, EventArgs e)
-        {
-            // FIXME:
-        }
-
-        // TODO: Re-implement in a package agnostic way (Blocked till UELib 2.0)
-        private bool PerformActionByObjectPath(UnrealPackage linker, string objectGroup)
-        {
-            var obj = linker.FindObjectByGroup(objectGroup);
-            if (obj == null)
-                return false;
-
-            PerformNodeAction(obj, ContextActionKind.Auto);
-            return true;
-        }
-
-        private void SearchObjectTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            switch (e.KeyChar)
-            {
-                case '\r':
-                    foreach (var packageReference in packageManager.EnumeratePackages())
-                    {
-                        if (packageReference.Linker == null) continue;
-                        
-                        if (PerformActionByObjectPath(packageReference.Linker, ActiveObjectPath.Text))
-                        {
-                            e.Handled = true;
-                            break;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        internal static UC_PackageExplorer Traverse(Control parent)
-        {
-            for (var c = parent; c != null; c = c.Parent)
-            {
-                if (c is UC_PackageExplorer packageExplorer) return packageExplorer;
-            }
-
-            throw new NotSupportedException();
-        }
-
-        public void EmitObjectNodeAction(object target, ContextActionKind actionKind)
-        {
-            PerformNodeAction(target, actionKind);
-        }
-
-        public void EmitSearchObjectByPath(string path)
-        {
-            foreach (var packageReference in packageManager.EnumeratePackages())
-            {
-                if (packageReference.Linker == null) continue;
-
-                if (PerformActionByObjectPath(packageReference.Linker, path))
-                {
-                    break;
-                }
-            }
-        }
-
-        public void EmitSearch<T>(string searchText) where T : UObject
-        {
-            PerformSearchIn<T>(searchText);
-        }
-
-        // FIXME: Find a better way to propagate commands down the docked pages.
-
-        public void EmitFind(string text)
-        {
-            var pages = kryptonDockingManagerMain.PagesWorkspace
-                .OfType<TrackingPage>()
-                .Where(p => p.IsTracking)
-                .ToList();
-
-            foreach (var page in pages)
-            {
-                page.OnFind(text);
-            }
-        }
-
-        public void EmitFind(TextSearchHelpers.FindResult findResult)
-        {
-            var pages = kryptonDockingManagerMain.PagesWorkspace
-                .OfType<TrackingPage>()
-                .Where(p => p.IsTracking)
-                .ToList();
-
-            foreach (var page in pages)
-            {
-                page.OnFind(findResult);
-            }
-        }
-
-        private void kryptonDockingManagerMain_PageFloatingRequest(object sender, CancelUniqueNameEventArgs e)
-        {
-            var page = kryptonDockingManagerMain.PageForUniqueName(e.UniqueName);
-            if (page is TrackingPage trackingPage && trackingPage.IsTracking)
-            {
-                trackingPage.IsTracking = false;
-            }
-        }
-
-        private void kryptonDockingManagerMain_PageCloseRequest(object sender, CloseRequestEventArgs e)
-        {
-            var page = kryptonDockingManagerMain.PageForUniqueName(e.UniqueName);
-            if (page is TrackingPage trackingPage)
-            {
-                page.Dispose();
-            }
-        }
     }
 }

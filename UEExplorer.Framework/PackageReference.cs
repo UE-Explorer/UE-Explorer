@@ -7,9 +7,9 @@ namespace UEExplorer.Framework
     [Serializable]
     public class PackageReference
     {
-        public readonly string FilePath;
+        [NotNull] public readonly string FilePath;
 
-        public PackageReference(string filePath, [CanBeNull] UnrealPackage linker)
+        public PackageReference([NotNull] string filePath, [CanBeNull] UnrealPackage linker)
         {
             FilePath = filePath;
             Linker = linker;

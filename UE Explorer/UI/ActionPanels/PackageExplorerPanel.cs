@@ -168,14 +168,13 @@ namespace UEExplorer.UI.ActionPanels
         public TreeNode GetRootPackageNode(PackageReference packageReference)
         {
             Debug.Assert(packageReference != null);
-            string name = Path.GetFileNameWithoutExtension(packageReference.FilePath);
-            return TreeViewPackages.Nodes[name];
+            return TreeViewPackages.Nodes[packageReference.FilePath];
         }
 
         public TreeNode GetRootPackageNode(UnrealPackage linker)
         {
             Debug.Assert(linker != null);
-            string name = linker.PackageName;
+            string name = linker.FullPackageName;
             return TreeViewPackages.Nodes[name];
         }
 
@@ -206,13 +205,26 @@ namespace UEExplorer.UI.ActionPanels
         private void BuildRootPackageTree(PackageReference packageReference)
         {
             var linker = packageReference.Linker;
-
             Debug.Assert(linker != null);
-            Debug.Assert(linker.Exports != null);
 
             var rootPackageNode = GetRootPackageNode(linker);
 
             TreeViewPackages.BeginUpdate();
+            
+            if (linker.Summary.CompressedChunks != null &&
+                linker.Summary.CompressedChunks.Any())
+            {
+                var dependenciesNode = new TreeNode("Chunks")
+                {
+                    Name = "Chunks",
+                    Tag = linker,
+                    ImageKey = "Chunks",
+                    SelectedImageKey = "Chunks"
+                };
+                dependenciesNode.Nodes.Add(ObjectTreeFactory.DummyNodeKey, "Expandable");
+                rootPackageNode.Nodes.Add(dependenciesNode);
+            }
+
             if (linker.Summary.ImportCount != 0)
             {
                 var depsNode = CreatePackageDependenciesNode(linker);
@@ -220,7 +232,7 @@ namespace UEExplorer.UI.ActionPanels
             }
 
             var nodes = _ObjectTreeBuilder.Visit(linker);
-            foreach (var treeNode in nodes)
+            if (nodes != null) foreach (var treeNode in nodes)
             {
                 rootPackageNode.Nodes.Add(treeNode);
             }
@@ -228,11 +240,14 @@ namespace UEExplorer.UI.ActionPanels
             TreeViewPackages.EndUpdate();
         }
 
-        public TreeNode CreatePackageDependenciesNode(UnrealPackage linker)
+        private TreeNode CreatePackageDependenciesNode(UnrealPackage linker)
         {
             var dependenciesNode = new TreeNode("Imports")
             {
-                Name = "Dependencies", Tag = linker, ImageKey = "Diagram", SelectedImageKey = "Diagram"
+                Name = "Dependencies",
+                Tag = linker,
+                ImageKey = "Diagram",
+                SelectedImageKey = "Diagram"
             };
             dependenciesNode.Nodes.Add(ObjectTreeFactory.DummyNodeKey, "Expandable");
             return dependenciesNode;
@@ -397,7 +412,6 @@ namespace UEExplorer.UI.ActionPanels
             string findText;
             using (var findDialog = new FindDialog())
             {
-                findDialog.FindInput.Text = Clipboard.GetText();
                 if (findDialog.ShowDialog() != DialogResult.OK)
                 {
                     return;
@@ -414,7 +428,6 @@ namespace UEExplorer.UI.ActionPanels
             string findText;
             using (var findDialog = new FindDialog())
             {
-                findDialog.FindInput.Text = Clipboard.GetText();
                 if (findDialog.ShowDialog() != DialogResult.OK)
                 {
                     return;

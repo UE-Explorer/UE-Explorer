@@ -8,7 +8,7 @@ namespace UEExplorer.UI.Tabs
 {
     // TODO: Save cache entries.
     [ComVisible(false)]
-    public partial class UC_CacheExtractor : UserControl_Tab
+    public partial class UC_CacheExtractor : UserControl
     {
         private UnrealCache _CurCache;
 

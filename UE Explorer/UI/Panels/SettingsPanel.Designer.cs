@@ -1,6 +1,6 @@
-﻿namespace UEExplorer.UI.Tabs
+﻿namespace UEExplorer.UI.Panels
 {
-	partial class UC_Options
+	partial class SettingsPanel
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -30,7 +30,7 @@
 		{
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label label2;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_Options));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsPanel));
             System.Windows.Forms.GroupBox groupBox3;
             System.Windows.Forms.Panel panel1;
             System.Windows.Forms.Label label5;
@@ -364,7 +364,6 @@
             // UC_Options
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -372,7 +371,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.Button_Save);
-            this.Name = "UC_Options";
+            this.Name = "SettingsPanel";
             this.Load += new System.EventHandler(this.UC_Options_Load);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();

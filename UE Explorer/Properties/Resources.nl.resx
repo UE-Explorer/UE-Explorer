@@ -357,4 +357,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   <data name="WavePlayerPage_OnObjectTarget_WavePlayer___0_" xml:space="preserve">
     <value>Golf: {0}</value>
   </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
 </root>

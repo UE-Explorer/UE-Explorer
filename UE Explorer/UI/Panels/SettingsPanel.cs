@@ -8,12 +8,12 @@ using UEExplorer.Properties;
 using UELib;
 using UELib.Types;
 
-namespace UEExplorer.UI.Tabs
+namespace UEExplorer.UI.Panels
 {
     [ComVisible(false)]
-    public partial class UC_Options : UserControl_Tab
+    public partial class SettingsPanel : UserControl
     {
-        public UC_Options()
+        public SettingsPanel()
         {
             InitializeComponent();
         }

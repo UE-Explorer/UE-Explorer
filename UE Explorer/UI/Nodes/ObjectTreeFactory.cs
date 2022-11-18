@@ -140,7 +140,7 @@ namespace UEExplorer.UI.Nodes
             string name = Path.GetFileNameWithoutExtension(packageReference.FilePath);
             var node = new TreeNode(name)
             {
-                Name = name, ImageKey = imageKey, SelectedImageKey = imageKey, Tag = packageReference,
+                Name = packageReference.FilePath, ImageKey = imageKey, SelectedImageKey = imageKey, Tag = packageReference,
             };
             return node;
         }

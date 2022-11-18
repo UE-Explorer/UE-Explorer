@@ -168,8 +168,8 @@ namespace UEExplorer.UI.Nodes
         public static bool BelongsWithinItem(UImportTableItem imp, UObjectTableItem item) =>
             imp.Outer == item;
 
-        public IEnumerable<TreeNode> Visit(UnrealPackage linker) =>
-            linker.Exports
+        [CanBeNull] public IEnumerable<TreeNode> Visit(UnrealPackage linker) =>
+            linker.Exports?
                 .Where(IsTopItem)
                 .SkipWhile(exp => _NodeFilterDelegate(exp))
                 .OrderBy(exp => _NodeSorterDelegate(exp))
@@ -183,14 +183,14 @@ namespace UEExplorer.UI.Nodes
                 .Select(ObjectTreeFactory.CreateNode);
 
         public IEnumerable<TreeNode> Visit(UImportTableItem item) =>
-            item.Owner.Imports
+            item.Owner.Imports?
                 .Where(imp => BelongsWithinItem(imp, item))
                 .SkipWhile(imp => _NodeFilterDelegate(imp))
                 .OrderBy(imp => _NodeSorterDelegate(imp))
                 .Select(ObjectTreeFactory.CreateNode);
 
         public IEnumerable<TreeNode> Visit(UExportTableItem item) =>
-            item.Owner.Exports
+            item.Owner.Exports?
                 .Where(exp => BelongsWithinItem(exp, item))
                 .SkipWhile(exp => _NodeFilterDelegate(exp))
                 .OrderBy(exp => _NodeSorterDelegate(exp))

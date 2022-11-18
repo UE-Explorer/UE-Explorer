@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace UEExplorer.UI.Tabs
 {
     [ComVisible(false)]
-    public partial class UC_ModExplorer
+    public partial class UC_ModExplorer : UserControl
     {
         public UC_ModExplorer()
         {
@@ -16,11 +16,7 @@ namespace UEExplorer.UI.Tabs
 
         private void ToolStripButton1_Click(object sender, EventArgs e)
         {
-            var sfd = new SaveFileDialog
-            {
-                Title = "Export File",
-                FileName = Label_ObjectName.Text
-            };
+            var sfd = new SaveFileDialog { Title = "Export File", FileName = Label_ObjectName.Text };
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
