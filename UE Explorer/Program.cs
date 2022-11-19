@@ -62,6 +62,20 @@ namespace UEExplorer
             }
         }
 
+        public static void PushRecentOpenedFile(string filePath)
+        {
+            var filePaths = UserHistory.Default.RecentFiles;
+            // If we have one already, we'd like to move it to the most recent.
+            filePaths.Remove(filePath);
+            filePaths.Add(filePath);
+            if (filePaths.Count > 15)
+            {
+                filePaths.RemoveAt(0);
+            }
+
+            UserHistory.Default.Save();
+        }
+
         public static IEnumerable<string> ParseArguments(IEnumerable<string> args)
         {
             IList<string> options = new List<string>();

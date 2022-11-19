@@ -39,7 +39,7 @@ namespace UEExplorer.UI.ActionPanels
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBoxFilter = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.packageToolsStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findInDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findInClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -153,7 +153,7 @@ namespace UEExplorer.UI.ActionPanels
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemOpen,
             this.toolStripTextBoxFilter,
-            this.toolStripMenuItem1,
+            this.packageToolsStripMenuItem,
             this.orderByToolStripComboBox});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -179,16 +179,16 @@ namespace UEExplorer.UI.ActionPanels
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.packageToolsStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.packageToolsStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.findInDocumentToolStripMenuItem,
             this.findInClassesToolStripMenuItem,
             this.exportClassesToolStripMenuItem});
-            this.toolStripMenuItem1.Image = global::UEExplorer.Properties.Resources.Code;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(79, 23);
-            this.toolStripMenuItem1.Text = "Package";
-            this.toolStripMenuItem1.DropDownOpening += new System.EventHandler(this.toolStripMenuItem1_DropDownOpening);
+            this.packageToolsStripMenuItem.Image = global::UEExplorer.Properties.Resources.Code;
+            this.packageToolsStripMenuItem.Name = "packageToolsStripMenuItem";
+            this.packageToolsStripMenuItem.Size = new System.Drawing.Size(79, 23);
+            this.packageToolsStripMenuItem.Text = "Package";
+            this.packageToolsStripMenuItem.DropDownOpening += new System.EventHandler(this.packageToolsStripMenuItem_DropDownOpening);
             // 
             // findInDocumentToolStripMenuItem
             // 
@@ -273,7 +273,7 @@ namespace UEExplorer.UI.ActionPanels
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxFilter;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpen;
         private ToolStripMenuItem toolStripMenuItemReload;
-        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem packageToolsStripMenuItem;
         private ToolStripMenuItem findInClassesToolStripMenuItem;
         private ToolStripMenuItem exportClassesToolStripMenuItem;
         private ToolStripMenuItem exportClassesToolStripMenuItem1;

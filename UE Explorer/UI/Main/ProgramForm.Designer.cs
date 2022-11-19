@@ -263,7 +263,7 @@ namespace UEExplorer.UI.Main
             resources.ApplyResources(this.toolsMenuItem, "toolsMenuItem");
             this.toolsMenuItem.DropDownOpening += new System.EventHandler(this.ToolsToolStripMenuItem_DropDownOpening);
             // 
-            // menuItem13
+            // extentionsMenuitem
             // 
             resources.ApplyResources(this.extentionsMenuitem, "extentionsMenuitem");
             this.extentionsMenuitem.Name = "extentionsMenuitem";
@@ -380,9 +380,10 @@ namespace UEExplorer.UI.Main
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             // 
-            // appWorkspace
+            // dockSpace
             // 
             resources.ApplyResources(this.dockSpace, "dockSpace");
+            this.dockSpace.FilePath = null;
             this.dockSpace.Name = "dockSpace";
             // 
             // ProgramForm

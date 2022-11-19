@@ -135,7 +135,7 @@
     <value>False</value>
   </data>
   <data name="progressStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>778, 17</value>
+    <value>668, 17</value>
   </data>
   <data name="progressStatusLabel.Text" xml:space="preserve">
     <value>Ready</value>
@@ -195,7 +195,7 @@
     <value>0, 578</value>
   </data>
   <data name="mainStatusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>900, 22</value>
+    <value>923, 22</value>
   </data>
   <data name="mainStatusStrip.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -244,7 +244,7 @@
     <value>Ctrl+O</value>
   </data>
   <data name="openFileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="openFileMenuItem.Text" xml:space="preserve">
     <value>&amp;Open File...</value>
@@ -253,7 +253,7 @@
     <value>False</value>
   </data>
   <data name="menuItem12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="menuItem12.Text" xml:space="preserve">
     <value>&amp;Save File</value>
@@ -262,31 +262,31 @@
     <value>False</value>
   </data>
   <data name="separator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mostRecentMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="mostRecentMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mostRecentMenuItem.Text" xml:space="preserve">
     <value>Recent &amp;Files</value>
   </data>
   <data name="separator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="menuItem10.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Alt+F4</value>
   </data>
   <data name="menuItem10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="menuItem10.Text" xml:space="preserve">
     <value>E&amp;xit</value>
   </data>
   <data name="fileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+    <value>37, 24</value>
   </data>
   <data name="fileMenuItem.Text" xml:space="preserve">
     <value>&amp;File</value>
@@ -307,7 +307,7 @@
     <value>False</value>
   </data>
   <data name="editMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
+    <value>39, 24</value>
   </data>
   <data name="editMenuItem.Text" xml:space="preserve">
     <value>Edit</value>
@@ -355,7 +355,7 @@
     <value>Navigate &amp;Forward</value>
   </data>
   <data name="viewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+    <value>44, 24</value>
   </data>
   <data name="viewToolStripMenuItem.Text" xml:space="preserve">
     <value>View</value>
@@ -388,7 +388,7 @@
     <value>Registry Features Enabled</value>
   </data>
   <data name="toolsMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
+    <value>46, 24</value>
   </data>
   <data name="toolsMenuItem.Text" xml:space="preserve">
     <value>&amp;Tools</value>
@@ -442,7 +442,7 @@
     <value>&amp;About UE Explorer...</value>
   </data>
   <data name="helpMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+    <value>44, 24</value>
   </data>
   <data name="helpMenuItem.Text" xml:space="preserve">
     <value>&amp;Help</value>
@@ -450,8 +450,11 @@
   <data name="mainMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="mainMenuStrip.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
   <data name="mainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>900, 24</value>
+    <value>923, 24</value>
   </data>
   <data name="mainMenuStrip.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -480,11 +483,8 @@
   <data name="dockSpace.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 27</value>
   </data>
-  <data name="dockSpace.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="dockSpace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>900, 548</value>
+    <value>923, 548</value>
   </data>
   <data name="dockSpace.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -511,7 +511,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>900, 600</value>
+    <value>923, 600</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

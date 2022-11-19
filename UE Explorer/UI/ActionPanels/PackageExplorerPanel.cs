@@ -466,10 +466,11 @@ namespace UEExplorer.UI.ActionPanels
             }
         }
 
-        private void toolStripMenuItem1_DropDownOpening(object sender, EventArgs e)
+        private void packageToolsStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             var linkers = _PackageManager.EnumeratePackages()
                 .Select(package => package.Linker)
+                .Where(linker => linker?.Exports != null)
                 .ToList();
 
             bool hasAnyClasses = linkers.Any(linker => linker.Exports.Any(exp => exp.ClassIndex == 0));
@@ -504,6 +505,7 @@ namespace UEExplorer.UI.ActionPanels
                     continue;
                 }
 
+                Program.PushRecentOpenedFile(filePath);
                 BeginInvoke((MethodInvoker)(() => _PackageManager.RegisterPackage(filePath)));
             }
         }

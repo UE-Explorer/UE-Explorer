@@ -159,24 +159,9 @@ namespace UEExplorer.UI.Main
             InitializeExtensions();
         }
 
-        private void PushRecentOpenedFile(string filePath)
-        {
-            var filePaths = UserHistory.Default.RecentFiles;
-            // If we have one already, we'd like to move it to the most recent.
-            filePaths.Remove(filePath);
-            filePaths.Add(filePath);
-            if (filePaths.Count > 15)
-            {
-                filePaths.RemoveAt(0);
-            }
-
-            mostRecentMenuItem.Enabled = true;
-            UserHistory.Default.Save();
-        }
-
         public void LoadFromFile(string filePath)
         {
-            PushRecentOpenedFile(filePath);
+            Program.PushRecentOpenedFile(filePath);
             switch (Path.GetExtension(filePath))
             {
                 default:
