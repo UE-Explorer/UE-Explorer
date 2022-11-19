@@ -372,6 +372,8 @@ namespace UEExplorer.UI.ActionPanels
                 var node = objectContextMenu.Items.Add(text);
                 node.Tag = action;
             }
+
+            e.Cancel = objectContextMenu.Items.Count == 0;
         }
 
         private void objectContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -388,10 +390,10 @@ namespace UEExplorer.UI.ActionPanels
 
         private void TreeViewPackages_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Button != MouseButtons.Right)
-            {
-                return;
-            }
+            //if (e.Button != MouseButtons.Right)
+            //{
+            //    return;
+            //}
 
             TreeViewPackages.SelectedNode = e.Node;
         }
@@ -507,6 +509,29 @@ namespace UEExplorer.UI.ActionPanels
 
                 Program.PushRecentOpenedFile(filePath);
                 BeginInvoke((MethodInvoker)(() => _PackageManager.RegisterPackage(filePath)));
+            }
+        }
+
+        private void addPackageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var ofd = new OpenFileDialog
+                   {
+                       Filter = UnrealExtensions.FormatUnrealExtensionsAsFilter(),
+                       FilterIndex = 1,
+                       Title = Resources.Open_File,
+                       Multiselect = true
+                   })
+            {
+                if (ofd.ShowDialog(this) != DialogResult.OK)
+                {
+                    return;
+                }
+
+                foreach (string filePath in ofd.FileNames)
+                {
+                    Program.PushRecentOpenedFile(filePath);
+                    BeginInvoke((MethodInvoker)(() => _PackageManager.RegisterPackage(filePath)));
+                }
             }
         }
     }

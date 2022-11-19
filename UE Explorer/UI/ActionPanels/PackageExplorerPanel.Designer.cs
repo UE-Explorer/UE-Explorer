@@ -34,9 +34,8 @@ namespace UEExplorer.UI.ActionPanels
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PackageExplorerPanel));
             this.TreeViewPackages = new System.Windows.Forms.TreeView();
             this.objectContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItemReload = new System.Windows.Forms.ToolStripMenuItem();
             this.VSIcons = new System.Windows.Forms.ImageList(this.components);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.explorerToolsMenuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBoxFilter = new System.Windows.Forms.ToolStripTextBox();
             this.packageToolsStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,8 +45,10 @@ namespace UEExplorer.UI.ActionPanels
             this.exportClassesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exportScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderByToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.objectContextMenu.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.explorerContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addPackageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.explorerToolsMenuStrip.SuspendLayout();
+            this.explorerContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // TreeViewPackages
@@ -79,22 +80,11 @@ namespace UEExplorer.UI.ActionPanels
             // 
             // objectContextMenu
             // 
-            this.objectContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemReload});
             this.objectContextMenu.Name = "objectContextMenu";
             this.objectContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.objectContextMenu.Size = new System.Drawing.Size(111, 26);
+            this.objectContextMenu.Size = new System.Drawing.Size(61, 4);
             this.objectContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.objectContextMenu_Opening);
             this.objectContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.objectContextMenu_ItemClicked);
-            // 
-            // toolStripMenuItemReload
-            // 
-            this.toolStripMenuItemReload.Image = global::UEExplorer.Properties.Resources.Refresh;
-            this.toolStripMenuItemReload.Name = "toolStripMenuItemReload";
-            this.toolStripMenuItemReload.Size = new System.Drawing.Size(110, 22);
-            this.toolStripMenuItemReload.Text = "Reload";
-            this.toolStripMenuItemReload.Visible = false;
-            this.toolStripMenuItemReload.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMenuItemReload_DropDownItemClicked);
             // 
             // VSIcons
             // 
@@ -147,20 +137,19 @@ namespace UEExplorer.UI.ActionPanels
             this.VSIcons.Images.SetKeyName(44, "UTextBuffer");
             this.VSIcons.Images.SetKeyName(45, "UnrealPackageFile");
             // 
-            // menuStrip1
+            // explorerToolsMenuStrip
             // 
-            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.explorerToolsMenuStrip.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.explorerToolsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemOpen,
             this.toolStripTextBoxFilter,
             this.packageToolsStripMenuItem,
             this.orderByToolStripComboBox});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(502, 27);
-            this.menuStrip1.TabIndex = 22;
-            this.menuStrip1.Text = "menuStrip1";
+            this.explorerToolsMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.explorerToolsMenuStrip.Name = "explorerToolsMenuStrip";
+            this.explorerToolsMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.explorerToolsMenuStrip.Size = new System.Drawing.Size(502, 27);
+            this.explorerToolsMenuStrip.TabIndex = 22;
             // 
             // toolStripMenuItemOpen
             // 
@@ -177,7 +166,7 @@ namespace UEExplorer.UI.ActionPanels
             this.toolStripTextBoxFilter.Size = new System.Drawing.Size(100, 23);
             this.toolStripTextBoxFilter.TextChanged += new System.EventHandler(this.toolStripTextBoxFilter_TextChanged);
             // 
-            // toolStripMenuItem1
+            // packageToolsStripMenuItem
             // 
             this.packageToolsStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.packageToolsStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -248,17 +237,34 @@ namespace UEExplorer.UI.ActionPanels
             this.orderByToolStripComboBox.Size = new System.Drawing.Size(121, 23);
             this.orderByToolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.orderByToolStripComboBox_SelectedIndexChanged);
             // 
+            // explorerContextMenu
+            // 
+            this.explorerContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addPackageToolStripMenuItem});
+            this.explorerContextMenu.Name = "explorerContextMenuStrip";
+            this.explorerContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.explorerContextMenu.Size = new System.Drawing.Size(200, 26);
+            // 
+            // addPackageToolStripMenuItem
+            // 
+            this.addPackageToolStripMenuItem.Image = global::UEExplorer.Properties.Resources.Package;
+            this.addPackageToolStripMenuItem.Name = "addPackageToolStripMenuItem";
+            this.addPackageToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.addPackageToolStripMenuItem.Text = "Load Package From File";
+            this.addPackageToolStripMenuItem.Click += new System.EventHandler(this.addPackageToolStripMenuItem_Click);
+            // 
             // PackageExplorerPanel
             // 
             this.AllowDrop = true;
-            this.Controls.Add(this.menuStrip1);
+            this.ContextMenuStrip = this.explorerContextMenu;
+            this.Controls.Add(this.explorerToolsMenuStrip);
             this.Controls.Add(this.TreeViewPackages);
             this.Name = "PackageExplorerPanel";
             this.Size = new System.Drawing.Size(502, 462);
             this.Load += new System.EventHandler(this.PackageExplorerPanel_Load);
-            this.objectContextMenu.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.explorerToolsMenuStrip.ResumeLayout(false);
+            this.explorerToolsMenuStrip.PerformLayout();
+            this.explorerContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,10 +275,9 @@ namespace UEExplorer.UI.ActionPanels
         private TreeView TreeViewPackages;
         private System.Windows.Forms.ImageList VSIcons;
         private ContextMenuStrip objectContextMenu;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip explorerToolsMenuStrip;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxFilter;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpen;
-        private ToolStripMenuItem toolStripMenuItemReload;
         private ToolStripMenuItem packageToolsStripMenuItem;
         private ToolStripMenuItem findInClassesToolStripMenuItem;
         private ToolStripMenuItem exportClassesToolStripMenuItem;
@@ -280,5 +285,7 @@ namespace UEExplorer.UI.ActionPanels
         private ToolStripMenuItem exportScriptsToolStripMenuItem;
         private ToolStripMenuItem findInDocumentToolStripMenuItem;
         private ToolStripComboBox orderByToolStripComboBox;
+        private ContextMenuStrip explorerContextMenu;
+        private ToolStripMenuItem addPackageToolStripMenuItem;
     }
 }
