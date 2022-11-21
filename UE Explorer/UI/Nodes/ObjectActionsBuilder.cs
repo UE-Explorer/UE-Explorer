@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UEExplorer.Framework;
 using UEExplorer.Properties;
 using UELib.Core;

@@ -70,7 +70,6 @@ namespace UEExplorer.UI.ActionPanels
             this.TreeViewPackages.Location = new System.Drawing.Point(0, 26);
             this.TreeViewPackages.Name = "TreeViewPackages";
             this.TreeViewPackages.SelectedImageIndex = 0;
-            this.TreeViewPackages.ShowNodeToolTips = true;
             this.TreeViewPackages.Size = new System.Drawing.Size(502, 436);
             this.TreeViewPackages.TabIndex = 21;
             this.TreeViewPackages.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewPackages_BeforeExpand);

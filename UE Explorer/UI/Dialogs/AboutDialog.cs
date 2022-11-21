@@ -32,10 +32,10 @@ namespace UEExplorer.UI.Dialogs
         private void AboutForm_Load(object sender, EventArgs e)
         {
             Text += $" {Application.ProductName}";
-            label4.Text = Application.ProductName;
+            ProductNameLabel.Text = Application.ProductName;
             VersionLabel.Text = string.Format(Resources.Version, ProgramForm.Version);
             CopyrightLabel.Text = AssemblyCopyright;
-            LinkLabel.Text = Program.WebsiteUrl;
+            DonateLink.Text = Program.DonateUrl;
         }
 
         private void AboutForm_Shown(object sender, EventArgs e)
@@ -56,13 +56,11 @@ namespace UEExplorer.UI.Dialogs
             DonatorsGrid.AutoGenerateColumns = true;
             DonatorsGrid.DataSource = DonatorsSet;
             DonatorsGrid.DataMember = "Donators";
-
-            DonateLink.Text = Program.DonateUrl;
         }
 
         private void LicenseLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start($"file:///{Path.Combine(Application.StartupPath, "license.html")}");
+            Process.Start($"file:///{Path.Combine(Application.StartupPath, "LICENSE-3RD-PARTY.html")}");
         }
     }
 }

@@ -366,7 +366,7 @@ namespace UEExplorer.UI.ActionPanels
             const int leftMargin = 8;
 
             // Cursor.Current.HotSpot
-            string newToolTipText = ObjectTreeFactory.GetTreeNodeToolTipText(e.Node);
+            string newToolTipText = ObjectToolTipTextBuilder.GetToolTipText(e.Node.Tag);
             treeToolTip.Show(newToolTipText,
                 this,
                 TreeViewPackages.Bounds.Left + e.Node.Bounds.Right + leftMargin,

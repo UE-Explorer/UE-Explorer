@@ -15,11 +15,11 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
     <ApplicationIcon>unrealfile.ico</ApplicationIcon>
     <ManifestCertificateThumbprint>BFCFD835477ADF3703D9CA79299DB728C4FBFE28</ManifestCertificateThumbprint>
     <ManifestKeyFile>UE Explorer_TemporaryKey.pfx</ManifestKeyFile>
-    <GenerateManifests>false</GenerateManifests>
+    <GenerateManifests>true</GenerateManifests>
     <SignManifests>false</SignManifests>
     <StartupObject>UEExplorer.Program</StartupObject>
     <SignAssembly>false</SignAssembly>
@@ -27,8 +27,8 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
@@ -41,17 +41,16 @@
     <ProductName>UE Explorer</ProductName>
     <PublisherName>Eliot van Uytfanghe</PublisherName>
     <MinimumRequiredVersion>1.0.0.1</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <AutorunEnabled>true</AutorunEnabled>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -195,6 +194,8 @@
     </Compile>
     <Compile Include="UI\ContextInfo.cs" />
     <Compile Include="UI\Nodes\ObjectActionsBuilder.cs" />
+    <Compile Include="UI\ObjectTextBuilder.cs" />
+    <Compile Include="UI\ObjectToolTipTextBuilder.cs" />
     <Compile Include="UI\Pages\StartPage.cs" />
     <Compile Include="UI\Panels\WebViewPanel.cs">
       <SubType>UserControl</SubType>
@@ -229,12 +230,6 @@
     <Compile Include="UI\Dialogs\FindDialog.Designer.cs">
       <DependentUpon>FindDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\PropertiesDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Dialogs\PropertiesDialog.Designer.cs">
-      <DependentUpon>PropertiesDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Dialogs\SendDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -265,7 +260,7 @@
     </Compile>
     <Compile Include="UI\Nodes\ObjectImageKeySelector.cs" />
     <Compile Include="UI\Nodes\ObjectTreeFactory.cs" />
-    <Compile Include="UI\Nodes\ObjectVisitor.cs" />
+    <Compile Include="UI\ObjectVisitor.cs" />
     <Compile Include="UI\Nodes\ObjectTreeBuilder.cs" />
     <Compile Include="UI\ActionPanels\BinaryDataFieldsPanel.cs">
       <SubType>UserControl</SubType>
@@ -308,12 +303,6 @@
     <Compile Include="UI\Panels\SettingsPanel.Designer.cs">
       <DependentUpon>SettingsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Tabs\UC_ModExplorer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Tabs\UC_ModExplorer.Designer.cs">
-      <DependentUpon>UC_ModExplorer.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Forms\HexViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -331,12 +320,6 @@
     </Compile>
     <Compile Include="UI\Forms\ColorGeneratorForm.Designer.cs">
       <DependentUpon>ColorGeneratorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Tabs\UC_CacheExtractor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Tabs\UC_CacheExtractor.Designer.cs">
-      <DependentUpon>UC_CacheExtractor.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\HexViewerControl.cs">
       <SubType>UserControl</SubType>
@@ -383,9 +366,6 @@
       <DependentUpon>FindDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Dialogs\PropertiesDialog.nl.resx">
-      <DependentUpon>PropertiesDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ColorGeneratorForm.nl.resx">
       <DependentUpon>ColorGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -400,9 +380,6 @@
     <EmbeddedResource Include="UI\Forms\HexViewerForm.nl.resx">
       <DependentUpon>HexViewerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Dialogs\PropertiesDialog.resx">
-      <DependentUpon>PropertiesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\SendDialog.resx">
       <DependentUpon>SendDialog.cs</DependentUpon>
@@ -445,9 +422,6 @@
       <DependentUpon>SettingsPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Tabs\UC_ModExplorer.resx">
-      <DependentUpon>UC_ModExplorer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\HexViewerForm.resx">
       <DependentUpon>HexViewerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -470,9 +444,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Tabs\UC_CacheExtractor.resx">
-      <DependentUpon>UC_CacheExtractor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\HexViewerControl.resx">
       <DependentUpon>HexViewerControl.cs</DependentUpon>
@@ -514,6 +485,9 @@
     <Content Include="Native Tables\NativesTableList_Lemony Snicket%27s A Series of Unfortunate Events.NTL">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="LICENSE.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Native Tables\NativesTableList_X-COM_Enforcer.NTL" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TextSearchHelpers.DocumentResult.datasource" />
@@ -625,10 +599,9 @@
     </FileAssociation>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="license.html">
+    <Content Include="LICENSE-3RD-PARTY.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
@@ -642,7 +615,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

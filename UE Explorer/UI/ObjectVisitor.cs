@@ -1,6 +1,6 @@
 ﻿using UELib;
 
-namespace UEExplorer.UI.Nodes
+namespace UEExplorer.UI
 {
     public abstract class ObjectVisitor<TResult> : IVisitor<TResult>
     {

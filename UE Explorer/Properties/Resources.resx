@@ -446,9 +446,6 @@ You can download the tool from http://www.gildor.org/downloads or press OK to go
   <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
     <value>You cannot import binary files with an unequal length!</value>
   </data>
-  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="WavePlayerPage_WavePlayerPage_WavePlayer_Title" xml:space="preserve">
     <value>Wave Player</value>
   </data>
