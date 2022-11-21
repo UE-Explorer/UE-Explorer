@@ -37,10 +37,6 @@ namespace UEExplorer.UI.Tabs
             InitializeComponent();
 
             contextService.ContextChanged += ContextServiceOnContextChanged;
-
-            packageManager.PackageRegistered += PackageManagerOnPackageRegistered;
-            packageManager.PackageLoaded += PackageManagerOnPackageLoaded;
-            packageManager.PackageInitialized += PackageManagerOnPackageInitialized;
         }
 
         public string FilePath { get; set; }
@@ -59,6 +55,10 @@ namespace UEExplorer.UI.Tabs
                 {
                     kryptonDockingManagerMain.LoadConfigFromFile(Program.DockingConfigPath);
                 }
+
+                packageManager.PackageRegistered += PackageManagerOnPackageRegistered;
+                packageManager.PackageLoaded += PackageManagerOnPackageLoaded;
+                packageManager.PackageInitialized += PackageManagerOnPackageInitialized;
             }
         }
 
@@ -89,7 +89,17 @@ namespace UEExplorer.UI.Tabs
                 {
                     UnrealConfig.SuppressSignature = true;
                 }
+                else
+                {
+                    return;
+                }
             }
+
+            if (UserHistory.Default.OpenFiles == null)
+            {
+                UserHistory.Default.OpenFiles = new PackageCollection();
+            }
+            UserHistory.Default.OpenFiles.Add(e.Package);
 
             if (Program.Options.bForceLicenseeMode)
             {
@@ -149,7 +159,8 @@ namespace UEExplorer.UI.Tabs
             var packageReference = e.Package;
             Debug.Assert(packageReference.Linker != null, "packageReference.Linker != null");
 
-            ProgressStatus.SetMaxProgress(packageReference.Linker.Exports.Count * 2);
+            ProgressStatus.ResetValue();
+            ProgressStatus.SetMaxProgress(packageReference.Linker.Objects.Count + packageReference.Linker.Exports.Count);
             packageReference.Linker.NotifyPackageEvent += OnNotifyPackageEvent;
 
             try
@@ -567,6 +578,11 @@ namespace UEExplorer.UI.Tabs
 
         public void AddPackage(string filePath) =>
             BeginInvoke((MethodInvoker)(() => packageManager.RegisterPackage(filePath)));
+
+        public void AddPackage(PackageReference packageReference)
+        {
+            BeginInvoke((MethodInvoker)(() => packageManager.RegisterPackage(packageReference)));
+        }
 
         public void AddPackageExplorer()
         {

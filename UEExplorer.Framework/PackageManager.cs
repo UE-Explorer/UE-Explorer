@@ -33,31 +33,21 @@ namespace UEExplorer.Framework
 
         public PackageReference RegisterPackage(string filePath)
         {
-            var packageReference = _Packages.Get(filePath);
-            if (packageReference != null)
+            var packageReference = new PackageReference(filePath, null);
+            if (_Packages.Add(packageReference))
             {
-                return packageReference;
+                PackageRegistered?.Invoke(this, new PackageEventArgs(packageReference));
             }
-
-            packageReference = new PackageReference(filePath, null);
-            _Packages.Add(packageReference);
-
-            PackageRegistered?.Invoke(this, new PackageEventArgs(packageReference));
 
             return packageReference;
         }
 
         public void RegisterPackage(PackageReference packageReference)
         {
-            var existingPackage = _Packages.Get(packageReference.FilePath);
-            if (existingPackage != null)
+            if (_Packages.Add(packageReference))
             {
-                return;
+                PackageRegistered?.Invoke(this, new PackageEventArgs(packageReference));
             }
-
-            _Packages.Add(packageReference);
-
-            PackageRegistered?.Invoke(this, new PackageEventArgs(packageReference));
         }
 
         public void LoadPackage(PackageReference packageReference)

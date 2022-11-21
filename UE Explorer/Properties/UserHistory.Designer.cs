@@ -12,7 +12,7 @@ namespace UEExplorer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     internal sealed partial class UserHistory : global::System.Configuration.ApplicationSettingsBase {
         
         private static UserHistory defaultInstance = ((UserHistory)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new UserHistory())));
@@ -26,14 +26,27 @@ namespace UEExplorer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsd=\"http://www.w3." +
-            "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">  <s" +
-            "tring /></ArrayOfString>")]
+            "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <s" +
+            "tring />\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection RecentFiles {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["RecentFiles"]));
             }
             set {
                 this["RecentFiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SettingsSerializeAs(global::System.Configuration.SettingsSerializeAs.Binary)]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public global::UEExplorer.Framework.PackageCollection OpenFiles {
+            get {
+                return ((global::UEExplorer.Framework.PackageCollection)(this["OpenFiles"]));
+            }
+            set {
+                this["OpenFiles"] = value;
             }
         }
     }

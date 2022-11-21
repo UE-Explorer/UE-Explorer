@@ -1,22 +1,19 @@
-﻿using System.Collections.ObjectModel;
-using UELib.Annotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace UEExplorer.Framework
 {
-    public class PackageCollection : Collection<PackageReference>
+    [Serializable]
+    public class PackageCollection : SortedSet<PackageReference>
     {
-        [CanBeNull]
-        public PackageReference Get(string filePath)
+        public PackageCollection()
         {
-            foreach (var item in Items)
-            {
-                if (item.FilePath == filePath)
-                {
-                    return item;
-                }
-            }
+        }
 
-            return null;
+        // We need this as public in order to expose it to the Xml serializer etc.
+        public PackageCollection(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
         }
     }
 }

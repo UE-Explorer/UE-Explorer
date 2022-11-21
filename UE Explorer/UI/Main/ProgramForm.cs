@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -30,10 +31,13 @@ namespace UEExplorer.UI.Main
 
         private void ProgramForm_Load(object sender, EventArgs e)
         {
-            InitializeConfig();
-            InitializeUI();
-            InitializeControls();
-            InitializeState();
+            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            {
+                InitializeConfig();
+                InitializeUI();
+                InitializeControls();
+                BeginInvoke((MethodInvoker)InitializeState);
+            }
         }
 
         private void InitializeControls()
@@ -64,6 +68,12 @@ namespace UEExplorer.UI.Main
             //{
             //    PerformActionByObjectPath(state.SearchObjectValue);
             //}
+
+            // Restore all open packages
+            if (UserHistory.Default.OpenFiles != null) foreach (var defaultOpenFile in UserHistory.Default.OpenFiles)
+            {
+                dockSpace.AddPackage(defaultOpenFile);
+            }
         }
 
         private void InitializeUI()
