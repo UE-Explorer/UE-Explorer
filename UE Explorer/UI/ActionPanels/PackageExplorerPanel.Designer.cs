@@ -47,6 +47,8 @@ namespace UEExplorer.UI.ActionPanels
             this.orderByToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.explorerContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addPackageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterTreeDelayTimer = new System.Windows.Forms.Timer(this.components);
+            this.treeToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.explorerToolsMenuStrip.SuspendLayout();
             this.explorerContextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -253,6 +255,16 @@ namespace UEExplorer.UI.ActionPanels
             this.addPackageToolStripMenuItem.Text = "Load Package From File";
             this.addPackageToolStripMenuItem.Click += new System.EventHandler(this.addPackageToolStripMenuItem_Click);
             // 
+            // filterTreeDelayTimer
+            // 
+            this.filterTreeDelayTimer.Interval = 350;
+            this.filterTreeDelayTimer.Tick += new System.EventHandler(this.filterTreeDelayTimer_Tick);
+            // 
+            // treeToolTip
+            // 
+            this.treeToolTip.AutomaticDelay = 50;
+            this.treeToolTip.UseFading = false;
+            // 
             // PackageExplorerPanel
             // 
             this.AllowDrop = true;
@@ -287,5 +299,7 @@ namespace UEExplorer.UI.ActionPanels
         private ToolStripComboBox orderByToolStripComboBox;
         private ContextMenuStrip explorerContextMenu;
         private ToolStripMenuItem addPackageToolStripMenuItem;
+        private Timer filterTreeDelayTimer;
+        private ToolTip treeToolTip;
     }
 }

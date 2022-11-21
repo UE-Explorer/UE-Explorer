@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using UEExplorer.Framework;
@@ -18,18 +17,15 @@ namespace UEExplorer.UI.ActionPanels
     public partial class PackageExplorerPanel : UserControl
     {
         private readonly ObjectActionsBuilder _ActionsBuilder = new ObjectActionsBuilder();
-
+        private readonly ContextProvider _ContextProvider;
+        private readonly ObjectTreeBuilder _ObjectTreeBuilder;
+        private readonly PackageManager _PackageManager;
+        
         private readonly Color _LoadedColor = Color.Black;
         private readonly Color _UnloadedColor = Color.DarkGray;
-        
-        private readonly ObjectTreeBuilder _ObjectTreeBuilder;
-        private readonly ContextProvider _ContextProvider;
-        private readonly PackageManager _PackageManager;
 
         private string _CurrentFilterText = string.Empty;
-
-        private Timer _FilterTextChangedTimer;
-
+        
         public PackageExplorerPanel(ContextProvider contextProvider, PackageManager packageManager)
         {
             InitializeComponent();
@@ -78,7 +74,7 @@ namespace UEExplorer.UI.ActionPanels
             //TreeViewPackages.SelectedNode = matchingNode;
         }
 
-        private TreeNode FindTaggedNode(object tag, TreeNodeCollection nodes)
+        private static TreeNode FindTaggedNode(object tag, TreeNodeCollection nodes)
         {
             foreach (TreeNode node in nodes)
             {
@@ -210,16 +206,13 @@ namespace UEExplorer.UI.ActionPanels
             var rootPackageNode = GetRootPackageNode(linker);
 
             TreeViewPackages.BeginUpdate();
-            
+
             if (linker.Summary.CompressedChunks != null &&
                 linker.Summary.CompressedChunks.Any())
             {
                 var dependenciesNode = new TreeNode("Chunks")
                 {
-                    Name = "Chunks",
-                    Tag = linker,
-                    ImageKey = "Chunks",
-                    SelectedImageKey = "Chunks"
+                    Name = "Chunks", Tag = linker, ImageKey = "Chunks", SelectedImageKey = "Chunks"
                 };
                 dependenciesNode.Nodes.Add(ObjectTreeFactory.DummyNodeKey, "Expandable");
                 rootPackageNode.Nodes.Add(dependenciesNode);
@@ -232,9 +225,12 @@ namespace UEExplorer.UI.ActionPanels
             }
 
             var nodes = _ObjectTreeBuilder.Visit(linker);
-            if (nodes != null) foreach (var treeNode in nodes)
+            if (nodes != null)
             {
-                rootPackageNode.Nodes.Add(treeNode);
+                foreach (var treeNode in nodes)
+                {
+                    rootPackageNode.Nodes.Add(treeNode);
+                }
             }
 
             TreeViewPackages.EndUpdate();
@@ -244,10 +240,7 @@ namespace UEExplorer.UI.ActionPanels
         {
             var dependenciesNode = new TreeNode("Imports")
             {
-                Name = "Dependencies",
-                Tag = linker,
-                ImageKey = "Diagram",
-                SelectedImageKey = "Diagram"
+                Name = "Dependencies", Tag = linker, ImageKey = "Diagram", SelectedImageKey = "Diagram"
             };
             dependenciesNode.Nodes.Add(ObjectTreeFactory.DummyNodeKey, "Expandable");
             return dependenciesNode;
@@ -328,35 +321,20 @@ namespace UEExplorer.UI.ActionPanels
                 return;
             }
 
-            _ContextProvider.OnContextChanged(this, new ContextChangedEventArgs(new ContextInfo(ContextActionKind.Auto, e.Node)));
+            _ContextProvider.OnContextChanged(this,
+                new ContextChangedEventArgs(new ContextInfo(ContextActionKind.Auto, e.Node)));
         }
 
         private void toolStripTextBoxFilter_TextChanged(object sender, EventArgs e)
         {
-            if (_FilterTextChangedTimer != null && _FilterTextChangedTimer.Enabled)
-            {
-                _FilterTextChangedTimer.Stop();
-                _FilterTextChangedTimer.Dispose();
-                _FilterTextChangedTimer = null;
-            }
-
-            if (_FilterTextChangedTimer != null)
-            {
-                return;
-            }
-
-            _FilterTextChangedTimer = new Timer();
-            _FilterTextChangedTimer.Interval = 350;
-            _FilterTextChangedTimer.Tick += DelayedTextChanges;
-            _FilterTextChangedTimer.Start();
+            filterTreeDelayTimer.Stop();
+            filterTreeDelayTimer.Start();
         }
 
-        private void DelayedTextChanges(object sender, EventArgs e)
+        private void filterTreeDelayTimer_Tick(object sender, EventArgs e)
         {
-            _FilterTextChangedTimer.Stop();
-            _FilterTextChangedTimer.Dispose();
-            _FilterTextChangedTimer = null;
-
+            filterTreeDelayTimer.Stop();
+            
             _CurrentFilterText = toolStripTextBoxFilter.Text.Trim();
             RebuildRootPackagesTree();
         }
@@ -379,24 +357,25 @@ namespace UEExplorer.UI.ActionPanels
         private void objectContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             var action = (ContextActionKind)e.ClickedItem.Tag;
-            _ContextProvider.OnContextChanged(this, new ContextChangedEventArgs(new ContextInfo(action, TreeViewPackages.SelectedNode)));
+            _ContextProvider.OnContextChanged(this,
+                new ContextChangedEventArgs(new ContextInfo(action, TreeViewPackages.SelectedNode)));
         }
 
         private void TreeViewPackages_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
         {
+            const int leftMargin = 8;
+
+            // Cursor.Current.HotSpot
             string newToolTipText = ObjectTreeFactory.GetTreeNodeToolTipText(e.Node);
-            e.Node.ToolTipText = newToolTipText;
+            treeToolTip.Show(newToolTipText,
+                this,
+                TreeViewPackages.Bounds.Left + e.Node.Bounds.Right + leftMargin,
+                TreeViewPackages.Bounds.Top + e.Node.Bounds.Top,
+                2500);
         }
 
-        private void TreeViewPackages_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            //if (e.Button != MouseButtons.Right)
-            //{
-            //    return;
-            //}
-
+        private void TreeViewPackages_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e) =>
             TreeViewPackages.SelectedNode = e.Node;
-        }
 
         private void toolStripMenuItemReload_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
