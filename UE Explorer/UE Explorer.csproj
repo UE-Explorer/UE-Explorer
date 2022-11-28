@@ -180,7 +180,6 @@
     <Compile Include="UI\Panels\WebViewPanel.Designer.cs">
       <DependentUpon>WebViewPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\StreamLocationFactory.cs" />
     <Compile Include="UI\Pages\BinaryPage.cs" />
     <Compile Include="UI\EditorUtil.cs" />
     <Compile Include="ExportHelpers.cs" />
@@ -467,7 +466,8 @@
     </None>
     <None Include="Native Tables\NativesTableList_X-COM_Enforcer.NTL" />
     <None Include="Properties\DataSources\TextSearchHelpers.DocumentResult.datasource" />
-    <None Include="Properties\DataSources\UELib.BinaryMetaData+BinaryField.datasource" />
+    <None Include="Properties\DataSources\UEExplorer.Framework.PackageCollection.datasource" />
+    <None Include="Properties\DataSources\UEExplorer.Framework.PackageReference.datasource" />    <None Include="Properties\DataSources\UELib.BinaryMetaData+BinaryField.datasource" />
     <None Include="Properties\DataSources\UELib.CompressedChunk.datasource" />
     <None Include="Properties\DataSources\UELib.UExportTableItem.datasource" />
     <None Include="Properties\DataSources\UELib.UGenerationTableItem.datasource" />

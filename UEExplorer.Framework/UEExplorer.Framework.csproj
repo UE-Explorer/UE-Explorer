@@ -39,7 +39,13 @@
     <Compile Include="PackageEventArgs.cs" />
     <Compile Include="PackageManager.cs" />
     <Compile Include="PackageReference.cs" />
+    <Compile Include="ProgramLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SourceLocation.cs" />
+    <Compile Include="StreamLocation.cs" />
+    <Compile Include="StreamLocationFactory.cs" />
+    <Compile Include="TextLocation.cs" />
+    <Compile Include="TextSegment.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj">

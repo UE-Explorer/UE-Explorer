@@ -40,5 +40,7 @@ namespace UEExplorer.UI
             ActiveContext = e.Context;
             ContextChanged?.Invoke(sender, e);
         }
+
+        public bool IsActiveTarget(object target) => ActiveContext?.Target == target;
     }
 }

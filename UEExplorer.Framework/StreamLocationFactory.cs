@@ -1,6 +1,6 @@
 ﻿using UELib;
 
-namespace UEExplorer.UI
+namespace UEExplorer.Framework
 {
     public static class StreamLocationFactory
     {

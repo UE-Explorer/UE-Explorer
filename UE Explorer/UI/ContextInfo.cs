@@ -1,45 +1,32 @@
-﻿namespace UEExplorer.UI
+﻿using UEExplorer.Framework;
+
+namespace UEExplorer.UI
 {
     public class ContextInfo
     {
         public readonly ContextActionKind ActionKind;
-        public readonly object Target;
         public readonly ProgramLocation Location;
+        public readonly object Target;
 
         public ContextInfo(ContextActionKind actionKind, object target)
         {
             ActionKind = actionKind;
             Target = target;
-            Location = new ProgramLocation(new StreamLocation(null, -1));
+            Location = new ProgramLocation(SourceLocation.Empty, StreamLocation.Empty);
         }
 
-        public ContextInfo(ContextActionKind actionKind, object target, StreamLocation location)
+        public ContextInfo(ContextActionKind actionKind, object target, in SourceLocation location)
         {
             ActionKind = actionKind;
             Target = target;
-            Location = new ProgramLocation(location);
+            Location = new ProgramLocation(location, StreamLocation.Empty);
         }
-    }
 
-    public struct ProgramLocation
-    {
-        public readonly StreamLocation StreamLocation;
-
-        public ProgramLocation(StreamLocation streamLocation)
+        public ContextInfo(ContextActionKind actionKind, object target, in StreamLocation location)
         {
-            StreamLocation = streamLocation;
-        }
-    }
-
-    public struct StreamLocation
-    {
-        public object Source;
-        public readonly long Position;
-
-        public StreamLocation(object source, long position)
-        {
-            Source = source;
-            Position = position;
+            ActionKind = actionKind;
+            Target = target;
+            Location = new ProgramLocation(SourceLocation.Empty, location);
         }
     }
 }

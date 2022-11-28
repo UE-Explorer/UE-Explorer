@@ -3,13 +3,12 @@
     public enum ContextActionKind
     {
         Action,
+        Location,
 
         /// <summary>
         /// Will use one of the below actions depending on the node's case.
         /// </summary>
         Auto,
-        
-        Location,
         
         Decompile,
         DecompileExternal,

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.IO;
 using UELib;
 using UELib.Annotations;
 
@@ -20,6 +22,12 @@ namespace UEExplorer.Framework
 
         [field: NonSerialized] [CanBeNull] public UnrealPackage Linker { get; internal set; }
 
+        [DisplayName("Path")]
+        public string ShortFilePath => Path.Combine(
+            //"...",
+            Path.GetDirectoryName(FilePath) ?? string.Empty,
+            Path.GetFileName(FilePath));
+
         public int CompareTo(PackageReference other) => other.FilePath.Equals(FilePath)
             ? 0
             : RegisterDate.CompareTo(other.RegisterDate);
@@ -29,5 +37,7 @@ namespace UEExplorer.Framework
         public bool IsActive() => Linker != null;
 
         public override int GetHashCode() => FilePath.GetHashCode();
+
+        public override string ToString() => ShortFilePath;
     }
 }
