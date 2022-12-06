@@ -1304,21 +1304,11 @@ namespace UEExplorer.UI.Tabs
             PerformNodeAction( TreeView_Content.SelectedNode, e.ClickedItem.Name );
         }
 
-        private static string LegacyFormatTokenHeader( UStruct.UByteCodeDecompiler.Token token, bool acronymizeName = true )
+        private static string LegacyFormatTokenHeader( UStruct.UByteCodeDecompiler.Token token )
         {
-            var name = token.GetType().Name;
-            if( !acronymizeName ) 
-                return String.Format( "{0}({1}/{2})", name, token.Size, token.StorageSize );
-
-            name = String.Concat( name.Substring( 0, name.Length - 5 ).Select(
-                c => Char.IsUpper( c ) ? c.ToString( CultureInfo.InvariantCulture ) : String.Empty
-                ) );
-
-            if( token is UStruct.UByteCodeDecompiler.CastToken )
-            {
-                name = "C" + name;
-            }
-            return String.Format( "{0}({1}/{2})", name, token.Size, token.StorageSize );
+            string name = token.GetType().Name;
+            string abbrName = string.Concat(name.Where(char.IsUpper));
+            return $"{abbrName}({token.Size}/{token.StorageSize})";
         }
 
         private static string _DisassembleTokensTemplate;
@@ -1351,7 +1341,7 @@ namespace UEExplorer.UI.Tabs
                 container.Package.Stream.Position = container.ExportTable.SerialOffset + container.ScriptOffset + token.StoragePosition;
                 container.Package.Stream.Read( buffer, 0, buffer.Length );
 
-                var header = LegacyFormatTokenHeader( token, false );
+                var header = LegacyFormatTokenHeader( token );
                 var bytes = BitConverter.ToString( buffer ).Replace( '-', ' ' );
 
                 content.Append(String.Format( _DisassembleTokensTemplate.Replace( "%INDENTATION%", UDecompilingState.Tabs ), 
@@ -1611,10 +1601,11 @@ namespace UEExplorer.UI.Tabs
                             var content = new StringBuilder(codeDec.DeserializedTokens.Count);
                             while ( codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count )
                             {
+                                string output;
+                                var breakOut = false;
+
                                 var t = codeDec.NextToken;
                                 int orgIndex = codeDec.CurrentTokenIndex;
-                                string output;
-                                bool breakOut = false;
                                 try
                                 {
                                     output = t.Decompile();
@@ -1626,16 +1617,15 @@ namespace UEExplorer.UI.Tabs
                                 }
 
                                 string chain = LegacyFormatTokenHeader( t );
-                                int inlinedTokens = codeDec.CurrentTokenIndex - orgIndex;
-                                if( inlinedTokens > 0 )
+                                int endTokenIndex = codeDec.CurrentTokenIndex;
+                                if( endTokenIndex < codeDec.DeserializedTokens.Count ) // sanity check
                                 {
-                                    ++ orgIndex;
-                                    for( int i = 0; i < inlinedTokens; ++ i )
+                                    for( int i = orgIndex + 1; i < endTokenIndex; ++ i )
                                     {
-                                        chain += " -> " + LegacyFormatTokenHeader( codeDec.DeserializedTokens[orgIndex + i] );
+                                        chain += " -> " + LegacyFormatTokenHeader( codeDec.DeserializedTokens[i] );
                                     }
                                 }
-
+                                
                                 var buffer = new byte[t.StorageSize];
                                 _UnrealPackage.Stream.Position = unStruct.ExportTable.SerialOffset + unStruct.ScriptOffset + t.StoragePosition;
                                 _UnrealPackage.Stream.Read( buffer, 0, buffer.Length );
