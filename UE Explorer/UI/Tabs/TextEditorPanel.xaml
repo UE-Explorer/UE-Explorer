@@ -1,19 +1,29 @@
 ﻿<UserControl x:Class="UEExplorer.UI.Tabs.TextEditorPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="426" d:DesignWidth="514" xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit">
-		<avalonedit:TextEditor Name="textEditor" ShowLineNumbers="True" IsReadOnly="True" FontSize="14" FontFamily="Courier New" FontWeight="Normal" FontStyle="Normal" Grid.RowSpan="5" LineNumbersForeground="DarkCyan">
-			<avalonedit:TextEditor.ContextMenu>
-				<ContextMenu Name="contextMenu">	
-				<MenuItem Header="Copy" Name="copy"/>
-                <MenuItem Header="Search in document" Name="searchDocument"/>
-                <MenuItem Header="Search in classes" Name="searchPackage"/>
-                <MenuItem Header="Search as object" Name="searchObject"/>
-                <MenuItem Header="Search UnrealWiki" Name="searchWiki"/>
-			    </ContextMenu>
-			</avalonedit:TextEditor.ContextMenu>
-		</avalonedit:TextEditor>
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:avalonedit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
+             xmlns:folding="clr-namespace:ICSharpCode.AvalonEdit.Folding;assembly=ICSharpCode.AvalonEdit"
+             mc:Ignorable="d"
+             d:DesignHeight="426" d:DesignWidth="514">
+    <avalonedit:TextEditor Name="TextEditor" ShowLineNumbers="True" IsReadOnly="True"
+                           FontFamily="Consolas" FontSize="10pt"
+                           Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}"
+                           Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}"
+                           folding:FoldingMargin.FoldingMarkerBackgroundBrush="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                           folding:FoldingMargin.SelectedFoldingMarkerBackgroundBrush="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                           folding:FoldingMargin.FoldingMarkerBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                           folding:FoldingMargin.SelectedFoldingMarkerBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                           Padding="4,4,4,4">
+        <avalonedit:TextEditor.ContextMenu>
+            <ContextMenu Name="contextMenu">
+                <MenuItem Header="Copy" Name="copy" />
+                <MenuItem Header="Search in document" Name="searchDocument" />
+                <MenuItem Header="Search in classes" Name="searchPackage" />
+                <MenuItem Header="Search as object" Name="searchObject" />
+                <MenuItem Header="Search UnrealWiki" Name="searchWiki" />
+            </ContextMenu>
+        </avalonedit:TextEditor.ContextMenu>
+    </avalonedit:TextEditor>
 </UserControl>

@@ -28,7 +28,7 @@ namespace UEExplorer.UI.Tabs
 			{
 				try
 				{
-					_MyTextEditor1.textEditor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load( 
+					_MyTextEditor1.TextEditor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load( 
 						new System.Xml.XmlTextReader( langPath ), 
 						ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance 
 					);
@@ -43,8 +43,8 @@ namespace UEExplorer.UI.Tabs
 
 		public void PostInitialize()
 		{
-			_MyTextEditor1.textEditor.IsReadOnly = false;
-			_MyTextEditor1.textEditor.Load( FileName );
+			_MyTextEditor1.TextEditor.IsReadOnly = false;
+			_MyTextEditor1.TextEditor.Load( FileName );
 		}
 
 		protected override void InitializeComponent()
@@ -93,7 +93,7 @@ namespace UEExplorer.UI.Tabs
 
 		public override void TabSave()
 		{
-			_MyTextEditor1.textEditor.Save( FileName );
+			_MyTextEditor1.TextEditor.Save( FileName );
 		}
 
 		public override void TabFind()
@@ -111,12 +111,12 @@ namespace UEExplorer.UI.Tabs
 		{
 			int fails = 0;
 
-			var currentIndex = editor.textEditor.CaretOffset;
-			if( currentIndex >= editor.textEditor.Text.Length )
+			var currentIndex = editor.TextEditor.CaretOffset;
+			if( currentIndex >= editor.TextEditor.Text.Length )
 				return;
 
 			searchAgain:
-			int textIndex = editor.textEditor.Text.IndexOf( text, currentIndex, StringComparison.OrdinalIgnoreCase );
+			int textIndex = editor.TextEditor.Text.IndexOf( text, currentIndex, StringComparison.OrdinalIgnoreCase );
 			if( textIndex == -1 )
 			{
 				currentIndex = 0;
@@ -127,12 +127,12 @@ namespace UEExplorer.UI.Tabs
 				goto searchAgain;
 			}
 
-			var line = editor.textEditor.TextArea.Document.GetLocation( textIndex );
+			var line = editor.TextEditor.TextArea.Document.GetLocation( textIndex );
 	
-			editor.textEditor.ScrollTo( line.Line, line.Column );
-			editor.textEditor.Select( textIndex, text.Length );
+			editor.TextEditor.ScrollTo( line.Line, line.Column );
+			editor.TextEditor.Select( textIndex, text.Length );
 
-			editor.textEditor.CaretOffset = textIndex + text.Length;
+			editor.TextEditor.CaretOffset = textIndex + text.Length;
 		}
 	}
 }

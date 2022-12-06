@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using UEExplorer.Properties;
@@ -41,32 +43,29 @@ namespace UEExplorer.UI.Tabs
         /// </summary>
         protected override void TabCreated()
         {						
+            // Fold all { } blocks
+            var foldingManager = ICSharpCode.AvalonEdit.Folding.FoldingManager.Install(TextEditorPanel.TextEditor.TextArea);
+            var foldingStrategy = new ICSharpCode.AvalonEdit.Folding.XmlFoldingStrategy();
+            foldingStrategy.UpdateFoldings(foldingManager, TextEditorPanel.TextEditor.Document);
+
             var langPath = Path.Combine( Application.StartupPath, "Config", "UnrealScript.xshd" );
             if( File.Exists( langPath ) )
             {
-                try
+                using (var stream = new System.Xml.XmlTextReader(langPath))
                 {
-                    TextEditorPanel.textEditor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load( 
-                        new System.Xml.XmlTextReader( langPath ), 
+                    TextEditorPanel.TextEditor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load( 
+                        stream, 
                         ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance 
                     );
-                    TextEditorPanel.searchWiki.Click += SearchWiki_Click;
-                    TextEditorPanel.searchDocument.Click += SearchDocument_Click;
-                    TextEditorPanel.searchPackage.Click += SearchClasses_Click;
-                    TextEditorPanel.searchObject.Click += SearchObject_Click;
-                    TextEditorPanel.textEditor.ContextMenuOpening += ContextMenu_ContextMenuOpening;
-                    TextEditorPanel.copy.Click += Copy_Click;
-
-                    // Fold all { } blocks
-                    //var foldingManager = ICSharpCode.AvalonEdit.Folding.FoldingManager.Install(myTextEditor1.textEditor.TextArea);
-                    //var foldingStrategy = new ICSharpCode.AvalonEdit.Folding.XmlFoldingStrategy();
-                    //foldingStrategy.UpdateFoldings(foldingManager, myTextEditor1.textEditor.Document);
-                }
-                catch( Exception e )
-                {
-                    ExceptionDialog.Show( e.GetType().Name, e ); 
                 }
             }
+            
+            TextEditorPanel.searchWiki.Click += SearchWiki_Click;
+            TextEditorPanel.searchDocument.Click += SearchDocument_Click;
+            TextEditorPanel.searchPackage.Click += SearchClasses_Click;
+            TextEditorPanel.searchObject.Click += SearchObject_Click;
+            TextEditorPanel.TextEditor.ContextMenuOpening += ContextMenu_ContextMenuOpening;
+            TextEditorPanel.copy.Click += Copy_Click;
 
             _Form = Tabs.Form;
             base.TabCreated();
@@ -74,17 +73,17 @@ namespace UEExplorer.UI.Tabs
 
         void Copy_Click( object sender, System.Windows.RoutedEventArgs e )
         {
-            TextEditorPanel.textEditor.Copy();
+            TextEditorPanel.TextEditor.Copy();
         }
 
         string GetSelection()
         {
-            return TextEditorPanel.textEditor.TextArea.Selection.GetText();
+            return TextEditorPanel.TextEditor.TextArea.Selection.GetText();
         }
 
         void ContextMenu_ContextMenuOpening( object sender, System.Windows.Controls.ContextMenuEventArgs e )
         {
-            if( TextEditorPanel.textEditor.TextArea.Selection.Length == 0 )
+            if( TextEditorPanel.TextEditor.TextArea.Selection.Length == 0 )
             {
                 TextEditorPanel.searchWiki.Visibility = System.Windows.Visibility.Collapsed;
                 TextEditorPanel.searchDocument.Visibility = System.Windows.Visibility.Collapsed;
@@ -150,17 +149,17 @@ namespace UEExplorer.UI.Tabs
                 UnrealPackage.OverrideVersion = Program.Options.Version;
             }
 
+            if (!Enum.TryParse(_Form.Platform.Text, out UnrealConfig.Platform))
+            {
+                UnrealConfig.Platform = UnrealConfig.CookedPlatform.PC;
+            };
+            
             UnrealConfig.SuppressSignature = false;
             reload:
             ProgressStatus.SetStatus( Resources.PACKAGE_LOADING );
             // Open the file.
             try
             {
-                UnrealConfig.Platform = (UnrealConfig.CookedPlatform)Enum.Parse
-                ( 
-                    typeof(UnrealConfig.CookedPlatform), 
-                    _Form.Platform.Text, true 
-                );
                 _UnrealPackage = UnrealLoader.LoadPackage( FileName );
                 UnrealConfig.SuppressSignature = false;
 
@@ -424,7 +423,7 @@ namespace UEExplorer.UI.Tabs
             {
                 if( sfd.ShowDialog() == DialogResult.OK )
                 {
-                    File.WriteAllText( sfd.FileName, TextEditorPanel.textEditor.Text );
+                    File.WriteAllText( sfd.FileName, TextEditorPanel.TextEditor.Text );
                 }
             }
         }
@@ -1305,27 +1304,16 @@ namespace UEExplorer.UI.Tabs
             PerformNodeAction( TreeView_Content.SelectedNode, e.ClickedItem.Name );
         }
 
-        private static string FormatTokenHeader( UStruct.UByteCodeDecompiler.Token token, bool acronymizeName = true )
+        private static string LegacyFormatTokenHeader( UStruct.UByteCodeDecompiler.Token token )
         {
-            var name = token.GetType().Name;
-            if( !acronymizeName ) 
-                return String.Format( "{0}({1}/{2})", name, token.Size, token.StorageSize );
-
-            name = String.Concat( name.Substring( 0, name.Length - 5 ).Select(
-                c => Char.IsUpper( c ) ? c.ToString( CultureInfo.InvariantCulture ) : String.Empty
-                ) );
-
-            if( token is UStruct.UByteCodeDecompiler.CastToken )
-            {
-                name = "C" + name;
-            }
-            return String.Format( "{0}({1}/{2})", name, token.Size, token.StorageSize );
+            string name = token.GetType().Name;
+            string abbrName = string.Concat(name.Where(char.IsUpper));
+            return $"{abbrName}({token.Size}/{token.StorageSize})";
         }
 
         private static string _DisassembleTokensTemplate;
-        private static string DisassembleTokens( UStruct container, UStruct.UByteCodeDecompiler decompiler, int tokenCount )
+        private static void LegacyDisassembleTokens( UStruct container, UStruct.UByteCodeDecompiler decompiler, int tokenCount, StringBuilder content )
         {
-            var content = String.Empty;
             for( var i = 0; i + 1 < tokenCount; ++ i )
             {
                 var token = decompiler.NextToken;
@@ -1353,24 +1341,33 @@ namespace UEExplorer.UI.Tabs
                 container.Package.Stream.Position = container.ExportTable.SerialOffset + container.ScriptOffset + token.StoragePosition;
                 container.Package.Stream.Read( buffer, 0, buffer.Length );
 
-                var header = FormatTokenHeader( token, false );
+                var header = LegacyFormatTokenHeader( token );
                 var bytes = BitConverter.ToString( buffer ).Replace( '-', ' ' );
 
-                content += String.Format( _DisassembleTokensTemplate.Replace( "%INDENTATION%", UDecompilingState.Tabs ), 
+                content.Append(String.Format( _DisassembleTokensTemplate.Replace( "%INDENTATION%", UDecompilingState.Tabs ), 
                     token.Position, token.StoragePosition, 
                     header, bytes,
                     value != String.Empty ? value + "\r\n" : value, firstTokenIndex, lastTokenIndex
-                );
+                ));
 
                 if( subTokensCount > 0 )
                 {
                     UDecompilingState.AddTab();
-                    content += DisassembleTokens( container, decompiler, subTokensCount + 1 );
-                    i += subTokensCount;
-                    UDecompilingState.RemoveTab();
+                    try
+                    {
+                        LegacyDisassembleTokens(container, decompiler, subTokensCount + 1, content);
+                    }
+                    catch (Exception ex)
+                    {
+                        content.Append($"/*Disassemble error: {ex}*/");
+                    }
+                    finally
+                    {
+                        i += subTokensCount;
+                        UDecompilingState.RemoveTab();
+                    }
                 }
             }
-            return content;
         }
 
         private void PerformNodeAction( object target, string action )
@@ -1518,15 +1515,6 @@ namespace UEExplorer.UI.Tabs
                         }
                         break;
 
-#if DEBUG
-                    case "FORCE_DESERIALIZE":
-                        SetContentTitle( ((TreeNode)target).Text, false );
-
-                        obj.BeginDeserializing();
-                        obj.PostInitialize();
-                        break;
-#endif
-
                     case "REPLICATION":
                     {
                         var unClass = obj as UClass;
@@ -1592,9 +1580,10 @@ namespace UEExplorer.UI.Tabs
                             codeDec.InitDecompile();
 
                             _DisassembleTokensTemplate = LoadTemplate("struct.tokens-disassembled");
-                            string content = DisassembleTokens( unStruct, codeDec, codeDec.DeserializedTokens.Count );
+                            var content = new StringBuilder(codeDec.DeserializedTokens.Count);
+                            LegacyDisassembleTokens( unStruct, codeDec, codeDec.DeserializedTokens.Count, content );
                             SetContentTitle( unStruct.GetOuterGroup(), true, "Tokens-Disassembled" );
-                            SetContentText( unStruct, content );
+                            SetContentText( unStruct, content.ToString() );
                         }
                         break;
                     }
@@ -1609,13 +1598,14 @@ namespace UEExplorer.UI.Tabs
                             codeDec.Deserialize();
                             codeDec.InitDecompile();
 
-                            string content = String.Empty;
-                            while( codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count )
+                            var content = new StringBuilder(codeDec.DeserializedTokens.Count);
+                            while ( codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count )
                             {
+                                string output;
+                                var breakOut = false;
+
                                 var t = codeDec.NextToken;
                                 int orgIndex = codeDec.CurrentTokenIndex;
-                                string output;
-                                bool breakOut = false;
                                 try
                                 {
                                     output = t.Decompile();
@@ -1626,32 +1616,31 @@ namespace UEExplorer.UI.Tabs
                                     breakOut = true;
                                 }
 
-                                string chain = FormatTokenHeader( t );
-                                int inlinedTokens = codeDec.CurrentTokenIndex - orgIndex;
-                                if( inlinedTokens > 0 )
+                                string chain = LegacyFormatTokenHeader( t );
+                                int endTokenIndex = codeDec.CurrentTokenIndex;
+                                if( endTokenIndex < codeDec.DeserializedTokens.Count ) // sanity check
                                 {
-                                    ++ orgIndex;
-                                    for( int i = 0; i < inlinedTokens; ++ i )
+                                    for( int i = orgIndex + 1; i < endTokenIndex; ++ i )
                                     {
-                                        chain += " -> " + FormatTokenHeader( codeDec.DeserializedTokens[orgIndex + i] );
+                                        chain += " -> " + LegacyFormatTokenHeader( codeDec.DeserializedTokens[i] );
                                     }
                                 }
-
+                                
                                 var buffer = new byte[t.StorageSize];
                                 _UnrealPackage.Stream.Position = unStruct.ExportTable.SerialOffset + unStruct.ScriptOffset + t.StoragePosition;
                                 _UnrealPackage.Stream.Read( buffer, 0, buffer.Length );
 
-                                content += String.Format( tokensTemplate, 
+                                content.Append(String.Format( tokensTemplate, 
                                     t.Position, t.StoragePosition, 
                                     chain, BitConverter.ToString( buffer ).Replace( '-', ' ' ),
                                     output != String.Empty ? output + "\r\n" : output
-                                );
+                                ));
 
                                 if( breakOut )
                                     break;
                             }
                             SetContentTitle( unStruct.GetOuterGroup(), true, "Tokens" );
-                            SetContentText( unStruct, content );
+                            SetContentText( unStruct, content.ToString() );
                         }
                         break;
                     }
@@ -1788,10 +1777,10 @@ namespace UEExplorer.UI.Tabs
                 findInDocumentToolStripMenuItem.Enabled = true;
             }
 
-            TextEditorPanel.textEditor.Text = content;
+            TextEditorPanel.TextEditor.Text = content;
             if( resetView )
             {
-                TextEditorPanel.textEditor.ScrollToHome();
+                TextEditorPanel.TextEditor.ScrollToHome();
             }
 
             if( skip )
@@ -1834,8 +1823,8 @@ namespace UEExplorer.UI.Tabs
         private void StoreViewForBuffer( int bufferIndex )
         {
             var content = _ContentBuffer[bufferIndex];
-            content.X = TextEditorPanel.textEditor.HorizontalOffset;
-            content.Y = TextEditorPanel.textEditor.VerticalOffset;
+            content.X = TextEditorPanel.TextEditor.HorizontalOffset;
+            content.Y = TextEditorPanel.TextEditor.VerticalOffset;
             _ContentBuffer[bufferIndex] = content;
         }
 
@@ -1845,8 +1834,8 @@ namespace UEExplorer.UI.Tabs
             SetContentText( _ContentBuffer[bufferIndex].Node, _ContentBuffer[bufferIndex].Text, true );
             SelectNode( _ContentBuffer[bufferIndex].Node as TreeNode );   
 
-            TextEditorPanel.textEditor.ScrollToVerticalOffset( _ContentBuffer[bufferIndex].Y );
-            TextEditorPanel.textEditor.ScrollToHorizontalOffset( _ContentBuffer[bufferIndex].X );
+            TextEditorPanel.TextEditor.ScrollToVerticalOffset( _ContentBuffer[bufferIndex].Y );
+            TextEditorPanel.TextEditor.ScrollToHorizontalOffset( _ContentBuffer[bufferIndex].X );
         }
 
         private void ToolStripButton_Backward_Click( object sender, EventArgs e )
@@ -2255,8 +2244,8 @@ namespace UEExplorer.UI.Tabs
                     SetContentText( nodeEvent.Node, unClass.Decompile(), false, false );
                 }
 
-                TextEditorPanel.textEditor.ScrollTo( findResult.TextLine, findResult.TextColumn );
-                TextEditorPanel.textEditor.Select( findResult.TextIndex, findText.Length );
+                TextEditorPanel.TextEditor.ScrollTo( findResult.TextLine, findResult.TextColumn );
+                TextEditorPanel.TextEditor.Select( findResult.TextIndex, findText.Length );
             };
         }
 
