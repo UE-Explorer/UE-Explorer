@@ -1304,7 +1304,7 @@ namespace UEExplorer.UI.Tabs
             PerformNodeAction( TreeView_Content.SelectedNode, e.ClickedItem.Name );
         }
 
-        private static string FormatTokenHeader( UStruct.UByteCodeDecompiler.Token token, bool acronymizeName = true )
+        private static string LegacyFormatTokenHeader( UStruct.UByteCodeDecompiler.Token token, bool acronymizeName = true )
         {
             var name = token.GetType().Name;
             if( !acronymizeName ) 
@@ -1322,9 +1322,8 @@ namespace UEExplorer.UI.Tabs
         }
 
         private static string _DisassembleTokensTemplate;
-        private static string DisassembleTokens( UStruct container, UStruct.UByteCodeDecompiler decompiler, int tokenCount )
+        private static void LegacyDisassembleTokens( UStruct container, UStruct.UByteCodeDecompiler decompiler, int tokenCount, StringBuilder content )
         {
-            var content = String.Empty;
             for( var i = 0; i + 1 < tokenCount; ++ i )
             {
                 var token = decompiler.NextToken;
@@ -1352,24 +1351,33 @@ namespace UEExplorer.UI.Tabs
                 container.Package.Stream.Position = container.ExportTable.SerialOffset + container.ScriptOffset + token.StoragePosition;
                 container.Package.Stream.Read( buffer, 0, buffer.Length );
 
-                var header = FormatTokenHeader( token, false );
+                var header = LegacyFormatTokenHeader( token, false );
                 var bytes = BitConverter.ToString( buffer ).Replace( '-', ' ' );
 
-                content += String.Format( _DisassembleTokensTemplate.Replace( "%INDENTATION%", UDecompilingState.Tabs ), 
+                content.Append(String.Format( _DisassembleTokensTemplate.Replace( "%INDENTATION%", UDecompilingState.Tabs ), 
                     token.Position, token.StoragePosition, 
                     header, bytes,
                     value != String.Empty ? value + "\r\n" : value, firstTokenIndex, lastTokenIndex
-                );
+                ));
 
                 if( subTokensCount > 0 )
                 {
                     UDecompilingState.AddTab();
-                    content += DisassembleTokens( container, decompiler, subTokensCount + 1 );
-                    i += subTokensCount;
-                    UDecompilingState.RemoveTab();
+                    try
+                    {
+                        LegacyDisassembleTokens(container, decompiler, subTokensCount + 1, content);
+                    }
+                    catch (Exception ex)
+                    {
+                        content.Append($"/*Disassemble error: {ex}*/");
+                    }
+                    finally
+                    {
+                        i += subTokensCount;
+                        UDecompilingState.RemoveTab();
+                    }
                 }
             }
-            return content;
         }
 
         private void PerformNodeAction( object target, string action )
@@ -1517,15 +1525,6 @@ namespace UEExplorer.UI.Tabs
                         }
                         break;
 
-#if DEBUG
-                    case "FORCE_DESERIALIZE":
-                        SetContentTitle( ((TreeNode)target).Text, false );
-
-                        obj.BeginDeserializing();
-                        obj.PostInitialize();
-                        break;
-#endif
-
                     case "REPLICATION":
                     {
                         var unClass = obj as UClass;
@@ -1591,9 +1590,10 @@ namespace UEExplorer.UI.Tabs
                             codeDec.InitDecompile();
 
                             _DisassembleTokensTemplate = LoadTemplate("struct.tokens-disassembled");
-                            string content = DisassembleTokens( unStruct, codeDec, codeDec.DeserializedTokens.Count );
+                            var content = new StringBuilder(codeDec.DeserializedTokens.Count);
+                            LegacyDisassembleTokens( unStruct, codeDec, codeDec.DeserializedTokens.Count, content );
                             SetContentTitle( unStruct.GetOuterGroup(), true, "Tokens-Disassembled" );
-                            SetContentText( unStruct, content );
+                            SetContentText( unStruct, content.ToString() );
                         }
                         break;
                     }
@@ -1608,8 +1608,8 @@ namespace UEExplorer.UI.Tabs
                             codeDec.Deserialize();
                             codeDec.InitDecompile();
 
-                            string content = String.Empty;
-                            while( codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count )
+                            var content = new StringBuilder(codeDec.DeserializedTokens.Count);
+                            while ( codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count )
                             {
                                 var t = codeDec.NextToken;
                                 int orgIndex = codeDec.CurrentTokenIndex;
@@ -1625,14 +1625,14 @@ namespace UEExplorer.UI.Tabs
                                     breakOut = true;
                                 }
 
-                                string chain = FormatTokenHeader( t );
+                                string chain = LegacyFormatTokenHeader( t );
                                 int inlinedTokens = codeDec.CurrentTokenIndex - orgIndex;
                                 if( inlinedTokens > 0 )
                                 {
                                     ++ orgIndex;
                                     for( int i = 0; i < inlinedTokens; ++ i )
                                     {
-                                        chain += " -> " + FormatTokenHeader( codeDec.DeserializedTokens[orgIndex + i] );
+                                        chain += " -> " + LegacyFormatTokenHeader( codeDec.DeserializedTokens[orgIndex + i] );
                                     }
                                 }
 
@@ -1640,17 +1640,17 @@ namespace UEExplorer.UI.Tabs
                                 _UnrealPackage.Stream.Position = unStruct.ExportTable.SerialOffset + unStruct.ScriptOffset + t.StoragePosition;
                                 _UnrealPackage.Stream.Read( buffer, 0, buffer.Length );
 
-                                content += String.Format( tokensTemplate, 
+                                content.Append(String.Format( tokensTemplate, 
                                     t.Position, t.StoragePosition, 
                                     chain, BitConverter.ToString( buffer ).Replace( '-', ' ' ),
                                     output != String.Empty ? output + "\r\n" : output
-                                );
+                                ));
 
                                 if( breakOut )
                                     break;
                             }
                             SetContentTitle( unStruct.GetOuterGroup(), true, "Tokens" );
-                            SetContentText( unStruct, content );
+                            SetContentText( unStruct, content.ToString() );
                         }
                         break;
                     }
@@ -1833,8 +1833,8 @@ namespace UEExplorer.UI.Tabs
         private void StoreViewForBuffer( int bufferIndex )
         {
             var content = _ContentBuffer[bufferIndex];
-            content.X = TextEditorPanel.textEditor.HorizontalOffset;
-            content.Y = TextEditorPanel.textEditor.VerticalOffset;
+            content.X = TextEditorPanel.TextEditor.HorizontalOffset;
+            content.Y = TextEditorPanel.TextEditor.VerticalOffset;
             _ContentBuffer[bufferIndex] = content;
         }
 
