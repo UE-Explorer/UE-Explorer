@@ -482,12 +482,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Extensions\Eliot.Extensions.ExecGenerator.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\Eliot.Extensions.NativesTableListGenerator.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Native Tables\NativesTableList_UDK-2011-08.NTL">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -544,7 +538,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eliot.Utilities\Eliot.Utilities.csproj">
-      <Project>{C240217D-9B6A-46D4-892F-12C64853F8AE}</Project>
+      <Project>{c240217d-9b6a-46d4-892f-12c64853f8ae}</Project>
       <Name>Eliot.Utilities</Name>
     </ProjectReference>
     <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj">
@@ -582,10 +576,13 @@
     </Content>
     <None Include="Resources\search.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
