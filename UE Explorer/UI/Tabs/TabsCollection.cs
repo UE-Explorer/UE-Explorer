@@ -5,7 +5,7 @@ using Storm.TabControl;
 
 namespace UEExplorer.UI
 {
-    public interface ITabComponent
+    public interface ITabComponent : IDisposable
     {
         TabsCollection Tabs{ set; }
         TabStripItem TabItem{ get; set; }
@@ -56,7 +56,7 @@ namespace UEExplorer.UI
             _TabsControl.Visible = _TabsControl.Items.Count > 0;
             _TabsControl.Refresh();
 
-            var tabComp = Activator.CreateInstance( tabType ) as ITabComponent;
+            var tabComp = (ITabComponent)Activator.CreateInstance( tabType );
             tabComp.TabItem = tabItem;
             tabComp.Tabs = this;
             tabComp.TabInitialize();
@@ -72,6 +72,7 @@ namespace UEExplorer.UI
                  delComponent.TabItem.Dispose();
             }
             Components.Remove( delComponent );
+            delComponent.Dispose();
         }
 
         public void Dispose()
