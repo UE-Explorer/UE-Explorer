@@ -149,17 +149,17 @@ namespace UEExplorer.UI.Tabs
                 UnrealPackage.OverrideVersion = Program.Options.Version;
             }
 
+            if (!Enum.TryParse(_Form.Platform.Text, out UnrealConfig.Platform))
+            {
+                UnrealConfig.Platform = UnrealConfig.CookedPlatform.PC;
+            };
+            
             UnrealConfig.SuppressSignature = false;
             reload:
             ProgressStatus.SetStatus( Resources.PACKAGE_LOADING );
             // Open the file.
             try
             {
-                UnrealConfig.Platform = (UnrealConfig.CookedPlatform)Enum.Parse
-                ( 
-                    typeof(UnrealConfig.CookedPlatform), 
-                    _Form.Platform.Text, true 
-                );
                 _UnrealPackage = UnrealLoader.LoadPackage( FileName );
                 UnrealConfig.SuppressSignature = false;
 
