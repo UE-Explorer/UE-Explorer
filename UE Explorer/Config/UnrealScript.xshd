@@ -124,7 +124,6 @@
 			<Word>structcpptext</Word>
 			<Word>replication</Word>
 			<Word>defaultproperties</Word>
-			<Word>structdefaults</Word>
 			<Word>structdefaultproperties</Word>
 		</Keywords>
 
@@ -172,19 +171,7 @@
 			<Word>false</Word>
 		</Keywords>
 
-		<Keywords color="ArrayFunctions">
-			<Word>length</Word>
-			<Word>insert</Word>
-			<Word>insertitem</Word>
-			<Word>add</Word>
-			<Word>additem</Word>
-			<Word>remove</Word>
-			<Word>removeitem</Word>
-			<Word>find</Word>
-			<Word>sort</Word>
-		</Keywords>
-
-		<Keywords color="ClassAccessors">
+        <Keywords color="ClassAccessors">
 			<Word>static</Word>
 			<Word>default</Word>
 			<Word>const</Word>
@@ -355,14 +342,7 @@
 		</Keywords>
 
 		<Keywords color="DefaultPropertiesMethods">
-			<Word>Empty</Word>
-			<Word>Add</Word>
-			<Word>AddIndex</Word>
-			<Word>Remove</Word>
-			<Word>RemoveIndex</Word>
-			<Word>Replace</Word>
-
-			<Word>Begin</Word>
+            <Word>Begin</Word>
 			<Word>End</Word>
 		</Keywords>
 

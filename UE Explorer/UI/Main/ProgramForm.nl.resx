@@ -120,7 +120,7 @@
   <data name="menuItem26.Text" xml:space="preserve">
     <value>&gt; &amp;Homepagina</value>
   </data>
-  <data name="ProgressLabel.Text" xml:space="preserve">
+  <data name="progressStatusLabel.Text" xml:space="preserve">
     <value>Gereed</value>
   </data>
   <data name="menuItem1.Text" xml:space="preserve">
@@ -147,10 +147,10 @@
   <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Extra</value>
   </data>
-  <data name="menuItem13.Text" xml:space="preserve">
+  <data name="extentionsMenuitem.Text" xml:space="preserve">
     <value>Uitbreidingen</value>
   </data>
-  <data name="_CacheExtractorItem.Text" xml:space="preserve">
+  <data name="cacheExtractorMenuItem.Text" xml:space="preserve">
     <value>Cache extractor</value>
   </data>
   <data name="menuItem17.Text" xml:space="preserve">
@@ -181,10 +181,10 @@
     <value>&amp;Over..</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="HomepageButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="homepageButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 23</value>
   </data>
-  <data name="HomepageButton.Text" xml:space="preserve">
+  <data name="homepageButton.Text" xml:space="preserve">
     <value>Hoofdpagina</value>
   </data>
 </root>

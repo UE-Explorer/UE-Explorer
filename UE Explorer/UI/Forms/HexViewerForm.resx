@@ -142,7 +142,7 @@
     <value>FAQControl</value>
   </data>
   <data name="&gt;&gt;FAQControl.Type" xml:space="preserve">
-    <value>UEExplorer.UI.Forms.HexViewerFAQ, UE Explorer, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>UEExplorer.UI.Forms.HexViewerFAQ, UE Explorer, Version=1.4.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FAQControl.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -192,6 +192,9 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>127, 17</value>
   </metadata>
+  <data name="menuStrip1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12world</value>
+  </data>
   <data name="hexWorkshopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
@@ -199,7 +202,7 @@
     <value>Hex Workshop</value>
   </data>
   <data name="openInToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>116, 22</value>
   </data>
   <data name="openInToolStripMenuItem.Text" xml:space="preserve">
     <value>Open &amp;In</value>
@@ -394,7 +397,7 @@
     <value>HexPanel</value>
   </data>
   <data name="&gt;&gt;HexPanel.Type" xml:space="preserve">
-    <value>UEExplorer.UI.Forms.HexViewerControl, UE Explorer, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>UEExplorer.UI.Forms.HexViewerControl, UE Explorer, Version=1.4.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;HexPanel.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -432,6 +435,9 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1000, 450</value>
   </data>
@@ -440,9 +446,6 @@
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>500, 225</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>Manual</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Hex Viewer</value>

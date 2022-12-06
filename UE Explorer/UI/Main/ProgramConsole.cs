@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using UEExplorer.Properties;
 using UELib;
+using UELib.Core;
 
 namespace UEExplorer.UI.Main
 {
@@ -15,44 +16,45 @@ namespace UEExplorer.UI.Main
         {
             InitializeComponent();
 
-            _ConsoleWriter = new ConsoleWriter( ConsoleOutput );
-            Console.SetOut( _ConsoleWriter );
+            _ConsoleWriter = new ConsoleWriter(ConsoleOutput);
+            Console.SetOut(_ConsoleWriter);
         }
 
-        private void Console_FormClosed( object sender, FormClosedEventArgs e )
+        private void Console_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if( _ConsoleWriter != null )
-            { 
+            if (_ConsoleWriter != null)
+            {
                 _ConsoleWriter.Close();
                 _ConsoleWriter = null;
             }
+
             Application.Exit();
         }
 
-        private void ProgramConsole_Shown( object sender, EventArgs e )
+        private void ProgramConsole_Shown(object sender, EventArgs e)
         {
-            var args = Environment.GetCommandLineArgs();
-            var filePath = args[1];
-            if( !File.Exists( filePath ) )
+            string[] args = Environment.GetCommandLineArgs();
+            string filePath = args[1];
+            if (!File.Exists(filePath))
             {
-                Console.WriteLine( Resources.THING_DOESNT_EXIST, filePath );
-                return;		
+                Console.WriteLine(Resources.THING_DOESNT_EXIST, filePath);
+                return;
             }
 
-            var options = Program.ParseArguments( args );
-            foreach( var option in options )
+            var options = Program.ParseArguments(args);
+            foreach (string option in options)
             {
-                var primary = option;
-                var secondary = String.Empty;
-                if( option.Contains( "=" ) )
+                string primary = option;
+                var secondary = string.Empty;
+                if (option.Contains("="))
                 {
-                    var doubleOption = option.Split( '=' );
+                    string[] doubleOption = option.Split('=');
                     primary = doubleOption[0];
                     secondary = doubleOption[1];
                 }
 
                 var closeWhenDone = false;
-                switch( primary )
+                switch (primary)
                 {
                     case "silent":
                         closeWhenDone = true;
@@ -63,9 +65,9 @@ namespace UEExplorer.UI.Main
                         break;
 
                     case "export":
-                    { 
-                        bool shouldExportScripts = false;
-                        switch( secondary )
+                    {
+                        var shouldExportScripts = false;
+                        switch (secondary)
                         {
                             case "classes":
                                 break;
@@ -75,32 +77,35 @@ namespace UEExplorer.UI.Main
                                 break;
 
                             default:
-                                Console.WriteLine( Resources.UNRECOGNIZED_EXPORT_TYPE, secondary );
+                                Console.WriteLine(Resources.UNRECOGNIZED_EXPORT_TYPE, secondary);
                                 return;
                         }
 
                         try
                         {
-                            Console.WriteLine( Resources.EXPORTING_PACKAGE, filePath );
-                            using( var package = UnrealLoader.LoadFullPackage( filePath ) )
-                            { 
-                                var exportPath = package.ExportPackageClasses( shouldExportScripts );
-                                Console.WriteLine( Resources.PACKAGE_EXPORTED_TO, exportPath );
+                            Console.WriteLine(Resources.EXPORTING_PACKAGE, filePath);
+                            using (var package = UnrealLoader.LoadFullPackage(filePath))
+                            {
+                                string exportPath = shouldExportScripts
+                                    ? package.ExportPackageObjects<UTextBuffer>()
+                                    : package.ExportPackageObjects<UClass>();
+                                Console.WriteLine(Resources.PACKAGE_EXPORTED_TO, exportPath);
                             }
                         }
-                        catch( Exception exc )
+                        catch (Exception exc)
                         {
-                            Console.WriteLine( Resources.EXCEPTION_OCCURRED_WHILE_EXPORTING, filePath, exc );
+                            Console.WriteLine(Resources.EXCEPTION_OCCURRED_WHILE_EXPORTING, filePath, exc);
                         }
+
                         break;
                     }
 
                     default:
-                        Console.WriteLine( Resources.UNRECOGNIZED_COMMANDLINE_OPTION, primary );
-                        break;   
+                        Console.WriteLine(Resources.UNRECOGNIZED_COMMANDLINE_OPTION, primary);
+                        break;
                 }
 
-                if( closeWhenDone )
+                if (closeWhenDone)
                 {
                     Close();
                 }
@@ -111,36 +116,37 @@ namespace UEExplorer.UI.Main
     public class ConsoleWriter : TextWriter
     {
         private readonly RichTextBox _Output;
-        private readonly Encoding _Encoding = Encoding.ASCII;
-        private string _LastWrite = String.Empty;
-        public override Encoding Encoding
+        private string _LastWrite = string.Empty;
+
+        public ConsoleWriter(RichTextBox output)
         {
-            get{ return _Encoding; }
+            _Output = output;
         }
 
-        public ConsoleWriter( RichTextBox output )
-        {
-            _Output = output;		
-        }
+        public override Encoding Encoding { get; } = Encoding.ASCII;
 
-        public override void Write( string value )
+        public override void Write(string value)
         {
             string trimmedValue = value.Trim();
-            if( trimmedValue == NewLine && _LastWrite == NewLine )
+            if (trimmedValue == NewLine && _LastWrite == NewLine)
+            {
                 return;
+            }
 
-            base.Write( value );
+            base.Write(value);
             _Output.Text += value;
             _LastWrite = trimmedValue;
-        } 
+        }
 
-        public override void WriteLine( string value )
+        public override void WriteLine(string value)
         {
             string trimmedValue = value.Trim();
-            if( trimmedValue == NewLine && _LastWrite == NewLine )
+            if (trimmedValue == NewLine && _LastWrite == NewLine)
+            {
                 return;
+            }
 
-            base.WriteLine( value );
+            base.WriteLine(value);
             _Output.Text += NewLine + value;
             _LastWrite = trimmedValue;
         }

@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="UEExplorer.UI.Panels.TextEditorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="426" d:DesignWidth="514" xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit">
+    <avalonedit:TextEditor Name="TextEditor" ShowLineNumbers="True" IsReadOnly="True" FontSize="14"
+                           FontFamily="Courier New" FontWeight="Normal" FontStyle="Normal"
+                           LineNumbersForeground="DarkCyan" x:FieldModifier="public" ContextMenuOpening="TextEditor_ContextMenuOpening">
+        <avalonedit:TextEditor.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Copy" Click="Copy_Click" />
+                <MenuItem Header="Search in document" Name="SearchInDocument" x:FieldModifier="public" />
+                <MenuItem Header="Search in classes" Name="SearchInClasses" x:FieldModifier="public" />
+                <MenuItem Header="Search as object" Name="SearchObject" x:FieldModifier="public" />
+                <MenuItem Header="Search UnrealWiki" Name="SearchWiki" Click="SearchWiki_Click" />
+            </ContextMenu>
+        </avalonedit:TextEditor.ContextMenu>
+    </avalonedit:TextEditor>
+</UserControl>

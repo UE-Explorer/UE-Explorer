@@ -243,7 +243,7 @@
   <data name="toolStripMenuItem1.Text" xml:space="preserve">
     <value>Zoeken</value>
   </data>
-  <data name="findNextToolStripMenuItem.Text" xml:space="preserve">
+  <data name="findNextToolStripMenuItem.TooltipText" xml:space="preserve">
     <value>Volgende zoeken</value>
   </data>
   <data name="findInDocumentToolStripMenuItem.Text" xml:space="preserve">
@@ -255,13 +255,13 @@
   <data name="viewBufferToolStripMenuItem.Text" xml:space="preserve">
     <value>Bekijk buffer</value>
   </data>
-  <data name="ReloadButton.Text" xml:space="preserve">
+  <data name="ReloadButton.TooltipText" xml:space="preserve">
     <value>Opnieuw laden</value>
   </data>
-  <data name="PrevButton.Text" xml:space="preserve">
+  <data name="PrevButton.TooltipText" xml:space="preserve">
     <value>Achteruit</value>
   </data>
-  <data name="NextButton.Text" xml:space="preserve">
+  <data name="NextButton.TooltipText" xml:space="preserve">
     <value>Vooruit</value>
   </data>
   <data name="ExportButton.Text" xml:space="preserve">
@@ -270,7 +270,7 @@
   <data name="ExportButton.ToolTipText" xml:space="preserve">
     <value>Opslaan als .uc</value>
   </data>
-  <data name="FindButton.Text" xml:space="preserve">
+  <data name="FindButton.TooltipText" xml:space="preserve">
     <value>Zoek</value>
   </data>
   <data name="ViewTools.Text" xml:space="preserve">

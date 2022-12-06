@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using UELib;
-using UELib.Core;
 using UELib.Flags;
 
 namespace UEExplorer
@@ -14,66 +13,67 @@ namespace UEExplorer
         private const string ExportedDir = "Exported";
         private const string ClassesDir = "Classes";
 
-        public static readonly string PackageExportPath = Path.Combine( Application.StartupPath, ExportedDir );
+        public static readonly string PackageExportPath = Path.Combine(Application.StartupPath, ExportedDir);
 
-        public static string InitializeExportDirectory( this UnrealPackage package )
+        public static string InitializeExportDirectory(this UnrealPackage package)
         {
-            var exportPath = Path.Combine( PackageExportPath, package.PackageName );
-            if( Directory.Exists( exportPath ) )
+            string exportPath = Path.Combine(PackageExportPath, package.PackageName);
+            if (Directory.Exists(exportPath))
             {
-                var files = Directory.GetFiles( exportPath );
-                foreach( var file in files )
+                string[] files = Directory.GetFiles(exportPath);
+                foreach (string file in files)
                 {
-                    File.Delete( exportPath + file );
-                }			
+                    File.Delete(exportPath + file);
+                }
             }
-            var classPath = Path.Combine( exportPath, ClassesDir );
-            Directory.CreateDirectory( classPath );
+
+            string classPath = Path.Combine(exportPath, ClassesDir);
+            Directory.CreateDirectory(classPath);
             return classPath;
         }
 
-        public static void CreateUPKGFile( this UnrealPackage package, string exportPath )
+        public static void CreateUPKGFile(this UnrealPackage package, string exportPath)
         {
-            var upkgContent = new[]
+            string[] upkgContent =
             {
                 "[Flags]",
-                "AllowDownload=" + package.HasPackageFlag( PackageFlags.AllowDownload ),
-                "ClientOptional=" + package.HasPackageFlag( PackageFlags.ClientOptional ),
-                "ServerSideOnly=" + package.HasPackageFlag( PackageFlags.ServerSideOnly )
+                "AllowDownload=" + package.Summary.PackageFlags.HasFlag(PackageFlags.AllowDownload),
+                "ClientOptional=" + package.Summary.PackageFlags.HasFlag(PackageFlags.ClientOptional),
+                "ServerSideOnly=" + package.Summary.PackageFlags.HasFlag(PackageFlags.ServerSideOnly)
             };
 
-            File.WriteAllLines( 
-                Path.Combine( exportPath, package.PackageName ) + UnrealExtensions.UnrealFlagsExt, 
-                upkgContent 
+            File.WriteAllLines(
+                Path.Combine(exportPath, package.PackageName) + UnrealExtensions.UnrealFlagsExt,
+                upkgContent
             );
         }
 
-        public static string ExportPackageClasses( this UnrealPackage package, bool exportScripts = false )
+        public static string ExportPackageObjects<T>(this UnrealPackage package)
         {
             Program.LoadConfig();
-            var exportPath = package.InitializeExportDirectory();
+            string exportPath = package.InitializeExportDirectory();
             package.NTLPackage = new NativesTablePackage();
-            package.NTLPackage.LoadPackage( Path.Combine( Application.StartupPath, "Native Tables", Program.Options.NTLPath ) );
-            foreach( UClass uClass in package.Objects.Where( o => o is UClass && o.ExportTable != null ) )
+            package.NTLPackage.LoadPackage(Path.Combine(Application.StartupPath, "Native Tables",
+                Program.Options.NTLPath));
+            foreach (var obj in package.Objects.Where(o => o is T && o.ExportTable != null))
             {
                 try
                 {
-                    var exportContent = exportScripts && uClass.ScriptText != null
-                        ? uClass.ScriptText.Decompile()
-                        : uClass.Decompile();
+                    string exportContent = obj.Decompile();
 
                     File.WriteAllText(
-                        Path.Combine( exportPath, uClass.Name ) + UnrealExtensions.UnrealCodeExt,
+                        Path.Combine(exportPath, obj.Name) + UnrealExtensions.UnrealCodeExt,
                         exportContent,
                         Encoding.ASCII
                     );
                 }
-                catch( Exception e )
+                catch (Exception e)
                 {
-                    Console.WriteLine( "Couldn't decompile object " + uClass + "\r\n" + e );
+                    Console.Error.WriteLine($"Couldn't decompile object {obj}\r\n{e}");
                 }
             }
-            package.CreateUPKGFile( exportPath );
+
+            package.CreateUPKGFile(exportPath);
             return exportPath;
         }
     }
