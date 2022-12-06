@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using UEExplorer.Properties;
@@ -41,32 +43,29 @@ namespace UEExplorer.UI.Tabs
         /// </summary>
         protected override void TabCreated()
         {						
+            // Fold all { } blocks
+            var foldingManager = ICSharpCode.AvalonEdit.Folding.FoldingManager.Install(TextEditorPanel.TextEditor.TextArea);
+            var foldingStrategy = new ICSharpCode.AvalonEdit.Folding.XmlFoldingStrategy();
+            foldingStrategy.UpdateFoldings(foldingManager, TextEditorPanel.TextEditor.Document);
+
             var langPath = Path.Combine( Application.StartupPath, "Config", "UnrealScript.xshd" );
             if( File.Exists( langPath ) )
             {
-                try
+                using (var stream = new System.Xml.XmlTextReader(langPath))
                 {
-                    TextEditorPanel.textEditor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load( 
-                        new System.Xml.XmlTextReader( langPath ), 
+                    TextEditorPanel.TextEditor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load( 
+                        stream, 
                         ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance 
                     );
-                    TextEditorPanel.searchWiki.Click += SearchWiki_Click;
-                    TextEditorPanel.searchDocument.Click += SearchDocument_Click;
-                    TextEditorPanel.searchPackage.Click += SearchClasses_Click;
-                    TextEditorPanel.searchObject.Click += SearchObject_Click;
-                    TextEditorPanel.textEditor.ContextMenuOpening += ContextMenu_ContextMenuOpening;
-                    TextEditorPanel.copy.Click += Copy_Click;
-
-                    // Fold all { } blocks
-                    //var foldingManager = ICSharpCode.AvalonEdit.Folding.FoldingManager.Install(myTextEditor1.textEditor.TextArea);
-                    //var foldingStrategy = new ICSharpCode.AvalonEdit.Folding.XmlFoldingStrategy();
-                    //foldingStrategy.UpdateFoldings(foldingManager, myTextEditor1.textEditor.Document);
-                }
-                catch( Exception e )
-                {
-                    ExceptionDialog.Show( e.GetType().Name, e ); 
                 }
             }
+            
+            TextEditorPanel.searchWiki.Click += SearchWiki_Click;
+            TextEditorPanel.searchDocument.Click += SearchDocument_Click;
+            TextEditorPanel.searchPackage.Click += SearchClasses_Click;
+            TextEditorPanel.searchObject.Click += SearchObject_Click;
+            TextEditorPanel.TextEditor.ContextMenuOpening += ContextMenu_ContextMenuOpening;
+            TextEditorPanel.copy.Click += Copy_Click;
 
             _Form = Tabs.Form;
             base.TabCreated();
@@ -74,17 +73,17 @@ namespace UEExplorer.UI.Tabs
 
         void Copy_Click( object sender, System.Windows.RoutedEventArgs e )
         {
-            TextEditorPanel.textEditor.Copy();
+            TextEditorPanel.TextEditor.Copy();
         }
 
         string GetSelection()
         {
-            return TextEditorPanel.textEditor.TextArea.Selection.GetText();
+            return TextEditorPanel.TextEditor.TextArea.Selection.GetText();
         }
 
         void ContextMenu_ContextMenuOpening( object sender, System.Windows.Controls.ContextMenuEventArgs e )
         {
-            if( TextEditorPanel.textEditor.TextArea.Selection.Length == 0 )
+            if( TextEditorPanel.TextEditor.TextArea.Selection.Length == 0 )
             {
                 TextEditorPanel.searchWiki.Visibility = System.Windows.Visibility.Collapsed;
                 TextEditorPanel.searchDocument.Visibility = System.Windows.Visibility.Collapsed;
@@ -424,7 +423,7 @@ namespace UEExplorer.UI.Tabs
             {
                 if( sfd.ShowDialog() == DialogResult.OK )
                 {
-                    File.WriteAllText( sfd.FileName, TextEditorPanel.textEditor.Text );
+                    File.WriteAllText( sfd.FileName, TextEditorPanel.TextEditor.Text );
                 }
             }
         }
@@ -1788,10 +1787,10 @@ namespace UEExplorer.UI.Tabs
                 findInDocumentToolStripMenuItem.Enabled = true;
             }
 
-            TextEditorPanel.textEditor.Text = content;
+            TextEditorPanel.TextEditor.Text = content;
             if( resetView )
             {
-                TextEditorPanel.textEditor.ScrollToHome();
+                TextEditorPanel.TextEditor.ScrollToHome();
             }
 
             if( skip )
@@ -1845,8 +1844,8 @@ namespace UEExplorer.UI.Tabs
             SetContentText( _ContentBuffer[bufferIndex].Node, _ContentBuffer[bufferIndex].Text, true );
             SelectNode( _ContentBuffer[bufferIndex].Node as TreeNode );   
 
-            TextEditorPanel.textEditor.ScrollToVerticalOffset( _ContentBuffer[bufferIndex].Y );
-            TextEditorPanel.textEditor.ScrollToHorizontalOffset( _ContentBuffer[bufferIndex].X );
+            TextEditorPanel.TextEditor.ScrollToVerticalOffset( _ContentBuffer[bufferIndex].Y );
+            TextEditorPanel.TextEditor.ScrollToHorizontalOffset( _ContentBuffer[bufferIndex].X );
         }
 
         private void ToolStripButton_Backward_Click( object sender, EventArgs e )
@@ -2255,8 +2254,8 @@ namespace UEExplorer.UI.Tabs
                     SetContentText( nodeEvent.Node, unClass.Decompile(), false, false );
                 }
 
-                TextEditorPanel.textEditor.ScrollTo( findResult.TextLine, findResult.TextColumn );
-                TextEditorPanel.textEditor.Select( findResult.TextIndex, findText.Length );
+                TextEditorPanel.TextEditor.ScrollTo( findResult.TextLine, findResult.TextColumn );
+                TextEditorPanel.TextEditor.Select( findResult.TextIndex, findText.Length );
             };
         }
 
