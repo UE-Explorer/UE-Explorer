@@ -10,13 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UE Explorer", "UE Explorer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UELib", "UELib\src\Eliot.UELib.csproj", "{7E45273F-434F-42FA-8269-0E760AEB41E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eliot.Extensions.EdProtector", "Eliot.Extensions.EdProtector\Eliot.Extensions.EdProtector.csproj", "{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eliot.Extensions.Obfuscator", "Eliot.Extensions.Obfuscator\Eliot.Extensions.Obfuscator.csproj", "{760F1D8A-0963-45DA-9E92-220E05EBAD2A}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94} = {C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.Extensions.ExecGenerator", "Eliot.Extensions.ExecGenerator\Eliot.Extensions.ExecGenerator.csproj", "{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94} = {C30CD5A3-BEA1-48FA-9EFA-A11CB7A03A94}
@@ -26,9 +19,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Install UE Explorer", "Setu
 	ProjectSection(ProjectDependencies) = postProject
 		{7E45273F-434F-42FA-8269-0E760AEB41E1} = {7E45273F-434F-42FA-8269-0E760AEB41E1}
 		{FE7B4B6E-D050-4B66-AC12-3D28E4917D77} = {FE7B4B6E-D050-4B66-AC12-3D28E4917D77}
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3} = {E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}
 		{C240217D-9B6A-46D4-892F-12C64853F8AE} = {C240217D-9B6A-46D4-892F-12C64853F8AE}
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A} = {760F1D8A-0963-45DA-9E92-220E05EBAD2A}
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1} = {4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}
 	EndProjectSection
 EndProject
@@ -84,28 +75,6 @@ Global
 		{7E45273F-434F-42FA-8269-0E760AEB41E1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7E45273F-434F-42FA-8269-0E760AEB41E1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7E45273F-434F-42FA-8269-0E760AEB41E1}.Release|x86.ActiveCfg = Release|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|Mixed Platforms.ActiveCfg = Publish|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|Mixed Platforms.Build.0 = Publish|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Publish|x86.ActiveCfg = Publish|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{E0D26B6F-3674-4CAD-B1C7-AC52258EC2A3}.Release|x86.ActiveCfg = Release|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|Mixed Platforms.ActiveCfg = Publish|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|Mixed Platforms.Build.0 = Publish|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Publish|x86.ActiveCfg = Publish|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{760F1D8A-0963-45DA-9E92-220E05EBAD2A}.Release|x86.ActiveCfg = Release|Any CPU
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
