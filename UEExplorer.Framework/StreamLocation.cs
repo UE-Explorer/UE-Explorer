@@ -6,11 +6,13 @@
 
         public readonly object Source;
         public readonly long Position;
+        public readonly int Size;
 
-        public StreamLocation(object source, long position)
+        public StreamLocation(object source, long position, int size = -1)
         {
             Source = source;
             Position = position;
+            Size = size;
         }
     }
 }

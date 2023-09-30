@@ -1,63 +1,139 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
+using AutoUpdaterDotNET;
+using Eliot.Utilities;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.VisualBasic.ApplicationServices;
+using UEExplorer.Framework;
+using UEExplorer.Framework.Commands;
+using UEExplorer.Framework.Plugin;
+using UEExplorer.Framework.UI.Services;
+using UEExplorer.Properties;
+using UEExplorer.Tools;
 using UEExplorer.UI.Dialogs;
+using UEExplorer.UI.Main;
+using UEExplorer.UI.Services;
 using UELib;
 using UELib.Types;
-using Eliot.Utilities;
-using UEExplorer.UI.Main;
-using AutoUpdaterDotNET;
-using UEExplorer.Properties;
-using System.Reflection;
+using UnhandledExceptionEventArgs = Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs;
 
 namespace UEExplorer
 {
     public static class Program
     {
+        private const string WebsiteUrl =
+#if DEBUG_WITH_LOCALHOST
+            "https://localhost/Eliot/";
+#else
+            "https://eliotvu.com/";
+#endif
+
+        internal const string DonateUrl = WebsiteUrl + "donate.html";
+
+        internal const string ForumUrl = WebsiteUrl + "forum/";
+        internal const string StartUrl = WebsiteUrl + "apps/ue_explorer/";
+        private const string UpdateUrl = WebsiteUrl + "updates/ue-explorer.xml" + UpdateQuery;
+        private const string UpdateQuery = "?auto=1&installed_version={0}";
+        internal const string SubmitReportUrl = WebsiteUrl + "report/send/";
+
+        private static IEnumerable<IPluginModule> InternalPluginModules =>
+            new List<IPluginModule> { new InternalToolsPlugin() };
+
         [STAThread]
         private static void Main(string[] args)
         {
+            IEnumerable<IPluginModule> pluginModules = null;
+                
             try
             {
                 LogManager.StartLogStream();
 
-                foreach (string arg in args) Console.WriteLine($"Argument: {arg}");
+                foreach (string arg in args)
+                {
+                    Console.WriteLine($"Argument: {arg}");
+                }
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                if (args.Length >= 2 && ((IList)args).Contains("-console"))
+                // TODO: Deprecate -console
+                if (args.Length >= 2 && args.Contains("-console"))
                 {
                     var console = new ProgramConsole();
                     Application.Run(console);
                     Application.Exit();
                 }
-                else if (((IList)args).Contains("-newwindow"))
-                {
-                    var window = new ProgramForm();
-                    Application.Run(window);
-                }
                 else
                 {
-                    //Thread.CurrentThread.CurrentCulture = CultureInfo.InstalledUICulture;
-                    var app = new SingleInstanceApplication();
-                    app.Run(Environment.GetCommandLineArgs());
+                    pluginModules = PluginManager
+                        .LoadModules(Path.Combine(Application.StartupPath, "plugins"))
+                        .ToList();
+
+                    var builder = Host.CreateDefaultBuilder();
+
+                    // Framework services
+                    builder.ConfigureServices(services => services
+                        .AddSingleton<CommandService>()
+                        .AddSingleton<ContextService>()
+                        .AddSingleton<PackageManager>()
+                        .AddSingleton<PluginService>()
+                        .AddSingleton<IDockingService, DockingService>()
+                    );
+
+                    foreach (var module in InternalPluginModules.Concat(pluginModules))
+                    {
+                        builder.ConfigureServices(services =>
+                        {
+                            services.AddSingleton(module);
+                            module.Build(services);
+                        });
+                    }
+
+                    // App services
+                    builder.ConfigureServices(services => services
+                        .AddTransient<ProgramForm>()
+                    );
+
+                    var serviceProvider = ServiceHost.Build(builder);
+
+                    var pluginService = ServiceHost.GetRequired<PluginService>();
+                    foreach (var module in pluginModules)
+                    {
+                        module.Activate(pluginService);
+                    }
+
+                    if (args.Contains("-newwindow"))
+                    {
+                        var window = serviceProvider.GetRequiredService<ProgramForm>();
+                        Application.Run(window);
+                    }
+                    else
+                    {
+                        var app = new SingleInstanceApplication();
+                        app.Run(Environment.GetCommandLineArgs());
+                    }
                 }
-            }
-            catch (Exception exception)
-            {
-                ExceptionDialog.Show("Internal crash!", exception);
             }
             finally
             {
+                if (pluginModules != null)
+                {
+                    foreach (var module in pluginModules)
+                    {
+                        module.Deactivate();
+                    }
+                }
+
                 LogManager.EndLogStream();
             }
         }
@@ -76,32 +152,30 @@ namespace UEExplorer
             UserHistory.Default.Save();
         }
 
-        public static IEnumerable<string> ParseArguments(IEnumerable<string> args)
+        internal static void CheckForUpdates()
         {
-            IList<string> options = new List<string>();
-            foreach (string arg in args)
-            {
-                if (arg.StartsWith("-")) options.Add(arg.Substring(1));
-            }
-
-            return options;
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Console.WriteLine(Resources.CHECKING_FOR_UPDATES_LOG, version);
+            AutoUpdater.Start(string.Format(UpdateUrl, version));
         }
 
         private class SingleInstanceApplication : WindowsFormsApplicationBase
         {
-            public SingleInstanceApplication()
-            {
-                IsSingleInstance = true;
-            }
+            public SingleInstanceApplication() => IsSingleInstance = true;
 
-            protected override void OnCreateMainForm()
-            {
-                MainForm = new ProgramForm();
-            }
+            protected override void OnCreateMainForm() =>
+                MainForm = ServiceHost.Get().GetRequiredService<ProgramForm>();
 
-            protected override bool OnStartup(StartupEventArgs eventArgs)
+            protected override bool OnStartup(StartupEventArgs eventArgs) => true;
+
+            protected override void OnRun() => base.OnRun();
+
+            protected override void OnShutdown() => base.OnShutdown();
+
+            protected override bool OnUnhandledException(UnhandledExceptionEventArgs e)
             {
-                return true;
+                ExceptionDialog.Show("Internal crash!", e.Exception);
+                return base.OnUnhandledException(e);
             }
 
             protected override void OnStartupNextInstance(StartupNextInstanceEventArgs eventArgs)
@@ -110,7 +184,10 @@ namespace UEExplorer
                 var args = eventArgs.CommandLine;
                 for (int i = 1; i < args.Count; ++i)
                 {
-                    if (File.Exists(args[i])) ((ProgramForm)MainForm).LoadFromFile(args[i]);
+                    if (File.Exists(args[i]))
+                    {
+                        ((ProgramForm)MainForm).LoadFromFile(args[i]);
+                    }
                 }
             }
         }
@@ -119,20 +196,20 @@ namespace UEExplorer
         {
             private const string LogFileName = "Log{0}.txt";
 
-            private static readonly string LogFilePath =
+            private static readonly string s_logFilePath =
                 Path.Combine(s_appDataDir, LogFileName);
 
-            private static FileStream _LogStream;
+            private static FileStream s_logStream;
 
             public static void StartLogStream()
             {
                 int failCount = 0;
             retry:
-                string logPath = string.Format(LogFilePath,
+                string logPath = string.Format(s_logFilePath,
                     failCount > 0 ? failCount.ToString(CultureInfo.InvariantCulture) : string.Empty);
                 try
                 {
-                    _LogStream = new FileStream(logPath, FileMode.Create, FileAccess.Write);
+                    s_logStream = new FileStream(logPath, FileMode.Create, FileAccess.Write);
                 }
                 catch (IOException)
                 {
@@ -140,18 +217,20 @@ namespace UEExplorer
                     goto retry;
                 }
 
-                Debug.Assert(_LogStream != null, "Couldn't open file" + Path.GetFileName(logPath));
-                Console.SetOut(new StreamWriter(_LogStream));
+                Debug.Assert(s_logStream != null, "Couldn't open file" + Path.GetFileName(logPath));
+                Console.SetOut(new StreamWriter(s_logStream));
             }
 
             public static void EndLogStream()
             {
-                if (_LogStream == null)
+                if (s_logStream == null)
+                {
                     return;
+                }
 
-                _LogStream.Flush();
-                _LogStream.Dispose();
-                _LogStream = null;
+                s_logStream.Flush();
+                s_logStream.Dispose();
+                s_logStream = null;
             }
         }
 
@@ -161,9 +240,6 @@ namespace UEExplorer
         private static readonly string s_settingsPath = Path.Combine(s_appDataDir, "UEExplorerConfig.xml");
         public static readonly string DockingConfigPath = Path.Combine(s_appDataDir, "Docking.xml");
 
-        private static readonly string s_appFilesDir = Application.StartupPath;
-        internal static readonly string s_templateDir = Path.Combine(s_appFilesDir, "Templates");
-
         public static XMLSettings Options;
 
         public static void LoadConfig()
@@ -172,12 +248,22 @@ namespace UEExplorer
             {
                 using (var r = new XmlTextReader(s_settingsPath))
                 {
-                    var xser = new XmlSerializer(typeof(XMLSettings));
-                    Options = (XMLSettings)xser.Deserialize(r);
+                    try
+                    {
+                        var xser = new XmlSerializer(typeof(XMLSettings));
+                        Options = (XMLSettings)xser.Deserialize(r);
+                    }
+                    catch (Exception exc)
+                    {
+                        Console.Error.WriteLine("Failed to deserialize the configuration file {0}", exc.Message);
+                        Options = new XMLSettings();
+                    }
                 }
             }
             else
+            {
                 SaveConfig();
+            }
 
             UnrealConfig.SuppressComments = Options.bSuppressComments;
             UnrealConfig.PreBeginBracket = ParseFormatOption(Options.PreBeginBracket);
@@ -238,20 +324,17 @@ namespace UEExplorer
             }
         }
 
-        internal static string ParseIndention(int indentionCount)
-        {
-            return string.Empty.PadLeft(indentionCount, ' ');
-        }
+        internal static string ParseIndention(int indentionCount) => string.Empty.PadLeft(indentionCount, ' ');
 
-        internal static string ParseFormatOption(string input)
-        {
-            return input.Replace("%NEWLINE%", "\r\n").Replace("%TABS%", "{0}");
-        }
+        internal static string ParseFormatOption(string input) =>
+            input.Replace("%NEWLINE%", "\r\n").Replace("%TABS%", "{0}");
 
         public static void SaveConfig()
         {
             if (Options == null)
+            {
                 Options = new XMLSettings();
+            }
 
             using (var w = new XmlTextWriter(s_settingsPath, Encoding.ASCII))
             {
@@ -261,26 +344,6 @@ namespace UEExplorer
         }
 
         #endregion
-
-        internal const string WebsiteUrl =
-#if DEBUG_WITH_LOCALHOST
-            "https://localhost/Eliot/";
-#else
-            "https://eliotvu.com/";
-#endif
-
-        internal const string DonateUrl = WebsiteUrl + "donate.html";
-
-        internal const string ContactUrl = WebsiteUrl + "contact.html";
-
-        //internal const string Program_URL = WEBSITE_URL + "portfolio/view/21/ue-explorer";
-        //internal const string Program_Parm_ID = "data[items][id]=21";
-        //internal const string Version_URL = WEBSITE_URL +  "apps/version/";
-        internal const string ForumUrl = WebsiteUrl + "forum/";
-        internal const string StartUrl = WebsiteUrl + "apps/ue_explorer/";
-        private const string UpdateUrl = WebsiteUrl + "updates/ue-explorer.xml" + UpdateQuery;
-        private const string UpdateQuery = "?auto=1&installed_version={0}";
-        internal const string SubmitReportUrl = WebsiteUrl + "report/send/";
 
         // TODO: Deprecate
 
@@ -407,12 +470,5 @@ namespace UEExplorer
         }
 
         #endregion
-
-        internal static void CheckForUpdates()
-        {
-            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            Console.WriteLine(Resources.CHECKING_FOR_UPDATES_LOG, version);
-            AutoUpdater.Start(string.Format(UpdateUrl, version));
-        }
     }
 }

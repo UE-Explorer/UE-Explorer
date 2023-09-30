@@ -7,11 +7,11 @@
         public TextLocation Location;
         public TextSegment Segment;
 
-        public SourceLocation(int line, int column, int index, int length)
+        public SourceLocation(int line, int column, int offset, int length)
         {
             Location.Line = line;
             Location.Column = column;
-            Segment.Index = index;
+            Segment.Index = offset;
             Segment.Length = length;
         }
 

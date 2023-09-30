@@ -6,11 +6,74 @@ using UELib.Annotations;
 
 namespace UEExplorer.Framework
 {
+    [Flags]
+    [Serializable]
+    public enum PackageReferenceFlags
+    {
+        NoAutoLoad = 1 << 0,
+    }
+
+    [Serializable]
+    public enum PackageCookerPlatform
+    {
+        /// <summary>
+        /// Automatically determine the platform.
+        /// </summary>
+        Auto,
+
+        /// <summary>
+        /// The package should be treated as cooked for PC.
+        /// </summary>
+        PC,
+
+        /// <summary>
+        /// The package should be treated as cooked for Console.
+        /// Console cooked packages are usually fully compressed,
+        /// use the .xxx extension,
+        /// and all editor data is completely stripped out.
+        /// </summary>
+        Console,
+    }
+
+    [Serializable]
+    public struct PackageEngineBuild
+    {
+        public uint PackageVersion;
+        public ushort PackageLicenseeVersion;
+
+        public UnrealPackage.GameBuild.BuildName BuildName;
+        public BuildGeneration Generation;
+    }
+
+    [Serializable]
+    public struct PackageSettings
+    {
+        public UnrealPackage.GameBuild.BuildName BuildNameTarget;
+
+        /// <summary>
+        /// Some game packages, esp heavily modified ones cannot be detected as such.
+        /// For such packages it is necessary to manually configure the build.
+        ///
+        /// If not null, override the auto-detected engine build.
+        /// If null, fall back to <see cref="BuildNameTarget"></see>
+        /// </summary>
+        public PackageEngineBuild? EngineBuild;
+
+        /// <summary>
+        /// A package cooked for console is drastically different, and usually cannot be detected automatically.
+        /// For such packages it is necessary to manually configure the platform.
+        /// </summary>
+        public PackageCookerPlatform CookerPlatform;
+    }
+
     [Serializable]
     public class PackageReference : IComparable<PackageReference>, IComparable<string>
     {
         [NotNull] public readonly string FilePath;
         public readonly DateTime RegisterDate;
+
+        public PackageSettings Settings;
+        public PackageReferenceFlags Flags;
 
         public PackageReference([NotNull] string filePath, [CanBeNull] UnrealPackage linker)
         {
@@ -21,12 +84,13 @@ namespace UEExplorer.Framework
         }
 
         [field: NonSerialized] [CanBeNull] public UnrealPackage Linker { get; internal set; }
+        [field: NonSerialized] [CanBeNull] public Exception Error { get; internal set; }
 
         [DisplayName("Path")]
         public string ShortFilePath => Path.Combine(
             //"...",
-            Path.GetDirectoryName(FilePath) ?? string.Empty,
-            Path.GetFileName(FilePath));
+            Path.GetFileName(Path.GetDirectoryName(FilePath)) ?? string.Empty,
+            Path.GetFileNameWithoutExtension(FilePath));
 
         public int CompareTo(PackageReference other) => other.FilePath.Equals(FilePath)
             ? 0

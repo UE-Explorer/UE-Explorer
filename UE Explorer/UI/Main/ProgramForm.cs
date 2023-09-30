@@ -5,7 +5,11 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using Krypton.Toolkit;
-using UEExplorer.Development;
+using UEExplorer.Framework;
+using UEExplorer.Framework.Commands;
+using UEExplorer.Framework.Tasks;
+using UEExplorer.Framework.UI.Commands;
+using UEExplorer.Framework.UI.Services;
 using UEExplorer.Properties;
 using UEExplorer.UI.Dialogs;
 using UEExplorer.UI.Forms;
@@ -18,7 +22,7 @@ namespace UEExplorer.UI.Main
 {
     public partial class ProgramForm : KryptonForm
     {
-        internal ProgramForm()
+        public ProgramForm()
         {
             InitializeComponent();
 

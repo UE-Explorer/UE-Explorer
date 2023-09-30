@@ -2,8 +2,8 @@
 {
     public struct ProgramLocation
     {
-        public readonly SourceLocation SourceLocation;
-        public readonly StreamLocation StreamLocation;
+        public SourceLocation SourceLocation;
+        public StreamLocation StreamLocation;
 
         public ProgramLocation(in SourceLocation sourceLocation, in StreamLocation streamLocation)
         {

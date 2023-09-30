@@ -1,9 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
 using UELib.Annotations;
 
-namespace UEExplorer.UI
+namespace UEExplorer.Framework
 {
     public class ContextChangedEventArgs : EventArgs
     {
@@ -18,20 +17,9 @@ namespace UEExplorer.UI
     public delegate void ContextChangedEventHandler(object sender, ContextChangedEventArgs e);
 
     [ComVisible(true)]
-    public sealed class ContextProvider : IComponent
+    public sealed class ContextService
     {
         [CanBeNull] public ContextInfo ActiveContext { get; private set; }
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
-        }
-
-        /// <inheritdoc />
-        public ISite Site { get; set; }
-
-        /// <inheritdoc />
-        public event EventHandler Disposed;
 
         public event ContextChangedEventHandler ContextChanged;
 

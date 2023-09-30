@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{66B17C8E-BF5D-456E-BF2E-C8BFA186D32B}</ProjectGuid>
+    <ProjectGuid>{5EB85C80-3417-43F6-BFB2-BA5D4CC237EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UEExplorer.Framework</RootNamespace>
-    <AssemblyName>UEExplorer.Framework</AssemblyName>
+    <RootNamespace>UEExplorer.Framework.Plugin</RootNamespace>
+    <AssemblyName>UEExplorer.Framework.Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -35,45 +35,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CommandCategoryAttribute.cs" />
-    <Compile Include="Commands\CommandService.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="ServiceHost.cs" />
-    <Compile Include="ContextActionKind.cs" />
-    <Compile Include="ContextChangeInfo.cs" />
-    <Compile Include="ContextInfo.cs" />
-    <Compile Include="ContextService.cs" />
-    <Compile Include="IContextListener.cs" />
-    <Compile Include="ObjectPathBuilder.cs" />
-    <Compile Include="PackageCollection.cs" />
-    <Compile Include="PackageEventArgs.cs" />
-    <Compile Include="PackageManager.cs" />
-    <Compile Include="PackageReference.cs" />
-    <Compile Include="ProgramLocation.cs" />
+    <Compile Include="IPluginModule.cs" />
+    <Compile Include="PluginPackage.cs" />
+    <Compile Include="PluginService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SourceLocation.cs" />
-    <Compile Include="StreamLocation.cs" />
-    <Compile Include="StreamLocationFactory.cs" />
-    <Compile Include="TargetResolver.cs" />
-    <Compile Include="TextLocation.cs" />
-    <Compile Include="TextSegment.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
       <Version>7.0.0</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions">
-      <Version>7.0.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj">
-      <Project>{7E45273F-434F-42FA-8269-0E760AEB41E1}</Project>
-      <Name>Eliot.UELib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
