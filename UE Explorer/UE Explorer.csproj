@@ -209,6 +209,9 @@
     <Compile Include="UI\Dialogs\StructureInputDialog.Designer.cs">
       <DependentUpon>StructureInputDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\HexViewerPanel.Designer.cs">
+      <DependentUpon>HexViewerPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Panels\WebViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -223,7 +226,7 @@
       <DependentUpon>HexViewerFAQ.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\HexViewerPanel.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Main\ProgramConsole.cs">
       <SubType>Form</SubType>
@@ -355,6 +358,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\HexViewerControl.nl.resx">
       <DependentUpon>HexViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\HexViewerPanel.resx">
+      <DependentUpon>HexViewerPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Main\ProgramConsole.resx">
       <DependentUpon>ProgramConsole.cs</DependentUpon>
@@ -531,7 +538,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
