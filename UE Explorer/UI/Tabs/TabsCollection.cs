@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using Storm.TabControl;
 
 namespace UEExplorer.UI
@@ -42,13 +43,14 @@ namespace UEExplorer.UI
                 return null;
             }
 
-            var tabItem = new TabStripItem
+            var tabItem = new TabStripItem(tabName, null)
             {
                 Selected = true,
                 TabStripParent = _TabsControl,
                 TabIndex = 0,
                 Title = tabName,
-                BackColor = System.Drawing.Color.White
+                BackColor = Form.BackColor,
+                Font = Form.Font
             };
 
             _TabsControl.AddTab( tabItem );

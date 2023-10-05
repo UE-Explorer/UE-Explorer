@@ -179,7 +179,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAK
-        LAAAAk1TRnQBSQFMAgEBLAEAAbQBBgG0AQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        LAAAAk1TRnQBSQFMAgEBLAEAAdQBBgHUAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAAcADAAEBAQABCAYAATAYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -706,7 +706,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="exportDecompiledClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+    <value>149, 22</value>
   </data>
   <data name="exportDecompiledClassesToolStripMenuItem.Text" xml:space="preserve">
     <value>Export &amp;Classes</value>
@@ -715,7 +715,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="exportScriptClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+    <value>149, 22</value>
   </data>
   <data name="exportScriptClassesToolStripMenuItem.Text" xml:space="preserve">
     <value>Export &amp;Scripts</value>
@@ -2241,6 +2241,9 @@
   <data name="SearchByObjectGroupButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 25</value>
   </data>
+  <data name="SearchObjectTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="SearchObjectTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 28</value>
   </data>
@@ -2317,7 +2320,7 @@
     <value>Reload</value>
   </data>
   <data name="_Tools_StripDropDownButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 25</value>
+    <value>54, 25</value>
   </data>
   <data name="_Tools_StripDropDownButton.Text" xml:space="preserve">
     <value>&amp;Tools</value>
@@ -2494,7 +2497,7 @@
     <value>Black</value>
   </data>
   <data name="PrevButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 25</value>
+    <value>23, 21</value>
   </data>
   <data name="PrevButton.Text" xml:space="preserve">
     <value>Backward</value>
@@ -2521,7 +2524,7 @@
     <value>Black</value>
   </data>
   <data name="NextButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 25</value>
+    <value>23, 21</value>
   </data>
   <data name="NextButton.Text" xml:space="preserve">
     <value>Forward</value>
@@ -2530,7 +2533,7 @@
     <value>False</value>
   </data>
   <data name="ExportButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 25</value>
+    <value>44, 21</value>
   </data>
   <data name="ExportButton.Text" xml:space="preserve">
     <value>Save</value>
@@ -2547,17 +2550,20 @@
   <data name="SearchBox.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="SearchBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="SearchBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
   <data name="SearchBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 28</value>
+    <value>140, 24</value>
   </data>
   <data name="FindButton.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="FindButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 25</value>
+    <value>40, 21</value>
   </data>
   <data name="FindButton.Text" xml:space="preserve">
     <value>Find</value>
@@ -2569,10 +2575,10 @@
     <value>6, 28</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 28</value>
+    <value>6, 24</value>
   </data>
   <data name="Label_ObjectName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 25</value>
+    <value>44, 21</value>
   </data>
   <data name="Label_ObjectName.Text" xml:space="preserve">
     <value>Object</value>
@@ -2605,13 +2611,16 @@
     <value>No</value>
   </data>
   <data name="ViewTools.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 25</value>
+    <value>45, 21</value>
   </data>
   <data name="ViewTools.Text" xml:space="preserve">
     <value>View</value>
   </data>
   <data name="ToolStrip_Content.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="ToolStrip_Content.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="ToolStrip_Content.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -2746,7 +2755,7 @@
     <value>58</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1312, 555</value>
@@ -2911,7 +2920,7 @@
     <value>TextEditorPanel</value>
   </data>
   <data name="&gt;&gt;TextEditorPanel.Type" xml:space="preserve">
-    <value>WindowsFormsIntegration.Design.HostedComponent, WindowsFormsIntegration.Design, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>WindowsFormsIntegration.Design.HostedComponent, WindowsFormsIntegration.Design, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;PrevButton.Name" xml:space="preserve">
     <value>PrevButton</value>
@@ -2983,6 +2992,6 @@
     <value>UC_PackageExplorer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>UEExplorer.UI.Tabs.UserControl_Tab, UE Explorer, Version=1.2.5.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>UEExplorer.UI.Tabs.UserControl_Tab, UE Explorer, Version=1.3.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

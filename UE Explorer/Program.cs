@@ -31,7 +31,7 @@ namespace UEExplorer
                 }
 
                 Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault( false );
+                Application.SetCompatibleTextRenderingDefault( true );
 
                 if( args.Length >= 2 && ((IList)args).Contains( "-console" ) )
                 {
