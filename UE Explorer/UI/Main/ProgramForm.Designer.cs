@@ -398,13 +398,11 @@
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
             this.BackgroundImage = global::UEExplorer.Properties.Resources.UE_ProgramLogo;
             this.Controls.Add(this.HomepageButton);
             this.Controls.Add(this.TabComponentsStrip);
             this.Controls.Add(this.UEStatusStrip);
             this.DoubleBuffered = true;
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.Menu = this.mainMenu1;
             this.Name = "ProgramForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
