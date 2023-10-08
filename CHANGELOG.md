@@ -1,3 +1,8 @@
+# 1.3.2
+
+* Fixed issues with DPI scaling
+* Fixed Hex-Viewer scrolling
+
 # 1.3.1.0
 
 This is a hotfix release which addresses a few minor issues with UE Explorer.
