@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using UEExplorer.Properties;
@@ -41,7 +43,9 @@ namespace UEExplorer.UI.Main
                 return;
             }
 
-            var options = Program.ParseArguments(args);
+            var options = from arg in args
+                where arg.StartsWith("-")
+                select arg.Substring(1);
             foreach (string option in options)
             {
                 string primary = option;
@@ -65,40 +69,48 @@ namespace UEExplorer.UI.Main
                         break;
 
                     case "export":
-                    {
-                        var shouldExportScripts = false;
-                        switch (secondary)
                         {
-                            case "classes":
-                                break;
-
-                            case "scripts":
-                                shouldExportScripts = true;
-                                break;
-
-                            default:
-                                Console.WriteLine(Resources.UNRECOGNIZED_EXPORT_TYPE, secondary);
-                                return;
-                        }
-
-                        try
-                        {
-                            Console.WriteLine(Resources.EXPORTING_PACKAGE, filePath);
-                            using (var package = UnrealLoader.LoadFullPackage(filePath))
+                            var shouldExportScripts = false;
+                            switch (secondary)
                             {
-                                string exportPath = shouldExportScripts
-                                    ? package.ExportPackageObjects<UTextBuffer>()
-                                    : package.ExportPackageObjects<UClass>();
-                                Console.WriteLine(Resources.PACKAGE_EXPORTED_TO, exportPath);
-                            }
-                        }
-                        catch (Exception exc)
-                        {
-                            Console.WriteLine(Resources.EXCEPTION_OCCURRED_WHILE_EXPORTING, filePath, exc);
-                        }
+                                case "classes":
+                                    break;
 
-                        break;
-                    }
+                                case "scripts":
+                                    shouldExportScripts = true;
+                                    break;
+
+                                default:
+                                    Console.WriteLine(Resources.UNRECOGNIZED_EXPORT_TYPE, secondary);
+                                    return;
+                            }
+
+                            try
+                            {
+                                Console.WriteLine(Resources.EXPORTING_PACKAGE, filePath);
+                                using (var package = UnrealLoader.LoadFullPackage(filePath))
+                                {
+                                    string exportPath = Path.Combine(Application.StartupPath, "Exported");
+                                    if (shouldExportScripts)
+                                    {
+                                        package.ExportPackageObjects<UTextBuffer>(exportPath);
+                                    }
+                                    else
+                                    {
+                                        package.ExportPackageObjects<UClass>(exportPath);
+                                        ;
+                                    }
+
+                                    Console.WriteLine(Resources.PACKAGE_EXPORTED_TO, exportPath);
+                                }
+                            }
+                            catch (Exception exc)
+                            {
+                                Console.WriteLine(Resources.EXCEPTION_OCCURRED_WHILE_EXPORTING, filePath, exc);
+                            }
+
+                            break;
+                        }
 
                     default:
                         Console.WriteLine(Resources.UNRECOGNIZED_COMMANDLINE_OPTION, primary);

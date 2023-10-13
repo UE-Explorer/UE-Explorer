@@ -225,7 +225,7 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   <data name="PACKAGE_METAINFO" xml:space="preserve">
     <value>Pakkets MetaInfo</value>
   </data>
-  <data name="NodeItem_ExportAs" xml:space="preserve">
+  <data name="ExportAsCommand" xml:space="preserve">
     <value>Exporteer als...</value>
   </data>
   <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
@@ -285,14 +285,14 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   <data name="NodeItem_ViewDisassembledTokens" xml:space="preserve">
     <value>Tokens afgezonderd decompileren</value>
   </data>
-  <data name="NodeItem_ViewBuffer" xml:space="preserve">
+  <data name="OpenBufferCommand" xml:space="preserve">
     <value>Buffer openen...</value>
   </data>
   <data name="NodeItem_ViewException" xml:space="preserve">
     <value>Uitzondering weergeven</value>
   </data>
-  <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
-    <value>Table buffer openen...</value>
+  <data name="TableIdentifier" xml:space="preserve">
+    <value>Tafel</value>
   </data>
   <data name="NoTargetForViewBuffer" xml:space="preserve">
     <value>Geen doelwit gevonden voor "Bekijk buffer"</value>
@@ -333,10 +333,10 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   <data name="NodeItem_Play" xml:space="preserve">
     <value>Play</value>
   </data>
-  <data name="DecompilerPage_OnObjectTarget_Decompile___0_" xml:space="preserve">
+  <data name="DecompilerPage_Decompile_Title__0_" xml:space="preserve">
     <value>Decompilatie: {0}</value>
   </data>
-  <data name="DecompilerPage_DecompilerPage_Decompile_Title" xml:space="preserve">
+  <data name="DecompilerPage_Decompile_Title" xml:space="preserve">
     <value>Décompilateur</value>
   </data>
   <data name="NodeItem_View" xml:space="preserve">
@@ -359,5 +359,11 @@ Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Instellingen</value>
+  </data>
+  <data name="FindInObjects" xml:space="preserve">
+    <value>Objecten doorzoeken</value>
+  </data>
+  <data name="StatusReady" xml:space="preserve">
+    <value>Gereed</value>
   </data>
 </root>

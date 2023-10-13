@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,8 @@ using Microsoft.VisualBasic.ApplicationServices;
 using UEExplorer.Framework;
 using UEExplorer.Framework.Commands;
 using UEExplorer.Framework.Plugin;
+using UEExplorer.Framework.Services;
+using UEExplorer.Framework.Tasks;
 using UEExplorer.Framework.UI.Commands;
 using UEExplorer.Framework.UI.Services;
 using UEExplorer.Properties;
@@ -81,9 +84,11 @@ namespace UEExplorer
                         // Framework services
                         services
                             .AddSingleton<CommandService>()
+                            .AddSingleton<ContextCommandBuilder>()
                             .AddSingleton<ContextService>()
                             .AddSingleton<PackageManager>()
                             .AddSingleton<PluginService>()
+                            .AddSingleton<TasksManager>()
                             .AddSingleton<IDockingService, DockingService>();
 
                         // Plugin services
@@ -342,132 +347,6 @@ namespace UEExplorer
             {
                 var xser = new XmlSerializer(typeof(XMLSettings));
                 xser.Serialize(w, Options);
-            }
-        }
-
-        #endregion
-
-        // TODO: Deprecate
-
-        #region Registry
-
-        private const string RegistryFileFolderName = "UEExplorer.AnyUnrealFile";
-
-        public static bool AreFileTypesRegistered()
-        {
-            return Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(RegistryFileFolderName) != null;
-        }
-
-        public static void ToggleRegisterFileTypes(bool undo = false)
-        {
-            var extkeys = new List<Microsoft.Win32.RegistryKey>();
-            var extensions = UnrealExtensions.FormatUnrealExtensionsAsList();
-            if (undo)
-            {
-                Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree(RegistryFileFolderName);
-                foreach (string ext in extensions)
-                {
-                    var extkey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext, true);
-                    if (extkey != null)
-                    {
-                        if ((string)extkey.GetValue(string.Empty) == RegistryFileFolderName)
-                            Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree(ext);
-                        else
-                            extkeys.Add(extkey);
-                    }
-                }
-
-                foreach (var key in extkeys)
-                {
-                    var reference = (string)key.GetValue(string.Empty);
-                    if (reference != null)
-                    {
-                        var k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(reference, true);
-                        if (k != null) ToggleFileProperties(k, true);
-                    }
-                }
-            }
-            else
-            {
-                foreach (string ext in extensions)
-                {
-                    var extkey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext, true);
-                    if (extkey == null)
-                    {
-                        extkey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(ext);
-                        extkey.SetValue(string.Empty, RegistryFileFolderName, Microsoft.Win32.RegistryValueKind.String);
-                        extkey.SetValue("Content Type", "application", Microsoft.Win32.RegistryValueKind.String);
-                    }
-                    else if ((string)extkey.GetValue(string.Empty) != RegistryFileFolderName) extkeys.Add(extkey);
-                }
-
-                var unrealfilekey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(RegistryFileFolderName);
-                if (unrealfilekey != null)
-                {
-                    unrealfilekey.SetValue(string.Empty, "Unreal File");
-                    ToggleFileProperties(unrealfilekey);
-                }
-
-                foreach (var key in extkeys)
-                {
-                    var reference = (string)key.GetValue(string.Empty);
-                    if (reference != null)
-                    {
-                        var k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(reference, true);
-                        if (k != null) ToggleFileProperties(k);
-                    }
-                }
-            }
-        }
-
-        private static void ToggleFileProperties(Microsoft.Win32.RegistryKey key, bool undo = false)
-        {
-            if (undo)
-            {
-                var xkey = key.OpenSubKey("DefaultIcon", true);
-                // Should only add a icon reference if none was already set, so that .UT2 map files keep their original icon.
-                if (xkey != null)
-                {
-                    var curkey = (string)xkey.GetValue(string.Empty);
-                    if (curkey != null)
-                    {
-                        var oldasc = (string)xkey.GetValue("OldAssociation");
-                        xkey.SetValue("OldAssociation", curkey, Microsoft.Win32.RegistryValueKind.String);
-                        xkey.SetValue(string.Empty, oldasc ?? string.Empty, Microsoft.Win32.RegistryValueKind.String);
-                    }
-                }
-
-                var shellkey = key.OpenSubKey("shell", true);
-                if (shellkey != null) shellkey.DeleteSubKeyTree("open in " + Application.ProductName);
-            }
-            else
-            {
-                // Should only add a icon reference if none was already set, so that .UT2 map files keep their original icon.
-                if (key.OpenSubKey("DefaultIcon") == null)
-                {
-                    using (var defaulticonkey = key.CreateSubKey("DefaultIcon"))
-                    {
-                        if (defaulticonkey != null)
-                        {
-                            string mykey = Path.Combine(Application.StartupPath, "unrealfile.ico");
-                            var oldassociation = (string)defaulticonkey.GetValue(string.Empty);
-                            if (oldassociation != mykey)
-                            {
-                                if (oldassociation != null)
-                                    defaulticonkey.SetValue("OldAssociation", oldassociation,
-                                        Microsoft.Win32.RegistryValueKind.String);
-                                defaulticonkey.SetValue(string.Empty, mykey, Microsoft.Win32.RegistryValueKind.String);
-                            }
-                        }
-                    }
-                }
-
-                var shellkey = key.CreateSubKey("shell");
-                var editkey = shellkey.CreateSubKey("open in " + Application.ProductName);
-                editkey.SetValue(string.Empty, "&Open in " + Application.ProductName);
-                var cmdkey = editkey.CreateSubKey("command");
-                cmdkey.SetValue(string.Empty, "\"" + Application.ExecutablePath + "\" \"%1\"",
-                    Microsoft.Win32.RegistryValueKind.ExpandString);
             }
         }
 

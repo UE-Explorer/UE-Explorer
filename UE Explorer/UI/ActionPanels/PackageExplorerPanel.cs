@@ -1,151 +1,200 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Windows.Forms;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using UEExplorer.Framework;
+using UEExplorer.Framework.Commands;
+using UEExplorer.Framework.UI;
+using UEExplorer.Framework.UI.Commands;
 using UEExplorer.Properties;
-using UEExplorer.UI.Dialogs;
 using UEExplorer.UI.Nodes;
-using UEExplorer.UI.Tabs;
 using UELib;
 using UELib.Core;
 
 namespace UEExplorer.UI.ActionPanels
 {
-    public partial class PackageExplorerPanel : UserControl
+    public partial class PackageExplorerPanel : UserControl, ITrackingContext
     {
-        private readonly ObjectActionsBuilder _ActionsBuilder = new ObjectActionsBuilder();
-        private readonly ContextProvider _ContextProvider;
+        private readonly ContextService _ContextService;
+
+        private readonly NodeSwapCollection _NodesSwap;
         private readonly ObjectTreeBuilder _ObjectTreeBuilder;
+
         private readonly PackageManager _PackageManager;
-        
-        private readonly Color _LoadedColor = Color.Black;
-        private readonly Color _UnloadedColor = Color.DarkGray;
+
+        private readonly Brush _Brush = new SolidBrush(SystemColors.WindowText);
 
         private string _CurrentFilterText = string.Empty;
-        
-        public PackageExplorerPanel(ContextProvider contextProvider, PackageManager packageManager)
+
+        public PackageExplorerPanel()
         {
             InitializeComponent();
 
-            _ObjectTreeBuilder = new ObjectTreeBuilder(FilterNodeDelegate, SortNodeDelegate);
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            {
+                return;
+            }
 
-            _ContextProvider = contextProvider;
-            _ContextProvider.ContextChanged += ContextProviderOnContextChanged;
+            IsTracking = isTrackingToolStripButton.Checked;
+            _NodesSwap = new NodeSwapCollection(packagesTreeView);
 
-            _PackageManager = packageManager;
+            UpdateSortBy(sortByNameToolStripMenuItem);
+
+            _ContextService = ServiceHost.GetRequired<ContextService>();
+            _ContextService.ContextChanged += ContextServiceOnContextChanged;
+
+            _PackageManager = ServiceHost.GetRequired<PackageManager>();
             _PackageManager.PackageRegistered += PackageManagerOnPackageRegistered;
             _PackageManager.PackageLoaded += PackageManagerOnPackageLoaded;
             _PackageManager.PackageInitialized += PackageManagerOnPackageInitialized;
             _PackageManager.PackageUnloaded += PackageManagerOnPackageUnloaded;
+            _PackageManager.PackageRemoved += PackageManagerOnPackageRemoved;
+            _PackageManager.PackageError += PackageManagerOnPackageError;
+
+            _ObjectTreeBuilder = new ObjectTreeBuilder(FilterNodeDelegate);
         }
+
+        public bool IsTracking { get; set; }
 
         ~PackageExplorerPanel()
         {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            {
+                return;
+            }
+
             _PackageManager.PackageRegistered -= PackageManagerOnPackageRegistered;
             _PackageManager.PackageLoaded -= PackageManagerOnPackageLoaded;
             _PackageManager.PackageInitialized -= PackageManagerOnPackageInitialized;
             _PackageManager.PackageUnloaded -= PackageManagerOnPackageUnloaded;
+            _PackageManager.PackageRemoved -= PackageManagerOnPackageRemoved;
+            _PackageManager.PackageError -= PackageManagerOnPackageError;
         }
 
         private void PackageExplorerPanel_Load(object sender, EventArgs e)
         {
-            var packages = _PackageManager.EnumeratePackages();
-            foreach (var packageReference in packages)
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
             {
-                var rootPackageNode = CreateRootPackageNode(packageReference);
-                TreeViewPackages.SelectedNode = rootPackageNode;
-                AddRootPackageNode(rootPackageNode);
-            }
-        }
-
-        private void ContextProviderOnContextChanged(object sender, ContextChangedEventArgs e)
-        {
-            object target = e.Context.Target;
-            if (target == null)
-            {
-                TreeViewPackages.SelectedNode = null;
                 return;
             }
 
-            var matchingNode = FindTaggedNode(target, TreeViewPackages.Nodes);
-            //TreeViewPackages.SelectedNode = matchingNode;
+            // Present the already-loaded packages.
+            var packages = _PackageManager.EnumeratePackages();
+            packagesTreeView.BeginUpdate();
+            foreach (var packageReference in packages)
+            {
+                var rootPackageNode = CreateRootPackageNode(packageReference);
+                rootPackageNode.Nodes.Add(ObjectTreeFactory.DummyNodeKey, "Expandable");
+                AddRootPackageNode(rootPackageNode);
+                packagesTreeView.SelectedNode = rootPackageNode;
+            }
+
+            UpdateTreeViewNodeSorter();
+            packagesTreeView.EndUpdate();
         }
 
-        private static TreeNode FindTaggedNode(object tag, TreeNodeCollection nodes)
+        private void ContextServiceOnContextChanged(object sender, ContextChangedEventArgs e)
+        {
+            if (!IsTracking)
+            {
+                return;
+            }
+
+            object target = e.Context.Target;
+            if (target == null)
+            {
+                //packagesTreeView.SelectedNode = null;
+                return;
+            }
+
+            var matchingNode = EnumerateNodes(_NodesSwap.Nodes).FirstOrDefault(node => node.Tag == target);
+            packagesTreeView.SelectedNode = matchingNode;
+        }
+
+        private static IEnumerable<TreeNode> EnumerateNodes(TreeNodeCollection nodes)
         {
             foreach (TreeNode node in nodes)
             {
-                if (node.Tag == tag)
-                {
-                    return node;
-                }
+                yield return node;
 
-                var subNode = FindTaggedNode(tag, node.Nodes);
-                if (subNode != null)
+                foreach (var child in EnumerateNodes(node.Nodes))
                 {
-                    return subNode;
+                    yield return child;
                 }
             }
-
-            return null;
         }
 
         private void PackageManagerOnPackageRegistered(object sender, PackageEventArgs e)
         {
             var packageReference = e.Package;
 
+            packagesTreeView.BeginUpdate();
             var rootPackageNode = CreateRootPackageNode(packageReference);
             AddRootPackageNode(rootPackageNode);
+            packagesTreeView.EndUpdate();
         }
 
         private void PackageManagerOnPackageLoaded(object sender, PackageEventArgs e)
         {
             var packageReference = e.Package;
 
+            packagesTreeView.BeginUpdate();
             var rootPackageNode = GetRootPackageNode(packageReference);
-            rootPackageNode.Nodes.Add(ObjectTreeFactory.DummyNodeKey, "Expandable");
-
-            rootPackageNode.ForeColor = Color.Empty;
+            rootPackageNode.ForeColor = ObjectTreeFactory.PackageLoadedColor;
+            rootPackageNode.EnsureVisible();
+            packagesTreeView.EndUpdate();
         }
 
         private void PackageManagerOnPackageInitialized(object sender, PackageEventArgs e)
         {
             var packageReference = e.Package;
 
+            packagesTreeView.BeginUpdate();
             var rootPackageNode = GetRootPackageNode(packageReference.Linker);
-            rootPackageNode.ForeColor = _LoadedColor;
-
-            if (TreeViewPackages.Nodes.Count == 1)
+            rootPackageNode.Nodes.Add(ObjectTreeFactory.DummyNodeKey, "Expandable");
+            if (_NodesSwap.Count == 1)
             {
                 rootPackageNode.Expand();
             }
+
+            packagesTreeView.EndUpdate();
         }
 
         private void PackageManagerOnPackageUnloaded(object sender, PackageEventArgs e)
         {
             var packageReference = e.Package;
 
+            packagesTreeView.BeginUpdate();
             var rootPackageNode = GetRootPackageNode(packageReference);
+            rootPackageNode.ForeColor = ObjectTreeFactory.PackageUnloadedColor;
+            rootPackageNode.Collapse();
             rootPackageNode.Nodes.Clear();
-            rootPackageNode.ForeColor = _UnloadedColor;
-            rootPackageNode.Remove();
+            packagesTreeView.EndUpdate();
         }
 
-        private IComparable SortNodeDelegate<T>(T exp)
+        private void PackageManagerOnPackageRemoved(object sender, PackageEventArgs e)
         {
-            switch (orderByToolStripComboBox.SelectedIndex)
-            {
-                case 0:
-                    return (exp as UObjectTableItem).Offset;
+            var packageReference = e.Package;
 
-                case 1:
-                    return (exp as UObjectTableItem).ObjectName.ToString();
-            }
+            packagesTreeView.BeginUpdate();
+            var rootPackageNode = GetRootPackageNode(packageReference);
+            RemoveRootPackageNode(rootPackageNode);
+            packagesTreeView.EndUpdate();
+        }
 
-            return 0;
+        private void PackageManagerOnPackageError(object sender, PackageEventArgs e)
+        {
+            var packageReference = e.Package;
+
+            var rootPackageNode = GetRootPackageNode(packageReference);
+            rootPackageNode.ForeColor = ObjectTreeFactory.ErrorColor;
         }
 
         private bool FilterNodeDelegate<T>(T exp)
@@ -159,170 +208,51 @@ namespace UEExplorer.UI.ActionPanels
                 .IndexOf(_CurrentFilterText, StringComparison.InvariantCultureIgnoreCase) <= 0;
         }
 
-        public void AddRootPackageNode(TreeNode node) => TreeViewPackages.Nodes.Add(node);
-
-        public TreeNode GetRootPackageNode(PackageReference packageReference)
+        private void AddRootPackageNode(TreeNode node)
         {
-            Debug.Assert(packageReference != null);
-            return TreeViewPackages.Nodes[packageReference.FilePath];
+            _NodesSwap.Add(node);
+            filterTextBox.Enabled = true;
+            packagesTreeView.Sort();
         }
 
-        public TreeNode GetRootPackageNode(UnrealPackage linker)
+        private void RemoveRootPackageNode(TreeNode node)
+        {
+            node.ForeColor = ObjectTreeFactory.PackageUnloadedColor;
+            node.Remove();
+            filterTextBox.Enabled = _NodesSwap.Count != 0;
+        }
+
+        private TreeNode GetRootPackageNode(PackageReference packageReference)
+        {
+            Debug.Assert(packageReference != null);
+            string name = packageReference.FilePath;
+            if (_NodesSwap.IsInFilterState)
+            {
+                return _NodesSwap.CachedNodes.Find(t => t.Name == name);
+            }
+
+            return _NodesSwap.Nodes[name];
+        }
+
+        private TreeNode GetRootPackageNode(UnrealPackage linker)
         {
             Debug.Assert(linker != null);
             string name = linker.FullPackageName;
-            return TreeViewPackages.Nodes[name];
+            if (_NodesSwap.IsInFilterState)
+            {
+                return _NodesSwap.CachedNodes.Find(t => t.Name == name);
+            }
+
+            return _NodesSwap.Nodes[name];
         }
 
-        public TreeNode CreateRootPackageNode(PackageReference packageReference)
+        private TreeNode CreateRootPackageNode(PackageReference packageReference)
         {
             var node = ObjectTreeFactory.CreateNode(packageReference);
             node.ForeColor = packageReference.IsActive()
-                ? _UnloadedColor
-                : _LoadedColor;
+                ? ObjectTreeFactory.PackageLoadedColor
+                : ObjectTreeFactory.PackageUnloadedColor;
             return node;
-        }
-
-        private void RebuildRootPackagesTree()
-        {
-            var packages = _PackageManager
-                .EnumeratePackages();
-
-            TreeViewPackages.Nodes.Clear();
-            foreach (var packageReference in packages)
-            {
-                var node = CreateRootPackageNode(packageReference);
-                AddRootPackageNode(node);
-
-                BuildRootPackageTree(packageReference);
-            }
-        }
-
-        private void BuildRootPackageTree(PackageReference packageReference)
-        {
-            var linker = packageReference.Linker;
-            Debug.Assert(linker != null);
-
-            var rootPackageNode = GetRootPackageNode(linker);
-
-            TreeViewPackages.BeginUpdate();
-
-            if (linker.Summary.CompressedChunks != null &&
-                linker.Summary.CompressedChunks.Any())
-            {
-                var dependenciesNode = new TreeNode("Chunks")
-                {
-                    Name = "Chunks", Tag = linker, ImageKey = "Chunks", SelectedImageKey = "Chunks"
-                };
-                dependenciesNode.Nodes.Add(ObjectTreeFactory.DummyNodeKey, "Expandable");
-                rootPackageNode.Nodes.Add(dependenciesNode);
-            }
-
-            if (linker.Summary.ImportCount != 0)
-            {
-                var depsNode = CreatePackageDependenciesNode(linker);
-                rootPackageNode.Nodes.Add(depsNode);
-            }
-
-            var nodes = _ObjectTreeBuilder.Visit(linker);
-            if (nodes != null)
-            {
-                foreach (var treeNode in nodes)
-                {
-                    rootPackageNode.Nodes.Add(treeNode);
-                }
-            }
-
-            TreeViewPackages.EndUpdate();
-        }
-
-        private TreeNode CreatePackageDependenciesNode(UnrealPackage linker)
-        {
-            var dependenciesNode = new TreeNode("Imports")
-            {
-                Name = "Dependencies", Tag = linker, ImageKey = "Diagram", SelectedImageKey = "Diagram"
-            };
-            dependenciesNode.Nodes.Add(ObjectTreeFactory.DummyNodeKey, "Expandable");
-            return dependenciesNode;
-        }
-
-        private void TreeViewPackages_BeforeExpand(object sender, TreeViewCancelEventArgs e)
-        {
-            // Already lazy-loaded.
-            if (!e.Node.Nodes.ContainsKey(ObjectTreeFactory.DummyNodeKey))
-            {
-                return;
-            }
-
-            TreeViewPackages.BeginUpdate();
-            e.Node.Nodes.RemoveByKey(ObjectTreeFactory.DummyNodeKey);
-
-            var node = e.Node;
-            switch (e.Node.Tag)
-            {
-                case PackageReference packageReference:
-                    BuildRootPackageTree(packageReference);
-                    break;
-
-                case UImportTableItem item:
-                    {
-                        node.Nodes.AddRange(_ObjectTreeBuilder.Visit(item).ToArray());
-                        break;
-                    }
-
-                case UExportTableItem item:
-                    {
-                        node.Nodes.AddRange(_ObjectTreeBuilder.Visit(item).ToArray());
-                        break;
-                    }
-
-                case UObject uObject:
-                    {
-                        var item = uObject.Table;
-                        dynamic nodes = _ObjectTreeBuilder.Visit((dynamic)item);
-                        if (nodes != null)
-                        {
-                            node.Nodes.AddRange(nodes.ToArray());
-                        }
-
-                        break;
-                    }
-
-                default:
-                    switch (e.Node.Name)
-                    {
-                        case "Dependencies":
-                            {
-                                var linker = (UnrealPackage)node.Tag;
-                                if (linker.Imports != null)
-                                {
-                                    foreach (var imp in linker.Imports.Where(item =>
-                                                 item.OuterIndex == 0))
-                                    {
-                                        var importNode = ObjectTreeFactory.CreateNode(imp);
-                                        node.Nodes.Add(importNode);
-                                    }
-                                }
-
-                                break;
-                            }
-                    }
-
-                    break;
-            }
-
-            TreeViewPackages.EndUpdate();
-        }
-
-        private void TreeViewPackages_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            if (e.Action == TreeViewAction.Unknown)
-            {
-                return;
-            }
-
-            _ContextProvider.OnContextChanged(this,
-                new ContextChangedEventArgs(new ContextInfo(ContextActionKind.Auto, e.Node)));
         }
 
         private void toolStripTextBoxFilter_TextChanged(object sender, EventArgs e)
@@ -334,31 +264,47 @@ namespace UEExplorer.UI.ActionPanels
         private void filterTreeDelayTimer_Tick(object sender, EventArgs e)
         {
             filterTreeDelayTimer.Stop();
-            
-            _CurrentFilterText = toolStripTextBoxFilter.Text.Trim();
-            RebuildRootPackagesTree();
-        }
 
-        private void objectContextMenu_Opening(object sender, CancelEventArgs e)
-        {
-            var actions = _ActionsBuilder
-                .Visit(TreeViewPackages.SelectedNode);
+            string searchText = filterTextBox.Text.Trim();
+            _CurrentFilterText = searchText;
 
-            objectContextMenu.Items.Clear();
-            foreach ((string text, var action) in actions)
+            if (searchText == string.Empty)
             {
-                var node = objectContextMenu.Items.Add(text);
-                node.Tag = action;
+                packagesTreeView.BeginUpdate();
+                _NodesSwap.SwapFilterState(true);
+                packagesTreeView.EndUpdate();
+                return;
             }
 
-            e.Cancel = objectContextMenu.Items.Count == 0;
-        }
+            var nodes = new List<TreeNode>();
+            foreach (var packageReference in _PackageManager.EnumeratePackages())
+            {
+                if (packageReference.Linker == null)
+                {
+                    continue;
+                }
 
-        private void objectContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            var action = (ContextActionKind)e.ClickedItem.Tag;
-            _ContextProvider.OnContextChanged(this,
-                new ContextChangedEventArgs(new ContextInfo(action, TreeViewPackages.SelectedNode)));
+                var groupNode = ObjectTreeFactory.CreateNode(packageReference);
+                groupNode.Expand();
+                foreach (var exp in packageReference.Linker.Exports)
+                {
+                    if (exp.ObjectName.ToString().IndexOf(searchText, StringComparison.OrdinalIgnoreCase) < 0)
+                    {
+                        continue;
+                    }
+
+                    var expNode = ObjectTreeFactory.CreateNode(exp);
+                    expNode.Text = ObjectPathBuilder.GetPath(exp.Object);
+                    groupNode.Nodes.Add(expNode);
+                }
+
+                nodes.Add(groupNode);
+            }
+
+            packagesTreeView.BeginUpdate();
+            _NodesSwap.SwapFilterState(false);
+            packagesTreeView.Nodes.AddRange(nodes.ToArray());
+            packagesTreeView.EndUpdate();
         }
 
         private void TreeViewPackages_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
@@ -369,102 +315,133 @@ namespace UEExplorer.UI.ActionPanels
             string newToolTipText = ObjectToolTipTextBuilder.GetToolTipText(e.Node.Tag);
             treeToolTip.Show(newToolTipText,
                 this,
-                TreeViewPackages.Bounds.Left + e.Node.Bounds.Right + leftMargin,
-                TreeViewPackages.Bounds.Top + e.Node.Bounds.Top,
+                packagesTreeView.Bounds.Left + e.Node.Bounds.Right + leftMargin,
+                packagesTreeView.Bounds.Top + e.Node.Bounds.Top,
                 2500);
         }
 
-        private void TreeViewPackages_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e) =>
-            TreeViewPackages.SelectedNode = e.Node;
-
-        private void toolStripMenuItemReload_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void TreeViewPackages_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            // We should reload the package in place, but legacy code prevents us from making this easy, let's fallback.
-            var target = TreeViewPackages.SelectedNode;
-            if (target.Tag is PackageReference packageReference)
+            if (e.Button == MouseButtons.Right)
             {
-                _PackageManager.UnloadPackage(packageReference);
-                _PackageManager.LoadPackage(packageReference);
-            }
-        }
-
-        private void findInDocumentToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string findText;
-            using (var findDialog = new FindDialog())
-            {
-                if (findDialog.ShowDialog() != DialogResult.OK)
+                if (packagesTreeView.SelectedNode != e.Node)
                 {
-                    return;
+                    packagesTreeView.SelectedNode = e.Node;
                 }
-
-                findText = findDialog.FindInput.Text;
             }
-
-            UC_PackageExplorer.Traverse(Parent).EmitFind(findText);
         }
 
-        private void findInClassesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TreeViewPackages_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
-            string findText;
-            using (var findDialog = new FindDialog())
+            if (e.Action == TreeViewAction.Unknown)
             {
-                if (findDialog.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-
-                findText = findDialog.FindInput.Text;
+                // Cancels NodeMouseClick too :(
+                //e.Cancel = true;
             }
-
-            UC_PackageExplorer.Traverse(Parent).PerformSearchIn<UClass>(findText);
         }
 
-        private void exportScriptsToolStripMenuItem_Click(object sender, EventArgs e) =>
-            ExportPackageObjects<UTextBuffer>();
-
-        private void exportClassesToolStripMenuItem1_Click(object sender, EventArgs e) =>
-            ExportPackageObjects<UClass>();
-
-        private void ExportPackageObjects<T>()
+        private void TreeViewPackages_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            var exportPaths = _PackageManager.EnumeratePackages()
-                .Select(package => package.Linker)
-                .Select(linker => linker.ExportPackageObjects<T>());
-            if (!exportPaths.Any())
+            if (e.Action == TreeViewAction.Unknown)
             {
                 return;
             }
 
-            var dialogResult = MessageBox.Show(
-                string.Format(Resources.EXPORTED_ALL_PACKAGE_CLASSES, ExportHelpers.PackageExportPath),
-                Application.ProductName,
-                MessageBoxButtons.YesNo
-            );
-            if (dialogResult == DialogResult.Yes)
+            object target = e.Node.Tag;
+            Contract.Assert(target != null);
+            var newContext = new ContextInfo(ContextActionKind.Target, target)
             {
-                Process.Start(ExportHelpers.PackageExportPath);
+                ResolvedTarget = TargetResolver.Resolve(target)
+            };
+
+            _ContextService.OnContextChanged(this,
+                new ContextChangedEventArgs(newContext));
+        }
+
+        private void packagesTreeView_DoubleClick(object sender, EventArgs e)
+        {
+            var node = packagesTreeView.SelectedNode;
+            if (node == null)
+            {
+                // No assert, because a user can double click outside of a node's boundary.
+                return;
+            }
+
+            object subject = node.Tag;
+            switch (subject)
+            {
+                case PackageReference packageReference when packageReference.Linker == null:
+                    {
+                        BeginInvoke((MethodInvoker)(() => _PackageManager.LoadPackage(packageReference)));
+                        break;
+                    }
             }
         }
 
-        private void packageToolsStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        private void TreeViewPackages_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            var linkers = _PackageManager.EnumeratePackages()
-                .Select(package => package.Linker)
-                .Where(linker => linker?.Exports != null)
-                .ToList();
+            var node = e.Node;
 
-            bool hasAnyClasses = linkers.Any(linker => linker.Exports.Any(exp => exp.ClassIndex == 0));
-            exportClassesToolStripMenuItem.Enabled = hasAnyClasses;
-            findInClassesToolStripMenuItem.Enabled = hasAnyClasses;
+            // Already lazy-loaded.
+            if (!node.Nodes.ContainsKey(ObjectTreeFactory.DummyNodeKey))
+            {
+                //e.Cancel = true;
+                return;
+            }
 
-            bool hasAnyScripts =
-                linkers.Any(linker => linker.Exports.Any(exp => exp.Class?.ObjectName == "TextBuffer"));
-            exportScriptsToolStripMenuItem.Enabled = hasAnyScripts;
+            packagesTreeView.SuspendLayout();
+            packagesTreeView.BeginUpdate();
+            node.Nodes.RemoveByKey(ObjectTreeFactory.DummyNodeKey);
+
+            object subject = node.Tag;
+            switch (subject)
+            {
+                case PackageReference packageReference:
+                    {
+                        var treeNodes = _ObjectTreeBuilder
+                            .Visit(packageReference)
+                            .OrderBy(n => n, (IComparer<TreeNode>)packagesTreeView.TreeViewNodeSorter)
+                            .ToArray();
+                        node.Nodes.AddRange(treeNodes);
+                        break;
+                    }
+
+                case UImportTableItem item:
+                    {
+                        var treeNodes = _ObjectTreeBuilder
+                            .Visit(item)
+                            .OrderBy(n => n, (IComparer<TreeNode>)packagesTreeView.TreeViewNodeSorter)
+                            .ToArray();
+                        node.Nodes.AddRange(treeNodes);
+                        break;
+                    }
+
+                case UExportTableItem item:
+                    {
+                        var treeNodes = _ObjectTreeBuilder
+                            .Visit(item)
+                            .OrderBy(n => n, (IComparer<TreeNode>)packagesTreeView.TreeViewNodeSorter)
+                            .ToArray();
+                        node.Nodes.AddRange(treeNodes);
+                        break;
+                    }
+
+                // Note: The exports table is lazily-expanded with "PackageReference".
+                case List<UImportTableItem> imports:
+                    {
+                        var treeNodes = _ObjectTreeBuilder
+                            .Visit(imports)
+                            .OrderBy(n => n, (IComparer<TreeNode>)packagesTreeView.TreeViewNodeSorter)
+                            .ToArray();
+
+                        node.Nodes.AddRange(treeNodes);
+                        break;
+                    }
+            }
+
+            packagesTreeView.EndUpdate();
+            packagesTreeView.ResumeLayout();
         }
-
-        private void orderByToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e) =>
-            RebuildRootPackagesTree();
 
         private void TreeViewPackages_DragOver(object sender, DragEventArgs e) =>
             e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop)
@@ -491,26 +468,300 @@ namespace UEExplorer.UI.ActionPanels
             }
         }
 
-        private void addPackageToolStripMenuItem_Click(object sender, EventArgs e)
+        private void objectContextMenu_Opening(object sender, CancelEventArgs e)
         {
-            using (var ofd = new OpenFileDialog
-                   {
-                       Filter = UnrealExtensions.FormatUnrealExtensionsAsFilter(),
-                       FilterIndex = 1,
-                       Title = Resources.Open_File,
-                       Multiselect = true
-                   })
+            // Occurs if no packages are loaded.
+            if (packagesTreeView.SelectedNode == null)
             {
-                if (ofd.ShowDialog(this) != DialogResult.OK)
+                // TODO: Instead let's popup a menu with the option to choose "Open package from file"
+                //e.Cancel = true;
+                //return;
+            }
+
+            objectContextMenu.Items.Clear();
+
+            object subject = packagesTreeView.SelectedNode?.Tag;
+
+            var builder = new ContextCommandBuilder(ServiceHost.GetRequired<IServiceProvider>());
+            var commands = builder.Build<IContextCommand>(subject);
+            var items = CommandMenuItemFactory.Create(commands, command =>
+            {
+                BeginInvoke((MethodInvoker)(() => ServiceHost.GetRequired<CommandService>().Execute(command, subject)));
+            });
+
+            objectContextMenu.Items.AddRange(items.ToArray());
+
+            e.Cancel = objectContextMenu.Items.Count == 0;
+        }
+
+        private void objectContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+        }
+
+        private void packageToolsStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            var linkers = _PackageManager.EnumeratePackages()
+                .Select(package => package.Linker)
+                .Where(linker => linker?.Exports != null)
+                .ToList();
+        }
+
+        private void toolStripTextBoxFilter_Paint(object sender, PaintEventArgs e)
+        {
+            if (filterTextBox.Text != string.Empty)
+            {
+                return;
+            }
+
+            var brush = new SolidBrush(filterTextBox.ForeColor);
+            e.Graphics.DrawString(
+                "Search",
+                filterTextBox.Font,
+                brush,
+                e.ClipRectangle.X,
+                e.ClipRectangle.Y + e.ClipRectangle.Height / 2);
+        }
+
+        private void collapseAllToolStripButton_Click(object sender, EventArgs e) => packagesTreeView.CollapseAll();
+
+        private void sortByToolStripSplitButton_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            UpdateSortBy(e.ClickedItem);
+            var n = packagesTreeView.SelectedNode;
+            UpdateTreeViewNodeSorter();
+            // Due sorting the selected node gets lost, so restore it! And scroll it into view as well :)
+            if (n != null)
+            {
+                packagesTreeView.SelectedNode = n;
+                n.EnsureVisible();
+            }
+        }
+
+        private void UpdateSortBy(ToolStripItem item)
+        {
+            sortByToolStripSplitButton.Image = item.Image;
+            foreach (ToolStripMenuItem dropDownItem in sortByToolStripSplitButton.DropDownItems)
+            {
+                if (dropDownItem == item)
                 {
+                    dropDownItem.Checked = true;
+                    continue;
+                }
+
+                dropDownItem.Checked = false;
+            }
+        }
+
+        private void UpdateTreeViewNodeSorter()
+        {
+            if (sortByNameToolStripMenuItem.Checked)
+            {
+                packagesTreeView.TreeViewNodeSorter = new ItemSortByNameComparer();
+            }
+            else if (sortByTypeToolStripMenuItem.Checked)
+            {
+                packagesTreeView.TreeViewNodeSorter = new ItemSortByTypeComparer();
+            }
+            else if (sortByOffsetToolStripMenuItem.Checked)
+            {
+                packagesTreeView.TreeViewNodeSorter = new ItemSortByOffsetComparer();
+            }
+            else
+            {
+                packagesTreeView.TreeViewNodeSorter = new ItemSortByNameComparer();
+            }
+        }
+
+        private void isTrackingToolStripButton_CheckStateChanged(object sender, EventArgs e) =>
+            IsTracking = isTrackingToolStripButton.Checked;
+
+        private void packagesTreeView_DrawNode(object sender, DrawTreeNodeEventArgs e) =>
+            e.Graphics.DrawString(e.Node.Text, packagesTreeView.Font, _Brush, e.Bounds.X, e.Bounds.Y);
+
+        private class NodeSwapCollection
+        {
+            public NodeSwapCollection(TreeView view) => Nodes = view.Nodes;
+
+            public List<TreeNode> CachedNodes { get; private set; }
+
+            public TreeNodeCollection Nodes { get; }
+
+            public int Count => Nodes.Count;
+
+            public bool IsInFilterState { get; private set; }
+
+            public void SwapFilterState(bool needsRestore)
+            {
+                if (needsRestore)
+                {
+                    Nodes.Clear();
+                    Nodes.AddRange(CachedNodes.ToArray());
+                    IsInFilterState = false;
                     return;
                 }
 
-                foreach (string filePath in ofd.FileNames)
+                if (!IsInFilterState)
                 {
-                    Program.PushRecentOpenedFile(filePath);
-                    BeginInvoke((MethodInvoker)(() => _PackageManager.RegisterPackage(filePath)));
+                    var nodes = new TreeNode[Nodes.Count];
+                    Nodes.CopyTo(nodes, 0);
+                    CachedNodes = nodes.ToList();
+                    IsInFilterState = true;
                 }
+
+                Nodes.Clear();
+            }
+
+            public void Add(TreeNode node)
+            {
+                if (IsInFilterState)
+                {
+                    CachedNodes.Add(node);
+                    return;
+                }
+
+                Nodes.Add(node);
+            }
+
+            public void Remove(TreeNode node)
+            {
+                if (IsInFilterState)
+                {
+                    CachedNodes.Remove(node);
+                    return;
+                }
+
+                Nodes.Remove(node);
+            }
+        }
+
+        private class ItemSortByNameComparer : IComparer, IComparer<TreeNode>
+        {
+            int IComparer.Compare(object x, object y)
+            {
+                var nodeX = x as TreeNode;
+                Debug.Assert(nodeX != null, nameof(nodeX) + " != null");
+                var nodeY = y as TreeNode;
+                Debug.Assert(nodeY != null, nameof(nodeY) + " != null");
+
+                return Compare(nodeX, nodeY);
+            }
+
+            public int Compare(TreeNode x, TreeNode y)
+            {
+                if (x is UnsortedTreeNode)
+                {
+                    return y is UnsortedTreeNode ? 0 : -1;
+                }
+
+                if (y is UnsortedTreeNode)
+                {
+                    return 1;
+                }
+
+                return string.Compare(x.Text, y.Text, StringComparison.Ordinal);
+            }
+        }
+
+        private class ItemSortByTypeComparer : IComparer, IComparer<TreeNode>
+        {
+            int IComparer.Compare(object x, object y)
+            {
+                var nodeX = x as TreeNode;
+                Debug.Assert(nodeX != null, nameof(nodeX) + " != null");
+                var nodeY = y as TreeNode;
+                Debug.Assert(nodeY != null, nameof(nodeY) + " != null");
+
+                return Compare(nodeX, nodeY);
+            }
+
+            public int Compare(TreeNode x, TreeNode y)
+            {
+                if (x is UnsortedTreeNode)
+                {
+                    return y is UnsortedTreeNode ? 0 : -1;
+                }
+
+                if (y is UnsortedTreeNode)
+                {
+                    return 1;
+                }
+
+                if (GetType(x.Tag) == null)
+                {
+                    return 0;
+                }
+
+                if (GetType(y.Tag) == null)
+                {
+                    return 0;
+                }
+
+                int compare = string.Compare(GetType(x.Tag), GetType(y.Tag), StringComparison.Ordinal);
+                if (compare != 0)
+                {
+                    return compare;
+                }
+
+                return string.Compare(x.Text, y.Text, StringComparison.Ordinal);
+            }
+
+            private static string GetType(object tag)
+            {
+                switch (tag)
+                {
+                    case null:
+                        return null;
+
+                    case UObjectTableItem item when item.Object != null:
+                        return item.Object.GetClassName();
+
+                    case UObjectTableItem item:
+                        switch (item)
+                        {
+                            case UExportTableItem exp:
+                                return exp.Class?.ObjectName.ToString() ?? "Class";
+
+                            case UImportTableItem imp:
+                                return imp.ClassName.ToString();
+                        }
+
+                        break;
+                }
+
+                return null;
+            }
+        }
+
+        private class ItemSortByOffsetComparer : IComparer, IComparer<TreeNode>
+        {
+            int IComparer.Compare(object x, object y)
+            {
+                var nodeX = x as TreeNode;
+                Debug.Assert(nodeX != null, nameof(nodeX) + " != null");
+                var nodeY = y as TreeNode;
+                Debug.Assert(nodeY != null, nameof(nodeY) + " != null");
+
+                return Compare(nodeX, nodeY);
+            }
+
+            public int Compare(TreeNode x, TreeNode y)
+            {
+                if (x is UnsortedTreeNode)
+                {
+                    return y is UnsortedTreeNode ? 0 : -1;
+                }
+
+                if (y is UnsortedTreeNode)
+                {
+                    return 1;
+                }
+
+                if (x.Tag is IBuffered bufferedX && y.Tag is IBuffered bufferedY)
+                {
+                    return bufferedX.GetBufferPosition().CompareTo(bufferedY.GetBufferPosition());
+                }
+
+                return string.Compare(x.Text, y.Text, StringComparison.Ordinal);
             }
         }
     }

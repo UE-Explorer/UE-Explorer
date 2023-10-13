@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UEExplorer.Framework;
 
 namespace UEExplorer.UI.ActionPanels
 {
-    public class ActionPanel : UserControl
+    public class ActionPanel : UserControl, IContextListener
     {
         private object _Object;
-        public bool HasPendingUpdate;
 
         public object Object
         {
-            get => _Object;
             set
             {
                 _Object = value;
-                if (HasPendingUpdate)
-                {
-                    return;
-                }
 
                 UpdateOutput(value);
             }
         }
 
-        protected virtual async void UpdateOutput(object target)
+        protected virtual void UpdateOutput(object target)
         {
             throw new NotImplementedException();
         }
+
+        public bool CanAccept(ContextInfo context) => throw new NotImplementedException();
+
+        public Task<bool> Accept(ContextInfo context) => throw new NotImplementedException();
     }
 }

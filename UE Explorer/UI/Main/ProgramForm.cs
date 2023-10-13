@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using Krypton.Toolkit;
@@ -9,22 +10,24 @@ using Microsoft.Extensions.DependencyInjection;
 using UEExplorer.Framework;
 using UEExplorer.Framework.Commands;
 using UEExplorer.Framework.Plugin;
+using UEExplorer.Framework.Services;
 using UEExplorer.Framework.Tasks;
 using UEExplorer.Framework.UI.Commands;
 using UEExplorer.Framework.UI.Services;
 using UEExplorer.Properties;
+using UEExplorer.Tools.Commands;
 using UEExplorer.UI.Dialogs;
 using UEExplorer.UI.Forms;
-using UEExplorer.UI.Pages;
 using UEExplorer.UI.Panels;
 using UELib;
-using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+using UELib.Annotations;
 
 namespace UEExplorer.UI.Main
 {
     public partial class ProgramForm : KryptonForm
     {
         private readonly IServiceProvider _ServiceProvider;
+        private readonly TasksManager _TasksManager;
 
         public ProgramForm()
         {
@@ -32,16 +35,19 @@ namespace UEExplorer.UI.Main
         }
         
         [UsedImplicitly]
-        public ProgramForm(IServiceProvider serviceProvider) : this()
+        public ProgramForm(IServiceProvider serviceProvider, TasksManager tasksManager) : this()
         {
             _ServiceProvider = serviceProvider;
-            
+            _TasksManager = tasksManager;
+
             WindowState = Settings.Default.WindowState;
             Size = Settings.Default.WindowSize;
             Location = Settings.Default.WindowLocation;
-        }
 
-        public static string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            tasksManager.TaskStart += ActionTasksManagerOnTaskStart;
+            tasksManager.TaskStop += ActionTasksManagerOnTaskStop;
+            tasksManager.ProgressChanged += ActionTasksManagerOnProgressChanged;
+        }
 
         private void ProgramForm_Load(object sender, EventArgs e)
         {
@@ -54,18 +60,39 @@ namespace UEExplorer.UI.Main
             {
                 pluginModule.Activate();
             }
-            
-            InitializeConfig();
-            InitializeUI();
-            InitializeControls();
-            BeginInvoke((MethodInvoker)InitializeState);
-        }
 
-        private void InitializeControls()
-        {
-            var startPage = new StartPage { UniqueName = "Start" };
-            dockSpace.AddDocument(startPage);
-            dockSpace.AddPackageExplorer();
+            var commandService = _ServiceProvider.GetRequiredService<CommandService>();
+
+            var viewCommands = _ServiceProvider.GetServices<IMenuCommand>();
+            var viewToolMenuItems = viewCommands
+                .Where(cmd =>
+                    cmd.GetType().GetCustomAttribute<CommandCategoryAttribute>()?.Category ==
+                    CommandCategories.View)
+                .Select(cmd =>
+                {
+                    string name = cmd.GetType().Name;
+                    string text = cmd.Text;
+
+                    var item = new ToolStripMenuItem
+                    {
+                        Name = name, Image = cmd.Icon, Text = text, ShortcutKeys = cmd.ShortcutKeys
+                    };
+                    item.Click += (clickSender, args) => commandService.Execute(cmd as ICommand<object>, sender);
+                    return item;
+                })
+                .ToArray<ToolStripItem>();
+
+            SuspendLayout();
+            if (viewToolMenuItems.Any())
+            {
+                viewToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+            }
+
+            viewToolStripMenuItem.DropDownItems.AddRange(viewToolMenuItems);
+            ResumeLayout();
+
+            InitializeConfig();
+            BeginInvoke((MethodInvoker)InitializeState);
         }
 
         private void InitializeState()
@@ -82,27 +109,36 @@ namespace UEExplorer.UI.Main
                 string filePath = args[i];
                 BeginInvoke((MethodInvoker)(() => LoadFromFile(filePath)));
             }
-
-            // FIXME:
-            //var state = Program.Options.GetState(_UnrealPackage.FullPackageName);
-            //if (state.SearchObjectValue != null)
-            //{
-            //    PerformActionByObjectPath(state.SearchObjectValue);
-            //}
-
-            // Restore all open packages
-            if (UserHistory.Default.OpenFiles != null) foreach (var defaultOpenFile in UserHistory.Default.OpenFiles)
-            {
-                dockSpace.AddPackage(defaultOpenFile);
-            }
         }
 
-        private void InitializeUI()
+        private void ActionTasksManagerOnTaskStart(object sender, ActionTask e)
         {
-            Text = string.Format(Resources.ProgramTitle, Application.ProductName, Version);
+            loadingProgressBar.Visible = true;
+            e.ProgressChanged += OnTaskProgressChanged;
+        }
 
-            ProgressStatus.Status = progressStatusLabel;
-            ProgressStatus.Loading = loadingProgressBar;
+        private void OnTaskProgressChanged(object sender, TaskProgressEventArgs e)
+        {
+            loadingProgressBar.Maximum = e.Max;
+            loadingProgressBar.Value = e.Count;
+        }
+
+        private void ActionTasksManagerOnTaskStop(object sender, ActionTask e)
+        {
+            loadingProgressBar.Visible = false;
+            e.ProgressChanged -= OnTaskProgressChanged;
+        }
+
+        private void ActionTasksManagerOnProgressChanged(object sender, TaskProgressEventArgs e)
+        {
+            var task = _TasksManager.CurrentTask;
+            if (task == null)
+            {
+                progressStatusLabel.Text = Resources.StatusReady;
+                return;
+            }
+
+            progressStatusLabel.Text = string.Format(Resources.StatusTask, e.Count, e.Max, task.Status());
         }
 
         private void InitializeConfig()
@@ -110,51 +146,6 @@ namespace UEExplorer.UI.Main
             Program.LoadConfig();
 
             nativeTableDropDownButton.Text = Program.Options.NTLPath;
-            Platform.Text = Program.Options.Platform;
-        }
-
-        private void InitializeExtensions()
-        {
-            string extensionsPath = Path.Combine(Application.StartupPath, "Extensions");
-            if (!Directory.Exists(extensionsPath))
-            {
-                return;
-            }
-
-            string[] files = Directory.GetFiles(extensionsPath);
-            foreach (string file in files)
-            {
-                if (Path.GetExtension(file) != ".dll")
-                {
-                    continue;
-                }
-
-                var assembly = Assembly.LoadFile(file);
-                var types = assembly.GetExportedTypes();
-                foreach (var t in types)
-                {
-                    var i = t.GetInterface("IExtension");
-                    if (i == null)
-                    {
-                        continue;
-                    }
-
-                    var ext = (IExtension)Activator.CreateInstance(t);
-                    ext.Initialize(this);
-
-                    var extensionTitleAttribute = t
-                        .GetCustomAttribute<ExtensionTitleAttribute>(false);
-                    if (extensionTitleAttribute == null)
-                    {
-                        throw new NotSupportedException("Missing ExtensionTitleAttribute on extension class");
-                    }
-
-                    string extensionName = extensionTitleAttribute.Title;
-                    var item = extentionsMenuitem.DropDownItems.Add(extensionName);
-                    item.Click += ext.OnActivate;
-                    extentionsMenuitem.Enabled = true;
-                }
-            }
         }
 
         private void SelectedNativeTable_DropDownOpening(object sender, EventArgs e)
@@ -180,14 +171,24 @@ namespace UEExplorer.UI.Main
 
         private void ToolsToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            menuItem20.Checked = Program.AreFileTypesRegistered();
-
-            if (extentionsMenuitem.Enabled)
+            if (toolsMenuItem.DropDownItems["tools"] != null)
             {
                 return;
             }
 
-            InitializeExtensions();
+            toolsMenuItem.DropDownItems.Add(new ToolStripSeparator { Name = "tools" });
+
+            var items = _ServiceProvider
+                .GetRequiredService<PluginService>()
+                .GetLoadedModules()
+                .Select(module =>
+                {
+                    string text = module.ToString();
+                    var item = new ToolStripMenuItem(text);
+                    return item;
+                });
+
+            toolsMenuItem.DropDownItems.AddRange(items.ToArray<ToolStripItem>());
         }
 
         public void LoadFromFile(string filePath)
@@ -196,28 +197,20 @@ namespace UEExplorer.UI.Main
             switch (Path.GetExtension(filePath))
             {
                 default:
-                    dockSpace.AddPackage(filePath);
+                    ServiceHost.GetRequired<PackageManager>().RegisterPackage(filePath);
                     break;
             }
         }
 
-        private void CheckForUpdatesMenuItem_Click(object sender, EventArgs e)
-        {
-            Program.CheckForUpdates();
-        }
-
-        private void Platform_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            Platform.Text = e.ClickedItem.Text;
-            Program.Options.Platform = Platform.Text;
-            Program.SaveConfig();
-        }
+        private void CheckForUpdatesMenuItem_Click(object sender, EventArgs e) => Program.CheckForUpdates();
 
         private void SocialMenuItem_Click(object sender, EventArgs e) =>
             Process.Start(Resources.UEExplorerFacebookUrl);
 
         private void OnClosing(object sender, FormClosingEventArgs e)
         {
+            UserHistory.Default.Save();
+
             if (WindowState != FormWindowState.Normal)
             {
                 Settings.Default.WindowLocation = RestoreBounds.Location;
@@ -242,7 +235,6 @@ namespace UEExplorer.UI.Main
         {
             if (disposing)
             {
-                ProgressStatus.Dispose();
                 components?.Dispose();
             }
 
@@ -260,27 +252,10 @@ namespace UEExplorer.UI.Main
             }
         }
 
-        private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var ofd = new OpenFileDialog
-                   {
-                       Filter = UnrealExtensions.FormatUnrealExtensionsAsFilter(),
-                       FilterIndex = 1,
-                       Title = Resources.Open_File,
-                       Multiselect = true
-                   })
-            {
-                if (ofd.ShowDialog(this) != DialogResult.OK)
-                {
-                    return;
-                }
-
-                foreach (string filePath in ofd.FileNames)
-                {
-                    BeginInvoke((MethodInvoker)(() => LoadFromFile(filePath)));
-                }
-            }
-        }
+        private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e) =>
+            ServiceHost
+                .GetRequired<CommandService>()
+                .Execute<OpenPackageFilePickerCommand>(sender);
 
         private void UnrealColorGeneratorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -304,8 +279,6 @@ namespace UEExplorer.UI.Main
                     MessageBoxIcon.Warning
                 );
             }
-
-            Program.ToggleRegisterFileTypes(menuItem20.Checked);
         }
 
         private void ProgramForm_DragOver(object sender, DragEventArgs e) =>
@@ -353,7 +326,10 @@ namespace UEExplorer.UI.Main
             mostRecentMenuItem.DropDownItems.Clear();
             for (int i = filePaths.Count - 1; i >= 0; --i)
             {
-                if (filePaths[i] == string.Empty) continue;
+                if (filePaths[i] == string.Empty)
+                {
+                    continue;
+                }
 
                 string fileName = Path.GetFileName(filePaths[i]);
                 string directoryName = Path.GetDirectoryName(filePaths[i]);
@@ -367,7 +343,7 @@ namespace UEExplorer.UI.Main
 
         private void mostRecentMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            string filePath = e.ClickedItem.Tag as string;
+            string filePath = (string)e.ClickedItem.Tag;
             if (!File.Exists(filePath))
             {
                 var filePaths = UserHistory.Default.RecentFiles;
@@ -378,99 +354,26 @@ namespace UEExplorer.UI.Main
             BeginInvoke((MethodInvoker)(() => LoadFromFile(filePath)));
         }
 
-        private void packageExplorerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dockSpace.HasPage("PackageExplorer"))
-            {
-                return;
-            }
-
+        private void packageExplorerToolStripMenuItem_Click(object sender, EventArgs e) =>
             dockSpace.AddPackageExplorer();
-        }
 
         // TODO: Propagate commands a different way.
-        private void navigateBackwardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void navigateBackwardToolStripMenuItem_Click(object sender, EventArgs e) =>
             dockSpace.ToolStripButton_Backward_Click(sender, e);
-        }
 
         // TODO: Propagate commands a different way.
-        private void navigateForwardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void navigateForwardToolStripMenuItem_Click(object sender, EventArgs e) =>
             dockSpace.ToolStripButton_Forward_Click(sender, e);
-        }
 
-        private void forumToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start(Program.ForumUrl);
-        }
+        private void forumToolStripMenuItem_Click(object sender, EventArgs e) => Process.Start(Program.ForumUrl);
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dockSpace.HasPage("Settings"))
-            {
-                return;
-            }
-
-            dockSpace.AddDocument<SettingsPanel>(Resources.SettingsTitle, "Settings");
-        }
-    }
-
-    public static class ProgressStatus
-    {
-        public static ToolStripProgressBar Loading;
-        public static ToolStripStatusLabel Status;
-
-        private static string s_savedStatus;
-
-        public static void Dispose()
-        {
-            if (Loading != null)
-            {
-                Loading.Dispose();
-                Loading = null;
-            }
-
-            if (Status != null)
-            {
-                Status.Dispose();
-                Status = null;
-            }
+            var dockingService = _ServiceProvider.GetRequiredService<IDockingService>();
+            BeginInvoke((MethodInvoker)(() =>
+                dockingService.AddDocumentUnique<SettingsPanel>("Settings", Resources.SettingsTitle)));
         }
 
-        public static void SetStatus(string status)
-        {
-            if (Status != null)
-            {
-                Status.Text = status;
-                Status.Invalidate();
-            }
-        }
-
-        public static void Reset()
-        {
-            ResetStatus();
-            ResetValue();
-        }
-
-        public static void ResetStatus() => SetStatus(s_savedStatus);
-
-        public static void SaveStatus() => s_savedStatus = Status.Text;
-
-        public static void IncrementValue() => ++Loading.Value;
-
-        public static void ResetValue()
-        {
-            Loading.Visible = false;
-            Loading.Value = 0;
-            Loading.Invalidate();
-        }
-
-        public static void SetMaxProgress(int max)
-        {
-            Loading.Visible = true;
-            Loading.Maximum = max;
-            Loading.Invalidate();
-        }
+        private void taskProcessor_Tick(object sender, EventArgs e) => _TasksManager.Process();
     }
 }

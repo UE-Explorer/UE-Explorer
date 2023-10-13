@@ -6,12 +6,22 @@ namespace UEExplorer.Framework
     {
         public static object Resolve(object target)
         {
-            return target is UObjectTableItem item ? item.Object : target;
+            switch (target)
+            {
+                case UObjectTableItem item: return Resolve(item);
+                case PackageReference packageReference: return Resolve(packageReference);
+                default: return target;
+            }
         }
 
         public static object Resolve(UObjectTableItem item)
         {
             return item.Object;
+        }
+
+        public static object Resolve(PackageReference packageReference)
+        {
+            return packageReference.Linker;
         }
     }
 }

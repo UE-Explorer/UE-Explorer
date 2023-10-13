@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Windows.Forms;
 using Eliot.Utilities.Net;
 using UEExplorer.Properties;
-using UEExplorer.UI.Main;
 
 namespace UEExplorer.UI.Dialogs
 {
@@ -33,7 +32,7 @@ namespace UEExplorer.UI.Dialogs
         {
             Text += $" {Application.ProductName}";
             ProductNameLabel.Text = Application.ProductName;
-            VersionLabel.Text = string.Format(Resources.Version, ProgramForm.Version);
+            VersionLabel.Text = string.Format(Resources.Version, Assembly.GetExecutingAssembly().GetName().Version);
             CopyrightLabel.Text = AssemblyCopyright;
             DonateLink.Text = Program.DonateUrl;
         }

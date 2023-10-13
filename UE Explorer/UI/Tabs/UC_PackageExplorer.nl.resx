@@ -258,10 +258,10 @@
   <data name="ReloadButton.TooltipText" xml:space="preserve">
     <value>Opnieuw laden</value>
   </data>
-  <data name="PrevButton.TooltipText" xml:space="preserve">
+  <data name="prevButton.TooltipText" xml:space="preserve">
     <value>Achteruit</value>
   </data>
-  <data name="NextButton.TooltipText" xml:space="preserve">
+  <data name="nextButton.TooltipText" xml:space="preserve">
     <value>Vooruit</value>
   </data>
   <data name="ExportButton.Text" xml:space="preserve">

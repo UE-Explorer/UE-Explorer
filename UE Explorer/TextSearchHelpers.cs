@@ -1,18 +1,30 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
+using UEExplorer.Framework;
 
 namespace UEExplorer
 {
     public static class TextSearchHelpers
     {
-        public static List<FindResult> FindText(string text, string keyword)
+        public static List<SourceLocation> FindText(string text, string keyword, CancellationToken cancellationToken)
         {
-            keyword = keyword.ToLower();
-            var results = new List<FindResult>();
+            var results = new List<SourceLocation>();
 
-            var currentLine = 1;
-            var currentColumn = 1;
-            for (var i = 0; i < text.Length; ++i)
+            if (text.Length < keyword.Length)
             {
+                return results;
+            }
+
+            keyword = keyword.ToLower();
+            int currentLine = 1;
+            int currentColumn = 1;
+            for (int i = 0; i < text.Length; ++i)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    break;
+                }
+
                 if (text[i] == '\n')
                 {
                     ++currentLine;
@@ -20,26 +32,26 @@ namespace UEExplorer
                     continue;
                 }
 
+                if (i + keyword.Length >= text.Length)
+                {
+                    break;
+                }
+                
                 int startIndex = i;
-                for (var j = 0; j < keyword.Length; ++j)
+                for (int j = 0; j < keyword.Length; ++j)
                 {
                     if (char.ToLower(text[startIndex]) == keyword[j])
                     {
                         ++startIndex;
-                        if (j == keyword.Length - 1)
+                        if (j != keyword.Length - 1)
                         {
-                            var result = new FindResult
-                            {
-                                TextIndex = startIndex - keyword.Length,
-                                TextLength = keyword.Length,
-                                TextLine = currentLine,
-                                TextColumn = currentColumn
-                            };
-                            results.Add(result);
-                            break;
+                            continue;
                         }
 
-                        continue;
+                        var result = new SourceLocation(
+                            currentLine, currentColumn,
+                            startIndex - keyword.Length, keyword.Length);
+                        results.Add(result);
                     }
 
                     break;
@@ -51,28 +63,12 @@ namespace UEExplorer
             return results;
         }
 
-        public class FindResult
-        {
-            public int TextIndex;
-            public int TextLength;
-            public int TextLine { get; set; }
-            public int TextColumn { get; set; }
-
-            public override string ToString()
-            {
-                return $"({TextLine}, {TextColumn})";
-            }
-        }
-
         public class DocumentResult
         {
             public object Document { get; set; }
-            public List<FindResult> Results { get; set; }
+            public List<SourceLocation> Results { get; set; }
 
-            public override string ToString()
-            {
-                return Document.ToString();
-            }
+            public override string ToString() => Document.ToString();
         }
     }
 }

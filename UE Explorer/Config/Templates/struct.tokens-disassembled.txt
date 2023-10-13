@@ -1,3 +1,0 @@
-%INDENTATION%({5}-{6};{0:X3}/{1:X3}) [{3}]
-%INDENTATION%	{2}
-%INDENTATION%	{4}

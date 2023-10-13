@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{84A39048-2805-48DA-B4A7-2B02465A9B4E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UELib.Decompiler.UnrealScript</RootNamespace>
+    <AssemblyName>Eliot.UELib.Decompiler.UnrealScript</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Nodes\ClassDeclarationNode.cs" />
+    <Compile Include="Nodes\ConstDeclarationNode.cs" />
+    <Compile Include="Nodes\StructDeclarationNode.cs" />
+    <Compile Include="ClassDependsOnBuilder.cs" />
+    <Compile Include="UCDecompiler.cs" />
+    <Compile Include="UCDecompilerSettings.cs" />
+    <Compile Include="ModifierNodeTreeBuilder.cs" />
+    <Compile Include="DeclarationNodeTreeBuilder.cs" />
+    <Compile Include="UCLegacyOutputDecompiler.cs" />
+    <Compile Include="UCOutputDecompiler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UELib\src\Decompiler\Eliot.UELib.Decompiler.csproj">
+      <Project>{8ca39d24-1e63-47e1-a556-52142671cff1}</Project>
+      <Name>Eliot.UELib.Decompiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj">
+      <Project>{7e45273f-434f-42fa-8269-0e760aeb41e1}</Project>
+      <Name>Eliot.UELib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

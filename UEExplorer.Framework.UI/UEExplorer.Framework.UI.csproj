@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9780AD67-ED57-4427-A40C-D097C0E52ED4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UEExplorer.Framework.UI</RootNamespace>
+    <AssemblyName>UEExplorer.Framework.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\CommandCategories.cs" />
+    <Compile Include="Commands\CommandsBuilder.cs" />
+    <Compile Include="Commands\ContainedCommandsBuilder.cs" />
+    <Compile Include="Commands\ContextCommandBuilder.cs" />
+    <Compile Include="Commands\IDecompilerFactoryCommand.cs" />
+    <Compile Include="Commands\IExportFactoryCommand.cs" />
+    <Compile Include="Commands\IMenuCommand.cs" />
+    <Compile Include="ContextCommandEventArgs.cs" />
+    <Compile Include="Editor\Segment.cs" />
+    <Compile Include="Commands\ICommandBuilder.cs" />
+    <Compile Include="Commands\IContextCommand.cs" />
+    <Compile Include="ITrackingContext.cs" />
+    <Compile Include="Editor\SegmentService.cs" />
+    <Compile Include="Pages\Page.cs" />
+    <Compile Include="Pages\PageHeader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Editor\TextEditorOutputStream.cs" />
+    <Compile Include="Editor\SegmentEventArgs.cs" />
+    <Compile Include="Editor\TextEditorControl.xaml.cs">
+      <DependentUpon>TextEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\TextEditorPanel.cs" />
+    <Compile Include="Editor\TextEditorPanel.Designer.cs">
+      <DependentUpon>TextEditorPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Services\IDockingService.cs" />
+    <Compile Include="Pages\PageFactory.cs" />
+    <Compile Include="SuperContextCommand.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UEExplorer.Framework\UEExplorer.Framework.csproj">
+      <Project>{66B17C8E-BF5D-456E-BF2E-C8BFA186D32B}</Project>
+      <Name>UEExplorer.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UELib\src\Decompiler\Eliot.UELib.Decompiler.csproj">
+      <Project>{8CA39D24-1E63-47E1-A556-52142671CFF1}</Project>
+      <Name>Eliot.UELib.Decompiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj">
+      <Project>{7e45273f-434f-42fa-8269-0e760aeb41e1}</Project>
+      <Name>Eliot.UELib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Editor\TextEditorPanel.nl.resx">
+      <DependentUpon>TextEditorPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\TextEditorPanel.resx">
+      <DependentUpon>TextEditorPanel.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Editor\TextEditorControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AvalonEdit">
+      <Version>6.3.0.90</Version>
+    </PackageReference>
+    <PackageReference Include="Krypton.Docking.Nightly">
+      <Version>80.23.9.269-alpha</Version>
+    </PackageReference>
+    <PackageReference Include="Krypton.Toolkit.Nightly">
+      <Version>80.23.9.269-alpha</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

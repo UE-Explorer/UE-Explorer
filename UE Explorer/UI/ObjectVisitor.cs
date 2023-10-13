@@ -1,4 +1,5 @@
 ﻿using UELib;
+using UELib.Core;
 
 namespace UEExplorer.UI
 {
@@ -9,7 +10,9 @@ namespace UEExplorer.UI
             return Visit((dynamic)visitor);
         }
 
-        public virtual TResult Visit(dynamic obj)
+        public TResult Visit(UStruct.UByteCodeDecompiler.Token token) => throw new System.NotImplementedException();
+
+        public virtual TResult Visit(dynamic subject)
         {
             return default;
         }

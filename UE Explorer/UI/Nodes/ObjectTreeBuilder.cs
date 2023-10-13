@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using UEExplorer.Framework;
 using UELib;
 using UELib.Annotations;
 using UELib.Core;
@@ -12,19 +13,20 @@ using UELib.Flags;
 
 namespace UEExplorer.UI.Nodes
 {
+    public sealed class UnsortedTreeNode : TreeNode
+    {
+        public UnsortedTreeNode(string text) : base(text) { }
+    }
+    
     public sealed class ObjectTreeBuilder : ObjectVisitor<IEnumerable<TreeNode>>
     {
         public delegate bool NodeFilter<in TFilter>(TFilter item);
 
-        public delegate IComparable NodeSorter<in T>(T item);
-
         private readonly NodeFilter<object> _NodeFilterDelegate;
-        private readonly NodeSorter<object> _NodeSorterDelegate;
 
-        public ObjectTreeBuilder(NodeFilter<object> nodeFilterDelegate, NodeSorter<object> nodeSorterDelegate)
+        public ObjectTreeBuilder(NodeFilter<object> nodeFilterDelegate)
         {
             _NodeFilterDelegate = nodeFilterDelegate;
-            _NodeSorterDelegate = nodeSorterDelegate;
         }
 
         [CanBeNull]
@@ -32,15 +34,6 @@ namespace UEExplorer.UI.Nodes
         {
             var memberNodes = BuildMemberNodes(visitor);
             return memberNodes?.ToArray();
-            //var visitorNodes = base.Visit(visitor);
-            //if (memberNodes == null)
-            //{
-            //    return visitorNodes;
-            //}
-
-            //return visitorNodes != null
-            //    ? visitorNodes.Concat(memberNodes).ToArray()
-            //    : memberNodes.ToArray();
         }
 
         public IEnumerable<TreeNode> BuildMemberNodes(object visitable)
@@ -151,10 +144,52 @@ namespace UEExplorer.UI.Nodes
             return subNodes.Any() ? subNodes : null;
         }
 
-        public override IEnumerable<TreeNode> Visit(dynamic obj) => null;
+        public override IEnumerable<TreeNode> Visit(dynamic subject) => null;
+
+        public IEnumerable<TreeNode> Visit(PackageReference packageReference)
+        {
+            var linker = packageReference.Linker;
+            if (linker == null)
+            {
+                throw new InvalidOperationException("Cannot create package nodes without an active linker.");
+            }
+
+            return Visit(linker);
+        }
+
+        public IEnumerable<TreeNode> Visit(UnrealPackage linker)
+        {
+            var nodes = new List<TreeNode>();
+            if (linker.Summary.CompressedChunks != null &&
+                linker.Summary.CompressedChunks.Any())
+            {
+                var chunksNode = ObjectTreeFactory.CreateNode(linker.Summary.CompressedChunks);
+                nodes.Add(chunksNode);
+            }
+
+            if (linker.Imports != null)
+            {
+                var dependenciesNode = ObjectTreeFactory.CreateNode(linker.Imports);
+                nodes.Add(dependenciesNode);
+                
+                // Lazy-Expand
+                //nodes.AddRange(Visit(linker.Imports));
+            }
+
+            if (linker.Exports != null)
+            {
+                nodes.AddRange(Visit(linker.Exports));
+            }
+
+            return nodes;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsTopItem(UExportTableItem exp) =>
+        private static bool IsParentItem(UImportTableItem imp) =>
+            imp.OuterIndex == 0;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool IsParentItem(UExportTableItem exp) =>
             exp.OuterIndex == 0
             && (exp.ObjectFlags & ((ulong)ObjectFlagsHO.PropertiesObject << 32)) == 0
             // Filter out deleted exports
@@ -168,32 +203,32 @@ namespace UEExplorer.UI.Nodes
         public static bool BelongsWithinItem(UImportTableItem imp, UObjectTableItem item) =>
             imp.Outer == item;
 
-        [CanBeNull] public IEnumerable<TreeNode> Visit(UnrealPackage linker) =>
-            linker.Exports?
-                .Where(IsTopItem)
+        // Commented out OrderBy because we are using the TreeNodeSortComparer instead
+
+        public IEnumerable<TreeNode> Visit(IEnumerable<UImportTableItem> imports) =>
+            imports
+                .Where(IsParentItem)
                 .SkipWhile(exp => _NodeFilterDelegate(exp))
-                .OrderBy(exp => _NodeSorterDelegate(exp))
                 .Select(ObjectTreeFactory.CreateNode);
 
-        public IEnumerable<TreeNode> Visit(UObjectTableItem item) =>
-            item.Owner.Exports
-                .Where(exp => BelongsWithinItem(exp, item))
+        public IEnumerable<TreeNode> Visit(IEnumerable<UExportTableItem> exports) =>
+            exports
+                .Where(IsParentItem)
                 .SkipWhile(exp => _NodeFilterDelegate(exp))
-                .OrderBy(exp => _NodeSorterDelegate(exp))
                 .Select(ObjectTreeFactory.CreateNode);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<TreeNode> Visit(UImportTableItem item) =>
             item.Owner.Imports?
                 .Where(imp => BelongsWithinItem(imp, item))
                 .SkipWhile(imp => _NodeFilterDelegate(imp))
-                .OrderBy(imp => _NodeSorterDelegate(imp))
                 .Select(ObjectTreeFactory.CreateNode);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<TreeNode> Visit(UExportTableItem item) =>
             item.Owner.Exports?
                 .Where(exp => BelongsWithinItem(exp, item))
                 .SkipWhile(exp => _NodeFilterDelegate(exp))
-                .OrderBy(exp => _NodeSorterDelegate(exp))
                 .Select(ObjectTreeFactory.CreateNode);
     }
 }

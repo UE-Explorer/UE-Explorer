@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using UEExplorer.Properties;
-using UEExplorer.UI.Tabs;
 using UELib;
 using UELib.Core;
 
@@ -12,8 +11,8 @@ namespace UEExplorer.UI.Forms
 {
     public partial class HexViewerForm : Form
     {
-        private readonly UC_PackageExplorer _PackageExplorer;
         private readonly IBuffered _Target;
+        private readonly string _FilePath;
 
         private HexViewerForm()
         {
@@ -26,10 +25,10 @@ namespace UEExplorer.UI.Forms
             ViewByteItem.Checked = Settings.Default.HexViewer_ViewByte;
         }
 
-        public HexViewerForm(IBuffered target, UC_PackageExplorer packageExplorer) : this()
+        public HexViewerForm(IBuffered target, string filePath) : this()
         {
             _Target = target;
-            _PackageExplorer = packageExplorer;
+            _FilePath = filePath;
 
             switch (target)
             {
@@ -261,7 +260,7 @@ namespace UEExplorer.UI.Forms
         private bool ReplaceBuffer(IBuffered target, byte[] buffer)
         {
             target.GetBuffer().Dispose();
-            string packageFilePath = _PackageExplorer.FilePath;
+            string packageFilePath = _FilePath;
             using (var package = UnrealLoader.LoadPackage(packageFilePath, FileAccess.ReadWrite))
             {
                 package.Stream.Seek(target.GetBufferPosition(), SeekOrigin.Begin);
@@ -323,7 +322,7 @@ namespace UEExplorer.UI.Forms
             }
 
             string appPath = Program.Options.HEXWorkshopAppPath;
-            string filePath = _PackageExplorer.FilePath;
+            string filePath = _FilePath;
             int pos = HexPanel.Target.GetBufferPosition();
             int size = HexPanel.Target.GetBufferSize();
 

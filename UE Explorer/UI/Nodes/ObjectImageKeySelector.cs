@@ -1,4 +1,6 @@
-﻿using UEExplorer.Framework;
+﻿using System;
+using System.Collections.Generic;
+using UEExplorer.Framework;
 using UELib;
 using UELib.Core;
 using UELib.Engine;
@@ -10,8 +12,13 @@ namespace UEExplorer.UI.Nodes
     {
         public override string Visit(IAcceptable visitor)
         {
+            if (visitor is UObject uObject && uObject.IsTemplate())
+            {
+                return "Component";
+            }
+            
             string key = Visit((dynamic)visitor);
-            return key ?? "Content";
+            return key ?? "Component";
         }
 
         public string Visit(PackageReference packageReference) => "UnrealPackageFile";
@@ -19,6 +26,16 @@ namespace UEExplorer.UI.Nodes
         public string Visit(UnrealPackage linker)
         {
             return "UnrealPackageFile";
+        }
+
+        public string Visit(UArray<CompressedChunk> summaryCompressedChunks)
+        {
+            return "Chunks";
+        }
+
+        public string Visit(List<UImportTableItem> imports)
+        {
+            return "Imports";
         }
 
         public string Visit(UObject obj)
@@ -83,6 +100,21 @@ namespace UEExplorer.UI.Nodes
         public string Visit(AActor obj)
         {
             return nameof(AActor);
+        }
+
+        public string Visit(UComponent obj)
+        {
+            return nameof(UComponent);
+        }
+
+        public string Visit(UTexture obj)
+        {
+            return nameof(UTexture);
+        }
+
+        public string Visit(UMaterial obj)
+        {
+            return nameof(UMaterial);
         }
     }
 }

@@ -39,6 +39,8 @@
     <Compile Include="Commands\CommandService.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="ServiceHost.cs" />
+    <Compile Include="Services\TasksManager.cs" />
+    <Compile Include="Tasks\ActionTask.cs" />
     <Compile Include="ContextActionKind.cs" />
     <Compile Include="ContextChangeInfo.cs" />
     <Compile Include="ContextInfo.cs" />
@@ -55,6 +57,8 @@
     <Compile Include="StreamLocation.cs" />
     <Compile Include="StreamLocationFactory.cs" />
     <Compile Include="TargetResolver.cs" />
+    <Compile Include="Tasks\TaskProgressEventArgs.cs" />
+    <Compile Include="Tasks\TaskProgressEventHandler.cs" />
     <Compile Include="TextLocation.cs" />
     <Compile Include="TextSegment.cs" />
   </ItemGroup>
@@ -75,5 +79,6 @@
       <Name>Eliot.UELib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

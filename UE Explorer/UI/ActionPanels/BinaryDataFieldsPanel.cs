@@ -1,25 +1,12 @@
-﻿using System.Threading.Tasks;
-using UEExplorer.UI.Tabs;
-using UELib;
+﻿using UELib;
 
 namespace UEExplorer.UI.ActionPanels
 {
-    public partial class BinaryDataFieldsPanel : ActionPanel, IActionPanel<object>
+    public partial class BinaryDataFieldsPanel : ActionPanel
     {
         public BinaryDataFieldsPanel()
         {
             InitializeComponent();
-        }
-
-        public void RestoreState(ref ActionState state)
-        {
-            // ??
-        }
-
-        public void StoreState(ref ActionState state)
-        {
-            state.X = binaryDataGridView.HorizontalScrollingOffset;
-            state.Y = binaryDataGridView.VerticalScrollingOffset;
         }
 
         protected override void UpdateOutput(object target)

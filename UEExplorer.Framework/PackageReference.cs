@@ -48,8 +48,9 @@ namespace UEExplorer.Framework
     [Serializable]
     public struct PackageSettings
     {
-        public UnrealPackage.GameBuild.BuildName BuildNameTarget;
-
+        [DisplayName("Package Build")]
+        public UnrealPackage.GameBuild.BuildName BuildNameTarget { get; set; }
+        
         /// <summary>
         /// Some game packages, esp heavily modified ones cannot be detected as such.
         /// For such packages it is necessary to manually configure the build.
@@ -57,13 +58,14 @@ namespace UEExplorer.Framework
         /// If not null, override the auto-detected engine build.
         /// If null, fall back to <see cref="BuildNameTarget"></see>
         /// </summary>
-        public PackageEngineBuild? EngineBuild;
+        public PackageEngineBuild? EngineBuild { get; set; }
 
         /// <summary>
         /// A package cooked for console is drastically different, and usually cannot be detected automatically.
         /// For such packages it is necessary to manually configure the platform.
         /// </summary>
-        public PackageCookerPlatform CookerPlatform;
+        [DisplayName("Package Platform")]
+        public PackageCookerPlatform CookerPlatform { get; set; }
     }
 
     [Serializable]

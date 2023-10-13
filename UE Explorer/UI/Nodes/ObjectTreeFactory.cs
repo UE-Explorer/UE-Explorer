@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,13 +14,22 @@ namespace UEExplorer.UI.Nodes
 {
     public static class ObjectTreeFactory
     {
+        public const string DummyNodeKey = "DUMMYNODE";
+        public static Color ErrorColor = Color.Red;
+        public static Color UnknownClassColor = Color.SlateGray;
+        public static readonly Color PackageLoadedColor = Color.Black;
+        public static readonly Color PackageUnloadedColor = Color.SlateGray;
+
         private static readonly ObjectImageKeySelector s_objectImageKeySelector = new ObjectImageKeySelector();
 
         [CanBeNull]
         public static TreeNode CreateNode(FieldInfo info, object obj)
         {
             object value = info.GetValue(obj);
-            if (value == null) return null;
+            if (value == null)
+            {
+                return null;
+            }
 
             var attr = info.GetCustomAttribute<DisplayNameAttribute>();
             var node = new TreeNode(attr != null ? attr.DisplayName : info.Name) { Tag = value };
@@ -30,7 +40,10 @@ namespace UEExplorer.UI.Nodes
         public static TreeNode CreateNode(PropertyInfo info, object obj)
         {
             object value = info.GetValue(obj);
-            if (value == null) return null;
+            if (value == null)
+            {
+                return null;
+            }
 
             var attr = info.GetCustomAttribute<DisplayNameAttribute>();
             string displayName = attr != null ? attr.DisplayName : info.Name;
@@ -74,14 +87,9 @@ namespace UEExplorer.UI.Nodes
                 node.Nodes.Add(DummyNodeKey, "Expandable");
             }
 
-            if (obj.Class == null)
-            {
-                node.ForeColor = Color.DarkCyan;
-            }
-
             if (obj.DeserializationState.HasFlag(UObject.ObjectState.Errorlized))
             {
-                node.ForeColor = Color.Red;
+                node.ForeColor = ErrorColor;
             }
 
             return node;
@@ -100,9 +108,9 @@ namespace UEExplorer.UI.Nodes
                 node.Nodes.Add(DummyNodeKey, "Expandable");
             }
 
-            if (item.ClassName == "Class")
+            if (!item.Owner.HasClassType(item.ClassName) || (item.ClassName == "Class" && !item.Owner.HasClassType(item.ObjectName)))
             {
-                node.ForeColor = Color.DarkCyan;
+                node.ForeColor = UnknownClassColor;
             }
 
             return node;
@@ -113,7 +121,7 @@ namespace UEExplorer.UI.Nodes
             string imageKey = item.Object.Accept(s_objectImageKeySelector);
             var node = new TreeNode(ObjectTextBuilder.GetText(item))
             {
-                Tag = item, ImageKey = imageKey, SelectedImageKey = imageKey,
+                Tag = item, ImageKey = imageKey, SelectedImageKey = imageKey
             };
 
             if (item.Owner.Exports.Any(exp => ObjectTreeBuilder.BelongsWithinItem(exp, item)))
@@ -123,12 +131,7 @@ namespace UEExplorer.UI.Nodes
 
             if (item.Object.DeserializationState.HasFlag(UObject.ObjectState.Errorlized))
             {
-                node.ForeColor = Color.Red;
-            }
-
-            if (item.Class == null)
-            {
-                node.ForeColor = Color.DarkCyan;
+                node.ForeColor = ErrorColor;
             }
 
             return node;
@@ -143,7 +146,7 @@ namespace UEExplorer.UI.Nodes
                 Name = packageReference.FilePath,
                 ImageKey = imageKey,
                 SelectedImageKey = imageKey,
-                Tag = packageReference,
+                Tag = packageReference
             };
             return node;
         }
@@ -152,13 +155,33 @@ namespace UEExplorer.UI.Nodes
         {
             string imageKey = s_objectImageKeySelector.Visit(linker);
             // TODO: Displace in UELib 2.0 using an ObjectNode referring the UnrealPackage.RootPackage object.
-            var node = new TreeNode(linker.PackageName)
+            var node = new UnsortedTreeNode(linker.PackageName)
             {
-                Name = linker.PackageName, ImageKey = imageKey, SelectedImageKey = imageKey, Tag = linker,
+                Name = linker.PackageName, ImageKey = imageKey, SelectedImageKey = imageKey, Tag = linker
             };
             return node;
         }
 
-        public const string DummyNodeKey = "DUMMYNODE";
+        public static TreeNode CreateNode(UArray<CompressedChunk> summaryCompressedChunks)
+        {
+            string imageKey = s_objectImageKeySelector.Visit(summaryCompressedChunks);
+            var node = new UnsortedTreeNode("Chunks")
+            {
+                Name = "Chunks", Tag = summaryCompressedChunks, ImageKey = imageKey, SelectedImageKey = imageKey
+            };
+            node.Nodes.Add(DummyNodeKey, "Expandable");
+            return node;
+        }
+
+        public static TreeNode CreateNode(List<UImportTableItem> imports)
+        {
+            string imageKey = s_objectImageKeySelector.Visit(imports);
+            var node = new UnsortedTreeNode("Imports")
+            {
+                Name = "Dependencies", Tag = imports, ImageKey = imageKey, SelectedImageKey = imageKey
+            };
+            node.Nodes.Add(DummyNodeKey, "Expandable");
+            return node;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UELib;
@@ -45,6 +46,7 @@ namespace UEExplorer
 
         [XmlRoot("State")]
         public class State
+
         {
             [XmlElement("Id")] public string Id;
 
@@ -76,7 +78,6 @@ namespace UEExplorer
 
             var state = new State(id);
             States.Add(state);
-            Program.SaveConfig();
             return state;
         }
     }

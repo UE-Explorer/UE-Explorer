@@ -29,5 +29,26 @@
     <Setting Name="HexPanel_SplitterDistance" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">219</Value>
     </Setting>
+    <Setting Name="FindIn_MatchCase" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FindIn_FindText" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FindIn_LookIn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FindInPanel_Size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">349, 146</Value>
+    </Setting>
+    <Setting Name="FindResultsPanel_Size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">349, 146</Value>
+    </Setting>
+    <Setting Name="SortByName_Checked" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SyncNodeWithActiveContext" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

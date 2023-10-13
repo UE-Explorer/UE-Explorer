@@ -9,6 +9,8 @@ namespace UEExplorer.UI.Panels
 
         public WebViewPanel(string initialUrl)
         {
+            SetStyle(ControlStyles.ContainerControl, true);
+
             _InitialUrl = initialUrl;
 
             InitializeComponent();

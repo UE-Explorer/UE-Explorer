@@ -135,7 +135,7 @@
     <value>False</value>
   </data>
   <data name="progressStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 17</value>
+    <value>943, 17</value>
   </data>
   <data name="progressStatusLabel.Text" xml:space="preserve">
     <value>Ready</value>
@@ -155,47 +155,11 @@
   <data name="nativeTableDropDownButton.Text" xml:space="preserve">
     <value>NTL</value>
   </data>
-  <data name="pCToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 22</value>
-  </data>
-  <data name="pCToolStripMenuItem.Text" xml:space="preserve">
-    <value>PC</value>
-  </data>
-  <data name="consoleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 22</value>
-  </data>
-  <data name="consoleToolStripMenuItem.Text" xml:space="preserve">
-    <value>Console</value>
-  </data>
-  <data name="Platform.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="Platform.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="Platform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 20</value>
-  </data>
-  <data name="Platform.Text" xml:space="preserve">
-    <value>Platform</value>
-  </data>
   <data name="mainStatusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 578</value>
   </data>
   <data name="mainStatusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>923, 22</value>
+    <value>999, 22</value>
   </data>
   <data name="mainStatusStrip.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -215,13 +179,16 @@
   <data name="&gt;&gt;mainStatusStrip.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="brandPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="brandPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, -37</value>
   </data>
   <data name="brandPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 37</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="brandPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
@@ -298,7 +265,7 @@
     <value>Ctrl+F</value>
   </data>
   <data name="findMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="findMenuItem.Text" xml:space="preserve">
     <value>&amp;Find</value>
@@ -454,7 +421,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="mainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>923, 24</value>
+    <value>999, 24</value>
   </data>
   <data name="mainMenuStrip.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -483,8 +450,11 @@
   <data name="dockSpace.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 27</value>
   </data>
+  <data name="dockSpace.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="dockSpace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>923, 548</value>
+    <value>999, 548</value>
   </data>
   <data name="dockSpace.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -501,6 +471,9 @@
   <data name="&gt;&gt;dockSpace.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="taskProcessor.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>766, 20</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -511,7 +484,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>923, 600</value>
+    <value>999, 600</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2055,7 +2028,7 @@
     <value>Manual</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>{0} {1}</value>
+    <value>UE Explorer</value>
   </data>
   <data name="&gt;&gt;loadingProgressBar.Name" xml:space="preserve">
     <value>loadingProgressBar</value>
@@ -2074,24 +2047,6 @@
   </data>
   <data name="&gt;&gt;nativeTableDropDownButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Platform.Name" xml:space="preserve">
-    <value>Platform</value>
-  </data>
-  <data name="&gt;&gt;Platform.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pCToolStripMenuItem.Name" xml:space="preserve">
-    <value>pCToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;pCToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;consoleToolStripMenuItem.Name" xml:space="preserve">
-    <value>consoleToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;consoleToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fileMenuItem.Name" xml:space="preserve">
     <value>fileMenuItem</value>
@@ -2289,18 +2244,24 @@
     <value>kryptonManager</value>
   </data>
   <data name="&gt;&gt;kryptonManager.Type" xml:space="preserve">
-    <value>Krypton.Toolkit.KryptonManager, Krypton.Toolkit, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+    <value>Krypton.Toolkit.KryptonManager, Krypton.Toolkit, Version=80.22.11.325, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
   <data name="&gt;&gt;kryptonPalette.Name" xml:space="preserve">
     <value>kryptonPalette</value>
   </data>
   <data name="&gt;&gt;kryptonPalette.Type" xml:space="preserve">
-    <value>Krypton.Toolkit.KryptonPalette, Krypton.Toolkit, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+    <value>Krypton.Toolkit.KryptonPalette, Krypton.Toolkit, Version=80.22.11.325, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;taskProcessor.Name" xml:space="preserve">
+    <value>taskProcessor</value>
+  </data>
+  <data name="&gt;&gt;taskProcessor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ProgramForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Krypton.Toolkit.KryptonForm, Krypton.Toolkit, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+    <value>Krypton.Toolkit.KryptonForm, Krypton.Toolkit, Version=80.22.11.325, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
 </root>

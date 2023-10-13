@@ -120,21 +120,41 @@
   <data name="NodeItem_ExportWithUEModelViewer" xml:space="preserve">
     <value>Export with UE Model Viewer</value>
   </data>
-  <data name="DecompilerPage_DecompilerPage_Decompile_Title" xml:space="preserve">
-    <value>Decompiler</value>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+    <comment>Dialog title</comment>
+  </data>
+  <data name="StatusInitializePackage" xml:space="preserve">
+    <value>Initializing package '{0}'</value>
+  </data>
+  <data name="FindInObjects" xml:space="preserve">
+    <value>F&amp;ind in Objects</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="FindInFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FindInFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ProgramForm_LoadFile_Loading_file" xml:space="preserve">
+    <value>Loading file {0}...</value>
+    <comment>Status description.</comment>
+  </data>
   <data name="UE_ProgramLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\UI\Main\ProgramLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UEExplorerFacebookUrl" xml:space="preserve">
+    <value>https://www.facebook.com/UE.Explorer</value>
   </data>
   <data name="UnrealClassFilter" xml:space="preserve">
     <value>Unreal Class</value>
   </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="LINKING_OBJECTS" xml:space="preserve">
     <value>Linking Objects...</value>
+  </data>
+  <data name="DecompilerPage_Decompile_Title__0_" xml:space="preserve">
+    <value>Decompile: {0}</value>
   </data>
   <data name="Package" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Package.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -149,8 +169,8 @@
     <value>Enabling this will edit your registry file. 
 If you happen to move the "UE Explorer" folder, uninstall or update it, then please disable this before doing so!</value>
   </data>
-  <data name="PACKAGE_EXPORTED_TO" xml:space="preserve">
-    <value>Package successfully exported to {0}</value>
+  <data name="ProgramTitle" xml:space="preserve">
+    <value>{0} {1}</value>
   </data>
   <data name="NEW_VERSION_AVAILABLE_TITLE" xml:space="preserve">
     <value>A new version is available!</value>
@@ -159,11 +179,20 @@ If you happen to move the "UE Explorer" folder, uninstall or update it, then ple
   <data name="FindNext" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FindNext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CollapseAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CollapseAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StatusTask" xml:space="preserve">
+    <value>{0}/{1} : {2}</value>
+  </data>
   <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
     <value>Clicking yes will bring you to the page with the latest version!
 Installed version: {0}
 Latest version: {1}</value>
     <comment>Dialog description.</comment>
+  </data>
+  <data name="SortAscending" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SortAscending.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Backwards" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Backwards.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -180,29 +209,32 @@ Latest version: {1}</value>
   <data name="THING_DOESNT_EXIST" xml:space="preserve">
     <value>{0} doesn't exist!</value>
   </data>
-  <data name="ProgramForm_Check_for_Updates_Status" xml:space="preserve">
-    <value>Checking for updates...</value>
-    <comment>Status</comment>
+  <data name="OrderedList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OrderedList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SAVE_QUESTION_WARNING" xml:space="preserve">
     <value>Do you want to save this? Warning! This change will be permanent, make sure you have made a backup!</value>
   </data>
-  <data name="FIND_RESULTS_TITLE" xml:space="preserve">
-    <value>Find Results "{0}"</value>
+  <data name="AboutBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AboutBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Pin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Pin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SortByType" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SortByType.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="BinaryPage_BinaryPage_Binary_Title" xml:space="preserve">
     <value>Binary</value>
   </data>
-  <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
-    <value>This package has an unknown signature.
-
-Are you sure you want to try to deserialize this package? Clicking Yes might lead to unexpected results!</value>
+  <data name="Expand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Expand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FindResultsPage_TextTitle___0__" xml:space="preserve">
-    <value>Find "{0}"</value>
+  <data name="ExpandDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExpandDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
     <value>Exported all packages content to {0}.
@@ -211,6 +243,9 @@ Click Yes if you want to go to the output directory!</value>
   </data>
   <data name="HexView_COULDNT_ACQUIRE_VALUE" xml:space="preserve">
     <value>Couldn't acquire value</value>
+  </data>
+  <data name="ExportScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExportScript.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NodeItem_ViewContent" xml:space="preserve">
     <value>View Content...</value>
@@ -235,12 +270,12 @@ Click Yes if you want to go to the output directory!</value>
     <value>Failed loading package: {0}</value>
     <comment>Exception description.</comment>
   </data>
-  <data name="Refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="EXCEPTION_OCCURRED_WHILE_EXPORTING" xml:space="preserve">
     <value>An exception occurred while exporting {0}
 {1}</value>
+  </data>
+  <data name="NodeItem_Play" xml:space="preserve">
+    <value>Play</value>
   </data>
   <data name="ProgramForm_Unreal_Natives_Table_Generator" xml:space="preserve">
     <value>Unreal Natives Table Generator</value>
@@ -255,6 +290,9 @@ Click Yes if you want to go to the output directory!</value>
   <data name="NO_FIND_RESULTS" xml:space="preserve">
     <value>Found no results with the specified text "{0}".</value>
   </data>
+  <data name="SortDescending" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SortDescending.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="FindDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FindDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -267,18 +305,17 @@ Click Yes if you want to go to the output directory!</value>
   <data name="CHECKING_FOR_UPDATES_LOG" xml:space="preserve">
     <value>Checking for updates(Current version is {0})...</value>
   </data>
-  <data name="NodeItem_Play" xml:space="preserve">
-    <value>Afspelen</value>
+  <data name="NOTICE_TITLE" xml:space="preserve">
+    <value>Notice</value>
   </data>
   <data name="COULDNT_SAVE_EXCEPTION" xml:space="preserve">
     <value>Couldn't save the file because of the following exception: {0}</value>
   </data>
-  <data name="ProgramForm_LoadFile_Loading_file" xml:space="preserve">
-    <value>Loading file {0}...</value>
-    <comment>Status description.</comment>
+  <data name="PACKAGE_EXPORTED_TO" xml:space="preserve">
+    <value>Package successfully exported to {0}</value>
   </data>
-  <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
-    <value>Open Table Buffer...</value>
+  <data name="TableIdentifier" xml:space="preserve">
+    <value>Table</value>
   </data>
   <data name="BinaryPage_SetNewObjectTarget_BinaryData___0_" xml:space="preserve">
     <value>BinaryData: {0}</value>
@@ -295,16 +332,19 @@ Click Yes if you want to go to the output directory!</value>
   <data name="NO_OBJECT_WAS_FOUND" xml:space="preserve">
     <value>No Object was found.</value>
   </data>
-  <data name="NOTICE_TITLE" xml:space="preserve">
-    <value>Notice</value>
+  <data name="SortByColumn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SortByColumn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SUCCESS" xml:space="preserve">
     <value>Successful</value>
   </data>
+  <data name="Searching_for___0__" xml:space="preserve">
+    <value>Searching for '{0}'</value>
+  </data>
   <data name="Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NodeItem_ExportAs" xml:space="preserve">
+  <data name="ExportAsCommand" xml:space="preserve">
     <value>Export As...</value>
   </data>
   <data name="WavePlayerPage_OnObjectTarget_WavePlayer___0_" xml:space="preserve">
@@ -316,8 +356,11 @@ Click Yes if you want to go to the output directory!</value>
   <data name="Version" xml:space="preserve">
     <value>Version {0}</value>
   </data>
+  <data name="Collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Collapse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ExceptionDialog_THANKS" xml:space="preserve">
-    <value>Thanks for reporting this exception occurrance!</value>
+    <value>Thanks for reporting this exception occurrence!</value>
   </data>
   <data name="Forwards" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Forwards.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -335,17 +378,14 @@ Click Yes if you want to go to the output directory!</value>
   <data name="EXPORTING_PACKAGE" xml:space="preserve">
     <value>Exporting package {0}</value>
   </data>
-  <data name="DecompilerPage_OnObjectTarget_Decompile___0_" xml:space="preserve">
-    <value>Decompile: {0}</value>
-  </data>
   <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
     <value>Constructing Objects...</value>
   </data>
   <data name="SEARCHING_CLASSES_STATUS" xml:space="preserve">
     <value>Searching classes...</value>
   </data>
-  <data name="UNRECOGNIZED_COMMANDLINE_OPTION" xml:space="preserve">
-    <value>Unrecognized commandline option {0}</value>
+  <data name="StatusReady" xml:space="preserve">
+    <value>Ready</value>
   </data>
   <data name="PACKAGE_IS_COMPRESSED" xml:space="preserve">
     <value>This package is compressed! Compressed packages are not supported.
@@ -369,8 +409,14 @@ You can download the tool from http://www.gildor.org/downloads or press OK to go
   <data name="NodeItem_View" xml:space="preserve">
     <value>View</value>
   </data>
-  <data name="ExportScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ExportScript.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ProgramForm_Check_for_Updates_Status" xml:space="preserve">
+    <value>Checking for updates...</value>
+    <comment>Status</comment>
+  </data>
+  <data name="COULDNT_RELOAD_OBJECT" xml:space="preserve">
+    <value>Couldn't reload due this error:
+
+	{0}</value>
   </data>
   <data name="NO_NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
     <value>You have the latest version of {0}</value>
@@ -379,24 +425,25 @@ You can download the tool from http://www.gildor.org/downloads or press OK to go
   <data name="InfoTipInline.11.11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InfoTipInline.11.11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProgramForm_Cache_Extractor" xml:space="preserve">
-    <value>Cache Extractor</value>
-    <comment>Tab title</comment>
+  <data name="DecompilerPage_Decompile_Title" xml:space="preserve">
+    <value>Decompiler</value>
   </data>
   <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NodeItem_ViewBuffer" xml:space="preserve">
+  <data name="OpenBufferCommand" xml:space="preserve">
     <value>Open Buffer...</value>
   </data>
-  <data name="UEExplorerFacebookUrl" xml:space="preserve">
-    <value>https://www.facebook.com/UE.Explorer</value>
+  <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
+    <value>This package has an unknown signature.
+
+Are you sure you want to try to deserialize this package? Clicking Yes might lead to unexpected results!</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
-  <data name="COMPRESSED_HOWTO" xml:space="preserve">
-    <value>To use Gildor's tool, try "decompress.exe PACKAGENAME.EXT" you may have to specify -lzo.</value>
+  <data name="UNRECOGNIZED_COMMANDLINE_OPTION" xml:space="preserve">
+    <value>Unrecognized commandline option {0}</value>
   </data>
   <data name="PackageExplorerPage_PackageExplorerPage_Package_Explorer_Title" xml:space="preserve">
     <value>Package Explorer</value>
@@ -404,8 +451,11 @@ You can download the tool from http://www.gildor.org/downloads or press OK to go
   <data name="ExceptionDialog_FAIL" xml:space="preserve">
     <value>Failed to send this report. Please try again later!</value>
   </data>
+  <data name="FindResultsPage_TextTitle___0__" xml:space="preserve">
+    <value>Find "{0}"</value>
+  </data>
   <data name="NodeItem_Decompile" xml:space="preserve">
-    <value>Decompile</value>
+    <value>&amp;Decompile</value>
   </data>
   <data name="HexView_Position" xml:space="preserve">
     <value>Position: {0} + {1} ; 0x{2:x8}</value>
@@ -413,14 +463,23 @@ You can download the tool from http://www.gildor.org/downloads or press OK to go
   <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
     <value>Do you want to go the folder with the exported content?</value>
   </data>
+  <data name="FIND_RESULTS_TITLE" xml:space="preserve">
+    <value>Find Results "{0}"</value>
+  </data>
   <data name="PACKAGE_LOADING" xml:space="preserve">
     <value>Loading Package...</value>
   </data>
   <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
     <value>Search the UnrealWiki for "{0}"</value>
   </data>
+  <data name="Remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="UNRECOGNIZED_EXPORT_TYPE" xml:space="preserve">
     <value>Unrecognized export type {0}</value>
+  </data>
+  <data name="Settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="HexView_Offset" xml:space="preserve">
     <value>Offset</value>
@@ -431,20 +490,17 @@ You can download the tool from http://www.gildor.org/downloads or press OK to go
   <data name="SEARCH_AS_OBJECT" xml:space="preserve">
     <value>Search as Object</value>
   </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-    <comment>Dialog title</comment>
-  </data>
   <data name="NoTargetForViewBuffer" xml:space="preserve">
     <value>No target found for "View Buffer"</value>
   </data>
-  <data name="COULDNT_RELOAD_OBJECT" xml:space="preserve">
-    <value>Couldn't reload due this error:
-
-	{0}</value>
+  <data name="COMPRESSED_HOWTO" xml:space="preserve">
+    <value>To use Gildor's tool, try "decompress.exe PACKAGENAME.EXT" you may have to specify -lzo.</value>
   </data>
   <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
     <value>You cannot import binary files with an unequal length!</value>
+  </data>
+  <data name="Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WavePlayerPage_WavePlayerPage_WavePlayer_Title" xml:space="preserve">
     <value>Wave Player</value>
@@ -456,16 +512,19 @@ You can download the tool from http://www.gildor.org/downloads or press OK to go
     <value>Homepage</value>
     <comment>Tab title</comment>
   </data>
-  <data name="AboutBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AboutBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="UnloadSolution" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UnloadSolution.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CloseSolution" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CloseSolution.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SettingsTitle" xml:space="preserve">
-    <value>Settings</value>
+  <data name="ExportFactoryTool_Text__Export" xml:space="preserve">
+    <value>&amp;Export</value>
   </data>
-  <data name="ProgramTitle" xml:space="preserve">
-    <value>{0} {1}</value>
+  <data name="Export" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Binary" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Binary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

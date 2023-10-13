@@ -23,9 +23,6 @@ namespace UEExplorer.UI.Main
             this.loadingProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.progressStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.nativeTableDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.Platform = new System.Windows.Forms.ToolStripDropDownButton();
-            this.pCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brandPictureBox = new System.Windows.Forms.PictureBox();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,8 +58,9 @@ namespace UEExplorer.UI.Main
             this.separator6 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonManager = new Krypton.Toolkit.KryptonManager(this.components);
-            this.kryptonPalette = new Krypton.Toolkit.KryptonPalette(this.components);
+            this.kryptonPalette = new Krypton.Toolkit.KryptonCustomPaletteBase(this.components);
             this.dockSpace = new UEExplorer.UI.Tabs.UC_PackageExplorer();
+            this.taskProcessor = new System.Windows.Forms.Timer(this.components);
             this.mainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.brandPictureBox)).BeginInit();
             this.mainMenuStrip.SuspendLayout();
@@ -73,8 +71,7 @@ namespace UEExplorer.UI.Main
             this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadingProgressBar,
             this.progressStatusLabel,
-            this.nativeTableDropDownButton,
-            this.Platform});
+            this.nativeTableDropDownButton});
             resources.ApplyResources(this.mainStatusStrip, "mainStatusStrip");
             this.mainStatusStrip.Name = "mainStatusStrip";
             this.mainStatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -101,26 +98,6 @@ namespace UEExplorer.UI.Main
             this.nativeTableDropDownButton.Name = "nativeTableDropDownButton";
             this.nativeTableDropDownButton.DropDownOpening += new System.EventHandler(this.SelectedNativeTable_DropDownOpening);
             this.nativeTableDropDownButton.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.SelectedNativeTable_DropDownItemClicked);
-            // 
-            // Platform
-            // 
-            this.Platform.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.Platform.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pCToolStripMenuItem,
-            this.consoleToolStripMenuItem});
-            resources.ApplyResources(this.Platform, "Platform");
-            this.Platform.Name = "Platform";
-            this.Platform.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.Platform_DropDownItemClicked);
-            // 
-            // pCToolStripMenuItem
-            // 
-            this.pCToolStripMenuItem.Name = "pCToolStripMenuItem";
-            resources.ApplyResources(this.pCToolStripMenuItem, "pCToolStripMenuItem");
-            // 
-            // consoleToolStripMenuItem
-            // 
-            this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
-            resources.ApplyResources(this.consoleToolStripMenuItem, "consoleToolStripMenuItem");
             // 
             // brandPictureBox
             // 
@@ -362,23 +339,84 @@ namespace UEExplorer.UI.Main
             // kryptonManager
             // 
             this.kryptonManager.GlobalPalette = this.kryptonPalette;
-            this.kryptonManager.GlobalPaletteMode = Krypton.Toolkit.PaletteModeManager.Custom;
+            this.kryptonManager.GlobalPaletteMode = Krypton.Toolkit.PaletteMode.Custom;
             // 
             // kryptonPalette
             // 
             this.kryptonPalette.BasePaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            this.kryptonPalette.BaseRenderMode = Krypton.Toolkit.RendererMode.Standard;
+            this.kryptonPalette.ButtonSpecs.Close.Image = global::UEExplorer.Properties.Resources.Close;
             this.kryptonPalette.ButtonSpecs.FormClose.Image = global::UEExplorer.Properties.Resources.Close;
             this.kryptonPalette.ButtonSpecs.PinHorizontal.Image = global::UEExplorer.Properties.Resources.Pin;
             this.kryptonPalette.ButtonSpecs.PinVertical.Image = global::UEExplorer.Properties.Resources.Pin;
-            this.kryptonPalette.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.kryptonPalette.Common.StateCommon.Border.Color1 = System.Drawing.Color.LightGray;
+            this.kryptonPalette.Common.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonPalette.TabStyles.TabCommon.StateNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.kryptonPalette.TabStyles.TabDock.StateNormal.Border.Color1 = System.Drawing.Color.Gray;
-            this.kryptonPalette.TabStyles.TabDock.StateNormal.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.kryptonPalette.TabStyles.TabDock.StateNormal.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.kryptonPalette.ControlStyles.ControlClient.StateCommon.Border.Color1 = System.Drawing.Color.LightGray;
+            this.kryptonPalette.ControlStyles.ControlClient.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette.HeaderStyles.HeaderDockActive.StateCommon.Back.Color1 = System.Drawing.SystemColors.MenuHighlight;
+            this.kryptonPalette.HeaderStyles.HeaderDockActive.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonPalette.HeaderStyles.HeaderDockActive.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.False;
+            this.kryptonPalette.HeaderStyles.HeaderDockActive.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette.HeaderStyles.HeaderDockActive.StateCommon.Content.LongText.Color1 = System.Drawing.Color.White;
+            this.kryptonPalette.HeaderStyles.HeaderDockActive.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonPalette.HeaderStyles.HeaderDockInactive.StateCommon.Back.Color1 = System.Drawing.Color.LightGray;
+            this.kryptonPalette.HeaderStyles.HeaderDockInactive.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonPalette.HeaderStyles.HeaderDockInactive.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.False;
+            this.kryptonPalette.HeaderStyles.HeaderDockInactive.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette.HeaderStyles.HeaderForm.StateCommon.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonPalette.HeaderStyles.HeaderForm.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonPalette.HeaderStyles.HeaderForm.StateCommon.Border.Color1 = System.Drawing.Color.LightGray;
+            this.kryptonPalette.HeaderStyles.HeaderForm.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette.HeaderStyles.HeaderForm.StateCommon.Content.LongText.Color1 = System.Drawing.Color.DimGray;
+            this.kryptonPalette.HeaderStyles.HeaderForm.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.DimGray;
+            this.kryptonPalette.Images.DropDownButton.Common = global::UEExplorer.Properties.Resources.ExpandDown;
+            this.kryptonPalette.Images.TreeView.Minus = global::UEExplorer.Properties.Resources.Collapse;
+            this.kryptonPalette.Images.TreeView.Plus = global::UEExplorer.Properties.Resources.Expand;
+            this.kryptonPalette.TabStyles.TabCommon.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.False;
+            this.kryptonPalette.TabStyles.TabCommon.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette.TabStyles.TabCommon.StateCommon.Border.Width = 1;
+            this.kryptonPalette.TabStyles.TabCommon.StateNormal.Back.Color1 = System.Drawing.Color.Silver;
+            this.kryptonPalette.TabStyles.TabCommon.StateNormal.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonPalette.TabStyles.TabCommon.StateNormal.Content.LongText.Color1 = System.Drawing.Color.DimGray;
+            this.kryptonPalette.TabStyles.TabCommon.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.DimGray;
+            this.kryptonPalette.TabStyles.TabCommon.StateSelected.Back.Color1 = System.Drawing.SystemColors.MenuHighlight;
+            this.kryptonPalette.TabStyles.TabCommon.StateSelected.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.SolidTopLine;
+            this.kryptonPalette.TabStyles.TabCommon.StateSelected.Content.LongText.Color1 = System.Drawing.Color.White;
+            this.kryptonPalette.TabStyles.TabCommon.StateSelected.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonPalette.TabStyles.TabCommon.StateTracking.Back.Color1 = System.Drawing.SystemColors.MenuHighlight;
+            this.kryptonPalette.TabStyles.TabCommon.StateTracking.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonPalette.TabStyles.TabCommon.StateTracking.Content.LongText.Color1 = System.Drawing.Color.White;
+            this.kryptonPalette.TabStyles.TabCommon.StateTracking.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonPalette.TabStyles.TabDock.StateCommon.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonPalette.TabStyles.TabDock.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonPalette.TabStyles.TabDock.StateCommon.Border.Color1 = System.Drawing.Color.Gray;
+            this.kryptonPalette.TabStyles.TabDock.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonPalette.TabStyles.TabDock.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.False;
+            this.kryptonPalette.TabStyles.TabDock.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette.TabStyles.TabDock.StateCommon.Content.LongText.Color1 = System.Drawing.Color.DimGray;
+            this.kryptonPalette.TabStyles.TabDock.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonPalette.TabStyles.TabDock.StateNormal.Back.Color1 = System.Drawing.Color.Silver;
+            this.kryptonPalette.TabStyles.TabDock.StateNormal.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonPalette.TabStyles.TabDock.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonPalette.TabStyles.TabDock.StateSelected.Back.Color1 = System.Drawing.SystemColors.MenuHighlight;
+            this.kryptonPalette.TabStyles.TabDock.StateSelected.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonPalette.TabStyles.TabDock.StateSelected.Content.LongText.Color1 = System.Drawing.Color.White;
+            this.kryptonPalette.TabStyles.TabDock.StateSelected.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonPalette.ToolMenuStatus.UseRoundedEdges = Krypton.Toolkit.InheritBool.False;
             // 
             // dockSpace
             // 
@@ -386,14 +424,19 @@ namespace UEExplorer.UI.Main
             this.dockSpace.FilePath = null;
             this.dockSpace.Name = "dockSpace";
             // 
+            // taskProcessor
+            // 
+            this.taskProcessor.Enabled = true;
+            this.taskProcessor.Tick += new System.EventHandler(this.taskProcessor_Tick);
+            // 
             // ProgramForm
             // 
             this.AllowDrop = true;
             this.AllowFormChrome = false;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dockSpace);
             this.Controls.Add(this.mainMenuStrip);
+            this.Controls.Add(this.dockSpace);
             this.Controls.Add(this.mainStatusStrip);
             this.DoubleBuffered = true;
             this.HeaderStyle = Krypton.Toolkit.HeaderStyle.Custom1;
@@ -456,13 +499,10 @@ namespace UEExplorer.UI.Main
         private System.Windows.Forms.ToolStripMenuItem menuItem22;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesMenuItem;
         private System.Windows.Forms.ToolStripSeparator separator6;
-        private System.Windows.Forms.ToolStripMenuItem pCToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripDropDownButton Platform;
         private System.Windows.Forms.ToolStripMenuItem mostRecentMenuItem;
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private Krypton.Toolkit.KryptonManager kryptonManager;
-        private Krypton.Toolkit.KryptonPalette kryptonPalette;
+        private Krypton.Toolkit.KryptonCustomPaletteBase kryptonPalette;
         private ToolStripProgressBar loadingProgressBar;
         private ToolStripMenuItem viewToolStripMenuItem;
         private ToolStripMenuItem packageExplorerToolStripMenuItem;
@@ -477,6 +517,7 @@ namespace UEExplorer.UI.Main
         private ToolStripMenuItem eliotsForumToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private Tabs.UC_PackageExplorer dockSpace;
+        private Timer taskProcessor;
 
 
         // OnClick events!

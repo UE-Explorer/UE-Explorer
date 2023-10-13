@@ -12,7 +12,7 @@ namespace UEExplorer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.6.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -128,6 +128,90 @@ namespace UEExplorer.Properties {
             }
             set {
                 this["HexPanel_SplitterDistance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FindIn_MatchCase {
+            get {
+                return ((bool)(this["FindIn_MatchCase"]));
+            }
+            set {
+                this["FindIn_MatchCase"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FindIn_FindText {
+            get {
+                return ((string)(this["FindIn_FindText"]));
+            }
+            set {
+                this["FindIn_FindText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FindIn_LookIn {
+            get {
+                return ((bool)(this["FindIn_LookIn"]));
+            }
+            set {
+                this["FindIn_LookIn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("349, 146")]
+        public global::System.Drawing.Size FindInPanel_Size {
+            get {
+                return ((global::System.Drawing.Size)(this["FindInPanel_Size"]));
+            }
+            set {
+                this["FindInPanel_Size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("349, 146")]
+        public global::System.Drawing.Size FindResultsPanel_Size {
+            get {
+                return ((global::System.Drawing.Size)(this["FindResultsPanel_Size"]));
+            }
+            set {
+                this["FindResultsPanel_Size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SortByName_Checked {
+            get {
+                return ((bool)(this["SortByName_Checked"]));
+            }
+            set {
+                this["SortByName_Checked"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SyncNodeWithActiveContext {
+            get {
+                return ((bool)(this["SyncNodeWithActiveContext"]));
+            }
+            set {
+                this["SyncNodeWithActiveContext"] = value;
             }
         }
     }

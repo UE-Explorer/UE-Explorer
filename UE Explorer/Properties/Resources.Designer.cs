@@ -81,6 +81,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Binary {
+            get {
+                object obj = ResourceManager.GetObject("Binary", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Binary.
         /// </summary>
         internal static string BinaryPage_BinaryPage_Binary_Title {
@@ -147,9 +157,39 @@ namespace UEExplorer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CloseSolution {
+            get {
+                object obj = ResourceManager.GetObject("CloseSolution", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Code {
             get {
                 object obj = ResourceManager.GetObject("Code", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Collapse {
+            get {
+                object obj = ResourceManager.GetObject("Collapse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CollapseAll {
+            get {
+                object obj = ResourceManager.GetObject("CollapseAll", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -195,18 +235,18 @@ namespace UEExplorer.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Decompiler.
         /// </summary>
-        internal static string DecompilerPage_DecompilerPage_Decompile_Title {
+        internal static string DecompilerPage_Decompile_Title {
             get {
-                return ResourceManager.GetString("DecompilerPage_DecompilerPage_Decompile_Title", resourceCulture);
+                return ResourceManager.GetString("DecompilerPage_Decompile_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Decompile: {0}.
         /// </summary>
-        internal static string DecompilerPage_OnObjectTarget_Decompile___0_ {
+        internal static string DecompilerPage_Decompile_Title__0_ {
             get {
-                return ResourceManager.GetString("DecompilerPage_OnObjectTarget_Decompile___0_", resourceCulture);
+                return ResourceManager.GetString("DecompilerPage_Decompile_Title__0_", resourceCulture);
             }
         }
         
@@ -248,7 +288,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thanks for reporting this exception occurrance!.
+        ///   Looks up a localized string similar to Thanks for reporting this exception occurrence!.
         /// </summary>
         internal static string ExceptionDialog_THANKS {
             get {
@@ -263,6 +303,45 @@ namespace UEExplorer.Properties {
         internal static string ExceptionText {
             get {
                 return ResourceManager.GetString("ExceptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Expand {
+            get {
+                object obj = ResourceManager.GetObject("Expand", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExpandDown {
+            get {
+                object obj = ResourceManager.GetObject("ExpandDown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Export {
+            get {
+                object obj = ResourceManager.GetObject("Export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export As....
+        /// </summary>
+        internal static string ExportAsCommand {
+            get {
+                return ResourceManager.GetString("ExportAsCommand", resourceCulture);
             }
         }
         
@@ -284,6 +363,15 @@ namespace UEExplorer.Properties {
         internal static string EXPORTED_ALL_PACKAGE_CLASSES {
             get {
                 return ResourceManager.GetString("EXPORTED_ALL_PACKAGE_CLASSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Export.
+        /// </summary>
+        internal static string ExportFactoryTool_Text__Export {
+            get {
+                return ResourceManager.GetString("ExportFactoryTool_Text__Export", resourceCulture);
             }
         }
         
@@ -341,6 +429,15 @@ namespace UEExplorer.Properties {
             get {
                 object obj = ResourceManager.GetObject("FindInFile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F&amp;ind in Objects.
+        /// </summary>
+        internal static string FindInObjects {
+            get {
+                return ResourceManager.GetString("FindInObjects", resourceCulture);
             }
         }
         
@@ -494,20 +591,11 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decompile.
+        ///   Looks up a localized string similar to &amp;Decompile.
         /// </summary>
         internal static string NodeItem_Decompile {
             get {
                 return ResourceManager.GetString("NodeItem_Decompile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Export As....
-        /// </summary>
-        internal static string NodeItem_ExportAs {
-            get {
-                return ResourceManager.GetString("NodeItem_ExportAs", resourceCulture);
             }
         }
         
@@ -530,7 +618,7 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Afspelen.
+        ///   Looks up a localized string similar to Play.
         /// </summary>
         internal static string NodeItem_Play {
             get {
@@ -553,15 +641,6 @@ namespace UEExplorer.Properties {
         internal static string NodeItem_ViewBinaryFields {
             get {
                 return ResourceManager.GetString("NodeItem_ViewBinaryFields", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open Buffer....
-        /// </summary>
-        internal static string NodeItem_ViewBuffer {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewBuffer", resourceCulture);
             }
         }
         
@@ -589,15 +668,6 @@ namespace UEExplorer.Properties {
         internal static string NodeItem_ViewException {
             get {
                 return ResourceManager.GetString("NodeItem_ViewException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open Table Buffer....
-        /// </summary>
-        internal static string NodeItem_ViewTableBuffer {
-            get {
-                return ResourceManager.GetString("NodeItem_ViewTableBuffer", resourceCulture);
             }
         }
         
@@ -666,6 +736,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Buffer....
+        /// </summary>
+        internal static string OpenBufferCommand {
+            get {
+                return ResourceManager.GetString("OpenBufferCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap OpenfileDialog {
@@ -681,6 +760,16 @@ namespace UEExplorer.Properties {
         internal static string Options {
             get {
                 return ResourceManager.GetString("Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OrderedList {
+            get {
+                object obj = ResourceManager.GetObject("OrderedList", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -774,15 +863,6 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cache Extractor.
-        /// </summary>
-        internal static string ProgramForm_Cache_Extractor {
-            get {
-                return ResourceManager.GetString("ProgramForm_Cache_Extractor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Checking for updates....
         /// </summary>
         internal static string ProgramForm_Check_for_Updates_Status {
@@ -850,6 +930,16 @@ namespace UEExplorer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Remove {
+            get {
+                object obj = ResourceManager.GetObject("Remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Save {
             get {
                 object obj = ResourceManager.GetObject("Save", resourceCulture);
@@ -894,6 +984,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Search {
+            get {
+                object obj = ResourceManager.GetObject("Search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search as Object.
         /// </summary>
         internal static string SEARCH_AS_OBJECT {
@@ -921,6 +1021,15 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Searching for &apos;{0}&apos;.
+        /// </summary>
+        internal static string Searching_for___0__ {
+            get {
+                return ResourceManager.GetString("Searching_for___0__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Settings {
@@ -940,11 +1049,87 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SortAscending {
+            get {
+                object obj = ResourceManager.GetObject("SortAscending", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SortByColumn {
+            get {
+                object obj = ResourceManager.GetObject("SortByColumn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SortByType {
+            get {
+                object obj = ResourceManager.GetObject("SortByType", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SortDescending {
+            get {
+                object obj = ResourceManager.GetObject("SortDescending", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initializing package &apos;{0}&apos;.
+        /// </summary>
+        internal static string StatusInitializePackage {
+            get {
+                return ResourceManager.GetString("StatusInitializePackage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        internal static string StatusReady {
+            get {
+                return ResourceManager.GetString("StatusReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}/{1} : {2}.
+        /// </summary>
+        internal static string StatusTask {
+            get {
+                return ResourceManager.GetString("StatusTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successful.
         /// </summary>
         internal static string SUCCESS {
             get {
                 return ResourceManager.GetString("SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table.
+        /// </summary>
+        internal static string TableIdentifier {
+            get {
+                return ResourceManager.GetString("TableIdentifier", resourceCulture);
             }
         }
         
@@ -991,6 +1176,16 @@ namespace UEExplorer.Properties {
         internal static string UEExplorerIssuesUrl {
             get {
                 return ResourceManager.GetString("UEExplorerIssuesUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UnloadSolution {
+            get {
+                object obj = ResourceManager.GetObject("UnloadSolution", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
