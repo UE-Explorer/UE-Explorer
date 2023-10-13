@@ -5,8 +5,10 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using Krypton.Toolkit;
+using Microsoft.Extensions.DependencyInjection;
 using UEExplorer.Framework;
 using UEExplorer.Framework.Commands;
+using UEExplorer.Framework.Plugin;
 using UEExplorer.Framework.Tasks;
 using UEExplorer.Framework.UI.Commands;
 using UEExplorer.Framework.UI.Services;
@@ -22,10 +24,18 @@ namespace UEExplorer.UI.Main
 {
     public partial class ProgramForm : KryptonForm
     {
+        private readonly IServiceProvider _ServiceProvider;
+
         public ProgramForm()
         {
             InitializeComponent();
-
+        }
+        
+        [UsedImplicitly]
+        public ProgramForm(IServiceProvider serviceProvider) : this()
+        {
+            _ServiceProvider = serviceProvider;
+            
             WindowState = Settings.Default.WindowState;
             Size = Settings.Default.WindowSize;
             Location = Settings.Default.WindowLocation;
@@ -35,13 +45,20 @@ namespace UEExplorer.UI.Main
 
         private void ProgramForm_Load(object sender, EventArgs e)
         {
-            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
             {
-                InitializeConfig();
-                InitializeUI();
-                InitializeControls();
-                BeginInvoke((MethodInvoker)InitializeState);
+                return;
             }
+
+            foreach (var pluginModule in _ServiceProvider.GetRequiredService<PluginService>().GetLoadedModules())
+            {
+                pluginModule.Activate();
+            }
+            
+            InitializeConfig();
+            InitializeUI();
+            InitializeControls();
+            BeginInvoke((MethodInvoker)InitializeState);
         }
 
         private void InitializeControls()

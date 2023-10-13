@@ -17,6 +17,7 @@ using Microsoft.VisualBasic.ApplicationServices;
 using UEExplorer.Framework;
 using UEExplorer.Framework.Commands;
 using UEExplorer.Framework.Plugin;
+using UEExplorer.Framework.UI.Commands;
 using UEExplorer.Framework.UI.Services;
 using UEExplorer.Properties;
 using UEExplorer.Tools;
@@ -46,14 +47,12 @@ namespace UEExplorer
         private const string UpdateQuery = "?auto=1&installed_version={0}";
         internal const string SubmitReportUrl = WebsiteUrl + "report/send/";
 
-        private static IEnumerable<IPluginModule> InternalPluginModules =>
-            new List<IPluginModule> { new InternalToolsPlugin() };
+        private static IEnumerable<Type> InternalPluginModules =>
+            new List<Type> { typeof(InternalToolsPlugin) };
 
         [STAThread]
         private static void Main(string[] args)
         {
-            IEnumerable<IPluginModule> pluginModules = null;
-                
             try
             {
                 LogManager.StartLogStream();
@@ -66,6 +65,8 @@ namespace UEExplorer
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
+                var builder = Host.CreateDefaultBuilder();
+
                 // TODO: Deprecate -console
                 if (args.Length >= 2 && args.Contains("-console"))
                 {
@@ -75,42 +76,39 @@ namespace UEExplorer
                 }
                 else
                 {
-                    pluginModules = PluginManager
-                        .LoadModules(Path.Combine(Application.StartupPath, "plugins"))
-                        .ToList();
-
-                    var builder = Host.CreateDefaultBuilder();
-
-                    // Framework services
-                    builder.ConfigureServices(services => services
-                        .AddSingleton<CommandService>()
-                        .AddSingleton<ContextService>()
-                        .AddSingleton<PackageManager>()
-                        .AddSingleton<PluginService>()
-                        .AddSingleton<IDockingService, DockingService>()
-                    );
-
-                    foreach (var module in InternalPluginModules.Concat(pluginModules))
+                    builder.ConfigureServices(services =>
                     {
-                        builder.ConfigureServices(services =>
-                        {
-                            services.AddSingleton(module);
-                            module.Build(services);
-                        });
-                    }
+                        // Framework services
+                        services
+                            .AddSingleton<CommandService>()
+                            .AddSingleton<ContextService>()
+                            .AddSingleton<PackageManager>()
+                            .AddSingleton<PluginService>()
+                            .AddSingleton<IDockingService, DockingService>();
 
-                    // App services
-                    builder.ConfigureServices(services => services
-                        .AddTransient<ProgramForm>()
-                    );
+                        // Plugin services
+                        var pluginModuleTypes = InternalPluginModules
+                            .Concat(PluginManager.LoadModules(Path.Combine(Application.StartupPath, "plugins")));
+                        foreach (var pluginModuleType in pluginModuleTypes)
+                        {
+                            var serviceAttributes = pluginModuleType
+                                .GetCustomAttributes<PluginProvideServiceAttribute>();
+                            foreach (var serviceAttribute in serviceAttributes)
+                            {
+                                Contract.Assert(
+                                    serviceAttribute.ServiceType.IsAssignableFrom(serviceAttribute.ImplementationType));
+                                services.AddSingleton(serviceAttribute.ServiceType,
+                                    serviceAttribute.ImplementationType);
+                            }
+
+                            services.AddSingleton(typeof(IPluginModule), pluginModuleType);
+                        }
+
+                        // App services
+                        services.AddTransient<ProgramForm>();
+                    });
 
                     var serviceProvider = ServiceHost.Build(builder);
-
-                    var pluginService = ServiceHost.GetRequired<PluginService>();
-                    foreach (var module in pluginModules)
-                    {
-                        module.Activate(pluginService);
-                    }
 
                     if (args.Contains("-newwindow"))
                     {
@@ -119,21 +117,18 @@ namespace UEExplorer
                     }
                     else
                     {
-                        var app = new SingleInstanceApplication();
+                        var app = new SingleInstanceApplication(serviceProvider);
                         app.Run(Environment.GetCommandLineArgs());
                     }
                 }
             }
+            catch (Exception exc)
+            {
+                ExceptionDialog.Show("Internal crash!", exc);
+                Console.Error.WriteLine(exc.ToString());
+            }
             finally
             {
-                if (pluginModules != null)
-                {
-                    foreach (var module in pluginModules)
-                    {
-                        module.Deactivate();
-                    }
-                }
-
                 LogManager.EndLogStream();
             }
         }
@@ -161,10 +156,17 @@ namespace UEExplorer
 
         private class SingleInstanceApplication : WindowsFormsApplicationBase
         {
+            private readonly IServiceProvider _ServiceProvider;
+
             public SingleInstanceApplication() => IsSingleInstance = true;
 
+            public SingleInstanceApplication(IServiceProvider serviceProvider)
+            {
+                _ServiceProvider = serviceProvider;
+            }
+
             protected override void OnCreateMainForm() =>
-                MainForm = ServiceHost.Get().GetRequiredService<ProgramForm>();
+                MainForm = _ServiceProvider.GetRequiredService<ProgramForm>();
 
             protected override bool OnStartup(StartupEventArgs eventArgs) => true;
 

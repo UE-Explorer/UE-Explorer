@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="IPluginModule.cs" />
     <Compile Include="PluginPackage.cs" />
+    <Compile Include="PluginProvideServiceAttribute.cs" />
     <Compile Include="PluginService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

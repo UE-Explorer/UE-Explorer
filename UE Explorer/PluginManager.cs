@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
-using UEExplorer.Framework;
 using UEExplorer.Framework.Plugin;
 
 namespace UEExplorer
 {
     internal static class PluginManager
     {
-        public static IEnumerable<IPluginModule> LoadModules(string pluginsPath)
+        public static IEnumerable<Type> LoadModules(string pluginsPath)
         {
             if (!Directory.Exists(pluginsPath))
             {
@@ -47,19 +45,8 @@ namespace UEExplorer
                 }
 
                 var pluginAssembly = Assembly.LoadFrom(pluginDllPath);
-                var pluginModuleType =
-                    pluginAssembly.ExportedTypes.First(t => typeof(IPluginModule).IsAssignableFrom(t));
-                Contract.Assert(pluginModuleType != null);
-
-                var pluginModule = (IPluginModule)Activator.CreateInstance(pluginModuleType);
-
-                yield return pluginModule;
+                yield return pluginAssembly.ExportedTypes.First(t => typeof(IPluginModule).IsAssignableFrom(t));
             }
-        }
-
-        public static IEnumerable<IPluginModule> GetLoadedModules()
-        {
-            return ServiceHost.GetAll<IPluginModule>();
         }
     }
 }
