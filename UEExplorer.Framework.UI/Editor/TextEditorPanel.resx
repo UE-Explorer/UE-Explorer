@@ -129,4 +129,7 @@
   <data name="ListingSubjectTitle" xml:space="preserve">
     <value>Listing: {0}</value>
   </data>
+  <data name="ImageEditorPage_ImageEditorPage_Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
 </root>

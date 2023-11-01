@@ -6,23 +6,25 @@ namespace UEExplorer.Framework.UI.Services
     public interface IDockingService
     {
         bool HasPage(string uniqueName);
-        bool HasPage(string uniqueName, out KryptonPage page);
-        
+
+        bool HasPage<TPage>(string uniqueName, out TPage page)
+            where TPage : KryptonPage;
+
         void RemovePage(string uniqueName);
 
         void AddWindow(string uniqueName, KryptonPage page);
 
         bool HasDocument(string uniqueName);
 
-        bool HasDocument<T>(string uniqueName, out T page)
-            where T : KryptonPage;
+        bool HasDocument<TPage>(string uniqueName, out TPage page)
+            where TPage : KryptonPage;
 
         void AddDocument(KryptonPage page);
 
-        void AddDocument<T>(string uniqueName, string title)
-            where T : Control, new();
+        TControl AddDocument<TControl>(string uniqueName, string title)
+            where TControl : Control;
 
-        void AddDocumentUnique<T>(string uniqueName, string title)
-            where T : Control, new();
+        TControl AddDocumentUnique<TControl>(string uniqueName, string title)
+            where TControl : Control;
     }
 }

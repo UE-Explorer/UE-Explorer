@@ -104,11 +104,14 @@
     <PackageReference Include="AvalonEdit">
       <Version>6.3.0.90</Version>
     </PackageReference>
-    <PackageReference Include="Krypton.Docking.Nightly">
-      <Version>80.23.9.269-alpha</Version>
+    <PackageReference Include="Krypton.Navigator.Nightly">
+      <Version>90.23.10.303-alpha</Version>
     </PackageReference>
     <PackageReference Include="Krypton.Toolkit.Nightly">
-      <Version>80.23.9.269-alpha</Version>
+      <Version>90.23.10.303-alpha</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.DependencyValidation.Analyzers">
+      <Version>0.11.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

@@ -5,18 +5,14 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Drawing;
-using System.Drawing.Text;
 using System.Linq;
 using System.Windows.Forms;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using UEExplorer.Framework;
 using UEExplorer.Framework.Commands;
 using UEExplorer.Framework.UI;
 using UEExplorer.Framework.UI.Commands;
-using UEExplorer.Properties;
 using UEExplorer.UI.Nodes;
 using UELib;
-using UELib.Core;
 
 namespace UEExplorer.UI.ActionPanels
 {
@@ -29,13 +25,15 @@ namespace UEExplorer.UI.ActionPanels
 
         private readonly PackageManager _PackageManager;
 
-        private readonly Brush _Brush = new SolidBrush(SystemColors.WindowText);
+        private readonly Brush _Brush;
 
         private string _CurrentFilterText = string.Empty;
 
         public PackageExplorerPanel()
         {
             InitializeComponent();
+
+            _Brush = new SolidBrush(packagesTreeView.ForeColor);
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
             {
@@ -484,10 +482,12 @@ namespace UEExplorer.UI.ActionPanels
 
             var builder = new ContextCommandBuilder(ServiceHost.GetRequired<IServiceProvider>());
             var commands = builder.Build<IContextCommand>(subject);
-            var items = CommandMenuItemFactory.Create(commands, command =>
-            {
-                BeginInvoke((MethodInvoker)(() => ServiceHost.GetRequired<CommandService>().Execute(command, subject)));
-            });
+            var items = CommandMenuItemFactory.Create(commands,
+                command =>
+                {
+                    BeginInvoke((MethodInvoker)(() =>
+                        ServiceHost.GetRequired<CommandService>().Execute(command, subject)));
+                });
 
             objectContextMenu.Items.AddRange(items.ToArray());
 
@@ -575,8 +575,22 @@ namespace UEExplorer.UI.ActionPanels
         private void isTrackingToolStripButton_CheckStateChanged(object sender, EventArgs e) =>
             IsTracking = isTrackingToolStripButton.Checked;
 
-        private void packagesTreeView_DrawNode(object sender, DrawTreeNodeEventArgs e) =>
-            e.Graphics.DrawString(e.Node.Text, packagesTreeView.Font, _Brush, e.Bounds.X, e.Bounds.Y);
+        private void packagesTreeView_DrawNode(object sender, DrawTreeNodeEventArgs e)
+        {
+            if ((e.State & TreeNodeStates.Indeterminate) != 0)
+            {
+                return;
+            }
+
+            float typeColumnX = (float)(packagesTreeView.Width * 0.55);
+
+            e.Graphics.DrawString(e.Node.Text, packagesTreeView.Font, _Brush, e.Bounds);
+            if (e.Node.Tag is UExportTableItem exportItem)
+            {
+                e.Graphics.DrawString(exportItem.Class?.GetPath(), packagesTreeView.Font, _Brush,
+                    typeColumnX, e.Bounds.Y);
+            }
+        }
 
         private class NodeSwapCollection
         {

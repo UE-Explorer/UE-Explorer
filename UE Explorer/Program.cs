@@ -22,6 +22,7 @@ using UEExplorer.Framework.Services;
 using UEExplorer.Framework.Tasks;
 using UEExplorer.Framework.UI.Commands;
 using UEExplorer.Framework.UI.Services;
+using UEExplorer.Plugin.Media;
 using UEExplorer.Properties;
 using UEExplorer.Tools;
 using UEExplorer.UI.Dialogs;
@@ -51,7 +52,7 @@ namespace UEExplorer
         internal const string SubmitReportUrl = WebsiteUrl + "report/send/";
 
         private static IEnumerable<Type> InternalPluginModules =>
-            new List<Type> { typeof(InternalToolsPlugin) };
+            new List<Type> { typeof(InternalToolsPlugin), typeof(MediaPluginModule) };
 
         [STAThread]
         private static void Main(string[] args)

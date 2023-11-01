@@ -10,9 +10,10 @@
         public const string Edit = "EDIT";
 
         public const string View = "VIEW";
+        public const string Open = "OPEN";
 
         // Context-commands
-        
+
         public const string Decompile = "DECOMPILE";
         public const string Export = "EXPORT";
         public const string External = "EXTERNAL";
