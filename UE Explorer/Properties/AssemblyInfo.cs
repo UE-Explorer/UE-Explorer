@@ -12,7 +12,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("EliotVU")]
 [assembly: AssemblyProduct("UE Explorer")]
-[assembly: AssemblyCopyright("© 2009-2022 Eliot van Uytfanghe. All rights reserved.")]
+[assembly: AssemblyCopyright("© 2009-2023 Eliot van Uytfanghe. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -19,7 +19,6 @@ using UEExplorer.Framework;
 using UEExplorer.Framework.Commands;
 using UEExplorer.Framework.Plugin;
 using UEExplorer.Framework.Services;
-using UEExplorer.Framework.Tasks;
 using UEExplorer.Framework.UI.Commands;
 using UEExplorer.Framework.UI.Services;
 using UEExplorer.Plugin.Media;

@@ -19,6 +19,7 @@ using UEExplorer.Properties;
 using UEExplorer.Tools.Commands;
 using UEExplorer.UI.ActionPanels;
 using UEExplorer.UI.Pages;
+using UEExplorer.UI.Panels;
 using UEExplorer.UI.Services;
 using UELib;
 
@@ -94,15 +95,16 @@ namespace UEExplorer.UI.Tabs
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Runtime)
             {
-                AddPackageExplorer();
-                //AddPropertiesManager();
-
-                _DockingService.AddDocumentUnique<StartPage>("Startpage", "Start");
-
                 if (File.Exists(Program.DockingConfigPath))
                 {
                     dockingManager.LoadConfigFromFile(Program.DockingConfigPath);
                 }
+
+                AddPackageExplorer();
+                //AddPropertiesManager();
+
+                var webControl = _DockingService.AddDocumentUnique<WebViewPanel>("Start", Resources.Homepage);
+                webControl?.NavigateTo($"{Program.StartUrl}?version={Application.ProductVersion}");
 
                 // Restore all open packages
                 if (UserHistory.Default.OpenFiles != null && !Environment.GetCommandLineArgs().Contains("-noautoload"))

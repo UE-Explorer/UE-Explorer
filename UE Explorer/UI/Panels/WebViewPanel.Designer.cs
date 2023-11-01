@@ -49,7 +49,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.webView2);
             this.Name = "WebViewPanel";
-            this.Load += new System.EventHandler(this.WebViewPanel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.webView2)).EndInit();
             this.ResumeLayout(false);
 

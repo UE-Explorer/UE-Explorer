@@ -1,24 +1,29 @@
-﻿using System;
+using Microsoft.Web.WebView2.Core;
+using System;
 using System.Windows.Forms;
 
 namespace UEExplorer.UI.Panels
 {
     public partial class WebViewPanel : UserControl
     {
-        private readonly string _InitialUrl;
-
-        public WebViewPanel(string initialUrl)
+        public WebViewPanel()
         {
             SetStyle(ControlStyles.ContainerControl, true);
-
-            _InitialUrl = initialUrl;
 
             InitializeComponent();
         }
 
-        private void WebViewPanel_Load(object sender, EventArgs e)
+        private CoreWebView2Environment _Environment;
+
+        public async void NavigateTo(string url)
         {
-            webView2.Source = new Uri(_InitialUrl, UriKind.Absolute);
+            if (_Environment == null)
+            {
+                string dataFolder = Application.UserAppDataPath;
+                _Environment = await CoreWebView2Environment.CreateAsync(null, dataFolder).ConfigureAwait(false);
+            }
+
+            webView2.Source = new Uri(url, UriKind.Absolute);
         }
     }
 }

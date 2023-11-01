@@ -9,19 +9,31 @@
             <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
                 <requestedExecutionLevel level="asInvoker" uiAccess="false" />
             </requestedPrivileges>
-            <applicationRequestMinimum>
+            <!--<applicationRequestMinimum>
                 <defaultAssemblyRequest permissionSetReference="Custom" />
-                <PermissionSet ID="Custom" SameSite="site" Unrestricted="true" />
-            </applicationRequestMinimum>
+                <PermissionSet ID="Custom" SameSite="site" />
+            </applicationRequestMinimum>-->
         </security>
     </trustInfo>
     <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
         <application>
             <!-- A list of all Windows versions that this application is designed to work with. Windows will automatically select the most compatible environment.-->
             <!-- If your application is designed to work with Windows 7, uncomment the following supportedOS node-->
-            <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+            <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>-->
         </application>
     </compatibility>
+    <!-- Enable themes for Windows common controls and dialogs (Windows XP and later) -->
+    <!--<dependency>
+        <dependentAssembly>
+            <assemblyIdentity
+                type="win32"
+                name="Microsoft.Windows.Common-Controls"
+                version="6.0.0.0"
+                processorArchitecture="*"
+                publicKeyToken="6595b64144ccf1df"
+                language="*" />
+        </dependentAssembly>
+    </dependency>-->
     <asmv3:application>
         <asmv3:windowsSettings xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">
             <dpiAware>true</dpiAware>
