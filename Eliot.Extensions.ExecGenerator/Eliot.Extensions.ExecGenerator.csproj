@@ -68,9 +68,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UC_ExecGenerator.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="UC_ExecGenerator.cs" />
     <Compile Include="UC_ExecGenerator.Designer.cs">
       <DependentUpon>UC_ExecGenerator.cs</DependentUpon>
     </Compile>
