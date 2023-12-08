@@ -12,15 +12,6 @@ namespace UEExplorer
     {
         private UnrealCache _CurCache;
 
-        public UC_CacheExtractor()
-        {
-            _CacheData.DataSource = null;
-            if( Directory.Exists( Program.Options.InitialCachePath ) )
-            {
-                LoadCache( Program.Options.InitialCachePath );
-            }
-        }
-
         private void Button_SelectDir_Click( object sender, EventArgs e )
         {
             if( CacheFolderDialog.ShowDialog( this ) == DialogResult.OK )
@@ -130,6 +121,15 @@ namespace UEExplorer
                     -- i;
                 }
             }	
+        }
+
+        private void UC_CacheExtractor_Load(object sender, EventArgs e)
+        {
+            _CacheData.DataSource = null;
+            if (Directory.Exists(Program.Options.InitialCachePath))
+            {
+                LoadCache(Program.Options.InitialCachePath);
+            }
         }
     }
 

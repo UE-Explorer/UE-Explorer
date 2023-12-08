@@ -229,7 +229,7 @@
     <value>C grootte</value>
   </data>
   <data name="_Tools_StripDropDownButton.Text" xml:space="preserve">
-    <value>&amp;Extra</value>
+    <value>Ex&amp;tra</value>
   </data>
   <data name="exportingToolStripMenuItem.Text" xml:space="preserve">
     <value>Ex&amp;porteren</value>
@@ -241,22 +241,22 @@
     <value>Exporteer &amp;scripts</value>
   </data>
   <data name="toolStripMenuItem1.Text" xml:space="preserve">
-    <value>Zoeken</value>
+    <value>&amp;Zoeken</value>
   </data>
   <data name="findNextToolStripMenuItem.Text" xml:space="preserve">
-    <value>Volgende zoeken</value>
+    <value>Volgende &amp;zoeken</value>
   </data>
   <data name="findInDocumentToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zoeken in document</value>
+    <value>Zoeken in &amp;document</value>
   </data>
   <data name="findInClassesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zoeken in klassen...</value>
+    <value>Zoeken in &amp;klassen...</value>
   </data>
   <data name="viewBufferToolStripMenuItem.Text" xml:space="preserve">
-    <value>Bekijk buffer</value>
+    <value>Bekijk &amp;buffer</value>
   </data>
   <data name="ReloadButton.Text" xml:space="preserve">
-    <value>Opnieuw laden</value>
+    <value>&amp;Opnieuw laden</value>
   </data>
   <data name="PrevButton.Text" xml:space="preserve">
     <value>Achteruit</value>
@@ -271,7 +271,7 @@
     <value>Opslaan als .uc</value>
   </data>
   <data name="FindButton.Text" xml:space="preserve">
-    <value>Zoek</value>
+    <value>&amp;Zoek</value>
   </data>
   <data name="ViewTools.Text" xml:space="preserve">
     <value>Bekijk</value>

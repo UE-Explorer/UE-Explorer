@@ -274,19 +274,14 @@ namespace UEExplorer.UI
         }
 
         private void TabComponentsStrip_TabStripItemSelectionChanged( TabStripItemChangedEventArgs e )
-        {		
+        {
+            e.Item.Focus();
+            
             // This delegate is called when UE is still none on startup
-            if( Tabs.SelectedComponent == null || e.ChangeType == TabStripItemChangeTypes.Removed )
+            if( e.ChangeType == TabStripItemChangeTypes.Removed )
             {
                 return;
             }
-
-            if( Tabs.LastSelectedComponent != null && Tabs.LastSelectedComponent != Tabs.SelectedComponent )
-            {
-                Tabs.LastSelectedComponent.TabDeselected();
-            }
-
-            Tabs.SelectedComponent.TabSelected();
 
             var show = Tabs.SelectedComponent is UC_UClassFile; 
             menuItem12.Enabled = show;
@@ -295,8 +290,6 @@ namespace UEExplorer.UI
             menuItem9.Visible = show;
             menuItem2.Enabled = show;
             menuItem2.Visible = show;
-
-            Tabs.LastSelectedComponent = Tabs.SelectedComponent;
         }
 
         private void TabComponentsStrip_TabStripItemClosing( TabStripItemClosingEventArgs e )

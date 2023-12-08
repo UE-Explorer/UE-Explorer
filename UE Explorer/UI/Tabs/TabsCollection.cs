@@ -12,11 +12,17 @@ namespace UEExplorer.UI
         TabStripItem TabItem{ get; set; }
 
         void TabInitialize();
-        void TabSelected();
         void TabClosing();
         void TabSave();
         void TabFind();
-        void TabDeselected();
+    }
+
+    internal class TabItem : TabStripItem
+    {
+        public TabItem(string title) : base(title, null)
+        {
+            
+        }
     }
 
     public class TabsCollection : IDisposable
@@ -27,13 +33,24 @@ namespace UEExplorer.UI
         {
             get{ return Components.Find( tabComp => tabComp.TabItem == _TabsControl.SelectedItem ); }
         }
-        public ITabComponent                    LastSelectedComponent;
         private TabStrip                        _TabsControl;
 
         public TabsCollection( ProgramForm owner, TabStrip tabsControl )
         {
             Form = owner;
             _TabsControl = tabsControl;
+            
+            tabsControl.SelectedItemChanged += TabsControlOnSelectedItemChanged;
+        }
+
+        private void TabsControlOnSelectedItemChanged(TabStripItemMouseEventArgs e)
+        {
+            foreach (TabStripItem item in _TabsControl.Items)
+            {
+                item.Invalidate();
+            }
+
+            e.Item.Select();
         }
 
         public ITabComponent Add( Type tabType, string tabName )
@@ -43,25 +60,23 @@ namespace UEExplorer.UI
                 return null;
             }
 
-            var tabItem = new TabStripItem(tabName, null)
+            var tabItem = new TabItem(tabName)
             {
-                Selected = true,
+                Parent = _TabsControl,
                 TabStripParent = _TabsControl,
-                TabIndex = 0,
                 Title = tabName,
-                BackColor = Form.BackColor,
-                Font = Form.Font
             };
 
             _TabsControl.AddTab( tabItem );
-            _TabsControl.SelectedItem = tabItem;
             _TabsControl.Visible = _TabsControl.Items.Count > 0;
+            _TabsControl.SelectedItem = tabItem;
             _TabsControl.Refresh();
 
             var tabComp = (ITabComponent)Activator.CreateInstance( tabType );
             tabComp.TabItem = tabItem;
             tabComp.Tabs = this;
             tabComp.TabInitialize();
+            tabItem.Controls.Add((Control)tabComp);
             Components.Add( tabComp );
             return tabComp;
         }
@@ -80,6 +95,7 @@ namespace UEExplorer.UI
         public void Dispose()
         {
             Form = null;
+            _TabsControl.SelectedItemChanged -= TabsControlOnSelectedItemChanged;
             _TabsControl = null;
             Components = null;
         }
