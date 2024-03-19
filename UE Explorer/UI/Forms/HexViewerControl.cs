@@ -48,6 +48,13 @@ namespace UEExplorer.UI.Forms
 
         private HexMetaInfo _Structure;
 
+        class CellState
+        {
+            public bool IsModified;
+        }
+
+        private readonly Dictionary<int, CellState> _CellStates = new Dictionary<int, CellState>();
+
         #region View Properties
 
         private const int CellCount = 16;
@@ -89,6 +96,8 @@ namespace UEExplorer.UI.Forms
         public HexViewerControl()
         {
             InitializeComponent();
+
+            CellModifiedFont = new Font(_HexLinePanel.Font, FontStyle.Italic | FontStyle.Bold);
 
             _UnderlinePen = new Pen(_UnderlineBrush);
 
@@ -228,6 +237,22 @@ namespace UEExplorer.UI.Forms
             InitializeMetaInfoFields();
         }
 
+        private void SetCellValue(int cellIndex, byte cellValue)
+        {
+            Buffer[cellIndex] = cellValue;
+            if (_CellStates.TryGetValue(cellIndex, out CellState cellState))
+            {
+                cellState.IsModified = true;
+            }
+            else
+            {
+                _CellStates.Add(cellIndex, new CellState()
+                {
+                    IsModified = true
+                });
+            }
+        }
+
         private void UpdateScrollBar()
         {
             if (Buffer == null)
@@ -325,6 +350,9 @@ namespace UEExplorer.UI.Forms
             var folderName = Path.GetFileNameWithoutExtension(Target.GetBufferId(true));
             return String.Format(_ConfigPath, folderName, Target.GetBufferId());
         }
+
+        [EditorBrowsable]
+        public Font CellModifiedFont { get; set; }
 
         private readonly Brush _ForeBrush;
         private readonly SolidBrush _BorderBrush = new SolidBrush(Color.FromArgb(237, 237, 237));
@@ -534,6 +562,8 @@ namespace UEExplorer.UI.Forms
                             cellTextBrush = new SolidBrush(cellTextBrush.Color.Darken(30F));
                         }
 
+                        var cellFont = _HexLinePanel.Font;
+
                         // Render edit carret.
                         if (byteIndex == _ActiveOffset)
                         {
@@ -551,7 +581,7 @@ namespace UEExplorer.UI.Forms
                                             _ActiveNibbleBrush,
                                             nibbleWidth
                                         ),
-                                        x1 + 1 + nibbleWidth * 0.5F, y1, x1 + 1 + nibbleWidth * 0.5F, y2
+                                        x1 + nibbleWidth * 0.5F, y1, x1 + nibbleWidth * 0.5F, y2
                                     );
                                     break;
 
@@ -568,9 +598,16 @@ namespace UEExplorer.UI.Forms
 
                             cellTextBrush = _WhiteForeBrush;
                             //}
+                        } 
+                        else
+                        {
+                            if (_CellStates.TryGetValue(byteIndex, out CellState cellState) && cellState.IsModified)
+                            {
+                                cellFont = CellModifiedFont;
+                            }
                         }
 
-                        e.Graphics.DrawString(cellText, _HexLinePanel.Font, cellTextBrush,
+                        e.Graphics.DrawString(cellText, cellFont, cellTextBrush,
                             byteColumnOffset + cellIndex * CellWidth, lineOffsetY
                         );
 
@@ -696,16 +733,11 @@ namespace UEExplorer.UI.Forms
             return '.';
         }
 
-        /// <summary>
-        /// Editing byte's buffer index.
-        /// </summary>
         private int _ActiveOffset = -1;
-
         private int _ActiveNibbleIndex;
         private DateTime _CarretStartTime;
 
         private int _SelectedOffset = -1;
-
         private int SelectedOffset
         {
             get { return _SelectedOffset; }
@@ -837,10 +869,15 @@ namespace UEExplorer.UI.Forms
             {
                 return;
             }
-            //ActiveOffset = -1;
 
-            SelectedOffset = GetHoveredByte(e);
-            _HexLinePanel.Invalidate();
+            var cellIndex = GetHoveredByte(e);
+            if (cellIndex == SelectedOffset)
+            {
+                return;
+            }
+
+            SelectedOffset = cellIndex;
+            SetActivateCell(-1);
         }
 
         private void HexLinePanel_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -850,14 +887,17 @@ namespace UEExplorer.UI.Forms
                 return;
             }
 
-            ActivateCell(GetHoveredByte(e));
+            var cellIndex = GetHoveredByte(e);
+            if (cellIndex == _ActiveOffset)
+            {
+                return;
+            }
+
+            SetActivateCell(cellIndex);
         }
 
-        private void ActivateCell(int index)
+        private void SetActivateCell(int index)
         {
-            if (index == -1)
-                return;
-
             _ActiveOffset = index;
             _ActiveNibbleIndex = 0;
 
@@ -949,7 +989,7 @@ namespace UEExplorer.UI.Forms
         {
             if (e.ClickedItem == EditMenuItem)
             {
-                ActivateCell(HoveredOffset != -1 ? HoveredOffset : SelectedOffset);
+                SetActivateCell(HoveredOffset != -1 ? HoveredOffset : SelectedOffset);
                 return;
             }
 
@@ -1077,6 +1117,29 @@ namespace UEExplorer.UI.Forms
 
         private void EditKeyDown(object sender, KeyEventArgs e)
         {
+            // Can't change selection if we are editing.
+            if (_ActiveOffset != -1 && (
+                e.KeyCode == Keys.Left || 
+                e.KeyCode == Keys.Right ||
+                e.KeyCode == Keys.Up ||
+                e.KeyCode == Keys.Down))
+            {
+                if (e.KeyCode == Keys.Left)
+                {
+                    _ActiveNibbleIndex = 0;
+                    _HexLinePanel.Invalidate();
+                }
+                else if (e.KeyCode == Keys.Right)
+                {
+                    _ActiveNibbleIndex = 1;
+                    _HexLinePanel.Invalidate();
+                }
+
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                return;
+            }
+
             // HACK: To determine the cause of increment and decrement events when scrolling.
             _LastKeyWasLeft = e.KeyCode == Keys.Left;
             _LastKeyWasRight = e.KeyCode == Keys.Right;
@@ -1085,23 +1148,34 @@ namespace UEExplorer.UI.Forms
                 return;
             }
 
-            if (_ActiveOffset == -1)
-                return;
-
             if (e.KeyCode == Keys.Return)
             {
-                _ActiveOffset = -1;
+                if (_ActiveOffset == -1 && SelectedOffset != -1)
+                {
+                    SetActivateCell(_SelectedOffset);
+                } 
+                else if (_ActiveOffset != -1)
+                {
+                    SelectedOffset = _ActiveOffset;
+                    SetActivateCell(-1);
+                }
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
             else
             {
-                if (e.KeyCode == Keys.Shift)
+                if (_ActiveOffset == -1 || e.KeyCode == Keys.Shift)
                 {
                     return;
                 }
 
                 var hexKeyIndex = HexKeyCodeToIndex(e.KeyCode);
                 if (hexKeyIndex == -1)
+                {
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
                     return;
+                }
 
                 _CarretStartTime = DateTime.Now;
                 byte newByte = Buffer[_ActiveOffset];
@@ -1109,23 +1183,27 @@ namespace UEExplorer.UI.Forms
                 {
                     case 0:
                         newByte = (byte)((byte)(newByte & 0x0F) | (hexKeyIndex << 4));
-                        Buffer[_ActiveOffset] = newByte;
+                        SetCellValue(_ActiveOffset, newByte);
                         _ActiveNibbleIndex = 1;
                         break;
 
                     case 1:
                         newByte = (byte)((byte)(newByte & 0xF0) | hexKeyIndex);
                         Buffer[_ActiveOffset] = newByte;
-                        _ActiveOffset = Math.Min(_ActiveOffset + 1, Buffer.Length - 1);
+                        SetCellValue(_ActiveOffset, newByte);
                         _ActiveNibbleIndex = 0;
+                        // Move the active cell index to the next cell
+                        _ActiveOffset = Math.Min(_ActiveOffset + 1, Buffer.Length - 1);
+                        SelectedOffset = _ActiveOffset;
                         break;
                 }
 
+                _HexLinePanel.Invalidate();
                 OnBufferModifiedEvent();
-            }
 
-            _HexLinePanel.Invalidate();
-            e.SuppressKeyPress = true;
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
         }
 
         [DllImport("user32")]
@@ -1175,7 +1253,6 @@ namespace UEExplorer.UI.Forms
 
         private void HexScrollBar_KeyDown(object sender, KeyEventArgs e)
         {
-            EditKeyDown(sender, e);
         }
 
         protected override void WndProc(ref Message m)
