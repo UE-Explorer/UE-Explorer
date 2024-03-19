@@ -515,7 +515,7 @@ namespace UEExplorer.UI
 
         private void SocialMenuItem_Click( object sender, EventArgs e )
         {
-            System.Diagnostics.Process.Start( "http://www.facebook.com/UE.Explorer" );
+            System.Diagnostics.Process.Start( "https://www.facebook.com/UE.Explorer" );
         }
 
         private void OnClosed( object sender, FormClosedEventArgs e )

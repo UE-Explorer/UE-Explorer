@@ -29,7 +29,7 @@ namespace UEExplorer.UI.Dialogs
 			InitializeDonators();
 		}
 
-		private const string DONATORS_URL = "http://eliotvu.com/files/donators.txt"; 
+		private const string DONATORS_URL = "https://eliotvu.com/files/donators.txt"; 
 		private void InitializeDonators()
 		{
 			Refresh();
