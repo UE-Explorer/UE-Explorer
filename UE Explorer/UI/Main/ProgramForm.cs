@@ -153,7 +153,6 @@ namespace UEExplorer.UI
         internal ProgramForm()
         {
             Program.LogManager.StartLogStream();
-            Text = string.Format( "{0} {1}", Application.ProductName, Version );
 
             InitializeComponent();	
             InitializeUserSettings();
