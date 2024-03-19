@@ -1,0 +1,237 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>UEExplorer</RootNamespace>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>unrealfile.ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>BFCFD835477ADF3703D9CA79299DB728C4FBFE28</ManifestCertificateThumbprint>
+    <ManifestKeyFile>UEExplorer_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>false</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <StartupObject>UEExplorer.Program</StartupObject>
+    <AssemblyOriginatorKeyFile>UEExplorer_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <SupportUrl>https://eliotvu.com/forum/</SupportUrl>
+    <ErrorReportUrl>https://eliotvu.com/forum/</ErrorReportUrl>
+    <TargetCulture>en</TargetCulture>
+    <ProductName>UE Explorer</ProductName>
+    <PublisherName>Eliot van Uytfanghe</PublisherName>
+    <MinimumRequiredVersion>1.0.0.1</MinimumRequiredVersion>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <AutorunEnabled>true</AutorunEnabled>
+    <TrustUrlParameters>true</TrustUrlParameters>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+	  <EmbeddedResourceUseDependentUponConvention>true</EmbeddedResourceUseDependentUponConvention>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DocumentationFile></DocumentationFile>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <LangVersion>default</LangVersion>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <DocumentationFile></DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;DEBUG_WITH_LOCALHOST</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+	  <DebugType>none</DebugType>
+	  <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>Internet</TargetZone>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Storm.TabControl">
+      <HintPath>libs\Storm.TabControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Update="WindowsFormsIntegration">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Panels\WebViewPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\HexViewerFAQ.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\HexViewerPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Tabs\UC_UClassFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Tabs\UC_Default.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Tabs\UC_Options.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Tabs\UC_ModExplorer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Tabs\UserControl_Tab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Tabs\UC_CacheExtractor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\HexViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Tabs\UC_PackageExplorer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <None Update="Config\UnrealScript.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="unrealfile.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <Content Include="Native Tables\NativesTableList_UDK-2011-08.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Native Tables\NativesTableList_UDK-2012-05.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Native Tables\NativesTableList_UT.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Native Tables\NativesTableList_UT2004.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Native Tables\NativesTableList_UT3.NTL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\Templates\struct.tokens.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Templates\struct.tokens-disassembled.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="unrealfile.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eliot.Utilities\Eliot.Utilities.csproj" />
+    <ProjectReference Include="..\UELib\src\Eliot.UELib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="UEExplorer_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <FileAssociation Include=".u">
+      <Visible>False</Visible>
+      <Description>Unreal File</Description>
+      <Progid>UEExplorer</Progid>
+      <DefaultIcon>unrealfile.ico</DefaultIcon>
+    </FileAssociation>
+    <FileAssociation Include=".upk">
+      <Visible>False</Visible>
+      <Description>Unreal File</Description>
+      <Progid>UEExplorer</Progid>
+      <DefaultIcon>unrealfile.ico</DefaultIcon>
+    </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="license.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autoupdater.NET.Official">
+      <Version>1.7.6</Version>
+    </PackageReference>
+    <PackageReference Include="AvalonEdit">
+      <Version>6.1.3.50</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+    <PackageReference Include="Microsoft.Web.WebView2">
+      <Version>1.0.1462.37</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <IsPublishable>False</IsPublishable>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Title>UE Explorer</Title>
+    <Version>$(VersionPrefix)1.3.2</Version>
+    <Authors>EliotVU</Authors>
+    <Copyright>© 2009-2023 Eliot van Uytfanghe. All rights reserved.</Copyright>
+    <Description>An UnrealScript decompiler for Unreal Engine 1, 2, and 3. Supporting all Epic Games for the PC such as Unreal, UT, UT2004, UT3, and the Unreal Development Kit(UDK).</Description>
+    <PackageIcon>unrealfile.ico</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/UE-Explorer/UE-Explorer</RepositoryUrl>
+    <PackageProjectUrl>https://eliotvu.com/portfolio/view/21/ue-explorer</PackageProjectUrl>
+    <Product>$(Title)</Product>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+  </PropertyGroup>
+</Project>
