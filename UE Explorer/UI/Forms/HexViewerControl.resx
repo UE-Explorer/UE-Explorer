@@ -1090,7 +1090,7 @@
     <value>_HexLinePanel</value>
   </data>
   <data name="&gt;&gt;_HexLinePanel.Type" xml:space="preserve">
-    <value>UEExplorer.UI.Forms.HexViewerPanel, UE Explorer, Version=1.3.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>UEExplorer.UI.Forms.HexViewerPanel, UEExplorer, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;_HexLinePanel.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>

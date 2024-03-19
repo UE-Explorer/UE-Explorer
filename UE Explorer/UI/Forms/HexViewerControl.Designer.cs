@@ -336,6 +336,7 @@
             this._HexLinePanel.ContextMenuStrip = this.Context_Structure;
             this._HexLinePanel.Name = "_HexLinePanel";
             this._HexLinePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HexLinePanel_Paint);
+            this._HexLinePanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditKeyDown);
             this._HexLinePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseClick);
             this._HexLinePanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseDoubleClick);
             this._HexLinePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseMove);
