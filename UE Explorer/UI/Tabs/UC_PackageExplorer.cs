@@ -1883,7 +1883,7 @@ namespace UEExplorer.UI.Tabs
                 return;
             }
 
-            var hexDialog = new HexViewerForm( target, this );
+            var hexDialog = new HexViewerForm( target, FileName );
             hexDialog.Show( _Form );
         }
 

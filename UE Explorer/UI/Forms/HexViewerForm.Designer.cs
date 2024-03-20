@@ -31,9 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HexViewerForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.FAQControl = new UEExplorer.UI.Forms.HexViewerFAQ();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.SizeLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ToolStripStatusLabel_Position = new System.Windows.Forms.ToolStripStatusLabel();
+            this.HexPanel = new UEExplorer.UI.Forms.HexViewerControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,18 +54,20 @@
             this.ViewByteItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewASCIIItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.HexPanel = new UEExplorer.UI.Forms.HexViewerControl();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.SizeLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ToolStripStatusLabel_Position = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.FAQControl);
-            this.panel1.Controls.Add(this.statusStrip1);
-            this.panel1.Controls.Add(this.menuStrip1);
             this.panel1.Controls.Add(this.HexPanel);
+            this.panel1.Controls.Add(this.menuStrip1);
+            this.panel1.Controls.Add(this.statusStrip1);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
@@ -76,29 +76,19 @@
             resources.ApplyResources(this.FAQControl, "FAQControl");
             this.FAQControl.Name = "FAQControl";
             // 
-            // statusStrip1
+            // HexPanel
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SizeLabel,
-            this.ToolStripStatusLabel_Position});
-            resources.ApplyResources(this.statusStrip1, "statusStrip1");
-            this.statusStrip1.Name = "statusStrip1";
-            // 
-            // SizeLabel
-            // 
-            this.SizeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.SizeLabel.Name = "SizeLabel";
-            resources.ApplyResources(this.SizeLabel, "SizeLabel");
-            // 
-            // ToolStripStatusLabel_Position
-            // 
-            this.ToolStripStatusLabel_Position.BackColor = System.Drawing.Color.Transparent;
-            this.ToolStripStatusLabel_Position.Name = "ToolStripStatusLabel_Position";
-            resources.ApplyResources(this.ToolStripStatusLabel_Position, "ToolStripStatusLabel_Position");
+            this.HexPanel.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.HexPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.HexPanel.Buffer = null;
+            this.HexPanel.CellModifiedFont = new System.Drawing.Font("Courier New", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            resources.ApplyResources(this.HexPanel, "HexPanel");
+            this.HexPanel.DrawASCII = true;
+            this.HexPanel.DrawByte = true;
+            this.HexPanel.Name = "HexPanel";
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
@@ -250,37 +240,46 @@
             // 
             // helpToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.HelpToolStripMenuItem_Click);
             // 
-            // HexPanel
+            // statusStrip1
             // 
-            resources.ApplyResources(this.HexPanel, "HexPanel");
-            this.HexPanel.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.HexPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.HexPanel.Buffer = null;
-            this.HexPanel.DrawASCII = true;
-            this.HexPanel.DrawByte = true;
-            this.HexPanel.Name = "HexPanel";
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SizeLabel,
+            this.ToolStripStatusLabel_Position});
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
+            this.statusStrip1.Name = "statusStrip1";
+            // 
+            // SizeLabel
+            // 
+            this.SizeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.SizeLabel.Name = "SizeLabel";
+            resources.ApplyResources(this.SizeLabel, "SizeLabel");
+            // 
+            // ToolStripStatusLabel_Position
+            // 
+            this.ToolStripStatusLabel_Position.BackColor = System.Drawing.Color.Transparent;
+            this.ToolStripStatusLabel_Position.Name = "ToolStripStatusLabel_Position";
+            resources.ApplyResources(this.ToolStripStatusLabel_Position, "ToolStripStatusLabel_Position");
             // 
             // HexViewerForm
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this, "$this");
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "HexViewerForm";
             this.ShowIcon = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HexViewDialog_FormClosing);
+            this.Load += new System.EventHandler(this.HexViewerForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
 		}

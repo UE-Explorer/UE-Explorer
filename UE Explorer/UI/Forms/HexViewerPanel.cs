@@ -7,11 +7,11 @@ namespace UEExplorer.UI.Forms
         public HexViewerPanel()
         {
             InitializeComponent();
-            
-            SetStyle( ControlStyles.UserPaint, true );
-            SetStyle( ControlStyles.AllPaintingInWmPaint, true );
-            SetStyle( ControlStyles.OptimizedDoubleBuffer, true );
-            SetStyle( ControlStyles.ResizeRedraw, true );
+
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.ResizeRedraw, true);
         }
     }
 }

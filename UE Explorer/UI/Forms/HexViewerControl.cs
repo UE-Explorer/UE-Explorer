@@ -18,7 +18,6 @@ namespace UEExplorer.UI.Forms
     using UELib;
     using UStruct = UELib.Core.UStruct;
 
-    // TODO: REFACTOR, and rewrite all of it to be more concise, less duplicational.
     public partial class HexViewerControl : UserControl
     {
         public byte[] Buffer { get; set; }
@@ -48,7 +47,7 @@ namespace UEExplorer.UI.Forms
 
         private HexMetaInfo _Structure;
 
-        class CellState
+        private class CellState
         {
             public bool IsModified;
         }
@@ -59,8 +58,8 @@ namespace UEExplorer.UI.Forms
 
         private const int CellCount = 16;
         private const float CellPadding = 6;
-        private float CellWidth => _HexLinePanel.Font.Height + CellPadding;
-        private float CellHeight => _HexLinePanel.Font.Height;
+        private float CellWidth => HexViewPanel.Font.Height + CellPadding;
+        private float CellHeight => HexViewPanel.Font.Height;
         private float ColumnWidth => CellCount * CellWidth;
         private const float ColumnMargin = 8;
 
@@ -68,11 +67,11 @@ namespace UEExplorer.UI.Forms
 
         public bool DrawASCII
         {
-            get { return _DrawASCII; }
+            get => _DrawASCII;
             set
             {
                 _DrawASCII = value;
-                _HexLinePanel.Invalidate();
+                HexViewPanel.Invalidate();
             }
         }
 
@@ -80,11 +79,11 @@ namespace UEExplorer.UI.Forms
 
         public bool DrawByte
         {
-            get { return _DrawByte; }
+            get => _DrawByte;
             set
             {
                 _DrawByte = value;
-                _HexLinePanel.Invalidate();
+                HexViewPanel.Invalidate();
             }
         }
 
@@ -97,7 +96,7 @@ namespace UEExplorer.UI.Forms
         {
             InitializeComponent();
 
-            CellModifiedFont = new Font(_HexLinePanel.Font, FontStyle.Italic | FontStyle.Bold);
+            CellModifiedFont = new Font(HexViewPanel.Font, FontStyle.Italic | FontStyle.Bold);
 
             _UnderlinePen = new Pen(_UnderlineBrush);
 
@@ -106,13 +105,18 @@ namespace UEExplorer.UI.Forms
 
             _LineSelectionPen = _SelectionPen;
             _LineHoverPen = _HoverPen;
-            _ForeBrush = new SolidBrush(ForeColor);
+            _ForeBrush = new SolidBrush(Color.Black);
             _WhiteForeBrush = new SolidBrush(Color.White);
             _ActiveNibbleBrush = new SolidBrush(Color.FromArgb(unchecked((int)0xEE000000)));
 
             _AddressSample = $"{99999999:x8}".PadLeft(8, '0').ToUpper();
             _MuteBrush = _EvenBrush;
             _BorderPen = new Pen(_BorderBrush);
+        }
+
+        private void HexViewerControl_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void LoadConfig(string path)
@@ -124,15 +128,12 @@ namespace UEExplorer.UI.Forms
 
                 foreach (var s in _Structure.MetaInfoList.Where(s => s.Type != "Generated"))
                 {
-                    byte size;
-                    Color color;
-
-                    InitStructure(s.Type, out size, out color);
+                    InitStructure(s.Type, out byte size, out var color);
                     s.Size = size;
                     s.Color = color;
                 }
 
-                _HexLinePanel.Invalidate();
+                HexViewPanel.Invalidate();
             }
         }
 
@@ -217,14 +218,12 @@ namespace UEExplorer.UI.Forms
 
         public void SetHexData(IBuffered target)
         {
-            if (target == null)
-                return;
-
-            Target = target;
+            Target = target ?? throw new Exception("target cannot be null");
+            
             Buffer = Target.CopyBuffer();
             UpdateScrollBar();
 
-            var path = GetConfigPath();
+            string path = GetConfigPath();
             if (File.Exists(path))
             {
                 LoadConfig(path);
@@ -240,13 +239,13 @@ namespace UEExplorer.UI.Forms
         private void SetCellValue(int cellIndex, byte cellValue)
         {
             Buffer[cellIndex] = cellValue;
-            if (_CellStates.TryGetValue(cellIndex, out CellState cellState))
+            if (_CellStates.TryGetValue(cellIndex, out var cellState))
             {
                 cellState.IsModified = true;
             }
             else
             {
-                _CellStates.Add(cellIndex, new CellState()
+                _CellStates.Add(cellIndex, new CellState
                 {
                     IsModified = true
                 });
@@ -255,16 +254,14 @@ namespace UEExplorer.UI.Forms
 
         private void UpdateScrollBar()
         {
-            if (Buffer == null)
-                return;
-
-            var totalLines = Math.Ceiling(Buffer.Length / (float)CellCount) + 2;
-            var visibleLines = Math.Ceiling(_HexLinePanel.Height / CellHeight);
+            var totalLines = (int)Math.Ceiling(Buffer.Length / (float)CellCount) + 2;
+            var visibleLines = (int)Math.Ceiling(HexViewPanel.Height / CellHeight);
             var trailingLines = totalLines % visibleLines;
             var scrollableLines = totalLines - trailingLines;
 
-            _HexViewScrollBar.Minimum = 0;
-            _HexViewScrollBar.Maximum = (int)Math.Max(totalLines, 0);
+            HexViewScrollBar.Minimum = 0;
+            HexViewScrollBar.Maximum = Math.Max(totalLines, 0);
+            HexViewScrollBar.Invalidate();
         }
 
         /// <summary>
@@ -278,68 +275,61 @@ namespace UEExplorer.UI.Forms
 
         private void InitializeMetaInfoFields()
         {
-#if DEBUG || BINARYMETADATA
-            try
+            if (Target is IBinaryData binaryTarget && binaryTarget.BinaryMetaData != null)
             {
-                var binaryTarget = Target as IBinaryData;
-                if (binaryTarget != null && binaryTarget.BinaryMetaData != null)
+                foreach (var binaryField in binaryTarget.BinaryMetaData.Fields)
                 {
-                    var randomizer1 = new Random(binaryTarget.BinaryMetaData.Fields.Count);
-                    foreach (var binaryField in binaryTarget.BinaryMetaData.Fields)
-                    {
-                        var red = randomizer1.Next(0x8F) | 70;
-                        var green = randomizer1.Next(0x8F) | 70;
-                        var blue = randomizer1.Next(0x8F) | 70;
-
-                        _Structure.MetaInfoList.Add
-                        (
-                            new HexMetaInfo.BytesMetaInfo
-                            {
-                                Position = (int)binaryField.Position,
-                                Size = (int)binaryField.Size,
-                                Type = "Generated",
-                                Color = Color.FromArgb(0x88, red, green, blue),
-                                Name = binaryField.Name,
-                                Tag = binaryField
-                            }
-                        );
-                    }
+                    int colorHash = binaryField.Name.GetHashCode()
+                                    ^ (int)binaryField.Size
+                                    ^ (binaryField.Tag?.GetType().GetHashCode() ?? 1);
+                    _Structure.MetaInfoList.Add
+                    (
+                        new HexMetaInfo.BytesMetaInfo
+                        {
+                            Position = (int)binaryField.Position,
+                            Size = (int)binaryField.Size,
+                            Type = "Generated",
+                            Color = NormalizeArgbToColor(colorHash),
+                            Name = binaryField.Name,
+                            Tag = binaryField
+                        }
+                    );
                 }
             }
-            catch (Exception e)
-            {
-                ExceptionDialog.Show("Initializing binary fields", e);
-            }
-#endif
-            if (!(Target is UStruct))
+
+            if (!(Target is UStruct unStruct))
                 return;
 
-            var unStruct = Target as UStruct;
-            if (unStruct.ByteCodeManager == null || unStruct.ByteCodeManager.DeserializedTokens == null ||
+            if (unStruct.ByteCodeManager?.DeserializedTokens == null ||
                 unStruct.ByteCodeManager.DeserializedTokens.Count <= 0)
                 return;
 
-            var randomizer2 = new Random(unStruct.ByteCodeManager.DeserializedTokens.Count);
             foreach (var token in unStruct.ByteCodeManager.DeserializedTokens)
             {
-                var red = randomizer2.Next(Byte.MaxValue);
-                var green = randomizer2.Next(Byte.MaxValue);
-                var blue = randomizer2.Next(Byte.MaxValue);
-
                 _Structure.MetaInfoList.Add
                 (
                     new HexMetaInfo.BytesMetaInfo
                     {
-                        Position = (int)token.StoragePosition + (int)unStruct.ScriptOffset,
+                        Position = (int)(token.StoragePosition + (int)unStruct.ScriptOffset),
                         Size = 1,
                         HoverSize = token.StorageSize,
                         Type = "Generated",
-                        Color = Color.FromArgb(Byte.MaxValue, red, green, blue),
+                        Color = NormalizeArgbToColor(token.GetHashCode()),
                         Name = token.GetType().Name,
                         Tag = token
                     }
                 );
             }
+        }
+
+        private Color NormalizeArgbToColor(int argb)
+        {
+            const float min = 68f;
+            const float max = 255 - min;
+            var r = (int)(((argb >> 16) & byte.MaxValue) / 255f * max + min);
+            var g = (int)(((argb >> 8) & byte.MaxValue) / 255f * max + min);
+            var b = (int)((argb & byte.MaxValue) / 255f * max + min);
+            return Color.FromArgb(60, r, g, b);
         }
 
         private readonly string _ConfigPath =
@@ -348,17 +338,18 @@ namespace UEExplorer.UI.Forms
         private string GetConfigPath()
         {
             var folderName = Path.GetFileNameWithoutExtension(Target.GetBufferId(true));
-            return String.Format(_ConfigPath, folderName, Target.GetBufferId());
+            return string.Format(_ConfigPath, folderName, Target.GetBufferId());
         }
 
-        [EditorBrowsable]
-        public Font CellModifiedFont { get; set; }
+        [EditorBrowsable] public Font CellModifiedFont { get; set; }
 
         private readonly Brush _ForeBrush;
         private readonly SolidBrush _BorderBrush = new SolidBrush(Color.FromArgb(237, 237, 237));
         private readonly SolidBrush _UnderlineBrush = new SolidBrush(Color.FromArgb(0x55EDEDED));
         private readonly SolidBrush _EvenBrush = new SolidBrush(Color.FromArgb(80, 80, 80));
+        private readonly SolidBrush _EvenLitBrush = new SolidBrush(Color.FromArgb(112, 32, 32));
         private readonly SolidBrush _OddBrush = new SolidBrush(Color.FromArgb(150, 150, 150));
+        private readonly SolidBrush _OddLitBrush = new SolidBrush(Color.FromArgb(182, 102, 102));
         private readonly SolidBrush _OffsetBrush = new SolidBrush(Color.FromArgb(160, 160, 160));
         private readonly SolidBrush _SelectedBrush = new SolidBrush(Color.FromArgb(unchecked((int)0x880000FF)));
         private readonly SolidBrush _HoveredBrush = new SolidBrush(Color.FromArgb(unchecked((int)0x880088FF)));
@@ -380,20 +371,10 @@ namespace UEExplorer.UI.Forms
 
         private void HexLinePanel_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(_BorderPen, 0f, 0f, _HexLinePanel.Width - 1, _HexLinePanel.Height - 1);
-            if (Buffer == null)
-                return;
-
-            _AddressSize = e.Graphics.MeasureString(_AddressSample, _HexLinePanel.Font,
+            _AddressSize = e.Graphics.MeasureString(_AddressSample, HexViewPanel.Font,
                 new PointF(0, 0), StringFormat.GenericTypographic
             );
-
-            int offset = CellCount * _HexViewScrollBar.Value;
-            int lineCount = Math.Min(
-                (int)(_HexLinePanel.ClientSize.Height / CellHeight),
-                (Buffer.Length - offset) / CellCount + ((Buffer.Length - offset) % CellCount > 0 ? 1 : 0)
-            );
-
+            
             float addressColumnOffset = ColumnMargin;
             float addressColumnWidth = _AddressSize.Width;
             float byteColumnOffset = _DrawByte
@@ -405,7 +386,7 @@ namespace UEExplorer.UI.Forms
 
             string text = Resources.HexView_Offset;
 
-            e.Graphics.DrawString(text, _HexLinePanel.Font, _ForeBrush,
+            e.Graphics.DrawString(text, HexViewPanel.Font, _ForeBrush,
                 addressColumnOffset,
                 ColumnMargin,
                 StringFormat.GenericDefault
@@ -414,7 +395,16 @@ namespace UEExplorer.UI.Forms
                 addressColumnOffset, ColumnMargin + CellHeight,
                 addressColumnOffset + byteColumnOffset - ColumnMargin, ColumnMargin + CellHeight
             );
-
+            
+            if (Buffer == null)
+                return;
+            
+            int offset = CellCount * HexViewScrollBar.Value;
+            int lineCount = Math.Min(
+                (int)(HexViewPanel.ClientSize.Height / CellHeight),
+                (Buffer.Length - offset) / CellCount + ((Buffer.Length - offset) % CellCount > 0 ? 1 : 0)
+            );
+            
             if (_DrawByte)
             {
                 float x = byteColumnOffset;
@@ -432,7 +422,7 @@ namespace UEExplorer.UI.Forms
                         : HoveredOffset % CellCount == i ? _HoveredBrush
                         : i / 4.0F / 1.00 % 2.00 < 1.00 ? _EvenBrush : _OffsetBrush;
                     var c = HexTable[i];
-                    e.Graphics.DrawString(c, _HexLinePanel.Font, textBrush,
+                    e.Graphics.DrawString(c, HexViewPanel.Font, textBrush,
                         x + i * CellWidth,
                         y,
                         StringFormat.GenericDefault
@@ -458,7 +448,7 @@ namespace UEExplorer.UI.Forms
                         : HoveredOffset % CellCount == i ? _HoveredBrush
                         : isOddGroup ? _EvenBrush : _OffsetBrush;
                     var c = HexTable[i];
-                    e.Graphics.DrawString(c, _HexLinePanel.Font, textBrush,
+                    e.Graphics.DrawString(c, HexViewPanel.Font, textBrush,
                         x + i * CellWidth,
                         y,
                         StringFormat.GenericDefault
@@ -470,7 +460,7 @@ namespace UEExplorer.UI.Forms
             float extraLineOffset = CellHeight;
             for (int line = 0; line < lineCount; ++line)
             {
-                if (lineOffsetY >= _HexLinePanel.ClientSize.Height)
+                if (lineOffsetY >= HexViewPanel.ClientSize.Height)
                 {
                     break;
                 }
@@ -499,10 +489,10 @@ namespace UEExplorer.UI.Forms
                     );
                 }
 
-                string lineText = String.Format("{0:x8}", offset).PadLeft(8, '0').ToUpper();
+                string lineText = $"{offset:X8}".PadLeft(8, '0');
                 var textBrush = line % 2 == 0 ? _EvenBrush : _OddBrush;
                 var lineBrush = lineIsSelected ? _SelectedBrush : lineIsHovered ? _HoveredBrush : textBrush;
-                e.Graphics.DrawString(lineText, _HexLinePanel.Font, lineBrush, addressColumnOffset, lineOffsetY);
+                e.Graphics.DrawString(lineText, HexViewPanel.Font, lineBrush, addressColumnOffset, lineOffsetY);
 
                 _EvenCellBrush = new SolidBrush(Color.FromArgb(textBrush.Color.ToArgb() - 0x303030 + 0x500000));
                 if (_DrawByte)
@@ -562,7 +552,7 @@ namespace UEExplorer.UI.Forms
                             cellTextBrush = new SolidBrush(cellTextBrush.Color.Darken(30F));
                         }
 
-                        var cellFont = _HexLinePanel.Font;
+                        var cellFont = HexViewPanel.Font;
 
                         // Render edit carret.
                         if (byteIndex == _ActiveOffset)
@@ -598,10 +588,10 @@ namespace UEExplorer.UI.Forms
 
                             cellTextBrush = _WhiteForeBrush;
                             //}
-                        } 
+                        }
                         else
                         {
-                            if (_CellStates.TryGetValue(byteIndex, out CellState cellState) && cellState.IsModified)
+                            if (_CellStates.TryGetValue(byteIndex, out var cellState) && cellState.IsModified)
                             {
                                 cellFont = CellModifiedFont;
                             }
@@ -691,7 +681,7 @@ namespace UEExplorer.UI.Forms
                         }
 
                         e.Graphics.DrawString(
-                            drawnChar, _HexLinePanel.Font, drawBrush,
+                            drawnChar, HexViewPanel.Font, drawBrush,
                             asciiColumnOffset + cellIndex * CellWidth,
                             lineOffsetY
                         );
@@ -734,13 +724,15 @@ namespace UEExplorer.UI.Forms
         }
 
         private int _ActiveOffset = -1;
+
         private int _ActiveNibbleIndex;
         private DateTime _CarretStartTime;
 
         private int _SelectedOffset = -1;
+
         private int SelectedOffset
         {
-            get { return _SelectedOffset; }
+            get => _SelectedOffset;
             set
             {
                 _SelectedOffset = value;
@@ -764,12 +756,12 @@ namespace UEExplorer.UI.Forms
 
         private void OffsetChanged()
         {
-            _HexLinePanel.Invalidate();
+            HexViewPanel.Invalidate();
             if (SelectedOffset == -1)
                 return;
 
-            DissambledObject.Text = String.Empty;
-            DissambledName.Text = String.Empty;
+            DissambledObject.Text = string.Empty;
+            DissambledName.Text = string.Empty;
 
             var bufferSelection = new byte[8];
             for (int i = 0; SelectedOffset + i < Buffer.Length && i < 8; ++i)
@@ -818,7 +810,7 @@ namespace UEExplorer.UI.Forms
                 DissambledName.Text = Resources.NOT_AVAILABLE;
             }
 
-            DissambledStruct.Text = String.Empty;
+            DissambledStruct.Text = string.Empty;
             foreach (var s in _Structure.MetaInfoList)
             {
                 if (SelectedOffset >= s.Position && SelectedOffset < s.Position + s.Size)
@@ -845,6 +837,7 @@ namespace UEExplorer.UI.Forms
                 _LastKeyWasRight = false;
             }
             else
+            {
                 switch (e.Type)
                 {
                     case ScrollEventType.SmallDecrement:
@@ -859,8 +852,9 @@ namespace UEExplorer.UI.Forms
                             : Math.Min(SelectedOffset + 1, Buffer.Length - 1);
                         break;
                 }
+            }
 
-            _HexLinePanel.Invalidate();
+            HexViewPanel.Invalidate();
         }
 
         private void HexLinePanel_MouseClick(object sender, MouseEventArgs e)
@@ -902,16 +896,16 @@ namespace UEExplorer.UI.Forms
             _ActiveNibbleIndex = 0;
 
             _CarretStartTime = DateTime.Now;
-            _HexLinePanel.Invalidate();
+            HexViewPanel.Invalidate();
         }
 
         private int GetHoveredByte(MouseEventArgs e)
         {
-            float x = e.X - _HexLinePanel.Location.X;
-            float y = e.Y - _HexLinePanel.Location.Y;
+            float x = e.X - HexViewPanel.Location.X;
+            float y = e.Y - HexViewPanel.Location.Y;
 
-            int offset = CellCount * _HexViewScrollBar.Value;
-            int lineCount = Math.Min((int)(_HexLinePanel.ClientSize.Height / CellHeight),
+            int offset = CellCount * HexViewScrollBar.Value;
+            int lineCount = Math.Min((int)(HexViewPanel.ClientSize.Height / CellHeight),
                 (Buffer.Length - offset) / CellCount +
                 ((Buffer.Length - offset) % CellCount > 0 ? 1 : 0)
             );
@@ -928,7 +922,7 @@ namespace UEExplorer.UI.Forms
             float lineYOffset = (float)(ColumnMargin + CellHeight + CellHeight * .5);
             for (int line = 0; line < lineCount; ++line)
             {
-                if (lineYOffset >= _HexLinePanel.ClientSize.Height)
+                if (lineYOffset >= HexViewPanel.ClientSize.Height)
                 {
                     break;
                 }
@@ -999,7 +993,7 @@ namespace UEExplorer.UI.Forms
                 dialog.TextBoxName.Text = type;
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (dialog.TextBoxName.Text == String.Empty)
+                    if (dialog.TextBoxName.Text == string.Empty)
                     {
                         // Show error box?
                         return;
@@ -1023,7 +1017,7 @@ namespace UEExplorer.UI.Forms
                     var path = GetConfigPath();
                     SaveConfig(path);
 
-                    _HexLinePanel.Invalidate();
+                    HexViewPanel.Invalidate();
                 }
             }
         }
@@ -1035,7 +1029,7 @@ namespace UEExplorer.UI.Forms
 
             if (lastHoveredOffset != HoveredOffset)
             {
-                _HexLinePanel.Invalidate();
+                HexViewPanel.Invalidate();
                 if (HoveredOffset != -1)
                 {
                     var dataStruct = _Structure.MetaInfoList.Find(
@@ -1055,8 +1049,7 @@ namespace UEExplorer.UI.Forms
                         try
                         {
                             // Restart token index.
-                            var token = dataStruct.Tag as UStruct.UByteCodeDecompiler.Token;
-                            if (token != null)
+                            if (dataStruct.Tag is UStruct.UByteCodeDecompiler.Token token)
                             {
                                 token.Decompiler.JumpTo((ushort)token.Position);
                             }
@@ -1082,24 +1075,6 @@ namespace UEExplorer.UI.Forms
             }
         }
 
-        private void DataInfoPanel_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawRectangle(_BorderPen, 0f, 0f, DataInfoPanel.Width - 1, DataInfoPanel.Height - 1);
-        }
-
-        private void SplitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-            DataInfoPanel.Invalidate();
-            _HexLinePanel.Invalidate();
-        }
-
-        private void UserControl_HexView_Resize(object sender, EventArgs e)
-        {
-            DataInfoPanel.Invalidate();
-            _HexLinePanel.Invalidate();
-            UpdateScrollBar();
-        }
-
         public delegate void BufferModifiedEventHandler();
 
         public event BufferModifiedEventHandler BufferModifiedEvent = null;
@@ -1119,20 +1094,20 @@ namespace UEExplorer.UI.Forms
         {
             // Can't change selection if we are editing.
             if (_ActiveOffset != -1 && (
-                e.KeyCode == Keys.Left || 
-                e.KeyCode == Keys.Right ||
-                e.KeyCode == Keys.Up ||
-                e.KeyCode == Keys.Down))
+                    e.KeyCode == Keys.Left ||
+                    e.KeyCode == Keys.Right ||
+                    e.KeyCode == Keys.Up ||
+                    e.KeyCode == Keys.Down))
             {
                 if (e.KeyCode == Keys.Left)
                 {
                     _ActiveNibbleIndex = 0;
-                    _HexLinePanel.Invalidate();
+                    HexViewPanel.Invalidate();
                 }
                 else if (e.KeyCode == Keys.Right)
                 {
                     _ActiveNibbleIndex = 1;
-                    _HexLinePanel.Invalidate();
+                    HexViewPanel.Invalidate();
                 }
 
                 e.Handled = true;
@@ -1153,12 +1128,13 @@ namespace UEExplorer.UI.Forms
                 if (_ActiveOffset == -1 && SelectedOffset != -1)
                 {
                     SetActivateCell(_SelectedOffset);
-                } 
+                }
                 else if (_ActiveOffset != -1)
                 {
                     SelectedOffset = _ActiveOffset;
                     SetActivateCell(-1);
                 }
+
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
@@ -1198,7 +1174,7 @@ namespace UEExplorer.UI.Forms
                         break;
                 }
 
-                _HexLinePanel.Invalidate();
+                HexViewPanel.Invalidate();
                 OnBufferModifiedEvent();
 
                 e.Handled = true;
@@ -1251,10 +1227,6 @@ namespace UEExplorer.UI.Forms
             HexScrollBar_Scroll(sender, e);
         }
 
-        private void HexScrollBar_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
@@ -1263,8 +1235,8 @@ namespace UEExplorer.UI.Forms
             {
                 case 0x20a:
                 {
-                    _HexViewScrollBar.Focus();
-                    SendMessage(_HexViewScrollBar.Handle, 0x20a, m.WParam, m.LParam);
+                    HexViewScrollBar.Focus();
+                    SendMessage(HexViewScrollBar.Handle, 0x20a, m.WParam, m.LParam);
                     //int value = _HexViewScrollBar.Value;
                     //_HexViewScrollBar.Value = Math.Min(value + 1, _HexViewScrollBar.Maximum);
                     //HexScrollBar_Scroll(this,
