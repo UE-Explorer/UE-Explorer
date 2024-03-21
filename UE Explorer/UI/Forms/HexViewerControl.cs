@@ -333,7 +333,7 @@ namespace UEExplorer.UI.Forms
         }
 
         private readonly string _ConfigPath =
-            Path.Combine(Application.StartupPath, "DataStructures", "{0}", "{1}") + ".xml";
+            Path.Combine(Program.s_appDataDir, "DataStructures", "{0}", "{1}") + ".xml";
 
         private string GetConfigPath()
         {

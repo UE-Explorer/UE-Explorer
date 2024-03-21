@@ -18,10 +18,12 @@ namespace UEExplorer.UI.Tabs
 		{
 		}*/
 
-		/// <summary>
-		/// Called when the Tab is added to the chain.
-		/// </summary>
-		protected override void TabCreated()
+		public UC_UClassFile()
+		{
+			InitializeComponent();
+		}
+
+        private void UC_UClassFile_Load(object sender, EventArgs e)
 		{
 			string langPath = Path.Combine( Application.StartupPath, "Config", "UnrealScript.xshd" );
 			if( File.Exists( langPath ) )
@@ -33,12 +35,11 @@ namespace UEExplorer.UI.Tabs
 						ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance 
 					);
 				}
-				catch( Exception e )
+				catch( Exception exc )
 				{
-					ExceptionDialog.Show( e.GetType().Name, e ); 
+					ExceptionDialog.Show( e.GetType().Name, exc ); 
 				}
 			}
-			base.TabCreated();
 		}
 
 		public void PostInitialize()
@@ -47,7 +48,7 @@ namespace UEExplorer.UI.Tabs
 			_MyTextEditor1.TextEditor.Load( FileName );
 		}
 
-		protected override void InitializeComponent()
+		protected void InitializeComponent()
 		{
 			this._WpfHost = new System.Windows.Forms.Integration.ElementHost();
 			this._MyTextEditor1 = new UEExplorer.UI.Tabs.TextEditorPanel();
@@ -86,7 +87,8 @@ namespace UEExplorer.UI.Tabs
 			this.Controls.Add( this._EditorLayout );
 			this.Name = "UC_UClassFile";
 			this.Size = new System.Drawing.Size( 1312, 584 );
-			this._EditorLayout.ResumeLayout( false );
+			this.Load += new System.EventHandler(this.UC_UClassFile_Load);
+            this._EditorLayout.ResumeLayout( false );
 			this.ResumeLayout( false );
 
 		}

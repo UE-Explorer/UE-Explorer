@@ -17,6 +17,11 @@ namespace Eliot.Extensions.ExecGenerator
     {
         private readonly List<UnrealPackage> _Packages = new List<UnrealPackage>();
 
+        public UC_ExecGenerator()
+        {
+            InitializeComponent();
+        }
+        
         private void Button_Add_Click( object sender, EventArgs e )
         {
             using( var ofd = new OpenFileDialog() )

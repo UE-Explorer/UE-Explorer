@@ -14,7 +14,7 @@ namespace UEExplorer
         private const string ExportedDir = "Exported";
         private const string ClassesDir = "Classes";
 
-        public static readonly string PackageExportPath = Path.Combine( Application.StartupPath, ExportedDir );
+        public static readonly string PackageExportPath = Path.Combine( Program.s_appDataDir, ExportedDir );
 
         public static string InitializeExportDirectory( this UnrealPackage package )
         {

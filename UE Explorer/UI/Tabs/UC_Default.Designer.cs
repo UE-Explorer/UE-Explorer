@@ -29,7 +29,7 @@ namespace UEExplorer.UI.Tabs
 		/// Required method for Designer support - do not modify 
 		/// the contents of this method with the code editor.
 		/// </summary>
-		protected override void InitializeComponent()
+		protected void InitializeComponent()
 		{
             this.SuspendLayout();
             // 
@@ -40,7 +40,7 @@ namespace UEExplorer.UI.Tabs
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Name = "UC_Default";
             this.Size = new System.Drawing.Size(349, 337);
-
+            this.Load += new System.EventHandler(this.UC_Default_Load);
 
 
             this.ResumeLayout(false);

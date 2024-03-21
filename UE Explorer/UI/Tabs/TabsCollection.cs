@@ -1,87 +1,73 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 using Storm.TabControl;
 
 namespace UEExplorer.UI
 {
-    public interface ITabComponent : IDisposable
+    // TODO: Deprecate
+    public interface ITabComponent
     {
-        TabsCollection Tabs{ set; }
-        TabStripItem TabItem{ get; set; }
-
-        void TabInitialize();
-        void TabSelected();
-        void TabClosing();
         void TabSave();
         void TabFind();
-        void TabDeselected();
     }
 
+    // TODO: Deprecate
     public class TabsCollection : IDisposable
     {
-        public ProgramForm                      Form;
-        public List<ITabComponent>              Components = new List<ITabComponent>();
-        public ITabComponent                    SelectedComponent
-        {
-            get{ return Components.Find( tabComp => tabComp.TabItem == _TabsControl.SelectedItem ); }
-        }
-        public ITabComponent                    LastSelectedComponent;
-        private TabStrip                        _TabsControl;
+        private TabStrip _TabStrip;
 
-        public TabsCollection( ProgramForm owner, TabStrip tabsControl )
+        public TabsCollection(TabStrip tabStrip)
         {
-            Form = owner;
-            _TabsControl = tabsControl;
+            _TabStrip = tabStrip;
         }
 
-        public ITabComponent Add( Type tabType, string tabName )
-        {
-            if( Components.Any( tc => tc.TabItem.Title == tabName ) )
-            {
-                return null;
-            }
-
-            var tabItem = new TabStripItem(tabName, null)
-            {
-                Selected = true,
-                TabStripParent = _TabsControl,
-                TabIndex = 0,
-                Title = tabName,
-                BackColor = Form.BackColor,
-                Font = Form.Font
-            };
-
-            _TabsControl.AddTab( tabItem );
-            _TabsControl.SelectedItem = tabItem;
-            _TabsControl.Visible = _TabsControl.Items.Count > 0;
-            _TabsControl.Refresh();
-
-            var tabComp = (ITabComponent)Activator.CreateInstance( tabType );
-            tabComp.TabItem = tabItem;
-            tabComp.Tabs = this;
-            tabComp.TabInitialize();
-            Components.Add( tabComp );
-            return tabComp;
-        }
-
-        public void Remove( ITabComponent delComponent, bool fullRemove = false )
-        {
-            if( fullRemove )
-            {
-                _TabsControl.RemoveTab( delComponent.TabItem );
-                 delComponent.TabItem.Dispose();
-            }
-            Components.Remove( delComponent );
-            delComponent.Dispose();
-        }
+        public ITabComponent SelectedComponent => (ITabComponent)_TabStrip.SelectedItem?.Controls[0];
 
         public void Dispose()
         {
-            Form = null;
-            _TabsControl = null;
-            Components = null;
+            _TabStrip = null;
+        }
+
+        public bool HasTab(string uniqueName)
+        {
+            return _TabStrip.Controls[uniqueName] != null;
+        }
+
+        public void InsertTab(Type componentType, string caption)
+        {
+            Debug.Assert(componentType.IsSubclassOf(typeof(Control)));
+
+            string uniqueName = componentType.Name;
+            if (HasTab(uniqueName))
+            {
+                return;
+            }
+
+            var tabComp = (Control)Activator.CreateInstance(componentType);
+            AddTab(tabComp, caption, uniqueName);
+        }
+
+        public void AddTab(Control component, string caption, string uniqueName = "")
+        {
+            _TabStrip.Visible = true;
+
+            var tabItem = new TabStripItem(caption, null)
+            {
+                Name = uniqueName == "" 
+                    ? component.GetType().Name 
+                    : uniqueName,
+            };
+            _TabStrip.AddTab(tabItem, true);
+
+            // We have to add this last for proper layout rendering.
+            tabItem.Controls.Add(component);
+        }
+
+        public void CloseTab(TabStripItem itemToRemove)
+        {
+            _TabStrip.RemoveTab(itemToRemove);
         }
     }
 }

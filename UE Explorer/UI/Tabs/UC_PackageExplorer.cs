@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using Storm.TabControl;
 using UEExplorer.Properties;
 using UEExplorer.UI.Forms;
 using UEExplorer.UI.Nodes;
@@ -32,44 +32,49 @@ namespace UEExplorer.UI.Tabs
         /// </summary>
         private UnrealPackage _UnrealPackage;
 
-        public override void TabInitialize()
+        public UC_PackageExplorer()
         {
-            base.TabInitialize();
-            
-            splitContainer1.SplitterDistance = Settings.Default.PackageExplorer_SplitterDistance;
+            InitializeComponent();
         }
 
-        /// <summary>
-        /// Called when the Tab is added to the chain.
-        /// </summary>
-        protected override void TabCreated()
-        {						
+        public UC_PackageExplorer(string fileName)
+        {
+            FileName = fileName;
+
+            InitializeComponent();
+            
+            splitContainer1.SplitterDistance = Settings.Default.PackageExplorer_SplitterDistance;
+
             // Fold all { } blocks
             var foldingManager = ICSharpCode.AvalonEdit.Folding.FoldingManager.Install(TextEditorPanel.TextEditor.TextArea);
             var foldingStrategy = new ICSharpCode.AvalonEdit.Folding.XmlFoldingStrategy();
             foldingStrategy.UpdateFoldings(foldingManager, TextEditorPanel.TextEditor.Document);
 
-            var langPath = Path.Combine( Application.StartupPath, "Config", "UnrealScript.xshd" );
-            if( File.Exists( langPath ) )
+            var langPath = Path.Combine(Application.StartupPath, "Config", "UnrealScript.xshd");
+            if (File.Exists(langPath))
             {
                 using (var stream = new System.Xml.XmlTextReader(langPath))
                 {
-                    TextEditorPanel.TextEditor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load( 
-                        stream, 
-                        ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance 
+                    TextEditorPanel.TextEditor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load(
+                        stream,
+                        ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance
                     );
                 }
             }
-            
+
             TextEditorPanel.searchWiki.Click += SearchWiki_Click;
             TextEditorPanel.searchDocument.Click += SearchDocument_Click;
             TextEditorPanel.searchPackage.Click += SearchClasses_Click;
             TextEditorPanel.searchObject.Click += SearchObject_Click;
             TextEditorPanel.TextEditor.ContextMenuOpening += ContextMenu_ContextMenuOpening;
             TextEditorPanel.copy.Click += Copy_Click;
+        }
 
-            _Form = Tabs.Form;
-            base.TabCreated();
+        private void UC_PackageExplorer_Load(object sender, EventArgs e)
+        {
+            _State = Program.Options.GetState( FileName );
+
+            InitializeFromFile(FileName);
         }
 
         void Copy_Click( object sender, System.Windows.RoutedEventArgs e )
@@ -132,10 +137,16 @@ namespace UEExplorer.UI.Tabs
 
         private XMLSettings.State _State;
 
-        public void PostInitialize()
-        {  
-            _State = Program.Options.GetState( FileName ); 
-            Invoke((MethodInvoker)(LoadPackage));
+        private void InitializeFromFile(string filePath)
+        {
+            try
+            {
+                LoadPackage();
+            }
+            catch (Exception exception)
+            {
+                throw new UnrealException("Couldn't load or initialize package", exception);
+            }
         }
 
         private void LoadPackage()
@@ -150,7 +161,7 @@ namespace UEExplorer.UI.Tabs
                 UnrealPackage.OverrideVersion = Program.Options.Version;
             }
 
-            if (!Enum.TryParse(_Form.Platform.Text, out UnrealConfig.Platform))
+            if (!Enum.TryParse(((ProgramForm)ParentForm).platformMenuItem.Text, out UnrealConfig.Platform))
             {
                 UnrealConfig.Platform = UnrealConfig.CookedPlatform.PC;
             };
@@ -199,7 +210,7 @@ namespace UEExplorer.UI.Tabs
                     ) == DialogResult.No
                 )
                 {
-                    Tabs.Remove( this );
+                    ((ProgramForm)ParentForm).Tabs.CloseTab((TabStripItem)Parent);
                     return;
                 }
                 UnrealConfig.SuppressSignature = true;
@@ -428,17 +439,8 @@ namespace UEExplorer.UI.Tabs
                 }
             }
         }
-
-        private ProgramForm _Form;
+        
         private List<UClass> _ClassesList;
-
-        public override void TabClosing()
-        {
-            base.TabClosing();
-
-            ProgressStatus.ResetStatus();
-            ProgressStatus.ResetValue();
-        }
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -447,15 +449,16 @@ namespace UEExplorer.UI.Tabs
         protected override void Dispose( bool disposing )
         {
             Console.WriteLine( "Disposing UC_PackageExplorer " + disposing );
-            if( disposing )
+
+            ProgressStatus.ResetStatus();
+            ProgressStatus.ResetValue();
+            
+            if ( disposing )
             {
                 _BorderPen.Dispose();
                 _LinePen.Dispose();
 
                 WPFHost.Dispose();
-
-                _ClassesList = null;
-                _Form = null;
 
                 if( _UnrealPackage != null )
                 {
@@ -468,6 +471,7 @@ namespace UEExplorer.UI.Tabs
                     components.Dispose();
                 }
             }
+            
             base.Dispose( disposing );
         }
 
@@ -509,8 +513,7 @@ namespace UEExplorer.UI.Tabs
             }
             InitializeTabs();
 
-            var state = Program.Options.GetState( _UnrealPackage.FullPackageName );
-            SearchObjectTextBox.Text = state.SearchObjectValue;
+            SearchObjectTextBox.Text = _State.SearchObjectValue;
             DoSearchObjectByGroup( SearchObjectTextBox.Text );
 
             SearchObjectTextBox.TextChanged += (e, sender) =>
@@ -916,8 +919,11 @@ namespace UEExplorer.UI.Tabs
 
         internal void ReloadPackage()
         {
-            Tabs.Remove( this, true );
-            Tabs.Form.LoadFile( FileName );
+            string filePath = _UnrealPackage.FullPackageName;
+
+            var form = ((ProgramForm)ParentForm);
+            form.Tabs.CloseTab((TabStripItem)Parent);
+            form.LoadFromFile(filePath);
         }
 
         private void OutputNodeObject( TreeNode treeNode )
@@ -1637,10 +1643,9 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private static readonly string _TemplateDir = Path.Combine( Program.ConfigDir, "Templates" );
         private static string LoadTemplate( string name )
         {
-            return File.ReadAllText( Path.Combine( _TemplateDir, name + ".txt" ), System.Text.Encoding.ASCII );
+            return File.ReadAllText( Path.Combine(Program.s_templateDir, name + ".txt" ), System.Text.Encoding.ASCII );
         }
         #endregion
 
@@ -1884,7 +1889,7 @@ namespace UEExplorer.UI.Tabs
             }
 
             var hexDialog = new HexViewerForm( target, FileName );
-            hexDialog.Show( _Form );
+            hexDialog.Show( ParentForm );
         }
 
         private System.Windows.Forms.Timer _FilterTextChangedTimer = null;
