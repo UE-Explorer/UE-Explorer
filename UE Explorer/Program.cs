@@ -99,7 +99,7 @@ namespace UEExplorer
                 {
                     if( File.Exists( args[i] ) )
                     {
-                        ((ProgramForm)MainForm).LoadFile( args[i] );
+                        ((ProgramForm)MainForm).LoadFromFile( args[i] );
                     }
                 }
             }

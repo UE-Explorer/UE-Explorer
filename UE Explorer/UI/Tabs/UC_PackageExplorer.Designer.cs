@@ -15,7 +15,7 @@
 		/// Required method for Designer support - do not modify 
 		/// the contents of this method with the code editor.
 		/// </summary>
-		protected override void InitializeComponent()
+		protected void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label label4;
@@ -1201,6 +1201,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Controls.Add(this.splitContainer1);
             this.Name = "UC_PackageExplorer";
+            this.Load += new System.EventHandler(this.UC_PackageExplorer_Load);
             filterPanel.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

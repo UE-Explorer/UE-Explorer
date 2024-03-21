@@ -12,6 +12,11 @@ namespace UEExplorer
     {
         private UnrealCache _CurCache;
 
+        public UC_CacheExtractor()
+        {
+            InitializeComponent();
+        }
+
         private void Button_SelectDir_Click( object sender, EventArgs e )
         {
             if( CacheFolderDialog.ShowDialog( this ) == DialogResult.OK )

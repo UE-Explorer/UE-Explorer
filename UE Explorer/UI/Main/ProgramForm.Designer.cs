@@ -1,4 +1,9 @@
-﻿namespace UEExplorer.UI
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Media.TextFormatting;
+
+namespace UEExplorer.UI
 {
     partial class ProgramForm
     {
@@ -16,117 +21,116 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.MenuItem menuItem26;
+            System.Windows.Forms.ToolStripMenuItem webMenuItem;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProgramForm));
-            this.UEStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.LoadingProgress = new System.Windows.Forms.ToolStripProgressBar();
-            this.ProgressLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.SelectedNativeTable = new System.Windows.Forms.ToolStripDropDownButton();
-            this.Platform = new System.Windows.Forms.ToolStripDropDownButton();
-            this.pCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.loadingProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.progressStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.nativeTableDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.platformMenuItem = new System.Windows.Forms.ToolStripDropDownButton();
+            this.platformPCMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.platformConsoleMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TabComponentsStrip = new Storm.TabControl.TabStrip();
-            this.tabStripItem2 = new Storm.TabControl.TabStripItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.menuItem8 = new System.Windows.Forms.MenuItem();
-            this._ROF = new System.Windows.Forms.MenuItem();
-            this.menuItem9 = new System.Windows.Forms.MenuItem();
-            this.menuItem12 = new System.Windows.Forms.MenuItem();
-            this.menuItem11 = new System.Windows.Forms.MenuItem();
-            this.menuItem10 = new System.Windows.Forms.MenuItem();
-            this.menuItem2 = new System.Windows.Forms.MenuItem();
-            this.menuItem21 = new System.Windows.Forms.MenuItem();
-            this.menuItem22 = new System.Windows.Forms.MenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.MenuItem();
-            this.menuItem13 = new System.Windows.Forms.MenuItem();
-            this.menuItem14 = new System.Windows.Forms.MenuItem();
-            this._CacheExtractorItem = new System.Windows.Forms.MenuItem();
-            this.menuItem16 = new System.Windows.Forms.MenuItem();
-            this.menuItem17 = new System.Windows.Forms.MenuItem();
-            this.menuItem19 = new System.Windows.Forms.MenuItem();
-            this.menuItem20 = new System.Windows.Forms.MenuItem();
-            this.menuItem7 = new System.Windows.Forms.MenuItem();
-            this.menuItem3 = new System.Windows.Forms.MenuItem();
-            this.menuItem15 = new System.Windows.Forms.MenuItem();
-            this.menuItem23 = new System.Windows.Forms.MenuItem();
-            this.menuItem25 = new System.Windows.Forms.MenuItem();
-            this.menuItem24 = new System.Windows.Forms.MenuItem();
-            this.menuItem6 = new System.Windows.Forms.MenuItem();
-            this.menuItem4 = new System.Windows.Forms.MenuItem();
-            this.SocialMenuItem = new System.Windows.Forms.MenuItem();
-            this.menuItem27 = new System.Windows.Forms.MenuItem();
-            this.menuItem5 = new System.Windows.Forms.MenuItem();
-            this.tabStripItem1 = new Storm.TabControl.TabStripItem();
-            this.tabStripItem3 = new Storm.TabControl.TabStripItem();
-            this.OpenHome = new System.Windows.Forms.Button();
-            this.HomepageButton = new System.Windows.Forms.Button();
-            menuItem26 = new System.Windows.Forms.MenuItem();
-            this.UEStatusStrip.SuspendLayout();
+            this.brandPictureBox = new System.Windows.Forms.PictureBox();
+            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.fileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.separator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mostRecentMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.separator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItem22 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.separator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cacheExtractorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.separator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.colorGeneratorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.separator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toggleFilesAssociationMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportAnIssueMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForUpdatesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.separator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.forumLinkMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.donateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contactMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.socialMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.separator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openHomeButton = new System.Windows.Forms.Button();
+            this.containerPanel = new System.Windows.Forms.Panel();
+            webMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brandPictureBox)).BeginInit();
+            this.mainMenuStrip.SuspendLayout();
+            this.containerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuItem26
             // 
-            menuItem26.Index = 3;
-            resources.ApplyResources(menuItem26, "menuItem26");
-            menuItem26.Click += new System.EventHandler(this.MenuItem26_Click);
+            webMenuItem.Name = "webMenuItem";
+            resources.ApplyResources(webMenuItem, "webMenuItem");
+            webMenuItem.Click += new System.EventHandler(this.WebMenuItem_Click);
             // 
-            // UEStatusStrip
+            // mainStatusStrip
             // 
-            this.UEStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LoadingProgress,
-            this.ProgressLabel,
-            this.SelectedNativeTable,
-            this.Platform});
-            resources.ApplyResources(this.UEStatusStrip, "UEStatusStrip");
-            this.UEStatusStrip.Name = "UEStatusStrip";
-            this.UEStatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadingProgressBar,
+            this.progressStatusLabel,
+            this.nativeTableDropDownButton,
+            this.platformMenuItem});
+            resources.ApplyResources(this.mainStatusStrip, "mainStatusStrip");
+            this.mainStatusStrip.Name = "mainStatusStrip";
+            this.mainStatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             // 
-            // LoadingProgress
+            // loadingProgressBar
             // 
-            this.LoadingProgress.CausesValidation = false;
-            resources.ApplyResources(this.LoadingProgress, "LoadingProgress");
-            this.LoadingProgress.Name = "LoadingProgress";
-            this.LoadingProgress.Step = 1;
+            this.loadingProgressBar.CausesValidation = false;
+            resources.ApplyResources(this.loadingProgressBar, "loadingProgressBar");
+            this.loadingProgressBar.Name = "loadingProgressBar";
+            this.loadingProgressBar.Step = 1;
             // 
-            // ProgressLabel
+            // progressStatusLabel
             // 
-            this.ProgressLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ProgressLabel.Name = "ProgressLabel";
-            resources.ApplyResources(this.ProgressLabel, "ProgressLabel");
-            this.ProgressLabel.Spring = true;
+            this.progressStatusLabel.BackColor = System.Drawing.Color.Transparent;
+            this.progressStatusLabel.Name = "progressStatusLabel";
+            resources.ApplyResources(this.progressStatusLabel, "progressStatusLabel");
+            this.progressStatusLabel.Spring = true;
             // 
-            // SelectedNativeTable
+            // nativeTableDropDownButton
             // 
-            this.SelectedNativeTable.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.SelectedNativeTable.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.SelectedNativeTable, "SelectedNativeTable");
-            this.SelectedNativeTable.Name = "SelectedNativeTable";
-            this.SelectedNativeTable.DropDownOpening += new System.EventHandler(this.SelectedNativeTable_DropDownOpening);
-            this.SelectedNativeTable.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.SelectedNativeTable_DropDownItemClicked);
+            this.nativeTableDropDownButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.nativeTableDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.nativeTableDropDownButton, "nativeTableDropDownButton");
+            this.nativeTableDropDownButton.Name = "nativeTableDropDownButton";
+            this.nativeTableDropDownButton.DropDownOpening += new System.EventHandler(this.NativeTableDropDownButton_DropDownOpening);
+            this.nativeTableDropDownButton.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.NativeTableDropDownButton_DropDownItemClicked);
             // 
             // Platform
             // 
-            this.Platform.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.Platform.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pCToolStripMenuItem,
-            this.consoleToolStripMenuItem});
-            resources.ApplyResources(this.Platform, "Platform");
-            this.Platform.Name = "Platform";
-            this.Platform.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.Platform_DropDownItemClicked);
+            this.platformMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.platformMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.platformPCMenuItem,
+            this.platformConsoleMenuItem});
+            resources.ApplyResources(this.platformMenuItem, "platformConsoleMenuItem");
+            this.platformMenuItem.Name = "platformConsoleMenuItem";
+            this.platformMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.platformMenuItem_DropDownItemClicked);
             // 
             // pCToolStripMenuItem
             // 
-            this.pCToolStripMenuItem.Name = "pCToolStripMenuItem";
-            resources.ApplyResources(this.pCToolStripMenuItem, "pCToolStripMenuItem");
+            this.platformPCMenuItem.Name = "platformPCMenuItem";
+            resources.ApplyResources(this.platformPCMenuItem, "platformPCMenuItem");
             // 
             // consoleToolStripMenuItem
             // 
-            this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
-            resources.ApplyResources(this.consoleToolStripMenuItem, "consoleToolStripMenuItem");
+            this.platformConsoleMenuItem.Name = "platformConsoleMenuItem";
+            resources.ApplyResources(this.platformConsoleMenuItem, "platformConsoleMenuItem");
             // 
             // TabComponentsStrip
             // 
@@ -142,278 +146,263 @@
             this.TabComponentsStrip.SelectedColorEnd = System.Drawing.Color.White;
             this.TabComponentsStrip.SelectedColorStart = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
             this.TabComponentsStrip.SelectedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.TabComponentsStrip.SelectedItem = this.tabStripItem2;
             this.TabComponentsStrip.TabStripItemClosing += new Storm.TabControl.TabStripItemClosingHandler(this.TabComponentsStrip_TabStripItemClosing);
-            this.TabComponentsStrip.TabStripItemSelectionChanged += new Storm.TabControl.TabStripItemChangedHandler(this.TabComponentsStrip_TabStripItemSelectionChanged);
-            this.TabComponentsStrip.TabStripItemClosed += new System.EventHandler(this.TabComponentsStrip_TabStripItemClosed);
-            this.TabComponentsStrip.DragDrop += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragDrop);
-            this.TabComponentsStrip.DragEnter += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragEnter);
+            this.TabComponentsStrip.TabStripItemClosed += new EventHandler(TabComponentsStrip_TabStripItemClosed);
+            this.TabComponentsStrip.DragDrop += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragDrop);
+            this.TabComponentsStrip.DragEnter += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragEnter);
             // 
-            // tabStripItem2
+            // brandPictureBox
             // 
-            this.tabStripItem2.IsDrawn = true;
-            this.tabStripItem2.Name = "tabStripItem2";
-            this.tabStripItem2.Selected = true;
-            resources.ApplyResources(this.tabStripItem2, "tabStripItem2");
-            this.tabStripItem2.TabStripParent = this.TabComponentsStrip;
-            this.tabStripItem2.Title = "TabStrip Page 1";
+            resources.ApplyResources(this.brandPictureBox, "brandPictureBox");
+            this.brandPictureBox.Name = "brandPictureBox";
+            this.brandPictureBox.TabStop = false;
+            this.brandPictureBox.Image = global::UEExplorer.Properties.Resources.UE_ProgramLogo;
             // 
-            // pictureBox1
+            // mainMenuStrip
             // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
+            resources.ApplyResources(this.mainMenuStrip, "mainMenuStrip");
+            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileMenuItem,
+            this.editMenuItem,
+            this.toolsMenuItem,
+            this.optionsMenuItem,
+            this.helpMenuItem});
+            this.mainMenuStrip.Name = "mainMenuStrip";
             // 
-            // mainMenu1
+            // fileMenuItem
             // 
-            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem1,
-            this.menuItem2,
-            this.toolsToolStripMenuItem,
-            this.menuItem7,
-            this.menuItem3});
+            this.fileMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openFileMenuItem,
+            this.saveFileMenuItem,
+            this.separator1,
+            this.mostRecentMenuItem,
+            this.separator2,
+            this.exitMenuItem});
+            this.fileMenuItem.Name = "fileMenuItem";
+            resources.ApplyResources(this.fileMenuItem, "fileMenuItem");
+            this.fileMenuItem.DropDownOpening += new System.EventHandler(this.fileMenuItem_DropDownOpening);
             // 
-            // menuItem1
+            // openFileMenuItem
             // 
-            this.menuItem1.Index = 0;
-            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem8,
-            this._ROF,
-            this.menuItem9,
-            this.menuItem12,
-            this.menuItem11,
-            this.menuItem10});
-            resources.ApplyResources(this.menuItem1, "menuItem1");
-            // 
-            // menuItem8
-            // 
-            this.menuItem8.Index = 0;
-            resources.ApplyResources(this.menuItem8, "menuItem8");
-            this.menuItem8.Click += new System.EventHandler(this.OpenFileToolStripMenuItem_Click);
-            // 
-            // _ROF
-            // 
-            resources.ApplyResources(this._ROF, "_ROF");
-            this._ROF.Index = 1;
-            // 
-            // menuItem9
-            // 
-            resources.ApplyResources(this.menuItem9, "menuItem9");
-            this.menuItem9.Index = 2;
+            this.openFileMenuItem.Name = "openFileMenuItem";
+            resources.ApplyResources(this.openFileMenuItem, "openFileMenuItem");
+            this.openFileMenuItem.Click += new System.EventHandler(this.OpenFileMenuItem_Click);
             // 
             // menuItem12
             // 
-            resources.ApplyResources(this.menuItem12, "menuItem12");
-            this.menuItem12.Index = 3;
-            this.menuItem12.Click += new System.EventHandler(this.SaveFileToolStripMenuItem_Click);
+            resources.ApplyResources(this.saveFileMenuItem, "saveFileMenuItem");
+            this.saveFileMenuItem.Name = "saveFileMenuItem";
+            this.saveFileMenuItem.Click += new System.EventHandler(this.SaveFileToolMenu);
             // 
-            // menuItem11
+            // separator1
             // 
-            this.menuItem11.Index = 4;
-            resources.ApplyResources(this.menuItem11, "menuItem11");
+            this.separator1.Name = "separator1";
+            resources.ApplyResources(this.separator1, "separator1");
+            // 
+            // mostRecentMenuItem
+            // 
+            resources.ApplyResources(this.mostRecentMenuItem, "mostRecentMenuItem");
+            this.mostRecentMenuItem.Name = "mostRecentMenuItem";
+            this.mostRecentMenuItem.DropDownOpening += new System.EventHandler(this.mostRecentMenuItem_DropDownOpening);
+            this.mostRecentMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mostRecentMenuItem_DropDownItemClicked);
+            // 
+            // separator2
+            // 
+            this.separator2.Name = "separator2";
+            resources.ApplyResources(this.separator2, "separator2");
             // 
             // menuItem10
             // 
-            this.menuItem10.Index = 5;
-            resources.ApplyResources(this.menuItem10, "menuItem10");
-            this.menuItem10.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            this.exitMenuItem.Name = "exitMenuItem";
+            resources.ApplyResources(this.exitMenuItem, "exitMenuItem");
+            this.exitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
-            // menuItem2
+            // editMenuItem
             // 
-            resources.ApplyResources(this.menuItem2, "menuItem2");
-            this.menuItem2.Index = 1;
-            this.menuItem2.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem21});
+            this.editMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findToolMenuItem});
+            resources.ApplyResources(this.editMenuItem, "editMenuItem");
+            this.editMenuItem.Name = "editMenuItem";
             // 
             // menuItem21
             // 
-            this.menuItem21.Index = 0;
-            this.menuItem21.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.findToolMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItem22});
-            resources.ApplyResources(this.menuItem21, "menuItem21");
-            this.menuItem21.Click += new System.EventHandler(this.FindToolStripMenuItem_Click);
+            this.findToolMenuItem.Name = "findToolMenuItem";
+            resources.ApplyResources(this.findToolMenuItem, "findToolMenuItem");
+            this.findToolMenuItem.Click += new System.EventHandler(this.FindMenuItem_Click);
             // 
             // menuItem22
             // 
-            this.menuItem22.Index = 0;
+            this.menuItem22.Name = "menuItem22";
             resources.ApplyResources(this.menuItem22, "menuItem22");
             // 
-            // toolsToolStripMenuItem
+            // toolsMenuItem
             // 
-            this.toolsToolStripMenuItem.Index = 2;
-            this.toolsToolStripMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.toolsMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItem13,
-            this.menuItem14,
-            this._CacheExtractorItem,
-            this.menuItem16,
-            this.menuItem17,
-            this.menuItem19,
-            this.menuItem20});
-            resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
-            this.toolsToolStripMenuItem.Popup += new System.EventHandler(this.ToolsToolStripMenuItem_DropDownOpening);
+            this.separator3,
+            this.cacheExtractorMenuItem,
+            this.separator4,
+            this.colorGeneratorMenuItem,
+            this.separator5,
+            this.toggleFilesAssociationMenuItem});
+            this.toolsMenuItem.Name = "toolsMenuItem";
+            resources.ApplyResources(this.toolsMenuItem, "toolsMenuItem");
+            this.toolsMenuItem.DropDownOpening += new System.EventHandler(this.ToolsMenuItem_DropDownOpening);
             // 
             // menuItem13
             // 
             resources.ApplyResources(this.menuItem13, "menuItem13");
-            this.menuItem13.Index = 0;
+            this.menuItem13.Name = "menuItem13";
             // 
-            // menuItem14
+            // separator3
             // 
-            this.menuItem14.Index = 1;
-            resources.ApplyResources(this.menuItem14, "menuItem14");
+            this.separator3.Name = "separator3";
+            resources.ApplyResources(this.separator3, "separator3");
             // 
-            // _CacheExtractorItem
+            // cacheExtractorMenuItem
             // 
-            resources.ApplyResources(this._CacheExtractorItem, "_CacheExtractorItem");
-            this._CacheExtractorItem.Index = 2;
-            this._CacheExtractorItem.Click += new System.EventHandler(this.UnrealCacheExtractorToolStripMenuItem_Click);
+            resources.ApplyResources(this.cacheExtractorMenuItem, "cacheExtractorMenuItem");
+            this.cacheExtractorMenuItem.Name = "cacheExtractorMenuItem";
+            this.cacheExtractorMenuItem.Click += new System.EventHandler(this.CacheExtractorMenuItem_Click);
             // 
-            // menuItem16
+            // separator4
             // 
-            this.menuItem16.Index = 3;
-            resources.ApplyResources(this.menuItem16, "menuItem16");
+            this.separator4.Name = "separator4";
+            resources.ApplyResources(this.separator4, "separator4");
             // 
             // menuItem17
             // 
-            this.menuItem17.Index = 4;
-            resources.ApplyResources(this.menuItem17, "menuItem17");
-            this.menuItem17.Click += new System.EventHandler(this.UnrealColorGeneratorToolStripMenuItem_Click);
+            this.colorGeneratorMenuItem.Name = "colorGeneratorMenuItem";
+            resources.ApplyResources(this.colorGeneratorMenuItem, "colorGeneratorMenuItem");
+            this.colorGeneratorMenuItem.Click += new System.EventHandler(this.ColorGeneratorMenuItem_Click);
             // 
-            // menuItem19
+            // separator5
             // 
-            this.menuItem19.Index = 5;
-            resources.ApplyResources(this.menuItem19, "menuItem19");
+            this.separator5.Name = "separator5";
+            resources.ApplyResources(this.separator5, "separator5");
             // 
             // menuItem20
             // 
-            this.menuItem20.Index = 6;
-            resources.ApplyResources(this.menuItem20, "menuItem20");
-            this.menuItem20.Click += new System.EventHandler(this.ToggleUEExplorerFileIconsToolStripMenuItem_Click);
+            this.toggleFilesAssociationMenuItem.Name = "toggleFilesAssociationMenuItem";
+            resources.ApplyResources(this.toggleFilesAssociationMenuItem, "toggleFilesAssociationMenuItem");
+            this.toggleFilesAssociationMenuItem.Click += new System.EventHandler(this.ToggleFilesAssociationMenuItem_Click);
             // 
-            // menuItem7
+            // optionsMenuItem
             // 
-            this.menuItem7.Index = 3;
-            resources.ApplyResources(this.menuItem7, "menuItem7");
-            this.menuItem7.Click += new System.EventHandler(this.MenuItem7_Click);
+            this.optionsMenuItem.Name = "optionsMenuItem";
+            resources.ApplyResources(this.optionsMenuItem, "optionsMenuItem");
+            this.optionsMenuItem.Click += new System.EventHandler(this.OptionsMenuItem_Click);
             // 
-            // menuItem3
+            // helpMenuItem
             // 
-            this.menuItem3.Index = 4;
-            this.menuItem3.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem15,
-            this.menuItem23,
-            this.menuItem25,
-            menuItem26,
-            this.menuItem24,
-            this.menuItem6,
-            this.menuItem4,
-            this.SocialMenuItem,
-            this.menuItem27,
-            this.menuItem5});
-            resources.ApplyResources(this.menuItem3, "menuItem3");
+            this.helpMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reportAnIssueMenuItem,
+            this.checkForUpdatesMenuItem,
+            this.separator6,
+            webMenuItem,
+            this.forumLinkMenu,
+            this.donateMenuItem,
+            this.contactMenuItem,
+            this.socialMenuItem,
+            this.separator7,
+            this.aboutMenuItem});
+            this.helpMenuItem.Name = "helpMenuItem";
+            resources.ApplyResources(this.helpMenuItem, "helpMenuItem");
             // 
             // menuItem15
             // 
-            this.menuItem15.Index = 0;
-            resources.ApplyResources(this.menuItem15, "menuItem15");
-            this.menuItem15.Click += new System.EventHandler(this.ReportAnIssue);
+            this.reportAnIssueMenuItem.Name = "reportAnIssueMenuItem";
+            resources.ApplyResources(this.reportAnIssueMenuItem, "reportAnIssueMenuItem");
+            this.reportAnIssueMenuItem.Click += new System.EventHandler(this.ReportAnIssue);
             // 
             // menuItem23
             // 
-            this.menuItem23.Index = 1;
-            resources.ApplyResources(this.menuItem23, "menuItem23");
-            this.menuItem23.Click += new System.EventHandler(this.OnCheckForUpdates);
+            this.checkForUpdatesMenuItem.Name = "checkForUpdatesMenuItem";
+            resources.ApplyResources(this.checkForUpdatesMenuItem, "checkForUpdatesMenuItem");
+            this.checkForUpdatesMenuItem.Click += new System.EventHandler(this.CheckForUpdatesMenuItem_Click);
             // 
-            // menuItem25
+            // separator6
             // 
-            this.menuItem25.Index = 2;
-            resources.ApplyResources(this.menuItem25, "menuItem25");
+            this.separator6.Name = "separator6";
+            resources.ApplyResources(this.separator6, "separator6");
             // 
             // menuItem24
             // 
-            this.menuItem24.Index = 4;
-            resources.ApplyResources(this.menuItem24, "menuItem24");
-            this.menuItem24.Click += new System.EventHandler(this.MenuItem24_Click);
+            this.forumLinkMenu.Name = "forumLinkMenu";
+            resources.ApplyResources(this.forumLinkMenu, "forumLinkMenu");
+            this.forumLinkMenu.Click += new System.EventHandler(this.ForumMenuItem_Click);
             // 
             // menuItem6
             // 
-            this.menuItem6.Index = 5;
-            resources.ApplyResources(this.menuItem6, "menuItem6");
-            this.menuItem6.Click += new System.EventHandler(this.DonateToolStripMenuItem1_Click);
+            this.donateMenuItem.Name = "donateMenuItem";
+            resources.ApplyResources(this.donateMenuItem, "donateMenuItem");
+            this.donateMenuItem.Click += new System.EventHandler(this.DonateMenuItem_Click);
             // 
             // menuItem4
             // 
-            this.menuItem4.Index = 6;
-            resources.ApplyResources(this.menuItem4, "menuItem4");
-            this.menuItem4.Click += new System.EventHandler(this.MenuItem4_Click);
+            this.contactMenuItem.Name = "contactMenuItem";
+            resources.ApplyResources(this.contactMenuItem, "contactMenuItem");
+            this.contactMenuItem.Click += new System.EventHandler(this.ContactMenuItem_Click);
             // 
             // SocialMenuItem
             // 
-            this.SocialMenuItem.Index = 7;
-            resources.ApplyResources(this.SocialMenuItem, "SocialMenuItem");
-            this.SocialMenuItem.Click += new System.EventHandler(this.SocialMenuItem_Click);
+            this.socialMenuItem.Name = "socialMenuItem";
+            resources.ApplyResources(this.socialMenuItem, "socialMenuItem");
+            this.socialMenuItem.Click += new System.EventHandler(this.SocialMenuItem_Click);
             // 
-            // menuItem27
+            // separator7
             // 
-            this.menuItem27.Index = 8;
-            resources.ApplyResources(this.menuItem27, "menuItem27");
+            this.separator7.Name = "separator7";
+            resources.ApplyResources(this.separator7, "separator7");
             // 
             // menuItem5
             // 
-            this.menuItem5.Index = 9;
-            resources.ApplyResources(this.menuItem5, "menuItem5");
-            this.menuItem5.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+            this.aboutMenuItem.Name = "aboutMenuItem";
+            resources.ApplyResources(this.aboutMenuItem, "aboutMenuItem");
+            this.aboutMenuItem.Click += new System.EventHandler(this.AboutMenuItem_Click);
             // 
-            // tabStripItem1
+            // openHomeButton
             // 
-            this.tabStripItem1.IsDrawn = true;
-            this.tabStripItem1.Name = "tabStripItem1";
-            resources.ApplyResources(this.tabStripItem1, "tabStripItem1");
-            this.tabStripItem1.TabStripParent = this.TabComponentsStrip;
-            this.tabStripItem1.Title = "TabStrip Page 1";
+            resources.ApplyResources(this.openHomeButton, "openHomeButton");
+            this.openHomeButton.Name = "openHomeButton";
+            this.openHomeButton.Click += new System.EventHandler(this.OpenHomeButton_Click);
+            this.openHomeButton.Location = new Point(0, 0);
+            this.openHomeButton.Visible = false;
             // 
-            // tabStripItem3
+            // containerPanel
             // 
-            this.tabStripItem3.IsDrawn = true;
-            this.tabStripItem3.Name = "tabStripItem3";
-            resources.ApplyResources(this.tabStripItem3, "tabStripItem3");
-            this.tabStripItem3.TabStripParent = this.TabComponentsStrip;
-            this.tabStripItem3.Title = "TabStrip Page 2";
-            // 
-            // OpenHome
-            // 
-            resources.ApplyResources(this.OpenHome, "OpenHome");
-            this.OpenHome.Name = "OpenHome";
-            this.OpenHome.Click += new System.EventHandler(this.OpenHome_Click);
-            // 
-            // HomepageButton
-            // 
-            resources.ApplyResources(this.HomepageButton, "HomepageButton");
-            this.HomepageButton.Name = "HomepageButton";
-            this.HomepageButton.UseVisualStyleBackColor = true;
-            this.HomepageButton.Click += new System.EventHandler(this.OpenHome_Click);
+            resources.ApplyResources(this.containerPanel, "containerPanel");
+            //this.containerPanel.Controls.Add(this.openHomeButton);
+            this.containerPanel.Controls.Add(this.TabComponentsStrip);
+            this.containerPanel.Name = "containerPanel";
             // 
             // ProgramForm
             // 
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::UEExplorer.Properties.Resources.UE_ProgramLogo;
-            this.Controls.Add(this.HomepageButton);
-            this.Controls.Add(this.TabComponentsStrip);
-            this.Controls.Add(this.UEStatusStrip);
+            this.Controls.Add(this.mainMenuStrip);
+            this.Controls.Add(this.containerPanel);
+            this.Controls.Add(this.mainStatusStrip);
             this.DoubleBuffered = true;
-            this.Menu = this.mainMenu1;
+            this.MainMenuStrip = this.mainMenuStrip;
             this.Name = "ProgramForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClosed);
-            this.Shown += new System.EventHandler(this.Unreal_Explorer_Form_Shown);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.UEExplorer_Form_DragEnter);
-            this.UEStatusStrip.ResumeLayout(false);
-            this.UEStatusStrip.PerformLayout();
+            this.Load += new System.EventHandler(this.ProgramForm_Load);
+            this.Shown += new System.EventHandler(this.ProgramForm_Shown);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragEnter);
+            this.DragOver += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragOver);
+            this.mainStatusStrip.ResumeLayout(false);
+            this.mainStatusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brandPictureBox)).EndInit();
+            this.mainMenuStrip.ResumeLayout(false);
+            this.mainMenuStrip.PerformLayout();
+            this.containerPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -421,51 +410,47 @@
 
         #endregion
 
-        internal System.Windows.Forms.StatusStrip UEStatusStrip;
-        internal System.Windows.Forms.ToolStripStatusLabel ProgressLabel;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        internal System.Windows.Forms.ToolStripProgressBar LoadingProgress;
-        internal System.Windows.Forms.ToolStripDropDownButton SelectedNativeTable;
-        private System.Windows.Forms.MenuItem menuItem1;
-        private System.Windows.Forms.MenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.MenuItem menuItem3;
-        private System.Windows.Forms.MenuItem menuItem5;
-        private System.Windows.Forms.MenuItem menuItem8;
-        private System.Windows.Forms.MenuItem menuItem9;
-        private System.Windows.Forms.MenuItem menuItem10;
-        private System.Windows.Forms.MenuItem menuItem12;
-        private System.Windows.Forms.MenuItem menuItem11;
-        private System.Windows.Forms.MenuItem menuItem13;
-        private System.Windows.Forms.MenuItem menuItem14;
-        private System.Windows.Forms.MenuItem _CacheExtractorItem;
-        private System.Windows.Forms.MenuItem menuItem16;
-        private System.Windows.Forms.MenuItem menuItem17;
-        private System.Windows.Forms.MenuItem menuItem19;
-        private System.Windows.Forms.MenuItem menuItem20;
-        private System.Windows.Forms.MenuItem menuItem2;
-        private System.Windows.Forms.MenuItem menuItem21;
-        private System.Windows.Forms.MenuItem menuItem22;
-        private System.Windows.Forms.MenuItem menuItem23;
-        private System.Windows.Forms.MenuItem menuItem7;
-        private System.Windows.Forms.MenuItem menuItem24;
-        private System.Windows.Forms.MenuItem menuItem25;
-        private System.Windows.Forms.MenuItem menuItem27;
-        private System.Windows.Forms.ToolStripMenuItem pCToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripDropDownButton Platform;
-        private Storm.TabControl.TabStripItem tabStripItem1;
-        private Storm.TabControl.TabStripItem tabStripItem2;
-        private Storm.TabControl.TabStripItem tabStripItem3;
-        private System.Windows.Forms.MenuItem menuItem6;
-        private System.Windows.Forms.MenuItem _ROF;
-        private System.Windows.Forms.MenuItem menuItem4;
-        private System.Windows.Forms.Button OpenHome;
+        internal System.Windows.Forms.StatusStrip mainStatusStrip;
+        internal System.Windows.Forms.ToolStripStatusLabel progressStatusLabel;
+        private System.Windows.Forms.PictureBox brandPictureBox;
+        internal System.Windows.Forms.ToolStripDropDownButton nativeTableDropDownButton;
+        private System.Windows.Forms.ToolStripMenuItem fileMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFileMenuItem;
+        private System.Windows.Forms.ToolStripSeparator separator1;
+        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveFileMenuItem;
+        private System.Windows.Forms.ToolStripSeparator separator2;
+        private System.Windows.Forms.ToolStripMenuItem menuItem13;
+        private System.Windows.Forms.ToolStripSeparator separator3;
+        private System.Windows.Forms.ToolStripMenuItem cacheExtractorMenuItem;
+        private System.Windows.Forms.ToolStripSeparator separator4;
+        private System.Windows.Forms.ToolStripMenuItem colorGeneratorMenuItem;
+        private System.Windows.Forms.ToolStripSeparator separator5;
+        private System.Windows.Forms.ToolStripMenuItem toggleFilesAssociationMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findToolMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuItem22;
+        private System.Windows.Forms.ToolStripMenuItem checkForUpdatesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem forumLinkMenu;
+        private System.Windows.Forms.ToolStripSeparator separator6;
+        private System.Windows.Forms.ToolStripSeparator separator7;
+        private System.Windows.Forms.ToolStripMenuItem platformPCMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem platformConsoleMenuItem;
+        internal System.Windows.Forms.ToolStripDropDownButton platformMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem donateMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mostRecentMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem contactMenuItem;
+        private System.Windows.Forms.Button openHomeButton;
         private Storm.TabControl.TabStrip TabComponentsStrip;
-        private System.Windows.Forms.Button HomepageButton;
-        private System.Windows.Forms.MenuItem SocialMenuItem;
-        private System.Windows.Forms.MainMenu mainMenu1;
-        private System.Windows.Forms.MenuItem menuItem15;
-
+        private System.Windows.Forms.ToolStripMenuItem socialMenuItem;
+        private System.Windows.Forms.MenuStrip mainMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem reportAnIssueMenuItem;
+        private System.Windows.Forms.Panel containerPanel;
+        internal System.Windows.Forms.ToolStripProgressBar loadingProgressBar;
 
         // OnClick events!
 

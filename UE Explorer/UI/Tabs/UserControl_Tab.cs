@@ -1,47 +1,19 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Storm.TabControl;
 
 namespace UEExplorer.UI.Tabs
 {
-    [ComVisible( false )]
+    // TODO: Deprecate
+    [ComVisible(false)]
     public class UserControl_Tab : UserControl, ITabComponent
     {
-        [ComVisible( false )]
-        public TabsCollection Tabs{ protected get; set; }
-
-        [ComVisible( false )]
-        public TabStripItem TabItem{ get; set; }
-
-        protected virtual void InitializeComponent()
+        protected UserControl_Tab()
         {
-        }
-        
-        /// <summary>
-        /// Called after the tab was constructed.
-        /// </summary>
-        // Not done in the constructor, because of some null references, neither won't use constructor params.
-        public virtual void TabInitialize()
-        {
-            Dock = DockStyle.Fill;
-            
-            InitializeComponent();
-            
-            TabCreated();
-        }
-
-        /// <summary>
-        /// Called when the Tab is added to the chain.
-        /// </summary>
-        protected virtual void TabCreated()
-        {
-        }
-
-        /// <summary>
-        /// Called when the Tab is closing.
-        /// </summary>
-        public virtual void TabClosing()
-        {
+            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            {
+                Dock = DockStyle.Fill;
+            }
         }
 
         public virtual void TabSave()

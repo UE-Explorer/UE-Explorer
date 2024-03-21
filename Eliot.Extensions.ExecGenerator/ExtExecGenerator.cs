@@ -24,7 +24,7 @@ namespace Eliot.Extensions.ExecGenerator
 		/// </summary>
 		public void OnActivate( object sender, EventArgs e )
 		{
-			_Owner.Tabs.Add( typeof(UC_ExecGenerator), "Unreal Exec Commands Generator" );
+			_Owner.Tabs.InsertTab( typeof(UC_ExecGenerator), "Unreal Exec Commands Generator" );
 		}
 	}
 }

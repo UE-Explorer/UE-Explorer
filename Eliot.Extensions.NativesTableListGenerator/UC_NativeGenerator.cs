@@ -20,6 +20,8 @@ namespace Eliot.Extensions.NativesTableListGenerator
         public UC_NativeGenerator()
         {
             _NTLPackage.NativeTableList = new List<NativeTableItem>();
+            
+            InitializeComponent();
         }
 
         private void Button_Add_Click( object sender, EventArgs e )
@@ -101,7 +103,7 @@ namespace Eliot.Extensions.NativesTableListGenerator
         /// </summary>
         public void OnActivate( object sender, EventArgs e )
         {
-            _Form.Tabs.Add( typeof(UC_NativeGenerator), "Natives Table List Generator" );
+            _Form.Tabs.InsertTab( typeof(UC_NativeGenerator), "Natives Table List Generator" );
         }
     }
 }
