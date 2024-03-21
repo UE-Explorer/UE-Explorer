@@ -72,6 +72,8 @@ namespace UEExplorer.UI.Tabs
 
         private void UC_PackageExplorer_Load(object sender, EventArgs e)
         {
+            _State = Program.Options.GetState( FileName );
+
             InitializeFromFile(FileName);
         }
 
@@ -134,12 +136,6 @@ namespace UEExplorer.UI.Tabs
         }
 
         private XMLSettings.State _State;
-
-        public void PostInitialize()
-        {  
-            _State = Program.Options.GetState( FileName ); 
-            Invoke((MethodInvoker)(LoadPackage));
-        }
 
         private void InitializeFromFile(string filePath)
         {
@@ -517,8 +513,7 @@ namespace UEExplorer.UI.Tabs
             }
             InitializeTabs();
 
-            var state = Program.Options.GetState( _UnrealPackage.FullPackageName );
-            SearchObjectTextBox.Text = state.SearchObjectValue;
+            SearchObjectTextBox.Text = _State.SearchObjectValue;
             DoSearchObjectByGroup( SearchObjectTextBox.Text );
 
             SearchObjectTextBox.TextChanged += (e, sender) =>
@@ -926,8 +921,9 @@ namespace UEExplorer.UI.Tabs
         {
             string filePath = _UnrealPackage.FullPackageName;
 
-            ((ProgramForm)ParentForm).Tabs.CloseTab((TabStripItem)Parent);
-            ((ProgramForm)ParentForm).LoadFromFile(filePath);
+            var form = ((ProgramForm)ParentForm);
+            form.Tabs.CloseTab((TabStripItem)Parent);
+            form.LoadFromFile(filePath);
         }
 
         private void OutputNodeObject( TreeNode treeNode )
@@ -1647,10 +1643,9 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private static readonly string _TemplateDir = Path.Combine( Program.ConfigDir, "Templates" );
         private static string LoadTemplate( string name )
         {
-            return File.ReadAllText( Path.Combine( _TemplateDir, name + ".txt" ), System.Text.Encoding.ASCII );
+            return File.ReadAllText( Path.Combine(Program.s_templateDir, name + ".txt" ), System.Text.Encoding.ASCII );
         }
         #endregion
 

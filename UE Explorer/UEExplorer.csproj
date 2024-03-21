@@ -88,6 +88,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="Properties\UserHistory.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserHistory.settings</DependentUpon>
+    </Compile>
     <Compile Update="UI\Panels\WebViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -128,6 +133,10 @@
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\UserHistory.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>UserHistory.Designer.cs</LastGenOutput>
     </None>
     <None Update="unrealfile.ico">
       <Pack>True</Pack>

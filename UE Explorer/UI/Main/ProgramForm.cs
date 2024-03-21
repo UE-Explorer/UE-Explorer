@@ -35,8 +35,6 @@ namespace UEExplorer.UI
 
         private void ProgramForm_Load(object sender, EventArgs e)
         {
-            Program.LogManager.StartLogStream();
-
             InitializeConfig();
             InitializeUI();
 
@@ -410,7 +408,7 @@ namespace UEExplorer.UI
             mostRecentMenuItem.DropDownItems.Clear();
             for (int i = filePaths.Count - 1; i >= 0; --i)
             {
-                if (filePaths[i] == "")
+                if (filePaths[i] == string.Empty)
                 {
                     filePaths.Remove(filePaths[i]);
                     --i;
