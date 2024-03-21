@@ -1,3 +1,8 @@
+# 1.3.3
+
+* Fixed #43
+* Fixed #25; (UAC, all user-data and settings will now be saved to `%AppData%\EliotVU\UE Explorer`)
+
 # 1.3.2
 
 * Fixed issues with DPI scaling
