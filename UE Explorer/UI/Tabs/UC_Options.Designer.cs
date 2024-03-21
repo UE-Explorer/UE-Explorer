@@ -90,7 +90,6 @@
             // 
             resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
-            this.toolTip1.SetToolTip(label2, resources.GetString("label2.ToolTip"));
             // 
             // groupBox3
             // 
@@ -105,7 +104,6 @@
             groupBox3.Controls.Add(this.SuppressComments);
             groupBox3.Name = "groupBox3";
             groupBox3.TabStop = false;
-            this.toolTip1.SetToolTip(groupBox3, resources.GetString("groupBox3.ToolTip"));
             // 
             // panel1
             // 
@@ -113,7 +111,6 @@
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.Controls.Add(this.BracketPreview);
             panel1.Name = "panel1";
-            this.toolTip1.SetToolTip(panel1, resources.GetString("panel1.ToolTip"));
             // 
             // BracketPreview
             // 
@@ -123,7 +120,6 @@
             this.BracketPreview.DetectUrls = false;
             this.BracketPreview.Name = "BracketPreview";
             this.BracketPreview.ReadOnly = true;
-            this.toolTip1.SetToolTip(this.BracketPreview, resources.GetString("BracketPreview.ToolTip"));
             // 
             // IndentionNumeric
             // 
@@ -135,19 +131,16 @@
             // 
             resources.ApplyResources(label5, "label5");
             label5.Name = "label5";
-            this.toolTip1.SetToolTip(label5, resources.GetString("label5.ToolTip"));
             // 
             // label4
             // 
             resources.ApplyResources(label4, "label4");
             label4.Name = "label4";
-            this.toolTip1.SetToolTip(label4, resources.GetString("label4.ToolTip"));
             // 
             // label3
             // 
             resources.ApplyResources(label3, "label3");
             label3.Name = "label3";
-            this.toolTip1.SetToolTip(label3, resources.GetString("label3.ToolTip"));
             // 
             // PreBeginBracket
             // 
@@ -170,10 +163,9 @@
             // 
             // label6
             // 
-            resources.ApplyResources(label6, "label6");
             label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            resources.ApplyResources(label6, "label6");
             label6.Name = "label6";
-            this.toolTip1.SetToolTip(label6, resources.GetString("label6.ToolTip"));
             // 
             // VariableTypesTree
             // 
@@ -182,7 +174,6 @@
             this.VariableTypesTree.ForeColor = System.Drawing.SystemColors.Highlight;
             this.VariableTypesTree.HideSelection = false;
             this.VariableTypesTree.Name = "VariableTypesTree";
-            this.toolTip1.SetToolTip(this.VariableTypesTree, resources.GetString("VariableTypesTree.ToolTip"));
             this.VariableTypesTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.VariableTypesTree_AfterSelect);
             // 
             // groupBox6
@@ -194,7 +185,6 @@
             this.groupBox6.Controls.Add(this.VariableTypeGroup);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox6, resources.GetString("groupBox6.ToolTip"));
             // 
             // VariableType
             // 
@@ -209,13 +199,11 @@
             // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.toolTip1.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
             // 
             // VariableTypeGroup
             // 
@@ -233,7 +221,6 @@
             this.groupBox4.Controls.Add(this.PathText);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox4, resources.GetString("groupBox4.ToolTip"));
             // 
             // PathButton
             // 
@@ -248,7 +235,6 @@
             resources.ApplyResources(this.PathText, "PathText");
             this.PathText.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.PathText.Name = "PathText";
-            this.toolTip1.SetToolTip(this.PathText, resources.GetString("PathText.ToolTip"));
             this.PathText.TextChanged += new System.EventHandler(this.PathText_TextChanged);
             // 
             // groupBox1
@@ -259,7 +245,6 @@
             this.groupBox1.Controls.Add(this.CheckBox_ImpObj);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // CheckBox_LinkObj
             // 
@@ -279,7 +264,6 @@
             // 
             resources.ApplyResources(this.CheckBox_ImpObj, "CheckBox_ImpObj");
             this.CheckBox_ImpObj.Name = "CheckBox_ImpObj";
-            this.toolTip1.SetToolTip(this.CheckBox_ImpObj, resources.GetString("CheckBox_ImpObj.ToolTip"));
             this.CheckBox_ImpObj.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -293,7 +277,6 @@
             this.groupBox2.Controls.Add(this.ComboBox_NativeTable);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             // 
             // NumericUpDown_LicenseeMode
             // 
@@ -304,7 +287,6 @@
             0,
             0});
             this.NumericUpDown_LicenseeMode.Name = "NumericUpDown_LicenseeMode";
-            this.toolTip1.SetToolTip(this.NumericUpDown_LicenseeMode, resources.GetString("NumericUpDown_LicenseeMode.ToolTip"));
             // 
             // NumericUpDown_Version
             // 
@@ -315,7 +297,6 @@
             0,
             0});
             this.NumericUpDown_Version.Name = "NumericUpDown_Version";
-            this.toolTip1.SetToolTip(this.NumericUpDown_Version, resources.GetString("NumericUpDown_Version.ToolTip"));
             // 
             // CheckBox_LicenseeMode
             // 
@@ -337,7 +318,6 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // ComboBox_NativeTable
             // 
@@ -364,7 +344,6 @@
             this.groupBox5.Controls.Add(this.NewArrayType);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
             // 
             // DeleteArrayType
             // 
@@ -394,7 +373,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.Button_Save);
             this.Name = "UC_Options";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
+            this.Load += new System.EventHandler(this.UC_Options_Load);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             panel1.ResumeLayout(false);
