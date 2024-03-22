@@ -1,3 +1,7 @@
+# 1.3.4
+
+* Fixed #45; (tools crash and launch by file crashes introduced with 1.3.3)
+
 # 1.3.3
 
 * Fixed #43
