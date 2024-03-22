@@ -22,7 +22,7 @@ namespace UEExplorer
     public static class Program
     {
         [STAThread]
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace UEExplorer
             return options;
         }
 
-        private class SingleInstanceApplication : WindowsFormsApplicationBase
+        public class SingleInstanceApplication : WindowsFormsApplicationBase
         {
             public SingleInstanceApplication()
             {
