@@ -33,9 +33,10 @@
     </ItemGroup>
     <ProjectExtensions>
         <VisualStudio>
-            <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True"
-                            BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
+            <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" />
         </VisualStudio>
     </ProjectExtensions>
-    <PropertyGroup />
+    <PropertyGroup>
+      <Version>$(VersionPrefix)1.0.1</Version>
+    </PropertyGroup>
 </Project>

@@ -40,13 +40,17 @@ namespace UEExplorer.UI
 
             Tabs = new TabsCollection(TabComponentsStrip);
             Tabs.InsertTab(typeof(UC_Default), Resources.Homepage);
+            
             string[] args = Environment.GetCommandLineArgs();
             for (int i = 1; i < args.Length; ++i)
             {
-                if (File.Exists(args[i]))
+                if (!File.Exists(args[i]))
                 {
-                    BeginInvoke((MethodInvoker)(() => LoadFromFile(args[i])));
+                    continue;
                 }
+                
+                string filePath = args[i];
+                BeginInvoke((MethodInvoker)(() => LoadFromFile(filePath)));
             }
         }
 
