@@ -155,7 +155,7 @@ namespace UEExplorer
         private static readonly string s_settingsPath = Path.Combine(s_appDataDir, "UEExplorerConfig.xml");
 
         private static readonly string s_appFilesDir = Application.StartupPath;
-        internal static readonly string s_templateDir = Path.Combine(s_appFilesDir, "Templates");
+        internal static readonly string s_templateDir = Path.Combine(s_appFilesDir, "Config", "Templates");
 
         public static XMLSettings Options;
 
