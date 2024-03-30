@@ -251,6 +251,13 @@ namespace UEExplorer.UI.Forms
 
         private void ReloadPackage()
         {
+            // TEMP: Hacky solution
+            var tab = ((ProgramForm)(Owner)).Tabs.GetTab(_PackageFilePath);
+            if (tab != null)
+            {
+                ((ProgramForm)Owner).Tabs.CloseTab(tab);
+            }
+            ((ProgramForm)Owner).LoadFromFile(_PackageFilePath);
             Close();
         }
 

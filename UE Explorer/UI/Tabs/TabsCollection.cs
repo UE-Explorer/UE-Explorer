@@ -30,6 +30,11 @@ namespace UEExplorer.UI
             _TabStrip = null;
         }
 
+        public TabStripItem GetTab(string uniqueName)
+        {
+            return _TabStrip.Controls[uniqueName] as TabStripItem;
+        }
+        
         public bool HasTab(string uniqueName)
         {
             return _TabStrip.Controls[uniqueName] != null;
