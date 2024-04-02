@@ -14,6 +14,7 @@ using UEExplorer.UI.Dialogs;
 using UELib;
 using UELib.Types;
 using Eliot.Utilities;
+using UnhandledExceptionEventArgs = Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs;
 
 namespace UEExplorer
 {
@@ -90,9 +91,11 @@ namespace UEExplorer
                 MainForm = new ProgramForm();
             }
 
-            protected override bool OnStartup(StartupEventArgs eventArgs)
+            protected override bool OnUnhandledException(UnhandledExceptionEventArgs e)
             {
-                return true;
+                ExceptionDialog.Show("Internal crash!", e.Exception);
+                
+                return base.OnUnhandledException(e);
             }
 
             protected override void OnStartupNextInstance(StartupNextInstanceEventArgs eventArgs)
@@ -165,15 +168,23 @@ namespace UEExplorer
             {
                 using (var r = new XmlTextReader(s_settingsPath))
                 {
-                    var xser = new XmlSerializer(typeof(XMLSettings));
-                    Options = (XMLSettings)xser.Deserialize(r);
+                    try
+                    {
+                        var xser = new XmlSerializer(typeof(XMLSettings));
+                        Options = (XMLSettings)xser.Deserialize(r);
+                    }
+                    catch (Exception exc)
+                    {
+                        Console.Error.WriteLine("Failed to deserialize the configuration file {0}", exc.Message);
+                        Options = new XMLSettings();
+                    }
                 }
             }
             else
             {
                 SaveConfig();
             }
-            
+
             Contract.Assert(Options != null);
 
             UnrealConfig.SuppressComments = Options.bSuppressComments;

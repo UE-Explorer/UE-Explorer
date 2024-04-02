@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using ICSharpCode.AvalonEdit.Search;
 
 namespace UEExplorer.UI.Tabs
 {
@@ -10,6 +11,9 @@ namespace UEExplorer.UI.Tabs
 		public TextEditorPanel()
 		{
 			InitializeComponent();
-		}
-	}
+
+            var searchPanel = SearchPanel.Install(TextEditor);
+            searchPanel.RegisterCommands(TextEditor.CommandBindings);
+        }
+    }
 }
