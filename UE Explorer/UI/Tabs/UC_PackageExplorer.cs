@@ -698,7 +698,7 @@ namespace UEExplorer.UI.Tabs
 
         private void _OnNotifyObjectAdded( object sender, ObjectEventArgs e )
         {
-            if( e.ObjectRef.Table.ClassIndex == 0 && e.ObjectRef.Name.ToLower() != "none" )
+            if( e.ObjectRef.ExportTable != null && e.ObjectRef.Table.ClassIndex == 0 && e.ObjectRef.Name.ToLower() != "none" )
             {
                 _ClassesList.Add( (UClass)e.ObjectRef );
             }
