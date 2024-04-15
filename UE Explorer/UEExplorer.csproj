@@ -235,6 +235,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="UI\Dialogs\NameReferenceInputDialog.nl.resx">
+      <DependentUpon>NameReferenceInputDialog.resx</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

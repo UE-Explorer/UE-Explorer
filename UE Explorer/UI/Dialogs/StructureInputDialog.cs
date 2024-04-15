@@ -3,32 +3,14 @@ using System.Windows.Forms;
 
 namespace UEExplorer.UI.Dialogs
 {
-	public partial class StructureInputDialog : Form
+    public partial class StructureInputDialog : Form
     {
-        public string InputStructType
-        {
-            get
-            {
-                return typeComboBox.SelectedText;
-            }
-        }
+        public StructureInputDialog() => InitializeComponent();
 
-        public string InputStructName
-        {
-            get
-            {
-                return nameComboBox.SelectedText;
-            }
-        }
-        
-		public StructureInputDialog()
-		{
-			InitializeComponent();
-		}
+        public string InputStructType => typeComboBox.SelectedText;
 
-		private void StructureInputDialog_Shown( object sender, EventArgs e )
-		{
-			typeComboBox.Focus();
-		}
-	}
+        public string InputStructName => nameComboBox.SelectedText;
+
+        private void StructureInputDialog_Shown(object sender, EventArgs e) => typeComboBox.Focus();
+    }
 }

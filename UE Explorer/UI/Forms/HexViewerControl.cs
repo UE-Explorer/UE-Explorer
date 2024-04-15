@@ -13,6 +13,7 @@ using System.Xml.Serialization;
 using Eliot.Utilities;
 using UEExplorer.UI.Dialogs;
 using UELib.Annotations;
+using UELib.Branch;
 using UELib.Core;
 
 namespace UEExplorer.UI.Forms
@@ -1317,7 +1318,7 @@ namespace UEExplorer.UI.Forms
 
             // FIXME: temp
             editStructValueToolStripMenuItem.Visible = GetCellStruct(_ContextOffset)?.Tag is BinaryMetaData.BinaryField binaryField
-                                                       && binaryField.Value is UObject;
+                                                       && (binaryField.Value is UObject || binaryField.Value is UName);
         }
 
         private void editCellToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1331,16 +1332,89 @@ namespace UEExplorer.UI.Forms
             var cellStruct = GetCellStruct(_ContextOffset);
             Contract.Assert(cellStruct != null);
 
+            var linker = Target is UObject o ? o.Package : null;
+            Contract.Assert(linker != null);
+
             switch (cellStruct.Tag)
             {
                 case BinaryMetaData.BinaryField binaryField:
                     switch (binaryField.Value)
                     {
-                        case UObject uObject:
-                            var inputDialog = new ObjectReferenceInputDialog { Linker = uObject.Package, DefaultObjectReference = uObject};
+                        case UName uName:
+                        {
+                            var inputDialog = new NameReferenceInputDialog
+                            {
+                                Linker = linker, DefaultNameReference = uName
+                            };
                             if (inputDialog.ShowDialog(this) == DialogResult.OK)
                             {
-                                var newValue = inputDialog.InputObjectReference as UObject;
+                                int numberValue = inputDialog.InputNameNumber;
+                                var newValue = new UName(inputDialog.InputNameItem, numberValue - 1);
+                                int index = (int)newValue;
+
+                                var archive = linker.GetBuffer();
+                                Contract.Assert(archive != null);
+
+                                // HACK: workaround IUnrealStream limitations for now.
+                                // This approach will likely fail for some games that have a different FName structure.
+                                if (archive.Version >= (uint)PackageObjectLegacyVersion.NumberAddedToName)
+                                {
+                                    const int indexMaxSize = 8;
+                                    // Let's use the UnrealWriter so that we can conform to the varying formats.
+                                    using (var uStream = new UnrealWriter(archive, new MemoryStream(indexMaxSize)))
+                                    {
+                                        uStream.WriteIndex(index);
+                                        uStream.Write(numberValue);
+                                        byte[] buffer = new byte[indexMaxSize];
+                                        uStream.Seek(0, SeekOrigin.Begin);
+                                        int read = uStream.BaseStream.Read(buffer, 0, buffer.Length);
+                                        Contract.Assert(read == buffer.Length);
+
+                                        Contract.Assert(buffer.Length == cellStruct.Size,
+                                            "Struct size must remain the same.");
+                                        SetCellStructValue(cellStruct.Offset, buffer);
+                                    }
+                                }
+                                else
+                                {
+                                    const int indexMaxSize = 5;
+                                    // Let's use the UnrealWriter so that we can conform to the varying formats.
+                                    using (var uStream = new UnrealWriter(archive, new MemoryStream(indexMaxSize)))
+                                    {
+                                        uStream.WriteIndex(index);
+                                        // dynamically sized to however many bytes were written for the index.
+                                        byte[] buffer = new byte[uStream.BaseStream.Position];
+                                        uStream.Seek(0, SeekOrigin.Begin);
+                                        int read = uStream.BaseStream.Read(buffer, 0, buffer.Length);
+                                        Contract.Assert(read == buffer.Length);
+
+                                        Contract.Assert(buffer.Length == cellStruct.Size,
+                                            "Struct size must remain the same.");
+                                        SetCellStructValue(cellStruct.Offset, buffer);
+                                    }
+                                }
+
+                                cellStruct.Tag = new BinaryMetaData.BinaryField
+                                {
+                                    Value = newValue,
+                                    Field = binaryField.Field,
+                                    Offset = binaryField.Offset,
+                                    Size = binaryField.Size
+                                };
+                            }
+
+                            break;
+                        }
+
+                        case UObject uObject:
+                        {
+                            var inputDialog = new ObjectReferenceInputDialog
+                            {
+                                Linker = linker, DefaultObjectReference = uObject
+                            };
+                            if (inputDialog.ShowDialog(this) == DialogResult.OK)
+                            {
+                                var newValue = inputDialog.InputObjectReference;
                                 int objectIndex = inputDialog.InputObjectReference is UObject input
                                     ? (int)input
                                     : 0;
@@ -1354,17 +1428,18 @@ namespace UEExplorer.UI.Forms
                                 {
                                     // Only valid for UE3's default format
                                     //byte[] buffer = BitConverter.GetBytes(objectIndex);
-                                    
+
                                     uStream.WriteIndex(objectIndex);
                                     // dynamically sized to however many bytes were written for the index.
                                     byte[] buffer = new byte[uStream.BaseStream.Position];
                                     uStream.Seek(0, SeekOrigin.Begin);
                                     int read = uStream.BaseStream.Read(buffer, 0, buffer.Length);
                                     Contract.Assert(read == buffer.Length);
-                                    
-                                    Contract.Assert(buffer.Length == cellStruct.Size, "Struct size must remain the same.");
+
+                                    Contract.Assert(buffer.Length == cellStruct.Size,
+                                        "Struct size must remain the same.");
                                     SetCellStructValue(cellStruct.Offset, buffer);
-                                } 
+                                }
 
                                 cellStruct.Tag = new BinaryMetaData.BinaryField
                                 {
@@ -1374,9 +1449,10 @@ namespace UEExplorer.UI.Forms
                                     Size = binaryField.Size
                                 };
                             }
-                            
-                            break;
 
+                            break;
+                        }
+                        
                         default:
                             throw new NotSupportedException("Field tag is not supported.");
                     }
