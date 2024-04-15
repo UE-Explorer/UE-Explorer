@@ -182,7 +182,7 @@
     <value>&amp;Openen...</value>
   </data>
   <data name="editMenuItem.Text" xml:space="preserve">
-    <value>Bewerken</value>
+    <value>Be&amp;werken</value>
   </data>
   <data name="optionsMenuItem.Text" xml:space="preserve">
     <value>&amp;Opties</value>

@@ -349,7 +349,7 @@
     <value>39, 20</value>
   </data>
   <data name="editMenuItem.Text" xml:space="preserve">
-    <value>Edit</value>
+    <value>&amp;Edit</value>
   </data>
   <data name="editMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
