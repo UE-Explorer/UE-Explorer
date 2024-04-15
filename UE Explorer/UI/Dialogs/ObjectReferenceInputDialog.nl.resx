@@ -117,40 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EditMenuItem.Text" xml:space="preserve">
-    <value>Cel be&amp;werken</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Object aanwijzen</value>
   </data>
-  <data name="cellToolStripMenuItem.Text" xml:space="preserve">
-    <value>Cel &amp;kopiëren</value>
-  </data>
-  <data name="hexOffsetToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hex afstand</value>
-  </data>
-  <data name="hexValueToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hex waarde</value>
-  </data>
-  <data name="toolStripMenuItem1.Text" xml:space="preserve">
-    <value>Struct hex grootte</value>
-  </data>
-  <data name="structNameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Struct naam</value>
-  </data>
-  <data name="structSizeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Struct decimale grootte</value>
-  </data>
-  <data name="structValueToolStripMenuItem.Text" xml:space="preserve">
-    <value>Struct waarde</value>
-  </data>
-  <data name="decimalOffsetToolStripMenuItem.Text" xml:space="preserve">
-    <value>Decimale afstand</value>
-  </data>
-  <data name="decimalValueToolStripMenuItem.Text" xml:space="preserve">
-    <value>Decimale waarde</value>
-  </data>
-  <data name="editStructValueToolStripMenuItem.Text" xml:space="preserve">
-    <value>Struct waarde be&amp;werken</value>
-  </data>
-  <data name="defineStructToolStripMenuItem.Text" xml:space="preserve">
-    <value>Struct definiëren</value>
+  <data name="nameLabel.Text" xml:space="preserve">
+    <value>Naam</value>
   </data>
 </root>

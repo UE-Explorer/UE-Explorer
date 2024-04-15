@@ -83,6 +83,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
@@ -92,6 +97,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>UserHistory.settings</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Dialogs\ObjectReferenceInputDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Panels\WebViewPanel.cs">
       <SubType>UserControl</SubType>
@@ -221,6 +229,12 @@
     <PackageReference Include="Microsoft.Web.WebView2">
       <Version>1.0.2365.46</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
