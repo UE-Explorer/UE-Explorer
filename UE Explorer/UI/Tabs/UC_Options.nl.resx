@@ -167,7 +167,7 @@
     <value>Derden</value>
   </data>
   <data name="PathButton.ToolTip" xml:space="preserve">
-    <value>Selecteer pad</value>
+    <value>Pad selecteren</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Pakket initialisatie</value>
@@ -229,6 +229,6 @@
     <value>Toevoegen</value>
   </data>
   <data name="NewArrayType.ToolTip" xml:space="preserve">
-    <value>Toevoegt een nieuwe definitie</value>
+    <value>Toevoeg een nieuwe definitie</value>
   </data>
 </root>

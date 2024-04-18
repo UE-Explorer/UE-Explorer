@@ -1002,74 +1002,107 @@
   <metadata name="Context_Structure.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="EditMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="editStructValueToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 22</value>
   </data>
-  <data name="EditMenuItem.Text" xml:space="preserve">
-    <value>Edit Cell</value>
+  <data name="editStructValueToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Edit Struct Value</value>
   </data>
-  <data name="defineCharToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="editCellToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA68AAAOvAGVvHJJAAAA2UlE
+        QVQ4T9WPOQrCUBRF02jhDtJkxiKWqQXjBkQxiLoPC1eilY2bcD3iiG5AQT0PXiCIX2MjeOHAH+75g/XT
+        xHFctW27ptPv4vt+5nneEfYw0eVyQRhwwM513RQ8GZd+SUFuOY5jQ5u1Q5IkFa2Y8yzLC2QOfa2YQylT
+        ORWZcRO2MNaKObkszy3KQRCMtGLOK5mvbJCHWjGHch3O+bP1z3JzTyvvQ3kBN5iC3LzmkK5uvw83+ggX
+        xLscwvgEHd3+HKSZyEhXWIZh2NCtckFewTyKolCX/iKW9QC0DEAGhnBrtAAAAABJRU5ErkJggg==
+</value>
   </data>
-  <data name="defineCharToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Char</value>
+  <data name="editCellToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="defineByteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="editCellToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Edit Cell</value>
   </data>
-  <data name="defineByteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Byte</value>
+  <data name="hexValueToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
   </data>
-  <data name="defineShortToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="hexValueToolStripMenuItem.Text" xml:space="preserve">
+    <value>Hex Value</value>
   </data>
-  <data name="defineShortToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Short</value>
+  <data name="hexOffsetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
   </data>
-  <data name="defineIntToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="hexOffsetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Hex Offset</value>
   </data>
-  <data name="defineIntToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Int</value>
+  <data name="decimalValueToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
   </data>
-  <data name="defineLongToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="decimalValueToolStripMenuItem.Text" xml:space="preserve">
+    <value>Decimal Value</value>
   </data>
-  <data name="defineLongToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Long</value>
+  <data name="decimalOffsetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
   </data>
-  <data name="defineFloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="decimalOffsetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Decimal Offset</value>
   </data>
-  <data name="defineFloatToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Float</value>
+  <data name="structNameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
   </data>
-  <data name="defineObjectToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="structNameToolStripMenuItem.Text" xml:space="preserve">
+    <value>Struct Name</value>
   </data>
-  <data name="defineObjectToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Object</value>
+  <data name="structValueToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
   </data>
-  <data name="defineNameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="structValueToolStripMenuItem.Text" xml:space="preserve">
+    <value>Struct Value</value>
   </data>
-  <data name="defineNameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Name</value>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
   </data>
-  <data name="defineCodeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="toolStripMenuItem1.Text" xml:space="preserve">
+    <value>Struct Hex Size</value>
   </data>
-  <data name="defineCodeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Code</value>
+  <data name="structSizeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
   </data>
-  <data name="defineIndexToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="structSizeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Struct Decimal Size</value>
   </data>
-  <data name="defineIndexToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Index</value>
+  <data name="cellToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA68AAAOvAGVvHJJAAAAWklE
+        QVQ4T2OgGVBUVFwBxPvx4BVQpdgBSJGUlJQwLgyShyrFDkgyAMh5AMT/8eAHhAz4LycnJ4kLg+RHDRgM
+        BoA0oGFESgRyCBoAVYodUMMAgikRqpTagIEBAABneZFeCA6HAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="cellToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="cellToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Copy Cell</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
+  </data>
+  <data name="defineStructToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="defineStructToolStripMenuItem.Text" xml:space="preserve">
+    <value>Apply Struct</value>
+  </data>
+  <data name="removeStructToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="removeStructToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Remove Struct</value>
   </data>
   <data name="Context_Structure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 246</value>
+    <value>181, 120</value>
   </data>
   <data name="&gt;&gt;Context_Structure.Name" xml:space="preserve">
     <value>Context_Structure</value>
@@ -1096,7 +1129,7 @@
     <value>HexViewPanel</value>
   </data>
   <data name="&gt;&gt;HexViewPanel.Type" xml:space="preserve">
-    <value>UEExplorer.UI.Forms.HexViewerPanel, UEExplorer, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>UEExplorer.UI.Forms.HexViewerPanel, UEExplorer, Version=1.3.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;HexViewPanel.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -1203,70 +1236,82 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>841, 488</value>
   </data>
-  <data name="&gt;&gt;EditMenuItem.Name" xml:space="preserve">
-    <value>EditMenuItem</value>
+  <data name="&gt;&gt;editCellToolStripMenuItem.Name" xml:space="preserve">
+    <value>editCellToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;EditMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;editCellToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineCharToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineCharToolStripMenuItem</value>
+  <data name="&gt;&gt;editStructValueToolStripMenuItem.Name" xml:space="preserve">
+    <value>editStructValueToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;defineCharToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;editStructValueToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineByteToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineByteToolStripMenuItem</value>
+  <data name="&gt;&gt;cellToolStripMenuItem.Name" xml:space="preserve">
+    <value>cellToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;defineByteToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;cellToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineShortToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineShortToolStripMenuItem</value>
+  <data name="&gt;&gt;hexValueToolStripMenuItem.Name" xml:space="preserve">
+    <value>hexValueToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;defineShortToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;hexValueToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineIntToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineIntToolStripMenuItem</value>
+  <data name="&gt;&gt;hexOffsetToolStripMenuItem.Name" xml:space="preserve">
+    <value>hexOffsetToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;defineIntToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;hexOffsetToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineLongToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineLongToolStripMenuItem</value>
+  <data name="&gt;&gt;decimalValueToolStripMenuItem.Name" xml:space="preserve">
+    <value>decimalValueToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;defineLongToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;decimalValueToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineFloatToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineFloatToolStripMenuItem</value>
+  <data name="&gt;&gt;decimalOffsetToolStripMenuItem.Name" xml:space="preserve">
+    <value>decimalOffsetToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;defineFloatToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;decimalOffsetToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineObjectToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineObjectToolStripMenuItem</value>
+  <data name="&gt;&gt;structNameToolStripMenuItem.Name" xml:space="preserve">
+    <value>structNameToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;defineObjectToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;structNameToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineNameToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineNameToolStripMenuItem</value>
+  <data name="&gt;&gt;structValueToolStripMenuItem.Name" xml:space="preserve">
+    <value>structValueToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;defineNameToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;structValueToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineCodeToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineCodeToolStripMenuItem</value>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
   </data>
-  <data name="&gt;&gt;defineCodeToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineIndexToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineIndexToolStripMenuItem</value>
+  <data name="&gt;&gt;structSizeToolStripMenuItem.Name" xml:space="preserve">
+    <value>structSizeToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;defineIndexToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;structSizeToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;defineStructToolStripMenuItem.Name" xml:space="preserve">
+    <value>defineStructToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;defineStructToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;HexToolTip.Name" xml:space="preserve">
@@ -1274,6 +1319,12 @@
   </data>
   <data name="&gt;&gt;HexToolTip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;removeStructToolStripMenuItem.Name" xml:space="preserve">
+    <value>removeStructToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;removeStructToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>HexViewerControl</value>

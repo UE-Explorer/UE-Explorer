@@ -117,22 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="nameLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="nameLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="nameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 17</value>
+    <value>12, 28</value>
   </data>
   <data name="nameLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
   </data>
   <data name="nameLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="nameLabel.Text" xml:space="preserve">
     <value>Name</value>
@@ -147,20 +144,20 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nameLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="okButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 12</value>
+    <value>382, 25</value>
   </data>
   <data name="okButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
   <data name="okButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
     <value>Ok</value>
@@ -175,87 +172,30 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="typeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="typeComboBox.Items" xml:space="preserve">
-    <value>Char</value>
-  </data>
-  <data name="typeComboBox.Items1" xml:space="preserve">
-    <value>Index</value>
-  </data>
-  <data name="typeComboBox.Items2" xml:space="preserve">
-    <value>Code</value>
-  </data>
-  <data name="typeComboBox.Items3" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="typeComboBox.Items4" xml:space="preserve">
-    <value>Object</value>
-  </data>
-  <data name="typeComboBox.Items5" xml:space="preserve">
-    <value>Float</value>
-  </data>
-  <data name="typeComboBox.Items6" xml:space="preserve">
-    <value>Long</value>
-  </data>
-  <data name="typeComboBox.Items7" xml:space="preserve">
-    <value>Int</value>
-  </data>
-  <data name="typeComboBox.Items8" xml:space="preserve">
-    <value>Short</value>
-  </data>
-  <data name="typeComboBox.Items9" xml:space="preserve">
-    <value>Byte</value>
-  </data>
-  <data name="typeComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>53, 14</value>
-  </data>
-  <data name="typeComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 21</value>
-  </data>
-  <data name="typeComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;typeComboBox.Name" xml:space="preserve">
-    <value>typeComboBox</value>
-  </data>
-  <data name="&gt;&gt;typeComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;typeComboBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;typeComboBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="nameComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="inputComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="nameComboBox.Items" xml:space="preserve">
-    <value>struct</value>
+  <data name="inputComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>53, 25</value>
   </data>
-  <data name="nameComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 14</value>
+  <data name="inputComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>323, 21</value>
   </data>
-  <data name="nameComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 21</value>
+  <data name="inputComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="nameComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="&gt;&gt;inputComboBox.Name" xml:space="preserve">
+    <value>inputComboBox</value>
   </data>
-  <data name="&gt;&gt;nameComboBox.Name" xml:space="preserve">
-    <value>nameComboBox</value>
-  </data>
-  <data name="&gt;&gt;nameComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;inputComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nameComboBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;inputComboBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;nameComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;inputComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -265,16 +205,16 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>364, 47</value>
+    <value>469, 68</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Struct Applyer</value>
+    <value>Object Picker</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>StructureInputDialog</value>
+    <value>ObjectReferenceInputDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

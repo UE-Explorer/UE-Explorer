@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PickColorCodeButton.Text" xml:space="preserve">
-    <value>Kies kleur</value>
+    <value>Kleur kiezen</value>
   </data>
   <data name="PickHTMLColorButton.Text" xml:space="preserve">
-    <value>Kies kleur</value>
+    <value>Kleur kiezen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>UE Kleur Generator</value>

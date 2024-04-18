@@ -61,6 +61,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Backwards {
+            get {
+                object obj = ResourceManager.GetObject("Backwards", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot import binary files with an unequal length!.
         /// </summary>
         internal static string CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH {
@@ -228,6 +238,16 @@ namespace UEExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Forwards {
+            get {
+                object obj = ResourceManager.GetObject("Forwards", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t acquire value.
         /// </summary>
         internal static string HexView_COULDNT_ACQUIRE_VALUE {
@@ -251,6 +271,16 @@ namespace UEExplorer.Properties {
         internal static string HexView_Position {
             get {
                 return ResourceManager.GetString("HexView_Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap History {
+            get {
+                object obj = ResourceManager.GetObject("History", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

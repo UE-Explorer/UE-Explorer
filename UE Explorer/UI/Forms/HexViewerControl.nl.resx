@@ -118,36 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EditMenuItem.Text" xml:space="preserve">
-    <value>Cel bewerken</value>
+    <value>Cel be&amp;werken</value>
   </data>
-  <data name="defineCharToolStripMenuItem.Text" xml:space="preserve">
-    <value>Char definiëren</value>
+  <data name="cellToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cel &amp;kopiëren</value>
   </data>
-  <data name="defineByteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Byte definiëren</value>
+  <data name="hexOffsetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Hex afstand</value>
   </data>
-  <data name="defineShortToolStripMenuItem.Text" xml:space="preserve">
-    <value>Short definiëren</value>
+  <data name="hexValueToolStripMenuItem.Text" xml:space="preserve">
+    <value>Hex waarde</value>
   </data>
-  <data name="defineIntToolStripMenuItem.Text" xml:space="preserve">
-    <value>Int definiëren</value>
+  <data name="toolStripMenuItem1.Text" xml:space="preserve">
+    <value>Struct hex grootte</value>
   </data>
-  <data name="defineLongToolStripMenuItem.Text" xml:space="preserve">
-    <value>Long definiëren</value>
+  <data name="structNameToolStripMenuItem.Text" xml:space="preserve">
+    <value>Struct naam</value>
   </data>
-  <data name="defineFloatToolStripMenuItem.Text" xml:space="preserve">
-    <value>Float definiëren</value>
+  <data name="structSizeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Struct decimale grootte</value>
   </data>
-  <data name="defineObjectToolStripMenuItem.Text" xml:space="preserve">
-    <value>Object definiëren</value>
+  <data name="structValueToolStripMenuItem.Text" xml:space="preserve">
+    <value>Struct waarde</value>
   </data>
-  <data name="defineNameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Name definiëren</value>
+  <data name="decimalOffsetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Decimale afstand</value>
   </data>
-  <data name="defineCodeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Code definiëren</value>
+  <data name="decimalValueToolStripMenuItem.Text" xml:space="preserve">
+    <value>Decimale waarde</value>
   </data>
-  <data name="defineIndexToolStripMenuItem.Text" xml:space="preserve">
-    <value>Index definiëren</value>
+  <data name="editStructValueToolStripMenuItem.Text" xml:space="preserve">
+    <value>Struct waarde be&amp;werken</value>
+  </data>
+  <data name="defineStructToolStripMenuItem.Text" xml:space="preserve">
+    <value>Struct toewijzen</value>
+  </data>
+  <data name="editCellToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cell be&amp;werken</value>
+  </data>
+  <data name="removeStructToolStripMenuItem.Text" xml:space="preserve">
+    <value>Struct &amp;wissen</value>
   </data>
 </root>

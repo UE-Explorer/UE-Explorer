@@ -172,6 +172,37 @@ namespace UEExplorer.UI.Tabs
             // Open the file.
             try
             {
+                // HACK: temporary workaround for legacy UE Explorer code, in order to suppress foreign file signatures without having to modify UELib.
+                var stream = new FileStream(FileName, FileMode.Open, FileAccess.Read);
+                byte[] buffer = new byte[4];
+                int read = stream.Read(buffer, 0, 4);
+                stream.Close();
+
+                uint signature = BitConverter.ToUInt32(buffer, 0);
+
+                if (read == 4 && (
+                        // 0x9E2A83C1
+                        signature != UnrealPackage.Signature &&
+                        signature != UnrealPackage.Signature_BigEndian
+                        // Killing Floor
+                        && signature != 0x9E2A83C2
+                        // Hawken
+                        && signature != 0xEA31928C
+                        ))
+                {
+                    if (MessageBox.Show(
+                            Resources.PACKAGE_UNKNOWN_SIGNATURE,
+                            Resources.Warning, MessageBoxButtons.YesNo
+                        ) == DialogResult.No
+                       )
+                    {
+                        ((ProgramForm)ParentForm).Tabs.CloseTab((TabStripItem)Parent);
+                        return;
+                    }
+
+                }
+
+                UnrealConfig.SuppressSignature = true;
                 _UnrealPackage = UnrealLoader.LoadPackage( FileName );
                 UnrealConfig.SuppressSignature = false;
 
@@ -195,26 +226,6 @@ namespace UEExplorer.UI.Tabs
                 }
 
                 TabControl_General.TabPages.Remove( TabPage_Chunks );
-            }
-            catch( FileLoadException )
-            {
-                if( _UnrealPackage != null )
-                {
-                    _UnrealPackage.Dispose();
-                    _UnrealPackage = null;
-                }
-
-                if( MessageBox.Show(
-                        Resources.PACKAGE_UNKNOWN_SIGNATURE,
-                        Resources.Warning, MessageBoxButtons.YesNo
-                    ) == DialogResult.No
-                )
-                {
-                    ((ProgramForm)ParentForm).Tabs.CloseTab((TabStripItem)Parent);
-                    return;
-                }
-                UnrealConfig.SuppressSignature = true;
-                goto reload;
             }
             catch( Exception e )
             {
@@ -1783,12 +1794,17 @@ namespace UEExplorer.UI.Tabs
 
         private void RestoreBufferedContent( int bufferIndex )
         {
-            SetContentTitle( _ContentBuffer[bufferIndex].Label, false ); 
-            SetContentText( _ContentBuffer[bufferIndex].Node, _ContentBuffer[bufferIndex].Text, true );
-            SelectNode( _ContentBuffer[bufferIndex].Node as TreeNode );   
+            RestoreBufferedContent(_ContentBuffer[bufferIndex]);
+        }
 
-            TextEditorPanel.TextEditor.ScrollToVerticalOffset( _ContentBuffer[bufferIndex].Y );
-            TextEditorPanel.TextEditor.ScrollToHorizontalOffset( _ContentBuffer[bufferIndex].X );
+        private void RestoreBufferedContent(BufferData bufferData)
+        {
+            SetContentTitle(bufferData.Label, false);
+            SetContentText(bufferData.Node, bufferData.Text, true);
+            SelectNode(bufferData.Node as TreeNode);
+
+            TextEditorPanel.TextEditor.ScrollToVerticalOffset(bufferData.Y);
+            TextEditorPanel.TextEditor.ScrollToHorizontalOffset(bufferData.X);
         }
 
         private void ToolStripButton_Backward_Click( object sender, EventArgs e )
@@ -2411,6 +2427,36 @@ namespace UEExplorer.UI.Tabs
         private void UC_PackageExplorer_Leave(object sender, EventArgs e)
         {
             _Tools_StripDropDownButton.Enabled = false;
+        }
+
+        private void RecentToolStripDropDownButton_DropDownOpening(object sender, EventArgs e)
+        {
+            recentToolStripDropDownButton.DropDownItems.Clear();
+
+            if (_BufferIndex == -1)
+            {
+                return;
+            }
+
+            var recentItems = _ContentBuffer
+                //.GetRange(0, _BufferIndex + 1)
+                .Select((d, i) => new ToolStripMenuItem
+                {
+                    Text = d.Node?.ToString() ?? d.Label,
+                    Tag = i,
+                    Checked = i == _BufferIndex
+                })
+                .Reverse()
+                .ToArray<ToolStripMenuItem>();
+
+            recentToolStripDropDownButton.DropDownItems.AddRange(recentItems);
+        }
+
+        private void RecentToolStripDropDownButton_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            int bufferIndex = (int)e.ClickedItem.Tag;
+            RestoreBufferedContent(bufferIndex);
+            _BufferIndex = bufferIndex;
         }
     }
 }
