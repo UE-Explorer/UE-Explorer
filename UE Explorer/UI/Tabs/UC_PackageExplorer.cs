@@ -172,6 +172,37 @@ namespace UEExplorer.UI.Tabs
             // Open the file.
             try
             {
+                // HACK: temporary workaround for legacy UE Explorer code, in order to suppress foreign file signatures without having to modify UELib.
+                var stream = new FileStream(FileName, FileMode.Open, FileAccess.Read);
+                byte[] buffer = new byte[4];
+                int read = stream.Read(buffer, 0, 4);
+                stream.Close();
+
+                uint signature = BitConverter.ToUInt32(buffer, 0);
+
+                if (read == 4 && (
+                        // 0x9E2A83C1
+                        signature != UnrealPackage.Signature &&
+                        signature != UnrealPackage.Signature_BigEndian
+                        // Killing Floor
+                        && signature != 0x9E2A83C2
+                        // Hawken
+                        && signature != 0xEA31928C
+                        ))
+                {
+                    if (MessageBox.Show(
+                            Resources.PACKAGE_UNKNOWN_SIGNATURE,
+                            Resources.Warning, MessageBoxButtons.YesNo
+                        ) == DialogResult.No
+                       )
+                    {
+                        ((ProgramForm)ParentForm).Tabs.CloseTab((TabStripItem)Parent);
+                        return;
+                    }
+
+                }
+
+                UnrealConfig.SuppressSignature = true;
                 _UnrealPackage = UnrealLoader.LoadPackage( FileName );
                 UnrealConfig.SuppressSignature = false;
 
@@ -195,26 +226,6 @@ namespace UEExplorer.UI.Tabs
                 }
 
                 TabControl_General.TabPages.Remove( TabPage_Chunks );
-            }
-            catch( FileLoadException )
-            {
-                if( _UnrealPackage != null )
-                {
-                    _UnrealPackage.Dispose();
-                    _UnrealPackage = null;
-                }
-
-                if( MessageBox.Show(
-                        Resources.PACKAGE_UNKNOWN_SIGNATURE,
-                        Resources.Warning, MessageBoxButtons.YesNo
-                    ) == DialogResult.No
-                )
-                {
-                    ((ProgramForm)ParentForm).Tabs.CloseTab((TabStripItem)Parent);
-                    return;
-                }
-                UnrealConfig.SuppressSignature = true;
-                goto reload;
             }
             catch( Exception e )
             {
