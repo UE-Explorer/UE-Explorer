@@ -20,7 +20,6 @@ namespace UEExplorer.UI
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ToolStripMenuItem webMenuItem;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProgramForm));
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
@@ -72,7 +71,7 @@ namespace UEExplorer.UI
             this.containerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuItem26
+            // webMenuItem
             // 
             webMenuItem.Name = "webMenuItem";
             resources.ApplyResources(webMenuItem, "webMenuItem");
@@ -112,22 +111,22 @@ namespace UEExplorer.UI
             this.nativeTableDropDownButton.DropDownOpening += new System.EventHandler(this.NativeTableDropDownButton_DropDownOpening);
             this.nativeTableDropDownButton.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.NativeTableDropDownButton_DropDownItemClicked);
             // 
-            // Platform
+            // platformMenuItem
             // 
             this.platformMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.platformMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.platformPCMenuItem,
             this.platformConsoleMenuItem});
-            resources.ApplyResources(this.platformMenuItem, "platformConsoleMenuItem");
-            this.platformMenuItem.Name = "platformConsoleMenuItem";
+            this.platformMenuItem.Name = "platformMenuItem";
+            resources.ApplyResources(this.platformMenuItem, "platformMenuItem");
             this.platformMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.platformMenuItem_DropDownItemClicked);
             // 
-            // pCToolStripMenuItem
+            // platformPCMenuItem
             // 
             this.platformPCMenuItem.Name = "platformPCMenuItem";
             resources.ApplyResources(this.platformPCMenuItem, "platformPCMenuItem");
             // 
-            // consoleToolStripMenuItem
+            // platformConsoleMenuItem
             // 
             this.platformConsoleMenuItem.Name = "platformConsoleMenuItem";
             resources.ApplyResources(this.platformConsoleMenuItem, "platformConsoleMenuItem");
@@ -147,16 +146,16 @@ namespace UEExplorer.UI
             this.TabComponentsStrip.SelectedColorStart = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
             this.TabComponentsStrip.SelectedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
             this.TabComponentsStrip.TabStripItemClosing += new Storm.TabControl.TabStripItemClosingHandler(this.TabComponentsStrip_TabStripItemClosing);
-            this.TabComponentsStrip.TabStripItemClosed += new EventHandler(TabComponentsStrip_TabStripItemClosed);
+            this.TabComponentsStrip.TabStripItemClosed += new System.EventHandler(this.TabComponentsStrip_TabStripItemClosed);
             this.TabComponentsStrip.DragDrop += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragDrop);
             this.TabComponentsStrip.DragEnter += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragEnter);
             // 
             // brandPictureBox
             // 
+            this.brandPictureBox.Image = global::UEExplorer.Properties.Resources.UE_ProgramLogo;
             resources.ApplyResources(this.brandPictureBox, "brandPictureBox");
             this.brandPictureBox.Name = "brandPictureBox";
             this.brandPictureBox.TabStop = false;
-            this.brandPictureBox.Image = global::UEExplorer.Properties.Resources.UE_ProgramLogo;
             // 
             // mainMenuStrip
             // 
@@ -188,7 +187,7 @@ namespace UEExplorer.UI
             resources.ApplyResources(this.openFileMenuItem, "openFileMenuItem");
             this.openFileMenuItem.Click += new System.EventHandler(this.OpenFileMenuItem_Click);
             // 
-            // menuItem12
+            // saveFileMenuItem
             // 
             resources.ApplyResources(this.saveFileMenuItem, "saveFileMenuItem");
             this.saveFileMenuItem.Name = "saveFileMenuItem";
@@ -211,7 +210,7 @@ namespace UEExplorer.UI
             this.separator2.Name = "separator2";
             resources.ApplyResources(this.separator2, "separator2");
             // 
-            // menuItem10
+            // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
             resources.ApplyResources(this.exitMenuItem, "exitMenuItem");
@@ -224,7 +223,7 @@ namespace UEExplorer.UI
             resources.ApplyResources(this.editMenuItem, "editMenuItem");
             this.editMenuItem.Name = "editMenuItem";
             // 
-            // menuItem21
+            // findToolMenuItem
             // 
             this.findToolMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItem22});
@@ -272,7 +271,7 @@ namespace UEExplorer.UI
             this.separator4.Name = "separator4";
             resources.ApplyResources(this.separator4, "separator4");
             // 
-            // menuItem17
+            // colorGeneratorMenuItem
             // 
             this.colorGeneratorMenuItem.Name = "colorGeneratorMenuItem";
             resources.ApplyResources(this.colorGeneratorMenuItem, "colorGeneratorMenuItem");
@@ -283,7 +282,7 @@ namespace UEExplorer.UI
             this.separator5.Name = "separator5";
             resources.ApplyResources(this.separator5, "separator5");
             // 
-            // menuItem20
+            // toggleFilesAssociationMenuItem
             // 
             this.toggleFilesAssociationMenuItem.Name = "toggleFilesAssociationMenuItem";
             resources.ApplyResources(this.toggleFilesAssociationMenuItem, "toggleFilesAssociationMenuItem");
@@ -311,13 +310,13 @@ namespace UEExplorer.UI
             this.helpMenuItem.Name = "helpMenuItem";
             resources.ApplyResources(this.helpMenuItem, "helpMenuItem");
             // 
-            // menuItem15
+            // reportAnIssueMenuItem
             // 
             this.reportAnIssueMenuItem.Name = "reportAnIssueMenuItem";
             resources.ApplyResources(this.reportAnIssueMenuItem, "reportAnIssueMenuItem");
             this.reportAnIssueMenuItem.Click += new System.EventHandler(this.ReportAnIssue);
             // 
-            // menuItem23
+            // checkForUpdatesMenuItem
             // 
             this.checkForUpdatesMenuItem.Name = "checkForUpdatesMenuItem";
             resources.ApplyResources(this.checkForUpdatesMenuItem, "checkForUpdatesMenuItem");
@@ -328,25 +327,25 @@ namespace UEExplorer.UI
             this.separator6.Name = "separator6";
             resources.ApplyResources(this.separator6, "separator6");
             // 
-            // menuItem24
+            // forumLinkMenu
             // 
             this.forumLinkMenu.Name = "forumLinkMenu";
             resources.ApplyResources(this.forumLinkMenu, "forumLinkMenu");
             this.forumLinkMenu.Click += new System.EventHandler(this.ForumMenuItem_Click);
             // 
-            // menuItem6
+            // donateMenuItem
             // 
             this.donateMenuItem.Name = "donateMenuItem";
             resources.ApplyResources(this.donateMenuItem, "donateMenuItem");
             this.donateMenuItem.Click += new System.EventHandler(this.DonateMenuItem_Click);
             // 
-            // menuItem4
+            // contactMenuItem
             // 
             this.contactMenuItem.Name = "contactMenuItem";
             resources.ApplyResources(this.contactMenuItem, "contactMenuItem");
             this.contactMenuItem.Click += new System.EventHandler(this.ContactMenuItem_Click);
             // 
-            // SocialMenuItem
+            // socialMenuItem
             // 
             this.socialMenuItem.Name = "socialMenuItem";
             resources.ApplyResources(this.socialMenuItem, "socialMenuItem");
@@ -357,7 +356,7 @@ namespace UEExplorer.UI
             this.separator7.Name = "separator7";
             resources.ApplyResources(this.separator7, "separator7");
             // 
-            // menuItem5
+            // aboutMenuItem
             // 
             this.aboutMenuItem.Name = "aboutMenuItem";
             resources.ApplyResources(this.aboutMenuItem, "aboutMenuItem");
@@ -368,13 +367,10 @@ namespace UEExplorer.UI
             resources.ApplyResources(this.openHomeButton, "openHomeButton");
             this.openHomeButton.Name = "openHomeButton";
             this.openHomeButton.Click += new System.EventHandler(this.OpenHomeButton_Click);
-            this.openHomeButton.Location = new Point(0, 0);
-            this.openHomeButton.Visible = false;
             // 
             // containerPanel
             // 
             resources.ApplyResources(this.containerPanel, "containerPanel");
-            //this.containerPanel.Controls.Add(this.openHomeButton);
             this.containerPanel.Controls.Add(this.TabComponentsStrip);
             this.containerPanel.Name = "containerPanel";
             // 

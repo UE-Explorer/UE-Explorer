@@ -117,10 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="webMenuItem.GenerateMember" type="System.Boolean, mscorlib">
+  <metadata name="webMenuItem.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
-  </data>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="webMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -128,9 +127,10 @@
   <data name="webMenuItem.Text" xml:space="preserve">
     <value>&gt; &amp;Home</value>
   </data>
-  <data name="mainStatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="mainStatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>126, 17</value>
-  </data>
+  </metadata>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="loadingProgressBar.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -144,7 +144,7 @@
     <value>False</value>
   </data>
   <data name="progressStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>778, 17</value>
+    <value>781, 17</value>
   </data>
   <data name="progressStatusLabel.Text" xml:space="preserve">
     <value>Ready</value>
@@ -176,29 +176,11 @@
   <data name="platformConsoleMenuItem.Text" xml:space="preserve">
     <value>Console</value>
   </data>
-  <data name="platformMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAAAgNJREFUOE+lkutLk2EYxvePhJaHShFBUTEPiCieQOmDiEZgrEbpYGiCQxkqA80I
-        RUkUEZ0YRMS+DDI70MkTmzJnDc8iU8QT2mAEItnle90wHwTDyBduXnie5/rd133Q4ZKfAJqHFs9E08A8
-        zD1emDpmYXjqRlnTFIrMk8iuGkNaxWekGEaQrHecBfw+/vPXODw6hj9whN2fh/Bt/8LSRgA3cxr/DeBZ
-        9kvmTNMoHGNbIrYN+3Aj23IxgJkpds0doP3VstgmsNexhutZ9QrAms8T0zYzU5xXM46kcjsmvfvoeL2i
-        AeoUgA07T8yaaZuZKab1rzN74jgys1YB2O2gmBZzH49LODXrrJlnzEzxe9cOLH1ziMioVgCOiuIFX0CE
-        Q+/WYf+yieiCFrRp9tkwxnP7Kt5MbKGm6wfC000KwDlTXNLgEvHMkh+Db32o7fYivtQm1l9+3IBOp5P7
-        yjYPwlKNCsAluWudxgvtknb5t9oWcL/VLU2Mvd2JFq3uqs7vAtE/ceNayiMF4KiYMSjmY2O7B4Ua+NaD
-        YQGEJumRbvyG1IcfBHI12aAAXM8R57aIWTNrLLY4tfNPiCvpR1SeVeu6WWzHFD6THSDwFMDdpmUG62NJ
-        PKM4Or9ZxBxb8H8l7g5CEu8pAOfM3WanSeeS8CFHxW4zM2umbWamOCShXAH+/wNOANABIDUxWnDPAAAA
-        AElFTkSuQmCC
-</value>
-  </data>
-  <data name="platformMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
   <data name="platformMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 20</value>
+    <value>63, 20</value>
   </data>
   <data name="platformMenuItem.Text" xml:space="preserve">
-    <value>Platform</value>
+    <value>Console</value>
   </data>
   <data name="mainStatusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 578</value>
@@ -227,9 +209,6 @@
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TabComponentsStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
-  </data>
-  <data name="TabComponentsStrip.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8.25pt</value>
   </data>
   <data name="TabComponentsStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -276,9 +255,9 @@
   <data name="&gt;&gt;brandPictureBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="mainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="mainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>376, 20</value>
-  </data>
+  </metadata>
   <data name="mainMenuStrip.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12world</value>
   </data>
@@ -286,7 +265,7 @@
     <value>Ctrl+O</value>
   </data>
   <data name="openFileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>176, 22</value>
   </data>
   <data name="openFileMenuItem.Text" xml:space="preserve">
     <value>&amp;Open File...</value>
@@ -295,7 +274,7 @@
     <value>False</value>
   </data>
   <data name="saveFileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>176, 22</value>
   </data>
   <data name="saveFileMenuItem.Text" xml:space="preserve">
     <value>&amp;Save File</value>
@@ -304,25 +283,25 @@
     <value>False</value>
   </data>
   <data name="separator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>173, 6</value>
   </data>
   <data name="mostRecentMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="mostRecentMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>176, 22</value>
   </data>
   <data name="mostRecentMenuItem.Text" xml:space="preserve">
     <value>Recent Files</value>
   </data>
   <data name="separator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>173, 6</value>
   </data>
   <data name="exitMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Alt+F4</value>
   </data>
   <data name="exitMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>176, 22</value>
   </data>
   <data name="exitMenuItem.Text" xml:space="preserve">
     <value>E&amp;xit</value>
@@ -337,10 +316,7 @@
     <value>67, 22</value>
   </data>
   <data name="findToolMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 22</value>
-  </data>
-  <data name="findMenuItem.Text" xml:space="preserve">
-    <value>Find</value>
+    <value>67, 22</value>
   </data>
   <data name="editMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -484,7 +460,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="openHomeButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>832, 506</value>
+    <value>0, 0</value>
   </data>
   <data name="openHomeButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 30</value>
@@ -494,6 +470,9 @@
   </data>
   <data name="openHomeButton.Text" xml:space="preserve">
     <value>Homepage</value>
+  </data>
+  <data name="openHomeButton.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;openHomeButton.Name" xml:space="preserve">
     <value>openHomeButton</value>
@@ -520,7 +499,7 @@
     <value>containerPanel</value>
   </data>
   <data name="&gt;&gt;containerPanel.Type" xml:space="preserve">
-    <value>Krypton.Toolkit.KryptonPanel, Krypton.Toolkit, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;containerPanel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -528,12 +507,12 @@
   <data name="&gt;&gt;containerPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
-  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>60</value>
-  </data>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -2304,6 +2283,6 @@
     <value>ProgramForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Krypton.Toolkit.KryptonForm, Krypton.Toolkit, Version=65.22.6.152, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

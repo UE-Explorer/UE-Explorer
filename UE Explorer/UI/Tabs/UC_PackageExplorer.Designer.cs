@@ -22,7 +22,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
             System.Windows.Forms.Panel filterPanel;
             System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.VSIcons = new System.Windows.Forms.ImageList(this.components);
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -116,8 +116,9 @@
             this.TextEditorPanel = new UEExplorer.UI.Tabs.TextEditorPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.ToolStrip_Content = new System.Windows.Forms.ToolStrip();
-            this.PrevButton = new System.Windows.Forms.ToolStripButton();
+            this.PrevButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.NextButton = new System.Windows.Forms.ToolStripButton();
+            this.recentToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.ExportButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.SearchBox = new System.Windows.Forms.ToolStripTextBox();
@@ -577,14 +578,14 @@
             this.DataGridView_Flags.MultiSelect = false;
             this.DataGridView_Flags.Name = "DataGridView_Flags";
             this.DataGridView_Flags.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridView_Flags.RowHeadersVisible = false;
             this.DataGridView_Flags.ShowCellErrors = false;
             this.DataGridView_Flags.ShowEditingIcon = false;
@@ -1091,6 +1092,7 @@
             this.ToolStrip_Content.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.PrevButton,
             this.NextButton,
+            this.recentToolStripDropDownButton,
             this.ExportButton,
             this.toolStripSeparator1,
             this.SearchBox,
@@ -1108,7 +1110,9 @@
             this.PrevButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.PrevButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.PrevButton, "PrevButton");
+            this.PrevButton.Image = global::UEExplorer.Properties.Resources.Backwards;
             this.PrevButton.Name = "PrevButton";
+            this.PrevButton.ShowDropDownArrow = false;
             this.PrevButton.Click += new System.EventHandler(this.ToolStripButton_Backward_Click);
             // 
             // NextButton
@@ -1116,8 +1120,18 @@
             this.NextButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.NextButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.NextButton, "NextButton");
+            this.NextButton.Image = global::UEExplorer.Properties.Resources.Forwards;
             this.NextButton.Name = "NextButton";
             this.NextButton.Click += new System.EventHandler(this.ToolStripButton_Forward_Click);
+            // 
+            // recentToolStripDropDownButton
+            // 
+            this.recentToolStripDropDownButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.recentToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.recentToolStripDropDownButton, "recentToolStripDropDownButton");
+            this.recentToolStripDropDownButton.Name = "recentToolStripDropDownButton";
+            this.recentToolStripDropDownButton.DropDownOpening += new System.EventHandler(this.RecentToolStripDropDownButton_DropDownOpening);
+            this.recentToolStripDropDownButton.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.RecentToolStripDropDownButton_DropDownItemClicked);
             // 
             // ExportButton
             // 
@@ -1174,6 +1188,7 @@
             this.Label_ObjectName.BackColor = System.Drawing.Color.Transparent;
             this.Label_ObjectName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.Label_ObjectName.Name = "Label_ObjectName";
+            this.Label_ObjectName.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             resources.ApplyResources(this.Label_ObjectName, "Label_ObjectName");
             // 
             // ViewTools
@@ -1264,8 +1279,6 @@
 		internal System.Windows.Forms.TabPage TabPage_Deps;
 		private System.Windows.Forms.DataGridView DataGridView_NameTable;
 		private System.Windows.Forms.ToolStripButton FindButton;
-		private System.Windows.Forms.ToolStripButton NextButton;
-		private System.Windows.Forms.ToolStripButton PrevButton;
 		private System.Windows.Forms.Integration.ElementHost WPFHost;
 		private TextEditorPanel TextEditorPanel;
 		private System.Windows.Forms.DataGridView DataGridView_GenerationsTable;
@@ -1352,5 +1365,8 @@
         private System.Windows.Forms.ToolStripMenuItem ReloadButton;
         private System.Windows.Forms.ToolStripButton SearchByObjectGroupButton;
         private System.Windows.Forms.CheckBox _CheckBox_ToggleHierachy;
-	}
+        private System.Windows.Forms.ToolStripDropDownButton PrevButton;
+        private System.Windows.Forms.ToolStripButton NextButton;
+        private System.Windows.Forms.ToolStripDropDownButton recentToolStripDropDownButton;
+    }
 }

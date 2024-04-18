@@ -1783,12 +1783,17 @@ namespace UEExplorer.UI.Tabs
 
         private void RestoreBufferedContent( int bufferIndex )
         {
-            SetContentTitle( _ContentBuffer[bufferIndex].Label, false ); 
-            SetContentText( _ContentBuffer[bufferIndex].Node, _ContentBuffer[bufferIndex].Text, true );
-            SelectNode( _ContentBuffer[bufferIndex].Node as TreeNode );   
+            RestoreBufferedContent(_ContentBuffer[bufferIndex]);
+        }
 
-            TextEditorPanel.TextEditor.ScrollToVerticalOffset( _ContentBuffer[bufferIndex].Y );
-            TextEditorPanel.TextEditor.ScrollToHorizontalOffset( _ContentBuffer[bufferIndex].X );
+        private void RestoreBufferedContent(BufferData bufferData)
+        {
+            SetContentTitle(bufferData.Label, false);
+            SetContentText(bufferData.Node, bufferData.Text, true);
+            SelectNode(bufferData.Node as TreeNode);
+
+            TextEditorPanel.TextEditor.ScrollToVerticalOffset(bufferData.Y);
+            TextEditorPanel.TextEditor.ScrollToHorizontalOffset(bufferData.X);
         }
 
         private void ToolStripButton_Backward_Click( object sender, EventArgs e )
@@ -2411,6 +2416,36 @@ namespace UEExplorer.UI.Tabs
         private void UC_PackageExplorer_Leave(object sender, EventArgs e)
         {
             _Tools_StripDropDownButton.Enabled = false;
+        }
+
+        private void RecentToolStripDropDownButton_DropDownOpening(object sender, EventArgs e)
+        {
+            recentToolStripDropDownButton.DropDownItems.Clear();
+
+            if (_BufferIndex == -1)
+            {
+                return;
+            }
+
+            var recentItems = _ContentBuffer
+                //.GetRange(0, _BufferIndex + 1)
+                .Select((d, i) => new ToolStripMenuItem
+                {
+                    Text = d.Node?.ToString() ?? d.Label,
+                    Tag = i,
+                    Checked = i == _BufferIndex
+                })
+                .Reverse()
+                .ToArray<ToolStripMenuItem>();
+
+            recentToolStripDropDownButton.DropDownItems.AddRange(recentItems);
+        }
+
+        private void RecentToolStripDropDownButton_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            int bufferIndex = (int)e.ClickedItem.Tag;
+            RestoreBufferedContent(bufferIndex);
+            _BufferIndex = bufferIndex;
         }
     }
 }
