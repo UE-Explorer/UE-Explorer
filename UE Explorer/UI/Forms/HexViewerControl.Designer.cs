@@ -59,6 +59,7 @@
             this.DissambledShort = new System.Windows.Forms.TextBox();
             this.DissambledByte = new System.Windows.Forms.TextBox();
             this.DissambledChar = new System.Windows.Forms.TextBox();
+            this.HexViewPanel = new UEExplorer.UI.Forms.HexViewerPanel();
             this.Context_Structure = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editCellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editStructValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,10 +73,10 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.structSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.defineStructToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HexViewScrollBar = new System.Windows.Forms.VScrollBar();
             this.HexToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.defineStructToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.HexViewPanel = new UEExplorer.UI.Forms.HexViewerPanel();
+            this.removeStructToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             label14 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
@@ -325,13 +326,27 @@
             resources.ApplyResources(panel1, "panel1");
             panel1.Name = "panel1";
             // 
+            // HexViewPanel
+            // 
+            this.HexViewPanel.ContextMenuStrip = this.Context_Structure;
+            resources.ApplyResources(this.HexViewPanel, "HexViewPanel");
+            this.HexViewPanel.Name = "HexViewPanel";
+            this.HexViewPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HexLinePanel_Paint);
+            this.HexViewPanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HexViewPanel_KeyDown);
+            this.HexViewPanel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HexViewPanel_KeyPress);
+            this.HexViewPanel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HexViewPanel_KeyUp);
+            this.HexViewPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseClick);
+            this.HexViewPanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseDoubleClick);
+            this.HexViewPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseMove);
+            // 
             // Context_Structure
             // 
             this.Context_Structure.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editCellToolStripMenuItem,
             this.cellToolStripMenuItem,
             this.toolStripSeparator1,
-            this.defineStructToolStripMenuItem});
+            this.defineStructToolStripMenuItem,
+            this.removeStructToolStripMenuItem});
             this.Context_Structure.Name = "Context_Structure";
             resources.ApplyResources(this.Context_Structure, "Context_Structure");
             this.Context_Structure.Opening += new System.ComponentModel.CancelEventHandler(this.Context_Structure_Opening);
@@ -428,12 +443,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
-            // HexViewScrollBar
-            // 
-            resources.ApplyResources(this.HexViewScrollBar, "HexViewScrollBar");
-            this.HexViewScrollBar.Name = "HexViewScrollBar";
-            this.HexViewScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.HexScrollBar_Scroll);
-            // 
             // defineStructToolStripMenuItem
             // 
             this.defineStructToolStripMenuItem.Name = "defineStructToolStripMenuItem";
@@ -441,18 +450,18 @@
             this.defineStructToolStripMenuItem.Tag = "Cell";
             this.defineStructToolStripMenuItem.Click += new System.EventHandler(this.defineStructToolStripMenuItem_Click);
             // 
-            // HexViewPanel
+            // HexViewScrollBar
             // 
-            this.HexViewPanel.ContextMenuStrip = this.Context_Structure;
-            resources.ApplyResources(this.HexViewPanel, "HexViewPanel");
-            this.HexViewPanel.Name = "HexViewPanel";
-            this.HexViewPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HexLinePanel_Paint);
-            this.HexViewPanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HexViewPanel_KeyDown);
-            this.HexViewPanel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HexViewPanel_KeyPress);
-            this.HexViewPanel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HexViewPanel_KeyUp);
-            this.HexViewPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseClick);
-            this.HexViewPanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseDoubleClick);
-            this.HexViewPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseMove);
+            resources.ApplyResources(this.HexViewScrollBar, "HexViewScrollBar");
+            this.HexViewScrollBar.Name = "HexViewScrollBar";
+            this.HexViewScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.HexScrollBar_Scroll);
+            // 
+            // removeStructToolStripMenuItem
+            // 
+            this.removeStructToolStripMenuItem.Name = "removeStructToolStripMenuItem";
+            resources.ApplyResources(this.removeStructToolStripMenuItem, "removeStructToolStripMenuItem");
+            this.removeStructToolStripMenuItem.Tag = "Struct";
+            this.removeStructToolStripMenuItem.Click += new System.EventHandler(this.removeStructToolStripMenuItem_Click);
             // 
             // HexViewerControl
             // 
@@ -507,5 +516,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem editStructValueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem defineStructToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeStructToolStripMenuItem;
     }
 }

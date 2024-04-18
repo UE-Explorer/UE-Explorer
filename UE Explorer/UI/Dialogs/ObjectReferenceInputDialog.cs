@@ -26,5 +26,11 @@ namespace UEExplorer.UI.Dialogs
         }
 
         private void ObjectReferenceInputDialog_Shown(object sender, EventArgs e) => inputComboBox.Focus();
+
+        private void inputComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            var obj = (UObject)inputComboBox.Items[e.Index];
+            TextRenderer.DrawText(e.Graphics, obj.GetReferencePath(), inputComboBox.Font, e.Bounds, inputComboBox.ForeColor);
+        }
     }
 }

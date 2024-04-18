@@ -151,6 +151,12 @@
     <value>Struct waarde be&amp;werken</value>
   </data>
   <data name="defineStructToolStripMenuItem.Text" xml:space="preserve">
-    <value>Struct definiëren</value>
+    <value>Struct toewijzen</value>
+  </data>
+  <data name="editCellToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cell be&amp;werken</value>
+  </data>
+  <data name="removeStructToolStripMenuItem.Text" xml:space="preserve">
+    <value>Struct &amp;wissen</value>
   </data>
 </root>

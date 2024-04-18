@@ -51,6 +51,7 @@
             this.inputComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.inputComboBox.FormattingEnabled = true;
             this.inputComboBox.Name = "inputComboBox";
+            this.inputComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.inputComboBox_DrawItem);
             // 
             // ObjectReferenceInputDialog
             // 

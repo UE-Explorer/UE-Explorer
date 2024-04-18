@@ -1003,7 +1003,7 @@
     <value>17, 17</value>
   </metadata>
   <data name="editStructValueToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>159, 22</value>
   </data>
   <data name="editStructValueToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Edit Struct Value</value>
@@ -1093,10 +1093,16 @@
     <value>180, 22</value>
   </data>
   <data name="defineStructToolStripMenuItem.Text" xml:space="preserve">
-    <value>Define Struct</value>
+    <value>Apply Struct</value>
+  </data>
+  <data name="removeStructToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="removeStructToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Remove Struct</value>
   </data>
   <data name="Context_Structure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 98</value>
+    <value>181, 120</value>
   </data>
   <data name="&gt;&gt;Context_Structure.Name" xml:space="preserve">
     <value>Context_Structure</value>
@@ -1302,16 +1308,22 @@
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;defineStructToolStripMenuItem.Name" xml:space="preserve">
+    <value>defineStructToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;defineStructToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;HexToolTip.Name" xml:space="preserve">
     <value>HexToolTip</value>
   </data>
   <data name="&gt;&gt;HexToolTip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;defineStructToolStripMenuItem.Name" xml:space="preserve">
-    <value>defineStructToolStripMenuItem</value>
+  <data name="&gt;&gt;removeStructToolStripMenuItem.Name" xml:space="preserve">
+    <value>removeStructToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;defineStructToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;removeStructToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

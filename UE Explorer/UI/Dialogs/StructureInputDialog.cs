@@ -7,9 +7,9 @@ namespace UEExplorer.UI.Dialogs
     {
         public StructureInputDialog() => InitializeComponent();
 
-        public string InputStructType => typeComboBox.SelectedText;
+        public string InputStructType => typeComboBox.SelectedItem?.ToString();
 
-        public string InputStructName => nameComboBox.SelectedText;
+        public string InputStructName => nameComboBox.SelectedItem?.ToString();
 
         private void StructureInputDialog_Shown(object sender, EventArgs e) => typeComboBox.Focus();
     }

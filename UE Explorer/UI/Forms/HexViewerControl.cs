@@ -187,11 +187,13 @@ namespace UEExplorer.UI.Forms
                     break;
 
                 case "object":
+                    // FIXME: Dynamic size
                     size = 4;
                     color = Color.DarkTurquoise;
                     break;
 
                 case "index":
+                    // FIXME: Dynamic size
                     size = 4;
                     color = Color.MediumOrchid;
                     break;
@@ -472,19 +474,11 @@ namespace UEExplorer.UI.Forms
                     x + ColumnWidth, y + CellHeight
                 );
 
-                for (int i = 0; i < CellCount; ++i)
-                {
-                    var isOddGroup = i / 4.0F / 1.00 % 2.00 < 1.00;
-                    var textBrush = SelectedOffset % CellCount == i ? _SelectedBrush
-                        : HoveredOffset % CellCount == i ? _HoveredBrush
-                        : isOddGroup ? _EvenBrush : _OffsetBrush;
-                    var c = HexTable[i];
-                    e.Graphics.DrawString(c, HexViewPanel.Font, textBrush,
-                        x + i * CellWidth,
-                        y,
-                        StringFormat.GenericDefault
-                    );
-                }
+                e.Graphics.DrawString("ASCII", HexViewPanel.Font, _OffsetBrush,
+                    x,
+                    y,
+                    StringFormat.GenericDefault
+                );
             }
 
             float lineOffsetY = (float)(ColumnMargin + CellHeight + CellHeight * .5);
@@ -659,6 +653,8 @@ namespace UEExplorer.UI.Forms
 
                 if (_DrawASCII)
                 {
+                    float cellWidth = CellWidth;
+                    float cellHeight = CellHeight;
                     for (int cellIndex = 0; cellIndex < maxCells; ++cellIndex)
                     {
                         int byteIndex = offset + cellIndex;
@@ -668,10 +664,10 @@ namespace UEExplorer.UI.Forms
                             // Draw the selection.
                             var drawPen = _SelectionPen;
                             e.Graphics.DrawRectangle(drawPen,
-                                (int)(asciiColumnOffset + cellIndex * CellWidth),
+                                (int)(asciiColumnOffset + cellIndex * cellWidth),
                                 (int)lineOffsetY,
-                                (int)CellWidth,
-                                (int)CellHeight
+                                (int)cellWidth,
+                                (int)cellHeight
                             );
                         }
 
@@ -679,10 +675,10 @@ namespace UEExplorer.UI.Forms
                         {
                             var drawPen = _HoverPen;
                             e.Graphics.DrawRectangle(drawPen,
-                                (int)(asciiColumnOffset + cellIndex * CellWidth),
+                                (int)(asciiColumnOffset + cellIndex * cellWidth),
                                 (int)lineOffsetY,
-                                (int)CellWidth,
-                                (int)CellHeight
+                                (int)cellWidth,
+                                (int)cellHeight
                             );
                         }
 
@@ -713,7 +709,7 @@ namespace UEExplorer.UI.Forms
 
                         e.Graphics.DrawString(
                             drawnChar, HexViewPanel.Font, drawBrush,
-                            asciiColumnOffset + cellIndex * CellWidth,
+                            asciiColumnOffset + cellIndex * cellWidth,
                             lineOffsetY
                         );
                     }
@@ -904,7 +900,7 @@ namespace UEExplorer.UI.Forms
             }
 
             SelectedOffset = cellIndex;
-            SetActivateCell(-1);
+            SetActiveCell(-1);
         }
 
         private void HexLinePanel_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -920,10 +916,10 @@ namespace UEExplorer.UI.Forms
                 return;
             }
 
-            SetActivateCell(cellIndex);
+            SetActiveCell(cellIndex);
         }
 
-        private void SetActivateCell(int index)
+        private void SetActiveCell(int index)
         {
             _ActiveOffset = index;
             _ActiveNibbleIndex = 0;
@@ -973,13 +969,14 @@ namespace UEExplorer.UI.Forms
                 // Check if the bytes field is selected.
                 if (_DrawByte && x >= byteColumnOffset && x < asciiColumnOffset)
                 {
+                    float cellWidth = CellWidth;
                     for (int cellIndex = 0; cellIndex < maxCells; ++cellIndex)
                     {
                         int byteIndex = offset + cellIndex;
                         if
                         (
-                            x >= byteColumnOffset + cellIndex * CellWidth &&
-                            x <= byteColumnOffset + (cellIndex + 1) * CellWidth
+                            x >= byteColumnOffset + cellIndex * cellWidth &&
+                            x <= byteColumnOffset + (cellIndex + 1) * cellWidth
                         )
                         {
                             return byteIndex;
@@ -990,14 +987,14 @@ namespace UEExplorer.UI.Forms
                 // Check if the ascii's field is selected.
                 if (_DrawASCII && x >= asciiColumnOffset)
                 {
-                    float asciiWidth = CellWidth;
+                    float cellWidth = CellWidth;
                     for (int cellIndex = 0; cellIndex < maxCells; ++cellIndex)
                     {
                         int byteIndex = offset + cellIndex;
                         if
                         (
-                            x >= asciiColumnOffset + cellIndex * asciiWidth &&
-                            x <= asciiColumnOffset + (cellIndex + 1) * asciiWidth
+                            x >= asciiColumnOffset + cellIndex * cellWidth &&
+                            x <= asciiColumnOffset + (cellIndex + 1) * cellWidth
                         )
                         {
                             return byteIndex;
@@ -1119,12 +1116,12 @@ namespace UEExplorer.UI.Forms
             {
                 if (currentCellIndex == -1 && SelectedOffset != -1)
                 {
-                    SetActivateCell(_SelectedOffset);
+                    SetActiveCell(_SelectedOffset);
                 }
                 else if (currentCellIndex != -1)
                 {
                     SelectedOffset = currentCellIndex;
-                    SetActivateCell(-1);
+                    SetActiveCell(-1);
                 }
 
                 e.Handled = true;
@@ -1193,7 +1190,7 @@ namespace UEExplorer.UI.Forms
                 if (e.Shift)
                 {
                     int value = currentCellIndex;
-                    string text = value.ToString("X8", CultureInfo.InvariantCulture);
+                    string text = "0x" + value.ToString("X8", CultureInfo.InvariantCulture);
                     Clipboard.SetText(text);
 
                     e.Handled = true;
@@ -1202,7 +1199,7 @@ namespace UEExplorer.UI.Forms
                 else
                 {
                     byte value = GetCellValue(currentCellIndex);
-                    string text = value.ToString("X2", CultureInfo.InvariantCulture);
+                    string text = "0x" + value.ToString("X2", CultureInfo.InvariantCulture);
                     Clipboard.SetText(text);
                     
                     e.Handled = true;
@@ -1319,12 +1316,14 @@ namespace UEExplorer.UI.Forms
             // FIXME: temp
             editStructValueToolStripMenuItem.Visible = GetCellStruct(_ContextOffset)?.Tag is BinaryMetaData.BinaryField binaryField
                                                        && (binaryField.Value is UObject || binaryField.Value is UName);
+
+            defineStructToolStripMenuItem.Visible = GetCellStruct(_ContextOffset) == null;
         }
 
         private void editCellToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Contract.Assert(_ContextOffset != -1);
-            SetActivateCell(_ContextOffset);
+            SetActiveCell(_ContextOffset);
         }
 
         private void editStructValueToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1469,7 +1468,7 @@ namespace UEExplorer.UI.Forms
             Contract.Assert(_ContextOffset != -1);
             
             byte value = GetCellValue(_ContextOffset);
-            string text = value.ToString("X2", CultureInfo.InvariantCulture);
+            string text = "0x" + value.ToString("X2", CultureInfo.InvariantCulture);
             Clipboard.SetText(text);
         }
 
@@ -1478,7 +1477,7 @@ namespace UEExplorer.UI.Forms
             Contract.Assert(_ContextOffset != -1);
 
             int value = _ContextOffset;
-            string text = value.ToString("X8", CultureInfo.InvariantCulture);
+            string text = "0x" + value.ToString("X8", CultureInfo.InvariantCulture);
             Clipboard.SetText(text);
         }
 
@@ -1544,7 +1543,7 @@ namespace UEExplorer.UI.Forms
             Contract.Assert(cellStruct != null);
 
             int size = cellStruct.HoverSize > 0 ? cellStruct.HoverSize : cellStruct.Size;
-            string text = size.ToString("X4", CultureInfo.InvariantCulture);
+            string text = "0x" + size.ToString("X4", CultureInfo.InvariantCulture);
             Clipboard.SetText(text);
         }
 
@@ -1566,15 +1565,21 @@ namespace UEExplorer.UI.Forms
                 {
                     return;
                 }
-
+                
+                string type = dialog.InputStructType;
+                if (type == string.Empty)
+                {
+                    MessageBox.Show(this, "Missing type");
+                    return;
+                }
+                
                 string name = dialog.InputStructName;
                 if (name == string.Empty)
                 {
-                    // Show error box?
+                    MessageBox.Show(this, "Missing name");
                     return;
                 }
-
-                string type = dialog.InputStructType;
+                
                 InitStructure(type, out byte size, out var color);
                 _Structure.MetaInfoList.Add
                 (
@@ -1593,6 +1598,19 @@ namespace UEExplorer.UI.Forms
 
                 HexViewPanel.Invalidate();
             }
+        }
+
+        private void removeStructToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var cellStruct = GetCellStruct(_ContextOffset);
+            Contract.Assert(cellStruct != null);
+            
+            _Structure.MetaInfoList.Remove(cellStruct);
+
+            string path = GetConfigPath();
+            SaveConfig(path);
+
+            HexViewPanel.Invalidate();
         }
     }
 }
