@@ -827,7 +827,7 @@
             // _SearchIcon
             // 
             resources.ApplyResources(this._SearchIcon, "_SearchIcon");
-            this._SearchIcon.BackgroundImage = global::UEExplorer.Properties.Resources.search;
+            this._SearchIcon.Image = global::UEExplorer.Properties.Resources.search;
             this._SearchIcon.Name = "_SearchIcon";
             this._SearchIcon.TabStop = false;
             // 
