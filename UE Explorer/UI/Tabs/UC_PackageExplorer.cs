@@ -161,12 +161,6 @@ namespace UEExplorer.UI.Tabs
                 UnrealPackage.OverrideVersion = Program.Options.Version;
             }
 
-            if (!Enum.TryParse(((ProgramForm)ParentForm).platformMenuItem.Text, out UnrealConfig.Platform))
-            {
-                UnrealConfig.Platform = UnrealConfig.CookedPlatform.PC;
-            };
-            
-            UnrealConfig.SuppressSignature = false;
             reload:
             ProgressStatus.SetStatus( Resources.PACKAGE_LOADING );
             // Open the file.
@@ -362,6 +356,13 @@ namespace UEExplorer.UI.Tabs
             try
             {
                 Refresh();
+
+                // False if set to 'Auto', by not assigning to CookerPlatform we let UELib runs its auto-detect course.
+                if (Enum.TryParse(((ProgramForm)ParentForm).platformMenuItem.Text, out BuildPlatform platform))
+                {
+                    _UnrealPackage.CookerPlatform = platform;
+                };
+                
                 _UnrealPackage.InitializePackage( Program.Options.InitFlags );
 
                 ReadMetaInfo();

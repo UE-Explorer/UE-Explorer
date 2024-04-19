@@ -63,6 +63,7 @@ namespace UEExplorer.UI
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openHomeButton = new System.Windows.Forms.Button();
             this.containerPanel = new System.Windows.Forms.Panel();
+            this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             webMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).BeginInit();
@@ -115,6 +116,7 @@ namespace UEExplorer.UI
             // 
             this.platformMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.platformMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoToolStripMenuItem,
             this.platformPCMenuItem,
             this.platformConsoleMenuItem});
             this.platformMenuItem.Name = "platformMenuItem";
@@ -374,6 +376,11 @@ namespace UEExplorer.UI
             this.containerPanel.Controls.Add(this.TabComponentsStrip);
             this.containerPanel.Name = "containerPanel";
             // 
+            // autoToolStripMenuItem
+            // 
+            this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
+            resources.ApplyResources(this.autoToolStripMenuItem, "autoToolStripMenuItem");
+            // 
             // ProgramForm
             // 
             this.AllowDrop = true;
@@ -447,6 +454,7 @@ namespace UEExplorer.UI
         private System.Windows.Forms.ToolStripMenuItem reportAnIssueMenuItem;
         private System.Windows.Forms.Panel containerPanel;
         internal System.Windows.Forms.ToolStripProgressBar loadingProgressBar;
+        private ToolStripMenuItem autoToolStripMenuItem;
 
         // OnClick events!
 

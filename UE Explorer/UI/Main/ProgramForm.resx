@@ -144,7 +144,7 @@
     <value>False</value>
   </data>
   <data name="progressStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>781, 17</value>
+    <value>648, 17</value>
   </data>
   <data name="progressStatusLabel.Text" xml:space="preserve">
     <value>Ready</value>
@@ -164,14 +164,20 @@
   <data name="nativeTableDropDownButton.Text" xml:space="preserve">
     <value>NTL</value>
   </data>
+  <data name="autoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="autoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Auto</value>
+  </data>
   <data name="platformPCMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="platformPCMenuItem.Text" xml:space="preserve">
     <value>PC</value>
   </data>
   <data name="platformConsoleMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="platformConsoleMenuItem.Text" xml:space="preserve">
     <value>Console</value>
@@ -2277,6 +2283,12 @@
     <value>aboutMenuItem</value>
   </data>
   <data name="&gt;&gt;aboutMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoToolStripMenuItem.Name" xml:space="preserve">
+    <value>autoToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;autoToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
