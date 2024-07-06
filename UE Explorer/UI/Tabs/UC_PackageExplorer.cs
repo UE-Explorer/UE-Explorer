@@ -570,7 +570,7 @@ namespace UEExplorer.UI.Tabs
             }
 
             if( _UnrealPackage.Exports == null || _UnrealPackage.Exports.Count == 0 
-                || !_UnrealPackage.Exports.Any( obj => obj.OuterTable == null && obj.ClassName == "Package") )
+                || !_UnrealPackage.Exports.Any( obj => obj.Outer == null && obj.Class?.ObjectName != "Class") )
             {
                 TabControl_Objects.Controls.Remove( TabPage_Content );   
             }
@@ -892,7 +892,7 @@ namespace UEExplorer.UI.Tabs
             TreeView_Content.BeginUpdate();
             foreach( var obj in _UnrealPackage.Exports )
             {
-                if( obj.OuterTable == null && obj.ClassName == "Package" )
+                if( obj.OuterTable == null && obj.ClassName != "Class" )
                 {
                     CreateContentNodesFor( obj, TreeView_Content.Nodes );
                 }
