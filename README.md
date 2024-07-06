@@ -30,7 +30,8 @@ It has support for:
 - Unreal Engine 1
 - Unreal Engine 2, UE2.5
 - Unreal Engine 3
-- UE2X and UE4/5 have not been supported as of yet.
+
+*UE2X and UE4/5 have not been supported as of yet*
 
 However many games may have modified the engine to some extent.
 
