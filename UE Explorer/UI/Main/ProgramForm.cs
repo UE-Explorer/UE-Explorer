@@ -162,47 +162,32 @@ namespace UEExplorer.UI
 
         public void LoadFromFile(string filePath)
         {
-            ProgressStatus.SaveStatus();
-            ProgressStatus.SetStatus(string.Format(
-                    Resources.ProgramForm_LoadFile_Loading_file,
-                    Path.GetFileName(filePath)
-                )
-            );
-
-            try
+            if (Tabs.HasTab(filePath))
             {
-                if (Tabs.HasTab(filePath))
-                {
-                    return;
-                }
-
-                PushRecentOpenedFile(filePath);
-                switch (Path.GetExtension(filePath))
-                {
-                    case ".uc":
-                    case ".uci":
-                        var classFileTab = new UC_UClassFile();
-                        Tabs.AddTab(classFileTab, Path.GetFileName(filePath), filePath);
-
-                        classFileTab.FileName = filePath;
-                        classFileTab.PostInitialize();
-                        break;
-
-                    default:
-                        var packageExplorer = new UC_PackageExplorer(filePath);
-                        Tabs.AddTab(packageExplorer, Path.GetFileName(filePath), filePath);
-                        break;
-                }
+                return;
             }
-            catch (Exception exception)
+
+            PushRecentOpenedFile(filePath);
+            switch (Path.GetExtension(filePath))
             {
-                ExceptionDialog.Show(string.Format(Resources.ProgramForm_LoadFile_Failed_loading_package,
-                        filePath), exception
-                );
-            }
-            finally
-            {
-                ProgressStatus.Reset();
+                case ".uc":
+                case ".uci":
+                    var classFileTab = new UC_UClassFile();
+                    Tabs.AddTab(classFileTab, Path.GetFileName(filePath), filePath);
+
+                    classFileTab.FileName = filePath;
+                    classFileTab.PostInitialize();
+
+                    break;
+
+                default:
+                    var packageExplorer = new UC_PackageExplorer();
+                    Tabs.AddTab(packageExplorer, Path.GetFileName(filePath), filePath);
+
+                    packageExplorer.FileName = filePath;
+                    BeginInvoke((MethodInvoker)(() => packageExplorer.InitializeFromFile(filePath)));
+
+                    break;
             }
         }
 
@@ -484,7 +469,7 @@ namespace UEExplorer.UI
         private void tabsContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             openInFileExplorerToolStripMenuItem.Enabled = false;
-                
+
             var tabItem = TabComponentsStrip.SelectedItem;
             var displayControl = tabItem?.Controls[0];
             if (displayControl is UC_PackageExplorer)

@@ -34,7 +34,7 @@ namespace UEExplorer.UI
         {
             return _TabStrip.Controls[uniqueName] as TabStripItem;
         }
-        
+
         public bool HasTab(string uniqueName)
         {
             return _TabStrip.Controls[uniqueName] != null;
@@ -58,10 +58,11 @@ namespace UEExplorer.UI
         {
             _TabStrip.Visible = true;
 
+            component.Dock = DockStyle.Fill;
             var tabItem = new TabStripItem(caption, null)
             {
-                Name = uniqueName == "" 
-                    ? component.GetType().Name 
+                Name = uniqueName == ""
+                    ? component.GetType().Name
                     : uniqueName,
             };
             _TabStrip.AddTab(tabItem, true);

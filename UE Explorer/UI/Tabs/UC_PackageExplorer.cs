@@ -37,12 +37,8 @@ namespace UEExplorer.UI.Tabs
             InitializeComponent();
         }
 
-        public UC_PackageExplorer(string fileName)
+        private void UC_PackageExplorer_Load(object sender, EventArgs e)
         {
-            FileName = fileName;
-
-            InitializeComponent();
-            
             splitContainer1.SplitterDistance = Settings.Default.PackageExplorer_SplitterDistance;
 
             // Fold all { } blocks
@@ -68,13 +64,7 @@ namespace UEExplorer.UI.Tabs
             TextEditorPanel.searchObject.Click += SearchObject_Click;
             TextEditorPanel.TextEditor.ContextMenuOpening += ContextMenu_ContextMenuOpening;
             TextEditorPanel.copy.Click += Copy_Click;
-        }
-
-        private void UC_PackageExplorer_Load(object sender, EventArgs e)
-        {
             _State = Program.Options.GetState( FileName );
-
-            InitializeFromFile(FileName);
         }
 
         void Copy_Click( object sender, System.Windows.RoutedEventArgs e )
@@ -137,8 +127,10 @@ namespace UEExplorer.UI.Tabs
 
         private XMLSettings.State _State;
 
-        private void InitializeFromFile(string filePath)
+        public void InitializeFromFile(string filePath)
         {
+            ProgressStatus.SaveStatus();
+            
             try
             {
                 LoadPackage();
@@ -147,22 +139,27 @@ namespace UEExplorer.UI.Tabs
             {
                 throw new UnrealException("Couldn't load or initialize package", exception);
             }
+            finally
+            {
+                ProgressStatus.ResetStatus();
+            }
         }
 
         private void LoadPackage()
         {
-            if( Program.Options.bForceLicenseeMode )
+            SuspendLayout();
+            if (Program.Options.bForceLicenseeMode)
             {
                 UnrealPackage.OverrideLicenseeVersion = Program.Options.LicenseeMode;
             }
 
-            if( Program.Options.bForceVersion )
+            if (Program.Options.bForceVersion)
             {
                 UnrealPackage.OverrideVersion = Program.Options.Version;
             }
 
-            reload:
-            ProgressStatus.SetStatus( Resources.PACKAGE_LOADING );
+        reload:
+            ProgressStatus.SetStatus(Resources.PACKAGE_LOADING);
             // Open the file.
             try
             {
@@ -182,7 +179,7 @@ namespace UEExplorer.UI.Tabs
                         && signature != 0x9E2A83C2
                         // Hawken
                         && signature != 0xEA31928C
-                        ))
+                    ))
                 {
                     if (MessageBox.Show(
                             Resources.PACKAGE_UNKNOWN_SIGNATURE,
@@ -197,56 +194,58 @@ namespace UEExplorer.UI.Tabs
                 }
 
                 UnrealConfig.SuppressSignature = true;
-                _UnrealPackage = UnrealLoader.LoadPackage( FileName );
+                _UnrealPackage = UnrealLoader.LoadPackage(FileName);
                 UnrealConfig.SuppressSignature = false;
 
-                if( _UnrealPackage.CompressedChunks != null && _UnrealPackage.CompressedChunks.Capacity > 0 )
+                if (_UnrealPackage.CompressedChunks != null && _UnrealPackage.CompressedChunks.Capacity > 0)
                 {
-                    if( MessageBox.Show( Resources.PACKAGE_IS_COMPRESSED,
-                        Resources.NOTICE_TITLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Question
-                    ) == DialogResult.OK )
+                    if (MessageBox.Show(Resources.PACKAGE_IS_COMPRESSED,
+                            Resources.NOTICE_TITLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Question
+                        ) == DialogResult.OK)
                     {
-                        Process.Start( "http://www.gildor.org/downloads" );
-                        MessageBox.Show( Resources.COMPRESSED_HOWTO, 
-                            Resources.NOTICE_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Information 
+                        Process.Start("http://www.gildor.org/downloads");
+                        MessageBox.Show(Resources.COMPRESSED_HOWTO,
+                            Resources.NOTICE_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Information
                         );
                     }
+
                     TabControl_General.Selected -= TabControl_General_Selected;
-                    TabControl_General.TabPages.Remove( TabPage_Objects );
-                    TabControl_General.TabPages.Remove( TabPage_Tables );
+                    TabControl_General.TabPages.Remove(TabPage_Objects);
+                    TabControl_General.TabPages.Remove(TabPage_Tables);
                     InitializeMetaInfo();
                     InitializeUI();
                     return;
                 }
 
-                TabControl_General.TabPages.Remove( TabPage_Chunks );
+                TabControl_General.TabPages.Remove(TabPage_Chunks);
             }
-            catch( Exception e )
+            catch (Exception e)
             {
-                throw new UnrealException( e.Message, e );
+                throw new UnrealException(e.Message, e);
             }
 
-            string ntlPath = Path.Combine( Application.StartupPath, "Native Tables", Program.Options.NTLPath );
-            if( File.Exists( ntlPath + NativesTablePackage.Extension ) )
+            string ntlPath = Path.Combine(Application.StartupPath, "Native Tables", Program.Options.NTLPath);
+            if (File.Exists(ntlPath + NativesTablePackage.Extension))
             {
                 // Load the native names.
                 try
                 {
                     _UnrealPackage.NTLPackage = new NativesTablePackage();
-                    _UnrealPackage.NTLPackage.LoadPackage( ntlPath ); 
+                    _UnrealPackage.NTLPackage.LoadPackage(ntlPath);
                 }
-                catch( Exception e )
+                catch (Exception e)
                 {
                     _UnrealPackage.NTLPackage = null;
                     throw new UnrealException
-                    ( 
-                        String.Format( "Couldn't load {0}! \r\nEvent:Loading Package", ntlPath ), e 
+                    (
+                        String.Format("Couldn't load {0}! \r\nEvent:Loading Package", ntlPath), e
                     );
                 }
             }
 
             InitializeMetaInfo();
             InitializePackage();
+            ResumeLayout();
         }
 
         private void InitializeMetaInfo()
@@ -383,6 +382,7 @@ namespace UEExplorer.UI.Tabs
             {
                 _UnrealPackage.NotifyObjectAdded -= _OnNotifyObjectAdded;
                 _UnrealPackage.NotifyPackageEvent -= _OnNotifyPackageEvent;    
+                ProgressStatus.ResetValue();
             }
 
             InitializeUI();
@@ -516,7 +516,6 @@ namespace UEExplorer.UI.Tabs
         private void InitializeUI()
         {
             ProgressStatus.SetStatus( Resources.INITIALIZING_UI );
-            SuspendLayout();
             exportDecompiledClassesToolStripMenuItem.Click += _OnExportClassesClick;
             exportScriptClassesToolStripMenuItem.Click += _OnExportScriptsClick;
             if( _UnrealPackage.Objects == null )
@@ -533,8 +532,6 @@ namespace UEExplorer.UI.Tabs
                 _State.SearchObjectValue = SearchObjectTextBox.Text;
                 _State.Update();
             };
-
-            ResumeLayout();
         }
 
         private void InitializeTabs()
@@ -646,9 +643,7 @@ namespace UEExplorer.UI.Tabs
                 if( _ThreadingNodeIndex != _UnrealPackage.Exports.Count ) 
                     return;
 
-                TreeView_Exports.BeginUpdate();
                 TreeView_Exports.Nodes.AddRange( _ThreadingNodes );
-                TreeView_Exports.EndUpdate();
                 _ThreadingNodes = null;
                 _ThreadingNodeIndex = 0;
             }
@@ -682,9 +677,7 @@ namespace UEExplorer.UI.Tabs
                 if( _ThreadingNodeIndex != _UnrealPackage.Imports.Count ) 
                     return;
 
-                TreeView_Exports.BeginUpdate();
                 TreeView_Imports.Nodes.AddRange( _ThreadingNodes );
-                TreeView_Exports.EndUpdate();
                 _ThreadingNodes = null;
                 _ThreadingNodeIndex = 0;
             }
