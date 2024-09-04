@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UEExplorer", "UE Explorer\U
 		{7E45273F-434F-42FA-8269-0E760AEB41E1} = {7E45273F-434F-42FA-8269-0E760AEB41E1}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eliot.UELib", "UELib\src\Eliot.UELib.csproj", "{7E45273F-434F-42FA-8269-0E760AEB41E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eliot.UELib", "UELib\src\Eliot.UELib.csproj", "{7E45273F-434F-42FA-8269-0E760AEB41E1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eliot.Extensions.ExecGenerator", "Eliot.Extensions.ExecGenerator\Eliot.Extensions.ExecGenerator.csproj", "{4FE66BD6-72D3-483D-9E47-AFE6066BE7C1}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -101,7 +101,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		BuildVersion_UpdateAssemblyVersion = True
-		BuildVersion_UpdateFileVersion = True
-		SolutionGuid = {C3228331-D3B2-4023-873A-8394388151F5}
 	EndGlobalSection
 EndGlobal
