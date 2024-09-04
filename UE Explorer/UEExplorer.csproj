@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -262,7 +262,7 @@
     <IsPublishable>False</IsPublishable>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Title>UE Explorer</Title>
-    <Version>$(VersionPrefix)1.4.1</Version>
+    <Version>$(VersionPrefix)1.4.2</Version>
     <Authors>EliotVU</Authors>
     <Copyright>© 2009-2024 Eliot van Uytfanghe. All rights reserved.</Copyright>
     <Description>An easy-to-use browser and decompiler for Unreal Engine packages (.upk, .u).</Description>

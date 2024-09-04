@@ -1,5 +1,38 @@
 #
 
+## 1.4.2
+
+* Various fixes
+* Added a dropdown to tabs which lets you open the package in the "File Explorer"
+* Added a tooltip to tabs to display its full file path.
+
+* Updated to UELib 1.6.1 from 1.5.0
+
+### UELib 1.6.1 - 1.5.1 Changelog
+
+#### [1.6.1](https://github.com/EliotVU/Unreal-Library/releases/tag/1.6.1)
+
+* Added a comment to enum tags to display its value.
+* Fixed the decompilation output of an element access expression (in a T3D context) for UE1 based games: Changed `Element[0]=Value` to `Element(0)=Value`
+
+#### [1.6.0](https://github.com/EliotVU/Unreal-Library/releases/tag/1.6.0)
+
+* Support for Tom Clancy's EndWar
+* Support for Gigantic: Rampage Edition (thanks to @HyenaCoding)
+* Support for Borderlands: Game of the Year Enhanced; and fixed regression of Borderlands and Battleborn.
+* Improved support for Duke Nukem Forever (thanks to @DaZombieKiller)
+* Improved support for Rocket League
+* Fixed regression [Batman series support](https://github.com/UE-Explorer/UE-Explorer/issues/63)
+
+* Fixed fallback for deprecated ClassName so that "UE Explorer" can pickup content again.
+* Fixed #36; various T3D archetype fixes.
+* Fixed T3D syntax ouput from "object end" to "end object"
+
+#### [1.5.1](https://github.com/EliotVU/Unreal-Library/releases/tag/1.5.1)
+
+* Fixed regression #74; The deprecated `UnrealConfig.CookedPlatform` field was ignored, which is still relevant for legacy-code, thanks to @Hox8
+* Updated auto-detected builds for the Infinity Blade series
+
 ## 1.4.1
 
 * Fixed #30 and #35; suppresses signature warning for Hawken and Killing Floor packages.
@@ -11,7 +44,7 @@
   * Remove Struct (removes an applied struct)
 * Updated to UELib 1.5.0 from 1.3.1
 
-### UELib Changelog
+### UELib 1.5.0 - 1.4.0 Changelog
 
 #### [1.5.0](https://github.com/EliotVU/Unreal-Library/releases/tag/1.5.0)
 
@@ -111,7 +144,7 @@ Change log notes for UELib 1.3.0.0:
 
 ## [1.2.7.1](https://github.com/UE-Explorer/UE-Explorer/releases/tag/release-1.2.7.1)
 
-Eliot.UELib.dll the engine behind UE Explorer is now open sourced at https://github.com/EliotVU/Unreal-Library
+Eliot.UELib.dll the engine behind UE Explorer is now open sourced at <https://github.com/EliotVU/Unreal-Library>
 
 * Added support for Vanguard: Saga of Heroes.
 * Added support for Tera: Rising.
