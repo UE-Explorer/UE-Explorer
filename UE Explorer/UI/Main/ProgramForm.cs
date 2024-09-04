@@ -208,6 +208,7 @@ namespace UEExplorer.UI
                 softKey.DeleteSubKeyTree(AppKey);
             }
 
+            AutoUpdater.Mandatory = true;
             CheckForUpdates();
         }
 
