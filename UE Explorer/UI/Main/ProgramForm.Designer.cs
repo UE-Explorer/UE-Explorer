@@ -20,6 +20,7 @@ namespace UEExplorer.UI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ToolStripMenuItem webMenuItem;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProgramForm));
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
@@ -27,9 +28,12 @@ namespace UEExplorer.UI
             this.progressStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.nativeTableDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.platformMenuItem = new System.Windows.Forms.ToolStripDropDownButton();
+            this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.platformPCMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.platformConsoleMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TabComponentsStrip = new Storm.TabControl.TabStrip();
+            this.tabsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openInFileExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brandPictureBox = new System.Windows.Forms.PictureBox();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,10 +67,11 @@ namespace UEExplorer.UI
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openHomeButton = new System.Windows.Forms.Button();
             this.containerPanel = new System.Windows.Forms.Panel();
-            this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabsToolTip = new System.Windows.Forms.ToolTip(this.components);
             webMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).BeginInit();
+            this.tabsContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.brandPictureBox)).BeginInit();
             this.mainMenuStrip.SuspendLayout();
             this.containerPanel.SuspendLayout();
@@ -123,6 +128,11 @@ namespace UEExplorer.UI
             resources.ApplyResources(this.platformMenuItem, "platformMenuItem");
             this.platformMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.platformMenuItem_DropDownItemClicked);
             // 
+            // autoToolStripMenuItem
+            // 
+            this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
+            resources.ApplyResources(this.autoToolStripMenuItem, "autoToolStripMenuItem");
+            // 
             // platformPCMenuItem
             // 
             this.platformPCMenuItem.Name = "platformPCMenuItem";
@@ -142,15 +152,31 @@ namespace UEExplorer.UI
             this.TabComponentsStrip.NormalColorEnd = System.Drawing.Color.White;
             this.TabComponentsStrip.NormalColorStart = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
             this.TabComponentsStrip.NormalForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(116)))), ((int)(((byte)(116)))));
-            this.TabComponentsStrip.RightClickMenu = null;
+            this.TabComponentsStrip.RightClickMenu = this.tabsContextMenuStrip;
             this.TabComponentsStrip.SelectedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(173)))), ((int)(((byte)(173)))));
             this.TabComponentsStrip.SelectedColorEnd = System.Drawing.Color.White;
             this.TabComponentsStrip.SelectedColorStart = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
             this.TabComponentsStrip.SelectedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
+            this.TabComponentsStrip.TabStripItemMouseEnter += new Storm.TabControl.TabStripItemMouseEnterHandler(this.TabComponentsStrip_TabStripItemMouseEnter);
+            this.TabComponentsStrip.TabStripItemMouseLeave += new Storm.TabControl.TabStripItemMouseLeaveHandler(this.TabComponentsStrip_TabStripItemMouseLeave);
             this.TabComponentsStrip.TabStripItemClosing += new Storm.TabControl.TabStripItemClosingHandler(this.TabComponentsStrip_TabStripItemClosing);
             this.TabComponentsStrip.TabStripItemClosed += new System.EventHandler(this.TabComponentsStrip_TabStripItemClosed);
             this.TabComponentsStrip.DragDrop += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragDrop);
             this.TabComponentsStrip.DragEnter += new System.Windows.Forms.DragEventHandler(this.ProgramForm_DragEnter);
+            // 
+            // tabsContextMenuStrip
+            // 
+            this.tabsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openInFileExplorerToolStripMenuItem});
+            this.tabsContextMenuStrip.Name = "tabsContextMenuStrip";
+            resources.ApplyResources(this.tabsContextMenuStrip, "tabsContextMenuStrip");
+            this.tabsContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.tabsContextMenuStrip_Opening);
+            // 
+            // openInFileExplorerToolStripMenuItem
+            // 
+            this.openInFileExplorerToolStripMenuItem.Name = "openInFileExplorerToolStripMenuItem";
+            resources.ApplyResources(this.openInFileExplorerToolStripMenuItem, "openInFileExplorerToolStripMenuItem");
+            this.openInFileExplorerToolStripMenuItem.Click += new System.EventHandler(this.openInFileExplorerToolStripMenuItem_Click);
             // 
             // brandPictureBox
             // 
@@ -376,10 +402,9 @@ namespace UEExplorer.UI
             this.containerPanel.Controls.Add(this.TabComponentsStrip);
             this.containerPanel.Name = "containerPanel";
             // 
-            // autoToolStripMenuItem
+            // tabsToolTip
             // 
-            this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
-            resources.ApplyResources(this.autoToolStripMenuItem, "autoToolStripMenuItem");
+            this.tabsToolTip.Active = false;
             // 
             // ProgramForm
             // 
@@ -402,6 +427,7 @@ namespace UEExplorer.UI
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabComponentsStrip)).EndInit();
+            this.tabsContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.brandPictureBox)).EndInit();
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
@@ -455,6 +481,9 @@ namespace UEExplorer.UI
         private System.Windows.Forms.Panel containerPanel;
         internal System.Windows.Forms.ToolStripProgressBar loadingProgressBar;
         private ToolStripMenuItem autoToolStripMenuItem;
+        private ToolTip tabsToolTip;
+        private ContextMenuStrip tabsContextMenuStrip;
+        private ToolStripMenuItem openInFileExplorerToolStripMenuItem;
 
         // OnClick events!
 

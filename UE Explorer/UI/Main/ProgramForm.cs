@@ -40,7 +40,7 @@ namespace UEExplorer.UI
 
             Tabs = new TabsCollection(TabComponentsStrip);
             Tabs.InsertTab(typeof(UC_Default), Resources.Homepage);
-            
+
             string[] args = Environment.GetCommandLineArgs();
             for (int i = 1; i < args.Length; ++i)
             {
@@ -48,7 +48,7 @@ namespace UEExplorer.UI
                 {
                     continue;
                 }
-                
+
                 string filePath = args[i];
                 BeginInvoke((MethodInvoker)(() => LoadFromFile(filePath)));
             }
@@ -175,7 +175,7 @@ namespace UEExplorer.UI
                 {
                     return;
                 }
-                
+
                 PushRecentOpenedFile(filePath);
                 switch (Path.GetExtension(filePath))
                 {
@@ -333,6 +333,7 @@ namespace UEExplorer.UI
             Tabs.InsertTab(typeof(UC_CacheExtractor), Resources.ProgramForm_Cache_Extractor);
 
         private void TabComponentsStrip_TabStripItemClosing(TabStripItemClosingEventArgs e) => e.Item.Dispose();
+
         private void TabComponentsStrip_TabStripItemClosed(object sender, EventArgs e)
         {
             //TabComponentsStrip.Visible = TabComponentsStrip.Items.Count > 0;
@@ -439,6 +440,58 @@ namespace UEExplorer.UI
             // Unshift to the top
             BeginInvoke((MethodInvoker)(() => LoadFromFile(filePath)));
         }
+
+        // Temporary solution for 1.4.2
+        private void TabComponentsStrip_TabStripItemMouseEnter(TabStripItemMouseEventArgs e)
+        {
+            if (tabsToolTip.Active)
+            {
+                return;
+            }
+
+            tabsToolTip.Active = true;
+            var r = e.Item.RectangleToClient(e.Item.ClientRectangle);
+            tabsToolTip.Show(e.Item.Name, e.Item, r.X, r.Y);
+        }
+
+        // Temporary solution for 1.4.2
+        private void TabComponentsStrip_TabStripItemMouseLeave(TabStripItemMouseEventArgs e)
+        {
+            tabsToolTip.Active = false;
+            tabsToolTip.Hide(e.Item);
+        }
+
+        // Temporary solution for 1.4.2
+        private void openInFileExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tabItem = TabComponentsStrip.SelectedItem;
+            var displayControl = tabItem?.Controls[0];
+            if (displayControl is UC_PackageExplorer packageExplorer)
+            {
+                string filePath = packageExplorer.FileName;
+
+                BeginInvoke((MethodInvoker)(() =>
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "explorer", Arguments = $"/select, \"{filePath}\""
+                    });
+                }));
+            }
+        }
+
+        // Temporary solution for 1.4.2
+        private void tabsContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            openInFileExplorerToolStripMenuItem.Enabled = false;
+                
+            var tabItem = TabComponentsStrip.SelectedItem;
+            var displayControl = tabItem?.Controls[0];
+            if (displayControl is UC_PackageExplorer)
+            {
+                openInFileExplorerToolStripMenuItem.Enabled = true;
+            }
+        }
     }
 
     public static class ProgressStatus
@@ -465,6 +518,12 @@ namespace UEExplorer.UI
 
         public static void SetStatus(string status)
         {
+            // Disposed?
+            if (Status == null)
+            {
+                return;
+            }
+
             Status.Text = status;
             Status.Owner.Refresh();
         }

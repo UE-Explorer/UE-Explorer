@@ -144,7 +144,7 @@
     <value>False</value>
   </data>
   <data name="progressStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>648, 17</value>
+    <value>781, 17</value>
   </data>
   <data name="progressStatusLabel.Text" xml:space="preserve">
     <value>Ready</value>
@@ -165,19 +165,19 @@
     <value>NTL</value>
   </data>
   <data name="autoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="autoToolStripMenuItem.Text" xml:space="preserve">
     <value>Auto</value>
   </data>
   <data name="platformPCMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="platformPCMenuItem.Text" xml:space="preserve">
     <value>PC</value>
   </data>
   <data name="platformConsoleMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="platformConsoleMenuItem.Text" xml:space="preserve">
     <value>Console</value>
@@ -210,14 +210,38 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mainStatusStrip.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TabComponentsStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="TabComponentsStrip.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
   <data name="TabComponentsStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <metadata name="tabsContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>626, 20</value>
+  </metadata>
+  <data name="openInFileExplorerToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+K</value>
+  </data>
+  <data name="openInFileExplorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="openInFileExplorerToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Open in File Explorer</value>
+  </data>
+  <data name="tabsContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 48</value>
+  </data>
+  <data name="&gt;&gt;tabsContextMenuStrip.Name" xml:space="preserve">
+    <value>tabsContextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;tabsContextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabComponentsStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>900, 548</value>
@@ -460,7 +484,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mainMenuStrip.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="openHomeButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -511,8 +535,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;containerPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
+  <metadata name="tabsToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>512, 20</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2099,6 +2126,12 @@
   <data name="&gt;&gt;platformMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;autoToolStripMenuItem.Name" xml:space="preserve">
+    <value>autoToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;autoToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;platformPCMenuItem.Name" xml:space="preserve">
     <value>platformPCMenuItem</value>
   </data>
@@ -2109,6 +2142,12 @@
     <value>platformConsoleMenuItem</value>
   </data>
   <data name="&gt;&gt;platformConsoleMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openInFileExplorerToolStripMenuItem.Name" xml:space="preserve">
+    <value>openInFileExplorerToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;openInFileExplorerToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fileMenuItem.Name" xml:space="preserve">
@@ -2285,11 +2324,11 @@
   <data name="&gt;&gt;aboutMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;autoToolStripMenuItem.Name" xml:space="preserve">
-    <value>autoToolStripMenuItem</value>
+  <data name="&gt;&gt;tabsToolTip.Name" xml:space="preserve">
+    <value>tabsToolTip</value>
   </data>
-  <data name="&gt;&gt;autoToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tabsToolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ProgramForm</value>

@@ -190,4 +190,7 @@
   <data name="helpMenuItem.Text" xml:space="preserve">
     <value>&amp;Hulp</value>
   </data>
+  <data name="openInFileExplorerToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Openen in File Explorer</value>
+  </data>
 </root>
