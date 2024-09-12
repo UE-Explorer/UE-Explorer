@@ -101,5 +101,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		BuildVersion_UpdateAssemblyVersion = True
+		SolutionGuid = {98A15717-22A9-4E71-B070-BBDB22769A97}
 	EndGlobalSection
 EndGlobal
