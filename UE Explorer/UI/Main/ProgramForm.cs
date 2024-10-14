@@ -528,6 +528,11 @@ namespace UEExplorer.UI
 
         public static void ResetValue()
         {
+            if (Loading == null)
+            {
+                return;
+            }
+
             Loading.Visible = false;
             Loading.Value = 0;
         }

@@ -2263,7 +2263,7 @@
     <value>False</value>
   </data>
   <data name="findInDocumentToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+F</value>
+    <value>Control+F</value>
   </data>
   <data name="findInDocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 22</value>
@@ -2275,7 +2275,7 @@
     <value>False</value>
   </data>
   <data name="findInClassesToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+Shift+F</value>
+    <value>Control+Shift+F</value>
   </data>
   <data name="findInClassesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 22</value>
@@ -2299,7 +2299,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="viewBufferToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+Shift+B</value>
+    <value>Control+Shift+B</value>
   </data>
   <data name="viewBufferToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>207, 22</value>

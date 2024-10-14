@@ -142,9 +142,9 @@ A: Double Mouse Click on a cell to activate editing.
 
   - You can now press any of the 0-9 or A-F key, it will replace the active hex unit(highlighted in black) and then move on to the next hex unit and so on!
 
-  - Once you have made a modification you will be able to save it using Edit-&gt;Permanently Save Modifications or CTRL + S. 
+  - Once you have made a modification you will be able to save it using Edit-&gt;Permanently Save Modifications or Control + S. 
 
-  - Either continue editing or update UE Explorer to adapt to the changes by doing Edit-&gt;Reload Package or Edit-&gt;Reload Buffer or just CTRL + R/CTRL + D.
+  - Either continue editing or update UE Explorer to adapt to the changes by doing Edit-&gt;Reload Package or Edit-&gt;Reload Buffer or just Control + R/Control + D.
 
 
 Q: What are (Name / Object / Index / Struct)?

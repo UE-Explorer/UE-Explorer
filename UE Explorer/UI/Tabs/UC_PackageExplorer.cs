@@ -197,7 +197,7 @@ namespace UEExplorer.UI.Tabs
                 _UnrealPackage = UnrealLoader.LoadPackage(FileName);
                 UnrealConfig.SuppressSignature = false;
 
-                if (_UnrealPackage.CompressedChunks != null && _UnrealPackage.CompressedChunks.Capacity > 0)
+                if (_UnrealPackage.Summary.CompressedChunks != null && _UnrealPackage.Summary.CompressedChunks.Any())
                 {
                     if (MessageBox.Show(Resources.PACKAGE_IS_COMPRESSED,
                             Resources.NOTICE_TITLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Question

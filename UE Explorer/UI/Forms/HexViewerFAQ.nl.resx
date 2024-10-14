@@ -124,9 +124,9 @@ A: Doe een dubbele muisklik op een cel om het bewerken te activeren.
 
    - U kunt nu op een 0-9 of AF-toets drukken, dit zal de actieve hex-eenheid (gemarkeerd in zwart) vervangen en dan verder naar de volgende hex-eenheid gaan, en zo verder!
 
-   - Zodra u een wijziging hebt gemaakt zul je in staat zijn om het op te slaan met behulp van Bewerken-&gt;"Wijzigingen permanent opslaan" of CTRL + S.
+   - Zodra u een wijziging hebt gemaakt zul je in staat zijn om het op te slaan met behulp van Bewerken-&gt;"Wijzigingen permanent opslaan" of Control + S.
 
-   - Je kan de veranderingen direct van toepassing maken met behulp van Bewerken-&gt;"Pakket opnieuw laden" of Bewerken-&gt;"Buffer opnieuw laden" of gewoon CTRL + R / CTRL + D.
+   - Je kan de veranderingen direct van toepassing maken met behulp van Bewerken-&gt;"Pakket opnieuw laden" of Bewerken-&gt;"Buffer opnieuw laden" of gewoon Control + R / Control + D.
 
 
 V: Wat zijn (Name / Object / Index / Struct)?

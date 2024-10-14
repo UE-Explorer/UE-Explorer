@@ -226,7 +226,7 @@
     <value>626, 20</value>
   </metadata>
   <data name="openInFileExplorerToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+K</value>
+    <value>Control+K</value>
   </data>
   <data name="openInFileExplorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 22</value>
@@ -292,7 +292,7 @@
     <value>Segoe UI, 12world</value>
   </data>
   <data name="openFileMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+O</value>
+    <value>Control+O</value>
   </data>
   <data name="openFileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
