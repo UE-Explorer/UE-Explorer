@@ -199,6 +199,12 @@ namespace UEExplorer.UI.Tabs
 
                 if (_UnrealPackage.Summary.CompressedChunks != null && _UnrealPackage.Summary.CompressedChunks.Any())
                 {
+                    TabControl_General.Selected -= TabControl_General_Selected;
+                    TabControl_General.TabPages.Remove(TabPage_Objects);
+                    TabControl_General.TabPages.Remove(TabPage_Tables);
+                    InitializeMetaInfo();
+                    InitializeUI();
+
                     if (MessageBox.Show(Resources.PACKAGE_IS_COMPRESSED,
                             Resources.NOTICE_TITLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Question
                         ) == DialogResult.OK)
@@ -209,11 +215,6 @@ namespace UEExplorer.UI.Tabs
                         );
                     }
 
-                    TabControl_General.Selected -= TabControl_General_Selected;
-                    TabControl_General.TabPages.Remove(TabPage_Objects);
-                    TabControl_General.TabPages.Remove(TabPage_Tables);
-                    InitializeMetaInfo();
-                    InitializeUI();
                     return;
                 }
 
@@ -518,10 +519,7 @@ namespace UEExplorer.UI.Tabs
             ProgressStatus.SetStatus( Resources.INITIALIZING_UI );
             exportDecompiledClassesToolStripMenuItem.Click += _OnExportClassesClick;
             exportScriptClassesToolStripMenuItem.Click += _OnExportScriptsClick;
-            if( _UnrealPackage.Objects == null )
-            {
-                PackageIsCompressed();
-            }
+            
             InitializeTabs();
 
             SearchObjectTextBox.Text = _State.SearchObjectValue;
@@ -537,9 +535,15 @@ namespace UEExplorer.UI.Tabs
         private void InitializeTabs()
         {
             ValidateTabs();
-            if( _UnrealPackage.Generations != null )
+            
+            if( _UnrealPackage.Summary.Generations != null )
             {
                 CreateGenerationsList();
+            }
+
+            if (_UnrealPackage.Summary.CompressedChunks != null && _UnrealPackage.Summary.CompressedChunks.Any())
+            {
+                CreateChunksList();
             }
         }
 
@@ -561,7 +565,7 @@ namespace UEExplorer.UI.Tabs
                 TabControl_Objects.Controls.Remove( TabPage_Deps );  
             }
 
-            if( _UnrealPackage.Generations == null || _UnrealPackage.Generations.Count == 0 )
+            if( _UnrealPackage.Summary.Generations == null || _UnrealPackage.Summary.Generations.Count == 0 )
             {
                 TabControl_Objects.Controls.Remove( TabPage_Generations );
             }
@@ -571,24 +575,11 @@ namespace UEExplorer.UI.Tabs
             {
                 TabControl_Objects.Controls.Remove( TabPage_Content );   
             }
-        }
 
-        private void PackageIsCompressed()
-        {
-            Num_ObjectIndex.Enabled = false;
-            Num_NameIndex.Enabled = false;
-
-            if( _UnrealPackage.CompressedChunks == null ) 
-                return;
-
-            foreach( var chunk in _UnrealPackage.CompressedChunks )
+            if (_UnrealPackage.Summary.CompressedChunks == null || _UnrealPackage.Summary.CompressedChunks.Count == 0)
             {
-                DataGridView_Chunks.Rows.Add( 
-                    chunk.UncompressedOffset, 
-                    chunk.UncompressedSize, 
-                    chunk.CompressedOffset, 
-                    chunk.CompressedSize 
-                    );
+                TabControl_Objects.Controls.Remove( TabPage_Chunks );
+
             }
         }
 
@@ -833,9 +824,22 @@ namespace UEExplorer.UI.Tabs
 
         private void CreateGenerationsList()
         {
-            foreach( var gen in _UnrealPackage.Generations )
+            foreach( var gen in _UnrealPackage.Summary.Generations )
             {
-                DataGridView_GenerationsTable.Rows.Add( gen.NamesCount, gen.ExportsCount, gen.NetObjectsCount );
+                DataGridView_GenerationsTable.Rows.Add( gen.NameCount, gen.ExportCount, gen.NetObjectCount );
+            }
+        }
+
+        private void CreateChunksList()
+        {
+            foreach (var chunk in _UnrealPackage.Summary.CompressedChunks)
+            {
+                DataGridView_Chunks.Rows.Add(
+                    chunk.UncompressedOffset,
+                    chunk.UncompressedSize,
+                    chunk.CompressedOffset,
+                    chunk.CompressedSize
+                );
             }
         }
 
