@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Storm.TabControl;
 using UEExplorer.Properties;
@@ -484,6 +485,9 @@ namespace UEExplorer.UI.Tabs
                     components.Dispose();
                 }
             }
+
+            _CancellationTokenSource.Cancel();
+            _CancellationTokenSource.Dispose();
             
             base.Dispose( disposing );
         }
@@ -579,7 +583,6 @@ namespace UEExplorer.UI.Tabs
             if (_UnrealPackage.Summary.CompressedChunks == null || _UnrealPackage.Summary.CompressedChunks.Count == 0)
             {
                 TabControl_Objects.Controls.Remove( TabPage_Chunks );
-
             }
         }
 
@@ -605,75 +608,6 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        private TreeNode[]  _ThreadingNodes;
-        private int         _ThreadingNodeIndex;
-
-        private void AddExportNodeAsync( object exportTable )
-        {
-            if( TreeView_Exports.InvokeRequired )
-            {
-                var del = new AddNodeDelegate( AddExportNodeAsync );
-                foreach( var t in _UnrealPackage.Exports )
-                {
-                    TreeView_Exports.Invoke( del, t );
-                }
-            }
-            else
-            {
-                if( _ThreadingNodeIndex == 0 )
-                {
-                    _ThreadingNodes = new TreeNode[_UnrealPackage.Exports.Count];
-                }
-
-                var exp = exportTable as UExportTableItem;
-                var node = new UExportNode {Table = exp, Text = exp.ObjectName};
-                InitializeObjectNode( exp, node );
-
-                _ThreadingNodes[_ThreadingNodeIndex ++] = node;
-
-                if( _ThreadingNodeIndex != _UnrealPackage.Exports.Count ) 
-                    return;
-
-                TreeView_Exports.Nodes.AddRange( _ThreadingNodes );
-                _ThreadingNodes = null;
-                _ThreadingNodeIndex = 0;
-            }
-        }
-
-        private void AddImportNodeAsync( object importTable )
-        {
-            if( TreeView_Imports.InvokeRequired )
-            {
-                AddNodeDelegate del = AddImportNodeAsync;
-                foreach( var importItem in _UnrealPackage.Imports )
-                {
-                    Invoke( del, importItem );
-                }
-            }
-            else
-            {
-                if( _ThreadingNodeIndex == 0 )
-                {
-                    _ThreadingNodes = new TreeNode[_UnrealPackage.Imports.Count];
-                }
-
-                var imp = (importTable as UImportTableItem);
-                var node = new UImportNode
-                {
-                    Table = imp,
-                    Text = imp.ObjectName
-                };
-                InitializeObjectNode( imp, node );
-                _ThreadingNodes[_ThreadingNodeIndex ++] = node;
-                if( _ThreadingNodeIndex != _UnrealPackage.Imports.Count ) 
-                    return;
-
-                TreeView_Imports.Nodes.AddRange( _ThreadingNodes );
-                _ThreadingNodes = null;
-                _ThreadingNodeIndex = 0;
-            }
-        }	
-
         private static void _OnImportNodeExpand( object sender, TreeViewCancelEventArgs e )
         {
             var importNode = e.Node as UTableNode;
@@ -694,7 +628,7 @@ namespace UEExplorer.UI.Tabs
 
         private void _OnNotifyObjectAdded( object sender, ObjectEventArgs e )
         {
-            if( e.ObjectRef.ExportTable != null && e.ObjectRef.Table.ClassIndex == 0 && e.ObjectRef.Name.ToLower() != "none" )
+            if( e.ObjectRef.ExportTable != null && e.ObjectRef.ExportTable.ClassIndex == 0 && e.ObjectRef.Name.ToLower() != "none" )
             {
                 _ClassesList.Add( (UClass)e.ObjectRef );
             }
@@ -702,52 +636,46 @@ namespace UEExplorer.UI.Tabs
 
         private void CreateClassesList()
         {
-            _ClassesList.Sort( (cl, cl2) => String.Compare( cl.Name, cl2.Name, StringComparison.Ordinal ) );
-
-            TreeView_Classes.BeginUpdate();
-            foreach( var Object in _ClassesList )
-            {			
-                if( Object == null )
-                {
-                    continue;
-                }
-  
-                var imageKey = Object.GetImageName();
-                var node = new ObjectNode( Object )
-                {
-                    ImageKey = imageKey, 
-                    SelectedImageKey = imageKey, 
-                    Text = Object.Name
-                };
-                node.Nodes.Add( "DUMMYNODE", "" );
-
-                if( Object.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
-                {
-                    node.ForeColor = Color.Red;
-                }
-                TreeView_Classes.Nodes.Add( node );	
-            }
-            // HACK:Add a MetaData object to the classes tree(hack because MetaData is not an actual class)
-            var metobj = _UnrealPackage.FindObject<UMetaData>( "MetaData" );
-            if( metobj != null )
-            {
-                var node = new ObjectNode( metobj )
-                {
-                    ImageKey = "Info", 
-                    SelectedImageKey = "Info", 
-                    Text = metobj.Name
-                };
-                node.Nodes.Add( "DUMMYNODE", "" );
-                if( metobj.DeserializationState.HasFlag( UObject.ObjectState.Errorlized ) )
-                {
-                    node.ForeColor = Color.Red;
-                }
-                TreeView_Classes.Nodes.Add( node );
-            }
-            TreeView_Classes.EndUpdate();
-
             TreeView_Classes.AfterSelect += _OnClassesNodeSelected;
             TreeView_Classes.BeforeExpand += _OnClassesNodeExpand;
+
+            var uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            Task.Factory
+                .StartNew(() =>
+                {
+                    _ClassesList.Sort( (cl, cl2) => string.Compare( cl.Name, cl2.Name, StringComparison.OrdinalIgnoreCase ) );
+                    var nodes = _ClassesList
+                        .Where(obj => obj != null)
+                        .Select<UObject, TreeNode>(obj =>
+                        {
+                            string imageKey = obj.GetImageName();
+                            var node = new ObjectNode(obj)
+                            {
+                                ImageKey = imageKey, SelectedImageKey = imageKey, Text = obj.Name
+                            };
+                            node.Nodes.Add("DUMMYNODE", "");
+
+                            if (obj.DeserializationState.HasFlag(UObject.ObjectState.Errorlized))
+                            {
+                                node.ForeColor = Color.Red;
+                            }
+
+                            return node;
+                        });
+
+                    return nodes.ToArray();
+                }, _CancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default)
+                .ContinueWith((r, obj) =>
+                {
+                    // ReSharper disable once AsyncApostle.AsyncWait
+                    BeginInvoke((MethodInvoker)(() =>
+                    {
+                        TreeView_Classes.Nodes.AddRange(r.Result);
+                    }));
+
+                    return r;
+                }, uiScheduler, TaskContinuationOptions.OnlyOnRanToCompletion)
+                .ConfigureAwait(false);
         }
 
         private void TabControl_General_Selecting( object sender, TabControlCancelEventArgs e )
@@ -758,33 +686,58 @@ namespace UEExplorer.UI.Tabs
             if( e.TabPage != TabPage_Objects ) 
                 return;
 
-            if( TreeView_Classes.Nodes.Count == 0 )
-                CreateClassesList();
-
-            if( TreeView_Deps.Nodes.Count == 0 )
-                CreateDependenciesList();  
-
-            if( TreeView_Content.Nodes.Count == 0 )
-                CreateContentList();
+            BeginInvoke((MethodInvoker)(() =>
+            {
+                if (TreeView_Classes.Nodes.Count == 0)
+                    CreateClassesList();
+                
+                if (TreeView_Content.Nodes.Count == 0)
+                    CreateContentList();
+                
+                if (TreeView_Deps.Nodes.Count == 0)
+                    CreateDependenciesList();
+            }));
         }
 
         private void CreateDependenciesList()
         {
-            foreach( var importItem in _UnrealPackage.Imports.Where( table => table.OuterIndex == 0 && table.ClassName == "Package" ) )
-            {
-                GetDependencyOn( importItem, TreeView_Deps.Nodes.Add( importItem.ObjectName ) );
-            }
+            var uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            Task.Factory
+                .StartNew(() =>
+                {
+                    var nodes = _UnrealPackage.Imports
+                        .Where(imp => imp.OuterIndex == 0 && imp.ClassName == "Package")
+                        .Select(imp =>
+                        {
+                            var node = new TreeNode(imp.ObjectName);
+                            GetDependencyOn(imp, node);
+
+                            return node;
+                        });
+
+                    return nodes.ToArray();
+                }, _CancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default)
+                .ContinueWith((r, obj) =>
+                {
+                    // ReSharper disable once AsyncApostle.AsyncWait
+                    BeginInvoke((MethodInvoker)(() =>
+                    {
+                        TreeView_Deps.Nodes.AddRange(r.Result);
+                    }));
+
+                    return r;
+                }, uiScheduler, TaskContinuationOptions.OnlyOnRanToCompletion)
+                .ConfigureAwait(false);
         }
 
         private void GetDependencyOn( UImportTableItem parentImport, TreeNode node )
         {
-            if( node == null )
-                return;
-
-            foreach( var importItem in _UnrealPackage.Imports.Where( table => table != parentImport 
-                && table.OuterTable == parentImport ) )
+            foreach (var importItem in _UnrealPackage.Imports)
             {
-                GetDependencyOn( importItem, node.Nodes.Add( importItem.ObjectName ) );
+                if (importItem.OuterIndex == (int)parentImport)
+                {
+                    GetDependencyOn(importItem, node.Nodes.Add(importItem.ObjectName));
+                }
             }
 
             node.ToolTipText = parentImport.ClassName;
@@ -845,23 +798,19 @@ namespace UEExplorer.UI.Tabs
 
         private void TreeView_Content_BeforeExpand( object sender, TreeViewCancelEventArgs e )
         {
-            var objectNode = e.Node as ObjectNode;
-            if( objectNode == null )
-                return;
-
-            var item = objectNode.Tag as UObjectTableItem;
+            var objectNode = (ObjectNode)e.Node;
+            var item = (UExportTableItem)objectNode?.Tag;
             if( item == null )
                 return;
 
             // Kill dummies.
             objectNode.Nodes.Clear();
-            TreeView_Content.BeginUpdate();
+            // Not worth it to re-write it as async (this is irrelevant in UE Explorer 2.x)
             CreateContentNodesFor( item, objectNode.Nodes, true );
-            TreeView_Content.EndUpdate();
         }
 
         // Lazy recursive.
-        private void CreateContentNodesFor( UObjectTableItem item, TreeNodeCollection nodeContainer, bool recursive = false )
+        private void CreateContentNodesFor( UExportTableItem item, TreeNodeCollection nodeContainer, bool recursive = false )
         {
             if( !recursive )
             {
@@ -872,7 +821,7 @@ namespace UEExplorer.UI.Tabs
 
             foreach( var obj in _UnrealPackage.Exports )
             {
-                if( obj.OuterTable == null || obj.OuterTable != item )
+                if( obj.OuterIndex != item.Index + 1 )
                     continue;
 
                 if( !recursive )
@@ -880,22 +829,45 @@ namespace UEExplorer.UI.Tabs
                     nodeContainer.Add( "DUMMYNODE" );
                     break;
                 }
+                
                 CreateContentNodesFor( obj, nodeContainer );
             }
         }
 
         private void CreateContentList()
         {
-            TreeView_Content.BeginUpdate();
-            foreach( var obj in _UnrealPackage.Exports )
-            {
-                if( obj.OuterTable == null && obj.ClassName != "Class" )
+            var uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            Task.Factory
+                .StartNew(() =>
                 {
-                    CreateContentNodesFor( obj, TreeView_Content.Nodes );
-                }
-            }
-            TreeView_Content.EndUpdate();
-            TreeView_Content.Sort();
+                    var nodes = _UnrealPackage.Exports
+                        .Where(exp => exp.OuterIndex == 0 && exp.ClassIndex != 0)
+                        .Select(exp =>
+                        {
+                            var objectNode = CreateObjectNode(exp);
+
+                            bool isExpandable = _UnrealPackage.Exports.Any(other => other.OuterIndex == exp.Index + 1);
+                            if (isExpandable)
+                            {
+                                objectNode.Nodes.Add("DUMMYNODE");
+                            }
+
+                            return objectNode;
+                        });
+
+                    return nodes.ToArray<TreeNode>();
+                }, _CancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default)
+                .ContinueWith((r, obj) =>
+                {
+                    // ReSharper disable once AsyncApostle.AsyncWait
+                    BeginInvoke((MethodInvoker)(() =>
+                    {
+                        TreeView_Content.Nodes.AddRange(r.Result);
+                    }));
+
+                    return r;
+                }, uiScheduler, TaskContinuationOptions.OnlyOnRanToCompletion)
+                .ConfigureAwait(false);
         }
 
         private void _OnExportClassesClick( object sender, EventArgs e )
@@ -1874,7 +1846,36 @@ namespace UEExplorer.UI.Tabs
                 if( TreeView_Exports.Nodes.Count != 0 ) 
                     return;
 
-                new Thread( () => AddExportNodeAsync( null ) ).Start();
+                var uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+                Task.Factory
+                    .StartNew(() =>
+                    {
+                        var exports = _UnrealPackage.Exports;
+                        var nodes = new TreeNode[exports.Count];
+
+                        for (int i = 0; i < nodes.Length; ++i)
+                        {
+                            var exp = exports[i];
+                            var node = new UExportNode { Table = exp, Text = exp.ObjectName };
+                            InitializeObjectNode(exp, node);
+
+                            nodes[i] = node;
+                        }
+
+                        return nodes;
+                    }, _CancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default)
+                    .ContinueWith((r, obj) =>
+                    {
+                        // ReSharper disable once AsyncApostle.AsyncWait
+                        BeginInvoke((MethodInvoker)(() =>
+                        {
+                            TreeView_Exports.Nodes.AddRange(r.Result);
+                        }));
+
+                        return r;
+                    }, uiScheduler, TaskContinuationOptions.OnlyOnRanToCompletion)
+                    .ConfigureAwait(false);
+
                 TreeView_Exports.BeforeExpand += _OnExportNodeExpand;
                 return;
             }
@@ -1884,7 +1885,36 @@ namespace UEExplorer.UI.Tabs
                 if( TreeView_Imports.Nodes.Count != 0 ) 
                     return;
 
-                new Thread( () => AddImportNodeAsync( null ) ).Start();
+                var uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+                Task.Factory
+                    .StartNew(() =>
+                    {
+                        var imports = _UnrealPackage.Imports;
+                        var nodes = new TreeNode[imports.Count];
+
+                        for (int i = 0; i < nodes.Length; ++i)
+                        {
+                            var exp = imports[i];
+                            var node = new UImportNode { Table = exp, Text = exp.ObjectName };
+                            InitializeObjectNode(exp, node);
+
+                            nodes[i] = node;
+                        }
+
+                        return nodes;
+                    }, _CancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default)
+                    .ContinueWith((r, obj) =>
+                    {
+                        // ReSharper disable once AsyncApostle.AsyncWait
+                        BeginInvoke((MethodInvoker)(() =>
+                        {
+                            TreeView_Imports.Nodes.AddRange(r.Result);
+                        }));
+
+                        return r;
+                    }, uiScheduler, TaskContinuationOptions.OnlyOnRanToCompletion)
+                    .ConfigureAwait(false);
+                
                 TreeView_Imports.BeforeExpand += _OnImportNodeExpand;
             }
         }
@@ -2120,6 +2150,8 @@ namespace UEExplorer.UI.Tabs
 
         private int _FindCount;
         private TabPage _FindTab;
+        private CancellationTokenSource _CancellationTokenSource = new CancellationTokenSource();
+
         private void FindInClassesToolStripMenuItem_Click( object sender, EventArgs e )
         {
             string findText;
