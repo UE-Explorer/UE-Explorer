@@ -262,7 +262,7 @@
     <IsPublishable>False</IsPublishable>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Title>UE Explorer</Title>
-    <Version>$(VersionPrefix)1.4.2</Version>
+    <Version>$(VersionPrefix)1.4.3</Version>
     <Authors>EliotVU</Authors>
     <Copyright>© 2009-2024 Eliot van Uytfanghe. All rights reserved.</Copyright>
     <Description>An easy-to-use browser and decompiler for Unreal Engine packages (.upk, .u).</Description>
