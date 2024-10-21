@@ -7,7 +7,7 @@
 
 * Updated to UELib 1.7.0 from 1.6.1
 
-### UELib 1.7.0 - 1.6.2 Changelog
+### UELib 1.7.0
 
 #### [1.7.0](https://github.com/EliotVU/Unreal-Library/releases/tag/1.7.0)
 
@@ -16,11 +16,6 @@
 * Support for Tom Clancy's Splinter Cell: Double Agent (Offline Mode)
 * Support for Stargate SG-1: The Alliance
 * Improved support for Frontlines: Fuel of War
-
-#### [1.6.2](https://github.com/EliotVU/Unreal-Library/releases/tag/1.6.2)
-
-* Added a comment to enum tags to display its value.
-* Fixed the decompilation output of an element access expression (in a T3D context) for UE1 based games: Changed Element[0]=Value to Element(0)=Value
 
 ## 1.4.2
 
