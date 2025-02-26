@@ -28,7 +28,7 @@ jobs:
       run: dotnet build --no-restore -c Release
 
     - name: Publish release
-      run: dotnet publish -c Release -o ./publish
+      run: dotnet publish "UE Explorer" -c Release -f net48 -o ./publish
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
