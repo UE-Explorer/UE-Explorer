@@ -2,9 +2,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "UE-Explorer" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "UE-Explorer" ]
 
 jobs:
   build:
