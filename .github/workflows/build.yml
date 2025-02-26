@@ -25,13 +25,10 @@ jobs:
       run: dotnet restore
 
     - name: Build release
-      run: dotnet build --no-restore -c Release
-
-    - name: Publish release
-      run: dotnet publish "UE Explorer" -c Release -f net48 -o ./publish
+      run: dotnet build "UE Explorer" --no-restore -c Release -f net48
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: UE-Explorer-Win-x86
-        path: "./publish"
+        path: "UE Explorer\\bin\\Release\\net48\\"
