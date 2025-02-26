@@ -1,0 +1,35 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4.1.4
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4.0.0
+      with:
+        dotnet-version: 9.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build release
+      run: dotnet build --no-restore -c Release
+
+    - name: Publish release
+      run: dotnet publish -c Release -o ./publish
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: UE-Explorer-Win-x86
+        path: "./publish"
