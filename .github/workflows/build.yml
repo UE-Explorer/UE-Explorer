@@ -1,8 +1,10 @@
 name: .NET
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ "UE-Explorer" ]
+    tags:
+      - '^[0-9]+\.[0-9]+\.[0-9]+$'
   pull_request:
     branches: [ "UE-Explorer" ]
 
