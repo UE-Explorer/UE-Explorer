@@ -1183,14 +1183,15 @@ namespace UEExplorer.UI.Tabs
                     }
                 }
 
-                if( uStruct.ByteCodeManager != null )
+                if (uStruct.Script != null)
                 {
-                    if( @class != null )
+                    if (@class != null)
                     {
-                        addItem( Resources.NodeItem_ViewReplication, "REPLICATION" );	
+                        addItem(Resources.NodeItem_ViewReplication, "REPLICATION");
                     }
-                    addItem( Resources.NodeItem_ViewTokens, "TOKENS" );
-                    addItem( Resources.NodeItem_ViewDisassembledTokens, "TOKENS_DISASSEMBLE" );
+
+                    addItem(Resources.NodeItem_ViewTokens, "TOKENS");
+                    addItem(Resources.NodeItem_ViewDisassembledTokens, "TOKENS_DISASSEMBLE");
                 }
 
                 if( uStruct.ScriptText != null )
@@ -1328,9 +1329,9 @@ namespace UEExplorer.UI.Tabs
                 string value;
                 try
                 {
-                    value = token.Decompile();
+                    value = token.Decompile(decompiler);
                 }
-                catch( Exception e )
+                catch (Exception e)
                 {
                     value = "Exception occurred while decompiling token: " + e;
                 }
@@ -1387,309 +1388,311 @@ namespace UEExplorer.UI.Tabs
 
             try
             {
-                switch( action )
+                switch (action)
                 {
-                    case "USED_TAGS":
-                    {
-                        var n = target as ObjectNode;
-                        if( n != null )
-                        {
-                            var metaObj = n.Object as UMetaData;
-                            if( metaObj != null )
-                            {
-                                SetContentTitle( metaObj.GetOuterGroup() );
-                                SetContentText( target as TreeNode, metaObj.GetUniqueMetas() );
-                            }
-                        }
-                        break;
-                    }
-
                     case "OPEN_UEMODELVIEWER":
-                    {
-                        Process.Start
-                        ( 
-                            Program.Options.UEModelAppPath, 
-                            "-path=" + _UnrealPackage.PackageDirectory
-                            + " " + _UnrealPackage.PackageName
-                            + " " + ((TreeNode)target).Text
-                        );
-                        break;
-                    }
+                        {
+                            Process.Start
+                            (
+                                Program.Options.UEModelAppPath,
+                                "-path=" + _UnrealPackage.PackageDirectory
+                                         + " " + _UnrealPackage.PackageName
+                                         + " " + ((TreeNode)target).Text
+                            );
+                            break;
+                        }
 
                     case "EXPORT_UEMODELVIEWER":
-                    {
-                        string packagePath = Application.StartupPath 
-                            + "\\Exported\\" 
-                            + _UnrealPackage.PackageName; 
-
-                        string contentDir = packagePath + "\\Content"; 
-                        Directory.CreateDirectory( contentDir );
-                        var appArguments = "-path=" + _UnrealPackage.PackageDirectory
-                            + " " + "-out="  + contentDir
-                            + " -export"
-                            + " " + _UnrealPackage.PackageName
-                            + " " + ((TreeNode)target).Text;
-                        var appInfo = new ProcessStartInfo( Program.Options.UEModelAppPath, appArguments )
                         {
-                            UseShellExecute = false, 
-                            RedirectStandardOutput = true, 
-                            CreateNoWindow = false
-                        };
-                        var app = Process.Start( appInfo );
-                        var log = String.Empty;
-                        app.OutputDataReceived += (sender, e) => log += e.Data;
-                        //app.WaitForExit();
+                            string packagePath = Application.StartupPath
+                                                 + "\\Exported\\"
+                                                 + _UnrealPackage.PackageName;
 
-                        if( Directory.GetFiles( contentDir ).Length > 0 )
-                        {
-                            if( MessageBox.Show( 
-                                Resources.UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER, 
-                                Application.ProductName,
-                                MessageBoxButtons.YesNo 
-                                ) == DialogResult.Yes )
+                            string contentDir = packagePath + "\\Content";
+                            Directory.CreateDirectory(contentDir);
+                            var appArguments = "-path=" + _UnrealPackage.PackageDirectory
+                                                        + " " + "-out=" + contentDir
+                                                        + " -export"
+                                                        + " " + _UnrealPackage.PackageName
+                                                        + " " + ((TreeNode)target).Text;
+                            var appInfo = new ProcessStartInfo(Program.Options.UEModelAppPath, appArguments)
                             {
-                                Process.Start( contentDir );
+                                UseShellExecute = false, RedirectStandardOutput = true, CreateNoWindow = false
+                            };
+                            var app = Process.Start(appInfo);
+                            var log = String.Empty;
+                            app.OutputDataReceived += (sender, e) => log += e.Data;
+                            //app.WaitForExit();
+
+                            if (Directory.GetFiles(contentDir).Length > 0)
+                            {
+                                if (MessageBox.Show(
+                                        Resources.UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER,
+                                        Application.ProductName,
+                                        MessageBoxButtons.YesNo
+                                    ) == DialogResult.Yes)
+                                {
+                                    Process.Start(contentDir);
+                                }
                             }
+                            else
+                            {
+                                MessageBox.Show
+                                (
+                                    String.Format
+                                    (
+                                        "The object was not exported.\r\n\r\nArguments:{0}\r\n\r\nLog:{1}",
+                                        appArguments,
+                                        log
+                                    ),
+                                    Application.ProductName
+                                );
+                            }
+
+                            break;
                         }
-                        else
-                        {
-                            MessageBox.Show
-                            ( 
-                                String.Format
-                                ( 
-                                    "The object was not exported.\r\n\r\nArguments:{0}\r\n\r\nLog:{1}", 
-                                    appArguments, 
-                                    log 
-                                ),
-                                Application.ProductName 
-                            );
-                        }
-                        break;
-                    }						
 
                     case "OBJECT":
-                    {
-                        if( obj != null )
                         {
-                            SetContentTitle( obj.GetOuterGroup() );
-                            SetContentText( obj, obj.Decompile() );   
+                            if (obj != null)
+                            {
+                                SetContentTitle(obj.GetOuterGroup());
+                                SetContentText(obj, obj.Decompile());
+                            }
+                            else if (target is IUnrealDecompilable)
+                            {
+                                var node = target as TreeNode;
+                                SetContentTitle(node.Text);
+                                SetContentText(node, (target as IUnrealDecompilable).Decompile());
+                            }
+
+                            break;
                         }
-                        else if( target is IUnrealDecompilable )
-                        {
-                            var node = target as TreeNode;
-                            SetContentTitle( node.Text );
-                            SetContentText( node, (target as IUnrealDecompilable).Decompile() );
-                        }
-                        break;
-                    }
 
                     case "VIEW_OUTER":
-                        if( obj != null && obj.Outer != null )
+                        if (obj != null && obj.Outer != null)
                         {
-                            SetContentTitle( obj.Outer.GetOuterGroup() );
-                            SetContentText( obj.Outer, obj.Outer.Decompile() );   
+                            SetContentTitle(obj.Outer.GetOuterGroup());
+                            SetContentText(obj.Outer, obj.Outer.Decompile());
                         }
+
                         break;
 
                     case "VIEW_SUPER":
-                        if( obj is UStruct && ((UStruct)obj).Super != null )
+                        if (obj is UStruct && ((UStruct)obj).Super != null)
                         {
                             var super = ((UStruct)obj).Super;
-                            SetContentTitle( super.GetOuterGroup() );
-                            SetContentText( super, super.Decompile() );   
+                            SetContentTitle(super.GetOuterGroup());
+                            SetContentText(super, super.Decompile());
                         }
+
                         break;
 
                     case "VIEW_WITHIN":
-                        if( obj is UClass && ((UClass)obj).Within != null )
+                        if (obj is UClass && ((UClass)obj).Within != null)
                         {
                             var within = ((UClass)obj).Within;
-                            SetContentTitle( within.GetOuterGroup() );
-                            SetContentText( within, within.Decompile() );   
+                            SetContentTitle(within.GetOuterGroup());
+                            SetContentText(within, within.Decompile());
                         }
+
                         break;
 
                     case "MANAGED_PROPERTIES":
-                        using( var propDialog = new PropertiesDialog{
-                                ObjectLabel = {Text = target.ToString()},
-                                ObjectPropertiesGrid = {SelectedObject = obj}
-                            } )
+                        using (var propDialog = new PropertiesDialog
+                               {
+                                   ObjectLabel = { Text = target.ToString() },
+                                   ObjectPropertiesGrid = { SelectedObject = obj }
+                               })
                         {
-                            propDialog.ShowDialog( this );
+                            propDialog.ShowDialog(this);
                         }
+
                         break;
 
                     case "REPLICATION":
-                    {
-                        var unClass = obj as UClass;
-                        if( unClass != null )
                         {
-                            SetContentTitle( unClass.Name, true, "Replication" );
-                            SetContentText( unClass, unClass.FormatReplication() );
+                            var unClass = obj as UClass;
+                            if (unClass != null)
+                            {
+                                SetContentTitle(unClass.Name, true, "Replication");
+                                SetContentText(unClass, unClass.FormatReplication());
+                            }
+
+                            break;
                         }
-                        break;
-                    }
 
                     case "SCRIPT":
-                    {
-                        var str = obj as UStruct;
-                        if( str != null && str.ScriptText != null )
                         {
-                            SetContentTitle( str.ScriptText.GetOuterGroup() );
-                            SetContentText( str.ScriptText, str.ScriptText.Decompile() );
+                            var str = obj as UStruct;
+                            if (str != null && str.ScriptText != null)
+                            {
+                                SetContentTitle(str.ScriptText.GetOuterGroup());
+                                SetContentText(str.ScriptText, str.ScriptText.Decompile());
+                            }
+
+                            break;
                         }
-                        break;
-                    }
 
                     case "CPPSCRIPT":
-                    {
-                        var str = obj as UStruct;
-                        if( str != null && str.CppText != null )
                         {
-                            SetContentTitle( str.CppText.GetOuterGroup() );
-                            SetContentText( str.CppText, str.CppText.Decompile() );
+                            var str = obj as UStruct;
+                            if (str != null && str.CppText != null)
+                            {
+                                SetContentTitle(str.CppText.GetOuterGroup());
+                                SetContentText(str.CppText, str.CppText.Decompile());
+                            }
+
+                            break;
                         }
-                        break;
-                    }
 
                     case "PROCESSEDSCRIPT":
-                    {
-                        var str = obj as UStruct;
-                        if( str != null && str.ProcessedText != null )
                         {
-                            SetContentTitle( str.ProcessedText.GetOuterGroup() );
-                            SetContentText( str.ProcessedText, str.ProcessedText.Decompile() );
+                            var str = obj as UStruct;
+                            if (str != null && str.ProcessedText != null)
+                            {
+                                SetContentTitle(str.ProcessedText.GetPath());
+                                SetContentText(str.ProcessedText, str.ProcessedText.Decompile());
+                            }
+
+                            break;
                         }
-                        break;
-                    }
 
                     case "DEFAULTPROPERTIES":
-                    {
-                        var unStruct = obj as UStruct;
-                        if( unStruct != null )
                         {
-                            SetContentTitle( unStruct.Default.GetOuterGroup(), true, "Default-Properties" );
-                            SetContentText( unStruct, unStruct.FormatDefaultProperties() );
-                        }
-                        break;
-                    }
-                        
-                    case "TOKENS_DISASSEMBLE":
-                    {
-                        var unStruct = obj as UStruct;
-                        if( unStruct != null && unStruct.ByteCodeManager != null )
-                        {                           
-                            var codeDec = unStruct.ByteCodeManager;
-                            codeDec.Deserialize();
-                            codeDec.InitDecompile();
+                            var unStruct = obj as UStruct;
+                            if (unStruct != null)
+                            {
+                                SetContentTitle(unStruct.Default.GetPath(), true, "Default-Properties");
+                                SetContentText(unStruct, unStruct.FormatDefaultProperties());
+                            }
 
-                            _DisassembleTokensTemplate = LoadTemplate("struct.tokens-disassembled");
-                            var content = new StringBuilder(codeDec.DeserializedTokens.Count);
-                            LegacyDisassembleTokens( unStruct, codeDec, codeDec.DeserializedTokens.Count, content );
-                            SetContentTitle( unStruct.GetOuterGroup(), true, "Tokens-Disassembled" );
-                            SetContentText( unStruct, content.ToString() );
+                            break;
                         }
-                        break;
-                    }
+
+                    case "TOKENS_DISASSEMBLE":
+                        {
+                            var unStruct = obj as UStruct;
+                            if (unStruct != null && unStruct.Script != null)
+                            {
+                                var codeDec = new UStruct.UByteCodeDecompiler(unStruct);
+                                codeDec.Deserialize();
+                                codeDec.InitDecompile();
+
+                                _DisassembleTokensTemplate = LoadTemplate("struct.tokens-disassembled");
+                                var content = new StringBuilder(codeDec.DeserializedTokens.Count);
+                                LegacyDisassembleTokens(unStruct, codeDec, codeDec.DeserializedTokens.Count, content);
+                                SetContentTitle(unStruct.GetPath(), true, "Tokens-Disassembled");
+                                SetContentText(unStruct, content.ToString());
+                            }
+
+                            break;
+                        }
 
                     case "TOKENS":
-                    {
-                        var unStruct = obj as UStruct;
-                        if( unStruct != null && unStruct.ByteCodeManager != null )
-                        {                   
-                            var tokensTemplate = LoadTemplate("struct.tokens");
-                            var codeDec = unStruct.ByteCodeManager;
-                            codeDec.Deserialize();
-                            codeDec.InitDecompile();
-
-                            var content = new StringBuilder(codeDec.DeserializedTokens.Count);
-                            while ( codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count )
+                        {
+                            var unStruct = obj as UStruct;
+                            if (unStruct != null && unStruct.Script != null)
                             {
-                                string output;
-                                var breakOut = false;
+                                var tokensTemplate = LoadTemplate("struct.tokens");
+                                var codeDec = new UStruct.UByteCodeDecompiler(unStruct);
+                                codeDec.Deserialize();
+                                codeDec.InitDecompile();
 
-                                var t = codeDec.NextToken;
-                                int orgIndex = codeDec.CurrentTokenIndex;
-                                try
+                                var content = new StringBuilder(codeDec.DeserializedTokens.Count);
+                                while (codeDec.CurrentTokenIndex + 1 < codeDec.DeserializedTokens.Count)
                                 {
-                                    output = t.Decompile();
-                                }
-                                catch
-                                {
-                                    output = "Exception occurred while decompiling token: " + t.GetType().Name;
-                                    breakOut = true;
-                                }
+                                    string output;
+                                    var breakOut = false;
 
-                                string chain = LegacyFormatTokenHeader( t );
-                                int endTokenIndex = codeDec.CurrentTokenIndex;
-                                if( endTokenIndex < codeDec.DeserializedTokens.Count ) // sanity check
-                                {
-                                    for( int i = orgIndex + 1; i < endTokenIndex; ++ i )
+                                    var t = codeDec.NextToken;
+                                    int orgIndex = codeDec.CurrentTokenIndex;
+                                    try
                                     {
-                                        chain += " -> " + LegacyFormatTokenHeader( codeDec.DeserializedTokens[i] );
+                                        output = t.Decompile(codeDec);
                                     }
+                                    catch
+                                    {
+                                        output = "Exception occurred while decompiling token: " + t.GetType().Name;
+                                        breakOut = true;
+                                    }
+
+                                    string chain = LegacyFormatTokenHeader(t);
+                                    int endTokenIndex = codeDec.CurrentTokenIndex;
+                                    if (endTokenIndex < codeDec.DeserializedTokens.Count) // sanity check
+                                    {
+                                        for (int i = orgIndex + 1; i < endTokenIndex; ++i)
+                                        {
+                                            chain += " -> " + LegacyFormatTokenHeader(codeDec.DeserializedTokens[i]);
+                                        }
+                                    }
+
+                                    var buffer = new byte[t.StorageSize];
+                                    _UnrealPackage.Stream.Position = unStruct.ExportTable.SerialOffset +
+                                                                     unStruct.ScriptOffset + t.StoragePosition;
+                                    _UnrealPackage.Stream.Read(buffer, 0, buffer.Length);
+
+                                    content.Append(String.Format(tokensTemplate,
+                                        t.Position, t.StoragePosition,
+                                        chain, BitConverter.ToString(buffer).Replace('-', ' '),
+                                        output != String.Empty ? output + "\r\n" : output
+                                    ));
+
+                                    if (breakOut)
+                                        break;
                                 }
-                                
-                                var buffer = new byte[t.StorageSize];
-                                _UnrealPackage.Stream.Position = unStruct.ExportTable.SerialOffset + unStruct.ScriptOffset + t.StoragePosition;
-                                _UnrealPackage.Stream.Read( buffer, 0, buffer.Length );
 
-                                content.Append(String.Format( tokensTemplate, 
-                                    t.Position, t.StoragePosition, 
-                                    chain, BitConverter.ToString( buffer ).Replace( '-', ' ' ),
-                                    output != String.Empty ? output + "\r\n" : output
-                                ));
-
-                                if( breakOut )
-                                    break;
+                                SetContentTitle(unStruct.GetOuterGroup(), true, "Tokens");
+                                SetContentText(unStruct, content.ToString());
                             }
-                            SetContentTitle( unStruct.GetOuterGroup(), true, "Tokens" );
-                            SetContentText( unStruct, content.ToString() );
+
+                            break;
                         }
-                        break;
-                    }
 
                     case "BUFFER":
-                    {
-                        var bufferObject = (IBuffered)obj;
-                        if( bufferObject.GetBufferSize() > 0 )
                         {
-                            ViewBufferFor( bufferObject );
+                            var bufferObject = (IBuffered)obj;
+                            if (bufferObject.GetBufferSize() > 0)
+                            {
+                                ViewBufferFor(bufferObject);
+                            }
+
+                            break;
                         }
-                        break;
-                    }
 
                     case "TABLEBUFFER":
-                    {
-                        var tableObject = target as IContainsTable ?? obj;
-                        ViewBufferFor( tableObject.Table );
-                        break;
-                    }
+                        {
+                            var tableObject = target as IContainsTable ?? obj;
+                            ViewBufferFor(tableObject.Table);
+                            break;
+                        }
 
                     case "DEFAULTBUFFER":
-                    {
-                        var unObject = obj;
-                        if( unObject != null )
                         {
-                            ViewBufferFor( unObject.Default );
+                            var unObject = obj;
+                            if (unObject != null)
+                            {
+                                ViewBufferFor(unObject.Default);
+                            }
+
+                            break;
                         }
-                        break;
-                    }
 
                     case "EXCEPTION":
-                    {
-                        var oNode = target as ObjectNode;
-                        if( oNode != null )
                         {
-                            SetContentText( oNode, GetExceptionMessage( ((UObject)oNode.Object) ) );
+                            var oNode = target as ObjectNode;
+                            if (oNode != null)
+                            {
+                                SetContentText(oNode, GetExceptionMessage(((UObject)oNode.Object)));
+                            }
+
+                            break;
                         }
-                        break;
-                    }
                 }
             }
-            catch( Exception e )
+            catch (Exception e)
             {
-                ExceptionDialog.Show( "An exception occurred while performing: " + action, e );
+                ExceptionDialog.Show("An exception occurred while performing: " + action, e);
             }
         }
 

@@ -24,9 +24,9 @@ namespace UEExplorer.UI.Dialogs
 
             object[] items = Linker.Names.ToArray<object>();
             inputComboBox.Items.AddRange(items);
-            inputComboBox.SelectedIndex = (int)DefaultNameReference;
+            inputComboBox.SelectedIndex = Linker.Archive.NameIndices[DefaultNameReference.Index];
 
-            numberNumericUpDown.Value = DefaultNameReference.Number + 1;
+            numberNumericUpDown.Value = DefaultNameReference.Number;
         }
 
         private void NameReferenceInputDialog_Shown(object sender, EventArgs e) => inputComboBox.Focus();

@@ -14,10 +14,10 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using UEExplorer.UI.Dialogs;
-using UELib.Branch;
+using UELib.Annotations;
 using UELib.Core;
+using UELib.IO;
 using UELib.UnrealScript;
-using ArgumentOutOfRangeException = System.ArgumentOutOfRangeException;
 
 namespace UEExplorer.UI.Forms
 {
@@ -58,7 +58,7 @@ namespace UEExplorer.UI.Forms
 
                 [XmlIgnore] public Brush Brush;
 
-                [XmlIgnore] public IUnrealDecompilable? Tag;
+                [XmlIgnore] public object? Tag;
 
                 private Color _Color;
             }
@@ -722,13 +722,20 @@ namespace UEExplorer.UI.Forms
                 return;
             }
 
-            if (unStruct.ByteCodeManager == null)
+            if (unStruct.Script == null)
             {
                 return;
             }
 
-            unStruct.ByteCodeManager.Deserialize();
-            foreach (var token in unStruct.ByteCodeManager.DeserializedTokens)
+            // Have the tokens been deserialized yet? (Lazy loaded for UE3)
+            if (unStruct.Script.Tokens.Count == 0 && unStruct.ScriptSize > 0)
+            {
+                using var stream = unStruct.LoadStream<UObjectStream>(unStruct.Package.Stream);
+                stream.Seek(unStruct.ScriptOffset, SeekOrigin.Begin);
+                unStruct.Script.Deserialize(stream);
+            }
+
+            foreach (var token in unStruct.Script.Tokens)
             {
                 _Patterns.MetaInfoList.Add
                 (
@@ -1429,13 +1436,19 @@ namespace UEExplorer.UI.Forms
                     // Restart token index.
                     if (pattern is { Size: 1, Tag: UStruct.UByteCodeDecompiler.Token token })
                     {
+                        var decompiler = new UStruct.UByteCodeDecompiler((UStruct)Target);
+
                         message += "\r\n" +
                                    $"\r\nOffset: {PropertyDisplay.FormatOffset(token.Position)}:{PropertyDisplay.FormatOffset(token.StoragePosition)}" +
                                    $"\r\nSize: {PropertyDisplay.FormatOffset(token.Size)}:{PropertyDisplay.FormatOffset(token.StorageSize)}";
-                        token.Decompiler.JumpTo((ushort)token.Position);
+                        decompiler.JumpTo((ushort)token.Position);
+                        message += "\r\n\r\n" + token.Decompile(decompiler);
+                    }
+                    else if (pattern.Tag is IUnrealDecompilable decompilable)
+                    {
+                        message += "\r\n\r\n" + decompilable.Decompile();
                     }
 
-                    message += "\r\n\r\n" + pattern.Tag.Decompile();
                 }
                 catch
                 {
@@ -1961,6 +1974,22 @@ namespace UEExplorer.UI.Forms
             SetActiveCell(_ContextOffset);
         }
 
+        private static byte[] WriteBuffer(UnrealPackageArchive archive, int offset, int size,
+            Action<UnrealPackageWriter> serializer)
+        {
+            byte[] buffer = new byte[size];
+
+            var memoryStream = new MemoryStream(buffer, true);
+            using (var writer = new UnrealPackageWriter(archive, new BinaryWriter(memoryStream)))
+            {
+                serializer(writer);
+            }
+
+            Contract.Assert(memoryStream.Position == size, "Size cannot be changed");
+
+            return buffer;
+        }
+
         private void editStructValueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var cellStruct = GetCellStruct(_ContextOffset);
@@ -1968,6 +1997,9 @@ namespace UEExplorer.UI.Forms
 
             var linker = Target is UObject o ? o.Package : null;
             Contract.Assert(linker != null);
+
+            int offset = _ContextOffset;
+            int size = cellStruct.Size;
 
             switch (cellStruct.Tag)
             {
@@ -1984,52 +2016,19 @@ namespace UEExplorer.UI.Forms
                                 if (inputDialog.ShowDialog(this) == DialogResult.OK)
                                 {
                                     int numberValue = inputDialog.InputNameNumber;
-                                    var newValue = new UName(inputDialog.InputNameItem, numberValue - 1);
-                                    int index = (int)newValue;
+                                    var newValue = new UName(inputDialog.InputNameItem, numberValue);
 
-                                    var archive = linker.GetBuffer();
-                                    Contract.Assert(archive != null);
+                                    var archive = linker.Archive;
+                                    byte[] buffer = WriteBuffer(archive, offset, size, writer => writer.WriteName(newValue));
+                                    SetCellStructValue(cellStruct.Offset, buffer);
 
-                                    // HACK: workaround IUnrealStream limitations for now.
-                                    // This approach will likely fail for some games that have a different FName structure.
-                                    if (archive.Version >= (uint)PackageObjectLegacyVersion.NumberAddedToName)
+                                    cellStruct.Tag = new BinaryMetaData.BinaryField
                                     {
-                                        const int indexMaxSize = 8;
-                                        // Let's use the UnrealWriter so that we can conform to the varying formats.
-                                        using (var uStream = new UnrealWriter(archive, new MemoryStream(indexMaxSize)))
-                                        {
-                                            uStream.WriteIndex(index);
-                                            uStream.Write(numberValue);
-                                            byte[] buffer = new byte[indexMaxSize];
-                                            uStream.Seek(0, SeekOrigin.Begin);
-                                            int read = uStream.BaseStream.Read(buffer, 0, buffer.Length);
-                                            Contract.Assert(read == buffer.Length);
-
-                                            Contract.Assert(buffer.Length == cellStruct.Size,
-                                                "Struct size must remain the same.");
-                                            SetCellStructValue(cellStruct.Offset, buffer);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        const int indexMaxSize = 5;
-                                        // Let's use the UnrealWriter so that we can conform to the varying formats.
-                                        using (var uStream = new UnrealWriter(archive, new MemoryStream(indexMaxSize)))
-                                        {
-                                            uStream.WriteIndex(index);
-                                            // dynamically sized to however many bytes were written for the index.
-                                            byte[] buffer = new byte[uStream.BaseStream.Position];
-                                            uStream.Seek(0, SeekOrigin.Begin);
-                                            int read = uStream.BaseStream.Read(buffer, 0, buffer.Length);
-                                            Contract.Assert(read == buffer.Length);
-
-                                            Contract.Assert(buffer.Length == cellStruct.Size,
-                                                "Struct size must remain the same.");
-                                            SetCellStructValue(cellStruct.Offset, buffer);
-                                        }
-                                    }
-
-                                    cellStruct.Tag = binaryField with { Value = newValue };
+                                        Value = newValue,
+                                        Field = binaryField.Field,
+                                        Offset = binaryField.Offset,
+                                        Size = binaryField.Size
+                                    };
                                 }
 
                                 break;
@@ -2045,33 +2044,21 @@ namespace UEExplorer.UI.Forms
                                 if (inputDialog.ShowDialog(this) == DialogResult.OK)
                                 {
                                     var newValue = inputDialog.InputObjectReference;
-                                    int objectIndex = inputDialog.InputObjectReference is { } input
+                                    int objectIndex = inputDialog.InputObjectReference is UObject input
                                         ? (int)input
                                         : 0;
 
-                                    var archive = uObject.Package.GetBuffer();
-                                    Contract.Assert(archive != null);
+                                    var archive = uObject.Package.Archive;
+                                    byte[] buffer = WriteBuffer(archive, offset, size, writer => writer.WriteIndex(objectIndex));
+                                    SetCellStructValue(cellStruct.Offset, buffer);
 
-                                    const int indexMaxSize = 5;
-                                    // Let's use the UnrealWriter so that we can conform to the varying formats.
-                                    using (var uStream = new UnrealWriter(archive, new MemoryStream(indexMaxSize)))
+                                    cellStruct.Tag = new BinaryMetaData.BinaryField
                                     {
-                                        // Only valid for UE3's default format
-                                        //byte[] buffer = BitConverter.GetBytes(objectIndex);
-
-                                        uStream.WriteIndex(objectIndex);
-                                        // dynamically sized to however many bytes were written for the index.
-                                        byte[] buffer = new byte[uStream.BaseStream.Position];
-                                        uStream.Seek(0, SeekOrigin.Begin);
-                                        int read = uStream.BaseStream.Read(buffer, 0, buffer.Length);
-                                        Contract.Assert(read == buffer.Length);
-
-                                        Contract.Assert(buffer.Length == cellStruct.Size,
-                                            "Struct size must remain the same.");
-                                        SetCellStructValue(cellStruct.Offset, buffer);
-                                    }
-
-                                    cellStruct.Tag = binaryField with { Value = newValue };
+                                        Value = newValue,
+                                        Field = binaryField.Field,
+                                        Offset = binaryField.Offset,
+                                        Size = binaryField.Size
+                                    };
                                 }
 
                                 break;
@@ -2147,8 +2134,9 @@ namespace UEExplorer.UI.Forms
             switch (cellStruct.Tag)
             {
                 case UStruct.UByteCodeDecompiler.Token token:
-                    token.Decompiler.JumpTo((ushort)token.Position);
-                    text = cellStruct.Tag.Decompile();
+                    var decompiler = new UStruct.UByteCodeDecompiler((UStruct)Target);
+                    decompiler.JumpTo((ushort)token.Position);
+                    text = token.Decompile(decompiler);
                     break;
 
                 case BinaryMetaData.BinaryField binaryField:
@@ -2157,7 +2145,7 @@ namespace UEExplorer.UI.Forms
                     break;
 
                 default:
-                    text = cellStruct.Tag.Decompile();
+                    text = "";
                     break;
             }
 
@@ -2402,16 +2390,22 @@ namespace UEExplorer.UI.Forms
                          .PatternRegions
                          .Where(pattern => index >= pattern.Offset && index < pattern.Offset + pattern.Size))
             {
-                if (patternRegion.Tag is UStruct.UByteCodeDecompiler.Token token)
-                {
-                    token.Decompiler.JumpTo((ushort)token.Position);
-                }
-
                 object? value;
 
                 try
                 {
-                    value = patternRegion.Tag?.Decompile();
+                    if (patternRegion.Tag is UStruct.UByteCodeDecompiler.Token token)
+                    {
+                        var decompiler = new UStruct.UByteCodeDecompiler((UStruct)hexViewControl.Target);
+                        decompiler.JumpTo((ushort)token.Position);
+
+                        value = token.Decompile(decompiler);
+                    }
+                    else if (patternRegion.Tag is IUnrealDecompilable decompilable)
+                    {
+                        value = decompilable.Decompile();
+                    }
+                    else value = string.Empty;
                 }
                 catch (Exception)
                 {

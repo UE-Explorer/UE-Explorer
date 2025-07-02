@@ -130,10 +130,10 @@ namespace UEExplorer.UI.Nodes
 
         public override string Decompile()
         {
-            if( Table == null )
-                return String.Empty;
+            if (Table == null)
+                return string.Empty;
 
-           return Table.ToString( true );
+            return Table.ToString();
         }
 
         private void BuildChildren()
@@ -143,13 +143,12 @@ namespace UEExplorer.UI.Nodes
 
             Nodes.Clear();
             Nodes.Add( "Object:" + Table );
-            Nodes.Add( "Class:" + Table.ClassName );
-            Nodes.Add( "Package:" + Table.ClassPackageName );
-            if( Table.OuterIndex != 0 )
+            Nodes.Add("Class:" + Table.ClassName);
+            Nodes.Add("Package:" + Table.ClassPackageName);
+            if (Table.OuterIndex)
             {
-                Nodes.Add( "Outer:" + Table.Outer );
+                Nodes.Add("Outer:" + Table.Outer);
             }
-
             _IsInitialized = true;
         }
 
