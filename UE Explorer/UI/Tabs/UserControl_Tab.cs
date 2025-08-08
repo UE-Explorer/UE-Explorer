@@ -14,5 +14,9 @@ namespace UEExplorer.UI.Tabs
         public virtual void TabFind()
         {
         }
+
+        public virtual void TabSelected()
+        {
+        }
     }
 }

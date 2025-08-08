@@ -11,6 +11,7 @@ namespace UEExplorer.UI
     {
         void TabSave();
         void TabFind();
+        void TabSelected();
     }
 
     // TODO: Deprecate
@@ -21,12 +22,16 @@ namespace UEExplorer.UI
         public TabsCollection(TabStrip tabStrip)
         {
             _TabStrip = tabStrip;
+
+            _TabStrip.TabStripItemSelectionChanged += TabStripItemSelectionChanged;
         }
 
         public ITabComponent SelectedComponent => (ITabComponent)_TabStrip.SelectedItem?.Controls[0];
 
         public void Dispose()
         {
+            _TabStrip.TabStripItemSelectionChanged -= TabStripItemSelectionChanged;
+
             _TabStrip = null;
         }
 
@@ -65,15 +70,26 @@ namespace UEExplorer.UI
                     ? component.GetType().Name
                     : uniqueName,
             };
-            _TabStrip.AddTab(tabItem, true);
+            _TabStrip.AddTab(tabItem, false);
 
             // We have to add this last for proper layout rendering.
             tabItem.Controls.Add(component);
+
+            _TabStrip.SelectedItem = tabItem;
         }
 
         public void CloseTab(TabStripItem itemToRemove)
         {
             _TabStrip.RemoveTab(itemToRemove);
+        }
+
+        private void TabStripItemSelectionChanged(TabStripItemChangedEventArgs e)
+        {
+            if (e.ChangeType != TabStripItemChangeTypes.SelectionChanged)
+                return;
+
+            if (e.Item.Controls.Count > 0 && e.Item.Controls[0] is ITabComponent tabComponent)
+                tabComponent.TabSelected();
         }
     }
 }
