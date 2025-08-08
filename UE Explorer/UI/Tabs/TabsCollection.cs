@@ -11,7 +11,7 @@ namespace UEExplorer.UI
     {
         void TabSave();
         void TabFind();
-        void TabSelected();
+        void TabSelected(bool isSelected);
     }
 
     // TODO: Deprecate
@@ -88,8 +88,12 @@ namespace UEExplorer.UI
             if (e.ChangeType != TabStripItemChangeTypes.SelectionChanged)
                 return;
 
-            if (e.Item.Controls.Count > 0 && e.Item.Controls[0] is ITabComponent tabComponent)
-                tabComponent.TabSelected();
+            foreach (TabStripItem tabStripItem in _TabStrip.Items)
+            {
+                if (tabStripItem.Controls.Count > 0 &&
+                    tabStripItem.Controls[0] is ITabComponent tabComponent)
+                    tabComponent.TabSelected(tabStripItem == e.Item);
+            }
         }
     }
 }

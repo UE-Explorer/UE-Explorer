@@ -1646,12 +1646,12 @@ namespace UEExplorer.UI.Tabs
             }
         }
 
-        public override void TabSelected()
+        public override void TabSelected(bool isSelected)
         {
-            findNextToolStripMenuItem.ShortcutKeys = _FindNextShortcutKeys;
-            viewBufferToolStripMenuItem.ShortcutKeys = _ViewBufferShortcutKeys;
-            findInClassesToolStripMenuItem.ShortcutKeys = _FindInClassesShortcutKeys;
-            findInDocumentToolStripMenuItem.ShortcutKeys = _FindInDocumentShortcutKeys;
+            findNextToolStripMenuItem.ShortcutKeys = isSelected ? _FindNextShortcutKeys : Keys.None;
+            viewBufferToolStripMenuItem.ShortcutKeys = isSelected ? _ViewBufferShortcutKeys : Keys.None;
+            findInClassesToolStripMenuItem.ShortcutKeys = isSelected ? _FindInClassesShortcutKeys : Keys.None;
+            findInDocumentToolStripMenuItem.ShortcutKeys = isSelected ? _FindInDocumentShortcutKeys : Keys.None;
         }
 
         private struct BufferData

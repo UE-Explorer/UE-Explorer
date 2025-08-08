@@ -15,7 +15,7 @@ namespace UEExplorer.UI.Tabs
         {
         }
 
-        public virtual void TabSelected()
+        public virtual void TabSelected(bool isSelected)
         {
         }
     }
