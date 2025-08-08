@@ -43,12 +43,12 @@ namespace UEExplorer.UI.Tabs
         {
             InitializeComponent();
 
-            var ComponentResourceManager = new ComponentResourceManager(typeof(UC_PackageExplorer));
+            var resources = new ComponentResourceManager(typeof(UC_PackageExplorer));
 
-            _FindNextShortcutKeys = (Keys)ComponentResourceManager.GetObject("findNextToolStripMenuItem.ShortcutKeys");
-            _ViewBufferShortcutKeys = (Keys)ComponentResourceManager.GetObject("viewBufferToolStripMenuItem.ShortcutKeys");
-            _FindInClassesShortcutKeys = (Keys)ComponentResourceManager.GetObject("findInClassesToolStripMenuItem.ShortcutKeys");
-            _FindInDocumentShortcutKeys = (Keys)ComponentResourceManager.GetObject("findInDocumentToolStripMenuItem.ShortcutKeys");
+            _FindNextShortcutKeys = (Keys)resources.GetObject("findNextToolStripMenuItem.ShortcutKeys");
+            _ViewBufferShortcutKeys = (Keys)resources.GetObject("viewBufferToolStripMenuItem.ShortcutKeys");
+            _FindInClassesShortcutKeys = (Keys)resources.GetObject("findInClassesToolStripMenuItem.ShortcutKeys");
+            _FindInDocumentShortcutKeys = (Keys)resources.GetObject("findInDocumentToolStripMenuItem.ShortcutKeys");
         }
 
         private void UC_PackageExplorer_Load(object sender, EventArgs e)
