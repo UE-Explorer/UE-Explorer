@@ -68,6 +68,15 @@ Various communities have written guides, such as:
 
 *Do you have or know of a guide that's missing here? Feel free to submit a pull-request, inform us in the discussion board*
 
+Furthermore, many communities have been spun up that make extensive use of UE Explorer:
+
+* [Arkham Workshop](https://discord.gg/N7buKT82), [Graphics Processing Community](https://discord.gg/graphicsprocessingunity-963091199739166760) - A Batman series modding community
+* [Bioshock Modding Hub](https://discord.gg/djmWv4HwZZ)
+* [Borderlands Modding](https://discord.gg/E47p2Q8gsa)
+* [Infinity Blade: Modding](https://discord.gg/uQRgZAFw34)
+* [ReEnergized Community](https://discord.gg/7CFaqbBCXx) - A Transformers modding community
+* [Unreal Engine Modding](https://discord.gg/eRJrfyG9Ap)
+
 ## Credits
   
 - [Antonio Cordero Balcazar](https://github.com/acorderob) for [UTPT](https://www.acordero.org/projects/unreal-tournament-package-tool)
