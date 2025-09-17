@@ -22,7 +22,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
             System.Windows.Forms.Panel filterPanel;
             System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.VSIcons = new System.Windows.Forms.ImageList(this.components);
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -83,10 +83,10 @@
             this.TabControl_Objects = new System.Windows.Forms.TabControl();
             this.TabPage_Classes = new System.Windows.Forms.TabPage();
             this._CheckBox_ToggleHierachy = new System.Windows.Forms.CheckBox();
-            this._SearchIcon = new System.Windows.Forms.PictureBox();
             this.TreeView_Classes = new System.Windows.Forms.TreeView();
-            this.FilterText = new System.Windows.Forms.TextBox();
+            this.classesFilterTextBox = new System.Windows.Forms.TextBox();
             this.TabPage_Content = new System.Windows.Forms.TabPage();
+            this.contentFilterTextBox = new System.Windows.Forms.TextBox();
             this.Button_Export = new System.Windows.Forms.Button();
             this.TreeView_Content = new System.Windows.Forms.TreeView();
             this.TabPage_Deps = new System.Windows.Forms.TabPage();
@@ -155,7 +155,6 @@
             this.TabPage_Objects.SuspendLayout();
             this.TabControl_Objects.SuspendLayout();
             this.TabPage_Classes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._SearchIcon)).BeginInit();
             this.TabPage_Content.SuspendLayout();
             this.TabPage_Deps.SuspendLayout();
             this.TabPage_Chunks.SuspendLayout();
@@ -578,14 +577,14 @@
             this.DataGridView_Flags.MultiSelect = false;
             this.DataGridView_Flags.Name = "DataGridView_Flags";
             this.DataGridView_Flags.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DataGridView_Flags.RowHeadersVisible = false;
             this.DataGridView_Flags.ShowCellErrors = false;
             this.DataGridView_Flags.ShowEditingIcon = false;
@@ -811,9 +810,8 @@
             // 
             this.TabPage_Classes.BackColor = System.Drawing.Color.White;
             this.TabPage_Classes.Controls.Add(this._CheckBox_ToggleHierachy);
-            this.TabPage_Classes.Controls.Add(this._SearchIcon);
             this.TabPage_Classes.Controls.Add(this.TreeView_Classes);
-            this.TabPage_Classes.Controls.Add(this.FilterText);
+            this.TabPage_Classes.Controls.Add(this.classesFilterTextBox);
             resources.ApplyResources(this.TabPage_Classes, "TabPage_Classes");
             this.TabPage_Classes.Name = "TabPage_Classes";
             // 
@@ -823,13 +821,6 @@
             this._CheckBox_ToggleHierachy.ImageList = this.VSIcons;
             this._CheckBox_ToggleHierachy.Name = "_CheckBox_ToggleHierachy";
             this._CheckBox_ToggleHierachy.CheckedChanged += new System.EventHandler(this.ToggleClassesHierachy);
-            // 
-            // _SearchIcon
-            // 
-            resources.ApplyResources(this._SearchIcon, "_SearchIcon");
-            this._SearchIcon.Image = global::UEExplorer.Properties.Resources.search;
-            this._SearchIcon.Name = "_SearchIcon";
-            this._SearchIcon.TabStop = false;
             // 
             // TreeView_Classes
             // 
@@ -842,20 +833,28 @@
             this.TreeView_Classes.ShowNodeToolTips = true;
             this.TreeView_Classes.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Classes_NodeMouseClick);
             // 
-            // FilterText
+            // classesFilterTextBox
             // 
-            resources.ApplyResources(this.FilterText, "FilterText");
-            this.FilterText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-            this.FilterText.Name = "FilterText";
-            this.FilterText.TextChanged += new System.EventHandler(this.FilterText_TextChanged);
+            resources.ApplyResources(this.classesFilterTextBox, "classesFilterTextBox");
+            this.classesFilterTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.classesFilterTextBox.Name = "classesFilterTextBox";
+            this.classesFilterTextBox.TextChanged += new System.EventHandler(this.classesFilterTextBox_TextChanged);
             // 
             // TabPage_Content
             // 
             this.TabPage_Content.BackColor = System.Drawing.Color.White;
+            this.TabPage_Content.Controls.Add(this.contentFilterTextBox);
             this.TabPage_Content.Controls.Add(this.Button_Export);
             this.TabPage_Content.Controls.Add(this.TreeView_Content);
             resources.ApplyResources(this.TabPage_Content, "TabPage_Content");
             this.TabPage_Content.Name = "TabPage_Content";
+            // 
+            // contentFilterTextBox
+            // 
+            resources.ApplyResources(this.contentFilterTextBox, "contentFilterTextBox");
+            this.contentFilterTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.contentFilterTextBox.Name = "contentFilterTextBox";
+            this.contentFilterTextBox.TextChanged += new System.EventHandler(this.contentFilterTextBox_TextChanged);
             // 
             // Button_Export
             // 
@@ -1196,7 +1195,6 @@
             this.ViewTools.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.ViewTools, "ViewTools");
             this.ViewTools.Name = "ViewTools";
-            this.ViewTools.DropDown.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ViewTools_DropDownItemClicked);
             // 
             // label3
             // 
@@ -1242,8 +1240,8 @@
             this.TabControl_Objects.ResumeLayout(false);
             this.TabPage_Classes.ResumeLayout(false);
             this.TabPage_Classes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._SearchIcon)).EndInit();
             this.TabPage_Content.ResumeLayout(false);
+            this.TabPage_Content.PerformLayout();
             this.TabPage_Deps.ResumeLayout(false);
             this.TabPage_Chunks.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Chunks)).EndInit();
@@ -1288,7 +1286,7 @@
 		private System.Windows.Forms.DataGridView DataGridView_Chunks;
 		internal System.Windows.Forms.Label LABEL_Copyright;
 		internal System.Windows.Forms.Label LABEL_Author;
-        private System.Windows.Forms.TextBox FilterText;
+        private System.Windows.Forms.TextBox classesFilterTextBox;
 		private System.Windows.Forms.TextBox Label_GUID;
 		internal System.Windows.Forms.Label VersionValue;
 		internal System.Windows.Forms.Label FlagsValue;
@@ -1304,7 +1302,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-		private System.Windows.Forms.PictureBox _SearchIcon;
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.CheckBox checkBox1;
@@ -1368,5 +1365,6 @@
         private System.Windows.Forms.ToolStripDropDownButton PrevButton;
         private System.Windows.Forms.ToolStripButton NextButton;
         private System.Windows.Forms.ToolStripDropDownButton recentToolStripDropDownButton;
+        private System.Windows.Forms.TextBox contentFilterTextBox;
     }
 }

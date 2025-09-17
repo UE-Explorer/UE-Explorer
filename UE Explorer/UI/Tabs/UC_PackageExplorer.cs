@@ -607,6 +607,9 @@ namespace UEExplorer.UI.Tabs
 
         private void CreateClassesList()
         {
+            classesFilterTextBox.Enabled = false;
+            classesFilterTextBox.Text = "Loading...";
+
             TreeView_Classes.AfterSelect += _OnClassesNodeSelected;
             TreeView_Classes.BeforeExpand += _OnClassesNodeExpand;
 
@@ -624,7 +627,7 @@ namespace UEExplorer.UI.Tabs
                             {
                                 ImageKey = imageKey, SelectedImageKey = imageKey, Text = obj.Name
                             };
-                            node.Nodes.Add("DUMMYNODE", "");
+                            node.Nodes.Add("DUMMYNODE", "Loading...");
 
                             if (obj.DeserializationState.HasFlag(UObject.ObjectState.Errorlized))
                             {
@@ -650,6 +653,8 @@ namespace UEExplorer.UI.Tabs
                     BeginInvoke((MethodInvoker)(() =>
                     {
                         TreeView_Classes.Nodes.AddRange(r.Result);
+                        classesFilterTextBox.Text = "";
+                        classesFilterTextBox.Enabled = true;
                     }));
 
                     return r;
@@ -790,10 +795,17 @@ namespace UEExplorer.UI.Tabs
             if( item == null )
                 return;
 
-            // Kill dummies.
-            objectNode.Nodes.Clear();
+            if (objectNode.Nodes.ContainsKey("DUMMYNODE"))
+            {
+                objectNode.Nodes.RemoveByKey("DUMMYNODE");
+            }
+            else
+            {
+                return;
+            }
+
             // Not worth it to re-write it as async (this is irrelevant in UE Explorer 2.x)
-            CreateContentNodesFor( item, objectNode.Nodes, true );
+            CreateContentNodesFor(item, objectNode.Nodes, true);
         }
 
         // Lazy recursive.
@@ -813,7 +825,7 @@ namespace UEExplorer.UI.Tabs
 
                 if( !recursive )
                 {
-                    nodeContainer.Add( "DUMMYNODE" );
+                    nodeContainer.Add("DUMMYNODE", "Loading...");
                     break;
                 }
                 
@@ -823,6 +835,9 @@ namespace UEExplorer.UI.Tabs
 
         private void CreateContentList()
         {
+            contentFilterTextBox.Enabled = false;
+            contentFilterTextBox.Text = "Loading...";
+
             var uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
             Task.Factory
                 .StartNew(() =>
@@ -836,7 +851,7 @@ namespace UEExplorer.UI.Tabs
                             bool isExpandable = _UnrealPackage.Exports.Any(other => other.OuterIndex == exp.Index + 1);
                             if (isExpandable)
                             {
-                                objectNode.Nodes.Add("DUMMYNODE");
+                                objectNode.Nodes.Add("DUMMYNODE", "Loading...");
                             }
 
                             return objectNode;
@@ -850,6 +865,8 @@ namespace UEExplorer.UI.Tabs
                     BeginInvoke((MethodInvoker)(() =>
                     {
                         TreeView_Content.Nodes.AddRange(r.Result);
+                        contentFilterTextBox.Text = "";
+                        contentFilterTextBox.Enabled = true;
                     }));
 
                     return r;
@@ -1777,7 +1794,7 @@ namespace UEExplorer.UI.Tabs
             if( _BufferIndex - 1 <= -1 ) 
                 return;
 
-            FilterText.Text = String.Empty;
+            classesFilterTextBox.Text = String.Empty;
             StoreViewForBuffer( _BufferIndex );
             RestoreBufferedContent( -- _BufferIndex );
 
@@ -1793,7 +1810,7 @@ namespace UEExplorer.UI.Tabs
             if( _BufferIndex + 1 >= _ContentBuffer.Count ) 
                 return;
 
-            FilterText.Text = String.Empty;
+            classesFilterTextBox.Text = String.Empty;
             StoreViewForBuffer( _BufferIndex );
             RestoreBufferedContent( ++ _BufferIndex );
 
@@ -1931,55 +1948,141 @@ namespace UEExplorer.UI.Tabs
             hexDialog.Show( ParentForm );
         }
 
-        private System.Windows.Forms.Timer _FilterTextChangedTimer = null;
-        private readonly List<TreeNode> _FilteredNodes = new List<TreeNode>();
+        private System.Windows.Forms.Timer?
+            _ClassesFilterTextBoxChangedTimer,
+            _ContentFilterTextBoxChangedTimer;
 
-        private void FilterText_TextChanged( object sender, EventArgs e )
+        private readonly List<(TreeNode, TreeNode?)>
+            _ClassesFilteredNodes = [],
+            _ContentFilteredNodes = [];
+
+        private void FilterTreeViewByText(TreeView treeView, string text, List<(TreeNode, TreeNode?)> filteredNodes)
         {
-            if( _FilterTextChangedTimer != null && _FilterTextChangedTimer.Enabled )
+            treeView.SuspendLayout();
+            treeView.BeginUpdate();
+
+            // Prevent 'SelectedNode' from triggering updates (which can happen if the selected node gets removed.)
+            var lastSelectedNode = treeView.SelectedNode;
+            treeView.SelectedNode = null;
+
+            // Add all the nodes back, then filter again.
+            for (int i = 0; i < filteredNodes.Count; ++i)
             {
-                _FilterTextChangedTimer.Stop();
-                _FilterTextChangedTimer.Dispose();
-                _FilterTextChangedTimer = null;
+                var treeNode = filteredNodes[i].Item1;
+                var parent = filteredNodes[i].Item2;
+                if (parent != null)
+                {
+                    parent.Nodes.Add(treeNode);
+                }
+                else
+                {
+                    treeView.Nodes.Add(treeNode);
+                }
+
+                filteredNodes.Remove(filteredNodes[i--]);
             }
 
-            if( _FilterTextChangedTimer == null )
+            _ = FilterNodes(treeView.Nodes);
+
+            treeView.SelectedNode = lastSelectedNode;
+
+            treeView.EndUpdate();
+            treeView.ResumeLayout();
+
+            return;
+
+            bool FilterNodes(TreeNodeCollection nodes)
             {
-                _FilterTextChangedTimer = new System.Windows.Forms.Timer();
-                _FilterTextChangedTimer.Interval = 350;
-                _FilterTextChangedTimer.Tick += _FilterTextChangedTimer_Tick;
-                _FilterTextChangedTimer.Start();
+                for (int i = 0; i < nodes.Count; ++i)
+                {
+                    bool wasCollapsed = !nodes[i].IsExpanded;
+                    nodes[i].Expand();
+                    if (wasCollapsed && nodes[i].IsExpanded)
+                    {
+                        nodes[i].Collapse(true);
+                    }
+
+                    // Don't remove the node if the node has children nodes that have not been filtered out.
+                    bool hasUnfilteredNodes = FilterNodes(nodes[i].Nodes); // filter out sub nodes
+                    if (hasUnfilteredNodes || nodes[i].Text.IndexOf(text, StringComparison.OrdinalIgnoreCase) != -1)
+                    {
+                        continue;
+                    }
+
+                    filteredNodes.Add((nodes[i], nodes[i].Parent));
+                    nodes[i--].Remove();
+                }
+
+                return nodes.Count > 0;
             }
         }
 
-        private void _FilterTextChangedTimer_Tick( object sender, EventArgs e )
+        private void classesFilterTextBox_TextChanged(object sender, EventArgs e)
         {
-            _FilterTextChangedTimer.Stop();
-            _FilterTextChangedTimer.Dispose();
-            _FilterTextChangedTimer = null;
+            if (classesFilterTextBox.Enabled == false) return;
 
-            for ( int i = 0; i < TreeView_Classes.Nodes.Count; ++ i )
+            if (_ClassesFilterTextBoxChangedTimer != null && _ClassesFilterTextBoxChangedTimer.Enabled)
             {
-                if( TreeView_Classes.Nodes[i].Text.IndexOf( FilterText.Text, StringComparison.OrdinalIgnoreCase ) != -1 )
-                    continue;
-
-                _FilteredNodes.Add( TreeView_Classes.Nodes[i] );
-                TreeView_Classes.Nodes[i].Remove();
-                -- i;
+                _ClassesFilterTextBoxChangedTimer.Stop();
+                _ClassesFilterTextBoxChangedTimer.Dispose();
+                _ClassesFilterTextBoxChangedTimer = null;
             }
 
-            for( int i = 0; i < _FilteredNodes.Count; ++ i )
+            if (_ClassesFilterTextBoxChangedTimer == null)
             {
-                if( FilterText.Text != String.Empty &&
-                    _FilteredNodes[i].Text.IndexOf( FilterText.Text, StringComparison.OrdinalIgnoreCase ) < 0 )
-                    continue;
+                _ClassesFilterTextBoxChangedTimer = new System.Windows.Forms.Timer();
+                _ClassesFilterTextBoxChangedTimer.Interval = 350;
+                _ClassesFilterTextBoxChangedTimer.Tick += ClassesFilterTextBoxChangedTimerTick;
+                _ClassesFilterTextBoxChangedTimer.Start();
+            }
+        }
 
-                TreeView_Classes.Nodes.Add( _FilteredNodes[i] );
-                _FilteredNodes.Remove( _FilteredNodes[i] ); 
-                -- i;
+        private void ClassesFilterTextBoxChangedTimerTick(object sender, EventArgs e)
+        {
+            _ClassesFilterTextBoxChangedTimer!.Stop();
+            _ClassesFilterTextBoxChangedTimer.Dispose();
+            _ClassesFilterTextBoxChangedTimer = null;
+
+            BeginInvoke(() =>
+            {
+                TabPage_Classes.SuspendLayout();
+                FilterTreeViewByText(TreeView_Classes, classesFilterTextBox.Text, _ClassesFilteredNodes);
+                TabPage_Classes.ResumeLayout();
+            });
+        }
+
+        private void contentFilterTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (contentFilterTextBox.Enabled == false) return;
+
+            if (_ContentFilterTextBoxChangedTimer != null && _ContentFilterTextBoxChangedTimer.Enabled)
+            {
+                _ContentFilterTextBoxChangedTimer.Stop();
+                _ContentFilterTextBoxChangedTimer.Dispose();
+                _ContentFilterTextBoxChangedTimer = null;
             }
 
-            TreeView_Classes.Sort();
+            if (_ContentFilterTextBoxChangedTimer == null)
+            {
+                _ContentFilterTextBoxChangedTimer = new System.Windows.Forms.Timer();
+                _ContentFilterTextBoxChangedTimer.Interval = 350;
+                _ContentFilterTextBoxChangedTimer.Tick += ContentFilterTextBoxChangedTimerTick;
+                _ContentFilterTextBoxChangedTimer.Start();
+            }
+        }
+
+        private void ContentFilterTextBoxChangedTimerTick(object sender, EventArgs e)
+        {
+            _ContentFilterTextBoxChangedTimer!.Stop();
+            _ContentFilterTextBoxChangedTimer.Dispose();
+            _ContentFilterTextBoxChangedTimer = null;
+
+            BeginInvoke(() =>
+            {
+                TabPage_Content.SuspendLayout();
+                FilterTreeViewByText(TreeView_Content, contentFilterTextBox.Text, _ContentFilteredNodes);
+                TabPage_Content.ResumeLayout();
+            });
         }
 
         private void ReloadButton_Click( object sender, EventArgs e )
