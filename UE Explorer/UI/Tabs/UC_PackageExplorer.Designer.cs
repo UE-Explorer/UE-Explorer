@@ -20,21 +20,11 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label label4;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
-            System.Windows.Forms.Panel filterPanel;
             System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.VSIcons = new System.Windows.Forms.ImageList(this.components);
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.exportDecompiledClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportScriptClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.VSIcons = new System.Windows.Forms.ImageList(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.Panel_Main = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -64,24 +54,8 @@
             this.Label_LicenseeMode = new System.Windows.Forms.Label();
             this.Label_Flags = new System.Windows.Forms.Label();
             this.Label_Version = new System.Windows.Forms.Label();
-            this.TabPage_Tables = new System.Windows.Forms.TabPage();
-            this.TabControl_Tables = new System.Windows.Forms.TabControl();
-            this.TabPage_Names = new System.Windows.Forms.TabPage();
-            this.DataGridView_NameTable = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TabPage_Exports = new System.Windows.Forms.TabPage();
-            this.TreeView_Exports = new System.Windows.Forms.TreeView();
-            this.TabPage_Imports = new System.Windows.Forms.TabPage();
-            this.TreeView_Imports = new System.Windows.Forms.TreeView();
-            this.TabPage_Generations = new System.Windows.Forms.TabPage();
-            this.DataGridView_GenerationsTable = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TabPage_Objects = new System.Windows.Forms.TabPage();
-            this.TabControl_Objects = new System.Windows.Forms.TabControl();
             this.TabPage_Classes = new System.Windows.Forms.TabPage();
+            this.checkBoxDeepFiltering = new System.Windows.Forms.CheckBox();
             this._CheckBox_ToggleHierachy = new System.Windows.Forms.CheckBox();
             this.TreeView_Classes = new System.Windows.Forms.TreeView();
             this.classesFilterTextBox = new System.Windows.Forms.TextBox();
@@ -97,6 +71,21 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CompressedOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CompressedSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TabPage_Tables = new System.Windows.Forms.TabPage();
+            this.TabControl_Tables = new System.Windows.Forms.TabControl();
+            this.TabPage_Names = new System.Windows.Forms.TabPage();
+            this.DataGridView_NameTable = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TabPage_Exports = new System.Windows.Forms.TabPage();
+            this.TreeView_Exports = new System.Windows.Forms.TreeView();
+            this.TabPage_Imports = new System.Windows.Forms.TabPage();
+            this.TreeView_Imports = new System.Windows.Forms.TreeView();
+            this.TabPage_Generations = new System.Windows.Forms.TabPage();
+            this.DataGridView_GenerationsTable = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ToolStrip_Main = new System.Windows.Forms.ToolStrip();
             this.SearchByObjectGroupButton = new System.Windows.Forms.ToolStripButton();
@@ -130,9 +119,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             label4 = new System.Windows.Forms.Label();
-            filterPanel = new System.Windows.Forms.Panel();
             exportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -144,6 +131,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.Num_NameIndex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_ObjectIndex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Flags)).BeginInit();
+            this.TabPage_Classes.SuspendLayout();
+            this.TabPage_Content.SuspendLayout();
+            this.TabPage_Deps.SuspendLayout();
+            this.TabPage_Chunks.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Chunks)).BeginInit();
             this.TabPage_Tables.SuspendLayout();
             this.TabControl_Tables.SuspendLayout();
             this.TabPage_Names.SuspendLayout();
@@ -152,13 +144,6 @@
             this.TabPage_Imports.SuspendLayout();
             this.TabPage_Generations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_GenerationsTable)).BeginInit();
-            this.TabPage_Objects.SuspendLayout();
-            this.TabControl_Objects.SuspendLayout();
-            this.TabPage_Classes.SuspendLayout();
-            this.TabPage_Content.SuspendLayout();
-            this.TabPage_Deps.SuspendLayout();
-            this.TabPage_Chunks.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Chunks)).BeginInit();
             this.panel2.SuspendLayout();
             this.ToolStrip_Main.SuspendLayout();
             this.Panel_Content.SuspendLayout();
@@ -172,179 +157,6 @@
             resources.ApplyResources(label4, "label4");
             label4.CausesValidation = false;
             label4.Name = "label4";
-            // 
-            // filterPanel
-            // 
-            resources.ApplyResources(filterPanel, "filterPanel");
-            filterPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-            filterPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            filterPanel.Controls.Add(this.checkBox9);
-            filterPanel.Controls.Add(this.checkBox8);
-            filterPanel.Controls.Add(this.checkBox7);
-            filterPanel.Controls.Add(this.checkBox6);
-            filterPanel.Controls.Add(this.checkBox5);
-            filterPanel.Controls.Add(this.checkBox4);
-            filterPanel.Controls.Add(this.checkBox3);
-            filterPanel.Controls.Add(this.checkBox2);
-            filterPanel.Controls.Add(this.checkBox1);
-            filterPanel.Name = "filterPanel";
-            // 
-            // checkBox9
-            // 
-            resources.ApplyResources(this.checkBox9, "checkBox9");
-            this.checkBox9.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox9.Checked = true;
-            this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox9.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox9.ImageList = this.VSIcons;
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.UseVisualStyleBackColor = false;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // VSIcons
-            // 
-            this.VSIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("VSIcons.ImageStream")));
-            this.VSIcons.TransparentColor = System.Drawing.Color.Fuchsia;
-            this.VSIcons.Images.SetKeyName(0, "text-left");
-            this.VSIcons.Images.SetKeyName(1, "UConst");
-            this.VSIcons.Images.SetKeyName(2, "UObject");
-            this.VSIcons.Images.SetKeyName(3, "UState");
-            this.VSIcons.Images.SetKeyName(4, "Interface");
-            this.VSIcons.Images.SetKeyName(5, "Operator");
-            this.VSIcons.Images.SetKeyName(6, "Operater-Protected");
-            this.VSIcons.Images.SetKeyName(7, "Operator-Private");
-            this.VSIcons.Images.SetKeyName(8, "TreeView");
-            this.VSIcons.Images.SetKeyName(9, "Info");
-            this.VSIcons.Images.SetKeyName(10, "Actor");
-            this.VSIcons.Images.SetKeyName(11, "OutParameter");
-            this.VSIcons.Images.SetKeyName(12, "Map");
-            this.VSIcons.Images.SetKeyName(13, "Namespace");
-            this.VSIcons.Images.SetKeyName(14, "ReturnValue");
-            this.VSIcons.Images.SetKeyName(15, "Extend");
-            this.VSIcons.Images.SetKeyName(16, "UFunction");
-            this.VSIcons.Images.SetKeyName(17, "UFunction-Protected");
-            this.VSIcons.Images.SetKeyName(18, "UFunction-Private");
-            this.VSIcons.Images.SetKeyName(19, "Library");
-            this.VSIcons.Images.SetKeyName(20, "Content");
-            this.VSIcons.Images.SetKeyName(21, "Table");
-            this.VSIcons.Images.SetKeyName(22, "UProperty");
-            this.VSIcons.Images.SetKeyName(23, "UProperty-Protected");
-            this.VSIcons.Images.SetKeyName(24, "UProperty-Private");
-            this.VSIcons.Images.SetKeyName(25, "Diagram");
-            this.VSIcons.Images.SetKeyName(26, "Chunks");
-            this.VSIcons.Images.SetKeyName(27, "UDefaultProperty");
-            this.VSIcons.Images.SetKeyName(28, "ImportCatalogPart");
-            this.VSIcons.Images.SetKeyName(29, "UEnum");
-            this.VSIcons.Images.SetKeyName(30, "UEnum-Protected");
-            this.VSIcons.Images.SetKeyName(31, "UEnum-Private");
-            this.VSIcons.Images.SetKeyName(32, "Delegate");
-            this.VSIcons.Images.SetKeyName(33, "Delegate-Protected");
-            this.VSIcons.Images.SetKeyName(34, "Delegate-Private");
-            this.VSIcons.Images.SetKeyName(35, "Event");
-            this.VSIcons.Images.SetKeyName(36, "Event-Protected");
-            this.VSIcons.Images.SetKeyName(37, "Event-Private");
-            this.VSIcons.Images.SetKeyName(38, "UStruct");
-            this.VSIcons.Images.SetKeyName(39, "UStruct-Protected");
-            this.VSIcons.Images.SetKeyName(40, "UStruct-Private");
-            this.VSIcons.Images.SetKeyName(41, "UClass");
-            this.VSIcons.Images.SetKeyName(42, "UClass-Abstract");
-            this.VSIcons.Images.SetKeyName(43, "UClass-Within");
-            // 
-            // checkBox8
-            // 
-            resources.ApplyResources(this.checkBox8, "checkBox8");
-            this.checkBox8.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox8.Checked = true;
-            this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox8.ImageList = this.VSIcons;
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.UseVisualStyleBackColor = false;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox7
-            // 
-            resources.ApplyResources(this.checkBox7, "checkBox7");
-            this.checkBox7.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox7.Checked = true;
-            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox7.ImageList = this.VSIcons;
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.UseVisualStyleBackColor = false;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox6
-            // 
-            resources.ApplyResources(this.checkBox6, "checkBox6");
-            this.checkBox6.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox6.Checked = true;
-            this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox6.ImageList = this.VSIcons;
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.UseVisualStyleBackColor = false;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox5
-            // 
-            resources.ApplyResources(this.checkBox5, "checkBox5");
-            this.checkBox5.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox5.Checked = true;
-            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox5.ImageList = this.VSIcons;
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.UseVisualStyleBackColor = false;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox4
-            // 
-            resources.ApplyResources(this.checkBox4, "checkBox4");
-            this.checkBox4.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox4.Checked = true;
-            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox4.ImageList = this.VSIcons;
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.UseVisualStyleBackColor = false;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox3
-            // 
-            resources.ApplyResources(this.checkBox3, "checkBox3");
-            this.checkBox3.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox3.Checked = true;
-            this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox3.ImageList = this.VSIcons;
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = false;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox2
-            // 
-            resources.ApplyResources(this.checkBox2, "checkBox2");
-            this.checkBox2.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox2.ImageList = this.VSIcons;
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.UseVisualStyleBackColor = false;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
-            // 
-            // checkBox1
-            // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(137)))));
-            this.checkBox1.ImageList = this.VSIcons;
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = false;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.FilterByClassCheckBox);
             // 
             // exportingToolStripMenuItem
             // 
@@ -367,6 +179,56 @@
             resources.ApplyResources(this.exportScriptClassesToolStripMenuItem, "exportScriptClassesToolStripMenuItem");
             this.exportScriptClassesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.exportScriptClassesToolStripMenuItem.Name = "exportScriptClassesToolStripMenuItem";
+            // 
+            // VSIcons
+            // 
+            this.VSIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("VSIcons.ImageStream")));
+            this.VSIcons.TransparentColor = System.Drawing.Color.Fuchsia;
+            this.VSIcons.Images.SetKeyName(0, "text-left");
+            this.VSIcons.Images.SetKeyName(1, "UObject");
+            this.VSIcons.Images.SetKeyName(2, "UConst");
+            this.VSIcons.Images.SetKeyName(3, "UState");
+            this.VSIcons.Images.SetKeyName(4, "Interface");
+            this.VSIcons.Images.SetKeyName(5, "Operator");
+            this.VSIcons.Images.SetKeyName(6, "Operater-Protected");
+            this.VSIcons.Images.SetKeyName(7, "Operator-Private");
+            this.VSIcons.Images.SetKeyName(8, "TreeView");
+            this.VSIcons.Images.SetKeyName(9, "Actor");
+            this.VSIcons.Images.SetKeyName(10, "OutParameter");
+            this.VSIcons.Images.SetKeyName(11, "Map");
+            this.VSIcons.Images.SetKeyName(12, "Namespace");
+            this.VSIcons.Images.SetKeyName(13, "ReturnValue");
+            this.VSIcons.Images.SetKeyName(14, "Extend");
+            this.VSIcons.Images.SetKeyName(15, "UFunction");
+            this.VSIcons.Images.SetKeyName(16, "UFunction-Protected");
+            this.VSIcons.Images.SetKeyName(17, "UFunction-Private");
+            this.VSIcons.Images.SetKeyName(18, "Content");
+            this.VSIcons.Images.SetKeyName(19, "Table");
+            this.VSIcons.Images.SetKeyName(20, "UProperty");
+            this.VSIcons.Images.SetKeyName(21, "UProperty-Protected");
+            this.VSIcons.Images.SetKeyName(22, "UProperty-Private");
+            this.VSIcons.Images.SetKeyName(23, "Diagram");
+            this.VSIcons.Images.SetKeyName(24, "Chunks");
+            this.VSIcons.Images.SetKeyName(25, "UDefaultProperty");
+            this.VSIcons.Images.SetKeyName(26, "ImportCatalogPart");
+            this.VSIcons.Images.SetKeyName(27, "UEnum");
+            this.VSIcons.Images.SetKeyName(28, "UEnum-Protected");
+            this.VSIcons.Images.SetKeyName(29, "UEnum-Private");
+            this.VSIcons.Images.SetKeyName(30, "Delegate");
+            this.VSIcons.Images.SetKeyName(31, "Delegate-Protected");
+            this.VSIcons.Images.SetKeyName(32, "Delegate-Private");
+            this.VSIcons.Images.SetKeyName(33, "Event");
+            this.VSIcons.Images.SetKeyName(34, "Event-Protected");
+            this.VSIcons.Images.SetKeyName(35, "Event-Private");
+            this.VSIcons.Images.SetKeyName(36, "UStruct");
+            this.VSIcons.Images.SetKeyName(37, "UStruct-Protected");
+            this.VSIcons.Images.SetKeyName(38, "UStruct-Private");
+            this.VSIcons.Images.SetKeyName(39, "UClass");
+            this.VSIcons.Images.SetKeyName(40, "UClass-Abstract");
+            this.VSIcons.Images.SetKeyName(41, "UClass-Within");
+            this.VSIcons.Images.SetKeyName(42, "Package");
+            this.VSIcons.Images.SetKeyName(43, "Library");
+            this.VSIcons.Images.SetKeyName(44, "DependancyGraph");
             // 
             // splitContainer1
             // 
@@ -401,9 +263,11 @@
             // 
             resources.ApplyResources(this.TabControl_General, "TabControl_General");
             this.TabControl_General.Controls.Add(this.TabPage_Package);
-            this.TabControl_General.Controls.Add(this.TabPage_Tables);
-            this.TabControl_General.Controls.Add(this.TabPage_Objects);
+            this.TabControl_General.Controls.Add(this.TabPage_Classes);
+            this.TabControl_General.Controls.Add(this.TabPage_Content);
+            this.TabControl_General.Controls.Add(this.TabPage_Deps);
             this.TabControl_General.Controls.Add(this.TabPage_Chunks);
+            this.TabControl_General.Controls.Add(this.TabPage_Tables);
             this.TabControl_General.HotTrack = true;
             this.TabControl_General.ImageList = this.VSIcons;
             this.TabControl_General.Name = "TabControl_General";
@@ -577,14 +441,14 @@
             this.DataGridView_Flags.MultiSelect = false;
             this.DataGridView_Flags.Name = "DataGridView_Flags";
             this.DataGridView_Flags.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridView_Flags.RowHeadersVisible = false;
             this.DataGridView_Flags.ShowCellErrors = false;
             this.DataGridView_Flags.ShowEditingIcon = false;
@@ -639,6 +503,164 @@
             resources.ApplyResources(this.Label_Version, "Label_Version");
             this.Label_Version.CausesValidation = false;
             this.Label_Version.Name = "Label_Version";
+            // 
+            // TabPage_Classes
+            // 
+            this.TabPage_Classes.BackColor = System.Drawing.Color.White;
+            this.TabPage_Classes.Controls.Add(this.checkBoxDeepFiltering);
+            this.TabPage_Classes.Controls.Add(this._CheckBox_ToggleHierachy);
+            this.TabPage_Classes.Controls.Add(this.TreeView_Classes);
+            this.TabPage_Classes.Controls.Add(this.classesFilterTextBox);
+            resources.ApplyResources(this.TabPage_Classes, "TabPage_Classes");
+            this.TabPage_Classes.Name = "TabPage_Classes";
+            // 
+            // checkBoxDeepFiltering
+            // 
+            resources.ApplyResources(this.checkBoxDeepFiltering, "checkBoxDeepFiltering");
+            this.checkBoxDeepFiltering.ImageList = this.VSIcons;
+            this.checkBoxDeepFiltering.Name = "checkBoxDeepFiltering";
+            this.checkBoxDeepFiltering.CheckedChanged += new System.EventHandler(this.checkBoxDeepFiltering_CheckedChanged);
+            // 
+            // _CheckBox_ToggleHierachy
+            // 
+            resources.ApplyResources(this._CheckBox_ToggleHierachy, "_CheckBox_ToggleHierachy");
+            this._CheckBox_ToggleHierachy.ImageList = this.VSIcons;
+            this._CheckBox_ToggleHierachy.Name = "_CheckBox_ToggleHierachy";
+            this._CheckBox_ToggleHierachy.CheckedChanged += new System.EventHandler(this.ToggleClassesHierachy);
+            // 
+            // TreeView_Classes
+            // 
+            resources.ApplyResources(this.TreeView_Classes, "TreeView_Classes");
+            this.TreeView_Classes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TreeView_Classes.HideSelection = false;
+            this.TreeView_Classes.ImageList = this.VSIcons;
+            this.TreeView_Classes.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            this.TreeView_Classes.Name = "TreeView_Classes";
+            this.TreeView_Classes.ShowNodeToolTips = true;
+            this.TreeView_Classes.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Classes_NodeMouseClick);
+            // 
+            // classesFilterTextBox
+            // 
+            resources.ApplyResources(this.classesFilterTextBox, "classesFilterTextBox");
+            this.classesFilterTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.classesFilterTextBox.Name = "classesFilterTextBox";
+            this.classesFilterTextBox.TextChanged += new System.EventHandler(this.classesFilterTextBox_TextChanged);
+            // 
+            // TabPage_Content
+            // 
+            this.TabPage_Content.BackColor = System.Drawing.Color.White;
+            this.TabPage_Content.Controls.Add(this.contentFilterTextBox);
+            this.TabPage_Content.Controls.Add(this.Button_Export);
+            this.TabPage_Content.Controls.Add(this.TreeView_Content);
+            resources.ApplyResources(this.TabPage_Content, "TabPage_Content");
+            this.TabPage_Content.Name = "TabPage_Content";
+            // 
+            // contentFilterTextBox
+            // 
+            resources.ApplyResources(this.contentFilterTextBox, "contentFilterTextBox");
+            this.contentFilterTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.contentFilterTextBox.Name = "contentFilterTextBox";
+            this.contentFilterTextBox.TextChanged += new System.EventHandler(this.contentFilterTextBox_TextChanged);
+            // 
+            // Button_Export
+            // 
+            resources.ApplyResources(this.Button_Export, "Button_Export");
+            this.Button_Export.Name = "Button_Export";
+            this.Button_Export.UseVisualStyleBackColor = true;
+            this.Button_Export.Click += new System.EventHandler(this.Button_Export_Click);
+            // 
+            // TreeView_Content
+            // 
+            resources.ApplyResources(this.TreeView_Content, "TreeView_Content");
+            this.TreeView_Content.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TreeView_Content.HideSelection = false;
+            this.TreeView_Content.ImageList = this.VSIcons;
+            this.TreeView_Content.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            this.TreeView_Content.Name = "TreeView_Content";
+            this.TreeView_Content.ShowNodeToolTips = true;
+            this.TreeView_Content.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView_Content_BeforeExpand);
+            this.TreeView_Content.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_Content_AfterSelect);
+            this.TreeView_Content.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Content_NodeMouseClick);
+            // 
+            // TabPage_Deps
+            // 
+            this.TabPage_Deps.BackColor = System.Drawing.Color.White;
+            this.TabPage_Deps.Controls.Add(this.TreeView_Deps);
+            resources.ApplyResources(this.TabPage_Deps, "TabPage_Deps");
+            this.TabPage_Deps.Name = "TabPage_Deps";
+            // 
+            // TreeView_Deps
+            // 
+            resources.ApplyResources(this.TreeView_Deps, "TreeView_Deps");
+            this.TreeView_Deps.BackColor = System.Drawing.Color.White;
+            this.TreeView_Deps.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TreeView_Deps.HideSelection = false;
+            this.TreeView_Deps.ImageList = this.VSIcons;
+            this.TreeView_Deps.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            this.TreeView_Deps.Name = "TreeView_Deps";
+            this.TreeView_Deps.ShowNodeToolTips = true;
+            this.TreeView_Deps.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.TreeView_Deps_DrawNode);
+            this.TreeView_Deps.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Deps_NodeMouseClick);
+            // 
+            // TabPage_Chunks
+            // 
+            this.TabPage_Chunks.BackColor = System.Drawing.Color.White;
+            this.TabPage_Chunks.Controls.Add(this.DataGridView_Chunks);
+            resources.ApplyResources(this.TabPage_Chunks, "TabPage_Chunks");
+            this.TabPage_Chunks.Name = "TabPage_Chunks";
+            // 
+            // DataGridView_Chunks
+            // 
+            this.DataGridView_Chunks.AllowUserToAddRows = false;
+            this.DataGridView_Chunks.AllowUserToDeleteRows = false;
+            this.DataGridView_Chunks.AllowUserToOrderColumns = true;
+            this.DataGridView_Chunks.AllowUserToResizeRows = false;
+            this.DataGridView_Chunks.BackgroundColor = System.Drawing.Color.White;
+            this.DataGridView_Chunks.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DataGridView_Chunks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DataGridView_Chunks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.CompressedOffset,
+            this.CompressedSize});
+            resources.ApplyResources(this.DataGridView_Chunks, "DataGridView_Chunks");
+            this.DataGridView_Chunks.EnableHeadersVisualStyles = false;
+            this.DataGridView_Chunks.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            this.DataGridView_Chunks.MultiSelect = false;
+            this.DataGridView_Chunks.Name = "DataGridView_Chunks";
+            this.DataGridView_Chunks.ReadOnly = true;
+            this.DataGridView_Chunks.RowHeadersVisible = false;
+            this.DataGridView_Chunks.ShowCellErrors = false;
+            this.DataGridView_Chunks.ShowEditingIcon = false;
+            this.DataGridView_Chunks.ShowRowErrors = false;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4");
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // CompressedOffset
+            // 
+            this.CompressedOffset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.CompressedOffset, "CompressedOffset");
+            this.CompressedOffset.Name = "CompressedOffset";
+            this.CompressedOffset.ReadOnly = true;
+            // 
+            // CompressedSize
+            // 
+            this.CompressedSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.CompressedSize, "CompressedSize");
+            this.CompressedSize.Name = "CompressedSize";
+            this.CompressedSize.ReadOnly = true;
             // 
             // TabPage_Tables
             // 
@@ -705,7 +727,6 @@
             // 
             // TabPage_Exports
             // 
-            this.TabPage_Exports.Controls.Add(filterPanel);
             this.TabPage_Exports.Controls.Add(this.TreeView_Exports);
             resources.ApplyResources(this.TabPage_Exports, "TabPage_Exports");
             this.TabPage_Exports.Name = "TabPage_Exports";
@@ -713,6 +734,7 @@
             // 
             // TreeView_Exports
             // 
+            this.TreeView_Exports.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.TreeView_Exports, "TreeView_Exports");
             this.TreeView_Exports.HideSelection = false;
             this.TreeView_Exports.ImageList = this.VSIcons;
@@ -788,169 +810,6 @@
             resources.ApplyResources(this.Column4, "Column4");
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
-            // 
-            // TabPage_Objects
-            // 
-            this.TabPage_Objects.Controls.Add(this.TabControl_Objects);
-            resources.ApplyResources(this.TabPage_Objects, "TabPage_Objects");
-            this.TabPage_Objects.Name = "TabPage_Objects";
-            this.TabPage_Objects.UseVisualStyleBackColor = true;
-            // 
-            // TabControl_Objects
-            // 
-            this.TabControl_Objects.Controls.Add(this.TabPage_Classes);
-            this.TabControl_Objects.Controls.Add(this.TabPage_Content);
-            this.TabControl_Objects.Controls.Add(this.TabPage_Deps);
-            resources.ApplyResources(this.TabControl_Objects, "TabControl_Objects");
-            this.TabControl_Objects.ImageList = this.VSIcons;
-            this.TabControl_Objects.Name = "TabControl_Objects";
-            this.TabControl_Objects.SelectedIndex = 0;
-            // 
-            // TabPage_Classes
-            // 
-            this.TabPage_Classes.BackColor = System.Drawing.Color.White;
-            this.TabPage_Classes.Controls.Add(this._CheckBox_ToggleHierachy);
-            this.TabPage_Classes.Controls.Add(this.TreeView_Classes);
-            this.TabPage_Classes.Controls.Add(this.classesFilterTextBox);
-            resources.ApplyResources(this.TabPage_Classes, "TabPage_Classes");
-            this.TabPage_Classes.Name = "TabPage_Classes";
-            // 
-            // _CheckBox_ToggleHierachy
-            // 
-            resources.ApplyResources(this._CheckBox_ToggleHierachy, "_CheckBox_ToggleHierachy");
-            this._CheckBox_ToggleHierachy.ImageList = this.VSIcons;
-            this._CheckBox_ToggleHierachy.Name = "_CheckBox_ToggleHierachy";
-            this._CheckBox_ToggleHierachy.CheckedChanged += new System.EventHandler(this.ToggleClassesHierachy);
-            // 
-            // TreeView_Classes
-            // 
-            resources.ApplyResources(this.TreeView_Classes, "TreeView_Classes");
-            this.TreeView_Classes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TreeView_Classes.HideSelection = false;
-            this.TreeView_Classes.ImageList = this.VSIcons;
-            this.TreeView_Classes.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-            this.TreeView_Classes.Name = "TreeView_Classes";
-            this.TreeView_Classes.ShowNodeToolTips = true;
-            this.TreeView_Classes.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Classes_NodeMouseClick);
-            // 
-            // classesFilterTextBox
-            // 
-            resources.ApplyResources(this.classesFilterTextBox, "classesFilterTextBox");
-            this.classesFilterTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-            this.classesFilterTextBox.Name = "classesFilterTextBox";
-            this.classesFilterTextBox.TextChanged += new System.EventHandler(this.classesFilterTextBox_TextChanged);
-            // 
-            // TabPage_Content
-            // 
-            this.TabPage_Content.BackColor = System.Drawing.Color.White;
-            this.TabPage_Content.Controls.Add(this.contentFilterTextBox);
-            this.TabPage_Content.Controls.Add(this.Button_Export);
-            this.TabPage_Content.Controls.Add(this.TreeView_Content);
-            resources.ApplyResources(this.TabPage_Content, "TabPage_Content");
-            this.TabPage_Content.Name = "TabPage_Content";
-            // 
-            // contentFilterTextBox
-            // 
-            resources.ApplyResources(this.contentFilterTextBox, "contentFilterTextBox");
-            this.contentFilterTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-            this.contentFilterTextBox.Name = "contentFilterTextBox";
-            this.contentFilterTextBox.TextChanged += new System.EventHandler(this.contentFilterTextBox_TextChanged);
-            // 
-            // Button_Export
-            // 
-            resources.ApplyResources(this.Button_Export, "Button_Export");
-            this.Button_Export.Name = "Button_Export";
-            this.Button_Export.UseVisualStyleBackColor = true;
-            this.Button_Export.Click += new System.EventHandler(this.Button_Export_Click);
-            // 
-            // TreeView_Content
-            // 
-            resources.ApplyResources(this.TreeView_Content, "TreeView_Content");
-            this.TreeView_Content.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TreeView_Content.HideSelection = false;
-            this.TreeView_Content.ImageList = this.VSIcons;
-            this.TreeView_Content.Name = "TreeView_Content";
-            this.TreeView_Content.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView_Content_BeforeExpand);
-            this.TreeView_Content.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_Content_AfterSelect);
-            this.TreeView_Content.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_Content_NodeMouseClick);
-            // 
-            // TabPage_Deps
-            // 
-            this.TabPage_Deps.BackColor = System.Drawing.Color.White;
-            this.TabPage_Deps.Controls.Add(this.TreeView_Deps);
-            resources.ApplyResources(this.TabPage_Deps, "TabPage_Deps");
-            this.TabPage_Deps.Name = "TabPage_Deps";
-            // 
-            // TreeView_Deps
-            // 
-            resources.ApplyResources(this.TreeView_Deps, "TreeView_Deps");
-            this.TreeView_Deps.BackColor = System.Drawing.Color.White;
-            this.TreeView_Deps.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TreeView_Deps.HideSelection = false;
-            this.TreeView_Deps.ImageList = this.VSIcons;
-            this.TreeView_Deps.Name = "TreeView_Deps";
-            this.TreeView_Deps.ShowNodeToolTips = true;
-            this.TreeView_Deps.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.TreeView_Deps_DrawNode);
-            // 
-            // TabPage_Chunks
-            // 
-            this.TabPage_Chunks.BackColor = System.Drawing.Color.White;
-            this.TabPage_Chunks.Controls.Add(this.DataGridView_Chunks);
-            resources.ApplyResources(this.TabPage_Chunks, "TabPage_Chunks");
-            this.TabPage_Chunks.Name = "TabPage_Chunks";
-            // 
-            // DataGridView_Chunks
-            // 
-            this.DataGridView_Chunks.AllowUserToAddRows = false;
-            this.DataGridView_Chunks.AllowUserToDeleteRows = false;
-            this.DataGridView_Chunks.AllowUserToOrderColumns = true;
-            this.DataGridView_Chunks.AllowUserToResizeRows = false;
-            this.DataGridView_Chunks.BackgroundColor = System.Drawing.Color.White;
-            this.DataGridView_Chunks.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.DataGridView_Chunks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.DataGridView_Chunks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.CompressedOffset,
-            this.CompressedSize});
-            resources.ApplyResources(this.DataGridView_Chunks, "DataGridView_Chunks");
-            this.DataGridView_Chunks.EnableHeadersVisualStyles = false;
-            this.DataGridView_Chunks.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-            this.DataGridView_Chunks.MultiSelect = false;
-            this.DataGridView_Chunks.Name = "DataGridView_Chunks";
-            this.DataGridView_Chunks.ReadOnly = true;
-            this.DataGridView_Chunks.RowHeadersVisible = false;
-            this.DataGridView_Chunks.ShowCellErrors = false;
-            this.DataGridView_Chunks.ShowEditingIcon = false;
-            this.DataGridView_Chunks.ShowRowErrors = false;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4");
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // CompressedOffset
-            // 
-            this.CompressedOffset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.CompressedOffset, "CompressedOffset");
-            this.CompressedOffset.Name = "CompressedOffset";
-            this.CompressedOffset.ReadOnly = true;
-            // 
-            // CompressedSize
-            // 
-            this.CompressedSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.CompressedSize, "CompressedSize");
-            this.CompressedSize.Name = "CompressedSize";
-            this.CompressedSize.ReadOnly = true;
             // 
             // panel2
             // 
@@ -1195,6 +1054,7 @@
             this.ViewTools.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.ViewTools, "ViewTools");
             this.ViewTools.Name = "ViewTools";
+            this.ViewTools.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ViewTools_DropDownItemClicked);
             // 
             // label3
             // 
@@ -1215,7 +1075,6 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "UC_PackageExplorer";
             this.Load += new System.EventHandler(this.UC_PackageExplorer_Load);
-            filterPanel.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -1228,6 +1087,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.Num_NameIndex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_ObjectIndex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Flags)).EndInit();
+            this.TabPage_Classes.ResumeLayout(false);
+            this.TabPage_Classes.PerformLayout();
+            this.TabPage_Content.ResumeLayout(false);
+            this.TabPage_Content.PerformLayout();
+            this.TabPage_Deps.ResumeLayout(false);
+            this.TabPage_Chunks.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Chunks)).EndInit();
             this.TabPage_Tables.ResumeLayout(false);
             this.TabControl_Tables.ResumeLayout(false);
             this.TabPage_Names.ResumeLayout(false);
@@ -1236,15 +1102,6 @@
             this.TabPage_Imports.ResumeLayout(false);
             this.TabPage_Generations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_GenerationsTable)).EndInit();
-            this.TabPage_Objects.ResumeLayout(false);
-            this.TabControl_Objects.ResumeLayout(false);
-            this.TabPage_Classes.ResumeLayout(false);
-            this.TabPage_Classes.PerformLayout();
-            this.TabPage_Content.ResumeLayout(false);
-            this.TabPage_Content.PerformLayout();
-            this.TabPage_Deps.ResumeLayout(false);
-            this.TabPage_Chunks.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Chunks)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ToolStrip_Main.ResumeLayout(false);
@@ -1272,7 +1129,6 @@
 		private System.Windows.Forms.ToolStripDropDownButton _Tools_StripDropDownButton;
 		public System.Windows.Forms.ToolStripMenuItem exportDecompiledClassesToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem exportScriptClassesToolStripMenuItem;
-		internal System.Windows.Forms.TabPage TabPage_Objects;
         internal System.Windows.Forms.TabPage TabPage_Classes;
 		internal System.Windows.Forms.TabPage TabPage_Deps;
 		private System.Windows.Forms.DataGridView DataGridView_NameTable;
@@ -1304,15 +1160,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.CheckBox checkBox1;
-		private System.Windows.Forms.CheckBox checkBox2;
-		private System.Windows.Forms.CheckBox checkBox9;
-		private System.Windows.Forms.CheckBox checkBox8;
-		private System.Windows.Forms.CheckBox checkBox7;
-		private System.Windows.Forms.CheckBox checkBox6;
-		private System.Windows.Forms.CheckBox checkBox5;
-		private System.Windows.Forms.CheckBox checkBox4;
-		private System.Windows.Forms.CheckBox checkBox3;
 		internal System.Windows.Forms.Button Button_Export;
 		public System.Windows.Forms.ToolStripDropDownButton ViewTools;
 		private System.Windows.Forms.TabControl TabControl_Tables;
@@ -1331,7 +1178,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn CompressedOffset;
 		private System.Windows.Forms.DataGridViewTextBoxColumn CompressedSize;
 		private System.Windows.Forms.TabPage TabPage_Package;
-		private System.Windows.Forms.TabControl TabControl_Objects;
 		private System.Windows.Forms.TreeView TreeView_Content;
 		private System.Windows.Forms.TreeView TreeView_Deps;
 		private System.Windows.Forms.ToolStrip ToolStrip_Content;
@@ -1366,5 +1212,6 @@
         private System.Windows.Forms.ToolStripButton NextButton;
         private System.Windows.Forms.ToolStripDropDownButton recentToolStripDropDownButton;
         private System.Windows.Forms.TextBox contentFilterTextBox;
+        private System.Windows.Forms.CheckBox checkBoxDeepFiltering;
     }
 }

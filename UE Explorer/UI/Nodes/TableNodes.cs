@@ -25,7 +25,7 @@ namespace UEExplorer.UI.Nodes
 
         public UExportNode()
         {
-            Nodes.Add( "DUMMYNODE" );
+            Nodes.Add("DUMMYNODE", "Loading...");
         }
 
         public override string Decompile()
@@ -41,9 +41,8 @@ namespace UEExplorer.UI.Nodes
             if( _IsInitialized )
                 return;
 
-            TreeView.BeginUpdate();
-                Nodes.Clear();
-                ulong objFlags = Table.ObjectFlags;
+            Nodes.Clear();
+            ulong objFlags = Table.ObjectFlags;
                 if( objFlags != 0 )
                 {
                     string flagTitle = "Flags(" + UnrealMethods.FlagToString( Table.ObjectFlags ) + ")";
@@ -107,9 +106,9 @@ namespace UEExplorer.UI.Nodes
                 {
                     Nodes.Add( "Object Size:" + Table.SerialSize );
                     Nodes.Add( "Object Offset:" + Table.SerialOffset );
-                }	
-            TreeView.EndUpdate();
-            _IsInitialized = true;
+                }
+
+                _IsInitialized = true;
         }
 
         public override void Expanded()
@@ -129,7 +128,7 @@ namespace UEExplorer.UI.Nodes
 
         public UImportNode()
         {
-            Nodes.Add( "DUMMYNODE" );
+            Nodes.Add("DUMMYNODE", "Loading...");
         }
 
         public override string Decompile()
@@ -145,17 +144,16 @@ namespace UEExplorer.UI.Nodes
             if( _IsInitialized )
                 return;
 
-            TreeView.BeginUpdate();
-                Nodes.Clear();
-                Nodes.Add( "Object:" + Table );
+            Nodes.Clear();
+            Nodes.Add( "Object:" + Table );
                 Nodes.Add( "Class:" + Table.ClassName + "(" + Table.ClassIndex + ")" );
                 Nodes.Add( "Package:" + Table.PackageName + "(" + (int)Table.PackageName + ")" );
                 if( Table.OuterIndex != 0 )
                 {
                     Nodes.Add( "Outer:" + Table.OuterTable );
                 }
-            TreeView.EndUpdate();
-            _IsInitialized = true;
+
+                _IsInitialized = true;
         }
 
         public override void Expanded()

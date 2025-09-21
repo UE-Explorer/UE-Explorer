@@ -211,7 +211,7 @@
     <value>Inhoud</value>
   </data>
   <data name="TabPage_Deps.Text" xml:space="preserve">
-    <value>Afhankelijkheden</value>
+    <value>Externen</value>
   </data>
   <data name="Button_Export.Text" xml:space="preserve">
     <value>Exporteren als...</value>
