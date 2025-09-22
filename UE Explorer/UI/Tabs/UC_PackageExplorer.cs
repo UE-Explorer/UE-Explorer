@@ -2054,7 +2054,10 @@ namespace UEExplorer.UI.Tabs
                 filteredNodes.Remove(filteredNodes[i--]);
             }
 
-            _ = FilterNodes(treeView.Nodes);
+            if (text.Trim() != string.Empty)
+            {
+                _ = FilterNodes(treeView.Nodes);
+            }
 
             treeView.SelectedNode = lastSelectedNode;
 
