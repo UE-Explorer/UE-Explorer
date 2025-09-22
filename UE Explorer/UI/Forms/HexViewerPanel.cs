@@ -10,7 +10,8 @@ namespace UEExplorer.UI.Forms
                 ControlStyles.UserPaint |
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.OptimizedDoubleBuffer |
-                ControlStyles.ResizeRedraw,
+                ControlStyles.ResizeRedraw | 
+                ControlStyles.Selectable,
                 true);
         }
     }

@@ -32,7 +32,6 @@
             System.Windows.Forms.SplitContainer hexViewSplitter;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HexViewerControl));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.HexViewPanel = new UEExplorer.UI.Forms.HexViewerPanel();
             this.Context_Structure = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +57,7 @@
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HexToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.caretTimer = new System.Windows.Forms.Timer(this.components);
+            this.HexViewPanel = new UEExplorer.UI.Forms.HexViewerPanel();
             hexViewSplitter = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(hexViewSplitter)).BeginInit();
             hexViewSplitter.Panel1.SuspendLayout();
@@ -85,19 +85,6 @@
             hexViewSplitter.Panel2.Controls.Add(this.DataInfoPanel);
             hexViewSplitter.SplitterDistance = global::UEExplorer.Properties.Settings.Default.HexViewer_SplitterDistance;
             hexViewSplitter.TabStop = false;
-            // 
-            // HexViewPanel
-            // 
-            this.HexViewPanel.ContextMenuStrip = this.Context_Structure;
-            resources.ApplyResources(this.HexViewPanel, "HexViewPanel");
-            this.HexViewPanel.Name = "HexViewPanel";
-            this.HexViewPanel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HexViewPanel_KeyUp);
-            this.HexViewPanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HexViewPanel_KeyDown);
-            this.HexViewPanel.Click += new System.EventHandler(this.HexViewPanel_Click);
-            this.HexViewPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HexLinePanel_Paint);
-            this.HexViewPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseClick);
-            this.HexViewPanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseDoubleClick);
-            this.HexViewPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseMove);
             // 
             // Context_Structure
             // 
@@ -311,6 +298,21 @@
             // 
             this.caretTimer.Interval = 1000;
             this.caretTimer.Tick += new System.EventHandler(this.caretTimer_Tick);
+            // 
+            // HexViewPanel
+            // 
+            this.HexViewPanel.ContextMenuStrip = this.Context_Structure;
+            resources.ApplyResources(this.HexViewPanel, "HexViewPanel");
+            this.HexViewPanel.Name = "HexViewPanel";
+            this.HexViewPanel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HexViewPanel_KeyUp);
+            this.HexViewPanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HexViewPanel_KeyDown);
+            this.HexViewPanel.Click += new System.EventHandler(this.HexViewPanel_Click);
+            this.HexViewPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HexLinePanel_Paint);
+            this.HexViewPanel.Enter += new System.EventHandler(this.HexViewerControl_Enter);
+            this.HexViewPanel.Leave += new System.EventHandler(this.HexViewPanel_Leave);
+            this.HexViewPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseClick);
+            this.HexViewPanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseDoubleClick);
+            this.HexViewPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HexLinePanel_MouseMove);
             // 
             // HexViewerControl
             // 

@@ -289,17 +289,14 @@ namespace UEExplorer.UI.Forms
             }
         }
 
-        protected override void OnHandleCreated(EventArgs e)
-        {
-            base.OnHandleCreated(e);
-
-            _HexMessageFilter = new HexMessageFilter(this);
-            Application.AddMessageFilter(_HexMessageFilter);
-        }
-
         protected override void OnHandleDestroyed(EventArgs e)
         {
-            Application.RemoveMessageFilter(_HexMessageFilter);
+            FindForm()!.Deactivate -= HexViewerForm_Deactivate;
+
+            if (_HexMessageFilter != null)
+            {
+                Application.RemoveMessageFilter(_HexMessageFilter);
+            }
 
             _MouseInputSubscription.Dispose();
 
@@ -351,10 +348,14 @@ namespace UEExplorer.UI.Forms
                     mouseEvent.Button == MouseButtons.Left && GetCellIndex(mouseEvent.X, mouseEvent.Y) != -1)
                 .Select(mouseStartEvent =>
                 {
+                    Focus();
+                    
+                    // In order to hook key inputs again (focus is not reliable)
+                    HexViewerControl_Enter(this, EventArgs.Empty);
+
                     focusPanel.Capture = true;
                     Cursor.Clip = focusPanel.RectangleToScreen(focusPanel.ClientRectangle);
-                    ActiveControl = focusPanel;
-
+                    
                     int startIndex, stopIndex, clickIndex;
                     if ((ModifierKeys & Keys.Shift) != 0 && Selection.HasValue)
                     {
@@ -448,6 +449,9 @@ namespace UEExplorer.UI.Forms
                     }))
                 .Switch()
                 .Subscribe();
+
+            // Unhook key input when leaving the dialog, somehow the 'Leave' event is not triggered when leaving the dialog.
+            FindForm()!.Deactivate += HexViewerForm_Deactivate;
         }
 
         private void UpdateView()
@@ -1448,7 +1452,7 @@ namespace UEExplorer.UI.Forms
         private SizeF _AddressSize;
         private Pen _ActiveNibblePen;
         private Range? _Selection;
-        private HexMessageFilter _HexMessageFilter;
+        private HexMessageFilter? _HexMessageFilter;
 
         private void HexViewPanel_KeyDown(object sender, KeyEventArgs e)
         {
@@ -2294,6 +2298,29 @@ namespace UEExplorer.UI.Forms
             {
                 // ignored
             }
+        }
+
+        private void HexViewerControl_Enter(object sender, EventArgs e)
+        {
+            if (_HexMessageFilter == null)
+            {
+                _HexMessageFilter = new HexMessageFilter(this);
+                Application.AddMessageFilter(_HexMessageFilter);
+            }
+        }
+
+        private void HexViewPanel_Leave(object sender, EventArgs e)
+        {
+            if (_HexMessageFilter != null)
+            {
+                Application.RemoveMessageFilter(_HexMessageFilter);
+                _HexMessageFilter = null;
+            }
+        }
+
+        private void HexViewerForm_Deactivate(object sender, EventArgs e)
+        {
+            HexViewPanel_Leave(sender, e);
         }
     }
 
