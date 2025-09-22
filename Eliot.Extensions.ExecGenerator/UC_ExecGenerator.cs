@@ -27,7 +27,7 @@ namespace Eliot.Extensions.ExecGenerator
             using( var ofd = new OpenFileDialog() )
             {
                 ofd.DefaultExt = "u";
-                ofd.Filter = "UnrealScript(*.u)|*.u";
+                ofd.Filter = UnrealExtensions.FormatUnrealExtensionsAsFilter();
                 ofd.FilterIndex = 1;
                 ofd.Title = "File Dialog";
                 ofd.Multiselect = true;
@@ -61,13 +61,16 @@ namespace Eliot.Extensions.ExecGenerator
                 string klasbuffer = String.Empty;
                 foreach( var klas in package.Objects.OfType<UClass>() )
                 {
-                    if( klas.Functions == null || !klas.Functions.Any() )
+                    var funcs = klas
+                        .EnumerateFields<UFunction>()
+                        .ToList();
+                    if( !funcs.Any() )
                         continue;
 
                     var execfunc = new List<UFunction>();
-                    foreach( var func in klas.Functions )
+                    foreach( var func in funcs )
                     {
-                        if( func.HasFunctionFlag( FunctionFlags.Exec ) )
+                        if( func.FunctionFlags.HasFlag(FunctionFlag.Exec) )
                         {
                             execfunc.Add( func );
                         }
@@ -82,16 +85,20 @@ namespace Eliot.Extensions.ExecGenerator
                     foreach( var func in execfunc )
                     {
                         klasbuffer += "\r\n;" + func.Name + " - '''???.'''";
-                        if( func.Params != null && func.Params.Any() )
+                        var parms = func
+                            .EnumerateFields<UProperty>()
+                            .Where(prop => prop.IsParm())
+                            .ToList();
+                        if( parms.Any() )
                         {
-                            foreach( var prop in func.Params )
+                            foreach( var prop in parms )
                             {
                                 string typetext = (prop.Type.ToString() == "Str" 
                                     ? "string" 
                                     : prop.Type.ToString()).ToLower( System.Globalization.CultureInfo.CurrentCulture );
 
                                 string friendlytypetext = prop.GetFriendlyType();
-                                klasbuffer += "\r\n:#'''''" + (prop.HasPropertyFlag( PropertyFlagsLO.OptionalParm ) 
+                                klasbuffer += "\r\n:#'''''" + (prop.PropertyFlags.HasFlag( PropertyFlag.OptionalParm ) 
                                     ? "[[optional]] " : "") + "[[" + typetext + (typetext != friendlytypetext 
                                     ? ("|" + friendlytypetext) : "") + "]]''''' '''" + prop.Name + "''' - '''???.'''";
                             }

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using UEExplorer.Development;
+using UEExplorer.UI;
 using UEExplorer.UI.Tabs;
 using UELib;
 using UELib.Core;
 using UELib.Flags;
-using UEExplorer.Development;
-using UEExplorer.UI;
 
 namespace Eliot.Extensions.NativesTableListGenerator
 {
     [System.Runtime.InteropServices.ComVisible(false)]
     public partial class UC_NativeGenerator : UserControl_Tab
     {
-        private readonly NativesTablePackage _NTLPackage = new NativesTablePackage();
+        private readonly NativesTablePackage _NTLPackage = new();
 
         public UC_NativeGenerator()
         {
@@ -33,7 +33,7 @@ namespace Eliot.Extensions.NativesTableListGenerator
             }
 
             var packages = new Stack<UnrealPackage>();
-            foreach (var fileName in OpenNTLDialog.FileNames)
+            foreach (string fileName in OpenNTLDialog.FileNames)
             {
                 packages.Push(UnrealLoader.LoadPackage(fileName));
             }
@@ -63,7 +63,7 @@ namespace Eliot.Extensions.NativesTableListGenerator
 
                 foreach (var function in package.Objects.OfType<UFunction>())
                 {
-                    if (!function.HasFunctionFlag(FunctionFlags.Native) || function.NativeToken == 0)
+                    if (!function.FunctionFlags.HasFlag(FunctionFlag.Native) || function.NativeToken == 0)
                         continue;
 
                     var item = new NativeTableItem(function);
@@ -99,9 +99,8 @@ namespace Eliot.Extensions.NativesTableListGenerator
                 return;
             }
 
-            var stream = dialog.OpenFile();
+            using var stream = dialog.OpenFile();
             _NTLPackage.Serialize(stream);
-            stream.Close();
         }
     }
 
