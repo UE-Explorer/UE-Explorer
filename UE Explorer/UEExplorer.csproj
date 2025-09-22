@@ -51,7 +51,7 @@
     <IsPublishable>False</IsPublishable>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Title>UE Explorer</Title>
-    <Version>$(VersionPrefix)1.5.0</Version>
+    <Version>$(VersionPrefix)1.6.0</Version>
     <Authors>EliotVU</Authors>
     <Copyright>© 2009-2025 Eliot van Uytfanghe. All rights reserved.</Copyright>
     <Description>An easy-to-use browser and decompiler for Unreal Engine packages (.upk, .u).</Description>
@@ -104,10 +104,10 @@
     <PackageReference Include="Autoupdater.NET.Official" Version="1.9.2" />
     <PackageReference Include="AvalonEdit" Version="6.3.1.120" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3351.48" />
-    <PackageReference Include="System.Reactive" Version="6.0.1" />
+    <PackageReference Include="System.Reactive" Version="6.0.2" />
     <PackageReference Include="System.Resources.Extensions" Version="9.0.7" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
-    <PackageReference Include="Microsoft.Bcl.Memory" Version="9.0.7" />
+    <PackageReference Include="Microsoft.Bcl.Memory" Version="9.0.9" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -273,9 +273,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
     <PackageReference Include="Microsoft.Web.WebView2">
-      <Version>1.0.3240.44</Version>
+      <Version>1.0.3485.44</Version>
     </PackageReference>
-    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="9.0.9" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">

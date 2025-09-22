@@ -1,5 +1,42 @@
 #
 
+## 1.6.0
+
+* Significant improvements made to speed up the performance when loading the content view on huge packages.
+* Added the ability to filter the content view (ironically this is REALLY slow on huge packages)
+* Some UI UX tweaks.
+
+* Fixed issues with key input hooking when using the Hex Viewer
+* Fixed some issues when using shortcuts (such as the 'Find' tools)
+
+* Updated to UELib 1.12.0 from 1.11.1
+
+## UELib [1.12.0](https://github.com/EliotVU/Unreal-Library/releases/tag/1.12.0)
+
+* Support for Sudden Attack 2 (thanks to @EDITzDev)
+* Support for Arctic Combat (thanks to @EDITzDev)
+
+* Improved support for Battleborn
+* Improved support for Batman series:
+
+  * Support for Rotator property type
+  * Support for ObjectProperty and ObjectNCRProperty (ComponentProperty)
+  * Support for GuidProperty
+  * Support for InterfaceProperty
+  * Support for StructProperty when the tagged property and its referenced struct are in the same package as the tag.
+
+  * Fixed deserialization for BoolProperty (but the value is likely wrong (may require bitmask shifting)
+  * Fixed StrProperty size
+  * Fixed 'Public' object flag for Batman 2
+  * Fixed several property flags for Batman (version >= 101)
+  * Fixed the deserialization of component archetypes for Batman 2 (Skips the NetIndex under a specific circumstance)
+  * Fixed UClass deserialization
+
+* Fixed some issues with the decompilation of tagged/binary struct properties.
+* Fixed a performance regression that was caused when a package has a significant amount of 'forced' export packages.
+* Fixed a decompilation regression with {UMoJsonObject}
+* Fixed a decompilation regression where a {UState} "ignored" some functions.
+
 ## 1.5.0
 
 Significant updates to the Hex Viewer:
