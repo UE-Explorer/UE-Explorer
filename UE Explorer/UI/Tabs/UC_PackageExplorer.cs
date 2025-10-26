@@ -59,11 +59,6 @@ namespace UEExplorer.UI.Tabs
         {
             splitContainer1.SplitterDistance = Settings.Default.PackageExplorer_SplitterDistance;
 
-            // Fold all { } blocks
-            var foldingManager = ICSharpCode.AvalonEdit.Folding.FoldingManager.Install(TextEditorPanel.TextEditor.TextArea);
-            var foldingStrategy = new ICSharpCode.AvalonEdit.Folding.XmlFoldingStrategy();
-            foldingStrategy.UpdateFoldings(foldingManager, TextEditorPanel.TextEditor.Document);
-
             var langPath = Path.Combine(Application.StartupPath, "Config", "UnrealScript.xshd");
             if (File.Exists(langPath))
             {

@@ -21,7 +21,7 @@
             System.Windows.Forms.Label label4;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_PackageExplorer));
             System.Windows.Forms.ToolStripMenuItem exportingToolStripMenuItem;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.exportDecompiledClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportScriptClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.VSIcons = new System.Windows.Forms.ImageList(this.components);
@@ -88,8 +88,6 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ToolStrip_Main = new System.Windows.Forms.ToolStrip();
-            this.SearchByObjectGroupButton = new System.Windows.Forms.ToolStripButton();
-            this.SearchObjectTextBox = new System.Windows.Forms.ToolStripTextBox();
             this._Tools_StripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,6 +97,8 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.viewBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReloadButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchObjectTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.SearchByObjectGroupButton = new System.Windows.Forms.ToolStripButton();
             this.Panel_Content = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.WPFHost = new System.Windows.Forms.Integration.ElementHost();
@@ -441,14 +441,14 @@
             this.DataGridView_Flags.MultiSelect = false;
             this.DataGridView_Flags.Name = "DataGridView_Flags";
             this.DataGridView_Flags.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridView_Flags.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DataGridView_Flags.RowHeadersVisible = false;
             this.DataGridView_Flags.ShowCellErrors = false;
             this.DataGridView_Flags.ShowEditingIcon = false;
@@ -617,13 +617,13 @@
             this.DataGridView_Chunks.AllowUserToResizeRows = false;
             this.DataGridView_Chunks.BackgroundColor = System.Drawing.Color.White;
             this.DataGridView_Chunks.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.DataGridView_Chunks, "DataGridView_Chunks");
             this.DataGridView_Chunks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DataGridView_Chunks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.CompressedOffset,
             this.CompressedSize});
-            resources.ApplyResources(this.DataGridView_Chunks, "DataGridView_Chunks");
             this.DataGridView_Chunks.EnableHeadersVisualStyles = false;
             this.DataGridView_Chunks.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
             this.DataGridView_Chunks.MultiSelect = false;
@@ -823,31 +823,15 @@
             this.ToolStrip_Main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
             resources.ApplyResources(this.ToolStrip_Main, "ToolStrip_Main");
             this.ToolStrip_Main.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ToolStrip_Main.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.ToolStrip_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SearchByObjectGroupButton,
+            this._Tools_StripDropDownButton,
             this.SearchObjectTextBox,
-            this._Tools_StripDropDownButton});
+            this.SearchByObjectGroupButton});
             this.ToolStrip_Main.Name = "ToolStrip_Main";
             this.ToolStrip_Main.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.ToolStrip_Main.TabStop = true;
             this.ToolStrip_Main.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolStrip_Content_Paint);
-            // 
-            // SearchByObjectGroupButton
-            // 
-            this.SearchByObjectGroupButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.SearchByObjectGroupButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SearchByObjectGroupButton.Image = global::UEExplorer.Properties.Resources.search;
-            resources.ApplyResources(this.SearchByObjectGroupButton, "SearchByObjectGroupButton");
-            this.SearchByObjectGroupButton.Name = "SearchByObjectGroupButton";
-            this.SearchByObjectGroupButton.Click += new System.EventHandler(this.SearchObjectButton_Click);
-            // 
-            // SearchObjectTextBox
-            // 
-            this.SearchObjectTextBox.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.SearchObjectTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.SearchObjectTextBox, "SearchObjectTextBox");
-            this.SearchObjectTextBox.Name = "SearchObjectTextBox";
-            this.SearchObjectTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchObjectTextBox_KeyPress);
             // 
             // _Tools_StripDropDownButton
             // 
@@ -859,9 +843,7 @@
             this.toolStripSeparator5,
             this.viewBufferToolStripMenuItem,
             this.ReloadButton});
-            this._Tools_StripDropDownButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this._Tools_StripDropDownButton.Name = "_Tools_StripDropDownButton";
-            this._Tools_StripDropDownButton.Padding = new System.Windows.Forms.Padding(3);
             resources.ApplyResources(this._Tools_StripDropDownButton, "_Tools_StripDropDownButton");
             // 
             // toolStripSeparator2
@@ -915,6 +897,23 @@
             this.ReloadButton.Name = "ReloadButton";
             this.ReloadButton.Click += new System.EventHandler(this.ReloadButton_Click);
             // 
+            // SearchObjectTextBox
+            // 
+            resources.ApplyResources(this.SearchObjectTextBox, "SearchObjectTextBox");
+            this.SearchObjectTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SearchObjectTextBox.Name = "SearchObjectTextBox";
+            this.SearchObjectTextBox.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.SearchObjectTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchObjectTextBox_KeyPress);
+            // 
+            // SearchByObjectGroupButton
+            // 
+            this.SearchByObjectGroupButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.SearchByObjectGroupButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SearchByObjectGroupButton.Image = global::UEExplorer.Properties.Resources.search;
+            resources.ApplyResources(this.SearchByObjectGroupButton, "SearchByObjectGroupButton");
+            this.SearchByObjectGroupButton.Name = "SearchByObjectGroupButton";
+            this.SearchByObjectGroupButton.Click += new System.EventHandler(this.SearchObjectButton_Click);
+            // 
             // Panel_Content
             // 
             this.Panel_Content.Controls.Add(this.panel4);
@@ -947,6 +946,7 @@
             resources.ApplyResources(this.ToolStrip_Content, "ToolStrip_Content");
             this.ToolStrip_Content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
             this.ToolStrip_Content.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ToolStrip_Content.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.ToolStrip_Content.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.PrevButton,
             this.NextButton,
@@ -1054,6 +1054,7 @@
             this.ViewTools.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.ViewTools, "ViewTools");
             this.ViewTools.Name = "ViewTools";
+            this.ViewTools.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.ViewTools.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ViewTools_DropDownItemClicked);
             // 
             // label3

@@ -213,9 +213,6 @@
   <data name="TabComponentsStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="TabComponentsStrip.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8.25pt</value>
-  </data>
   <data name="TabComponentsStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -256,7 +253,7 @@
     <value>0</value>
   </data>
   <data name="openInFileExplorerToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Control+K</value>
+    <value>Ctrl+K</value>
   </data>
   <data name="openInFileExplorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 22</value>
@@ -285,23 +282,11 @@
   <metadata name="mainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>376, 20</value>
   </metadata>
-  <data name="mainMenuStrip.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12world</value>
-  </data>
   <data name="fileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 20</value>
   </data>
   <data name="fileMenuItem.Text" xml:space="preserve">
     <value>&amp;File</value>
-  </data>
-  <data name="menuItem22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 22</value>
-  </data>
-  <data name="findToolMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="findToolMenuItem.Text" xml:space="preserve">
-    <value>&amp;Find</value>
   </data>
   <data name="editMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -355,7 +340,7 @@
     <value>1</value>
   </data>
   <data name="openFileMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Control+O</value>
+    <value>Ctrl+O</value>
   </data>
   <data name="openFileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
@@ -398,6 +383,15 @@
   </data>
   <data name="exitMenuItem.Text" xml:space="preserve">
     <value>E&amp;xit</value>
+  </data>
+  <data name="findToolMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 22</value>
+  </data>
+  <data name="findToolMenuItem.Text" xml:space="preserve">
+    <value>&amp;Find</value>
+  </data>
+  <data name="menuItem22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 22</value>
   </data>
   <data name="menuItem13.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>

@@ -92,7 +92,6 @@ namespace UEExplorer.UI
             this.platformMenuItem});
             resources.ApplyResources(this.mainStatusStrip, "mainStatusStrip");
             this.mainStatusStrip.Name = "mainStatusStrip";
-            this.mainStatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             // 
             // loadingProgressBar
             // 
@@ -187,13 +186,13 @@ namespace UEExplorer.UI
             // 
             // mainMenuStrip
             // 
-            resources.ApplyResources(this.mainMenuStrip, "mainMenuStrip");
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenuItem,
             this.editMenuItem,
             this.toolsMenuItem,
             this.optionsMenuItem,
             this.helpMenuItem});
+            resources.ApplyResources(this.mainMenuStrip, "mainMenuStrip");
             this.mainMenuStrip.Name = "mainMenuStrip";
             // 
             // fileMenuItem

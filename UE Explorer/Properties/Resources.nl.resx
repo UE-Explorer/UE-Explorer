@@ -117,68 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NAME_IS" xml:space="preserve">
-    <value>Naam is {0}</value>
-  </data>
-  <data name="Open_File" xml:space="preserve">
-    <value>Openen</value>
-  </data>
-  <data name="Warning" xml:space="preserve">
-    <value>Waarschuwing</value>
-  </data>
-  <data name="INVALID_NAME_INDEX" xml:space="preserve">
-    <value>Ongeldig naam index {0}</value>
-  </data>
-  <data name="NOT_AVAILABLE" xml:space="preserve">
-    <value>N/B</value>
-  </data>
-  <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
-    <value>Ongeldig object index {0}</value>
-  </data>
-  <data name="RegistryWarning" xml:space="preserve">
-    <value>Dit zal jouw registery bewerken.
-Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eerst uitschakeld!</value>
-  </data>
-  <data name="NO_OBJECT_WAS_FOUND" xml:space="preserve">
-    <value>Geen object gevonden.</value>
-  </data>
-  <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
-    <value>Wil je naar de /exported/ map gaan?</value>
-  </data>
-  <data name="NEW_VERSION_AVAILABLE_TITLE" xml:space="preserve">
-    <value>Een nieuwere versie is beschikbaar!</value>
-    <comment>Dialog title.</comment>
-  </data>
-  <data name="ProgramForm_Check_for_Updates_Status" xml:space="preserve">
-    <value>Zoeken naar updates...</value>
-    <comment>Status</comment>
-  </data>
-  <data name="NO_NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
-    <value>Je hebt de laatste versie van {0}</value>
-    <comment>Dialog description</comment>
+  <data name="NodeItem_ExportWithUEModelViewer" xml:space="preserve">
+    <value>Exporteren met UE Model Viewer</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Fout</value>
     <comment>Dialog title</comment>
-  </data>
-  <data name="Options" xml:space="preserve">
-    <value>Opties</value>
-    <comment>Tab title</comment>
-  </data>
-  <data name="CHECKFORUPDATES_FAILED_MESSAGE" xml:space="preserve">
-    <value>Het zoeken naar een update was mislukt. Probeer later nog een keer opnieuw!</value>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>Hoofdpagina</value>
-    <comment>Tab title</comment>
-  </data>
-  <data name="ProgramForm_LoadFile_Failed_loading_package" xml:space="preserve">
-    <value>Kon het pakket niet laden: {0}</value>
-    <comment>Exception description.</comment>
-  </data>
-  <data name="ProgramForm_LoadFile_Loading_file" xml:space="preserve">
-    <value>Bezig met het laden van {0}...</value>
-    <comment>Status description.</comment>
   </data>
   <data name="NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
     <value>Als je op ja klikt zal je naar de update gebracht worden!
@@ -187,31 +131,160 @@ Huidige versie: {0}
 Laatste versie: {1}</value>
     <comment>Dialog description.</comment>
   </data>
-  <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
-    <value>Je kan geen binaire bestanden importeren die een ongelijke lengte hebben!</value>
+  <data name="UnrealClassFilter" xml:space="preserve">
+    <value>Unreal klass</value>
+  </data>
+  <data name="NodeItem_ViewDefaultProperties" xml:space="preserve">
+    <value>Bekijk standaard eigenschappen</value>
+  </data>
+  <data name="LINKING_OBJECTS" xml:space="preserve">
+    <value>Objecten verbinden...</value>
+  </data>
+  <data name="NodeItem_ViewParent" xml:space="preserve">
+    <value>Bekijk ouder</value>
+  </data>
+  <data name="SAVED" xml:space="preserve">
+    <value>Opgeslagen!</value>
+  </data>
+  <data name="RegistryWarning" xml:space="preserve">
+    <value>Dit zal jouw registery bewerken.
+Moest je "UE Explorer" verplaatsen of verwijderen, maak dan zeker dat je dit eerst uitschakeld!</value>
+  </data>
+  <data name="EXPORT_AS" xml:space="preserve">
+    <value>Exporteer {0} als...</value>
+  </data>
+  <data name="NodeItem_ViewCPPText" xml:space="preserve">
+    <value>Bekijk CPP script</value>
+  </data>
+  <data name="CLASS_ISNT_SUPPORTED" xml:space="preserve">
+    <value>Klass {0} is niet ondersteund</value>
+  </data>
+  <data name="THING_DOESNT_EXIST" xml:space="preserve">
+    <value>{0} bestaat niet!</value>
+  </data>
+  <data name="ProgramForm_Check_for_Updates_Status" xml:space="preserve">
+    <value>Zoeken naar updates...</value>
+    <comment>Status</comment>
   </data>
   <data name="SAVE_QUESTION_WARNING" xml:space="preserve">
     <value>Weet je zeker dat je dit wilt opslaan? Deze veranderingen zullen permanent zijn, maak zeker dat je een reservekopie hebt!</value>
   </data>
-  <data name="SAVE_QUESTION" xml:space="preserve">
-    <value>Opslaan?</value>
+  <data name="NAME_IS" xml:space="preserve">
+    <value>Naam is {0}</value>
+  </data>
+  <data name="NEW_VERSION_AVAILABLE_TITLE" xml:space="preserve">
+    <value>Een nieuwere versie is beschikbaar!</value>
+    <comment>Dialog title.</comment>
   </data>
   <data name="COULDNT_SAVE_EXCEPTION" xml:space="preserve">
     <value>Kon dit bestand niet opslaan vanwege de volgende uitzondering: {0}</value>
-  </data>
-  <data name="SUCCESS" xml:space="preserve">
-    <value>Succesvol</value>
-  </data>
-  <data name="SAVE_SUCCESS" xml:space="preserve">
-    <value>Succesvol opgeslaan!</value>
-  </data>
-  <data name="SAVED" xml:space="preserve">
-    <value>Opgeslagen!</value>
   </data>
   <data name="EXPORTED_ALL_PACKAGE_CLASSES" xml:space="preserve">
     <value>Alle klassen van {0} zijn naar {1} geëxporteerd.
 
 Klik op ja als je nu naar deze map wilt gebracht worden!</value>
+  </data>
+  <data name="HexView_COULDNT_ACQUIRE_VALUE" xml:space="preserve">
+    <value>Kon de waarde niet ophalen</value>
+  </data>
+  <data name="DESERIALIZING_OBJECTS" xml:space="preserve">
+    <value>Objecten lezen...</value>
+  </data>
+  <data name="CHECKFORUPDATES_FAILED_MESSAGE" xml:space="preserve">
+    <value>Het zoeken naar een update was mislukt. Probeer later nog een keer opnieuw!</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Opties</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="Open_File" xml:space="preserve">
+    <value>Openen</value>
+  </data>
+  <data name="NodeItem_ViewException" xml:space="preserve">
+    <value>Bekijk uitzondering</value>
+  </data>
+  <data name="INVALID_OBJECT_INDEX" xml:space="preserve">
+    <value>Ongeldig object index {0}</value>
+  </data>
+  <data name="ProgramForm_LoadFile_Failed_loading_package" xml:space="preserve">
+    <value>Kon het pakket niet laden: {0}</value>
+    <comment>Exception description.</comment>
+  </data>
+  <data name="SEARCHING_CLASSES_STATUS" xml:space="preserve">
+    <value>Klassen worden doorzocht..</value>
+  </data>
+  <data name="EXCEPTION_OCCURRED_WHILE_EXPORTING" xml:space="preserve">
+    <value>Een uitzondering vondt zich plaats tijdens het exporteren van {0}
+{1}</value>
+  </data>
+  <data name="NodeItem_OpenInUEModelViewer" xml:space="preserve">
+    <value>Openen met UE Model Viewer</value>
+  </data>
+  <data name="PLEASE_SELECT_PATH" xml:space="preserve">
+    <value>Het pad naar {0} is niet geconfigureerd. Selecteer de toepassing van het programma!</value>
+  </data>
+  <data name="NO_FIND_RESULTS" xml:space="preserve">
+    <value>Er werden geen resultaten gevonden met deze text "{0}".</value>
+  </data>
+  <data name="ExportTextTitle" xml:space="preserve">
+    <value>Exporteer text</value>
+  </data>
+  <data name="NOTICE_TITLE" xml:space="preserve">
+    <value>Opmerking</value>
+  </data>
+  <data name="ProgramForm_LoadFile_Loading_file" xml:space="preserve">
+    <value>Bezig met het laden van {0}...</value>
+    <comment>Status description.</comment>
+  </data>
+  <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
+    <value>Tabel buffer</value>
+  </data>
+  <data name="NodeItem_ViewDisassembledTokens" xml:space="preserve">
+    <value>Bekijk gedemonteerde tokens</value>
+  </data>
+  <data name="SAVE_SUCCESS" xml:space="preserve">
+    <value>Succesvol opgeslaan!</value>
+  </data>
+  <data name="SAVE_QUESTION" xml:space="preserve">
+    <value>Opslaan?</value>
+  </data>
+  <data name="NO_OBJECT_WAS_FOUND" xml:space="preserve">
+    <value>Geen object gevonden.</value>
+  </data>
+  <data name="HexView_Offset" xml:space="preserve">
+    <value>Afstand</value>
+  </data>
+  <data name="SUCCESS" xml:space="preserve">
+    <value>Succesvol</value>
+  </data>
+  <data name="PACKAGE_METAINFO" xml:space="preserve">
+    <value>Pakkets MetaInfo</value>
+  </data>
+  <data name="Homepage" xml:space="preserve">
+    <value>Hoofdpagina</value>
+    <comment>Tab title</comment>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versie {0}</value>
+  </data>
+  <data name="NodeItem_ManagedProperties" xml:space="preserve">
+    <value>Beheerde eigenschappen</value>
+  </data>
+  <data name="NodeItem_ViewScript" xml:space="preserve">
+    <value>Bekijk script</value>
+  </data>
+  <data name="NO_NEW_VERSION_AVAILABLE_MESSAGE" xml:space="preserve">
+    <value>Je hebt de laatste versie van {0}</value>
+    <comment>Dialog description</comment>
+  </data>
+  <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
+    <value>Objecten constructeren...</value>
+  </data>
+  <data name="NodeItem_ViewOuter" xml:space="preserve">
+    <value>Bekijk buitenste</value>
+  </data>
+  <data name="NOT_AVAILABLE" xml:space="preserve">
+    <value>N/B</value>
   </data>
   <data name="PACKAGE_IS_COMPRESSED" xml:space="preserve">
     <value>Dit pakket is gecompresseerd! Deze pakketen zijn niet ondersteund.
@@ -219,151 +292,78 @@ Om dit te decompresseren moet je "Unreal Package Decompressor" van Gildor downlo
 
 Als je op ja klikt, zul je naar http://www.gildor.org/downloads gebracht worden.</value>
   </data>
-  <data name="COMPRESSED_HOWTO" xml:space="preserve">
-    <value>Om Gildor's tool te gebruiken, probeer het volgende "decompress.exe PACKAGENAME.EXT" het zou kunnen dat je -lzo zult moeten tevoegen.</value>
-  </data>
-  <data name="NOTICE_TITLE" xml:space="preserve">
-    <value>Opmerking</value>
-  </data>
-  <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
-    <value>Dit pakket heeft een onbekend handtekening. Ben je zeker dat je dit pakket wilt openen? Op ja klikken, zou kunnen leiden tot onverwachte resultaten!</value>
-  </data>
-  <data name="PACKAGE_LOADING" xml:space="preserve">
-    <value>Pakket aan het laden...</value>
-  </data>
-  <data name="PACKAGE_METAINFO" xml:space="preserve">
-    <value>Pakkets MetaInfo</value>
-  </data>
-  <data name="EXPORT_AS" xml:space="preserve">
-    <value>Exporteer {0} als...</value>
-  </data>
-  <data name="CONSTRUCTING_OBJECTS" xml:space="preserve">
-    <value>Objecten constructeren...</value>
-  </data>
-  <data name="DESERIALIZING_OBJECTS" xml:space="preserve">
-    <value>Objecten lezen...</value>
-  </data>
-  <data name="IMPORTING_OBJECTS" xml:space="preserve">
-    <value>Objecten aan het importeren...</value>
-  </data>
-  <data name="LINKING_OBJECTS" xml:space="preserve">
-    <value>Objecten verbinden...</value>
-  </data>
-  <data name="INITIALIZING_UI" xml:space="preserve">
-    <value>UI initializeren...</value>
-  </data>
-  <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
-    <value>In de UnrealWiki zoeken naar "{0}"</value>
-  </data>
-  <data name="NO_FIND_RESULTS" xml:space="preserve">
-    <value>Er werden geen resultaten gevonden met deze text "{0}".</value>
-  </data>
-  <data name="SEARCHING_CLASSES_STATUS" xml:space="preserve">
-    <value>Klassen worden doorzocht..</value>
-  </data>
-  <data name="FIND_RESULTS_TITLE" xml:space="preserve">
-    <value>Zoek resultaten {0}</value>
-  </data>
-  <data name="HexView_COULDNT_ACQUIRE_VALUE" xml:space="preserve">
-    <value>Kon de waarde niet ophalen</value>
-  </data>
-  <data name="HexView_Offset" xml:space="preserve">
-    <value>Afstand</value>
-  </data>
-  <data name="Version" xml:space="preserve">
-    <value>Versie {0}</value>
-  </data>
-  <data name="CLASS_ISNT_SUPPORTED" xml:space="preserve">
-    <value>Klass {0} is niet ondersteund</value>
-  </data>
-  <data name="NodeItem_ViewObject" xml:space="preserve">
-    <value>Bekijk object</value>
-  </data>
-  <data name="NodeItem_OpenInUEModelViewer" xml:space="preserve">
-    <value>Openen met UE Model Viewer</value>
-  </data>
-  <data name="NodeItem_ExportWithUEModelViewer" xml:space="preserve">
-    <value>Exporteren met UE Model Viewer</value>
-  </data>
-  <data name="NodeItem_ViewContent" xml:space="preserve">
-    <value>Bekijk inhoud</value>
-  </data>
-  <data name="NodeItem_ViewUsedTags" xml:space="preserve">
-    <value>Bekijk gebruikte tags</value>
-  </data>
-  <data name="NodeItem_ViewReplication" xml:space="preserve">
-    <value>Bekijk replicatie</value>
-  </data>
   <data name="NodeItem_ViewTokens" xml:space="preserve">
     <value>Bekijk tokens</value>
   </data>
-  <data name="NodeItem_ViewDisassembledTokens" xml:space="preserve">
-    <value>Bekijk gedemonteerde tokens</value>
-  </data>
-  <data name="NodeItem_ViewScript" xml:space="preserve">
-    <value>Bekijk script</value>
-  </data>
-  <data name="NodeItem_ViewDefaultProperties" xml:space="preserve">
-    <value>Bekijk standaard eigenschappen</value>
-  </data>
-  <data name="NodeItem_ViewBuffer" xml:space="preserve">
-    <value>Bekijk buffer</value>
-  </data>
-  <data name="NodeItem_ViewException" xml:space="preserve">
-    <value>Bekijk uitzondering</value>
-  </data>
-  <data name="NodeItem_ManagedProperties" xml:space="preserve">
-    <value>Beheerde eigenschappen</value>
-  </data>
-  <data name="NodeItem_ViewTableBuffer" xml:space="preserve">
-    <value>Tabel buffer</value>
-  </data>
-  <data name="NoTargetForViewBuffer" xml:space="preserve">
-    <value>Geen doelwit gevonden voor "Bekijk buffer"</value>
-  </data>
-  <data name="NodeItem_DefaultBuffer" xml:space="preserve">
-    <value>Standaard eigenschappen buffer</value>
-  </data>
-  <data name="UnrealClassFilter" xml:space="preserve">
-    <value>Unreal klass</value>
-  </data>
-  <data name="ExportTextTitle" xml:space="preserve">
-    <value>Exporteer text</value>
-  </data>
-  <data name="NodeItem_ViewProcessedScript" xml:space="preserve">
-    <value>Bekijk verwerkte script</value>
-  </data>
-  <data name="NodeItem_ViewCPPText" xml:space="preserve">
-    <value>Bekijk CPP script</value>
-  </data>
-  <data name="THING_DOESNT_EXIST" xml:space="preserve">
-    <value>{0} bestaat niet!</value>
-  </data>
-  <data name="UNRECOGNIZED_EXPORT_TYPE" xml:space="preserve">
-    <value>Niet herkende export type {0}</value>
-  </data>
-  <data name="EXCEPTION_OCCURRED_WHILE_EXPORTING" xml:space="preserve">
-    <value>Een uitzondering vondt zich plaats tijdens het exporteren van {0}
-{1}</value>
-  </data>
-  <data name="UNRECOGNIZED_COMMANDLINE_OPTION" xml:space="preserve">
-    <value>Commandline optie {0} is niet herkenbaar!</value>
+  <data name="INVALID_NAME_INDEX" xml:space="preserve">
+    <value>Ongeldig naam index {0}</value>
   </data>
   <data name="COULDNT_RELOAD_OBJECT" xml:space="preserve">
     <value>Het object kon niet worden herladen vanwege deze fout:
 
 	{0}</value>
   </data>
-  <data name="PLEASE_SELECT_PATH" xml:space="preserve">
-    <value>Het pad naar {0} is niet geconfigureerd. Selecteer de toepassing van het programma!</value>
+  <data name="PACKAGE_UNKNOWN_SIGNATURE" xml:space="preserve">
+    <value>Dit pakket heeft een onbekend handtekening. Ben je zeker dat je dit pakket wilt openen? Op ja klikken, zou kunnen leiden tot onverwachte resultaten!</value>
+  </data>
+  <data name="NodeItem_ViewBuffer" xml:space="preserve">
+    <value>Bekijk buffer</value>
+  </data>
+  <data name="NodeItem_ViewObject" xml:space="preserve">
+    <value>Bekijk object</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Waarschuwing</value>
+  </data>
+  <data name="NodeItem_DefaultBuffer" xml:space="preserve">
+    <value>Standaard eigenschappen buffer</value>
+  </data>
+  <data name="UNRECOGNIZED_COMMANDLINE_OPTION" xml:space="preserve">
+    <value>Commandline optie {0} is niet herkenbaar!</value>
+  </data>
+  <data name="UC_PackageExplorer_PerformNodeAction_QUESTIONEXPORTFOLDER" xml:space="preserve">
+    <value>Wil je naar de /exported/ map gaan?</value>
+  </data>
+  <data name="FIND_RESULTS_TITLE" xml:space="preserve">
+    <value>Zoek resultaten {0}</value>
+  </data>
+  <data name="PACKAGE_LOADING" xml:space="preserve">
+    <value>Pakket aan het laden...</value>
+  </data>
+  <data name="SEARCH_WIKI_ITEM" xml:space="preserve">
+    <value>In de UnrealWiki zoeken naar "{0}"</value>
+  </data>
+  <data name="UNRECOGNIZED_EXPORT_TYPE" xml:space="preserve">
+    <value>Niet herkende export type {0}</value>
+  </data>
+  <data name="NodeItem_ViewContent" xml:space="preserve">
+    <value>Bekijk inhoud</value>
+  </data>
+  <data name="INITIALIZING_UI" xml:space="preserve">
+    <value>UI initializeren...</value>
+  </data>
+  <data name="IMPORTING_OBJECTS" xml:space="preserve">
+    <value>Objecten aan het importeren...</value>
   </data>
   <data name="SEARCH_AS_OBJECT" xml:space="preserve">
     <value>Zoeken als object</value>
   </data>
-  <data name="NodeItem_ViewOuter" xml:space="preserve">
-    <value>Bekijk buitenste</value>
+  <data name="NoTargetForViewBuffer" xml:space="preserve">
+    <value>Geen doelwit gevonden voor "Bekijk buffer"</value>
   </data>
-  <data name="NodeItem_ViewParent" xml:space="preserve">
-    <value>Bekijk ouder</value>
+  <data name="COMPRESSED_HOWTO" xml:space="preserve">
+    <value>Om Gildor's tool te gebruiken, probeer het volgende "decompress.exe PACKAGENAME.EXT" het zou kunnen dat je -lzo zult moeten tevoegen.</value>
+  </data>
+  <data name="NodeItem_ViewUsedTags" xml:space="preserve">
+    <value>Bekijk gebruikte tags</value>
+  </data>
+  <data name="CANNOT_IMPORT_BINARY_NOTEQUAL_LENGTH" xml:space="preserve">
+    <value>Je kan geen binaire bestanden importeren die een ongelijke lengte hebben!</value>
+  </data>
+  <data name="NodeItem_ViewReplication" xml:space="preserve">
+    <value>Bekijk replicatie</value>
+  </data>
+  <data name="NodeItem_ViewProcessedScript" xml:space="preserve">
+    <value>Bekijk verwerkte script</value>
   </data>
 </root>

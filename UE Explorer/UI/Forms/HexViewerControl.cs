@@ -44,9 +44,23 @@ namespace UEExplorer.UI.Forms
 
                 public string Name;
 
-                [XmlIgnore] public Color Color;
+                [XmlIgnore]
+                public Color Color
+                {
+                    get => _Color;
+                    set
+                    {
+                        Debug.Assert(Brush == null);
+                        Brush = new SolidBrush(Color.FromArgb(60, value.R, value.G, value.B));
+                        _Color = value;
+                    }
+                }
+
+                [XmlIgnore] public Brush Brush;
 
                 [XmlIgnore] public IUnrealDecompilable? Tag;
+
+                private Color _Color;
             }
 
             public List<BytesMetaInfo> MetaInfoList = [];
@@ -115,6 +129,7 @@ namespace UEExplorer.UI.Forms
 
             _SelectionPen = new Pen(_SelectedBrush);
             _HoverPen = new Pen(_HoveredBrush);
+            _HoveredBorderPen = new Pen(_HoveredFieldBrush);
 
             _LineSelectionPen = _SelectionPen;
             _LineHoverPen = _HoverPen;
@@ -124,7 +139,6 @@ namespace UEExplorer.UI.Forms
 
             _AddressSample = $"{99999999:x8}".PadLeft(8, '0').ToUpper();
             _MuteBrush = _EvenBrush;
-            _BorderPen = new Pen(_BorderBrush);
 
             HexViewPanel.FontChanged += (_, _) =>
             {
@@ -248,9 +262,16 @@ namespace UEExplorer.UI.Forms
             CellModifiedFont?.Dispose();
             CellModifiedFont = new Font(CellFont, FontStyle.Italic | FontStyle.Bold);
 
-            CellWidth = CellFont.Height + CellPadding;
-            CellHeight = CellFont.Height;
+            var fontSize = TextRenderer.MeasureText("DD", CellFont,
+                new Size((int)CellPadding, (int)CellPadding),
+                TextFormatFlags.NoClipping
+            );
+            int cellSize = Math.Max(fontSize.Width, fontSize.Height);
+            CellWidth = cellSize;
+            CellHeight = fontSize.Height;
             ColumnWidth = CellCount * CellWidth;
+
+            _AddressSize = TextRenderer.MeasureText(_AddressSample, CellFont);
 
             NibbleWidth = CellWidth * 0.5f;
 
@@ -311,6 +332,7 @@ namespace UEExplorer.UI.Forms
             _SelectedBrush.Dispose();
             _HoveredBrush.Dispose();
             _HoveredFieldBrush.Dispose();
+            _HoveredBorderPen.Dispose();
             _WhiteForeBrush.Dispose();
             _ActiveNibbleBrush.Dispose();
             _MuteBrush.Dispose();
@@ -349,13 +371,13 @@ namespace UEExplorer.UI.Forms
                 .Select(mouseStartEvent =>
                 {
                     Focus();
-                    
+
                     // In order to hook key inputs again (focus is not reliable)
                     HexViewerControl_Enter(this, EventArgs.Empty);
 
                     focusPanel.Capture = true;
                     Cursor.Clip = focusPanel.RectangleToScreen(focusPanel.ClientRectangle);
-                    
+
                     int startIndex, stopIndex, clickIndex;
                     if ((ModifierKeys & Keys.Shift) != 0 && Selection.HasValue)
                     {
@@ -757,9 +779,6 @@ namespace UEExplorer.UI.Forms
         private readonly SolidBrush _HoveredBrush = new(Color.FromArgb(unchecked((int)0x880088FF)));
         private readonly SolidBrush _HoveredFieldBrush = new(Color.FromArgb(unchecked((int)0x88000000)));
 
-        private SolidBrush _EvenCellBrush;
-
-        private readonly Pen _BorderPen;
         private readonly Pen _UnderlinePen;
         private readonly Pen _SelectionPen;
         private readonly Pen _HoverPen;
@@ -773,14 +792,11 @@ namespace UEExplorer.UI.Forms
 
         private void HexLinePanel_Paint(object sender, PaintEventArgs e)
         {
+            var g = e.Graphics;
             if (HexViewPanel.Focused)
             {
-                //e.Graphics.DrawRectangle(_BorderPen, e.ClipRectangle);
+                //g.DrawRectangle(_BorderPen, e.ClipRectangle);
             }
-
-            _AddressSize = e.Graphics.MeasureString(_AddressSample, CellFont,
-                new PointF(0, 0), StringFormat.GenericTypographic
-            );
 
             float addressColumnOffset = ColumnMargin;
             float addressColumnWidth = _AddressSize.Width;
@@ -793,12 +809,12 @@ namespace UEExplorer.UI.Forms
 
             string text = Resources.HexView_Offset;
 
-            e.Graphics.DrawString(text, CellFont, _ForeBrush,
-                addressColumnOffset,
-                ColumnMargin,
-                StringFormat.GenericDefault
+            TextRenderer.DrawText(g, text, CellFont,
+                new Point((int)addressColumnOffset, (int)ColumnMargin),
+                SystemColors.ControlText,
+                TextFormatFlags.NoClipping
             );
-            e.Graphics.DrawLine(_UnderlinePen,
+            g.DrawLine(_UnderlinePen,
                 addressColumnOffset, ColumnMargin + CellHeight,
                 addressColumnOffset + byteColumnOffset - ColumnMargin, ColumnMargin + CellHeight
             );
@@ -814,8 +830,8 @@ namespace UEExplorer.UI.Forms
                 float x = byteColumnOffset;
                 float y = ColumnMargin;
 
-                //e.Graphics.FillRectangle( new SolidBrush( Color.FromArgb(44, 44, 44) ), x, y, ColumnSize, _LineSpacing );
-                e.Graphics.DrawLine(_UnderlinePen,
+                //g.FillRectangle( new SolidBrush( Color.FromArgb(44, 44, 44) ), x, y, ColumnSize, _LineSpacing );
+                g.DrawLine(_UnderlinePen,
                     x, y + CellHeight,
                     x + ColumnWidth, y + CellHeight
                 );
@@ -825,11 +841,11 @@ namespace UEExplorer.UI.Forms
                     var textBrush = SelectedOffset % CellCount == i ? _SelectedBrush
                         : HoveredOffset % CellCount == i ? _HoveredBrush
                         : i / 4.0F / 1.00 % 2.00 < 1.00 ? _EvenBrush : _OffsetBrush;
-                    var c = HexTable[i];
-                    e.Graphics.DrawString(c, CellFont, textBrush,
-                        x + i * CellWidth,
-                        y,
-                        StringFormat.GenericDefault
+                    string c = HexTable[i];
+                    TextRenderer.DrawText(g, c, CellFont,
+                        new Point((int)(x + i * CellWidth), (int)y),
+                        textBrush.Color,
+                        TextFormatFlags.NoClipping
                     );
                 }
             }
@@ -839,22 +855,17 @@ namespace UEExplorer.UI.Forms
                 float x = asciiColumnOffset;
                 float y = ColumnMargin;
 
-                //e.Graphics.FillRectangle( new SolidBrush( Color.FromArgb(44, 44, 44) ), x, y, ColumnSize, _LineSpacing );
-                e.Graphics.DrawLine(_UnderlinePen,
+                //g.FillRectangle( new SolidBrush( Color.FromArgb(44, 44, 44) ), x, y, ColumnSize, _LineSpacing );
+                g.DrawLine(_UnderlinePen,
                     x, y + CellHeight,
                     x + ColumnWidth, y + CellHeight
                 );
 
-                e.Graphics.DrawString("ASCII", CellFont, _OffsetBrush,
-                    x,
-                    y,
-                    StringFormat.GenericDefault
-                );
+                // Replaced g.DrawString with TextRenderer.DrawText
+                TextRenderer.DrawText(g, "ASCII", CellFont, new Point((int)x, (int)y), _OffsetBrush.Color, TextFormatFlags.NoClipping);
             }
 
-            using var hoveredBorderPen = new Pen(_HoveredFieldBrush);
-
-            float lineOffsetY = (float)(ColumnMargin + CellHeight + CellHeight * .5);
+            int lineOffsetY = (int)(ColumnMargin + CellHeight + CellHeight * .5);
             float extraLineOffset = CellHeight;
             for (int line = 0; line < lineCount; ++line)
             {
@@ -870,7 +881,7 @@ namespace UEExplorer.UI.Forms
 
                 if (lineIsSelected)
                 {
-                    e.Graphics.DrawLine
+                    g.DrawLine
                     (
                         _LineSelectionPen,
                         0, lineOffsetY + extraLineOffset,
@@ -880,7 +891,7 @@ namespace UEExplorer.UI.Forms
 
                 if (lineIsHovered)
                 {
-                    e.Graphics.DrawLine
+                    g.DrawLine
                     (
                         _LineHoverPen,
                         0, lineOffsetY + extraLineOffset,
@@ -891,10 +902,13 @@ namespace UEExplorer.UI.Forms
                 string lineText = $"{offset:X8}".PadLeft(8, '0');
                 var textBrush = line % 2 == 0 ? _EvenBrush : _OddBrush;
                 var lineBrush = lineIsSelected ? _SelectedBrush : lineIsHovered ? _HoveredBrush : textBrush;
-                e.Graphics.DrawString(lineText, CellFont, lineBrush, addressColumnOffset, lineOffsetY);
 
-                using var evenCellBrush =
-                    new SolidBrush(Color.FromArgb(textBrush.Color.ToArgb() - 0x303030 + 0x500000));
+                TextRenderer.DrawText(g, lineText, CellFont,
+                    new Point((int)addressColumnOffset, lineOffsetY),
+                    lineBrush.Color,
+                    TextFormatFlags.NoClipping
+                );
+
                 if (_DrawByte)
                 {
                     // TODO: Spatial hashing?
@@ -909,15 +923,15 @@ namespace UEExplorer.UI.Forms
                     for (int cellIndex = 0; cellIndex < maxCells; ++cellIndex)
                     {
                         int byteIndex = offset + cellIndex;
-                        var cellTextBrush = cellIndex % 4 == 0
-                            ? evenCellBrush
-                            : textBrush;
+                        var cellTextColor = cellIndex % 4 == 0
+                            ? SystemColors.ControlText
+                            : textBrush.Color;
                         string cellText = HexTable[Buffer[byteIndex]];
 
-                        var y1 = lineOffsetY;
-                        var y2 = lineOffsetY + extraLineOffset;
-                        var x1 = byteColumnOffset + cellIndex * CellWidth;
-                        var x2 = byteColumnOffset + (cellIndex + 1) * CellWidth;
+                        float y1 = lineOffsetY;
+                        float y2 = lineOffsetY + extraLineOffset;
+                        float x1 = byteColumnOffset + cellIndex * CellWidth;
+                        float x2 = byteColumnOffset + (cellIndex + 1) * CellWidth;
 
                         foreach (var pattern in _Patterns.MetaInfoList)
                         {
@@ -927,30 +941,30 @@ namespace UEExplorer.UI.Forms
                             if (byteIndex < pattern.Offset || byteIndex >= pattern.Offset + drawSize)
                                 continue;
 
-                            var cellHeight = extraLineOffset;
-                            var cellRectangleY = y1;
+                            float cellHeight = extraLineOffset;
+                            float cellRectangleY = y1;
                             if (pattern is { Size: 1, Tag: UStruct.UByteCodeDecompiler.Token })
                             {
                                 cellHeight *= 0.5F;
                                 cellRectangleY = y1 + (y2 - y1) * 0.5F - cellHeight * 0.5F;
                             }
 
-                            using var rectBrush = new SolidBrush(Color.FromArgb(60, pattern.Color.R, pattern.Color.G, pattern.Color.B));
-                            e.Graphics.FillRectangle(rectBrush, x1, cellRectangleY, CellWidth, cellHeight);
+                            var rectBrush = pattern.Brush;
+                            g.FillRectangle(rectBrush, x1, cellRectangleY, CellWidth, cellHeight);
 
                             if (HoveredOffset == -1 || HoveredOffset < pattern.Offset || HoveredOffset >= pattern.Offset + drawSize)
                             {
                                 continue;
                             }
 
-                            e.Graphics.DrawLine(hoveredBorderPen, x1, y1, x2, y1); // Top	
-                            e.Graphics.DrawLine(hoveredBorderPen, x1, y2, x2, y2); // Bottom
+                            g.DrawLine(_HoveredBorderPen, x1, y1, x2, y1); // Top	
+                            g.DrawLine(_HoveredBorderPen, x1, y2, x2, y2); // Bottom
 
                             if (byteIndex == pattern.Offset)
-                                e.Graphics.DrawLine(hoveredBorderPen, x1, y1, x1, y2); // Left
+                                g.DrawLine(_HoveredBorderPen, x1, y1, x1, y2); // Left
 
                             if (byteIndex == pattern.Offset + drawSize - 1)
-                                e.Graphics.DrawLine(hoveredBorderPen, x2, y1, x2, y2); // Right
+                                g.DrawLine(_HoveredBorderPen, x2, y1, x2, y2); // Right
 
                         }
 
@@ -962,24 +976,26 @@ namespace UEExplorer.UI.Forms
                                 cellFont = CellModifiedFont;
                             }
 
-                            e.Graphics.DrawString(cellText, cellFont, cellTextBrush,
-                                new RectangleF(
-                                    byteColumnOffset + cellIndex * CellWidth, lineOffsetY,
-                                    CellWidth, CellHeight
-                                )
+                            TextRenderer.DrawText(g, cellText, cellFont,
+                                new Point(
+                                    (int)(byteColumnOffset + cellIndex * CellWidth),
+                                    lineOffsetY
+                                ),
+                                cellTextColor,
+                                TextFormatFlags.NoClipping
                             );
                         }
                         // Render edit caret.
                         else
                         {
                             using var cellTextBrushAlternate = new SolidBrush(Color.FromArgb(
-                                cellTextBrush.Color.A,
-                                (int)(cellTextBrush.Color.R * 0.7f),
-                                (int)(cellTextBrush.Color.G * 0.7f),
-                                (int)(cellTextBrush.Color.B * 0.7f)
+                                cellTextColor.A,
+                                (int)(cellTextColor.R * 0.7f),
+                                (int)(cellTextColor.G * 0.7f),
+                                (int)(cellTextColor.B * 0.7f)
                             ));
 
-                            e.Graphics.FillRectangle(cellTextBrushAlternate,
+                            g.FillRectangle(cellTextBrushAlternate,
                                 x1, y1,
                                 CellWidth, CellHeight
                             );
@@ -989,13 +1005,13 @@ namespace UEExplorer.UI.Forms
                                 switch (_ActiveNibbleIndex)
                                 {
                                     case 0:
-                                        e.Graphics.DrawLine(_ActiveNibblePen,
+                                        g.DrawLine(_ActiveNibblePen,
                                             x1 + NibbleWidth * 0.5F, y1, x1 + NibbleWidth * 0.5F, y2
                                         );
                                         break;
 
                                     case 1:
-                                        e.Graphics.DrawLine(_ActiveNibblePen,
+                                        g.DrawLine(_ActiveNibblePen,
                                             x1 + NibbleWidth + NibbleWidth * 0.5F, y1,
                                             x1 + NibbleWidth + NibbleWidth * 0.5F, y2
                                         );
@@ -1003,11 +1019,10 @@ namespace UEExplorer.UI.Forms
                                 }
                             }
 
-                            e.Graphics.DrawString(cellText, cellFont, _WhiteForeBrush,
-                                new RectangleF(
-                                    byteColumnOffset + cellIndex * CellWidth, lineOffsetY,
-                                    CellWidth, CellHeight
-                                )
+                            TextRenderer.DrawText(g, cellText, cellFont,
+                                new Point((int)(byteColumnOffset + cellIndex * CellWidth), lineOffsetY),
+                                _WhiteForeBrush.Color,
+                                TextFormatFlags.NoClipping
                             );
                         }
 
@@ -1018,7 +1033,7 @@ namespace UEExplorer.UI.Forms
                             {
                                 // Draw the selection.
                                 var drawPen = _SelectionPen;
-                                e.Graphics.DrawRectangle(drawPen,
+                                g.DrawRectangle(drawPen,
                                     byteColumnOffset + cellIndex * CellWidth,
                                     lineOffsetY,
                                     CellWidth,
@@ -1030,7 +1045,7 @@ namespace UEExplorer.UI.Forms
                         if (byteIndex == HoveredOffset)
                         {
                             var drawPen = _HoverPen;
-                            e.Graphics.DrawRectangle(drawPen,
+                            g.DrawRectangle(drawPen,
                                 byteColumnOffset + cellIndex * CellWidth,
                                 lineOffsetY,
                                 CellWidth,
@@ -1055,7 +1070,7 @@ namespace UEExplorer.UI.Forms
                             {
                                 // Draw the selection.
                                 var drawPen = _SelectionPen;
-                                e.Graphics.DrawRectangle(drawPen,
+                                g.DrawRectangle(drawPen,
                                     asciiColumnOffset + cellIndex * cellWidth,
                                     lineOffsetY,
                                     cellWidth,
@@ -1067,7 +1082,7 @@ namespace UEExplorer.UI.Forms
                         if (byteIndex == HoveredOffset)
                         {
                             var drawPen = _HoverPen;
-                            e.Graphics.DrawRectangle(drawPen,
+                            g.DrawRectangle(drawPen,
                                 asciiColumnOffset + cellIndex * cellWidth,
                                 lineOffsetY,
                                 cellWidth,
@@ -1076,42 +1091,40 @@ namespace UEExplorer.UI.Forms
                         }
 
                         string drawnChar;
-                        Brush drawBrush;
+                        Color charColor;
                         switch (Buffer[byteIndex])
                         {
                             case 0x09:
                                 drawnChar = "\\t";
-                                drawBrush = evenCellBrush;
+                                charColor = SystemColors.ControlLight;
                                 break;
 
                             case 0x0A:
                                 drawnChar = "\\n";
-                                drawBrush = evenCellBrush;
+                                charColor = SystemColors.ControlLight;
                                 break;
 
                             case 0x0D:
                                 drawnChar = "\\r";
-                                drawBrush = evenCellBrush;
+                                charColor = SystemColors.ControlLight;
                                 break;
 
                             default:
                                 drawnChar = FilterByte(Buffer[byteIndex]).ToString(CultureInfo.InvariantCulture);
-                                drawBrush = drawnChar == "." ? _MuteBrush : textBrush;
+                                charColor = drawnChar == "." ? _MuteBrush.Color : textBrush.Color;
                                 break;
                         }
 
-                        e.Graphics.DrawString(
-                            drawnChar, CellFont, drawBrush,
-                            new RectangleF(
-                                asciiColumnOffset + cellIndex * cellWidth, lineOffsetY,
-                                CellWidth, CellHeight
-                            )
+                        TextRenderer.DrawText(g, drawnChar, CellFont,
+                            new Point((int)(asciiColumnOffset + cellIndex * cellWidth), lineOffsetY),
+                            charColor,
+                            TextFormatFlags.NoPadding
                         );
                     }
                 }
 
                 offset += maxCells;
-                lineOffsetY += extraLineOffset;
+                lineOffsetY += (int)extraLineOffset;
             }
         }
 
@@ -1453,6 +1466,7 @@ namespace UEExplorer.UI.Forms
         private Pen _ActiveNibblePen;
         private Range? _Selection;
         private HexMessageFilter? _HexMessageFilter;
+        private Pen _HoveredBorderPen;
 
         private void HexViewPanel_KeyDown(object sender, KeyEventArgs e)
         {
