@@ -253,7 +253,7 @@
     <value>0</value>
   </data>
   <data name="openInFileExplorerToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+K</value>
+    <value>Control+K</value>
   </data>
   <data name="openInFileExplorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 22</value>
@@ -340,7 +340,7 @@
     <value>1</value>
   </data>
   <data name="openFileMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+O</value>
+    <value>Control+O</value>
   </data>
   <data name="openFileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
