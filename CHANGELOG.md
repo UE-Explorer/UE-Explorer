@@ -1,5 +1,17 @@
 #
 
+## 1.6.1
+
+* Fixed #93; DPI issues.
+* Fixed #94; Ctrl->Control
+
+* Updated to UELib 1.12.1 from 1.12.0
+
+## UELib [1.12.1](https://github.com/EliotVU/Unreal-Library/releases/tag/1.12.1)
+
+* Fixed support for Alien: Colonial Marines
+* Fixed "ArgumentException" when decompiling structs.
+
 ## 1.6.0
 
 * Significant improvements made to speed up the performance when loading the content view on huge packages.
