@@ -37,9 +37,40 @@ It has support for:
 
 *UE2X and UE4/5 have not been supported as of yet*
 
+*p.s. the program can open loose UE4 `.uasset` files*
+
 However many games may have modified the engine to some extent.
 
 A list of games that have been confirmed to work can be viewed [here](https://github.com/EliotVU/Unreal-Library).
+
+## Opening decompressed packages
+
+In most cases you can open any `.upk`, `.u`, `.xxx` (compressed) etc. files anywhere, but, for **UE Explorer 1.6.1** and older, packages must be decompressed before hand.
+
+In order to decompress a package you can use a third-party tool such as [Gildor's Unreal Package Decompressor](https://www.gildor.org/downloads)
+
+* Drag and drop the compressed package on top of the `decompress.exe` executable.
+* A new folder `unpacked` should have been created in the same directory as the executable.
+* You now open the `.upk` file respectively from the `unpacked` directory using **UE Explorer**
+
+*If the decompression failed then it it's likely that the compression codec could not be detected by the tool, or the tool has no support for that package format.*
+*Using the commandline, you can append arguments to tell the tool what codec to use for decompression:*
+
+* `-lzo|lzx|zlib` e.g. `decompress.exe -lzo "Core.upk"`
+* `-game=<TAG>` (you can use `-taglist` to list all applicable tags) e.g. `decompress.exe -lzo -game=xcom2 "Core.upk"`
+* `-ps3`, if necessary.
+
+## Command-line interface
+
+You can launch **UE Explorer** in console mode, by appending the `-console` argument to the `ueexplorer.exe` executable.
+
+The program accepts the following arguments:
+
+* `[file-path]` The package file path to open.
+* `-console` Launches the program as a console window.
+  * `-silent` The console will automatically close when it has finished its tasks.
+  * `-export=classes|scripts` Exports all classes or scripts from the specified package file.
+* `-newwindow` Launches the program in a new window, as opposed to a new tab in the currently running program.
 
 ## How to contribute
 
