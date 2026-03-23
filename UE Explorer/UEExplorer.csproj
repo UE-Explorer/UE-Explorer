@@ -107,7 +107,7 @@
     <PackageReference Include="System.Reactive" Version="6.0.2" />
     <PackageReference Include="System.Resources.Extensions" Version="9.0.7" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
-    <PackageReference Include="Microsoft.Bcl.Memory" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Bcl.Memory" Version="9.0.14" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
