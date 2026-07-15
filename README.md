@@ -6,7 +6,8 @@
     
 **Package explorer tool for Unreal Engine (.upk, .u) with `UnrealScript` decompilation, browsing, and hex inspection**
 
-[![Website](https://img.shields.io/badge/Website-UE%20Explorer-blue)](https://eliotvu.com/portfolio/view/21/ue-explorer)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Us-7289DA?logo=discord&logoColor=white)](https://discord.gg/8d4p3M2nMw)
+[![Website](https://img.shields.io/badge/Website-UE%20Explorer-blue)](https://eliotvu.com/portfolio/ue-explorer)
 [![Release](https://img.shields.io/github/release/UE-Explorer/UE-Explorer)]()
 [![Downloads](https://img.shields.io/github/downloads/UE-Explorer/UE-Explorer/total?color=green)]()
 
