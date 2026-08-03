@@ -1,5 +1,18 @@
 #
 
+## 1.6.2
+
+* Updated to UELib 1.13.0 from 1.12.1
+
+## UELib [1.13.0](https://github.com/EliotVU/Unreal-Library/releases/tag/1.13.0)
+
+* Fixed an issue where the specified array dim (e.g. `local string a, b[6];`) of a local variable would not be written if it is grouped along with another local variable of the same type.
+
+* Added support for "Dungeon Defenders Eternity"
+* Added support for "TNA Impact!"
+
+* Improved support for Sudden Attack 2: "Supper newer version" and "Fixes trailing data for old package OnlineSubsystemPC.u" (contributed by @EDITzDev)
+
 ## 1.6.1
 
 * Fixed #93; DPI issues.
