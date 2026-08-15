@@ -6,10 +6,10 @@
     
 **Package explorer tool for Unreal Engine (.upk, .u) with `UnrealScript` decompilation, browsing, and hex inspection**
 
-[![Discord](https://img.shields.io/badge/Discord-Join%20Us-7289DA?logo=discord&logoColor=white)](https://discord.gg/8d4p3M2nMw)
-[![Website](https://img.shields.io/badge/Website-UE%20Explorer-blue)](https://eliotvu.com/portfolio/ue-explorer)
 [![Release](https://img.shields.io/github/release/UE-Explorer/UE-Explorer)]()
 [![Downloads](https://img.shields.io/github/downloads/UE-Explorer/UE-Explorer/total?color=green)]()
+[![UE-Explorer](https://img.shields.io/badge/Website-UE%20Explorer-blue)](https://eliotvu.com/portfolio/ue-explorer)
+[![Discord](https://img.shields.io/badge/Discord-UE%20Explorer-7289DA?logo=discord&logoColor=white)](https://discord.gg/8d4p3M2nMw)
 
 ![app demo](https://user-images.githubusercontent.com/808593/170879806-00b481c0-5f09-4c3b-bb12-56870b8d264f.png)
 
@@ -63,7 +63,7 @@ If UE Explorer helps your research, modding, or learning, please consider suppor
 
 ## Opening decompressed packages
 
-In most cases you can open any `.upk`, `.u`, `.xxx` (compressed) etc. files anywhere, but, for **UE Explorer 1.6.1** and older, packages must be decompressed before hand.
+In most cases you can open any `.upk`, `.u`, `.xxx` (compressed) etc. files anywhere, but, for **UE Explorer 1.6** and older, packages must be decompressed before hand.
 
 In order to decompress a package you can use a third-party tool such as [Gildor's Unreal Package Decompressor](https://www.gildor.org/downloads)
 
