@@ -45,24 +45,21 @@
 Note: Many games ship with engine modifications; compatibility may vary depending on custom forks or heavily altered packages.
 A list of games that have been confirmed to work can be viewed [here](https://github.com/EliotVU/Unreal-Library).
 
-
-## Support Development
-
-If UE Explorer helps your research, modding, or learning, please consider supporting its continued [development](./CHANGELOG.md).
-
-[![GitHub Sponsors](https://img.shields.io/badge/GitHub%20Sponsors-Support-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/eliotvu)
-[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/eliotvu)
-
-UE Explorer and [UELib](https://github.com/EliotVU/Unreal-Library) are free and open source, and community support helps fund updates, fixes, and new features.
-
-
 ## Install
 
 You can download and install UE Explorer for **Windows** using one of the following sources:
-- EliotVU: https://eliotvu.com/portfolio/download/21/ue-explorer
+- EliotVU: https://eliotvu.com/portfolio/ue-explorer/download/
 - GitHub: https://github.com/UE-Explorer/UE-Explorer/releases
 - winget: `winget install "ue explorer"`
 
+
+## Support Development
+
+UE Explorer and [UELib](https://github.com/EliotVU/Unreal-Library) are free and open source, and community support helps fund updates, fixes, and new features.
+
+If UE Explorer helps your research, modding, or learning, please consider supporting its continued development 
+
+[![EliotVU.com](https://img.shields.io/badge/EliotVU-Support-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://eliotvu.com/portfolio/ue-explorer/support/)
 
 ## Opening decompressed packages
 
